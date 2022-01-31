@@ -606,7 +606,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReduceAction::input_type_is_collection(Any, std::map) : bool: 456887339

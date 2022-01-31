@@ -243,7 +243,7 @@ bool SequenceTypeValueImpl::eSet(int featureID, Any newValue)
 Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::SequenceTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1931133348

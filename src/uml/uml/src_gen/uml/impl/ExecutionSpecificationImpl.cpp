@@ -410,7 +410,7 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 Any ExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ExecutionSpecification::same_lifeline(Any, std::map) : bool: 1601243580

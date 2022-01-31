@@ -465,7 +465,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DurationObservation::first_event_multiplicity(Any, std::map) : bool: 254475739

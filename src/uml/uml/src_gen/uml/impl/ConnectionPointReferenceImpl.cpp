@@ -408,7 +408,7 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAny(returnValue,uml::umlPackage::STATE_CLASS,false); //5214
+			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //5214
 		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
@@ -525,7 +525,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ConnectionPointReference::entry_pseudostates(Any, std::map) : bool: 1348223732

@@ -487,7 +487,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ValueSpecificationAction::compatible_type(Any, std::map) : bool: 1309355490

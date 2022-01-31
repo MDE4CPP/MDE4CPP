@@ -480,7 +480,7 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1843594424

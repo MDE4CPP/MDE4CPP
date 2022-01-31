@@ -505,14 +505,14 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LinkEndData::allPins() : uml::InputPin[*]: 1232620149
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
 			std::shared_ptr<Bag<uml::InputPin> > resultList = this->allPins();
-			return eAny(resultList,uml::umlPackage::INPUTPIN_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INPUTPIN_CLASS);
 			break;
 		}
 		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1213117792

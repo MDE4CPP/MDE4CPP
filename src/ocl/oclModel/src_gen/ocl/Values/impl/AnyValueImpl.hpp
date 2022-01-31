@@ -43,6 +43,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
 			virtual std::string toString() ;
 			
 			//*********************************

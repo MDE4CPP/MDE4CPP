@@ -354,13 +354,13 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::_copy() : fUML::Semantics::Values::Value: 913377262
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::equals(fUML::Semantics::Values::Value) : bool: 886044238
@@ -377,13 +377,13 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::new_() : fUML::Semantics::Values::Value: 1924598092
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::specify() : uml::ValueSpecification: 519448828
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
+			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::toString() : std::string: 668784562

@@ -35,8 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
 //Factories and Package includes
@@ -323,7 +323,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

@@ -798,7 +798,7 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ConditionalNode::clause_no_predecessor(Any, std::map) : bool: 1185762341

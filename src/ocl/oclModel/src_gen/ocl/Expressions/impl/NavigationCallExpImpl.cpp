@@ -538,7 +538,7 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

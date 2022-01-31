@@ -535,7 +535,7 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
-			return eAny(returnValue,uml::umlPackage::DEPLOYMENT_CLASS,false); //7045
+			return eAnyObject(returnValue,uml::umlPackage::DEPLOYMENT_CLASS); //7045
 		}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation(),ecore::ecorePackage::ESTRING_CLASS,false); //7043
@@ -596,7 +596,7 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DeploymentSpecification::deployed_elements(Any, std::map) : bool: 1212838527

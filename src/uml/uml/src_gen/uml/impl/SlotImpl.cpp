@@ -398,7 +398,7 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningInstance().lock();
-			return eAny(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS,false); //2175
+			return eAnyObject(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS); //2175
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 			return eAnyBag(getValue(),uml::umlPackage::VALUESPECIFICATION_CLASS); //2174
@@ -488,7 +488,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

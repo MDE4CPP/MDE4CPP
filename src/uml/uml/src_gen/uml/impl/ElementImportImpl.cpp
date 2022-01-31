@@ -482,7 +482,7 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAny(returnValue,uml::umlPackage::NAMESPACE_CLASS,false); //828
+			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //828
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility(),uml::umlPackage::VISIBILITYKIND_CLASS,false); //829
@@ -551,7 +551,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ElementImport::getName() : std::string: 991755702

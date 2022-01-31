@@ -71,6 +71,10 @@ std::shared_ptr<ecore::EAttribute> ocl::Values::ValuesPackageImpl::getAnyValue_A
 }
 
 
+std::shared_ptr<ecore::EOperation> ocl::Values::ValuesPackageImpl::getAnyValue_Operation_equals_Value() const
+{
+	return m_anyValue_Operation_equals_Value;
+}
 std::shared_ptr<ecore::EOperation> ocl::Values::ValuesPackageImpl::getAnyValue_Operation_toString() const
 {
 	return m_anyValue_Operation_toString;

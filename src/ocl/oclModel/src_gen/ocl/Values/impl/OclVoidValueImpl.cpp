@@ -241,7 +241,7 @@ bool OclVoidValueImpl::eSet(int featureID, Any newValue)
 Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::OclVoidValue::equals(fUML::Semantics::Values::Value) : bool: 613975732

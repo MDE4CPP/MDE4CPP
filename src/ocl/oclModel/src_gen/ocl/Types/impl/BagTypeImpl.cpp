@@ -248,7 +248,7 @@ bool BagTypeImpl::eSet(int featureID, Any newValue)
 Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

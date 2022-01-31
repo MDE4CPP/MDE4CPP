@@ -735,7 +735,7 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAny(returnValue,uml::umlPackage::REGION_CLASS,false); //24125
+			return eAnyObject(returnValue,uml::umlPackage::REGION_CLASS); //24125
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 			return eAny(getEffect(),uml::umlPackage::BEHAVIOR_CLASS,false); //24118
@@ -907,13 +907,13 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Transition::containingStateMachine() : uml::StateMachine: 1765667922
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS,false);
+			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 909121488
@@ -1015,7 +1015,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		// uml::Transition::redefinitionContext() : uml::Classifier: 1971879180
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
+			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Transition::state_is_external(Any, std::map) : bool: 1155164645

@@ -483,13 +483,13 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::_copy() : fUML::Semantics::Values::Value: 931511190
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::assignFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 1447778125
@@ -543,14 +543,14 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->retrieveFeatureValue(incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
+			result = eAnyObject(this->retrieveFeatureValue(incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::retrieveFeatureValues() : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 1935462533
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->retrieveFeatureValues();
-			return eAny(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::toString() : std::string: 95501137

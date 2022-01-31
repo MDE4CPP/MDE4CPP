@@ -482,15 +482,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// uml::OccurrenceSpecification::getCovered() : uml::Lifeline: 1100038979
-		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_GETCOVERED:
-		{
-			result = eAny(this->getCovered(), uml::umlPackage::LIFELINE_CLASS,false);
-			break;
-		}
 		// uml::OccurrenceSpecification::setCovered(uml::Lifeline): 1493510619
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE:
 		{

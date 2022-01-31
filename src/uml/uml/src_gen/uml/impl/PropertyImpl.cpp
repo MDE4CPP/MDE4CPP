@@ -1124,17 +1124,17 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAssociationEnd().lock();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //18531
+			return eAnyObject(returnValue,uml::umlPackage::PROPERTY_CLASS); //18531
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-			return eAny(returnValue,uml::umlPackage::CLASS_CLASS,false); //18533
+			return eAnyObject(returnValue,uml::umlPackage::CLASS_CLASS); //18533
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-			return eAny(returnValue,uml::umlPackage::DATATYPE_CLASS,false); //18527
+			return eAnyObject(returnValue,uml::umlPackage::DATATYPE_CLASS); //18527
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //18529
@@ -1143,7 +1143,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-			return eAny(returnValue,uml::umlPackage::INTERFACE_CLASS,false); //18528
+			return eAnyObject(returnValue,uml::umlPackage::INTERFACE_CLASS); //18528
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //18535
@@ -1158,7 +1158,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningAssociation().lock();
-			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //18540
+			return eAnyObject(returnValue,uml::umlPackage::ASSOCIATION_CLASS); //18540
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 			return eAnyBag(getQualifier(),uml::umlPackage::PROPERTY_CLASS); //18532
@@ -1480,7 +1480,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Property::binding_to_attribute(Any, std::map) : bool: 1056930161
@@ -1547,16 +1547,10 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::getOpposite() : uml::Property: 1965496207
-		case umlPackage::PROPERTY_OPERATION_GETOPPOSITE:
-		{
-			result = eAny(this->getOpposite(), uml::umlPackage::PROPERTY_CLASS,false);
-			break;
-		}
 		// uml::Property::getOtherEnd() : uml::Property: 1860005684
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
-			result = eAny(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS,false);
+			result = eAnyObject(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Property::isAttribute() : bool: 1679656582
@@ -1723,7 +1717,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->subsettingContext();
-			return eAny(resultList,uml::umlPackage::TYPE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
 		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 236653454

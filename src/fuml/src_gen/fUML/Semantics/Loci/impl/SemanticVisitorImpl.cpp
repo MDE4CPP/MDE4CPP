@@ -224,7 +224,7 @@ bool SemanticVisitorImpl::eSet(int featureID, Any newValue)
 Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Loci::SemanticVisitor::_beginIsolation(): 1202559749

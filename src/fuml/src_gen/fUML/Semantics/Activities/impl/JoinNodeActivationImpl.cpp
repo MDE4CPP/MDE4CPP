@@ -306,7 +306,7 @@ bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
 Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::JoinNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1177783705

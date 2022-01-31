@@ -239,13 +239,13 @@ bool LiteralNullEvaluationImpl::eSet(int featureID, Any newValue)
 Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : fUML::Semantics::Values::Value: 507735969
 		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

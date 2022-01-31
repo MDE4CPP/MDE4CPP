@@ -359,7 +359,7 @@ bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getAssociation(uml::StructuralFeature) : uml::Association: 1275297557
@@ -370,7 +370,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS,false);
+			result = eAnyObject(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 1331426136
@@ -392,7 +392,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
-			return eAny(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 1009305296
@@ -419,7 +419,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			std::list<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
-			return eAny(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1780438725
@@ -435,7 +435,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
 			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->getOppositeEnd(incoming_param_association,incoming_param_end), uml::umlPackage::PROPERTY_CLASS,false);
+			result = eAnyObject(this->getOppositeEnd(incoming_param_association,incoming_param_end), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 

@@ -982,17 +982,17 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-			return eAny(returnValue,uml::umlPackage::CLASS_CLASS,false); //16731
+			return eAnyObject(returnValue,uml::umlPackage::CLASS_CLASS); //16731
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-			return eAny(returnValue,uml::umlPackage::DATATYPE_CLASS,false); //16732
+			return eAnyObject(returnValue,uml::umlPackage::DATATYPE_CLASS); //16732
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-			return eAny(returnValue,uml::umlPackage::INTERFACE_CLASS,false); //16733
+			return eAnyObject(returnValue,uml::umlPackage::INTERFACE_CLASS); //16733
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //16734
@@ -1292,7 +1292,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Operation::at_most_one_return(Any, std::map) : bool: 12386545
@@ -1320,13 +1320,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Operation::getReturnResult() : uml::Parameter: 425885811
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
-			result = eAny(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS,false);
-			break;
-		}
-		// uml::Operation::getType() : uml::Type: 84668058
-		case umlPackage::OPERATION_OPERATION_GETTYPE:
-		{
-			result = eAny(this->getType(), uml::umlPackage::TYPE_CLASS,false);
+			result = eAnyObject(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Operation::getUpper() : int: 658132292
@@ -1377,7 +1371,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Operation::returnResult() : uml::Parameter: 831929813
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
-			result = eAny(this->returnResult(), uml::umlPackage::PARAMETER_CLASS,false);
+			result = eAnyObject(this->returnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Operation::setIsOrdered(bool): 995733814

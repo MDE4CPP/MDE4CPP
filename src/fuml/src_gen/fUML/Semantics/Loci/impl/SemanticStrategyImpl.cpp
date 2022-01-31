@@ -214,7 +214,7 @@ bool SemanticStrategyImpl::eSet(int featureID, Any newValue)
 Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Loci::SemanticStrategy::getName() : std::string: 1330583593

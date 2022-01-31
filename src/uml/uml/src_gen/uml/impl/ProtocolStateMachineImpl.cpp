@@ -653,7 +653,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ProtocolStateMachine::deep_or_shallow_history(Any, std::map) : bool: 2140613199

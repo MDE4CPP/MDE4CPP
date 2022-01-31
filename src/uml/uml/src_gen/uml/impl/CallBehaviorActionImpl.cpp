@@ -459,7 +459,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::CallBehaviorAction::no_onport(Any, std::map) : bool: 1974091371

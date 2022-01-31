@@ -730,7 +730,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InteractionUse::all_lifelines(Any, std::map) : bool: 558716346

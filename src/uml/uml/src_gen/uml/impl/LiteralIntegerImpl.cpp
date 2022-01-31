@@ -407,7 +407,7 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralInteger::integerValue() : int: 1304183652

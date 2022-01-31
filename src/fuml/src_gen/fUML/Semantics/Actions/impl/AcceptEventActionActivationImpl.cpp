@@ -400,7 +400,7 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::AcceptEventActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 908096905

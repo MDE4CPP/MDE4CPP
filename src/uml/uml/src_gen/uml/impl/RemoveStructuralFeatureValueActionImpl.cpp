@@ -504,7 +504,7 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 Any RemoveStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::RemoveStructuralFeatureValueAction::removeAt_and_value(Any, std::map) : bool: 412809920

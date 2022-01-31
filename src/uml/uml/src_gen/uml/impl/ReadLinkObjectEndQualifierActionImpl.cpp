@@ -595,7 +595,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadLinkObjectEndQualifierAction::association_of_association(Any, std::map) : bool: 1161739982

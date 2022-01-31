@@ -301,7 +301,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
-			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //9912
+			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //9912
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -340,7 +340,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ExtensionPoint::must_have_name(Any, std::map) : bool: 247703177

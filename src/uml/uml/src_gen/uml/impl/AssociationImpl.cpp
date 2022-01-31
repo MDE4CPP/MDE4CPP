@@ -948,7 +948,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Association::association_ends(Any, std::map) : bool: 1798482022
@@ -1003,7 +1003,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
-			return eAny(resultList,uml::umlPackage::TYPE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
 		// uml::Association::isBinary() : bool: 1275990908

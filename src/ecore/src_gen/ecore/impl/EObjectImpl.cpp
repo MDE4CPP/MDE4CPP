@@ -564,7 +564,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EObject::eAllContents() : Any {const}: 345308248
@@ -576,32 +576,32 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		// ecore::EObject::eClass() : ecore::EClass {const}: 1897829605
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
-			result = eAny(this->eClass(), ecore::ecorePackage::ECLASS_CLASS,false);
+			result = eAnyObject(this->eClass(), ecore::ecorePackage::ECLASS_CLASS);
 			break;
 		}
 		// ecore::EObject::eContainer() : ecore::EObject: 1564505762
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINER:
 		{
-			result = eAny(this->eContainer(), ecore::ecorePackage::EOBJECT_CLASS,false);
+			result = eAnyObject(this->eContainer(), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// ecore::EObject::eContainingFeature() : ecore::EStructuralFeature {const}: 1314774326
 		case ecorePackage::EOBJECT_OPERATION_ECONTAININGFEATURE:
 		{
-			result = eAny(this->eContainingFeature(), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAnyObject(this->eContainingFeature(), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// ecore::EObject::eContainmentFeature() : ecore::EReference {const}: 1559436300
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINMENTFEATURE:
 		{
-			result = eAny(this->eContainmentFeature(), ecore::ecorePackage::EREFERENCE_CLASS,false);
+			result = eAnyObject(this->eContainmentFeature(), ecore::ecorePackage::EREFERENCE_CLASS);
 			break;
 		}
 		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1140157049
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject> > resultList = this->eContents();
-			return eAny(resultList,ecore::ecorePackage::EOBJECT_CLASS,true);
+			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// ecore::EObject::eCrossReferences() : std::list {const}: 1830400680

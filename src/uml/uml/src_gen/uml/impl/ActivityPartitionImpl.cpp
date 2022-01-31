@@ -722,7 +722,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperPartition().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYPARTITION_CLASS,false); //1319
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITYPARTITION_CLASS); //1319
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -906,7 +906,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActivityPartition::dimension_not_contained(Any, std::map) : bool: 1076567983

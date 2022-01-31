@@ -330,7 +330,7 @@ bool PartDecompositionImpl::eSet(int featureID, Any newValue)
 Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::PartDecomposition::assume(Any, std::map) : bool: 827444235

@@ -402,7 +402,7 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::Offer::countOfferedVales() : int: 1010430261
@@ -438,7 +438,7 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->retrieveOfferedTokens();
-			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 

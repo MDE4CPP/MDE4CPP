@@ -345,14 +345,14 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 767566935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
-			return eAny(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 			break;
 		}
 		// uml::MessageEnd::isReceive() : bool: 786128866
@@ -371,7 +371,7 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
 			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();
-			return eAny(resultList,uml::umlPackage::MESSAGEEND_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::MESSAGEEND_CLASS);
 			break;
 		}
 

@@ -443,7 +443,7 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //22919
+			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //22919
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -492,7 +492,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

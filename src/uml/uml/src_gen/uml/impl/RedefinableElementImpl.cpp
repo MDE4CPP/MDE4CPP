@@ -383,7 +383,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::RedefinableElement::isConsistentWith(uml::RedefinableElement) : bool: 1261679630

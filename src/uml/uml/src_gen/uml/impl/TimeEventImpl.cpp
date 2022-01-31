@@ -423,7 +423,7 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TimeEvent::when_non_negative(Any, std::map) : bool: 368076727

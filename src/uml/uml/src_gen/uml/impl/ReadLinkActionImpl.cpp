@@ -480,7 +480,7 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadLinkAction::compatible_multiplicity(Any, std::map) : bool: 1004154613
@@ -535,7 +535,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->openEnd();
-			return eAny(resultList,uml::umlPackage::PROPERTY_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1848164464

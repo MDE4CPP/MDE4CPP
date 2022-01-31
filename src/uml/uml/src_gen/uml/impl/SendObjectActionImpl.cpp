@@ -483,7 +483,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 Any SendObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::SendObjectAction::type_target_pin(Any, std::map) : bool: 1355807073

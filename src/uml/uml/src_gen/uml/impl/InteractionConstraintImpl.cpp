@@ -469,7 +469,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InteractionConstraint::dynamic_variables(Any, std::map) : bool: 1640911984

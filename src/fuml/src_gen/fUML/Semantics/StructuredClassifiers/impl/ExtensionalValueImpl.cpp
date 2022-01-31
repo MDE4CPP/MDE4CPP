@@ -315,13 +315,13 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::_copy() : fUML::Semantics::Values::Value: 2102774946
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::destroy(): 1826522411

@@ -335,7 +335,7 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
-			return eAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS,false); //1150
+			return eAnyObject(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1150
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1151
@@ -385,13 +385,13 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::Token::_copy() : fUML::Semantics::Activities::Token: 1757807572
 		case ActivitiesPackage::TOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::equals(fUML::Semantics::Activities::Token) : bool: 1923944023
@@ -408,7 +408,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 1836665410
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
-			result = eAny(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::isControl() : bool: 2050511719
@@ -425,7 +425,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
 			std::list<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
-			result = eAny(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
+			result = eAnyObject(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::withdraw(): 1727020278

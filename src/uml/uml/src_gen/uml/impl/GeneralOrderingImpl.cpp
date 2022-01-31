@@ -381,7 +381,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::GeneralOrdering::irreflexive_transitive_closure(Any, std::map) : bool: 1443676012

@@ -397,7 +397,7 @@ bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::CreateObjectActionActivation::doAction(): 1970915943

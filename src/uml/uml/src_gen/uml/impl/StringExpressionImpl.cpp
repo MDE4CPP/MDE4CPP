@@ -458,7 +458,7 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
-			return eAny(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS,false); //22419
+			return eAnyObject(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS); //22419
 		}
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 			return eAnyBag(getSubExpression(),uml::umlPackage::STRINGEXPRESSION_CLASS); //22420
@@ -559,7 +559,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StringExpression::operands(Any, std::map) : bool: 89087278

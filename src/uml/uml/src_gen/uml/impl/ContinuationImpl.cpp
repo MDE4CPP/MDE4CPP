@@ -373,7 +373,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Continuation::first_or_last_interaction_fragment(Any, std::map) : bool: 2040370552

@@ -960,7 +960,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StateMachine::LCA(uml::Vertex, uml::Vertex) : uml::Region: 475472255
@@ -976,7 +976,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
 			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS,false);
+			result = eAnyObject(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
 			break;
 		}
 		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 296092779
@@ -992,7 +992,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
 			std::list<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS,false);
+			result = eAnyObject(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
 			break;
 		}
 		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 235532453

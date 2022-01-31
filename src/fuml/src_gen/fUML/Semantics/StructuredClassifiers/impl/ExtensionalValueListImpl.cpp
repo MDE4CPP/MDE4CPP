@@ -263,7 +263,7 @@ bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
 Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::addValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue) : bool: 935741283
@@ -296,7 +296,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::getValue() : fUML::Semantics::StructuredClassifiers::ExtensionalValue: 1588146499
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_GETVALUE:
 		{
-			result = eAny(this->getValue(), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS,false);
+			result = eAnyObject(this->getValue(), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::removeValue(int) : std::string: 1425086792
@@ -323,7 +323,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			int incoming_param_i;
 			std::list<Any>::const_iterator incoming_param_i_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_i = (*incoming_param_i_arguments_citer)->get<int >();
-			result = eAny(this->setValue(incoming_param_value,incoming_param_i), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->setValue(incoming_param_value,incoming_param_i), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

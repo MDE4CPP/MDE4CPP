@@ -313,19 +313,19 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::SignalInstance::_copy() : fUML::Semantics::Values::Value: 1643457429
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::SignalInstance::new_() : fUML::Semantics::Values::Value: 40647669
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

@@ -408,13 +408,13 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::ParameterValue::_copy() : fUML::Semantics::CommonBehavior::ParameterValue: 1957074675
 		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 

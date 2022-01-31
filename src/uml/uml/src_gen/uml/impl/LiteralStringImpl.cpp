@@ -407,7 +407,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralString::isComputable() : bool: 681007420

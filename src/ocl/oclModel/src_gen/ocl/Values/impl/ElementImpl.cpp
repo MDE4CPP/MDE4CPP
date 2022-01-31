@@ -313,7 +313,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

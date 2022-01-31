@@ -510,13 +510,13 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ActivityExecution::_copy() : fUML::Semantics::Values::Value: 268283450
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::execute(): 1727608078
@@ -528,7 +528,7 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		// fUML::Semantics::Activities::ActivityExecution::new_() : fUML::Semantics::Values::Value: 929802882
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::terminate(): 679246932

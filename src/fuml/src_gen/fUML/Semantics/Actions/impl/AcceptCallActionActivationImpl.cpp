@@ -273,7 +273,7 @@ bool AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
 Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::AcceptCallActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 168434213

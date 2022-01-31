@@ -447,7 +447,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::BroadcastSignalAction::no_onport(Any, std::map) : bool: 2075676186

@@ -497,7 +497,7 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 Any DurationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Duration::no_expr_requires_observation(Any, std::map) : bool: 492859079

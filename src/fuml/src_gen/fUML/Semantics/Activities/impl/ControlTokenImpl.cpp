@@ -260,13 +260,13 @@ bool ControlTokenImpl::eSet(int featureID, Any newValue)
 Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ControlToken::_copy() : fUML::Semantics::Activities::Token: 186948332
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ControlToken::equals(fUML::Semantics::Activities::Token) : bool: 1420478842

@@ -372,7 +372,7 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EModelElement::getEAnnotation(std::string) : ecore::EAnnotation: 304921690
@@ -383,7 +383,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::string incoming_param_source;
 			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAny(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS,false);
+			result = eAnyObject(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
 		}
 

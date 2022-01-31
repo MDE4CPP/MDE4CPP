@@ -533,7 +533,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ValuePin::compatible_type(Any, std::map) : bool: 1162006079

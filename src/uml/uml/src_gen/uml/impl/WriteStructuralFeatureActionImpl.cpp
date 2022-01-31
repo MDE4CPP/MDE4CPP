@@ -510,7 +510,7 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::WriteStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 1698582669

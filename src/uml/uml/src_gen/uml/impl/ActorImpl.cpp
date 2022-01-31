@@ -436,7 +436,7 @@ bool ActorImpl::eSet(int featureID, Any newValue)
 Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Actor::associations(Any, std::map) : bool: 818238989

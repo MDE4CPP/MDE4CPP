@@ -408,14 +408,14 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DeploymentTarget::getDeployedElements() : uml::PackageableElement[*]: 2114329514
 		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getDeployedElements();
-			return eAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 

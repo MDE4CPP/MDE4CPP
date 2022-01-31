@@ -230,7 +230,7 @@ bool FirstChoiceStrategyImpl::eSet(int featureID, Any newValue)
 Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Loci::FirstChoiceStrategy::choose(int) : int: 1148186745

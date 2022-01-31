@@ -391,13 +391,13 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ReturnInformation::_copy() : fUML::Semantics::Values::Value: 2045103425
 		case ActionsPackage::RETURNINFORMATION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::equals(fUML::Semantics::Values::Value) : bool: 1074588088
@@ -414,20 +414,20 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		// fUML::Semantics::Actions::ReturnInformation::getOperation() : uml::Operation: 455013808
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETOPERATION:
 		{
-			result = eAny(this->getOperation(), uml::umlPackage::OPERATION_CLASS,false);
+			result = eAnyObject(this->getOperation(), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::getTypes() : uml::Classifier[*]: 904744346
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::new_() : fUML::Semantics::Values::Value: 1466582464
 		case ActionsPackage::RETURNINFORMATION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::reply(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1070285524
@@ -444,7 +444,7 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		// fUML::Semantics::Actions::ReturnInformation::specify() : uml::ValueSpecification: 364086231
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
+			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::toString() : std::string: 352529642

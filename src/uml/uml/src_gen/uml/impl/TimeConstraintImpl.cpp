@@ -387,7 +387,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TimeConstraint::has_one_constrainedElement(Any, std::map) : bool: 161108299

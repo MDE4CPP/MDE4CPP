@@ -305,7 +305,7 @@ bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::doBody(fUML::Semantics::CommonBehavior::ParameterValue[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 90990798

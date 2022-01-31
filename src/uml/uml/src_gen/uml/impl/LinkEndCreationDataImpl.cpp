@@ -354,7 +354,7 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LinkEndCreationData::insertAt_pin(Any, std::map) : bool: 632771740

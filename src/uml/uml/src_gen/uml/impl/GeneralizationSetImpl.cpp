@@ -530,7 +530,7 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::GeneralizationSet::generalization_same_classifier(Any, std::map) : bool: 2025134361

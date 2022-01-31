@@ -241,7 +241,7 @@ bool UndefinedValueImpl::eSet(int featureID, Any newValue)
 Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::UndefinedValue::equals(fUML::Semantics::Values::Value) : bool: 1032526186

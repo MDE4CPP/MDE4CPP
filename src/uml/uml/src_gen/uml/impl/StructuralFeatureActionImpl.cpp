@@ -503,7 +503,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StructuralFeatureAction::multiplicity(Any, std::map) : bool: 980879933

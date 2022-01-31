@@ -324,7 +324,7 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 Any ReduceActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

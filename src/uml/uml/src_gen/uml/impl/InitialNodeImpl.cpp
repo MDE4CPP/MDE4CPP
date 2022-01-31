@@ -354,7 +354,7 @@ bool InitialNodeImpl::eSet(int featureID, Any newValue)
 Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InitialNode::control_edges(Any, std::map) : bool: 1281146585

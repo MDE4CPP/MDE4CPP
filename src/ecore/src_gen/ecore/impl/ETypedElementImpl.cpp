@@ -542,7 +542,7 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

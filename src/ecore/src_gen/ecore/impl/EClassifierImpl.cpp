@@ -395,7 +395,7 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
-			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //149
+			return eAnyObject(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //149
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //1410
@@ -502,7 +502,7 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EClassifier::getClassifierID() : int: 1232310610

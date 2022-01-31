@@ -246,7 +246,7 @@ bool OrderedSetTypeValueImpl::eSet(int featureID, Any newValue)
 Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::OrderedSetTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1906377029

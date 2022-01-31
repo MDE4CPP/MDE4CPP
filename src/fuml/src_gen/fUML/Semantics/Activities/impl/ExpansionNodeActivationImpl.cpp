@@ -292,7 +292,7 @@ bool ExpansionNodeActivationImpl::eSet(int featureID, Any newValue)
 Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ExpansionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1801862850
@@ -309,7 +309,7 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		// fUML::Semantics::Activities::ExpansionNodeActivation::getExpansionRegionActivation() : fUML::Semantics::Activities::ExpansionRegionActivation: 1117119621
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
 		{
-			result = eAny(this->getExpansionRegionActivation(), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS,false);
+			result = eAnyObject(this->getExpansionRegionActivation(), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ExpansionNodeActivation::isReady() : bool: 14712609

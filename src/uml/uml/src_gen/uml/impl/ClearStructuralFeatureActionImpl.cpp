@@ -459,7 +459,7 @@ bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ClearStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 838051871

@@ -538,7 +538,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActionInputPin::input_pin(Any, std::map) : bool: 637438317

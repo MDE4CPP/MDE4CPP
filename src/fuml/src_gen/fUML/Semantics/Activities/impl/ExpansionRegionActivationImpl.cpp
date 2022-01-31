@@ -967,7 +967,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ExpansionRegionActivation::doAction(): 1088415189
@@ -996,7 +996,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::shared_ptr<uml::ExpansionNode> incoming_param_node;
 			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ExpansionNode> >();
-			result = eAny(this->getExpansionNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS,false);
+			result = eAnyObject(this->getExpansionNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::isSuspended() : bool: 1266640523
@@ -1055,7 +1055,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
-			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::terminate(): 664627780

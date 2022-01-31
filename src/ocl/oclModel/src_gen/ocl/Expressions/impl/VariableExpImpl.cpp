@@ -37,8 +37,8 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -439,7 +439,7 @@ bool VariableExpImpl::eSet(int featureID, Any newValue)
 Any VariableExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

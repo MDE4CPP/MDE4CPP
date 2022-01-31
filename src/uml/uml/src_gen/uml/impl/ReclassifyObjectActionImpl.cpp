@@ -644,7 +644,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReclassifyObjectAction::classifier_not_abstract(Any, std::map) : bool: 1111669922

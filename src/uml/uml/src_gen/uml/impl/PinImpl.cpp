@@ -426,7 +426,7 @@ bool PinImpl::eSet(int featureID, Any newValue)
 Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Pin::control_pins(Any, std::map) : bool: 633209512

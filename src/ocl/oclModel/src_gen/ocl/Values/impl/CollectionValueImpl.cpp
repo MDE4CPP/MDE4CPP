@@ -382,7 +382,7 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::CollectionValue::addValue(fUML::Semantics::Values::Value) : bool: 1275818346

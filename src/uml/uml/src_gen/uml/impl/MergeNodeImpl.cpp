@@ -354,7 +354,7 @@ bool MergeNodeImpl::eSet(int featureID, Any newValue)
 Any MergeNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::MergeNode::edges(Any, std::map) : bool: 822782941

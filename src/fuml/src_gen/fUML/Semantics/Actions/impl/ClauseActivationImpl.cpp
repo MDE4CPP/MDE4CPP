@@ -362,27 +362,27 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ClauseActivation::getDecision() : fUML::Semantics::SimpleClassifiers::BooleanValue: 1084984079
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
 		{
-			result = eAny(this->getDecision(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS,false);
+			result = eAnyObject(this->getDecision(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::getPredecessors() : fUML::Semantics::Actions::ClauseActivation[*]: 712913762
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getPredecessors();
-			return eAny(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::getSuccessors() : fUML::Semantics::Actions::ClauseActivation[*]: 970094705
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getSuccessors();
-			return eAny(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::isReady() : bool: 1218269216

@@ -422,7 +422,7 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TemplateableElement::isTemplate() : bool: 175010214
@@ -435,7 +435,7 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();
-			return eAny(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
 			break;
 		}
 

@@ -378,7 +378,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Types::CollectionType::kindOf(ocl::Types::CollectionType) : bool: 1909894118

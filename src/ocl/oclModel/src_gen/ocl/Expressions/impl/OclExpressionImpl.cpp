@@ -37,8 +37,8 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -657,59 +657,59 @@ Any OclExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAppliedElement().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::CALLEXP_CLASS,false); //6110
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::CALLEXP_CLASS); //6110
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElseOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS,false); //6117
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS); //6117
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFirstOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS,false); //6119
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS); //6119
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIfOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS,false); //6116
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS); //6116
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitializedElement().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //6112
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS); //6112
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //6121
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLastOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS,false); //6120
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS); //6120
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLoopBodyOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::LOOPEXP_CLASS,false); //6111
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::LOOPEXP_CLASS); //6111
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParentCall().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_CLASS,false); //6114
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_CLASS); //6114
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParentNav().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_CLASS,false); //6118
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_CLASS); //6118
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getThenOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS,false); //6115
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::IFEXP_CLASS); //6115
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTopExpression().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //6113
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS); //6113
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -858,7 +858,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

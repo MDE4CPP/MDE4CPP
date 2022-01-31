@@ -281,7 +281,7 @@ bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
 Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::OperationTemplateParameter::match_default_signature(Any, std::map) : bool: 1020467918

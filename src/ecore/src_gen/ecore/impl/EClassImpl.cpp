@@ -1279,7 +1279,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EClass::getEOperation(int) : ecore::EOperation {const}: 1526673885
@@ -1290,7 +1290,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			int incoming_param_operationID;
 			std::list<Any>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operationID = (*incoming_param_operationID_arguments_citer)->get<int >();
-			result = eAny(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS,false);
+			result = eAnyObject(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(int) : ecore::EStructuralFeature {const}: 1143915648
@@ -1301,7 +1301,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			int incoming_param_featureID;
 			std::list<Any>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureID = (*incoming_param_featureID_arguments_citer)->get<int >();
-			result = eAny(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(std::string) : ecore::EStructuralFeature {const}: 927658850
@@ -1312,7 +1312,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::string incoming_param_featureName;
 			std::list<Any>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureName = (*incoming_param_featureName_arguments_citer)->get<std::string >();
-			result = eAny(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// ecore::EClass::getFeatureCount() : int {const}: 663421227
@@ -1340,7 +1340,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAny(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS,false);
+			result = eAnyObject(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS);
 			break;
 		}
 		// ecore::EClass::getOperationCount() : int {const}: 2008923785
@@ -1368,7 +1368,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
-			result = eAny(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS,false);
+			result = eAnyObject(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
 		// ecore::EClass::isSuperTypeOf(ecore::EClass) : bool {const}: 253558657

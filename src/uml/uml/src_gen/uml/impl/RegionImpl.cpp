@@ -637,12 +637,12 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAny(returnValue,uml::umlPackage::STATE_CLASS,false); //20719
+			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //20719
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS,false); //20720
+			return eAnyObject(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //20720
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 			return eAnyBag(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
@@ -804,7 +804,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Region::belongsToPSM() : bool: 701066281
@@ -816,7 +816,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		// uml::Region::containingStateMachine() : uml::StateMachine: 1752814481
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS,false);
+			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Region::deep_history_vertex(Any, std::map) : bool: 629096106
@@ -870,7 +870,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		// uml::Region::redefinitionContext() : uml::Classifier: 2039075134
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
+			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 771598032

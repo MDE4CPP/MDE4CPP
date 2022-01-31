@@ -737,33 +737,27 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Action::allActions() : uml::Action[*]: 547817094
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
 			std::shared_ptr<Bag<uml::Action> > resultList = this->allActions();
-			return eAny(resultList,uml::umlPackage::ACTION_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::ACTION_CLASS);
 			break;
 		}
 		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1538297391
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->allOwnedNodes();
-			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::Action::containingBehavior() : uml::Behavior: 959584979
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
-			result = eAny(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS,false);
-			break;
-		}
-		// uml::Action::getContext() : uml::Classifier: 215661939
-		case umlPackage::ACTION_OPERATION_GETCONTEXT:
-		{
-			result = eAny(this->getContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
+			result = eAnyObject(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 

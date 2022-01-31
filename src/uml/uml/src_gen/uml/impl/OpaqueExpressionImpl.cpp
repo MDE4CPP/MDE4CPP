@@ -558,15 +558,9 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// uml::OpaqueExpression::getResult() : uml::Parameter: 1957650327
-		case umlPackage::OPAQUEEXPRESSION_OPERATION_GETRESULT:
-		{
-			result = eAny(this->getResult(), uml::umlPackage::PARAMETER_CLASS,false);
-			break;
-		}
 		// uml::OpaqueExpression::isIntegral() : bool: 649739801
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
 		{

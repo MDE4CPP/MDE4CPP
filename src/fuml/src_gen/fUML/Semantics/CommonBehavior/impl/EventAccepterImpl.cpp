@@ -221,7 +221,7 @@ bool EventAccepterImpl::eSet(int featureID, Any newValue)
 Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::SimpleClassifiers::SignalInstance): 488129254

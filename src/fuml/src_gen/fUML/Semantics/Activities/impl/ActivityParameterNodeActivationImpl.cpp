@@ -301,7 +301,7 @@ bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
 Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ActivityParameterNodeActivation::clearTokens(): 1135371975

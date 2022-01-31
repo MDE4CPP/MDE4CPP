@@ -1030,7 +1030,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InformationFlow::convey_classifiers(Any, std::map) : bool: 260413641

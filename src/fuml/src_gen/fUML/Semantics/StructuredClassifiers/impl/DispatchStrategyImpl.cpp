@@ -262,7 +262,7 @@ bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
 Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::dispatch(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 399838326
@@ -278,7 +278,7 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->dispatch(incoming_param_object,incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
+			result = eAnyObject(this->dispatch(incoming_param_object,incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::getName() : std::string: 1383879722
@@ -300,7 +300,7 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation), uml::umlPackage::BEHAVIOR_CLASS,false);
+			result = eAnyObject(this->retrieveMethod(incoming_param_object,incoming_param_operation), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 

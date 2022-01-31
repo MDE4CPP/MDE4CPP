@@ -283,7 +283,7 @@ bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
 Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::DataStoreNodeActivation::addToken(fUML::Semantics::Activities::Token): 131946306

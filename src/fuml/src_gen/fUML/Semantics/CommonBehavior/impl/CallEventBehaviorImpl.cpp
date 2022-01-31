@@ -282,7 +282,7 @@ bool CallEventBehaviorImpl::eSet(int featureID, Any newValue)
 Any CallEventBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

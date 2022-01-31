@@ -366,12 +366,12 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //25219
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //25219
 		}
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
-			return eAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //25220
+			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //25220
 		}
 	}
 	Any result;
@@ -441,7 +441,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Variable::isAccessibleBy(uml::Action) : bool: 1435273110

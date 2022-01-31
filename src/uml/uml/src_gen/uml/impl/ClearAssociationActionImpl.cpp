@@ -496,7 +496,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ClearAssociationAction::multiplicity(Any, std::map) : bool: 819319273

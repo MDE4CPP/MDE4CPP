@@ -311,7 +311,7 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ClearStructuralFeatureActionActivation::doAction(): 1925160483

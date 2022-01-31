@@ -498,7 +498,7 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
-			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //4410
+			return eAnyObject(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //4410
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 			return eAny(getNsPrefix(),ecore::ecorePackage::ESTRING_CLASS,false); //446
@@ -639,7 +639,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EPackage::getEClassifier(std::string) : ecore::EClassifier {const}: 1732523502
@@ -650,7 +650,7 @@ Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS,false);
+			result = eAnyObject(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS);
 			break;
 		}
 

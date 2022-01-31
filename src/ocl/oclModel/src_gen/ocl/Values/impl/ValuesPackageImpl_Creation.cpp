@@ -62,6 +62,7 @@ void ValuesPackageImpl::createAnyValueContent(std::shared_ptr<ecore::EPackage> p
 	m_anyValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_anyValue_Class, ANYVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_anyValue_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_anyValue_Class, ANYVALUE_OPERATION_EQUALS_VALUE);
 	m_anyValue_Operation_toString = factory->createEOperation_as_eOperations_in_EClass(m_anyValue_Class, ANYVALUE_OPERATION_TOSTRING);
 	
 }

@@ -609,7 +609,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReplyAction::event_on_reply_to_call_trigger(Any, std::map) : bool: 1073826622

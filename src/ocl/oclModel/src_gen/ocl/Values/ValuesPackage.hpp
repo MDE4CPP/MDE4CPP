@@ -70,10 +70,11 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const long long ANYVALUE_CLASS = 1772675012;
 			static const unsigned int ANYVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 12;
+			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 13;
 			static const long long ANYVALUE_ATTRIBUTE_VALUE = 79068194;
 			
 			
+			static const int ANYVALUE_OPERATION_EQUALS_VALUE = 103556546;
 			static const int ANYVALUE_OPERATION_TOSTRING = 944564240;
 			
 			//Class and Feature Getter
@@ -82,6 +83,7 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EAttribute> getAnyValue_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_equals_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_toString() const = 0;
 			
 			// End Class AnyValue

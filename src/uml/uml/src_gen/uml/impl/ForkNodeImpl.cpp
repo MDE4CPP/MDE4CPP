@@ -354,7 +354,7 @@ bool ForkNodeImpl::eSet(int featureID, Any newValue)
 Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ForkNode::edges(Any, std::map) : bool: 1898705516

@@ -644,7 +644,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InstanceSpecification::defining_feature(Any, std::map) : bool: 305091535

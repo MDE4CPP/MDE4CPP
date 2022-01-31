@@ -321,7 +321,7 @@ bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DestructionOccurrenceSpecification::no_occurrence_specifications_below(Any, std::map) : bool: 2054634562

@@ -590,7 +590,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadLinkObjectEndAction::association_of_association(Any, std::map) : bool: 803845092

@@ -414,7 +414,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ConsiderIgnoreFragment::consider_or_ignore(Any, std::map) : bool: 849186850

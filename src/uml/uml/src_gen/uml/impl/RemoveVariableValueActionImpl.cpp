@@ -484,7 +484,7 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::RemoveVariableValueAction::removeAt_and_value(Any, std::map) : bool: 212395563

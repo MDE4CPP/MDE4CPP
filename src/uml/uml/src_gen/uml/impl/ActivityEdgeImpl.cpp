@@ -698,7 +698,7 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //812
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //812
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 			return eAny(getGuard(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //813
@@ -709,7 +709,7 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //816
+			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //816
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 			return eAny(getInterrupts(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS,false); //815
@@ -898,7 +898,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActivityEdge::source_and_target(Any, std::map) : bool: 256269069

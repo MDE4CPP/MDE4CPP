@@ -386,7 +386,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::_startObjectBehavior(): 981714484

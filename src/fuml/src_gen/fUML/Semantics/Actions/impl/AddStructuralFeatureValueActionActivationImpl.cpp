@@ -516,7 +516,7 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation::doAction(): 1373829199

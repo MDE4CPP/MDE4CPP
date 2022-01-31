@@ -475,7 +475,7 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAbstraction().lock();
-			return eAny(returnValue,uml::umlPackage::COMPONENT_CLASS,false); //4819
+			return eAnyObject(returnValue,uml::umlPackage::COMPONENT_CLASS); //4819
 		}
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 			return eAnyBag(getRealizingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //4818
@@ -555,7 +555,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

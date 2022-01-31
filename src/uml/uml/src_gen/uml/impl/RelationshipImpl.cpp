@@ -261,7 +261,7 @@ bool RelationshipImpl::eSet(int featureID, Any newValue)
 Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

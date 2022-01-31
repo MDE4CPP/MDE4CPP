@@ -471,7 +471,7 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBoundElement().lock();
-			return eAny(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS,false); //2308
+			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2308
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 			return eAnyBag(getParameterSubstitution(),uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS); //2306
@@ -563,7 +563,7 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TemplateBinding::one_parameter_substitution(Any, std::map) : bool: 654929774

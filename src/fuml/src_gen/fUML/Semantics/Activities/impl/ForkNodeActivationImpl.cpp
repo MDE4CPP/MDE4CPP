@@ -302,7 +302,7 @@ bool ForkNodeActivationImpl::eSet(int featureID, Any newValue)
 Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ForkNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1337885932

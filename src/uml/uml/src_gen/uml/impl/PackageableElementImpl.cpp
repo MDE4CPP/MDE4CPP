@@ -312,7 +312,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //17311
+			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //17311
 		}
 	}
 	Any result;
@@ -372,7 +372,7 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 Any PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::PackageableElement::namespace_needs_visibility(Any, std::map) : bool: 911284147

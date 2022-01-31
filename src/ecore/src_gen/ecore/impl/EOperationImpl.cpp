@@ -547,7 +547,7 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //4314
+			return eAnyObject(returnValue,ecore::ecorePackage::ECLASS_CLASS); //4314
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 			return eAnyBag(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4317
@@ -746,7 +746,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EOperation::isOverrideOf(ecore::EOperation) : bool {const}: 861941010

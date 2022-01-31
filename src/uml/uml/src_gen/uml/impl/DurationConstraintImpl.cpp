@@ -400,7 +400,7 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DurationConstraint::first_event_multiplicity(Any, std::map) : bool: 605050300

@@ -1184,7 +1184,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 99188554
@@ -1239,14 +1239,14 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
-			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 585821302
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();
-			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 

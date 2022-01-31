@@ -433,7 +433,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ClassifierTemplateParameter::actual_is_classifier(Any, std::map) : bool: 1795975272

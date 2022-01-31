@@ -497,7 +497,7 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
-			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //9615
+			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //9615
 		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 			return eAnyBag(getExtensionLocation(),uml::umlPackage::EXTENSIONPOINT_CLASS); //9614
@@ -618,7 +618,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 Any ExtendImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Extend::extension_points(Any, std::map) : bool: 1884789013

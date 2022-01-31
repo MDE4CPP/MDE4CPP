@@ -526,7 +526,7 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InformationItem::has_no(Any, std::map) : bool: 1598598328

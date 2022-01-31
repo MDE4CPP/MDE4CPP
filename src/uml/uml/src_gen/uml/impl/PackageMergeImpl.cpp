@@ -379,7 +379,7 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //1727
+			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //1727
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -428,7 +428,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

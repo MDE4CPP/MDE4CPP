@@ -335,13 +335,13 @@ bool InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 675295782
 		case ClassificationPackage::INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

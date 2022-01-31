@@ -735,7 +735,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::OpaqueAction::language_body_size(Any, std::map) : bool: 2072708409

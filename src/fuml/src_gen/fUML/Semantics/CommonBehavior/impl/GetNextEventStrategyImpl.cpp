@@ -231,7 +231,7 @@ bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::getName() : std::string: 905122154
@@ -248,7 +248,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
 			std::list<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
-			result = eAny(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS,false);
+			result = eAnyObject(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS);
 			break;
 		}
 

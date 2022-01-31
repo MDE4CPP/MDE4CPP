@@ -269,7 +269,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValu
 Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1906305416

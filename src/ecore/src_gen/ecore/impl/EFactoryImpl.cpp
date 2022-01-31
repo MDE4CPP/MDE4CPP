@@ -741,7 +741,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EFactory::convertToString(ecore::EDataType, Any) : std::string {const}: 776190528
@@ -768,7 +768,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			result = eAny(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS,false);
+			result = eAnyObject(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 1793041850

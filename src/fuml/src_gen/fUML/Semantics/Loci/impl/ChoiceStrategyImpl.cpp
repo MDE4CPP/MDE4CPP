@@ -226,7 +226,7 @@ bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
 Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Loci::ChoiceStrategy::choose(int) : int: 1273166866

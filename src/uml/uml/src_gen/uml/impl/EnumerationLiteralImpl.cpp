@@ -341,7 +341,7 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
-			return eAny(returnValue,uml::umlPackage::ENUMERATION_CLASS,false); //8517
+			return eAnyObject(returnValue,uml::umlPackage::ENUMERATION_CLASS); //8517
 		}
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -380,20 +380,14 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// uml::EnumerationLiteral::getClassifier() : uml::Enumeration: 118208468
-		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
-		{
-			result = eAny(this->getClassifier(), uml::umlPackage::ENUMERATION_CLASS,false);
-			break;
-		}
 		// uml::EnumerationLiteral::getClassifiers() : uml::Classifier[*]: 1410424622
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getClassifiers();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

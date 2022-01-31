@@ -497,7 +497,7 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 Any TimeExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TimeExpression::no_expr_requires_observation(Any, std::map) : bool: 162495471

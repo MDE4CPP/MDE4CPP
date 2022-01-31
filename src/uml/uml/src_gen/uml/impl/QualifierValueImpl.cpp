@@ -368,7 +368,7 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::QualifierValue::multiplicity_of_qualifier(Any, std::map) : bool: 1678485092

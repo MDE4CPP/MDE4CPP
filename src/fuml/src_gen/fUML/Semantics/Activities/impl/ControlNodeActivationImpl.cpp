@@ -246,7 +246,7 @@ bool ControlNodeActivationImpl::eSet(int featureID, Any newValue)
 Any ControlNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ControlNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1114472253

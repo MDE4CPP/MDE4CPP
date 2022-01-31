@@ -444,7 +444,7 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //12619
+			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //12619
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -493,7 +493,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

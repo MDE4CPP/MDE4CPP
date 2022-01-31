@@ -407,7 +407,7 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralBoolean::booleanValue() : bool: 844586416

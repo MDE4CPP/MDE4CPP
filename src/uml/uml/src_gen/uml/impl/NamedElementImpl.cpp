@@ -521,7 +521,7 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();
-			return eAny(returnValue,uml::umlPackage::NAMESPACE_CLASS,false); //1556
+			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //1556
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName(),ecore::ecorePackage::ESTRING_CLASS,false); //1557
@@ -588,21 +588,21 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2032137401
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
 			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
-			return eAny(resultList,uml::umlPackage::NAMESPACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::NAMESPACE_CLASS);
 			break;
 		}
 		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 1344070418
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
-			return eAny(resultList,uml::umlPackage::PACKAGE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 859532136
@@ -613,7 +613,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS,false);
+			result = eAnyObject(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
 		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 274373089
@@ -624,14 +624,14 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS,false);
+			result = eAnyObject(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
 			break;
 		}
 		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 1863743641
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
 			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
-			return eAny(resultList,uml::umlPackage::DEPENDENCY_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
 		// uml::NamedElement::getLabel() : std::string: 1812636995
@@ -649,12 +649,6 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::list<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
 			result = eAny(this->getLabel(incoming_param_localize),0,false);
-			break;
-		}
-		// uml::NamedElement::getNamespace() : uml::Namespace: 769066163
-		case umlPackage::NAMEDELEMENT_OPERATION_GETNAMESPACE:
-		{
-			result = eAny(this->getNamespace(), uml::umlPackage::NAMESPACE_CLASS,false);
 			break;
 		}
 		// uml::NamedElement::getQualifiedName() : std::string {const}: 646487924

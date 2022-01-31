@@ -397,12 +397,12 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningSlot().lock();
-			return eAny(returnValue,uml::umlPackage::SLOT_CLASS,false); //25013
+			return eAnyObject(returnValue,uml::umlPackage::SLOT_CLASS); //25013
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS,false); //25014
+			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //25014
 		}
 	}
 	Any result;
@@ -472,7 +472,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ValueSpecification::booleanValue() : bool: 1922865696

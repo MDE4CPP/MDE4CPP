@@ -501,7 +501,7 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier().lock();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //20517
+			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //20517
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 			return eAnyBag(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
@@ -606,14 +606,14 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 257289515
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
-			return eAny(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}
 		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 1263440260

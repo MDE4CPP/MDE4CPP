@@ -347,7 +347,7 @@ bool ControlFlowImpl::eSet(int featureID, Any newValue)
 Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ControlFlow::object_nodes(Any, std::map) : bool: 1247728389

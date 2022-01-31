@@ -489,7 +489,7 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::AddVariableValueAction::insertAt_pin(Any, std::map) : bool: 39023039

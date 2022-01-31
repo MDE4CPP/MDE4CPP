@@ -247,13 +247,13 @@ bool LiteralBooleanEvaluationImpl::eSet(int featureID, Any newValue)
 Any LiteralBooleanEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Values::LiteralBooleanEvaluation::evaluate() : fUML::Semantics::Values::Value: 1960284282
 		case ValuesPackage::LITERALBOOLEANEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

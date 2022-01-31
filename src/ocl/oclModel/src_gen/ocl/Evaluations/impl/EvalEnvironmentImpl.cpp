@@ -377,7 +377,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Evaluations::EvalEnvironment::add(ocl::Values::NameValueBinding): 1479022861
@@ -410,7 +410,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->find(incoming_param_name), ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS,false);
+			result = eAnyObject(this->find(incoming_param_name), ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS);
 			break;
 		}
 		// ocl::Evaluations::EvalEnvironment::getValueOf(std::string) : fUML::Semantics::Values::Value: 1187543967
@@ -421,7 +421,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::string incoming_param_n;
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::string >();
-			result = eAny(this->getValueOf(incoming_param_n), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->getValueOf(incoming_param_n), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// ocl::Evaluations::EvalEnvironment::replace(ocl::Values::NameValueBinding): 483482254

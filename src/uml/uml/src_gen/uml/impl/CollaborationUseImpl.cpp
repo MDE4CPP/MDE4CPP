@@ -468,7 +468,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::CollaborationUse::client_elements(Any, std::map) : bool: 123075857

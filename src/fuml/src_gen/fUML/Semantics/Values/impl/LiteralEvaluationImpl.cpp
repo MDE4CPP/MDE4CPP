@@ -241,7 +241,7 @@ bool LiteralEvaluationImpl::eSet(int featureID, Any newValue)
 Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Values::LiteralEvaluation::getType(std::string) : uml::PrimitiveType: 1020927880
@@ -252,7 +252,7 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::string incoming_param_builtInTypeName;
 			std::list<Any>::const_iterator incoming_param_builtInTypeName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_builtInTypeName = (*incoming_param_builtInTypeName_arguments_citer)->get<std::string >();
-			result = eAny(this->getType(incoming_param_builtInTypeName), uml::umlPackage::PRIMITIVETYPE_CLASS,false);
+			result = eAnyObject(this->getType(incoming_param_builtInTypeName), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
 

@@ -553,14 +553,14 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBaseExp().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::ITERATEEXP_CLASS,false); //9713
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::ITERATEEXP_CLASS); //9713
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
 			return eAny(getInitExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //9710
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLoopExp().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::LOOPEXP_CLASS,false); //9712
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::LOOPEXP_CLASS); //9712
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
 			return eAny(getReferringExp(),ocl::Expressions::ExpressionsPackage::VARIABLEEXP_CLASS,false); //9714
@@ -569,19 +569,19 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResultOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9716
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS); //9716
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSelfOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9715
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS); //9715
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
 			return eAny(getValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //9718
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVarOwner().lock();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9717
+			return eAnyObject(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS); //9717
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -700,7 +700,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

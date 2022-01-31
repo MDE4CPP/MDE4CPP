@@ -618,7 +618,7 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

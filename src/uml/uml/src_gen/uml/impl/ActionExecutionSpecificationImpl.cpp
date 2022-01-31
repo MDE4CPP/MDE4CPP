@@ -377,7 +377,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActionExecutionSpecification::action_referenced(Any, std::map) : bool: 861896458

@@ -533,7 +533,7 @@ bool AssociationClassImpl::eSet(int featureID, Any newValue)
 Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::AssociationClass::cannot_be_defined(Any, std::map) : bool: 166637851

@@ -380,7 +380,7 @@ bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
 Any CreateLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::CreateLinkAction::association_not_abstract(Any, std::map) : bool: 1852135634

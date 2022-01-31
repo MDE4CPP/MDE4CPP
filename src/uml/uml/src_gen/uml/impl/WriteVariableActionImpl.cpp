@@ -431,7 +431,7 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::WriteVariableAction::multiplicity(Any, std::map) : bool: 438779608

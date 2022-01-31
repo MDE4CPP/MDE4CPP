@@ -460,7 +460,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::JoinNode::incoming_object_flow(Any, std::map) : bool: 1655982604

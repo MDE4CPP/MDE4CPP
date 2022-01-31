@@ -106,6 +106,22 @@ void ValuesPackageImpl::initializeAnyValueContent()
 	}
 	
 	
+	m_anyValue_Operation_equals_Value->setName("equals");
+	m_anyValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_anyValue_Operation_equals_Value->setLowerBound(1);
+	m_anyValue_Operation_equals_Value->setUpperBound(1);
+	m_anyValue_Operation_equals_Value->setUnique(true);
+	m_anyValue_Operation_equals_Value->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_anyValue_Operation_equals_Value);
+		parameter->setName("otherValue");
+		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_anyValue_Operation_toString->setName("toString");
 	m_anyValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_anyValue_Operation_toString->setLowerBound(1);

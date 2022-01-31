@@ -391,7 +391,7 @@ bool FinalStateImpl::eSet(int featureID, Any newValue)
 Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::FinalState::cannot_reference_submachine(Any, std::map) : bool: 859062182

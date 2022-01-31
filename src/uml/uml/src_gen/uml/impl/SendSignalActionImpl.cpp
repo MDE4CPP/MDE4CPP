@@ -504,7 +504,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::SendSignalAction::number_order(Any, std::map) : bool: 1206735679

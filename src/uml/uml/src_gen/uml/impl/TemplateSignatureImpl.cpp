@@ -417,7 +417,7 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
-			return eAny(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS,false); //2334
+			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2334
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -534,7 +534,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TemplateSignature::own_elements(Any, std::map) : bool: 545793563

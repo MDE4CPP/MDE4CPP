@@ -495,7 +495,7 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadExtentAction::multiplicity_of_result(Any, std::map) : bool: 796840948

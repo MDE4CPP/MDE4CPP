@@ -509,7 +509,7 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::AddStructuralFeatureValueAction::insertAt_pin(Any, std::map) : bool: 1640724037

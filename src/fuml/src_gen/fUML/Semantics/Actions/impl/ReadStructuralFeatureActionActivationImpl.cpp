@@ -404,7 +404,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue
 Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ReadStructuralFeatureActionActivation::doAction(): 1837829447

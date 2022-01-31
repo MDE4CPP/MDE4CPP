@@ -484,7 +484,7 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::ObjectValue::equals(fUML::Semantics::Values::Value) : bool: 1285091917

@@ -607,7 +607,7 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
-			return eAny(returnValue,uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS,false); //5319
+			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS); //5319
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return eAny(getType(),uml::umlPackage::ASSOCIATION_CLASS,false); //5318
@@ -777,7 +777,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Connector::getKind() : uml::ConnectorKind: 1738876455

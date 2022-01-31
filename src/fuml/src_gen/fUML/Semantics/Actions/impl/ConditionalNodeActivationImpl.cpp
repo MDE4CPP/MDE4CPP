@@ -472,7 +472,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ConditionalNodeActivation::getClauseActivation(uml::Clause) : fUML::Semantics::Actions::ClauseActivation: 655045744
@@ -483,7 +483,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::shared_ptr<uml::Clause> incoming_param_clause;
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
-			result = eAny(this->getClauseActivation(incoming_param_clause), fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS,false);
+			result = eAnyObject(this->getClauseActivation(incoming_param_clause), fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ConditionalNodeActivation::runTest(uml::Clause): 612797622

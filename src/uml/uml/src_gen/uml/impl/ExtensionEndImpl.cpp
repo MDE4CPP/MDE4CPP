@@ -440,7 +440,7 @@ bool ExtensionEndImpl::eSet(int featureID, Any newValue)
 Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ExtensionEnd::aggregation(Any, std::map) : bool: 1897744733

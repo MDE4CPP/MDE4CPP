@@ -436,7 +436,7 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StartClassifierBehaviorAction::multiplicity(Any, std::map) : bool: 1094899512

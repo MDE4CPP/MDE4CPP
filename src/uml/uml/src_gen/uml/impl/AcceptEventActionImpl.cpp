@@ -677,7 +677,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::AcceptEventAction::conforming_type(Any, std::map) : bool: 1819988295

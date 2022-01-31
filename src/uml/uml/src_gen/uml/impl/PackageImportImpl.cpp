@@ -444,7 +444,7 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAny(returnValue,uml::umlPackage::NAMESPACE_CLASS,false); //1717
+			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //1717
 		}
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility(),uml::umlPackage::VISIBILITYKIND_CLASS,false); //1718
@@ -504,7 +504,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::PackageImport::public_or_private(Any, std::map) : bool: 216730500

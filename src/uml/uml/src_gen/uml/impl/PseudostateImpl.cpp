@@ -513,12 +513,12 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAny(returnValue,uml::umlPackage::STATE_CLASS,false); //18912
+			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //18912
 		}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS,false); //18914
+			return eAnyObject(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //18914
 		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
@@ -576,7 +576,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Pseudostate::choice_vertex(Any, std::map) : bool: 1495555718

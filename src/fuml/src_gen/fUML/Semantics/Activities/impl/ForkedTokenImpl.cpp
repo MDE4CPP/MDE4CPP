@@ -428,13 +428,13 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ForkedToken::_copy() : fUML::Semantics::Activities::Token: 252058926
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ForkedToken::equals(fUML::Semantics::Activities::Token) : bool: 1288297071
@@ -451,7 +451,7 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		// fUML::Semantics::Activities::ForkedToken::getValue() : fUML::Semantics::Values::Value {const}: 727492760
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
-			result = eAny(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ForkedToken::isControl() : bool: 1584869028

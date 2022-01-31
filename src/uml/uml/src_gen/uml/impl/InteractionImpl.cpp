@@ -1150,7 +1150,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Interaction::not_contained(Any, std::map) : bool: 1772816991

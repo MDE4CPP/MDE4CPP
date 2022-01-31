@@ -321,7 +321,7 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
-			return eAny(returnValue,ecore::ecorePackage::EENUM_CLASS,false); //228
+			return eAnyObject(returnValue,ecore::ecorePackage::EENUM_CLASS); //228
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance(),ecore::ecorePackage::EENUMERATOR_CLASS,false); //226
@@ -385,7 +385,7 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

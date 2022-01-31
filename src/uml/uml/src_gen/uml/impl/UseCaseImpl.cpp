@@ -891,14 +891,14 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::UseCase::allIncludedUseCases() : uml::UseCase[*]: 1800777238
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
 			std::shared_ptr<Bag<uml::UseCase> > resultList = this->allIncludedUseCases();
-			return eAny(resultList,uml::umlPackage::USECASE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::USECASE_CLASS);
 			break;
 		}
 		// uml::UseCase::binary_associations(Any, std::map) : bool: 994037494

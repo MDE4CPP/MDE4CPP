@@ -430,7 +430,7 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Model::isMetamodel() : bool: 632630866

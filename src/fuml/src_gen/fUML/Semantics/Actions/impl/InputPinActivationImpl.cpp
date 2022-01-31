@@ -278,7 +278,7 @@ bool InputPinActivationImpl::eSet(int featureID, Any newValue)
 Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::InputPinActivation::isReady() : bool: 508191945

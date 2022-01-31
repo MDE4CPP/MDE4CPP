@@ -395,7 +395,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Reception::same_name_as_signal(Any, std::map) : bool: 552397630

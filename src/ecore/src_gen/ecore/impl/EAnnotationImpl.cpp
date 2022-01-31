@@ -435,7 +435,7 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEModelElement().lock();
-			return eAny(returnValue,ecore::ecorePackage::EMODELELEMENT_CLASS,false); //25
+			return eAnyObject(returnValue,ecore::ecorePackage::EMODELELEMENT_CLASS); //25
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 			return eAnyBag(getReferences(),ecore::ecorePackage::EOBJECT_CLASS); //27
@@ -575,7 +575,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 Any EAnnotationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

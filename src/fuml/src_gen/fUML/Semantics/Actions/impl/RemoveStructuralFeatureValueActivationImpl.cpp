@@ -406,7 +406,7 @@ bool RemoveStructuralFeatureValueActivationImpl::eSet(int featureID, Any newValu
 Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation::doAction(): 694812278

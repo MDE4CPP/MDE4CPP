@@ -406,7 +406,7 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();
-			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //11213
+			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //11213
 		}
 	}
 	Any result;
@@ -476,7 +476,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

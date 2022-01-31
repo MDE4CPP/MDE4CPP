@@ -370,7 +370,7 @@ bool WriteLinkActionImpl::eSet(int featureID, Any newValue)
 Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::WriteLinkAction::allow_access(Any, std::map) : bool: 717511047

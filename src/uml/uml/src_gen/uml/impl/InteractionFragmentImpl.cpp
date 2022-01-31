@@ -454,12 +454,12 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
-			return eAny(returnValue,uml::umlPackage::INTERACTION_CLASS,false); //12111
+			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //12111
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
-			return eAny(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS,false); //12110
+			return eAnyObject(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS); //12110
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 			return eAnyBag(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
@@ -588,7 +588,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

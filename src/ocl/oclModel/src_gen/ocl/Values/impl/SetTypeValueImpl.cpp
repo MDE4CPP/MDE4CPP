@@ -246,7 +246,7 @@ bool SetTypeValueImpl::eSet(int featureID, Any newValue)
 Any SetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::SetTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1324843311

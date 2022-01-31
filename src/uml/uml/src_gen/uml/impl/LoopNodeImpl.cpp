@@ -1192,7 +1192,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LoopNode::body_output_pins(Any, std::map) : bool: 2141690272

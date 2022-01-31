@@ -407,7 +407,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralReal::isComputable() : bool: 1259887142

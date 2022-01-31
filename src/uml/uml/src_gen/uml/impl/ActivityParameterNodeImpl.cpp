@@ -433,7 +433,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActivityParameterNode::has_parameters(Any, std::map) : bool: 1893745114

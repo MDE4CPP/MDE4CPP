@@ -677,7 +677,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ObjectNode::input_output_parameter(Any, std::map) : bool: 1199944681

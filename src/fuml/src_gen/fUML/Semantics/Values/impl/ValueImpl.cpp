@@ -321,13 +321,13 @@ bool ValueImpl::eSet(int featureID, Any newValue)
 Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Values::Value::_copy() : fUML::Semantics::Values::Value: 569532635
 		case ValuesPackage::VALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Values::Value::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1176194197
@@ -361,7 +361,7 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		case ValuesPackage::VALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// fUML::Semantics::Values::Value::hasTypes(uml::Classifier) : bool: 157177571
@@ -378,7 +378,7 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// fUML::Semantics::Values::Value::new_() : fUML::Semantics::Values::Value: 374650370
 		case ValuesPackage::VALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Values::Value::objectId() : std::string: 520851197
@@ -390,7 +390,7 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// fUML::Semantics::Values::Value::specify() : uml::ValueSpecification: 164025975
 		case ValuesPackage::VALUE_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
+			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Values::Value::toString() : std::string: 780447699

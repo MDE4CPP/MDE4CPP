@@ -321,7 +321,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

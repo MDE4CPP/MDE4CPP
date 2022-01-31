@@ -501,7 +501,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ParameterSet::input(Any, std::map) : bool: 893901939

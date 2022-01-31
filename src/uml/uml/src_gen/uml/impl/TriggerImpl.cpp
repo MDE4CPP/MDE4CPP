@@ -414,7 +414,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Trigger::trigger_with_ports(Any, std::map) : bool: 1662674080

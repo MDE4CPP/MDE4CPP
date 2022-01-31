@@ -610,7 +610,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadIsClassifiedObjectAction::boolean_result(Any, std::map) : bool: 1594582560

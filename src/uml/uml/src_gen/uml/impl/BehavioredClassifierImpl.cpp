@@ -730,7 +730,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 1882586927
@@ -753,14 +753,14 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 1944346500
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 

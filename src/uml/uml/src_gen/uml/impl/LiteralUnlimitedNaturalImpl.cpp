@@ -407,7 +407,7 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralUnlimitedNatural::isComputable() : bool: 1049705709

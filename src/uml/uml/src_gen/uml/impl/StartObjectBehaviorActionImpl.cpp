@@ -472,13 +472,13 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::StartObjectBehaviorAction::behavior() : uml::Behavior: 1069157764
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR:
 		{
-			result = eAny(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS,false);
+			result = eAnyObject(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 		// uml::StartObjectBehaviorAction::multiplicity_of_object(Any, std::map) : bool: 2114618972

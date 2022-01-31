@@ -263,7 +263,7 @@ bool ReclassifyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 Any ReclassifyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

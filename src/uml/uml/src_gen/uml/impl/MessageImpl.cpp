@@ -648,7 +648,7 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAny(returnValue,uml::umlPackage::INTERACTION_CLASS,false); //14711
+			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //14711
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind(),uml::umlPackage::MESSAGEKIND_CLASS,false); //14712
@@ -787,7 +787,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Message::arguments(Any, std::map) : bool: 1899252778

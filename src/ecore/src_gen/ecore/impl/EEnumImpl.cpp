@@ -435,7 +435,7 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EEnum::getEEnumLiteral(std::string) : ecore::EEnumLiteral {const}: 1917703622
@@ -446,7 +446,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS,false);
+			result = eAnyObject(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 		// ecore::EEnum::getEEnumLiteral(int) : ecore::EEnumLiteral {const}: 1070395435
@@ -457,7 +457,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			int incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
-			result = eAny(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS,false);
+			result = eAnyObject(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 		// ecore::EEnum::getEEnumLiteralByLiteral(std::string) : ecore::EEnumLiteral {const}: 582537382
@@ -468,7 +468,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_literal;
 			std::list<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
-			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS,false);
+			result = eAnyObject(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 

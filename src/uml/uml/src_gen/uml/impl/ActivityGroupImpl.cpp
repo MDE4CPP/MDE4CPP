@@ -411,14 +411,14 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //1011
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1011
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 			return eAnyBag(getSubgroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1012
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYGROUP_CLASS,false); //1013
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITYGROUP_CLASS); //1013
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -465,13 +465,13 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActivityGroup::containingActivity() : uml::Activity: 155988317
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS,false);
+			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
 		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 662716167

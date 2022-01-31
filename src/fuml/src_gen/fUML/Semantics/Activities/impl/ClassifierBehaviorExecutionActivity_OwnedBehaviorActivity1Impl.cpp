@@ -217,7 +217,7 @@ bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int fe
 Any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

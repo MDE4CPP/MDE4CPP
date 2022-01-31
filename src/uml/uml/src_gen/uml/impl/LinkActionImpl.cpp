@@ -617,13 +617,13 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LinkAction::association() : uml::Association: 1086747006
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
-			result = eAny(this->association(), uml::umlPackage::ASSOCIATION_CLASS,false);
+			result = eAnyObject(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// uml::LinkAction::not_static(Any, std::map) : bool: 768493780

@@ -557,7 +557,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::InteractionOperand::guard_contain_references(Any, std::map) : bool: 922629264

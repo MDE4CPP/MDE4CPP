@@ -254,7 +254,7 @@ bool FactoryImpl::eSet(int featureID, Any newValue)
 Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Factory::create(uml::Class) : uml::Element: 486892436
@@ -265,7 +265,7 @@ Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<uml::Class> incoming_param_metaClass;
 			std::list<Any>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->create(incoming_param_metaClass), uml::umlPackage::ELEMENT_CLASS,false);
+			result = eAnyObject(this->create(incoming_param_metaClass), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 

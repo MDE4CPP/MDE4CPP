@@ -338,7 +338,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //24412
+			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //24412
 		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -377,7 +377,7 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Type::conformsTo(uml::Type) : bool: 629993373
@@ -449,14 +449,14 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			int incoming_param_end2Upper;
 			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
-			result = eAny(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS,false);
+			result = eAnyObject(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// uml::Type::getAssociations() : uml::Association[*]: 16000238
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
 			std::shared_ptr<Bag<uml::Association> > resultList = this->getAssociations();
-			return eAny(resultList,uml::umlPackage::ASSOCIATION_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 

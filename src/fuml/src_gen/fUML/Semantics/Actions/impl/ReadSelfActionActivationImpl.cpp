@@ -396,7 +396,7 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ReadSelfActionActivation::doAction(): 43961115

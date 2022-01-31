@@ -258,7 +258,7 @@ bool InitialNodeActivationImpl::eSet(int featureID, Any newValue)
 Any InitialNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::InitialNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 228412215

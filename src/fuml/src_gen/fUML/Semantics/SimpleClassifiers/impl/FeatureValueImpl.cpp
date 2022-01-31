@@ -504,13 +504,13 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::FeatureValue::_copy() : fUML::Semantics::SimpleClassifiers::FeatureValue: 1429289502
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::FeatureValue::hasEqualValues(fUML::Semantics::SimpleClassifiers::FeatureValue) : bool: 2061713627

@@ -243,7 +243,7 @@ bool BagTypeValueImpl::eSet(int featureID, Any newValue)
 Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ocl::Values::BagTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 794069208

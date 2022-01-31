@@ -511,7 +511,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

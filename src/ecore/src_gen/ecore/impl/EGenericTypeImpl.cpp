@@ -564,7 +564,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EGenericType::isInstance(Any) : bool {const}: 1426574931

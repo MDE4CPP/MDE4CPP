@@ -559,7 +559,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::TestIdentityAction::multiplicity(Any, std::map) : bool: 936405543

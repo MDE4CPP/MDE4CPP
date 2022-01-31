@@ -442,7 +442,7 @@ bool IterateExpImpl::eSet(int featureID, Any newValue)
 Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

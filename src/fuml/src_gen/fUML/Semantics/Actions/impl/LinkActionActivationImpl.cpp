@@ -274,7 +274,7 @@ bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
 Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData) : bool: 767035740
@@ -296,7 +296,7 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// fUML::Semantics::Actions::LinkActionActivation::getAssociation() : uml::Association: 1506375580
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_GETASSOCIATION:
 		{
-			result = eAny(this->getAssociation(), uml::umlPackage::ASSOCIATION_CLASS,false);
+			result = eAnyObject(this->getAssociation(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData[*]) : bool: 1981105116

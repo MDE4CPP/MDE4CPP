@@ -505,7 +505,7 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::CreateObjectAction::classifier_not_abstract(Any, std::map) : bool: 635180

@@ -554,14 +554,14 @@ bool EncapsulatedClassifierImpl::eSet(int featureID, Any newValue)
 Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::EncapsulatedClassifier::getOwnedPorts() : uml::Port[*]: 1343953906
 		case umlPackage::ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS:
 		{
 			std::shared_ptr<Bag<uml::Port> > resultList = this->getOwnedPorts();
-			return eAny(resultList,uml::umlPackage::PORT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PORT_CLASS);
 			break;
 		}
 

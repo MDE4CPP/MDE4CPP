@@ -431,7 +431,7 @@ bool ClassifierBehaviorInvocationEventAccepterImpl::eSet(int featureID, Any newV
 Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 700456347

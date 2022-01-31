@@ -1003,7 +1003,7 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavioredClassifier().lock();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2361
+			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //2361
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
 			return eAny(getContext(),uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2354
@@ -1282,7 +1282,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Behavior::behavioredClassifier(uml::Element) : uml::BehavioredClassifier: 612359873
@@ -1293,7 +1293,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<uml::Element> incoming_param_from;
 			std::list<Any>::const_iterator incoming_param_from_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_from = (*incoming_param_from_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->behavioredClassifier(incoming_param_from), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false);
+			result = eAnyObject(this->behavioredClassifier(incoming_param_from), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Behavior::feature_of_context_classifier(Any, std::map) : bool: 1483589484
@@ -1312,17 +1312,11 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->feature_of_context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Behavior::getContext() : uml::BehavioredClassifier: 1834858445
-		case umlPackage::BEHAVIOR_OPERATION_GETCONTEXT:
-		{
-			result = eAny(this->getContext(), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false);
-			break;
-		}
 		// uml::Behavior::inputParameters() : uml::Parameter[*]: 1386831040
 		case umlPackage::BEHAVIOR_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Behavior::most_one_behavior(Any, std::map) : bool: 1307543230
@@ -1345,7 +1339,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		case umlPackage::BEHAVIOR_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Behavior::parameters_match(Any, std::map) : bool: 1912163781

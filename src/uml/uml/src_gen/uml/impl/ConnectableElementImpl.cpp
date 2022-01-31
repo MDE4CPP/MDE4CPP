@@ -332,14 +332,14 @@ bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 241976055
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
 			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();
-			return eAny(resultList,uml::umlPackage::CONNECTOREND_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CONNECTOREND_CLASS);
 			break;
 		}
 

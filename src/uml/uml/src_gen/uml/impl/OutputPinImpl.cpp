@@ -621,42 +621,42 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-			return eAny(returnValue,uml::umlPackage::ACTION_CLASS,false); //16934
+			return eAnyObject(returnValue,uml::umlPackage::ACTION_CLASS); //16934
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
-			return eAny(returnValue,uml::umlPackage::CALLACTION_CLASS,false); //16933
+			return eAnyObject(returnValue,uml::umlPackage::CALLACTION_CLASS); //16933
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
-			return eAny(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS,false); //16938
+			return eAnyObject(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS); //16938
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
-			return eAny(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS,false); //16940
+			return eAnyObject(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS); //16940
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
-			return eAny(returnValue,uml::umlPackage::READSELFACTION_CLASS,false); //16939
+			return eAnyObject(returnValue,uml::umlPackage::READSELFACTION_CLASS); //16939
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
-			return eAny(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //16937
+			return eAnyObject(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS); //16937
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS,false); //16935
+			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //16935
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-			return eAny(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS,false); //16936
+			return eAnyObject(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS); //16936
 		}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -757,7 +757,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::OutputPin::incoming_edges_structured_only(Any, std::map) : bool: 195902860

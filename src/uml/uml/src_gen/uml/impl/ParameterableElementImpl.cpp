@@ -318,7 +318,7 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
-			return eAny(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1783
+			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS); //1783
 		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 			return eAny(getTemplateParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1784
@@ -369,7 +369,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ParameterableElement::isCompatibleWith(uml::ParameterableElement) : bool: 1783372574

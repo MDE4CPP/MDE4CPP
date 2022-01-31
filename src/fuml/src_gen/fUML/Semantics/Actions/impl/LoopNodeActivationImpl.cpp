@@ -385,13 +385,13 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::LoopNodeActivation::makeLoopVariableList() : uml::ActivityNode: 1597416642
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
 		{
-			result = eAny(this->makeLoopVariableList(), uml::umlPackage::ACTIVITYNODE_CLASS,false);
+			result = eAnyObject(this->makeLoopVariableList(), uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::LoopNodeActivation::runBody(): 563107466

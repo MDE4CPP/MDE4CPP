@@ -442,7 +442,7 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
-			return eAny(returnValue,uml::umlPackage::NAMESPACE_CLASS,false); //5713
+			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //5713
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //5714
@@ -532,7 +532,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Constraint::boolean_value(Any, std::map) : bool: 383317525

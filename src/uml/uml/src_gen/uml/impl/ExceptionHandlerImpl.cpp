@@ -419,7 +419,7 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();
-			return eAny(returnValue,uml::umlPackage::EXECUTABLENODE_CLASS,false); //876
+			return eAnyObject(returnValue,uml::umlPackage::EXECUTABLENODE_CLASS); //876
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -517,7 +517,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ExceptionHandler::edge_source_target(Any, std::map) : bool: 2069883868

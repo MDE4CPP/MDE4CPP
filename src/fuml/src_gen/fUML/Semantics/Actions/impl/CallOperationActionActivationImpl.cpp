@@ -513,13 +513,13 @@ bool CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 371888052
 		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-			result = eAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
+			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 

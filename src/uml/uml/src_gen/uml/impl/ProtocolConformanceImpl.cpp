@@ -379,7 +379,7 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
-			return eAny(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //1867
+			return eAnyObject(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS); //1867
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -428,7 +428,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

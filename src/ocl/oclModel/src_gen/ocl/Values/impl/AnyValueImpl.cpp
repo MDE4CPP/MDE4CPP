@@ -104,6 +104,68 @@ std::shared_ptr<ecore::EObject> AnyValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+bool AnyValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<ocl::Values::AnyValue> otherAnyValue = std::dynamic_pointer_cast<ocl::Values::AnyValue>(otherValue);
+
+	Any otherAny=otherAnyValue->getValue();
+	if(otherAny==m_value) // same anyPtr
+	{
+		return true;
+	}
+    if(otherValue != nullptr && (otherAny->isContainer() == m_value->isContainer()) && (otherAny->getTypeId() == m_value->getTypeId()))
+    {
+    	//ToDo Check Content
+    	if(m_value->isContainer())//container eval
+    	{
+
+    	}
+    	else
+    	{
+			std::shared_ptr<ecore::EObject> otherObj =nullptr;
+			std::shared_ptr<AnyEObject> othereObjectAny = std::dynamic_pointer_cast<AnyEObject>(otherAny);
+			if(nullptr!=othereObjectAny)
+			{
+				otherObj=othereObjectAny->getObject();
+			}
+			else
+			{
+				try
+				{
+					otherObj = othereObjectAny->get<std::shared_ptr<ecore::EObject>>();
+				}
+				catch(...) {} // TODO equals for PrimitiveTypes, String,...
+			}
+			if(nullptr!=otherObj)
+			{
+				std::shared_ptr<ecore::EObject> thisObj =nullptr;
+				std::shared_ptr<AnyEObject> thisObjectAny = std::dynamic_pointer_cast<AnyEObject>(m_value);
+				if(nullptr!=thisObjectAny )
+				{
+					thisObj=thisObjectAny ->getObject();
+				}
+				else
+				{
+					try
+					{
+						thisObj = m_value->get<std::shared_ptr<ecore::EObject>>();
+					}
+					catch(...) {}// Todo other AnyTypes (PrimitiveTypes, String,...)
+				}
+				if(nullptr!=thisObj)
+				{//TODO realize == operator!
+					//return (*thisObj)==(*otherObj);
+					return thisObj == otherObj;
+				}
+			}
+    	}
+    }
+    return false;
+	//end of body
+}
+
 std::string AnyValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -171,7 +233,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@25b5c5e3 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@37b72ea (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}
@@ -277,9 +339,20 @@ bool AnyValueImpl::eSet(int featureID, Any newValue)
 Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
+		// ocl::Values::AnyValue::equals(fUML::Semantics::Values::Value) : bool: 103556546
+		case ValuesPackage::ANYVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
+			break;
+		}
 		// ocl::Values::AnyValue::toString() : std::string: 944564240
 		case ValuesPackage::ANYVALUE_OPERATION_TOSTRING:
 		{

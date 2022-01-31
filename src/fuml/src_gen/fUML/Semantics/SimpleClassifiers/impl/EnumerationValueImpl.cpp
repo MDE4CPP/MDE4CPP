@@ -408,13 +408,13 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::_copy() : fUML::Semantics::Values::Value: 2039932483
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::equals(fUML::Semantics::Values::Value) : bool: 1509384347
@@ -432,19 +432,19 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::new_() : fUML::Semantics::Values::Value: 873040755
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::specify() : uml::ValueSpecification: 1719232753
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
+			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::toString() : std::string: 1081001181

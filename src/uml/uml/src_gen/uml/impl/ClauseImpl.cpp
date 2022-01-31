@@ -705,7 +705,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Clause::body_output_pins(Any, std::map) : bool: 555602658

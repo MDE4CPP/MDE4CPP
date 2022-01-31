@@ -285,7 +285,7 @@ bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
 Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ValueSpecificationActionActivation::doAction(): 37357803

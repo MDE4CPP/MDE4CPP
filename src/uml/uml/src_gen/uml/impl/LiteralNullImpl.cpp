@@ -359,7 +359,7 @@ bool LiteralNullImpl::eSet(int featureID, Any newValue)
 Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::LiteralNull::isComputable() : bool: 1995427709

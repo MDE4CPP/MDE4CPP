@@ -541,7 +541,7 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::MultiplicityElement::compatibleWith(uml::MultiplicityElement) : bool: 781962328

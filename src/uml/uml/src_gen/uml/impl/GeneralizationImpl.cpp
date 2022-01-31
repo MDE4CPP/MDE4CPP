@@ -444,7 +444,7 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecific().lock();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //1099
+			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //1099
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -541,7 +541,7 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 Any GeneralizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

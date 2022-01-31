@@ -488,7 +488,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DecisionNode::decision_input_flow_incoming(Any, std::map) : bool: 1478029581

@@ -454,7 +454,7 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadStructuralFeatureAction::type_and_ordering(Any, std::map) : bool: 26062862

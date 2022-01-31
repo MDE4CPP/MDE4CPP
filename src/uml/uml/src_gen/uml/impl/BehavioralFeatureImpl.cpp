@@ -859,7 +859,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 506804351
@@ -891,21 +891,21 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::shared_ptr<uml::Type> incoming_param_type;
 			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS,false);
+			result = eAnyObject(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 1757399347
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 370844008
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 

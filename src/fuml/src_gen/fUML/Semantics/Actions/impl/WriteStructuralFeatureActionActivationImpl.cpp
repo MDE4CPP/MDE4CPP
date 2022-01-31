@@ -281,7 +281,7 @@ bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value[*], int) : int: 665074260

@@ -375,7 +375,7 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
-			return eAny(returnValue,uml::umlPackage::CONNECTOR_CLASS,false); //5412
+			return eAnyObject(returnValue,uml::umlPackage::CONNECTOR_CLASS); //5412
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return eAny(getDefiningEnd(),uml::umlPackage::PROPERTY_CLASS,false); //549
@@ -442,15 +442,9 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// uml::ConnectorEnd::getDefiningEnd() : uml::Property: 847443347
-		case umlPackage::CONNECTOREND_OPERATION_GETDEFININGEND:
-		{
-			result = eAny(this->getDefiningEnd(), uml::umlPackage::PROPERTY_CLASS,false);
-			break;
-		}
 		// uml::ConnectorEnd::multiplicity(Any, std::map) : bool: 931479953
 		case umlPackage::CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{

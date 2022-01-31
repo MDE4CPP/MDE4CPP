@@ -444,7 +444,7 @@ bool PrimitiveTypeImpl::eSet(int featureID, Any newValue)
 Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

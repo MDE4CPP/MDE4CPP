@@ -338,20 +338,20 @@ bool CallEventOccurrenceImpl::eSet(int featureID, Any newValue)
 Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getOperation() : uml::Operation: 1654121439
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETOPERATION:
 		{
-			result = eAny(this->getOperation(), uml::umlPackage::OPERATION_CLASS,false);
+			result = eAnyObject(this->getOperation(), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1038563063
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
-			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventOccurrence::match(uml::Trigger) : bool: 1118833879

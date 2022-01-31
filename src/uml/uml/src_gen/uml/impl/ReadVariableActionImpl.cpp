@@ -439,7 +439,7 @@ bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ReadVariableAction::compatible_multiplicity(Any, std::map) : bool: 311196748

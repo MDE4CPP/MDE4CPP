@@ -44,6 +44,7 @@
 #include <ecore/EParameter.hpp>
 #include <ecore/EEnumLiteral.hpp>
 #include <ecore/ETypeParameter.hpp>
+
 // Start of user code includes 
 // You may manually edit additional includes, won't be overwritten upon generation.
 
@@ -691,6 +692,7 @@ int main ()
 	std::shared_ptr<BookStore_umlFactory> factory = BookStore_umlFactory::eInstance();
 	std::shared_ptr<BookStore_umlPackage> package = BookStore_umlPackage::eInstance();
 
+	
 	query1();
 	query2();
 	query3();
@@ -720,6 +722,7 @@ int main ()
 	validate11();
 
 	pause();
+
 
 	// Start of user code main
 	// You may manually edit the following lines, won't be overwritten upon generation.

@@ -419,7 +419,7 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //1848
+			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //1848
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1847
@@ -479,13 +479,13 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1871054573
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
-			result = eAny(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS,false);
+			result = eAnyObject(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1978495829
@@ -496,7 +496,7 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
 			std::list<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS,false);
+			result = eAnyObject(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
 

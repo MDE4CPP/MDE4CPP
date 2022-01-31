@@ -690,7 +690,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior().lock();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //17427
+			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOR_CLASS); //17427
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //17419
@@ -707,7 +707,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOperation().lock();
-			return eAny(returnValue,uml::umlPackage::OPERATION_CLASS,false); //17425
+			return eAnyObject(returnValue,uml::umlPackage::OPERATION_CLASS); //17425
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 			return eAnyBag(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
@@ -865,7 +865,7 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Parameter::connector_end(Any, std::map) : bool: 740584078

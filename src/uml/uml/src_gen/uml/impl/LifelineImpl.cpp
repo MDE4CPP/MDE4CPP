@@ -479,7 +479,7 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAny(returnValue,uml::umlPackage::INTERACTION_CLASS,false); //13210
+			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //13210
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 			return eAny(getRepresents(),uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //13211
@@ -591,7 +591,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Lifeline::interaction_uses_share_lifeline(Any, std::map) : bool: 1328915244

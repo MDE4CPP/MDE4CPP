@@ -341,7 +341,7 @@ bool FinalNodeImpl::eSet(int featureID, Any newValue)
 Any FinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::FinalNode::no_outgoing_edges(Any, std::map) : bool: 318458769

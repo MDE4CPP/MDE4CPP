@@ -306,7 +306,7 @@ bool ReplyActionActivationImpl::eSet(int featureID, Any newValue)
 Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::ReplyActionActivation::doAction(): 563900863

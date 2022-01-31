@@ -369,7 +369,7 @@ bool UsageImpl::eSet(int featureID, Any newValue)
 Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

@@ -406,7 +406,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 Any VariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::VariableAction::scope_of_variable(Any, std::map) : bool: 405545884

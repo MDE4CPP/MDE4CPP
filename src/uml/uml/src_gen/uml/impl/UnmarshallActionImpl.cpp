@@ -643,7 +643,7 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::UnmarshallAction::multiplicity_of_object(Any, std::map) : bool: 621569527

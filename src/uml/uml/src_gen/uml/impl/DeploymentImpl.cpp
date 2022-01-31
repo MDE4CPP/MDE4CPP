@@ -555,7 +555,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
-			return eAny(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS,false); //6919
+			return eAnyObject(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS); //6919
 		}
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -672,7 +672,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

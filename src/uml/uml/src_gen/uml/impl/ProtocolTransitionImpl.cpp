@@ -506,7 +506,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ProtocolTransition::associated_actions(Any, std::map) : bool: 222746916
@@ -545,7 +545,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getReferreds();
-			return eAny(resultList,uml::umlPackage::OPERATION_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 1225665035

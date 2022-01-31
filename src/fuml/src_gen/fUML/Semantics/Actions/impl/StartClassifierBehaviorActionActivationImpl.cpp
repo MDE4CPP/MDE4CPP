@@ -300,7 +300,7 @@ bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, Any newVal
 Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::StartClassifierBehaviorActionActivation::doAction(): 271588955

@@ -655,7 +655,7 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //1112
+			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1112
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1113
@@ -666,7 +666,7 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //1115
+			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //1115
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 			return eAnyBag(getIncoming(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1116
@@ -918,13 +918,13 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ActivityNode::containingActivity() : uml::Activity: 2064733269
 		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS,false);
+			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
 

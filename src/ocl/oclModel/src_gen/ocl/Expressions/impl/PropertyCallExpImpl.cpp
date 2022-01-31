@@ -446,7 +446,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

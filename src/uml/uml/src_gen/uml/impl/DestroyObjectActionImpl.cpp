@@ -521,7 +521,7 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::DestroyObjectAction::multiplicity(Any, std::map) : bool: 1797058034

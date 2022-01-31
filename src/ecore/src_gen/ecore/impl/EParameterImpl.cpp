@@ -250,7 +250,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-			return eAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS,false); //4513
+			return eAnyObject(returnValue,ecore::ecorePackage::EOPERATION_CLASS); //4513
 		}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -281,7 +281,7 @@ bool EParameterImpl::eSet(int featureID, Any newValue)
 Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

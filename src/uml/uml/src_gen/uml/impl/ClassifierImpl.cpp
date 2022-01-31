@@ -1782,98 +1782,98 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Classifier::allAttributes() : uml::Property[*]: 2002439221
 		case umlPackage::CLASSIFIER_OPERATION_ALLATTRIBUTES:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->allAttributes();
-			return eAny(resultList,uml::umlPackage::PROPERTY_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::allFeatures() : uml::Feature[*]: 1045296212
 		case umlPackage::CLASSIFIER_OPERATION_ALLFEATURES:
 		{
 			std::shared_ptr<Bag<uml::Feature> > resultList = this->allFeatures();
-			return eAny(resultList,uml::umlPackage::FEATURE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::FEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allParents() : uml::Classifier[*]: 1019192791
 		case umlPackage::CLASSIFIER_OPERATION_ALLPARENTS:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->allParents();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::allRealizedInterfaces() : uml::Interface[*]: 1304029721
 		case umlPackage::CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->allRealizedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::allSlottableFeatures() : uml::StructuralFeature[*]: 589992607
 		case umlPackage::CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES:
 		{
 			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->allSlottableFeatures();
-			return eAny(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allUsedInterfaces() : uml::Interface[*]: 347634799
 		case umlPackage::CLASSIFIER_OPERATION_ALLUSEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->allUsedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyRealizedInterfaces() : uml::Interface[*]: 689864747
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyRealizedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyUsedInterfaces() : uml::Interface[*]: 827011971
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyUsedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllAttributes() : uml::Property[*]: 123729859
 		case umlPackage::CLASSIFIER_OPERATION_GETALLATTRIBUTES:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->getAllAttributes();
-			return eAny(resultList,uml::umlPackage::PROPERTY_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllOperations() : uml::Operation[*]: 1697084588
 		case umlPackage::CLASSIFIER_OPERATION_GETALLOPERATIONS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
-			return eAny(resultList,uml::umlPackage::OPERATION_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllUsedInterfaces() : uml::Interface[*]: 1424746899
 		case umlPackage::CLASSIFIER_OPERATION_GETALLUSEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllUsedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getGenerals() : uml::Classifier[*]: 1243085147
 		case umlPackage::CLASSIFIER_OPERATION_GETGENERALS:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getGenerals();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::getInheritedMembers() : uml::NamedElement[*]: 1965646606
 		case umlPackage::CLASSIFIER_OPERATION_GETINHERITEDMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getInheritedMembers();
-			return eAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*]) : uml::Operation: 555558759
@@ -1894,7 +1894,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
 			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
-			result = eAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes), uml::umlPackage::OPERATION_CLASS,false);
+			result = eAnyObject(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*], bool) : uml::Operation: 606711066
@@ -1920,14 +1920,14 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			bool incoming_param_ignoreCase;
 			std::list<Any>::const_iterator incoming_param_ignoreCase_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_ignoreCase = (*incoming_param_ignoreCase_arguments_citer)->get<bool >();
-			result = eAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase), uml::umlPackage::OPERATION_CLASS,false);
+			result = eAnyObject(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperations() : uml::Operation[*]: 696829928
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATIONS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getOperations();
-			return eAny(resultList,uml::umlPackage::OPERATION_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getPropertyValue(std::string) : Any: 1845223945
@@ -1945,7 +1945,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::CLASSIFIER_OPERATION_GETUSEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getUsedInterfaces();
-			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::hasVisibilityOf(uml::NamedElement) : bool: 1565356937
@@ -1968,7 +1968,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			std::list<Any>::const_iterator incoming_param_inhs_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_inhs = (*incoming_param_inhs_arguments_citer)->get<std::shared_ptr<Bag<uml::NamedElement>> >();
 			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inherit(incoming_param_inhs);
-			return eAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::inheritableMembers(uml::Classifier) : uml::NamedElement[*]: 110806438
@@ -1980,7 +1980,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
 			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inheritableMembers(incoming_param_c);
-			return eAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::isSubstitutableFor(uml::Classifier) : bool: 124497889
@@ -2057,7 +2057,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->parents();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::specialize_type(Any, std::map) : bool: 1534446662

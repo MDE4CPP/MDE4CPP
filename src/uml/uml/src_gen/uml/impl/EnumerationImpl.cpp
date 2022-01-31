@@ -571,7 +571,7 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Enumeration::immutable(Any, std::map) : bool: 36465829

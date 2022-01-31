@@ -1263,7 +1263,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::State::composite_states(Any, std::map) : bool: 1735758508
@@ -1341,7 +1341,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// uml::State::redefinitionContext() : uml::Classifier: 871920175
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
+			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::State::submachine_or_regions(Any, std::map) : bool: 1111971003

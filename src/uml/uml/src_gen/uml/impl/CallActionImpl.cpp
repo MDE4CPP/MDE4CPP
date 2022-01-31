@@ -579,7 +579,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::CallAction::argument_pins(Any, std::map) : bool: 1200715811
@@ -602,14 +602,14 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::CallAction::outputParameters() : uml::Parameter[*]: 138816985
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::CallAction::result_pins(Any, std::map) : bool: 1421824785

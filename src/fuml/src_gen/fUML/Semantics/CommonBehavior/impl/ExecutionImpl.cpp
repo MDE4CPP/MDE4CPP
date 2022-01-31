@@ -565,13 +565,13 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::Execution::_copy() : fUML::Semantics::Values::Value: 2119596406
 		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::execute(): 650217545
@@ -584,7 +584,7 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getOutputParameterValues();
-			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::getParameterValue(uml::Parameter) : fUML::Semantics::CommonBehavior::ParameterValue: 190986849
@@ -595,13 +595,13 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::shared_ptr<uml::Parameter> incoming_param_parameter;
 			std::list<Any>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get<std::shared_ptr<uml::Parameter> >();
-			result = eAny(this->getParameterValue(incoming_param_parameter), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,false);
+			result = eAnyObject(this->getParameterValue(incoming_param_parameter), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::new_() : fUML::Semantics::Values::Value: 1338828288
 		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::setParameterValue(fUML::Semantics::CommonBehavior::ParameterValue): 680977365

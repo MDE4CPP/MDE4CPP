@@ -309,20 +309,20 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::_copy() : fUML::Semantics::Values::Value: 1483946573
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::getTypes() : uml::Classifier[*]: 1603549944
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
-			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

@@ -457,7 +457,7 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ExpansionNode::region_as_input_or_output(Any, std::map) : bool: 1386125979

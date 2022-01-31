@@ -348,7 +348,7 @@ bool GateImpl::eSet(int featureID, Any newValue)
 Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::Gate::actual_gate_distinguishable(Any, std::map) : bool: 817896676
@@ -408,7 +408,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		// uml::Gate::getOperand() : uml::InteractionOperand: 993244855
 		case umlPackage::GATE_OPERATION_GETOPERAND:
 		{
-			result = eAny(this->getOperand(), uml::umlPackage::INTERACTIONOPERAND_CLASS,false);
+			result = eAnyObject(this->getOperand(), uml::umlPackage::INTERACTIONOPERAND_CLASS);
 			break;
 		}
 		// uml::Gate::inside_cf_gate_distinguishable(Any, std::map) : bool: 1402380378

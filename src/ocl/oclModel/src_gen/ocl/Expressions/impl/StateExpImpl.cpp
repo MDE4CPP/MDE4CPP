@@ -442,7 +442,7 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 

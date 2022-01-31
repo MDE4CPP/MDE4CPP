@@ -462,7 +462,7 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //5321
+			return eAnyObject(returnValue,ecore::ecorePackage::ECLASS_CLASS); //5321
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID(),ecore::ecorePackage::EINT_CLASS,false); //5320
@@ -566,7 +566,7 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EStructuralFeature::getContainerClass() : void *: 172675706

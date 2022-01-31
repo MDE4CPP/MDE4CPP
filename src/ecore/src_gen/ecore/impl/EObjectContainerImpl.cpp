@@ -328,7 +328,7 @@ bool EObjectContainerImpl::eSet(int featureID, Any newValue)
 Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// ecore::EObjectContainer::setContainer(ecore::EObject[*]): 1083860390

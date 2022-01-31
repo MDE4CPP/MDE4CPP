@@ -558,7 +558,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// uml::ObjectFlow::compatible_types(Any, std::map) : bool: 108756439

@@ -654,7 +654,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
 		// fUML::Semantics::Actions::CallActionActivation::doAction(): 789549435
@@ -666,7 +666,7 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// fUML::Semantics::Actions::CallActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1108060274
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-			result = eAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
+			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::CallActionActivation::removeCallExecution(fUML::Semantics::CommonBehavior::Execution): 894035989
