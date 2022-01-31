@@ -364,7 +364,6 @@ template <typename T> static Any eAnyBag(T value,long long typeID)
 	Any any(new AnyGenericBag<T>(value,typeID,true));
 	return any;
 }
-#endif /* end of include guard: ECORE_EOBJECT_HPP */
 [/if]
 [endGuard(anEClass)/]
 [/file]
