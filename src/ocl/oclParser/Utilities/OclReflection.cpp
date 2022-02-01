@@ -32,6 +32,8 @@
 #include <ecore/ETypeParameter.hpp>
 #include <abstractDataTypes/Bag.hpp>
 #include <abstractDataTypes/Subset.hpp>
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include <ecore/EFactory.hpp>
 
 #include <uml/Object.hpp>
@@ -127,11 +129,13 @@ bool OclReflection::kindOf(std::shared_ptr<ecore::EClassifier> type, std::shared
 		std::shared_ptr<ecore::EClass> eclass = std::dynamic_pointer_cast<ecore::EClass>(type->eClass());
 		std::shared_ptr<ecore::EClass> eclassOf = std::dynamic_pointer_cast<ecore::EClass>(ofType->eClass());
 		if(eclass != nullptr && eclassOf != nullptr) {
-			if(eclassOf->isSuperTypeOf(eclass)) {
-				if(instanceOf<CollectionType>(type) && instanceOf<CollectionType>(ofType)) {
-					std::shared_ptr<CollectionType> coll = std::dynamic_pointer_cast<CollectionType>(type);
-					std::shared_ptr<CollectionType> collOf = std::dynamic_pointer_cast<CollectionType>(ofType);
+			if(eclassOf->isSuperTypeOf(eclass))
+			{
+				std::shared_ptr<CollectionType> coll = std::dynamic_pointer_cast<CollectionType>(type);
+				std::shared_ptr<CollectionType> collOf = std::dynamic_pointer_cast<CollectionType>(ofType);
 
+				if((nullptr !=  coll)  && (nullptr != collOf) )
+				{
 					if(coll->getElementType() == nullptr || collOf->getElementType() == nullptr)
 						return true;
 					else
@@ -146,8 +150,7 @@ bool OclReflection::kindOf(std::shared_ptr<ecore::EClassifier> type, std::shared
     return false;
 }
 
-std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_ptr<ecore::EClass> eclass,
-                                                                  const std::string& name, std::shared_ptr<Bag<OclExpression>> arguments)
+std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_ptr<ecore::EClass> eclass, const std::string& name, std::shared_ptr<Bag<OclExpression>> arguments)
 {
     std::shared_ptr<Bag<ecore::EOperation>> ecore_operations = eclass->getEAllOperations();
     Bag<ecore::EOperation>::const_iterator endIt_operation = ecore_operations->end();
@@ -731,8 +734,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EOperation> operation,
-                                                                           std::shared_ptr<Bag<OclExpression>> arguments, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
+std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EOperation> operation, std::shared_ptr<Bag<OclExpression>> arguments, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
     std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
     if(nullptr != colValue) {
@@ -798,10 +800,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			return OclReflection::createValue(operation, value);
 		}
 		else
-		{ // primary value not managed yet
-			if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
+		{ // primitive value not managed yet
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
+			if(nullptr!= stringValue )
 			{
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
 				std::string value = stringValue->getValue();
 				return stringValue;
 			}

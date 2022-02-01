@@ -91,6 +91,7 @@ Ocl::~Ocl()
         delete(m_parserErListener);
         m_parserErListener = nullptr;
     }
+    m_env=nullptr;
 }
 
 void Ocl::parse(const string& oclText)

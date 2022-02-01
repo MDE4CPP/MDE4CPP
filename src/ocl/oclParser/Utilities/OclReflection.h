@@ -104,8 +104,7 @@ public:
      * @param arguments : arguments of the searched operation
      * @return the found operation if it exists within the given class, nullptr otherwise.
      */
-    static std::shared_ptr<ecore::EOperation> lookupOperation(std::shared_ptr<ecore::EClass> eclass,
-                                                              const std::string& name, std::shared_ptr<Bag<OclExpression>> arguments);
+    static std::shared_ptr<ecore::EOperation> lookupOperation(std::shared_ptr<ecore::EClass> eclass, const std::string& name, std::shared_ptr<Bag<OclExpression>> arguments);
 
     /**
      * @brief Check if the given typed element is a Bag type.
@@ -120,15 +119,7 @@ public:
      * @return true if the first type is a kind of the second type, false otherwise.
      */
     static bool kindOf(std::shared_ptr<ecore::EClassifier> type, std::shared_ptr<ecore::EClassifier> ofType);
-    /**
-     * @brief Check if the given object is an instance of the given template type.
-     * @param obj
-     * @return
-     */
-    template <class T>
-    static bool instanceOf(std::shared_ptr<ecore::EObject> obj) {
-        return std::dynamic_pointer_cast<T>(obj) != nullptr;
-    }
+
     /**
      * @brief Retrieve the embedded value from the given fUML value.
      * @param fromValue : fUML value

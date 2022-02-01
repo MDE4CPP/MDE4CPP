@@ -99,6 +99,7 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 
 	if(epackage)
 	{
+
 		std::shared_ptr<Variable> packageVar = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
 
 		packageVar->setName(epackage->getName());

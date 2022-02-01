@@ -58,6 +58,17 @@ Environment::Environment(std::shared_ptr<Environment> parent) : m_parent(parent)
     }
 }
 
+
+Environment::~Environment()
+{
+    m_parent.reset();
+	m_evalEnv.reset();
+	m_self.reset();
+    m_namedElements.clear();
+}
+
+
+
 std::shared_ptr<NamedElement> Environment::lookupLocal(const std::string& name)
 {
     if(m_namedElements.find(name) != m_namedElements.end()) {

@@ -72,7 +72,7 @@ class Ocl
 
 public:
     Ocl(bool throwException = false);
-    ~Ocl();
+    virtual ~Ocl();
     /*!
      * \brief Check the correctness of the current Ocl query syntax.
      *	\return true if the query is syntacticaly correct, false otherwise

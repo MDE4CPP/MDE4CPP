@@ -1025,16 +1025,19 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
     expr->setEnv(ctx->getEnv());
     expr->setErrorListener(ctx->getErrorListener());
 
-    if(visitOclExpressionCS(expr)) {
+    if(visitOclExpressionCS(expr))
+    {
         std::shared_ptr<OclExpression> leftExpr = infExpr->getSource();
         std::shared_ptr<OclExpression> rightExpr = expr->getAST();
         std::shared_ptr<fUML::Semantics::Values::Value> leftvalue = leftExpr->getInstance()->getResultValue();
         std::shared_ptr<fUML::Semantics::Values::Value> rightvalue = rightExpr->getInstance()->getResultValue();
 
-        if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(leftvalue)) {
-            if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(rightvalue)) {
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> leftString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(leftvalue);
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> rightString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(rightvalue);
+        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> leftString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(leftvalue);
+
+        if(nullptr!= leftString)
+        {
+            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> rightString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(rightvalue);
+            if(nullptr!=rightString) {
                 bool result = false;
                 if(binCS->LT() != nullptr) { // leftString < rigtString
                     result = leftString->getValue() < rightString->getValue();
@@ -1070,147 +1073,162 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
                 return false;
             }
         }
-        else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(leftvalue)) {
-            if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(rightvalue)) {
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> leftBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(leftvalue);
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> rightBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(rightvalue);
-                bool result = false;
-                if(binCS->ASSIGN() != nullptr) { // leftBool == rightBool
-                    result = leftBool->isValue() == rightBool->isValue();
-                }
-                else if(binCS->INEQUAL() != nullptr) { // leftBool != rightBool
-                    result = leftBool->isValue() != rightBool->isValue();
-                }
-                else if(binCS->KEYOR() != nullptr) { // leftBool || rightBool
-                    result = leftBool->isValue() || rightBool->isValue();
-                }
-                else if(binCS->KEYAND() != nullptr) { // leftBool && rightBool
-                    result = leftBool->isValue() && rightBool->isValue();
-                }
-                else if(binCS->IMPLIES() != nullptr) { // leftBool => rightBool
-                    result = !leftBool->isValue() || rightBool->isValue();
-                }
-                else {
-                    ctx->getErrorListener()->syntaxError("The possible binary operations between two boolean are : or, and, =, <>, implies");
-                    return false;
-                }
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-                infExpr->setEType(type);
-                boolValue->setValue(result);
-                infEval->setResultValue(boolValue);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value string must also be a string");
-                return false;
-            }
-        }
-        else if(OclReflection::instanceOf<CollectionValue>(leftvalue))
-        {
-            if(OclReflection::instanceOf<CollectionValue>(rightvalue)) {
-                std::shared_ptr<CollectionValue> leftCol = std::dynamic_pointer_cast<CollectionValue>(leftvalue);
-                std::shared_ptr<CollectionValue> rightCol = std::dynamic_pointer_cast<CollectionValue>(rightvalue);
-                bool result = false;
-                if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
-                    result = leftCol->equals(rightCol);
-                }
-                else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
-                    result = !leftCol->equals(rightCol);
-                }
-                else {
-                    ctx->getErrorListener()->syntaxError("The possible binary operations between two collections are : =, <>");
-                    return false;
-                }
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-                infExpr->setEType(type);
-                boolValue->setValue(result);
-                infEval->setResultValue(boolValue);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left collection value must also be a collection");
-                return false;
-            }
-        }
         else
         {
-            std::shared_ptr<AnyValue> leftAny = std::dynamic_pointer_cast<AnyValue>(leftvalue);
-            if(nullptr!=leftAny)
-            {
-            	std::shared_ptr<AnyValue> rightAny = std::dynamic_pointer_cast<AnyValue>(rightvalue);
-                if(nullptr!=rightAny )
-                {
-                    bool result = false;
-                    if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
-                        result = leftAny->equals(rightAny);
-                    }
-                    else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
-                        result = !leftAny->equals(rightAny);
-                    }
-                    else {
-                        ctx->getErrorListener()->syntaxError("The possible binary operations between two AnyTypes are : =, <>");
-                        return false;
-                    }
-                    std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                    std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-                    infExpr->setEType(type);
-                    boolValue->setValue(result);
-                    infEval->setResultValue(boolValue);
-                    return true;
-                }
-                else
-                {
-                    ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value AnyType must also be an AnyType");
-                    return false;
-                }
-            }
-            else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr)
-            {
-				int leftInt = retrieveInt(leftvalue);
-				if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+            std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> leftBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(leftvalue);
+        	if(nullptr!= leftBool)
+        	{
+                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> rightBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(rightvalue);
+				if(nullptr!= rightBool) {
+					bool result = false;
+					if(binCS->ASSIGN() != nullptr) { // leftBool == rightBool
+						result = leftBool->isValue() == rightBool->isValue();
+					}
+					else if(binCS->INEQUAL() != nullptr) { // leftBool != rightBool
+						result = leftBool->isValue() != rightBool->isValue();
+					}
+					else if(binCS->KEYOR() != nullptr) { // leftBool || rightBool
+						result = leftBool->isValue() || rightBool->isValue();
+					}
+					else if(binCS->KEYAND() != nullptr) { // leftBool && rightBool
+						result = leftBool->isValue() && rightBool->isValue();
+					}
+					else if(binCS->IMPLIES() != nullptr) { // leftBool => rightBool
+						result = !leftBool->isValue() || rightBool->isValue();
+					}
+					else {
+						ctx->getErrorListener()->syntaxError("The possible binary operations between two boolean are : or, and, =, <>, implies");
+						return false;
+					}
+					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+					infExpr->setEType(type);
+					boolValue->setValue(result);
+					infEval->setResultValue(boolValue);
+					return true;
+				}
+				else
 				{
-					int rightInt = retrieveInt(rightvalue);
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightInt);
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-					infExpr->setEType(type);
-					infEval->setResultValue(boolValue);
-					return true;
+					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value string must also be a string");
+					return false;
 				}
-				else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue))
+        	}
+			else
+			{
+				std::shared_ptr<CollectionValue> leftCol = std::dynamic_pointer_cast<CollectionValue>(leftvalue);
+				if(nullptr!=leftCol)
 				{
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightReal->getValue());
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-					infExpr->setEType(type);
-					infEval->setResultValue(boolValue);
-					return true;
+					std::shared_ptr<CollectionValue> rightCol = std::dynamic_pointer_cast<CollectionValue>(rightvalue);
+					if(nullptr!=rightCol )
+					{
+						bool result = false;
+						if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
+							result = leftCol->equals(rightCol);
+						}
+						else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
+							result = !leftCol->equals(rightCol);
+						}
+						else {
+							ctx->getErrorListener()->syntaxError("The possible binary operations between two collections are : =, <>");
+							return false;
+						}
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+						std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+						infExpr->setEType(type);
+						boolValue->setValue(result);
+						infEval->setResultValue(boolValue);
+						return true;
+					}
+					else {
+						ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left collection value must also be a collection");
+						return false;
+					}
 				}
-				else {
-					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
-				}
-            }
-			else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue)) {
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
-				if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr) {
-					int rightInt = retrieveInt(rightvalue);
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightInt);
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-					infExpr->setEType(type);
-					infEval->setResultValue(boolValue);
-					return true;
-				}
-				else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightReal->getValue());
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-					infExpr->setEType(type);
-					infEval->setResultValue(boolValue);
-					return true;
-				}
-				else {
-					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
+				else
+				{
+					std::shared_ptr<AnyValue> leftAny = std::dynamic_pointer_cast<AnyValue>(leftvalue);
+					if(nullptr!=leftAny)
+					{
+						std::shared_ptr<AnyValue> rightAny = std::dynamic_pointer_cast<AnyValue>(rightvalue);
+						if(nullptr!=rightAny )
+						{
+							bool result = false;
+							if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
+								result = leftAny->equals(rightAny);
+							}
+							else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
+								result = !leftAny->equals(rightAny);
+							}
+							else {
+								ctx->getErrorListener()->syntaxError("The possible binary operations between two AnyTypes are : =, <>");
+								return false;
+							}
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+							std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+							infExpr->setEType(type);
+							boolValue->setValue(result);
+							infEval->setResultValue(boolValue);
+							return true;
+						}
+						else
+						{
+							ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value AnyType must also be an AnyType");
+							return false;
+						}
+					}
+					else
+					{
+						if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr)
+						{
+							int leftInt = retrieveInt(leftvalue);
+							if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+							{
+								int rightInt = retrieveInt(rightvalue);
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightInt);
+								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+								infExpr->setEType(type);
+								infEval->setResultValue(boolValue);
+								return true;
+							}
+							else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue))
+							{
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightReal->getValue());
+								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+								infExpr->setEType(type);
+								infEval->setResultValue(boolValue);
+								return true;
+							}
+							else {
+								ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
+							}
+						}
+						else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue))
+						{
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
+							if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+							{
+								int rightInt = retrieveInt(rightvalue);
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightInt);
+								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+								infExpr->setEType(type);
+								infEval->setResultValue(boolValue);
+								return true;
+							}
+							else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
+								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightReal->getValue());
+								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
+								infExpr->setEType(type);
+								infEval->setResultValue(boolValue);
+								return true;
+							}
+							else
+							{
+								ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
+							}
+						}
+					}
 				}
 			}
         }
@@ -1755,9 +1773,10 @@ antlrcpp::Any OclParserCustomVisitor::visitIteratorExpCS(OclParser::IteratorExpC
             std::shared_ptr<Variable> result = resultExp->getReferredVariable();
             for(size_t i = 0; i < collExp->getPart()->size(); i++) {
                 std::shared_ptr<CollectionLiteralPart> part = collExp->getPart()->at(i);
+                std::shared_ptr<CollectionItem> item = std::dynamic_pointer_cast<CollectionItem>(part);
 
-                if(OclReflection::instanceOf<CollectionItem>(part)) {
-                    std::shared_ptr<CollectionItem> item = std::dynamic_pointer_cast<CollectionItem>(part);
+                if(nullptr != item)
+                {
                     iterator->setValue(item->getItem()->getInstance()->getResultValue());
                     if(!visitOclExpressionCS(oclExpCS)){
                         return false;
@@ -2406,9 +2425,11 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
     std::shared_ptr<fUML::Semantics::Values::Value> leftvalue = leftExpr->getInstance()->getResultValue();
     std::shared_ptr<fUML::Semantics::Values::Value> rightvalue = rightExpr->getInstance()->getResultValue();
 
-    if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr) {
+    if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr)
+    {
         int leftInt = retrieveInt(leftvalue);
-        if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr) {
+        if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+        {
             int rightInt = retrieveInt(rightvalue);
             int result = 0;
             if(ctx->PLUS() != nullptr) { // leftInt + rightReal
@@ -2436,103 +2457,118 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
             ctx->setAST(resultExpr);
             return true;
         }
-        else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
+        else
+        {
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-            double result = 0;
-            if(ctx->PLUS() != nullptr) { // leftInt + rightReal
-                result = leftInt + rightReal->getValue();
-            }
-            else if(ctx->MINUS() != nullptr) { // leftInt - rightReal
-                result = leftInt - rightReal->getValue();
-            }
-            else if(ctx->STAR() != nullptr) { // leftInt * rightReal
-                result = leftInt * rightReal->getValue();
-            }
-            else if(ctx->SLASH() != nullptr) { // leftInt / rightReal
-                result = leftInt / rightReal->getValue();
-            }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-            std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-            std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
+        	if(nullptr != rightReal)
+        	{
+				double result = 0;
+				if(ctx->PLUS() != nullptr) { // leftInt + rightReal
+					result = leftInt + rightReal->getValue();
+				}
+				else if(ctx->MINUS() != nullptr) { // leftInt - rightReal
+					result = leftInt - rightReal->getValue();
+				}
+				else if(ctx->STAR() != nullptr) { // leftInt * rightReal
+					result = leftInt * rightReal->getValue();
+				}
+				else if(ctx->SLASH() != nullptr) { // leftInt / rightReal
+					result = leftInt / rightReal->getValue();
+				}
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+				std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
+				std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
+				std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
-            realValue->setValue(result);
-            resultEval->setResultValue(realValue);
-            resultExpr->setEType(type);
-            resultExpr->setInstance(resultEval);
-            resultExpr->setRealSymbol(result);
-            ctx->setAST(resultExpr);
-            return true;
-        }
-        else {
-            ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
-        }
+				realValue->setValue(result);
+				resultEval->setResultValue(realValue);
+				resultExpr->setEType(type);
+				resultExpr->setInstance(resultEval);
+				resultExpr->setRealSymbol(result);
+				ctx->setAST(resultExpr);
+				return true;
+			}
+			else {
+				ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
+			}
+		}
     }
-    else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
-        if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr) {
-            int rightInt = retrieveInt(rightvalue);
-            double result = 0;
-            if(ctx->PLUS() != nullptr) { // leftReal + rightInt
-                result = leftReal->getValue() + rightInt;
-            }
-            else if(ctx->MINUS() != nullptr) { // leftReal - rightInt
-                result = leftReal->getValue() - rightInt;
-            }
-            else if(ctx->STAR() != nullptr) { // leftReal * rightInt
-                result = leftReal->getValue() * rightInt;
-            }
-            else if(ctx->SLASH() != nullptr) { // leftReal / rightInt
-                result = leftReal->getValue() / rightInt;
-            }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-            std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-            std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
+	else
+	{
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
+		if(nullptr != leftReal )
+		{
+			if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+			{
+				int rightInt = retrieveInt(rightvalue);
+				double result = 0;
+				if(ctx->PLUS() != nullptr) { // leftReal + rightInt
+					result = leftReal->getValue() + rightInt;
+				}
+				else if(ctx->MINUS() != nullptr) { // leftReal - rightInt
+					result = leftReal->getValue() - rightInt;
+				}
+				else if(ctx->STAR() != nullptr) { // leftReal * rightInt
+					result = leftReal->getValue() * rightInt;
+				}
+				else if(ctx->SLASH() != nullptr) { // leftReal / rightInt
+					result = leftReal->getValue() / rightInt;
+				}
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+				std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
+				std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
+				std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
-            realValue->setValue(result);
-            resultEval->setResultValue(realValue);
-            resultExpr->setEType(type);
-            resultExpr->setInstance(resultEval);
-            resultExpr->setRealSymbol(result);
-            ctx->setAST(resultExpr);
-            return true;
-        }
-        else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-            double result = 0;
-            if(ctx->PLUS() != nullptr) { // leftReal + rightReal
-                result = leftReal->getValue() + rightReal->getValue();
-            }
-            else if(ctx->MINUS() != nullptr) { // leftReal - rightReal
-                result = leftReal->getValue() - rightReal->getValue();
-            }
-            else if(ctx->STAR() != nullptr) { // leftReal * rightReal
-                result = leftReal->getValue() * rightReal->getValue();
-            }
-            else if(ctx->SLASH() != nullptr) { // leftReal / rightReal
-                result = leftReal->getValue() / rightReal->getValue();
-            }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-            std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-            std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
+				realValue->setValue(result);
+				resultEval->setResultValue(realValue);
+				resultExpr->setEType(type);
+				resultExpr->setInstance(resultEval);
+				resultExpr->setRealSymbol(result);
+				ctx->setAST(resultExpr);
+				return true;
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
+				if(nullptr!= rightReal)
+				{
+					double result = 0;
+					if(ctx->PLUS() != nullptr) { // leftReal + rightReal
+						result = leftReal->getValue() + rightReal->getValue();
+					}
+					else if(ctx->MINUS() != nullptr) { // leftReal - rightReal
+						result = leftReal->getValue() - rightReal->getValue();
+					}
+					else if(ctx->STAR() != nullptr) { // leftReal * rightReal
+						result = leftReal->getValue() * rightReal->getValue();
+					}
+					else if(ctx->SLASH() != nullptr) { // leftReal / rightReal
+						result = leftReal->getValue() / rightReal->getValue();
+					}
+					std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
+					std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
+					std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
-            realValue->setValue(result);
-            resultEval->setResultValue(realValue);
-            resultExpr->setEType(type);
-            resultExpr->setInstance(resultEval);
-            resultExpr->setRealSymbol(result);
-            ctx->setAST(resultExpr);
-            return true;
-        }
-        else {
-            ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
-        }
-    }
-    else {
-        ctx->getErrorListener()->syntaxError("The left and right value of a binary operation must be integers, unlimiteNaturals, or reals");
-    }
+					realValue->setValue(result);
+					resultEval->setResultValue(realValue);
+					resultExpr->setEType(type);
+					resultExpr->setInstance(resultEval);
+					resultExpr->setRealSymbol(result);
+					ctx->setAST(resultExpr);
+					return true;
+				}
+				else
+				{
+					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
+				}
+			}
+		}
+		else
+		{
+			ctx->getErrorListener()->syntaxError("The left and right value of a binary operation must be integers, unlimiteNaturals, or reals");
+		}
+	}
     return false;
 }
 
@@ -2596,11 +2632,14 @@ std::shared_ptr<VariableExp> OclParserCustomVisitor::createVariableExp(std::shar
 int OclParserCustomVisitor::retrieveInt(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
     int intValue = 0;
-    if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(value)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> left = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(value);
+    std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> left = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(value);
+
+    if(nullptr!= left)
+    {
         intValue = left->getValue();
     }
-    else {
+    else
+    {
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> left = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(value);
         intValue = left->getValue();
     }
@@ -2613,8 +2652,10 @@ bool OclParserCustomVisitor::visitForBoolExp(CSTNode *ctx, OclParser::OclExpress
         std::shared_ptr<OclExpression> boolExp = oclExpCS->getAST();
         std::shared_ptr<fUML::Semantics::Values::Value> boolValue = boolExp->getInstance()->getResultValue();
 
-        if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(boolValue)) {
-            if(simpleNameCS != nullptr) {
+        if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(boolValue))
+        {
+            if(simpleNameCS != nullptr)
+            {
                 std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
                 std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
 

@@ -52,7 +52,7 @@ class Environment
 {
 public:
     Environment(std::shared_ptr<Environment> parent);
-
+    virtual ~Environment();
     /*!
      * \brief Find a named element in the current environment, not in its parents, based on a single name.
      * \param name
