@@ -36,33 +36,30 @@
 [file (fileName, false, 'UTF-8')]
 [printInfo(includeGenerationMessage(), 3)/]
 #include "[anEClass.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
-
 [defineDebugMacros()/]
 
 #include <cassert>
 #include <iostream>
 #include <sstream>
-[if (anEClass.eOperations->select(not hasKey(keyBody()))->notEmpty())]
-#include <stdexcept>
-[/if]
-
-
+[if (anEClass.eOperations->select(not hasKey(keyBody()))->notEmpty())]#include <stdexcept>[/if]
 [generateAbstractDataTypesIncludes()/]
+[comment] toDO selektive Type-includes
 [if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
-[/if][comment toDO selektive Type-includes/]
+[/if]
+[/comment] 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 [if (anEClass.hasKey(keyImplIncludes()))]
 //Includes from codegen annotation
 [anEClass.valueKey(keyImplIncludes())/]
 [/if]
-
 //Forward declaration includes
 [anEClass.generatePersitsenceInclude()/]
 [for (element : EClassifier| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]

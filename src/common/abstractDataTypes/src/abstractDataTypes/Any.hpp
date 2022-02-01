@@ -1,5 +1,5 @@
-#ifndef OBJECT_HPP
-#define OBJECT_HPP
+#ifndef ABSTRACTDATATPYES_ANY_HPP
+#define ABSTRACTDATATPYES_ANY_HPP
 
 #include <memory>
 #include <stdexcept>
