@@ -198,19 +198,20 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 
 bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
-	bool isEqual = false;
 	
 	std::shared_ptr<[className/]> other[className/] = std::dynamic_pointer_cast<[className/]>(otherValue);
-
 	if(other[className/] != nullptr)
 	{
 		if(this->[aClassifier.UMLValueGetterName()/]() == other[className/]->[aClassifier.UMLValueGetterName()/]())
 		{
-			isEqual = true;
+			return true;
 		}
 	}
+	[for (inheritedType : Classifier | aClassifier.collectInheritedTypes()) before('\n\t//Recursively check "equals" for base types and realized interfaces\n') separator('\n')]
+	if([inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.getValueClass()/]::equals(otherValue)) { return true; }
+	[/for]
 
-	return isEqual;
+	return false;
 }
 
 std::string [className/]::toString()
