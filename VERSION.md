@@ -1,117 +1,88 @@
 # Version 1.3
 
 ## General
-- Integrated PSCS implementation in MDE4CPP (*see section 'PSCS'*)
-- Added support of hierarchical package structures for UML/fUML models
-	- Reworked upper and lowercase package names
-	- Adapted generation of include statements accordingly
-- Extended and revised examples as well as test models
-	- Revised fUML examples and test models to work with new features (*see section 'fUML'*)
-	- Added examples as well as test models for newly integrated PSCS implementation (*see section 'PSCS'*)
-- Updated Xerces (persistance API) to version 3.2.3
-- Updated Gradle wrapper to 6.5.1
-- .cproject files for Eclipse IDE are now created for both, model source & main application projects
-- Generated IDs of model classes are now of type long int (was just int before) and are computed in a different way
-- Added possibility to specify libraries to be linked during compilation in a model
+- Updated CXX standard to C++-17
+- Integrated OCL implementation in MDE4CPP (*see section 'OCL'*)
+- Updated Gradle to version 7.3.1
+- Added support for JDK 16
+- Added generation-based machanism to extend fUML/PSCS-execution-strategies (*see section 'fUML/PSCS'*)
+- Added main eclipse project in MDE4CPP root directory
+- Unimplemented methods in generated model code now thorw std::runtime_error
+- Added project-specific extensions for Gradle build environment (custom tasks for generating and compiling model libraries) which were formely handled by external plugins
 ---
 
 ## Ecore
 ### Additional functionalities:
-- Added support of redefined properties in ecore-models using new annotation 'redefines'
-- Realized lazy initialization for container properties as well as redefined properties
-- Added new annotation 'library' to specify libraries that should additionally be linked during compilation of generated model code
-
+- Added support of generic types using C++ templates
+- Added support of template containers (Map, List, etc.) using C++ STL containers
+- Added new keywords to specify behavior of ecore4CPP generator using EAnnotations (see newly introduced AnnotationsExample in examples)
+- Added "doNotGenerate" annotation to enable excluding certain model elements from code generation in various contexts
+- Added "cppType" annotation to enable substitution of types with external types (e.g. special C++ types like unsigned types or types from external libraries)
+- Added new meta-element IDs: Now using polynomial rolling hash with an element's qualified name as an input to generate IDs (currently supported for EClasses, EAttributes, EReferences and EOperations)
+- Added support for redefined properties with multiplicity [0..\*] (was by now only possible for properties with multiplicity [1] or [0..1])
+- Added support of interfaces and abstract classes
+- EEnums are now generated as C++ *enum classes* for type safety
+- Reworked validation mechanism of ecore4CPP-generator: a model's structure is now validated befor actual generation process
+- Added hierarchical logging system to the generator for flexible ouput during generation 
+### Model changes:
+- Added support of EObject::eInvoke()
+- Added implementation of EObject::eContents() and EObject::eAllContents()
+- Added support for EFactory::convertToString()
 ### Bugfixes and minor changes:
-- Names of getter-methods for boolean values are now generated with 'is' as prefix (instead of 'get')
-- Adapted create-methods in model factory: 'create$ClassName$' methods are now called with the correct metaelement ID by default
-- Changed root base class of all generated classes to 'EModelElement' instead of 'EObject' (conforming to Eclipses built-in metamodels)
+- Fixed linkage of external libraries in generated CMakeLists
+- Removed generation of unnecessary includes and forward declarations
+- Renamed keywords for EAnnotations used to specify behavior of generator (see newly introduced AnnotationsExample in examples)
+- Moved copy-functionality of generated classes from copy constructor to overloaded assignment operation ('='); copy constructor now only calls overloaded assignment
+- Introduced queries to retrieve keywords in ecore4CPP generator instead of hard-coding them
+- Introduced explicit symbol handling when linking libraries generated with ecore4CPP generator (fixes bug of exceeding the maximum number of exported symbols on Windows platforms for large models)
+- Changed naming conventions for create-methods for containments in generated model factory to *create\<type-of-contained-property\>_as_\<name-of-contained-property\>_in_\<type-of-container\>*
+- Enhanced support for back references for compositions
+- Fixed creation of objects in subsetted EAttributes and EReferences (were formely created into unions in some situations)
+- Overhaul of generator structure: renamed and restructured generator modules
+- Moved "types.ecore" from "src/ecore/types" to "src/uml/types" as it is only used in uml.ecore
 ---
 
 ## UML
 ### Additional functionalities:
-- Added annotation to set const-qualifier for generated operations
-- Extended library include specification by body entry; now: multiply libraries separated by line separator can be specified
-- Added support of include path annotation for packages to provide "alias" inlcudes
-- Added support of associations in model packages
-- Reworked names for create-methods concerning compositions; now: unified names 'create$ClassName1$_as_$CompositionName$_in_$ClassName2$'
-- Added new annotations 'activityMain' and 'mainActivity' to define an activity as the models main execution entry point
-- OpaqueBehavior elements assigned directly to package element
-- Realized lazy initialization for container properties, redefined properties as well as Subsets, Unsions and SubsetUnions
+- Introduced UML profile 'UML4CPPProfile' which contains stereotypes to add information concerning code generation to UML models (this replaces the usage of EAnnotations in UML models)
+- Added new meta-element IDs: Now using polynomial rolling hash with an element's qualified name as an input to generate IDs (currently supported for Classes, Properties and Operations)
+- Added support of subsets/unions for generated UML models
+- Added support of Object::invoke() for generic operation invokation
+- Added static IDs for Enumerations
 #### PSCS-specific extensions:
-- Added support of PSCS-specific structural elements for UML models: 
-	- 'Connectors', parts (composite 'Properties') and 'Ports'; including creation/initialization
-	- Behavioral ports to invoke 'BehavioralFeatures'
-	- 'Dependencies' in model packge
-	- 'onPort' property of 'CallOperationAction' in model package
-- Implemented instantiation of connector patterns in composite structures (empty pattern, unconnected pattern, array pattern and star pattern) as defined by PSCS specification
-- Added support of instantiation of default values for properties typed by classes
-- Implemented recursive destruction semantics for circular dependencies in composite structures
-
+- Added support for Port::isBehavior property
 ### Model changes:
-- Added back reference from 'ConnectorEnd' to its owning 'Connector'
-- Removed interface "ActivityContent" which is not defined by OMG UML
-- Implemented several methods of class 'Operation' in uml.ecore
-
+- Fixed faulty subset definitions
+- renamed getter 'Class::getOwnedAttribute' to 'Class::getClass_ownedAttribute' to avoid naming conflicts with getter 'StructuredClassifier::getOwnedAttribute'
+- renamed getter 'Operation::getOwnedParameter' to 'Operation::getOperation_ownedParameter' to avoid naming conflicts with getter 'BehavioralFeature::getOwnedParameter'
+- Added containment for property 'EncapsulatedClassifier::ownedPort'
 ### Bugfixes and minor changes:
-- Names of getter-methods for boolean values are now generated with 'is' as prefix (instead of 'get')
-- Adapted create-methods in model factory: 'create$ClassName$' methods are now called with the correct metaelement ID by default
-- Revised implementation of method 'Element::allOwnedElements()'
-- Reworked naming convention for LiteralSpecifications to include its name (if defined in the model)
-- Excluded subtypes of 'Class' like 'Behavior', 'AssociationClass', 'Component', 'Stereotype' and 'Node' from generation of C++-classes
-- Added generation of 'OpaqueBehavior' elements in the model package, that are neither on root level of the model, nor (directly) owned by a class 
-- Added support of 'isUnique' flag of 'Property'
+- Fixed linkage of external libraries in generated CMakeLists
+- Removed generation of unnecessary includes and forward declarations
+- Moved copy-functionality of generated classes from copy constructor to overloaded assignment operation ('='); copy constructor now only calls overloaded assignment
 ---
 
-## fUML
+## fUML/PSCS
 ### Additional functions:
-- Extended functionality of activation classes for StructuralFeatureActions:
-	- Added handling to add, edit and remove feature values of model-specific runtime objects
-	- Added support of 'removeAt'-pin for 'RemoveStructuralFeatureValueAction'
-	- Implemented possibility to use "self" as pin name for the object pin to use the activities context object
-- Extended functionality of activation classes for additional actions:
-	- Added support of "isDestroyLinks" flag for 'DestroyObjectAction'
-- Upgraded destruction semantics for circular dependencies in composite structures on the execution level
-- Added support of inheritence of object classes in execution library (corresponding to the defined inheritence relationships defined in the model)
-- Reworked UMLValue-functionality to link execution level object with lower level model-specific C++-objects
-	- get-/setUMLValue functions now return the linked lower level objects as type 'Element'
-	- former UMLValue-functionality is now handled via functions named 'get-/set$ClassName$Value'
-- Improved performance and memory usage of model executions (avoided dynamic_casts, fixed memory leaks, introduced lazy initialization)
-- Realized different methods for recursive deep copy (copy()) and fUML-specific copy methods (_copy())
-- Added support of imported external models as well as import and usage of metamodels (UML & Ecore) in fUML models
-- Moved initialization of execution plugin to a special "initialize()" method rather than doing it in the constructor (lazy initialization)
-- Added new annotation "noExecution" to prevent generation of specific execution classes (e.g. for OperationExecutions, OpaqueBehaviorExecutions, ...)
-#### PSCS-specific extensions:
-- Added usage of PSCS execution engine for model-specific execution library
-	- Usage of PSCS-specific execution model elements like strategy classes, activation classes, execution classes and classifier object classes
-	- Implemented special overloded operation for 'CS_Object::getLinks()' to adapt execution engine and lower level, model-specific concepts during model execution
-
+- Added mechanism for generation-based extension of fUML/PSCS execution semantics: It is now possible to introduce model-specific execution strategy classes and implement custom, specific behavior
 ### Bugfixes and minor changes:
-- Removed memory leak in anonymus forks
-- Modified behavior generation for 'ClassifierObject::setValue()' - handle derived types of defined structured feature on value pin
-- Fixed support of enumeration literals inside 'OpaqueBehavior'
-- Updated type handling of model-specific object classes
-- Bugfix concerning execution of 'OpaqueBehaviors' in 'DecisionNodes'
-- Fixed missing type inludes for parameters of activities that are not referenced by an operation (but rather of an activity itself)
-- Adapted call of create-methods in model locus: 'create$Classname$' methods are now called with the correct metaelement ID by default
+- Removed generation of unnecessary includes and forward declarations
+- Various bug fixes concerning generation of 'Object' classes
+- Moved copy-functionality of generated classes from copy constructor to overloaded assignment operation ('='); copy constructor now only calls overloaded assignment
 ---
 
-## PSCS
-### Additional functions:
-- Realized model corresponding to the PSCS test suite defined by the specification
-	- Test Suite 1: Instantiation
-	- Test Suite 2: Communication
-	- Test Suite 3: Communication (onPort)
-	- Test Suite 4: Destruction
-- Introduced first PSCS example model 'AmpelsteuerungExample'
-- *see section 'UML/PSCS-specific extensions'*
-- *see section 'fUML/PSCS-specific extensions'*
+## OCL
 
-### Model changes:
-- Introduced PSCS execution model as file 'PSCS.ecore' (NOTE: handling of 'Signals' is not supported in MDE4CPP right now)
-- Implemented behavior (operations) of execution model classes for packages:
-	- Actions
-	- Classification
-	- CommonBehavior
-	- Loci
-	- StructuredClassifiers
-	- Values
+## Examples
+- Added AnnotationExample to ecore examples which explains the usage of EAnnotations to specify behavior of the ecore4CPP generator
+- Added ecore example for templates
+- Added ecore example for validation of copying objects
+- Added ecore example for usage of EObject::eInvoke()
+- Added UML example for validation of copying objects
+- Added UML example for validation of subset/union functionalities of UML models
+- Added examples for custom execution strategy mechanism (*see section fUML/PSCS*)
+- Added applications for custom execution strategy mechanism (*"PingModel" and "LoadBalance"*)
+- Added generation scripts to various examples
+- Changed task group for benchmarks from 'Examples' to 'Benchmarks'
+- Added general gradle tasks for fUML and PSCS test suites
+- Moved various examples from 'commonExamples' to 'ecoreExamples/TestSuite'
