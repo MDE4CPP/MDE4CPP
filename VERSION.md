@@ -1,4 +1,4 @@
-# Version 1.3
+# Version 1.4
 
 ## General
 - Updated CXX standard to C++-17
@@ -6,6 +6,7 @@
 - Updated Gradle to version 7.3.1
 - Added support for JDK 16
 - Added generation-based machanism to extend fUML/PSCS-execution-strategies (*see section 'fUML/PSCS'*)
+- Extended generic container-class *Any* (*see section 'Any'*)
 - Added main eclipse project in MDE4CPP root directory
 - Unimplemented methods in generated model code now thorw std::runtime_error
 - Added project-specific extensions for Gradle build environment (custom tasks for generating and compiling model libraries) which were formely handled by external plugins
@@ -19,7 +20,7 @@
 - Added "doNotGenerate" annotation to enable excluding certain model elements from code generation in various contexts
 - Added "cppType" annotation to enable substitution of types with external types (e.g. special C++ types like unsigned types or types from external libraries)
 - Added new meta-element IDs: Now using polynomial rolling hash with an element's qualified name as an input to generate IDs (currently supported for EClasses, EAttributes, EReferences and EOperations)
-- Added support for redefined properties with multiplicity [0..\*] (was by now only possible for properties with multiplicity [1] or [0..1])
+- Added support for redefined properties with multiplicity \[0..\*\] (was by now only possible for properties with multiplicity \[1\] or \[0..1\])
 - Added support of interfaces and abstract classes
 - EEnums are now generated as C++ *enum classes* for type safety
 - Reworked validation mechanism of ecore4CPP-generator: a model's structure is now validated befor actual generation process
@@ -28,6 +29,8 @@
 - Added support of EObject::eInvoke()
 - Added implementation of EObject::eContents() and EObject::eAllContents()
 - Added support for EFactory::convertToString()
+- Added EClass *EObjectAny* as subclass of *EObject* which may contain an instance of *Any*
+- Added EClass *EObjectContainer* as subclass of *EObject* which may contain a list of *EObject* instances
 ### Bugfixes and minor changes:
 - Fixed linkage of external libraries in generated CMakeLists
 - Removed generation of unnecessary includes and forward declarations
@@ -38,6 +41,7 @@
 - Changed naming conventions for create-methods for containments in generated model factory to *create\<type-of-contained-property\>_as_\<name-of-contained-property\>_in_\<type-of-container\>*
 - Enhanced support for back references for compositions
 - Fixed creation of objects in subsetted EAttributes and EReferences (were formely created into unions in some situations)
+- *create_\<contained-type-name\>_as_\<composite-property-name\>_in_\<container-type-name\>*-methods are now also generated for subsets of compositions in 'Factory' classes
 - Overhaul of generator structure: renamed and restructured generator modules
 - Moved "types.ecore" from "src/ecore/types" to "src/uml/types" as it is only used in uml.ecore
 ---
@@ -63,13 +67,20 @@
 ---
 
 ## fUML/PSCS
-### Additional functions:
+### Additional functionalities:
 - Added mechanism for generation-based extension of fUML/PSCS execution semantics: It is now possible to introduce model-specific execution strategy classes and implement custom, specific behavior
 ### Bugfixes and minor changes:
 - Removed generation of unnecessary includes and forward declarations
 - Various bug fixes concerning generation of 'Object' classes
 - Moved copy-functionality of generated classes from copy constructor to overloaded assignment operation ('='); copy constructor now only calls overloaded assignment
 ---
+
+## Any
+### Additional functionalities:
+- *Any* type now stores the type ID of the encapsulated object to be able to determine its type from outside
+- *Any* type now stores a flag to determine if the encapsulated object is a simple object or a container of objects (i.e. *Bag\<T\>*)
+- Added new subclass *AnyEObject* of *Any* which is used to encapsulate a simple object and allows it to be retrieved either as its real type or alternatively as *EObject*
+- Added new subclass *AnyEObjectBag* of *Any* which is used to encapsulate a container of objects and allows it to be retrieved either as its real type or alternatively as a container of *EObject* instances (i.e. *Bag\<EObject\>*)
 
 ## OCL
 
