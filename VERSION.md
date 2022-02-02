@@ -22,7 +22,7 @@
 - Added new meta-element IDs: Now using polynomial rolling hash with an element's qualified name as an input to generate IDs (currently supported for *EClasses*, *EAttributes*, *EReferences* and *EOperations*)
 - Added support for redefined properties with multiplicity \[0..\*\] (was by now only possible for properties with multiplicity \[1\] or \[0..1\])
 - Added support of interfaces and abstract classes
-- *EEnums* are now generated as C++ *enum classes* for type safety
+- *EEnums* are now generated as C++ enum classes for type safety
 - Reworked validation mechanism of ecore4CPP generator: a model's structure is now validated before the actual generation process
 - Added hierarchical logging system to the generator for flexible ouput during generation 
 ### Model changes:
