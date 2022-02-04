@@ -69,7 +69,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 	{
 	[for (aOperation : EOperation | aClass.eOperations->reject((doNotGenerateEOperation() or ignore()))->asOrderedSet()->sortedBy(name))]
 		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
-		// [aOperation.generateQualifiedNameWithSignature()/]: [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]
+		// [aOperation.generateQualifiedNameWithSignature()/]: [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash(true)/]
 		case [aClass.ePackage.name/]Package::[aOperation.getStaticAttributeIDName()/]:
 		{
 		[let parameterList : OrderedSet(EParameter) = aOperation.eParameters->reject(doNotGenerateEParameter())]

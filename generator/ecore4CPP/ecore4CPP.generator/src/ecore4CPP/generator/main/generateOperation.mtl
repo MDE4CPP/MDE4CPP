@@ -132,7 +132,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
+static const unsigned int [aOperation.getStaticAttributeIDName()/] = [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash(true)/];
 
 [/template]
 

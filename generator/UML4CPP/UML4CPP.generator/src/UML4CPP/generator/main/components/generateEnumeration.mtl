@@ -40,6 +40,6 @@
 
 [template public generateStaticEnumerationID(anEnumeration : Enumeration)]
 //Enumeration [anEnumeration.generateNamespaceName(true)/]
-static const long long [anEnumeration.getMemberName().toUpperCase()/] = [anEnumeration.transformType().generatePolynomialRollingHash()/];
+static const unsigned long [anEnumeration.getMemberName().toUpperCase()/] = [anEnumeration.transformType().generatePolynomialRollingHash()/];
 
 [/template]

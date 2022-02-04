@@ -105,7 +105,7 @@ void [anEClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName(
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]
-static const long long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generatePolynomialRollingHash()/];
+static const unsigned long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generatePolynomialRollingHash(false)/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.eAllStructuralFeatures->reject(doNotGenerateEStructuralFeature())->size()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.eAllOperations->reject(doNotGenerateEOperation())->size()/];
 [/template]

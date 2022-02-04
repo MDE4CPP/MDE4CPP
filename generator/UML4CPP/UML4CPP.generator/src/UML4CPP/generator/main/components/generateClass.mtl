@@ -81,7 +81,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
 */]
 [template public generateStaticClassID(aClass : Class)]
 //Class [aClass.generateNamespaceName(true)/]
-static const long long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generatePolynomialRollingHash()/];
+static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generatePolynomialRollingHash()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 [/template]
@@ -98,7 +98,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[generateStaticClassID(c)/]
 	[comment  Properties of c/]
 	[for (aProperty : Property | c.ownedAttribute) before('//Properties\n')]
-	static const long long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
 	[/for]
 	[comment TODO Notwendig? Hierfür werden keine Getter generiert/]
 	[comment  Properties for compositions of c/]
@@ -106,7 +106,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 		[let containerProperty : Property = anAssociation.getCompositeProperty(c)]
 			[if (not containerProperty.opposite.oclIsUndefined())]
 				[let containmentProperty : Property = containerProperty.opposite]
-	static const long long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containerProperty.name.toUpperCase().concat('_').concat(containmentProperty.name.toUpperCase()).generatePolynomialRollingHash()/];
+	static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containerProperty.name.toUpperCase().concat('_').concat(containmentProperty.name.toUpperCase()).generatePolynomialRollingHash()/];
 				[/let]
 			[/if]
 		[/let]
@@ -114,12 +114,12 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[comment  Properties of composite owners of c (i.e. back references to classes that have parts and/or ports of type c)/]
 	[for (compositeOwnerClass : Class | c.getImplicitCompositeOwners()) before('//Properties for composite owners\n')]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	static const long long [c.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [c.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
+	static const unsigned long [c.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [c.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
 	[/for]
 	[comment  Operations of c/]
 	[for (anOperation : Operation | c.ownedOperation) before('//Operations\n')]
 	//[anOperation.generateQualifiedNameWithSignature()/]
-	static const long long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
+	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 	[/for]
 [/for]
 [for (aClass : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]

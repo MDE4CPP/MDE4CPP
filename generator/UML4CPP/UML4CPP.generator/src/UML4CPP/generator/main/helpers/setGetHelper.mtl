@@ -43,15 +43,15 @@
 //Get
 virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
 virtual Any get(std::string _qualifiedName) const [abstractSuffix(impl)/];
-virtual Any get(long long _uID) const [abstractSuffix(impl)/];
+virtual Any get(unsigned long _uID) const [abstractSuffix(impl)/];
 //Set
 virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
 virtual void set(std::string _qualifiedName, Any value) [abstractSuffix(impl)/];
-virtual void set(long long _uID, Any value) [abstractSuffix(impl)/];
+virtual void set(unsigned long _uID, Any value) [abstractSuffix(impl)/];
 //Unset
 virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
-virtual void unset(long long _uID) [abstractSuffix(impl)/];
+virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -61,7 +61,7 @@ virtual void unset(long long _uID) [abstractSuffix(impl)/];
 //Invoke
 virtual Any invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
 virtual Any invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
-virtual Any invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
+virtual Any invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -69,10 +69,10 @@ virtual Any invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments) [abstra
  * as well as operation id and function to invoke the operation
 */]
 [template public generateGetSetMemeberInit(aClass : Class)]
-std::map<long long,std::function<Any()>> m_getterMap;
-std::map<long long,std::function<void(Any)>> m_setterMap;
-std::map<long long,std::function<void()>> m_unsetterMap;
-std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMap;
+std::map<unsigned long,std::function<Any()>> m_getterMap;
+std::map<unsigned long,std::function<void(Any)>> m_setterMap;
+std::map<unsigned long,std::function<void()>> m_unsetterMap;
+std::map<unsigned long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMap;
 [/template]
 
 [query private getSetGetProperties(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->sortedBy(myQualifiedName())/]
@@ -85,44 +85,44 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 [for (prop : Property | propList) before('//getter init\n') after('\n')]
 [let anyBagRequired : Boolean = ((prop.upper <> 1) and not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 	//Property [prop.name/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return [if(anyBagRequired)]eAnyBag[else]eAny[/if](this->[prop.getterName()/](), [prop.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(prop.upper = 1)]false[else]true[/if][/if]);}));
+	m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return [if(anyBagRequired)]eAnyBag[else]eAny[/if](this->[prop.getterName()/](), [prop.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(prop.upper = 1)]false[else]true[/if][/if]);}));
 [/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/], false);}));
+	m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/], false);}));
 [/for]
 
 [for (prop : Property | propList->select(hasSetter())) before('//setter init\n') after('\n')]
 //Property [prop.name/]
 [if (prop.type.oclIsKindOf(Enumeration))]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
+	m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
 [else]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<[if (prop.upper<>1)]std::shared_ptr<Bag[/if][prop.type.generateCppType(false)/][if (prop.upper<>1)]>[/if]>());}));
+	m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<[if (prop.upper<>1)]std::shared_ptr<Bag[/if][prop.type.generateCppType(false)/][if (prop.upper<>1)]>[/if]>());}));
 [/if]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->set[compositeOwnerClass.name.toUpperFirst()/](object->get<std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>>());}));
+	m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->set[compositeOwnerClass.name.toUpperFirst()/](object->get<std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>>());}));
 [/for]
 
 [for (prop : Property | propList->select(not(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))) before('//unsetter init\n') after('\n')]
 	//Property [prop.name/]
 [if (prop.upper=1)]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
+	m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
 [else]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
+	m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[compositeOwnerClass.name/] = std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>(nullptr);}));
+	m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[compositeOwnerClass.name/] = std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>(nullptr);}));
 [/for]
 [/let]
 
 [for (anOperation : Operation | aClass.ownedOperation) before('//invocation init\n')]
 	//Operation [anOperation.name/]
-	m_invocationMap.insert(std::pair<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>([anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/], [ '[' /]this[ ']' /](std::shared_ptr<Bag<Any>> arguments) {
+	m_invocationMap.insert(std::pair<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>([anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/], [ '[' /]this[ ']' /](std::shared_ptr<Bag<Any>> arguments) {
 	[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))]
 	[for (anInputParameter : Parameter | inputParameterList) after('\n')]
 		//Retrieve input parameter '[anInputParameter.name/]'
@@ -193,13 +193,13 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Prope
 
 Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any [aClass.name.toUpperFirst().concat('Impl')/]::get(long long _uID) const
+Any [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -233,13 +233,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Prop
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(long long _uID, Any value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -260,13 +260,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Pr
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::unset(long long _uID)
+void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -301,13 +301,13 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Op
 
 Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation

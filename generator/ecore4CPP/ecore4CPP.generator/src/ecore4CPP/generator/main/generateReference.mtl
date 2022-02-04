@@ -320,7 +320,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 [/template]
 
 [template public generateStaticReferenceID(anEReference : EReference)]
-static const long long [anEReference.getStaticAttributeIDName()/] = [anEReference.generateNamespaceDefinition().generatePolynomialRollingHash()/];
+static const unsigned long [anEReference.getStaticAttributeIDName()/] = [anEReference.generateNamespaceDefinition().generatePolynomialRollingHash(false)/];
 
 [/template]
 

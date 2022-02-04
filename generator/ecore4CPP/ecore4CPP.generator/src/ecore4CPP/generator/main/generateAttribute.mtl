@@ -273,7 +273,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 [/template]
 
 [template public generateStaticAttributeID(anEAttribute : EAttribute)]
-static const long long [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.generateNamespaceDefinition().generatePolynomialRollingHash()/];
+static const unsigned long [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.generateNamespaceDefinition().generatePolynomialRollingHash(false)/];
 
 [/template]
 
