@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/LiteralIntegerEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,20 +20,19 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/IntegerValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralInteger.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -251,7 +249,7 @@ Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralIntegerEvaluation::evaluate() : fUML::Semantics::Values::Value: 604709657
+		// fUML::Semantics::Values::LiteralIntegerEvaluation::evaluate() : fUML::Semantics::Values::Value: 1437295956
 		case ValuesPackage::LITERALINTEGEREVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

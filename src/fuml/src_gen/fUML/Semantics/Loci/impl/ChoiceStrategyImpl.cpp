@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/ChoiceStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -229,7 +226,7 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::ChoiceStrategy::choose(int) : int: 1273166866
+		// fUML::Semantics::Loci::ChoiceStrategy::choose(int) : int: 3427851710
 		case LociPackage::CHOICESTRATEGY_OPERATION_CHOOSE_EINT:
 		{
 			//Retrieve input parameter 'size'
@@ -240,7 +237,7 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->choose(incoming_param_size),0,false);
 			break;
 		}
-		// fUML::Semantics::Loci::ChoiceStrategy::getName() : std::string: 1727304580
+		// fUML::Semantics::Loci::ChoiceStrategy::getName() : std::string: 1209409598
 		case LociPackage::CHOICESTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);

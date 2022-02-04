@@ -1,6 +1,5 @@
 
 #include "uml/impl/ExtensionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -500,25 +496,25 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Extension::getStereotype() : uml::Stereotype: 1488888961
+		// uml::Extension::getStereotype() : uml::Stereotype: 2020808468
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
 		{
 			result = eAnyObject(this->getStereotype(), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
-		// uml::Extension::getStereotypeEnd() : uml::Property: 969898884
+		// uml::Extension::getStereotypeEnd() : uml::Property: 2320579564
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
 		{
 			result = eAnyObject(this->getStereotypeEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::Extension::isRequired() : bool: 792186175
+		// uml::Extension::isRequired() : bool: 2180088823
 		case umlPackage::EXTENSION_OPERATION_ISREQUIRED:
 		{
 			result = eAny(this->isRequired(),0,false);
 			break;
 		}
-		// uml::Extension::is_binary(Any, std::map) : bool: 1026814326
+		// uml::Extension::is_binary(Any, std::map) : bool: 2411406819
 		case umlPackage::EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -534,13 +530,13 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Extension::metaclassEnd() : uml::Property: 2105308144
+		// uml::Extension::metaclassEnd() : uml::Property: 2327939617
 		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
 		{
 			result = eAnyObject(this->metaclassEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::Extension::non_owned_end(Any, std::map) : bool: 1195964610
+		// uml::Extension::non_owned_end(Any, std::map) : bool: 8830304
 		case umlPackage::EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ObjectTokenImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,17 +20,16 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
  #include "fUML/Semantics/Values/ValuesPackage.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -328,13 +326,13 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ObjectToken::_copy() : fUML::Semantics::Activities::Token: 2097614011
+		// fUML::Semantics::Activities::ObjectToken::_copy() : fUML::Semantics::Activities::Token: 2325156054
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ObjectToken::equals(fUML::Semantics::Activities::Token) : bool: 986368509
+		// fUML::Semantics::Activities::ObjectToken::equals(fUML::Semantics::Activities::Token) : bool: 1120332551
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -345,7 +343,7 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ObjectToken::isControl() : bool: 1282940466
+		// fUML::Semantics::Activities::ObjectToken::isControl() : bool: 3725482608
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl(),0,false);

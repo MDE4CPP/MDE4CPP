@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/RealValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <sstream>
 #include "fUML/fUMLFactory.hpp"
@@ -37,7 +36,6 @@
 #include "uml/PrimitiveType.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Type.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -349,13 +347,13 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::RealValue::_copy() : fUML::Semantics::Values::Value: 324500325
+		// fUML::Semantics::SimpleClassifiers::RealValue::_copy() : fUML::Semantics::Values::Value: 2829436007
 		case SimpleClassifiersPackage::REALVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::RealValue::equals(fUML::Semantics::Values::Value) : bool: 1451150382
+		// fUML::Semantics::SimpleClassifiers::RealValue::equals(fUML::Semantics::Values::Value) : bool: 1760399560
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -366,19 +364,19 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::RealValue::new_() : fUML::Semantics::Values::Value: 904241655
+		// fUML::Semantics::SimpleClassifiers::RealValue::new_() : fUML::Semantics::Values::Value: 114814602
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::RealValue::specify() : uml::ValueSpecification: 663742132
+		// fUML::Semantics::SimpleClassifiers::RealValue::specify() : uml::ValueSpecification: 1095688268
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_SPECIFY:
 		{
 			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::RealValue::toString() : std::string: 413538336
+		// fUML::Semantics::SimpleClassifiers::RealValue::toString() : std::string: 1044160033
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

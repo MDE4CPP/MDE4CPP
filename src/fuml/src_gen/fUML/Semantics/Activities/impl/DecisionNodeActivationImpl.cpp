@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/DecisionNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
@@ -49,7 +48,6 @@
 #include "uml/ParameterDirectionKind.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/ValueSpecification.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -702,7 +700,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::DecisionNodeActivation::executeDecisionInputBehavior(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::Values::Value: 474512401
+		// fUML::Semantics::Activities::DecisionNodeActivation::executeDecisionInputBehavior(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::Values::Value: 1497497786
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE:
 		{
 			//Retrieve input parameter 'inputValue'
@@ -718,7 +716,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAnyObject(this->executeDecisionInputBehavior(incoming_param_inputValue,incoming_param_decisionInputValue), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 655526507
+		// fUML::Semantics::Activities::DecisionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 4127070096
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -729,19 +727,19 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowInstance() : fUML::Semantics::Activities::ActivityEdgeInstance: 1439501389
+		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowInstance() : fUML::Semantics::Activities::ActivityEdgeInstance: 589400247
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE:
 		{
 			result = eAnyObject(this->getDecisionInputFlowInstance(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowValue() : fUML::Semantics::Values::Value: 1462609127
+		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowValue() : fUML::Semantics::Values::Value: 15068892
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE:
 		{
 			result = eAnyObject(this->getDecisionInputFlowValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionValues(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Values::Value[*]: 1833083459
+		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionValues(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Values::Value[*]: 1834254220
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -753,19 +751,19 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::hasObjectFlowInput() : bool: 1189277255
+		// fUML::Semantics::Activities::DecisionNodeActivation::hasObjectFlowInput() : bool: 336094904
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT:
 		{
 			result = eAny(this->hasObjectFlowInput(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::isReady() : bool: 500251013
+		// fUML::Semantics::Activities::DecisionNodeActivation::isReady() : bool: 2829031806
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::removeJoinedControlTokens(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Activities::Token[*]: 118568537
+		// fUML::Semantics::Activities::DecisionNodeActivation::removeJoinedControlTokens(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Activities::Token[*]: 1559509247
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -777,20 +775,20 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 772920813
+		// fUML::Semantics::Activities::DecisionNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 121080352
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::terminate(): 92927738
+		// fUML::Semantics::Activities::DecisionNodeActivation::terminate(): 1771187084
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::test(uml::ValueSpecification, fUML::Semantics::Values::Value) : bool: 1272277240
+		// fUML::Semantics::Activities::DecisionNodeActivation::test(uml::ValueSpecification, fUML::Semantics::Values::Value) : bool: 753683065
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE:
 		{
 			//Retrieve input parameter 'gaurd'

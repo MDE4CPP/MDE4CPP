@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_ConstructStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,18 +20,16 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -236,10 +233,10 @@ bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_ConstructStrategy::construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : fUML::Semantics::StructuredClassifiers::Object: 597739318
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : fUML::Semantics::StructuredClassifiers::Object: 1666096409
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
 		{
 			//Retrieve input parameter 'constructor'
@@ -252,10 +249,10 @@ Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
 			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
-			result = eAny(this->construct(incoming_param_constructor,incoming_param_context), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
+			result = eAnyObject(this->construct(incoming_param_constructor,incoming_param_context), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_ConstructStrategy::getName() : std::string: 1128538055
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::getName() : std::string: 753057332
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);

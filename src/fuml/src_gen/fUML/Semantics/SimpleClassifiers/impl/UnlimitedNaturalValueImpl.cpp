@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/fUMLFactory.hpp"
@@ -38,7 +37,6 @@
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"
 #include "uml/umlFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -357,13 +355,13 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::_copy() : fUML::Semantics::Values::Value: 913377262
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::_copy() : fUML::Semantics::Values::Value: 2602066957
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::equals(fUML::Semantics::Values::Value) : bool: 886044238
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::equals(fUML::Semantics::Values::Value) : bool: 3214001150
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -374,19 +372,19 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::new_() : fUML::Semantics::Values::Value: 1924598092
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::new_() : fUML::Semantics::Values::Value: 3814660320
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::specify() : uml::ValueSpecification: 519448828
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::specify() : uml::ValueSpecification: 3624944066
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
 		{
 			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::toString() : std::string: 668784562
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::toString() : std::string: 1690699879
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

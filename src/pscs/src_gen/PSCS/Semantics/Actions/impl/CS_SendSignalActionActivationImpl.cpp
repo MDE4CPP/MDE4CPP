@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_SendSignalActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
@@ -48,7 +47,6 @@
 #include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -354,10 +352,10 @@ bool CS_SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
 Any CS_SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_SendSignalActionActivation::doAction(): 699108812
+		// PSCS::Semantics::Actions::CS_SendSignalActionActivation::doAction(): 796983372
 		case ActionsPackage::CS_SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

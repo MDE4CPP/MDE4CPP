@@ -1,6 +1,5 @@
 
 #include "uml/impl/RedefinableTemplateSignatureImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -609,14 +605,14 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
  
   	switch(operationID)
 	{
-		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 257289515
+		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 1729090337
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
 			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}
-		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 1263440260
+		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 2810722782
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

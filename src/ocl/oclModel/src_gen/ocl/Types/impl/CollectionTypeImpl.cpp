@@ -1,6 +1,5 @@
 
 #include "ocl/Types/impl/CollectionTypeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -381,7 +379,7 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// ocl::Types::CollectionType::kindOf(ocl::Types::CollectionType) : bool: 1909894118
+		// ocl::Types::CollectionType::kindOf(ocl::Types::CollectionType) : bool: 3279789440
 		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
 		{
 			//Retrieve input parameter 'coll'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/ParameterSetImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -504,7 +500,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::ParameterSet::input(Any, std::map) : bool: 893901939
+		// uml::ParameterSet::input(Any, std::map) : bool: 547814115
 		case umlPackage::PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -520,7 +516,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ParameterSet::same_parameterized_entity(Any, std::map) : bool: 396663857
+		// uml::ParameterSet::same_parameterized_entity(Any, std::map) : bool: 1035426461
 		case umlPackage::PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -536,7 +532,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ParameterSet::two_parameter_sets(Any, std::map) : bool: 1153192792
+		// uml::ParameterSet::two_parameter_sets(Any, std::map) : bool: 3479021643
 		case umlPackage::PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

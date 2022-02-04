@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralStringImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,13 +408,13 @@ Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// uml::LiteralString::isComputable() : bool: 681007420
+		// uml::LiteralString::isComputable() : bool: 3555956385
 		case umlPackage::LITERALSTRING_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		// uml::LiteralString::stringValue() : std::string: 1579170200
+		// uml::LiteralString::stringValue() : std::string: 3894136783
 		case umlPackage::LITERALSTRING_OPERATION_STRINGVALUE:
 		{
 			result = eAny(this->stringValue(),0,false);

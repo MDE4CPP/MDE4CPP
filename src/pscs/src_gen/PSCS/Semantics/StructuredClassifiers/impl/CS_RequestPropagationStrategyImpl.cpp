@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,18 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -234,16 +231,16 @@ bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::getName() : std::string: 1845969483
+		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::getName() : std::string: 2901676164
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::select(fUML::Semantics::StructuredClassifiers::Reference[*], fUML::Semantics::Loci::SemanticVisitor) : fUML::Semantics::StructuredClassifiers::Reference[*]: 503944288
+		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::select(fUML::Semantics::StructuredClassifiers::Reference[*], fUML::Semantics::Loci::SemanticVisitor) : fUML::Semantics::StructuredClassifiers::Reference[*]: 552630845
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
 		{
 			//Retrieve input parameter 'potentialTargets'
@@ -257,7 +254,7 @@ Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<
 			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
-			return eAny(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
 			break;
 		}
 

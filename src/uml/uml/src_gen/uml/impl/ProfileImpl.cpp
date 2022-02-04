@@ -1,6 +1,5 @@
 
 #include "uml/impl/ProfileImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -679,7 +675,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// uml::Profile::create(uml::Classifier) : ecore::EObject: 601455413
+		// uml::Profile::create(uml::Classifier) : ecore::EObject: 2317940279
 		case umlPackage::PROFILE_OPERATION_CREATE_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'
@@ -690,13 +686,13 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// uml::Profile::define() : ecore::EPackage: 1290863447
+		// uml::Profile::define() : ecore::EPackage: 1369026160
 		case umlPackage::PROFILE_OPERATION_DEFINE:
 		{
 			result = eAnyObject(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
-		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1039331867
+		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1280241598
 		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EMAP:
 		{
 			//Retrieve input parameter 'options'
@@ -717,13 +713,13 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
-		// uml::Profile::getDefinition() : ecore::EPackage: 1362267442
+		// uml::Profile::getDefinition() : ecore::EPackage: 3919615722
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION:
 		{
 			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
-		// uml::Profile::getDefinition(uml::NamedElement) : ecore::ENamedElement: 668433302
+		// uml::Profile::getDefinition(uml::NamedElement) : ecore::ENamedElement: 230708030
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'namedElement'
@@ -734,7 +730,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
-		// uml::Profile::getOwnedExtensions(bool) : uml::Extension[*]: 1633691648
+		// uml::Profile::getOwnedExtensions(bool) : uml::Extension[*]: 1345091052
 		case umlPackage::PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN:
 		{
 			//Retrieve input parameter 'requiredOnly'
@@ -746,27 +742,27 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
-		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 163141874
+		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 2481786676
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class> > resultList = this->getReferencedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 1875658587
+		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 2762577013
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
 			std::shared_ptr<Bag<uml::Model> > resultList = this->getReferencedMetamodels();
 			return eAnyBag(resultList,uml::umlPackage::MODEL_CLASS);
 			break;
 		}
-		// uml::Profile::isDefined() : bool: 806963924
+		// uml::Profile::isDefined() : bool: 2217318421
 		case umlPackage::PROFILE_OPERATION_ISDEFINED:
 		{
 			result = eAny(this->isDefined(),0,false);
 			break;
 		}
-		// uml::Profile::metaclass_reference_not_specialized(Any, std::map) : bool: 1947780751
+		// uml::Profile::metaclass_reference_not_specialized(Any, std::map) : bool: 4152976330
 		case umlPackage::PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -782,7 +778,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Profile::references_same_metamodel(Any, std::map) : bool: 1497139273
+		// uml::Profile::references_same_metamodel(Any, std::map) : bool: 2161741941
 		case umlPackage::PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

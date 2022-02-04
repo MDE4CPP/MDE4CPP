@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ReplyActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/ReplyAction.hpp"
 #include "uml/CallEvent.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/Semantics/Actions/ReturnInformation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -309,7 +307,7 @@ Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ReplyActionActivation::doAction(): 563900863
+		// fUML::Semantics::Actions::ReplyActionActivation::doAction(): 1028494874
 		case ActionsPackage::REPLYACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

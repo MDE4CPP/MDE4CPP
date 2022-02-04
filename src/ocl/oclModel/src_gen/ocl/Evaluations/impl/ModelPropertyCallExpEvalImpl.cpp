@@ -1,6 +1,5 @@
 
 #include "ocl/Evaluations/impl/ModelPropertyCallExpEvalImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -249,7 +246,7 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// ocl::Evaluations::ModelPropertyCallExpEval::atPre() : bool: 2043150223
+		// ocl::Evaluations::ModelPropertyCallExpEval::atPre() : bool: 2989568563
 		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
 		{
 			result = eAny(this->atPre(),0,false);

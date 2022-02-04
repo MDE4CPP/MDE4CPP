@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -57,7 +56,6 @@
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -545,16 +543,16 @@ bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any n
 Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation::doAction(): 998058488
+		// PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation::doAction(): 2459034463
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation::doActionDefault(): 494359846
+		// PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation::doActionDefault(): 572905456
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT:
 		{
 			this->doActionDefault();

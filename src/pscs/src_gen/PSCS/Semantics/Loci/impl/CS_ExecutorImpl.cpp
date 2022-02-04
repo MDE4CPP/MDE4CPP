@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -279,10 +277,10 @@ bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
 Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Loci::CS_Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::StructuredClassifiers::Reference: 1767369396
+		// PSCS::Semantics::Loci::CS_Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::StructuredClassifiers::Reference: 435271847
 		case LociPackage::CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'type'
@@ -295,7 +293,7 @@ Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			result = eAny(this->start(incoming_param_type,incoming_param_inputs), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,false);
+			result = eAnyObject(this->start(incoming_param_type,incoming_param_inputs), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
 			break;
 		}
 

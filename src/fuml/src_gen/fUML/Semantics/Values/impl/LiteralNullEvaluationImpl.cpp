@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/LiteralNullEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,15 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -242,7 +240,7 @@ Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : fUML::Semantics::Values::Value: 507735969
+		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : fUML::Semantics::Values::Value: 297899813
 		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

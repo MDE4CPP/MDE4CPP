@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EClassImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1282,7 +1279,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// ecore::EClass::getEOperation(int) : ecore::EOperation {const}: 1526673885
+		// ecore::EClass::getEOperation(int) : ecore::EOperation {const}: 2381602408
 		case ecorePackage::ECLASS_OPERATION_GETEOPERATION_EINT:
 		{
 			//Retrieve input parameter 'operationID'
@@ -1293,7 +1290,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
-		// ecore::EClass::getEStructuralFeature(int) : ecore::EStructuralFeature {const}: 1143915648
+		// ecore::EClass::getEStructuralFeature(int) : ecore::EStructuralFeature {const}: 2814968520
 		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'featureID'
@@ -1304,7 +1301,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
-		// ecore::EClass::getEStructuralFeature(std::string) : ecore::EStructuralFeature {const}: 927658850
+		// ecore::EClass::getEStructuralFeature(std::string) : ecore::EStructuralFeature {const}: 4067797539
 		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING:
 		{
 			//Retrieve input parameter 'featureName'
@@ -1315,13 +1312,13 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
-		// ecore::EClass::getFeatureCount() : int {const}: 663421227
+		// ecore::EClass::getFeatureCount() : int {const}: 3596988599
 		case ecorePackage::ECLASS_OPERATION_GETFEATURECOUNT:
 		{
 			result = eAny(this->getFeatureCount(),0,false);
 			break;
 		}
-		// ecore::EClass::getFeatureID(ecore::EStructuralFeature) : int {const}: 118348729
+		// ecore::EClass::getFeatureID(ecore::EStructuralFeature) : int {const}: 1817491227
 		case ecorePackage::ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -1332,7 +1329,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->getFeatureID(incoming_param_feature),0,false);
 			break;
 		}
-		// ecore::EClass::getFeatureType(ecore::EStructuralFeature) : ecore::EGenericType {const}: 1392350498
+		// ecore::EClass::getFeatureType(ecore::EStructuralFeature) : ecore::EGenericType {const}: 3202363015
 		case ecorePackage::ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -1343,13 +1340,13 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS);
 			break;
 		}
-		// ecore::EClass::getOperationCount() : int {const}: 2008923785
+		// ecore::EClass::getOperationCount() : int {const}: 116983988
 		case ecorePackage::ECLASS_OPERATION_GETOPERATIONCOUNT:
 		{
 			result = eAny(this->getOperationCount(),0,false);
 			break;
 		}
-		// ecore::EClass::getOperationID(ecore::EOperation) : int {const}: 88181657
+		// ecore::EClass::getOperationID(ecore::EOperation) : int {const}: 1486864904
 		case ecorePackage::ECLASS_OPERATION_GETOPERATIONID_EOPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -1360,7 +1357,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->getOperationID(incoming_param_operation),0,false);
 			break;
 		}
-		// ecore::EClass::getOverride(ecore::EOperation) : ecore::EOperation {const}: 280340408
+		// ecore::EClass::getOverride(ecore::EOperation) : ecore::EOperation {const}: 3447074303
 		case ecorePackage::ECLASS_OPERATION_GETOVERRIDE_EOPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -1371,7 +1368,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
-		// ecore::EClass::isSuperTypeOf(ecore::EClass) : bool {const}: 253558657
+		// ecore::EClass::isSuperTypeOf(ecore::EClass) : bool {const}: 803543878
 		case ecorePackage::ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS:
 		{
 			//Retrieve input parameter 'someClass'

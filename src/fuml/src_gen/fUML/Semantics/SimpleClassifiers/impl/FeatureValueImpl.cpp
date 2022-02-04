@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/FeatureValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -507,13 +505,13 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::FeatureValue::_copy() : fUML::Semantics::SimpleClassifiers::FeatureValue: 1429289502
+		// fUML::Semantics::SimpleClassifiers::FeatureValue::_copy() : fUML::Semantics::SimpleClassifiers::FeatureValue: 3021163793
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::FeatureValue::hasEqualValues(fUML::Semantics::SimpleClassifiers::FeatureValue) : bool: 2061713627
+		// fUML::Semantics::SimpleClassifiers::FeatureValue::hasEqualValues(fUML::Semantics::SimpleClassifiers::FeatureValue) : bool: 2370187995
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'other'

@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/UndefinedValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,17 +20,16 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -244,7 +242,7 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// ocl::Values::UndefinedValue::equals(fUML::Semantics::Values::Value) : bool: 1032526186
+		// ocl::Values::UndefinedValue::equals(fUML::Semantics::Values::Value) : bool: 1274785983
 		case ValuesPackage::UNDEFINEDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -255,7 +253,7 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::UndefinedValue::toString() : std::string: 1847553997
+		// ocl::Values::UndefinedValue::toString() : std::string: 1695102816
 		case ValuesPackage::UNDEFINEDVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

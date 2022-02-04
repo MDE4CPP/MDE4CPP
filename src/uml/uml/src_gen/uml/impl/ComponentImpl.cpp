@@ -1,6 +1,5 @@
 
 #include "uml/impl/ComponentImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -840,7 +836,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Component::createOwnedClass(std::string, bool) : uml::Class: 1988739931
+		// uml::Component::createOwnedClass(std::string, bool) : uml::Class: 46843329
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -856,7 +852,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Component::createOwnedEnumeration(std::string) : uml::Enumeration: 444369064
+		// uml::Component::createOwnedEnumeration(std::string) : uml::Enumeration: 3554753543
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -867,7 +863,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
 		}
-		// uml::Component::createOwnedInterface(std::string) : uml::Interface: 1656446202
+		// uml::Component::createOwnedInterface(std::string) : uml::Interface: 2133826027
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -878,7 +874,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Component::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1653509115
+		// uml::Component::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1105443607
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -889,21 +885,21 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
-		// uml::Component::getProvideds() : uml::Interface[*]: 108282626
+		// uml::Component::getProvideds() : uml::Interface[*]: 1978665601
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Component::getRequireds() : uml::Interface[*]: 8442330
+		// uml::Component::getRequireds() : uml::Interface[*]: 1044914701
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Component::no_nested_classifiers(Any, std::map) : bool: 1111918920
+		// uml::Component::no_nested_classifiers(Any, std::map) : bool: 3917555991
 		case umlPackage::COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -919,7 +915,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->no_nested_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Component::no_packaged_elements(Any, std::map) : bool: 415493174
+		// uml::Component::no_packaged_elements(Any, std::map) : bool: 4216292457
 		case umlPackage::COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

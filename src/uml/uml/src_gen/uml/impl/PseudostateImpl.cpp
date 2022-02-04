@@ -1,6 +1,5 @@
 
 #include "uml/impl/PseudostateImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -579,7 +575,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::Pseudostate::choice_vertex(Any, std::map) : bool: 1495555718
+		// uml::Pseudostate::choice_vertex(Any, std::map) : bool: 268196655
 		case umlPackage::PSEUDOSTATE_OPERATION_CHOICE_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -595,7 +591,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->choice_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::fork_vertex(Any, std::map) : bool: 80852483
+		// uml::Pseudostate::fork_vertex(Any, std::map) : bool: 70703214
 		case umlPackage::PSEUDOSTATE_OPERATION_FORK_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -611,7 +607,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->fork_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::history_vertices(Any, std::map) : bool: 399889455
+		// uml::Pseudostate::history_vertices(Any, std::map) : bool: 1473780509
 		case umlPackage::PSEUDOSTATE_OPERATION_HISTORY_VERTICES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -627,7 +623,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->history_vertices(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::initial_vertex(Any, std::map) : bool: 542250645
+		// uml::Pseudostate::initial_vertex(Any, std::map) : bool: 1119478342
 		case umlPackage::PSEUDOSTATE_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -643,7 +639,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::join_vertex(Any, std::map) : bool: 1204202765
+		// uml::Pseudostate::join_vertex(Any, std::map) : bool: 3336750216
 		case umlPackage::PSEUDOSTATE_OPERATION_JOIN_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -659,7 +655,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->join_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::junction_vertex(Any, std::map) : bool: 2121667598
+		// uml::Pseudostate::junction_vertex(Any, std::map) : bool: 1046174546
 		case umlPackage::PSEUDOSTATE_OPERATION_JUNCTION_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -675,7 +671,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->junction_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::outgoing_from_initial(Any, std::map) : bool: 754555881
+		// uml::Pseudostate::outgoing_from_initial(Any, std::map) : bool: 56020895
 		case umlPackage::PSEUDOSTATE_OPERATION_OUTGOING_FROM_INITIAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -691,7 +687,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->outgoing_from_initial(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::transitions_incoming(Any, std::map) : bool: 1123445499
+		// uml::Pseudostate::transitions_incoming(Any, std::map) : bool: 1040583452
 		case umlPackage::PSEUDOSTATE_OPERATION_TRANSITIONS_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -707,7 +703,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->transitions_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pseudostate::transitions_outgoing(Any, std::map) : bool: 367366800
+		// uml::Pseudostate::transitions_outgoing(Any, std::map) : bool: 1228342264
 		case umlPackage::PSEUDOSTATE_OPERATION_TRANSITIONS_OUTGOING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

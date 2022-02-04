@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/CallBehaviorActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,23 +18,22 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallBehaviorAction.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,7 +408,7 @@ Any CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::CallBehaviorActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1400525921
+		// fUML::Semantics::Actions::CallBehaviorActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 3714278039
 		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
 			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);

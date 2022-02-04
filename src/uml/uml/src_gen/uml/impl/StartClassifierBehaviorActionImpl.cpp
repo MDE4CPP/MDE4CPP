@@ -1,6 +1,5 @@
 
 #include "uml/impl/StartClassifierBehaviorActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -439,7 +435,7 @@ Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// uml::StartClassifierBehaviorAction::multiplicity(Any, std::map) : bool: 1094899512
+		// uml::StartClassifierBehaviorAction::multiplicity(Any, std::map) : bool: 1330965660
 		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -455,7 +451,7 @@ Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StartClassifierBehaviorAction::type_has_classifier(Any, std::map) : bool: 1109650331
+		// uml::StartClassifierBehaviorAction::type_has_classifier(Any, std::map) : bool: 1313200504
 		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

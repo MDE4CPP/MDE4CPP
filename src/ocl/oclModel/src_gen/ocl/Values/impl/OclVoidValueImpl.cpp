@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/OclVoidValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,17 +20,16 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -244,7 +242,7 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// ocl::Values::OclVoidValue::equals(fUML::Semantics::Values::Value) : bool: 613975732
+		// ocl::Values::OclVoidValue::equals(fUML::Semantics::Values::Value) : bool: 3635156929
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -255,7 +253,7 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::OclVoidValue::toString() : std::string: 1594356317
+		// ocl::Values::OclVoidValue::toString() : std::string: 2031383210
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

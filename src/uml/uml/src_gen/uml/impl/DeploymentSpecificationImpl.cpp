@@ -1,6 +1,5 @@
 
 #include "uml/impl/DeploymentSpecificationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -599,7 +595,7 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// uml::DeploymentSpecification::deployed_elements(Any, std::map) : bool: 1212838527
+		// uml::DeploymentSpecification::deployed_elements(Any, std::map) : bool: 1961458522
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -615,7 +611,7 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->deployed_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DeploymentSpecification::deployment_target(Any, std::map) : bool: 1545768860
+		// uml::DeploymentSpecification::deployment_target(Any, std::map) : bool: 153248179
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

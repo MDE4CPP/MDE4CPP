@@ -1,6 +1,5 @@
 
 #include "uml/impl/PackageImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1291,14 +1287,14 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// uml::Package::allApplicableStereotypes() : uml::Stereotype[*]: 1557820782
+		// uml::Package::allApplicableStereotypes() : uml::Stereotype[*]: 3081223090
 		case umlPackage::PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES:
 		{
 			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->allApplicableStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
-		// uml::Package::applyProfile(uml::Profile) : ecore::EObject[*]: 532857739
+		// uml::Package::applyProfile(uml::Profile) : ecore::EObject[*]: 1307726167
 		case umlPackage::PACKAGE_OPERATION_APPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1310,13 +1306,13 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// uml::Package::containingProfile() : uml::Profile: 1369083844
+		// uml::Package::containingProfile() : uml::Profile: 297814107
 		case umlPackage::PACKAGE_OPERATION_CONTAININGPROFILE:
 		{
 			result = eAnyObject(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Package::createOwnedClass(std::string, bool) : uml::Class: 520555000
+		// uml::Package::createOwnedClass(std::string, bool) : uml::Class: 3225469238
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -1332,7 +1328,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Package::createOwnedEnumeration(std::string) : uml::Enumeration: 588810307
+		// uml::Package::createOwnedEnumeration(std::string) : uml::Enumeration: 4030973228
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1343,7 +1339,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
 		}
-		// uml::Package::createOwnedInterface(std::string) : uml::Interface: 2141179079
+		// uml::Package::createOwnedInterface(std::string) : uml::Interface: 4044228400
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1354,7 +1350,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Package::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1204664161
+		// uml::Package::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1311535292
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1365,7 +1361,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
-		// uml::Package::createOwnedStereotype(std::string, bool) : uml::Stereotype: 64069774
+		// uml::Package::createOwnedStereotype(std::string, bool) : uml::Stereotype: 1764677662
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -1381,7 +1377,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
-		// uml::Package::elements_public_or_private(Any, std::map) : bool: 1451255929
+		// uml::Package::elements_public_or_private(Any, std::map) : bool: 1462953787
 		case umlPackage::PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1397,21 +1393,21 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Package::getAllAppliedProfiles() : uml::Profile[*]: 1609552989
+		// uml::Package::getAllAppliedProfiles() : uml::Profile[*]: 1897955286
 		case umlPackage::PACKAGE_OPERATION_GETALLAPPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAllAppliedProfiles();
 			return eAnyBag(resultList,uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Package::getAllProfileApplications() : uml::ProfileApplication[*]: 1816651881
+		// uml::Package::getAllProfileApplications() : uml::ProfileApplication[*]: 3294067191
 		case umlPackage::PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS:
 		{
 			std::shared_ptr<Bag<uml::ProfileApplication> > resultList = this->getAllProfileApplications();
 			return eAnyBag(resultList,uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
-		// uml::Package::getAppliedProfile(std::string) : uml::Profile: 996929944
+		// uml::Package::getAppliedProfile(std::string) : uml::Profile: 1220237638
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -1422,7 +1418,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->getAppliedProfile(incoming_param_qualifiedName), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Package::getAppliedProfile(std::string, bool) : uml::Profile: 537452639
+		// uml::Package::getAppliedProfile(std::string, bool) : uml::Profile: 3532488162
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -1438,35 +1434,35 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Package::getAppliedProfiles() : uml::Profile[*]: 619686908
+		// uml::Package::getAppliedProfiles() : uml::Profile[*]: 2071132101
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAppliedProfiles();
 			return eAnyBag(resultList,uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Package::getNestedPackages() : uml::Package[*]: 1133617509
+		// uml::Package::getNestedPackages() : uml::Package[*]: 2155135055
 		case umlPackage::PACKAGE_OPERATION_GETNESTEDPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package> > resultList = this->getNestedPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
-		// uml::Package::getOwnedStereotypes() : uml::Stereotype[*]: 984223651
+		// uml::Package::getOwnedStereotypes() : uml::Stereotype[*]: 2086351653
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDSTEREOTYPES:
 		{
 			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getOwnedStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
-		// uml::Package::getOwnedTypes() : uml::Type[*]: 1807861876
+		// uml::Package::getOwnedTypes() : uml::Type[*]: 2779567969
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDTYPES:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->getOwnedTypes();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
-		// uml::Package::getProfileApplication(uml::Profile) : uml::ProfileApplication: 1780891819
+		// uml::Package::getProfileApplication(uml::Profile) : uml::ProfileApplication: 1494696140
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1477,7 +1473,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->getProfileApplication(incoming_param_profile), uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
-		// uml::Package::getProfileApplication(uml::Profile, bool) : uml::ProfileApplication: 1620950971
+		// uml::Package::getProfileApplication(uml::Profile, bool) : uml::ProfileApplication: 3694877816
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN:
 		{
 			//Retrieve input parameter 'profile'
@@ -1493,13 +1489,13 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->getProfileApplication(incoming_param_profile,incoming_param_recurse), uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
-		// uml::Package::isModelLibrary() : bool: 126460786
+		// uml::Package::isModelLibrary() : bool: 1153574071
 		case umlPackage::PACKAGE_OPERATION_ISMODELLIBRARY:
 		{
 			result = eAny(this->isModelLibrary(),0,false);
 			break;
 		}
-		// uml::Package::isProfileApplied(uml::Profile) : bool: 1688405008
+		// uml::Package::isProfileApplied(uml::Profile) : bool: 1902112608
 		case umlPackage::PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1510,7 +1506,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->isProfileApplied(incoming_param_profile),0,false);
 			break;
 		}
-		// uml::Package::makesVisible(uml::NamedElement) : bool: 1550634476
+		// uml::Package::makesVisible(uml::NamedElement) : bool: 4229111501
 		case umlPackage::PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'el'
@@ -1521,7 +1517,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->makesVisible(incoming_param_el),0,false);
 			break;
 		}
-		// uml::Package::unapplyProfile(uml::Profile) : ecore::EObject[*]: 775995658
+		// uml::Package::unapplyProfile(uml::Profile) : ecore::EObject[*]: 2851150210
 		case umlPackage::PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1533,7 +1529,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// uml::Package::visibleMembers() : uml::PackageableElement[*]: 1123478292
+		// uml::Package::visibleMembers() : uml::PackageableElement[*]: 3140448168
 		case umlPackage::PACKAGE_OPERATION_VISIBLEMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->visibleMembers();

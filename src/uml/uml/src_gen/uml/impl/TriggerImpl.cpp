@@ -1,6 +1,5 @@
 
 #include "uml/impl/TriggerImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -417,7 +413,7 @@ Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// uml::Trigger::trigger_with_ports(Any, std::map) : bool: 1662674080
+		// uml::Trigger::trigger_with_ports(Any, std::map) : bool: 943017704
 		case umlPackage::TRIGGER_OPERATION_TRIGGER_WITH_PORTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

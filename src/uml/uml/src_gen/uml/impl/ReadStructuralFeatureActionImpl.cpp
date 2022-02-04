@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadStructuralFeatureActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -457,7 +453,7 @@ Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<st
  
   	switch(operationID)
 	{
-		// uml::ReadStructuralFeatureAction::type_and_ordering(Any, std::map) : bool: 26062862
+		// uml::ReadStructuralFeatureAction::type_and_ordering(Any, std::map) : bool: 368989742
 		case umlPackage::READSTRUCTURALFEATUREACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

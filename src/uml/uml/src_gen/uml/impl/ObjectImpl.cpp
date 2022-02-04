@@ -1,6 +1,5 @@
 
 #include "uml/impl/ObjectImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -244,7 +240,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Object::get(uml::Property) : Any {const}: 160022814
+		// uml::Object::get(uml::Property) : Any {const}: 511579154
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
 			//Retrieve input parameter 'property'
@@ -255,7 +251,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = this->get(incoming_param_property);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, uml::Argument[*]) : uml::Object[*]: 229017557
+		// uml::Object::invoke(uml::Operation, uml::Argument[*]) : uml::Object[*]: 1605333897
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT:
 		{
 			//Retrieve input parameter 'op'
@@ -272,7 +268,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			return eAnyBag(resultList,uml::umlPackage::OBJECT_CLASS);
 			break;
 		}
-		// uml::Object::set(uml::Property, Any): 1266543324
+		// uml::Object::set(uml::Property, Any): 183386425
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'property'
@@ -288,7 +284,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			this->set(incoming_param_property,incoming_param_value);
 			break;
 		}
-		// uml::Object::unset(uml::Property): 1465531791
+		// uml::Object::unset(uml::Property): 2421215512
 		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
 		{
 			//Retrieve input parameter 'property'

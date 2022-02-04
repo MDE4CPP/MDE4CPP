@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -224,7 +221,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::SimpleClassifiers::SignalInstance): 488129254
+		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::SimpleClassifiers::SignalInstance): 1764686554
 		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -235,7 +232,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			this->accept(incoming_param_signalInstance);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::SimpleClassifiers::SignalInstance) : bool: 1803064884
+		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::SimpleClassifiers::SignalInstance) : bool: 2264525893
 		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'

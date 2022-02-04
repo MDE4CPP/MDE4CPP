@@ -1,6 +1,5 @@
 
 #include "uml/impl/UseCaseImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -894,14 +890,14 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// uml::UseCase::allIncludedUseCases() : uml::UseCase[*]: 1800777238
+		// uml::UseCase::allIncludedUseCases() : uml::UseCase[*]: 3794514740
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
 			std::shared_ptr<Bag<uml::UseCase> > resultList = this->allIncludedUseCases();
 			return eAnyBag(resultList,uml::umlPackage::USECASE_CLASS);
 			break;
 		}
-		// uml::UseCase::binary_associations(Any, std::map) : bool: 994037494
+		// uml::UseCase::binary_associations(Any, std::map) : bool: 2884115735
 		case umlPackage::USECASE_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -917,7 +913,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UseCase::cannot_include_self(Any, std::map) : bool: 774173796
+		// uml::UseCase::cannot_include_self(Any, std::map) : bool: 929569410
 		case umlPackage::USECASE_OPERATION_CANNOT_INCLUDE_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -933,7 +929,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->cannot_include_self(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UseCase::must_have_name(Any, std::map) : bool: 1489214321
+		// uml::UseCase::must_have_name(Any, std::map) : bool: 295172503
 		case umlPackage::USECASE_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -949,7 +945,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UseCase::no_association_to_use_case(Any, std::map) : bool: 1306318580
+		// uml::UseCase::no_association_to_use_case(Any, std::map) : bool: 1524958393
 		case umlPackage::USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

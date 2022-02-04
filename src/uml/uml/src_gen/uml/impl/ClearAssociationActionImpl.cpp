@@ -1,6 +1,5 @@
 
 #include "uml/impl/ClearAssociationActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -499,7 +495,7 @@ Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::ClearAssociationAction::multiplicity(Any, std::map) : bool: 819319273
+		// uml::ClearAssociationAction::multiplicity(Any, std::map) : bool: 324759177
 		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -515,7 +511,7 @@ Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClearAssociationAction::same_type(Any, std::map) : bool: 1974715701
+		// uml::ClearAssociationAction::same_type(Any, std::map) : bool: 1927354895
 		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

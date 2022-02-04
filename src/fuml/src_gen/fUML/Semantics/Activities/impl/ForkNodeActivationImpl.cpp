@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ForkNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ForkedToken.hpp"
 #include "fUML/fUMLFactory.hpp"
 #include"uml/ActivityNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -305,7 +303,7 @@ Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ForkNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1337885932
+		// fUML::Semantics::Activities::ForkNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 974284456
 		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -316,7 +314,7 @@ Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkNodeActivation::terminate(): 1661037681
+		// fUML::Semantics::Activities::ForkNodeActivation::terminate(): 3793874788
 		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralIntegerImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,13 +408,13 @@ Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::LiteralInteger::integerValue() : int: 1304183652
+		// uml::LiteralInteger::integerValue() : int: 3507556350
 		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
 		{
 			result = eAny(this->integerValue(),0,false);
 			break;
 		}
-		// uml::LiteralInteger::isComputable() : bool: 1573689205
+		// uml::LiteralInteger::isComputable() : bool: 780783796
 		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);

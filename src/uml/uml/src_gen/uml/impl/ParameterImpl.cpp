@@ -1,6 +1,5 @@
 
 #include "uml/impl/ParameterImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -868,7 +864,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Parameter::connector_end(Any, std::map) : bool: 740584078
+		// uml::Parameter::connector_end(Any, std::map) : bool: 1424722688
 		case umlPackage::PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -884,7 +880,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::in_and_out(Any, std::map) : bool: 136133503
+		// uml::Parameter::in_and_out(Any, std::map) : bool: 3334031447
 		case umlPackage::PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -900,13 +896,13 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::isSetDefault() : bool: 1999374675
+		// uml::Parameter::isSetDefault() : bool: 1989057623
 		case umlPackage::PARAMETER_OPERATION_ISSETDEFAULT:
 		{
 			result = eAny(this->isSetDefault(),0,false);
 			break;
 		}
-		// uml::Parameter::not_exception(Any, std::map) : bool: 964172832
+		// uml::Parameter::not_exception(Any, std::map) : bool: 2813272446
 		case umlPackage::PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -922,7 +918,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::object_effect(Any, std::map) : bool: 305756032
+		// uml::Parameter::object_effect(Any, std::map) : bool: 493477054
 		case umlPackage::PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -938,7 +934,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::reentrant_behaviors(Any, std::map) : bool: 873949267
+		// uml::Parameter::reentrant_behaviors(Any, std::map) : bool: 3622294264
 		case umlPackage::PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -954,7 +950,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::setBooleanDefaultValue(bool): 401053548
+		// uml::Parameter::setBooleanDefaultValue(bool): 126976962
 		case umlPackage::PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -965,7 +961,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Parameter::setIntegerDefaultValue(int): 1728800880
+		// uml::Parameter::setIntegerDefaultValue(int): 747752843
 		case umlPackage::PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
 		{
 			//Retrieve input parameter 'value'
@@ -976,13 +972,13 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Parameter::setNullDefaultValue(): 687577499
+		// uml::Parameter::setNullDefaultValue(): 2746464937
 		case umlPackage::PARAMETER_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
 			break;
 		}
-		// uml::Parameter::setRealDefaultValue(double): 488751702
+		// uml::Parameter::setRealDefaultValue(double): 1763278425
 		case umlPackage::PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL:
 		{
 			//Retrieve input parameter 'value'
@@ -993,7 +989,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setRealDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Parameter::setStringDefaultValue(std::string): 1288613666
+		// uml::Parameter::setStringDefaultValue(std::string): 2547376863
 		case umlPackage::PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
 		{
 			//Retrieve input parameter 'value'
@@ -1004,7 +1000,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setStringDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Parameter::setUnlimitedNaturalDefaultValue(int): 287411615
+		// uml::Parameter::setUnlimitedNaturalDefaultValue(int): 3942902083
 		case umlPackage::PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'value'
@@ -1015,7 +1011,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Parameter::stream_and_exception(Any, std::map) : bool: 1728894546
+		// uml::Parameter::stream_and_exception(Any, std::map) : bool: 1481041467
 		case umlPackage::PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1031,7 +1027,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Parameter::unsetDefault(): 314482012
+		// uml::Parameter::unsetDefault(): 190690520
 		case umlPackage::PARAMETER_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();

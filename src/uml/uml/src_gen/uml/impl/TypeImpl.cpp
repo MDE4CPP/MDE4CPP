@@ -1,6 +1,5 @@
 
 #include "uml/impl/TypeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -380,7 +377,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
  
   	switch(operationID)
 	{
-		// uml::Type::conformsTo(uml::Type) : bool: 629993373
+		// uml::Type::conformsTo(uml::Type) : bool: 2823302737
 		case umlPackage::TYPE_OPERATION_CONFORMSTO_TYPE:
 		{
 			//Retrieve input parameter 'other'
@@ -391,7 +388,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAny(this->conformsTo(incoming_param_other),0,false);
 			break;
 		}
-		// uml::Type::createAssociation(bool, uml::AggregationKind, std::string, int, int, uml::Type, bool, uml::AggregationKind, std::string, int, int) : uml::Association: 968461441
+		// uml::Type::createAssociation(bool, uml::AggregationKind, std::string, int, int, uml::Type, bool, uml::AggregationKind, std::string, int, int) : uml::Association: 1855728755
 		case umlPackage::TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
@@ -452,7 +449,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAnyObject(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// uml::Type::getAssociations() : uml::Association[*]: 16000238
+		// uml::Type::getAssociations() : uml::Association[*]: 831147640
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
 			std::shared_ptr<Bag<uml::Association> > resultList = this->getAssociations();

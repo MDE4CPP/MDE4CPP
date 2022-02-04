@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActionInputPinImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -541,7 +537,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::ActionInputPin::input_pin(Any, std::map) : bool: 637438317
+		// uml::ActionInputPin::input_pin(Any, std::map) : bool: 964432489
 		case umlPackage::ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -557,7 +553,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActionInputPin::no_control_or_object_flow(Any, std::map) : bool: 653463064
+		// uml::ActionInputPin::no_control_or_object_flow(Any, std::map) : bool: 2585890729
 		case umlPackage::ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -573,7 +569,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->no_control_or_object_flow(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActionInputPin::one_output_pin(Any, std::map) : bool: 2141238809
+		// uml::ActionInputPin::one_output_pin(Any, std::map) : bool: 3182098911
 		case umlPackage::ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

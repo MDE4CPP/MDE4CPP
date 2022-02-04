@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,19 +20,18 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Bag.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -265,7 +263,7 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::dispatch(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 399838326
+		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::dispatch(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 2597265996
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
@@ -281,13 +279,13 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->dispatch(incoming_param_object,incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::getName() : std::string: 1383879722
+		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::getName() : std::string: 1474882685
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 240191422
+		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 3819358925
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'

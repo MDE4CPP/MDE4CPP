@@ -1,6 +1,5 @@
 
 #include "uml/impl/CombinedFragmentImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -707,7 +703,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::CombinedFragment::break_(Any, std::map) : bool: 173441283
+		// uml::CombinedFragment::break_(Any, std::map) : bool: 3240199571
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -723,7 +719,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CombinedFragment::consider_and_ignore(Any, std::map) : bool: 1524474821
+		// uml::CombinedFragment::consider_and_ignore(Any, std::map) : bool: 161942571
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -739,7 +735,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CombinedFragment::opt_loop_break_neg(Any, std::map) : bool: 2094584575
+		// uml::CombinedFragment::opt_loop_break_neg(Any, std::map) : bool: 1641284448
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

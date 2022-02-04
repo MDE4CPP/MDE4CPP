@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralUnlimitedNaturalImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,13 +408,13 @@ Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// uml::LiteralUnlimitedNatural::isComputable() : bool: 1049705709
+		// uml::LiteralUnlimitedNatural::isComputable() : bool: 3321491888
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		// uml::LiteralUnlimitedNatural::unlimitedValue() : int: 1389217242
+		// uml::LiteralUnlimitedNatural::unlimitedValue() : int: 2738594635
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE:
 		{
 			result = eAny(this->unlimitedValue(),0,false);

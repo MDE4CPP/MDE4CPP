@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConnectableElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -335,7 +332,7 @@ Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 241976055
+		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 700294205
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
 			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();

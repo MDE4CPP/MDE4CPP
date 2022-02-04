@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralNullImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -362,13 +360,13 @@ Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::LiteralNull::isComputable() : bool: 1995427709
+		// uml::LiteralNull::isComputable() : bool: 1849010665
 		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		// uml::LiteralNull::isNull() : bool: 1222543064
+		// uml::LiteralNull::isNull() : bool: 1191978620
 		case umlPackage::LITERALNULL_OPERATION_ISNULL:
 		{
 			result = eAny(this->isNull(),0,false);

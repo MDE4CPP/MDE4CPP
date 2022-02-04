@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -318,13 +316,13 @@ Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::_copy() : fUML::Semantics::Values::Value: 2102774946
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::_copy() : fUML::Semantics::Values::Value: 3680179428
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::destroy(): 1826522411
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::destroy(): 891501082
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
 		{
 			this->destroy();

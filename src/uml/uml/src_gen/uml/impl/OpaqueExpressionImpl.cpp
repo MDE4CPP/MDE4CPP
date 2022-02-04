@@ -1,6 +1,5 @@
 
 #include "uml/impl/OpaqueExpressionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -561,25 +557,25 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::OpaqueExpression::isIntegral() : bool: 649739801
+		// uml::OpaqueExpression::isIntegral() : bool: 810802950
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
 		{
 			result = eAny(this->isIntegral(),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::isNonNegative() : bool: 103942961
+		// uml::OpaqueExpression::isNonNegative() : bool: 2422740566
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE:
 		{
 			result = eAny(this->isNonNegative(),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::isPositive() : bool: 222077740
+		// uml::OpaqueExpression::isPositive() : bool: 157142355
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISPOSITIVE:
 		{
 			result = eAny(this->isPositive(),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::language_body_size(Any, std::map) : bool: 1898733225
+		// uml::OpaqueExpression::language_body_size(Any, std::map) : bool: 2711343532
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -595,7 +591,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::one_return_result_parameter(Any, std::map) : bool: 1679688181
+		// uml::OpaqueExpression::one_return_result_parameter(Any, std::map) : bool: 1464956848
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -611,7 +607,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::only_return_result_parameters(Any, std::map) : bool: 257815046
+		// uml::OpaqueExpression::only_return_result_parameters(Any, std::map) : bool: 2103615055
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -627,7 +623,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::OpaqueExpression::value() : int: 1330275204
+		// uml::OpaqueExpression::value() : int: 2181682856
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_VALUE:
 		{
 			result = eAny(this->value(),0,false);

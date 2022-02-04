@@ -1,6 +1,5 @@
 
 #include "uml/impl/InitialNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -357,7 +353,7 @@ Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::InitialNode::control_edges(Any, std::map) : bool: 1281146585
+		// uml::InitialNode::control_edges(Any, std::map) : bool: 480137158
 		case umlPackage::INITIALNODE_OPERATION_CONTROL_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -373,7 +369,7 @@ Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->control_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InitialNode::no_incoming_edges(Any, std::map) : bool: 961519650
+		// uml::InitialNode::no_incoming_edges(Any, std::map) : bool: 3592148437
 		case umlPackage::INITIALNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

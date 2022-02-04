@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActivityGroupImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -468,13 +464,13 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// uml::ActivityGroup::containingActivity() : uml::Activity: 155988317
+		// uml::ActivityGroup::containingActivity() : uml::Activity: 2017091657
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
 			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
-		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 662716167
+		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 2906877622
 		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -490,7 +486,7 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityGroup::not_contained(Any, std::map) : bool: 1338347221
+		// uml::ActivityGroup::not_contained(Any, std::map) : bool: 2941117457
 		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

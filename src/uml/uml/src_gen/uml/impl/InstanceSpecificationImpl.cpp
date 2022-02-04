@@ -1,6 +1,5 @@
 
 #include "uml/impl/InstanceSpecificationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -647,7 +643,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// uml::InstanceSpecification::defining_feature(Any, std::map) : bool: 305091535
+		// uml::InstanceSpecification::defining_feature(Any, std::map) : bool: 1693146419
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -663,7 +659,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::deployment_artifact(Any, std::map) : bool: 2089426612
+		// uml::InstanceSpecification::deployment_artifact(Any, std::map) : bool: 1340824250
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -679,7 +675,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::deployment_target(Any, std::map) : bool: 1332220925
+		// uml::InstanceSpecification::deployment_target(Any, std::map) : bool: 705404039
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -695,7 +691,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::structural_feature(Any, std::map) : bool: 1699332849
+		// uml::InstanceSpecification::structural_feature(Any, std::map) : bool: 432277844
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

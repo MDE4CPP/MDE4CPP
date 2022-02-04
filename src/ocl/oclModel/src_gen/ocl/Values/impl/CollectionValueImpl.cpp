@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/CollectionValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -385,7 +382,7 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// ocl::Values::CollectionValue::addValue(fUML::Semantics::Values::Value) : bool: 1275818346
+		// ocl::Values::CollectionValue::addValue(fUML::Semantics::Values::Value) : bool: 2527489752
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -396,7 +393,7 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
-		// ocl::Values::CollectionValue::equals(fUML::Semantics::Values::Value) : bool: 2069036065
+		// ocl::Values::CollectionValue::equals(fUML::Semantics::Values::Value) : bool: 4237584245
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -407,7 +404,7 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::CollectionValue::find(fUML::Semantics::Values::Value) : bool: 1127442822
+		// ocl::Values::CollectionValue::find(fUML::Semantics::Values::Value) : bool: 844392547
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_FIND_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -418,7 +415,7 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->find(incoming_param_value),0,false);
 			break;
 		}
-		// ocl::Values::CollectionValue::toString() : std::string: 168353461
+		// ocl::Values::CollectionValue::toString() : std::string: 744572618
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

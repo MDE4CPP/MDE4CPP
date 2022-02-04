@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/ObjectActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,26 +18,23 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -688,7 +684,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::ObjectActivation::_register(fUML::Semantics::CommonBehavior::EventAccepter): 1087514112
+		// fUML::Semantics::CommonBehavior::ObjectActivation::_register(fUML::Semantics::CommonBehavior::EventAccepter): 1841170159
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -699,7 +695,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->_register(incoming_param_accepter);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::_send(Any): 711916111
+		// fUML::Semantics::CommonBehavior::ObjectActivation::_send(Any): 3568620231
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'signal'
@@ -710,25 +706,25 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->_send(incoming_param_signal);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::_startObjectBehavior(): 1589878255
+		// fUML::Semantics::CommonBehavior::ObjectActivation::_startObjectBehavior(): 3886431562
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
 			this->_startObjectBehavior();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::dispatchNextEvent(): 1966555783
+		// fUML::Semantics::CommonBehavior::ObjectActivation::dispatchNextEvent(): 3009954687
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT:
 		{
 			this->dispatchNextEvent();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : fUML::Semantics::SimpleClassifiers::SignalInstance: 1375267786
+		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : fUML::Semantics::SimpleClassifiers::SignalInstance: 1292799887
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT:
 		{
 			result = eAnyObject(this->retrieveNextEvent(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 2081943134
+		// fUML::Semantics::CommonBehavior::ObjectActivation::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 3214058052
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -739,7 +735,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->send(incoming_param_signalInstance);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 1157088544
+		// fUML::Semantics::CommonBehavior::ObjectActivation::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 3087048988
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -755,13 +751,13 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::stop(): 1101851081
+		// fUML::Semantics::CommonBehavior::ObjectActivation::stop(): 2767061188
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STOP:
 		{
 			this->stop();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1862281169
+		// fUML::Semantics::CommonBehavior::ObjectActivation::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1357284263
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'

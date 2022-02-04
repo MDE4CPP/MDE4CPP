@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "uml/umlFactory.hpp"
@@ -71,7 +70,6 @@
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
 #include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -497,10 +495,10 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeApplication(uml::Class, uml::Element) : fUML::Semantics::StructuredClassifiers::Object: 305337573
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeApplication(uml::Class, uml::Element) : fUML::Semantics::StructuredClassifiers::Object: 96017842
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -513,10 +511,10 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::shared_ptr<uml::Element> incoming_param_element;
 			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
+			result = eAnyObject(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeClass(std::string, std::string) : uml::Classifier: 1716538227
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeClass(std::string, std::string) : uml::Classifier: 2486099920
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING:
 		{
 			//Retrieve input parameter 'profileName'
@@ -529,10 +527,10 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::string incoming_param_stereotypeName;
 			std::list<Any>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get<std::string >();
-			result = eAny(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName), uml::umlPackage::CLASSIFIER_CLASS,false);
+			result = eAnyObject(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Loci::CS_ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 689017765
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 3579698249
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
 		{
 			//Retrieve input parameter 'element'
@@ -540,7 +538,7 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::shared_ptr<uml::Element> incoming_param_element;
 			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS,false);
+			result = eAnyObject(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
 			break;
 		}
 

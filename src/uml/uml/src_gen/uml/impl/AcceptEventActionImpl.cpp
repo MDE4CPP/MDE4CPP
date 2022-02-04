@@ -1,6 +1,5 @@
 
 #include "uml/impl/AcceptEventActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -680,7 +676,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::AcceptEventAction::conforming_type(Any, std::map) : bool: 1819988295
+		// uml::AcceptEventAction::conforming_type(Any, std::map) : bool: 3506211385
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_CONFORMING_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -696,7 +692,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->conforming_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptEventAction::no_input_pins(Any, std::map) : bool: 1577028175
+		// uml::AcceptEventAction::no_input_pins(Any, std::map) : bool: 880552727
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -712,7 +708,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptEventAction::no_output_pins(Any, std::map) : bool: 33049259
+		// uml::AcceptEventAction::no_output_pins(Any, std::map) : bool: 786063400
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -728,7 +724,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->no_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptEventAction::one_output_pin(Any, std::map) : bool: 361980146
+		// uml::AcceptEventAction::one_output_pin(Any, std::map) : bool: 1998234410
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -744,7 +740,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptEventAction::unmarshall_signal_events(Any, std::map) : bool: 1699791673
+		// uml::AcceptEventAction::unmarshall_signal_events(Any, std::map) : bool: 1806469778
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

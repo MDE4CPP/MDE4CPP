@@ -1,6 +1,5 @@
 
 #include "uml/impl/MultiplicityElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -544,7 +540,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
  
   	switch(operationID)
 	{
-		// uml::MultiplicityElement::compatibleWith(uml::MultiplicityElement) : bool: 781962328
+		// uml::MultiplicityElement::compatibleWith(uml::MultiplicityElement) : bool: 4183352193
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT:
 		{
 			//Retrieve input parameter 'other'
@@ -555,7 +551,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->compatibleWith(incoming_param_other),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::includesMultiplicity(uml::MultiplicityElement) : bool: 731782748
+		// uml::MultiplicityElement::includesMultiplicity(uml::MultiplicityElement) : bool: 935007317
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT:
 		{
 			//Retrieve input parameter 'M'
@@ -566,7 +562,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->includesMultiplicity(incoming_param_M),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::is(int, int) : bool: 1193521774
+		// uml::MultiplicityElement::is(int, int) : bool: 2447710154
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'lowerbound'
@@ -582,19 +578,19 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::isMultivalued() : bool: 77238747
+		// uml::MultiplicityElement::isMultivalued() : bool: 2268498524
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED:
 		{
 			result = eAny(this->isMultivalued(),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::lowerBound() : int: 2138592890
+		// uml::MultiplicityElement::lowerBound() : int: 4073704864
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWERBOUND:
 		{
 			result = eAny(this->lowerBound(),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::lower_ge_0(Any, std::map) : bool: 1181781721
+		// uml::MultiplicityElement::lower_ge_0(Any, std::map) : bool: 27225824
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -610,7 +606,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::lower_is_integer(Any, std::map) : bool: 1564505796
+		// uml::MultiplicityElement::lower_is_integer(Any, std::map) : bool: 3479893910
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -626,13 +622,13 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::upperBound() : int: 1061985247
+		// uml::MultiplicityElement::upperBound() : int: 2210299255
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPERBOUND:
 		{
 			result = eAny(this->upperBound(),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::upper_ge_lower(Any, std::map) : bool: 1059806351
+		// uml::MultiplicityElement::upper_ge_lower(Any, std::map) : bool: 1007813900
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -648,7 +644,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::upper_is_unlimitedNatural(Any, std::map) : bool: 1135606767
+		// uml::MultiplicityElement::upper_is_unlimitedNatural(Any, std::map) : bool: 2998336909
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -664,7 +660,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::value_specification_constant(Any, std::map) : bool: 686253068
+		// uml::MultiplicityElement::value_specification_constant(Any, std::map) : bool: 141713939
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -680,7 +676,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::value_specification_no_side_effects(Any, std::map) : bool: 190489247
+		// uml::MultiplicityElement::value_specification_no_side_effects(Any, std::map) : bool: 3115291509
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

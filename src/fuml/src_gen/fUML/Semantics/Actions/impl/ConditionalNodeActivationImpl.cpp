@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ConditionalNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -475,7 +472,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ConditionalNodeActivation::getClauseActivation(uml::Clause) : fUML::Semantics::Actions::ClauseActivation: 655045744
+		// fUML::Semantics::Actions::ConditionalNodeActivation::getClauseActivation(uml::Clause) : fUML::Semantics::Actions::ClauseActivation: 1595546892
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_GETCLAUSEACTIVATION_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'
@@ -486,7 +483,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			result = eAnyObject(this->getClauseActivation(incoming_param_clause), fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ConditionalNodeActivation::runTest(uml::Clause): 612797622
+		// fUML::Semantics::Actions::ConditionalNodeActivation::runTest(uml::Clause): 4172951613
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_RUNTEST_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'
@@ -497,7 +494,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			this->runTest(incoming_param_clause);
 			break;
 		}
-		// fUML::Semantics::Actions::ConditionalNodeActivation::selectBody(uml::Clause): 1236206203
+		// fUML::Semantics::Actions::ConditionalNodeActivation::selectBody(uml::Clause): 3643783730
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'

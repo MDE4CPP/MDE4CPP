@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/TupleValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -413,7 +411,7 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// ocl::Values::TupleValue::equals(fUML::Semantics::Values::Value) : bool: 1507564928
+		// ocl::Values::TupleValue::equals(fUML::Semantics::Values::Value) : bool: 2778619799
 		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -424,7 +422,7 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::TupleValue::toString() : std::string: 1666165674
+		// ocl::Values::TupleValue::toString() : std::string: 4438792
 		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

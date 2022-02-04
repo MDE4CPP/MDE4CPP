@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/StructuredActivityNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
@@ -39,7 +38,6 @@
 #include "uml/ActivityNode.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -558,38 +556,38 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 1463365234
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 3878860807
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->completeAction();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::createEdgeInstances(): 1744916571
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::createEdgeInstances(): 4189320520
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES:
 		{
 			this->createEdgeInstances();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::createNodeActivations(): 926749067
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::createNodeActivations(): 3493676622
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doAction(): 1390767454
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doAction(): 3506173856
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doStructuredActivity(): 1423246036
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doStructuredActivity(): 1244905776
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 1844151899
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 935616927
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -600,7 +598,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::getPinValues(uml::OutputPin) : fUML::Semantics::Values::Value[*]: 446682606
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::getPinValues(uml::OutputPin) : fUML::Semantics::Values::Value[*]: 1339751016
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETPINVALUES_OUTPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -612,7 +610,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 1962224717
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 3281612984
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -623,13 +621,13 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::isSuspended() : bool: 1041207864
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::isSuspended() : bool: 3925255716
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED:
 		{
 			result = eAny(this->isSuspended(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::makeActivityNodeList(uml::ExecutableNode[*]) : uml::ActivityNode[*]: 888818214
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::makeActivityNodeList(uml::ExecutableNode[*]) : uml::ActivityNode[*]: 854326129
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -641,7 +639,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::putPinValues(uml::OutputPin, fUML::Semantics::Values::Value[*]): 843457855
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::putPinValues(uml::OutputPin, fUML::Semantics::Values::Value[*]): 3900117335
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_PUTPINVALUES_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -657,19 +655,19 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			this->putPinValues(incoming_param_pin,incoming_param_values);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::resume(): 86337545
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::resume(): 568722472
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME:
 		{
 			this->resume();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminate(): 333463071
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminate(): 2956351072
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
-		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminateAll(): 354863338
+		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminateAll(): 188036217
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();

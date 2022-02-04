@@ -1,6 +1,5 @@
 
 #include "uml/impl/StartObjectBehaviorActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -475,13 +471,13 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
  
   	switch(operationID)
 	{
-		// uml::StartObjectBehaviorAction::behavior() : uml::Behavior: 1069157764
+		// uml::StartObjectBehaviorAction::behavior() : uml::Behavior: 3504813546
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR:
 		{
 			result = eAnyObject(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
-		// uml::StartObjectBehaviorAction::multiplicity_of_object(Any, std::map) : bool: 2114618972
+		// uml::StartObjectBehaviorAction::multiplicity_of_object(Any, std::map) : bool: 3775718348
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -497,7 +493,7 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StartObjectBehaviorAction::no_onport(Any, std::map) : bool: 1307325213
+		// uml::StartObjectBehaviorAction::no_onport(Any, std::map) : bool: 49782203
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -513,7 +509,7 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StartObjectBehaviorAction::type_of_object(Any, std::map) : bool: 1625050276
+		// uml::StartObjectBehaviorAction::type_of_object(Any, std::map) : bool: 2859096117
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

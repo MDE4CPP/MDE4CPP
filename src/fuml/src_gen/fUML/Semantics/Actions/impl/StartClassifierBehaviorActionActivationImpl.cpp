@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/StartClassifierBehaviorActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,24 +18,23 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/StartClassifierBehaviorAction.hpp"
 #include "uml/Class.hpp"
 #include "uml/InputPin.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -303,7 +301,7 @@ Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::s
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::StartClassifierBehaviorActionActivation::doAction(): 271588955
+		// fUML::Semantics::Actions::StartClassifierBehaviorActionActivation::doAction(): 371746705
 		case ActionsPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

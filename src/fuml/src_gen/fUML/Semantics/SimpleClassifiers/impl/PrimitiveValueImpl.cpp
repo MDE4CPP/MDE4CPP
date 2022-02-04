@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,20 +20,19 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Classifier.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -312,13 +310,13 @@ Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::_copy() : fUML::Semantics::Values::Value: 1483946573
+		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::_copy() : fUML::Semantics::Values::Value: 2505682004
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::getTypes() : uml::Classifier[*]: 1603549944
+		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::getTypes() : uml::Classifier[*]: 951226260
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();

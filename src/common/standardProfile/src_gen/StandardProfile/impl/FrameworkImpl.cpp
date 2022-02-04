@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -105,7 +106,7 @@ FrameworkImpl& FrameworkImpl::operator=(const FrameworkImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass()
+std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass() const
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Framework();
 }

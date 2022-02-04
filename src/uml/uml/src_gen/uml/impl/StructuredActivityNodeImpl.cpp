@@ -1,6 +1,5 @@
 
 #include "uml/impl/StructuredActivityNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1187,7 +1183,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 99188554
+		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 2175188978
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1203,7 +1199,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1066841877
+		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1705277235
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1219,7 +1215,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 1915068085
+		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 3435203420
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1235,14 +1231,14 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 569554525
+		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 3462902530
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
-		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 585821302
+		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 2207842792
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();

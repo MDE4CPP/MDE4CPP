@@ -1,6 +1,5 @@
 
 #include "uml/impl/LinkActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -620,13 +616,13 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::LinkAction::association() : uml::Association: 1086747006
+		// uml::LinkAction::association() : uml::Association: 4091876769
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
 			result = eAnyObject(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// uml::LinkAction::not_static(Any, std::map) : bool: 768493780
+		// uml::LinkAction::not_static(Any, std::map) : bool: 4073421866
 		case umlPackage::LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -642,7 +638,7 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkAction::same_association(Any, std::map) : bool: 1355951104
+		// uml::LinkAction::same_association(Any, std::map) : bool: 1009969332
 		case umlPackage::LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -658,7 +654,7 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkAction::same_pins(Any, std::map) : bool: 1475541173
+		// uml::LinkAction::same_pins(Any, std::map) : bool: 3042884065
 		case umlPackage::LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

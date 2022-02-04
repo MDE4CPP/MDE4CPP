@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -330,7 +327,7 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::Evaluation::evaluate() : fUML::Semantics::Values::Value: 1899572768
+		// fUML::Semantics::Values::Evaluation::evaluate() : fUML::Semantics::Values::Value: 3829887513
 		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ForkedTokenImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,18 +20,17 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 //NEWDEBUG
 #include "uml/ActivityNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -431,13 +429,13 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ForkedToken::_copy() : fUML::Semantics::Activities::Token: 252058926
+		// fUML::Semantics::Activities::ForkedToken::_copy() : fUML::Semantics::Activities::Token: 3813886438
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkedToken::equals(fUML::Semantics::Activities::Token) : bool: 1288297071
+		// fUML::Semantics::Activities::ForkedToken::equals(fUML::Semantics::Activities::Token) : bool: 2609062935
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'otherToken'
@@ -448,19 +446,19 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->equals(incoming_param_otherToken),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkedToken::getValue() : fUML::Semantics::Values::Value {const}: 727492760
+		// fUML::Semantics::Activities::ForkedToken::getValue() : fUML::Semantics::Values::Value {const}: 3937215927
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
 			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkedToken::isControl() : bool: 1584869028
+		// fUML::Semantics::Activities::ForkedToken::isControl() : bool: 919245696
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkedToken::withdraw(): 1407760219
+		// fUML::Semantics::Activities::ForkedToken::withdraw(): 3679135667
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();

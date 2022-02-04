@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EObjectContainerImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Union.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -331,7 +329,7 @@ Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// ecore::EObjectContainer::setContainer(ecore::EObject[*]): 1083860390
+		// ecore::EObjectContainer::setContainer(ecore::EObject[*]): 3163854885
 		case ecorePackage::EOBJECTCONTAINER_OPERATION_SETCONTAINER_EOBJECT:
 		{
 			//Retrieve input parameter 'container'

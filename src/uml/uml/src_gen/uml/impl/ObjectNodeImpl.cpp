@@ -1,6 +1,5 @@
 
 #include "uml/impl/ObjectNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -680,7 +676,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::ObjectNode::input_output_parameter(Any, std::map) : bool: 1199944681
+		// uml::ObjectNode::input_output_parameter(Any, std::map) : bool: 3905166423
 		case umlPackage::OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -696,7 +692,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectNode::object_flow_edges(Any, std::map) : bool: 987041183
+		// uml::ObjectNode::object_flow_edges(Any, std::map) : bool: 4134283328
 		case umlPackage::OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -712,7 +708,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectNode::selection_behavior(Any, std::map) : bool: 1576805400
+		// uml::ObjectNode::selection_behavior(Any, std::map) : bool: 3463618476
 		case umlPackage::OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

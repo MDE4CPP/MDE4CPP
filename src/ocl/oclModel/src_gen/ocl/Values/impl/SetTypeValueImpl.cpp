@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/SetTypeValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -249,7 +247,7 @@ Any SetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// ocl::Values::SetTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1324843311
+		// ocl::Values::SetTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 836523242
 		case ValuesPackage::SETTYPEVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'

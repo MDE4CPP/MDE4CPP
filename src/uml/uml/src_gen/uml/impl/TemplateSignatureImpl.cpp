@@ -1,6 +1,5 @@
 
 #include "uml/impl/TemplateSignatureImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -537,7 +533,7 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::TemplateSignature::own_elements(Any, std::map) : bool: 545793563
+		// uml::TemplateSignature::own_elements(Any, std::map) : bool: 3202902736
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -553,7 +549,7 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TemplateSignature::unique_parameters(Any, std::map) : bool: 1841790268
+		// uml::TemplateSignature::unique_parameters(Any, std::map) : bool: 1309689182
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

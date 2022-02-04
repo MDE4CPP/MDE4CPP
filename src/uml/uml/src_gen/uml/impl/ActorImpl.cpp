@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -439,7 +435,7 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// uml::Actor::associations(Any, std::map) : bool: 818238989
+		// uml::Actor::associations(Any, std::map) : bool: 2262426123
 		case umlPackage::ACTOR_OPERATION_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -455,7 +451,7 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Actor::must_have_name(Any, std::map) : bool: 1791803587
+		// uml::Actor::must_have_name(Any, std::map) : bool: 1170610443
 		case umlPackage::ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

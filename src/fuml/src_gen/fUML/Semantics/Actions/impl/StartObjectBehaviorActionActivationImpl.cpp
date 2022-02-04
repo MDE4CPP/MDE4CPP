@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/StartObjectBehaviorActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/StartObjectBehaviorAction.hpp"
 #include "uml/Class.hpp"
@@ -40,7 +39,6 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -342,7 +340,7 @@ Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::share
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::StartObjectBehaviorActionActivation::doAction(): 964472741
+		// fUML::Semantics::Actions::StartObjectBehaviorActionActivation::doAction(): 764653435
 		case ActionsPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

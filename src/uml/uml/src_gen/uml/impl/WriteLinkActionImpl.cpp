@@ -1,6 +1,5 @@
 
 #include "uml/impl/WriteLinkActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -373,7 +369,7 @@ Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// uml::WriteLinkAction::allow_access(Any, std::map) : bool: 717511047
+		// uml::WriteLinkAction::allow_access(Any, std::map) : bool: 367255121
 		case umlPackage::WRITELINKACTION_OPERATION_ALLOW_ACCESS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_AcceptCallActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -290,10 +288,10 @@ bool CS_AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
 Any CS_AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_AcceptCallActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 2027172968
+		// PSCS::Semantics::Actions::CS_AcceptCallActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 2621330370
 		case ActionsPackage::CS_ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'

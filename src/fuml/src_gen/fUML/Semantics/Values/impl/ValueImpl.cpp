@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/ValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,19 +20,17 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "uml/Classifier.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -324,13 +321,13 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::Value::_copy() : fUML::Semantics::Values::Value: 569532635
+		// fUML::Semantics::Values::Value::_copy() : fUML::Semantics::Values::Value: 611324517
 		case ValuesPackage::VALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Values::Value::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1176194197
+		// fUML::Semantics::Values::Value::checkAllParents(uml::Classifier, uml::Classifier) : bool: 4163434821
 		case ValuesPackage::VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -346,7 +343,7 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
-		// fUML::Semantics::Values::Value::equals(fUML::Semantics::Values::Value) : bool: 1153535893
+		// fUML::Semantics::Values::Value::equals(fUML::Semantics::Values::Value) : bool: 1172438202
 		case ValuesPackage::VALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -357,14 +354,14 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// fUML::Semantics::Values::Value::getTypes() : uml::Classifier[*] {const}: 53656869
+		// fUML::Semantics::Values::Value::getTypes() : uml::Classifier[*] {const}: 3772499480
 		case ValuesPackage::VALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// fUML::Semantics::Values::Value::hasTypes(uml::Classifier) : bool: 157177571
+		// fUML::Semantics::Values::Value::hasTypes(uml::Classifier) : bool: 2391965979
 		case ValuesPackage::VALUE_OPERATION_HASTYPES_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -375,25 +372,25 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->hasTypes(incoming_param_type),0,false);
 			break;
 		}
-		// fUML::Semantics::Values::Value::new_() : fUML::Semantics::Values::Value: 374650370
+		// fUML::Semantics::Values::Value::new_() : fUML::Semantics::Values::Value: 2089540196
 		case ValuesPackage::VALUE_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Values::Value::objectId() : std::string: 520851197
+		// fUML::Semantics::Values::Value::objectId() : std::string: 3339238689
 		case ValuesPackage::VALUE_OPERATION_OBJECTID:
 		{
 			result = eAny(this->objectId(),0,false);
 			break;
 		}
-		// fUML::Semantics::Values::Value::specify() : uml::ValueSpecification: 164025975
+		// fUML::Semantics::Values::Value::specify() : uml::ValueSpecification: 3348978702
 		case ValuesPackage::VALUE_OPERATION_SPECIFY:
 		{
 			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Values::Value::toString() : std::string: 780447699
+		// fUML::Semantics::Values::Value::toString() : std::string: 3303049319
 		case ValuesPackage::VALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/OfferImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -405,19 +403,19 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::Offer::countOfferedVales() : int: 1010430261
+		// fUML::Semantics::Activities::Offer::countOfferedVales() : int: 904773483
 		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
 		{
 			result = eAny(this->countOfferedVales(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::Offer::hasTokens() : bool: 610053038
+		// fUML::Semantics::Activities::Offer::hasTokens() : bool: 3339319593
 		case ActivitiesPackage::OFFER_OPERATION_HASTOKENS:
 		{
 			result = eAny(this->hasTokens(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::Offer::removeOfferedValues(int): 541660047
+		// fUML::Semantics::Activities::Offer::removeOfferedValues(int): 1313324759
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT:
 		{
 			//Retrieve input parameter 'count'
@@ -428,13 +426,13 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			this->removeOfferedValues(incoming_param_count);
 			break;
 		}
-		// fUML::Semantics::Activities::Offer::removeWithdrawnTokens(): 363104288
+		// fUML::Semantics::Activities::Offer::removeWithdrawnTokens(): 3955994697
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEWITHDRAWNTOKENS:
 		{
 			this->removeWithdrawnTokens();
 			break;
 		}
-		// fUML::Semantics::Activities::Offer::retrieveOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1975591629
+		// fUML::Semantics::Activities::Offer::retrieveOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1383812745
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->retrieveOfferedTokens();

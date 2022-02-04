@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConditionalNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -801,7 +797,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// uml::ConditionalNode::clause_no_predecessor(Any, std::map) : bool: 1185762341
+		// uml::ConditionalNode::clause_no_predecessor(Any, std::map) : bool: 976934855
 		case umlPackage::CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -817,7 +813,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::executable_nodes(Any, std::map) : bool: 1505479442
+		// uml::ConditionalNode::executable_nodes(Any, std::map) : bool: 3475178446
 		case umlPackage::CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -833,7 +829,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::matching_output_pins(Any, std::map) : bool: 1811715719
+		// uml::ConditionalNode::matching_output_pins(Any, std::map) : bool: 3565877168
 		case umlPackage::CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -849,7 +845,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::no_input_pins(Any, std::map) : bool: 8643008
+		// uml::ConditionalNode::no_input_pins(Any, std::map) : bool: 3507258893
 		case umlPackage::CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -865,7 +861,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::one_clause_with_executable_node(Any, std::map) : bool: 837476677
+		// uml::ConditionalNode::one_clause_with_executable_node(Any, std::map) : bool: 34142531
 		case umlPackage::CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -881,7 +877,7 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::result_no_incoming(Any, std::map) : bool: 1958196833
+		// uml::ConditionalNode::result_no_incoming(Any, std::map) : bool: 1196289718
 		case umlPackage::CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

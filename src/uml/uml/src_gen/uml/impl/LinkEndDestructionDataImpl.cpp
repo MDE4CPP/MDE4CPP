@@ -1,6 +1,5 @@
 
 #include "uml/impl/LinkEndDestructionDataImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -357,7 +353,7 @@ Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::LinkEndDestructionData::destroyAt_pin(Any, std::map) : bool: 342602115
+		// uml::LinkEndDestructionData::destroyAt_pin(Any, std::map) : bool: 1453837690
 		case umlPackage::LINKENDDESTRUCTIONDATA_OPERATION_DESTROYAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

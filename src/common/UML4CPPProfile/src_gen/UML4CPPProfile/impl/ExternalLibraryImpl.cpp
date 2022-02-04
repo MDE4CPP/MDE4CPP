@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -121,7 +122,7 @@ ExternalLibraryImpl& ExternalLibraryImpl::operator=(const ExternalLibraryImpl & 
 }
 
 
-std::shared_ptr<uml::Class> ExternalLibraryImpl::getMetaClass()
+std::shared_ptr<uml::Class> ExternalLibraryImpl::getMetaClass() const
 {
 	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_ExternalLibrary();
 }

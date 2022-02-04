@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/LoopNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -388,25 +385,25 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::LoopNodeActivation::makeLoopVariableList() : uml::ActivityNode: 1597416642
+		// fUML::Semantics::Actions::LoopNodeActivation::makeLoopVariableList() : uml::ActivityNode: 1128095596
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
 		{
 			result = eAnyObject(this->makeLoopVariableList(), uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::LoopNodeActivation::runBody(): 563107466
+		// fUML::Semantics::Actions::LoopNodeActivation::runBody(): 3162279846
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
 		{
 			this->runBody();
 			break;
 		}
-		// fUML::Semantics::Actions::LoopNodeActivation::runLoopVariables(): 1175069894
+		// fUML::Semantics::Actions::LoopNodeActivation::runLoopVariables(): 2507672483
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
 		{
 			this->runLoopVariables();
 			break;
 		}
-		// fUML::Semantics::Actions::LoopNodeActivation::runTest() : bool: 1241885508
+		// fUML::Semantics::Actions::LoopNodeActivation::runTest() : bool: 4227158654
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
 		{
 			result = eAny(this->runTest(),0,false);

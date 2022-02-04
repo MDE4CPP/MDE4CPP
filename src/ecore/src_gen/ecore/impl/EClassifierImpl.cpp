@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EClassifierImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -505,13 +502,13 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// ecore::EClassifier::getClassifierID() : int: 1232310610
+		// ecore::EClassifier::getClassifierID() : int: 3270154772
 		case ecorePackage::ECLASSIFIER_OPERATION_GETCLASSIFIERID:
 		{
 			result = eAny(this->getClassifierID(),0,false);
 			break;
 		}
-		// ecore::EClassifier::isInstance(Any) : bool {const}: 890144981
+		// ecore::EClassifier::isInstance(Any) : bool {const}: 202200991
 		case ecorePackage::ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'

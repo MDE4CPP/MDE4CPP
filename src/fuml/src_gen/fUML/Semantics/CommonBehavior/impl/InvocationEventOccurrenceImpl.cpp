@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/InvocationEventOccurrenceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -312,14 +310,14 @@ Any InvocationEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std:
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::InvocationEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1982529495
+		// fUML::Semantics::CommonBehavior::InvocationEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 264852969
 		case CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::InvocationEventOccurrence::match(uml::Trigger) : bool: 218231342
+		// fUML::Semantics::CommonBehavior::InvocationEventOccurrence::match(uml::Trigger) : bool: 1234869067
 		case CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
 		{
 			//Retrieve input parameter 'trigger'

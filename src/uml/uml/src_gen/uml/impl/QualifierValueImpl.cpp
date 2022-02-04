@@ -1,6 +1,5 @@
 
 #include "uml/impl/QualifierValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -371,7 +367,7 @@ Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::QualifierValue::multiplicity_of_qualifier(Any, std::map) : bool: 1678485092
+		// uml::QualifierValue::multiplicity_of_qualifier(Any, std::map) : bool: 1559562031
 		case umlPackage::QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -387,7 +383,7 @@ Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::QualifierValue::qualifier_attribute(Any, std::map) : bool: 2009884538
+		// uml::QualifierValue::qualifier_attribute(Any, std::map) : bool: 697235734
 		case umlPackage::QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -403,7 +399,7 @@ Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::QualifierValue::type_of_qualifier(Any, std::map) : bool: 868153665
+		// uml::QualifierValue::type_of_qualifier(Any, std::map) : bool: 3071264124
 		case umlPackage::QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

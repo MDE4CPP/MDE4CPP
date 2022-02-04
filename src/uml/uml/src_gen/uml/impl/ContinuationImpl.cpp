@@ -1,6 +1,5 @@
 
 #include "uml/impl/ContinuationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -376,7 +372,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::Continuation::first_or_last_interaction_fragment(Any, std::map) : bool: 2040370552
+		// uml::Continuation::first_or_last_interaction_fragment(Any, std::map) : bool: 2196117154
 		case umlPackage::CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -392,7 +388,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->first_or_last_interaction_fragment(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Continuation::global(Any, std::map) : bool: 235492236
+		// uml::Continuation::global(Any, std::map) : bool: 2866939866
 		case umlPackage::CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -408,7 +404,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->global(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Continuation::same_name(Any, std::map) : bool: 945404935
+		// uml::Continuation::same_name(Any, std::map) : bool: 4191439791
 		case umlPackage::CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

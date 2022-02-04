@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityEdgeInstanceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <algorithm> 
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -626,26 +624,26 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ActivityEdgeInstance::countOfferedValue() : int: 729654799
+		// fUML::Semantics::Activities::ActivityEdgeInstance::countOfferedValue() : int: 3512353870
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE:
 		{
 			result = eAny(this->countOfferedValue(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityEdgeInstance::getOfferedTokens() : fUML::Semantics::Activities::Token[*]: 433302189
+		// fUML::Semantics::Activities::ActivityEdgeInstance::getOfferedTokens() : fUML::Semantics::Activities::Token[*]: 247253392
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityEdgeInstance::hasOffer() : bool: 1690101896
+		// fUML::Semantics::Activities::ActivityEdgeInstance::hasOffer() : bool: 2669398996
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER:
 		{
 			result = eAny(this->hasOffer(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityEdgeInstance::sendOffer(fUML::Semantics::Activities::Token[*]): 1208149194
+		// fUML::Semantics::Activities::ActivityEdgeInstance::sendOffer(fUML::Semantics::Activities::Token[*]): 2265631071
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -656,14 +654,14 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			this->sendOffer(incoming_param_tokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1733798230
+		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 3785400521
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens(int) : fUML::Semantics::Activities::Token[*]: 982608933
+		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens(int) : fUML::Semantics::Activities::Token[*]: 1787668928
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT:
 		{
 			//Retrieve input parameter 'maxCount'

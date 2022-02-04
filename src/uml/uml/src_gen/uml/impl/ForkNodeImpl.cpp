@@ -1,6 +1,5 @@
 
 #include "uml/impl/ForkNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -357,7 +353,7 @@ Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::ForkNode::edges(Any, std::map) : bool: 1898705516
+		// uml::ForkNode::edges(Any, std::map) : bool: 3696331862
 		case umlPackage::FORKNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -373,7 +369,7 @@ Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ForkNode::one_incoming_edge(Any, std::map) : bool: 1885491418
+		// uml::ForkNode::one_incoming_edge(Any, std::map) : bool: 1554773991
 		case umlPackage::FORKNODE_OPERATION_ONE_INCOMING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

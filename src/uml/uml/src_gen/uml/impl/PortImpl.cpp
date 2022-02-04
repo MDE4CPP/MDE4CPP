@@ -1,6 +1,5 @@
 
 #include "uml/impl/PortImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -814,21 +810,21 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
  
   	switch(operationID)
 	{
-		// uml::Port::basicProvided() : uml::Interface[*]: 1253849343
+		// uml::Port::basicProvided() : uml::Interface[*]: 2234995286
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicProvided();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::basicRequired() : uml::Interface[*]: 1121864045
+		// uml::Port::basicRequired() : uml::Interface[*]: 149776146
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicRequired();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::default_value(Any, std::map) : bool: 1305438653
+		// uml::Port::default_value(Any, std::map) : bool: 1564189360
 		case umlPackage::PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -844,7 +840,7 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Port::encapsulated_owner(Any, std::map) : bool: 791607261
+		// uml::Port::encapsulated_owner(Any, std::map) : bool: 2364621826
 		case umlPackage::PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -860,21 +856,21 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Port::getProvideds() : uml::Interface[*]: 1432885746
+		// uml::Port::getProvideds() : uml::Interface[*]: 4122866187
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::getRequireds() : uml::Interface[*]: 1195078911
+		// uml::Port::getRequireds() : uml::Interface[*]: 2874458023
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::port_aggregation(Any, std::map) : bool: 2107947933
+		// uml::Port::port_aggregation(Any, std::map) : bool: 1332067907
 		case umlPackage::PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

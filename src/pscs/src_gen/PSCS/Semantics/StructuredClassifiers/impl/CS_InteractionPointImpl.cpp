@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_InteractionPointImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -394,10 +392,10 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1730410848
+		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::checkAllParents(uml::Classifier, uml::Classifier) : bool: 956192241
 		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -413,7 +411,7 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 889946605
+		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 2507438394
 		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_DISPATCH_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -421,10 +419,10 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->dispatch(incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
+			result = eAnyObject(this->dispatch(incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::send(fUML::Semantics::CommonBehavior::EventOccurrence): 1091927057
+		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::send(fUML::Semantics::CommonBehavior::EventOccurrence): 1027936062
 		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_SEND_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -435,7 +433,7 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			this->send(incoming_param_eventOccurrence);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 986944862
+		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 3659703839
 		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'

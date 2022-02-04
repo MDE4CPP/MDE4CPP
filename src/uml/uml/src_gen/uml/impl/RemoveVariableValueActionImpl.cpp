@@ -1,6 +1,5 @@
 
 #include "uml/impl/RemoveVariableValueActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -487,7 +483,7 @@ Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std:
  
   	switch(operationID)
 	{
-		// uml::RemoveVariableValueAction::removeAt_and_value(Any, std::map) : bool: 212395563
+		// uml::RemoveVariableValueAction::removeAt_and_value(Any, std::map) : bool: 222150914
 		case umlPackage::REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

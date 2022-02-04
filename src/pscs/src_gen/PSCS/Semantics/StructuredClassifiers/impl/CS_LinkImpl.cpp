@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_LinkImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -281,10 +279,10 @@ bool CS_LinkImpl::eSet(int featureID, Any newValue)
 Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::StructuredClassifiers::CS_Link::getFeature(fUML::Semantics::Values::Value) : uml::StructuralFeature: 422522157
+		// PSCS::Semantics::StructuredClassifiers::CS_Link::getFeature(fUML::Semantics::Values::Value) : uml::StructuralFeature: 3546412222
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_GETFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -292,10 +290,10 @@ Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->getFeature(incoming_param_value), uml::umlPackage::STRUCTURALFEATURE_CLASS,false);
+			result = eAnyObject(this->getFeature(incoming_param_value), uml::umlPackage::STRUCTURALFEATURE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_Link::hasValueForAFeature(fUML::Semantics::Values::Value) : bool: 778539952
+		// PSCS::Semantics::StructuredClassifiers::CS_Link::hasValueForAFeature(fUML::Semantics::Values::Value) : bool: 1213928788
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_HASVALUEFORAFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'

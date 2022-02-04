@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/AcceptEventActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -403,7 +400,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::AcceptEventActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 908096905
+		// fUML::Semantics::Actions::AcceptEventActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 3708275754
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -414,13 +411,13 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			this->accept(incoming_param_eventOccurrence);
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::doAction(): 2139307330
+		// fUML::Semantics::Actions::AcceptEventActionActivation::doAction(): 2150655828
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1477585117
+		// fUML::Semantics::Actions::AcceptEventActionActivation::fire(fUML::Semantics::Activities::Token[*]): 2626905848
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -431,7 +428,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 640030514
+		// fUML::Semantics::Actions::AcceptEventActionActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 124765928
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'node'
@@ -447,13 +444,13 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			this->initialize(incoming_param_node,incoming_param_group);
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::isReady() : bool: 1247902812
+		// fUML::Semantics::Actions::AcceptEventActionActivation::isReady() : bool: 2864583542
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 1530016891
+		// fUML::Semantics::Actions::AcceptEventActionActivation::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 2008096317
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -464,13 +461,13 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			result = eAny(this->match(incoming_param_eventOccurrence),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::run(): 1056616233
+		// fUML::Semantics::Actions::AcceptEventActionActivation::run(): 689637052
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
-		// fUML::Semantics::Actions::AcceptEventActionActivation::terminate(): 1685607188
+		// fUML::Semantics::Actions::AcceptEventActionActivation::terminate(): 3496128276
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

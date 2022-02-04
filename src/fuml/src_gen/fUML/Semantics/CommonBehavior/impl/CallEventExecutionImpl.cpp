@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CallEventExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
@@ -38,7 +37,6 @@
 #include "uml/ParameterDirectionKind.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/Behavior.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -471,62 +469,62 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::CallEventExecution::_copy() : fUML::Semantics::Values::Value: 1363706716
+		// fUML::Semantics::CommonBehavior::CallEventExecution::_copy() : fUML::Semantics::Values::Value: 3198945315
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 481630429
+		// fUML::Semantics::CommonBehavior::CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 1959549943
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
 		{
 			result = eAnyObject(this->createEventOccurrence(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::execute(): 1944613447
+		// fUML::Semantics::CommonBehavior::CallEventExecution::execute(): 1935201218
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::getInputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1341556238
+		// fUML::Semantics::CommonBehavior::CallEventExecution::getInputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 4255424542
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getInputParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::getOperation() : uml::Operation: 1532410324
+		// fUML::Semantics::CommonBehavior::CallEventExecution::getOperation() : uml::Operation: 375307381
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETOPERATION:
 		{
 			result = eAnyObject(this->getOperation(), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::isCallerSuspended() : bool: 2007960635
+		// fUML::Semantics::CommonBehavior::CallEventExecution::isCallerSuspended() : bool: 2898441339
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED:
 		{
 			result = eAny(this->isCallerSuspended(),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::makeCall(): 1000602015
+		// fUML::Semantics::CommonBehavior::CallEventExecution::makeCall(): 2619341921
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_MAKECALL:
 		{
 			this->makeCall();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::new_() : fUML::Semantics::Values::Value: 166651669
+		// fUML::Semantics::CommonBehavior::CallEventExecution::new_() : fUML::Semantics::Values::Value: 557164094
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::releaseCaller(): 2117660495
+		// fUML::Semantics::CommonBehavior::CallEventExecution::releaseCaller(): 1070213359
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_RELEASECALLER:
 		{
 			this->releaseCaller();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1277368691
+		// fUML::Semantics::CommonBehavior::CallEventExecution::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 2257574777
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'parameterValues'
@@ -537,13 +535,13 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			this->setOutputParameterValues(incoming_param_parameterValues);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::suspendCaller(): 766550033
+		// fUML::Semantics::CommonBehavior::CallEventExecution::suspendCaller(): 349016100
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER:
 		{
 			this->suspendCaller();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::wait_(): 1917959097
+		// fUML::Semantics::CommonBehavior::CallEventExecution::wait_(): 3761191063
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_WAIT_:
 		{
 			this->wait_();

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/fUMLFactory.hpp"
@@ -145,7 +144,6 @@
 #include "uml/ReduceAction.hpp"
 #include "uml/StartClassifierBehaviorAction.hpp"
 #include "uml/StartObjectBehaviorAction.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1108,7 +1106,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::ExecutionFactory::addBuiltInType(uml::PrimitiveType): 856696871
+		// fUML::Semantics::Loci::ExecutionFactory::addBuiltInType(uml::PrimitiveType): 1000019030
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE:
 		{
 			//Retrieve input parameter 'type'
@@ -1119,7 +1117,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->addBuiltInType(incoming_param_type);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::addPrimitiveBehaviorPrototype(fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution): 1007202968
+		// fUML::Semantics::Loci::ExecutionFactory::addPrimitiveBehaviorPrototype(fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution): 2237491026
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION:
 		{
 			//Retrieve input parameter 'execution'
@@ -1130,7 +1128,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->addPrimitiveBehaviorPrototype(incoming_param_execution);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::assignStrategy(fUML::Semantics::Loci::SemanticStrategy): 1797723207
+		// fUML::Semantics::Loci::ExecutionFactory::assignStrategy(fUML::Semantics::Loci::SemanticStrategy): 4022033692
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY:
 		{
 			//Retrieve input parameter 'strategy'
@@ -1141,7 +1139,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->assignStrategy(incoming_param_strategy);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::createEvaluation(uml::ValueSpecification) : fUML::Semantics::Values::Evaluation: 823281622
+		// fUML::Semantics::Loci::ExecutionFactory::createEvaluation(uml::ValueSpecification) : fUML::Semantics::Values::Evaluation: 2830428948
 		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION:
 		{
 			//Retrieve input parameter 'specification'
@@ -1152,7 +1150,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->createEvaluation(incoming_param_specification), fUML::Semantics::Values::ValuesPackage::EVALUATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object) : fUML::Semantics::CommonBehavior::Execution: 490726063
+		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object) : fUML::Semantics::CommonBehavior::Execution: 1344567686
 		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT:
 		{
 			//Retrieve input parameter 'behavior'
@@ -1168,7 +1166,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::getBuiltInType(std::string) : uml::PrimitiveType: 192630283
+		// fUML::Semantics::Loci::ExecutionFactory::getBuiltInType(std::string) : uml::PrimitiveType: 3934172273
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1179,7 +1177,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::getStrategy(std::string) : fUML::Semantics::Loci::SemanticStrategy: 1451856544
+		// fUML::Semantics::Loci::ExecutionFactory::getStrategy(std::string) : fUML::Semantics::Loci::SemanticStrategy: 4148006243
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1190,7 +1188,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::getStrategyIndex(std::string) : int: 461389125
+		// fUML::Semantics::Loci::ExecutionFactory::getStrategyIndex(std::string) : int: 353629829
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1201,7 +1199,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->getStrategyIndex(incoming_param_name),0,false);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::instantiateOpaqueBehaviorExecution(uml::Behavior) : fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution: 859316560
+		// fUML::Semantics::Loci::ExecutionFactory::instantiateOpaqueBehaviorExecution(uml::Behavior) : fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution: 1913492013
 		case LociPackage::EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR:
 		{
 			//Retrieve input parameter 'behavior'
@@ -1212,7 +1210,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->instantiateOpaqueBehaviorExecution(incoming_param_behavior), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 1427156490
+		// fUML::Semantics::Loci::ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 442268567
 		case LociPackage::EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
 		{
 			//Retrieve input parameter 'element'

@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/ObjectValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "abstractDataTypes/Bag.hpp"
@@ -45,7 +44,6 @@
 #include "uml/NamedElement.hpp"
 #include "uml/Type.hpp"
 #include "uml/Property.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -487,7 +485,7 @@ Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// ocl::Values::ObjectValue::equals(fUML::Semantics::Values::Value) : bool: 1285091917
+		// ocl::Values::ObjectValue::equals(fUML::Semantics::Values::Value) : bool: 356131236
 		case ValuesPackage::OBJECTVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -498,7 +496,7 @@ Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::ObjectValue::toString() : std::string: 1100996867
+		// ocl::Values::ObjectValue::toString() : std::string: 3648393225
 		case ValuesPackage::OBJECTVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ReturnInformationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/Classifier.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -394,13 +392,13 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ReturnInformation::_copy() : fUML::Semantics::Values::Value: 2045103425
+		// fUML::Semantics::Actions::ReturnInformation::_copy() : fUML::Semantics::Values::Value: 1937568219
 		case ActionsPackage::RETURNINFORMATION_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::equals(fUML::Semantics::Values::Value) : bool: 1074588088
+		// fUML::Semantics::Actions::ReturnInformation::equals(fUML::Semantics::Values::Value) : bool: 1369927812
 		case ActionsPackage::RETURNINFORMATION_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -411,26 +409,26 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::getOperation() : uml::Operation: 455013808
+		// fUML::Semantics::Actions::ReturnInformation::getOperation() : uml::Operation: 3636024685
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETOPERATION:
 		{
 			result = eAnyObject(this->getOperation(), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::getTypes() : uml::Classifier[*]: 904744346
+		// fUML::Semantics::Actions::ReturnInformation::getTypes() : uml::Classifier[*]: 2416387611
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::new_() : fUML::Semantics::Values::Value: 1466582464
+		// fUML::Semantics::Actions::ReturnInformation::new_() : fUML::Semantics::Values::Value: 722574038
 		case ActionsPackage::RETURNINFORMATION_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::reply(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1070285524
+		// fUML::Semantics::Actions::ReturnInformation::reply(fUML::Semantics::CommonBehavior::ParameterValue[*]): 3427650235
 		case ActionsPackage::RETURNINFORMATION_OPERATION_REPLY_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'outputParameterValues'
@@ -441,13 +439,13 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			this->reply(incoming_param_outputParameterValues);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::specify() : uml::ValueSpecification: 364086231
+		// fUML::Semantics::Actions::ReturnInformation::specify() : uml::ValueSpecification: 1675491624
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
 		{
 			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ReturnInformation::toString() : std::string: 352529642
+		// fUML::Semantics::Actions::ReturnInformation::toString() : std::string: 85310949
 		case ActionsPackage::RETURNINFORMATION_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

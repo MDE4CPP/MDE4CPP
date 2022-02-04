@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_ClearStructuralFeatureActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -46,7 +45,6 @@
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/InputPin.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -469,16 +467,16 @@ bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newV
 Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::doAction(): 425670922
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::doAction(): 1473569464
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(fUML::Semantics::SimpleClassifiers::StructuredValue, uml::StructuralFeature) : PSCS::Semantics::StructuredClassifiers::CS_Link[*]: 1339765966
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(fUML::Semantics::SimpleClassifiers::StructuredValue, uml::StructuralFeature) : PSCS::Semantics::StructuredClassifiers::CS_Link[*]: 3586980415
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'value'
@@ -492,10 +490,10 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
-			return eAny(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS,true);
+			return eAnyBag(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getPotentialLinkEnds(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::StructuralFeature) : fUML::Semantics::Values::Value[*]: 1423989550
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getPotentialLinkEnds(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::StructuralFeature) : fUML::Semantics::Values::Value[*]: 4153851883
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'context'
@@ -509,7 +507,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
-			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

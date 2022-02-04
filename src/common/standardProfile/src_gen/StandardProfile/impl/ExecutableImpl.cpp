@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -105,7 +106,7 @@ ExecutableImpl& ExecutableImpl::operator=(const ExecutableImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ExecutableImpl::getMetaClass()
+std::shared_ptr<uml::Class> ExecutableImpl::getMetaClass() const
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Executable();
 }

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ValueSpecificationActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,23 +18,22 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/ValueSpecificationAction.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -288,7 +286,7 @@ Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ValueSpecificationActionActivation::doAction(): 37357803
+		// fUML::Semantics::Actions::ValueSpecificationActionActivation::doAction(): 871196704
 		case ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

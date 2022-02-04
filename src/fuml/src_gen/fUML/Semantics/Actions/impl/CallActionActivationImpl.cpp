@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
@@ -45,7 +44,6 @@
 #include "uml/OutputPin.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/Property.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -657,19 +655,19 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::CallActionActivation::doAction(): 789549435
+		// fUML::Semantics::Actions::CallActionActivation::doAction(): 3531200850
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1108060274
+		// fUML::Semantics::Actions::CallActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 910408163
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
 			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::removeCallExecution(fUML::Semantics::CommonBehavior::Execution): 894035989
+		// fUML::Semantics::Actions::CallActionActivation::removeCallExecution(fUML::Semantics::CommonBehavior::Execution): 3901665011
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
 		{
 			//Retrieve input parameter 'execution'
@@ -680,7 +678,7 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			this->removeCallExecution(incoming_param_execution);
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::terminate(): 58283131
+		// fUML::Semantics::Actions::CallActionActivation::terminate(): 2819746834
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/InputPinActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Union.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "uml/Pin.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -281,13 +279,13 @@ Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::InputPinActivation::isReady() : bool: 508191945
+		// fUML::Semantics::Actions::InputPinActivation::isReady() : bool: 2767333969
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::InputPinActivation::receiveOffer(): 1104040774
+		// fUML::Semantics::Actions::InputPinActivation::receiveOffer(): 1988186339
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();

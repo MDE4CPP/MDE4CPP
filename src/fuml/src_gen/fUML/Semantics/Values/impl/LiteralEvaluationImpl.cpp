@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/LiteralEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,20 +20,19 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -244,7 +242,7 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralEvaluation::getType(std::string) : uml::PrimitiveType: 1020927880
+		// fUML::Semantics::Values::LiteralEvaluation::getType(std::string) : uml::PrimitiveType: 3047468424
 		case ValuesPackage::LITERALEVALUATION_OPERATION_GETTYPE_ESTRING:
 		{
 			//Retrieve input parameter 'builtInTypeName'

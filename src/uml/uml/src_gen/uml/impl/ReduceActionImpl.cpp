@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReduceActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -609,7 +605,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::ReduceAction::input_type_is_collection(Any, std::map) : bool: 456887339
+		// uml::ReduceAction::input_type_is_collection(Any, std::map) : bool: 3018721939
 		case umlPackage::REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -625,7 +621,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReduceAction::output_types_are_compatible(Any, std::map) : bool: 694994492
+		// uml::ReduceAction::output_types_are_compatible(Any, std::map) : bool: 2690307739
 		case umlPackage::REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -641,7 +637,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReduceAction::reducer_inputs_output(Any, std::map) : bool: 1133614067
+		// uml::ReduceAction::reducer_inputs_output(Any, std::map) : bool: 3526484648
 		case umlPackage::REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

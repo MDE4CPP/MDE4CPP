@@ -1,6 +1,5 @@
 
 #include "uml/impl/AssociationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -951,7 +947,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::Association::association_ends(Any, std::map) : bool: 1798482022
+		// uml::Association::association_ends(Any, std::map) : bool: 2930642913
 		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -967,7 +963,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::binary_associations(Any, std::map) : bool: 1486749742
+		// uml::Association::binary_associations(Any, std::map) : bool: 3742063439
 		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -983,7 +979,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 2137643093
+		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 3676775068
 		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -999,20 +995,20 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::getEndTypes() : uml::Type[*]: 855369150
+		// uml::Association::getEndTypes() : uml::Type[*]: 2690402644
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
-		// uml::Association::isBinary() : bool: 1275990908
+		// uml::Association::isBinary() : bool: 1073463579
 		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
 		{
 			result = eAny(this->isBinary(),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_number(Any, std::map) : bool: 1038022213
+		// uml::Association::specialized_end_number(Any, std::map) : bool: 1286424394
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1028,7 +1024,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_types(Any, std::map) : bool: 2057384221
+		// uml::Association::specialized_end_types(Any, std::map) : bool: 3385560362
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Actions/impl/CS_CallOperationActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -51,7 +50,6 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 #include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -507,10 +505,10 @@ bool CS_CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::_isCreate(uml::Operation) : bool: 777835038
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::_isCreate(uml::Operation) : bool: 1345774800
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -521,19 +519,19 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			result = eAny(this->_isCreate(incoming_param_operation),0,false);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::doAction(): 161083929
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::doAction(): 1729294133
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1367520836
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 3811651158
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-			result = eAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
+			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isCreate(uml::Operation) : bool: 1805833323
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isCreate(uml::Operation) : bool: 2024874825
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -544,7 +542,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			result = eAny(this->isCreate(incoming_param_operation),0,false);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationProvided(uml::Port, uml::Operation) : bool: 1814316481
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationProvided(uml::Port, uml::Operation) : bool: 4192990466
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'
@@ -560,7 +558,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			result = eAny(this->isOperationProvided(incoming_param_port,incoming_param_operation),0,false);
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationRequired(uml::Port, uml::Operation) : bool: 1388387072
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationRequired(uml::Port, uml::Operation) : bool: 2625896910
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'

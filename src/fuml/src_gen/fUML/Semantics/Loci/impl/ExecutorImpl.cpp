@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -358,7 +356,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::Executor::evaluate(uml::ValueSpecification) : fUML::Semantics::Values::Value: 1244975009
+		// fUML::Semantics::Loci::Executor::evaluate(uml::ValueSpecification) : fUML::Semantics::Values::Value: 2026288311
 		case LociPackage::EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION:
 		{
 			//Retrieve input parameter 'specification'
@@ -369,7 +367,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAnyObject(this->evaluate(incoming_param_specification), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 531750117
+		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1195525632
 		case LociPackage::EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'behavior'
@@ -391,7 +389,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::StructuredClassifiers::Reference: 204336979
+		// fUML::Semantics::Loci::Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::StructuredClassifiers::Reference: 2928260845
 		case LociPackage::EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'type'

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
@@ -53,7 +52,6 @@
 #include "uml/InstanceValue.hpp"
 #include "uml/Slot.hpp"
 #include "uml/StructuralFeature.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -338,7 +336,7 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 675295782
+		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 2581799787
 		case ClassificationPackage::INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

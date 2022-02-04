@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -504,23 +502,23 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::doSend(): 689081980
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::doSend(): 1735238335
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
 		{
 			this->doSend();
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2147256668
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 4181762813
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
-			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::match(uml::Trigger) : bool: 892695871
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::match(uml::Trigger) : bool: 1214438023
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
 		{
 			//Retrieve input parameter 'trigger'
@@ -531,7 +529,7 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->match(incoming_param_trigger),0,false);
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendInTo(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Port): 1017800210
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendInTo(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Port): 3066261426
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDINTO_CS_REFERENCE_PORT:
 		{
 			//Retrieve input parameter 'target'
@@ -547,7 +545,7 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			this->sendInTo(incoming_param_target,incoming_param_port);
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendOutTo(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Port): 1422750174
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendOutTo(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Port): 2982290579
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_CS_REFERENCE_PORT:
 		{
 			//Retrieve input parameter 'target'

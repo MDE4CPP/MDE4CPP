@@ -1,6 +1,5 @@
 
 #include "uml/impl/NamespaceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -799,7 +795,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Namespace::cannot_import_ownedMembers(Any, std::map) : bool: 802790798
+		// uml::Namespace::cannot_import_ownedMembers(Any, std::map) : bool: 2277069255
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -815,7 +811,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Namespace::cannot_import_self(Any, std::map) : bool: 845973580
+		// uml::Namespace::cannot_import_self(Any, std::map) : bool: 3009607981
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -831,7 +827,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Namespace::createElementImport(uml::PackageableElement, uml::VisibilityKind) : uml::ElementImport: 86368278
+		// uml::Namespace::createElementImport(uml::PackageableElement, uml::VisibilityKind) : uml::ElementImport: 3041688654
 		case umlPackage::NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND:
 		{
 			//Retrieve input parameter 'element'
@@ -847,7 +843,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
 			break;
 		}
-		// uml::Namespace::createPackageImport(uml::Package, uml::VisibilityKind) : uml::PackageImport: 1868922656
+		// uml::Namespace::createPackageImport(uml::Package, uml::VisibilityKind) : uml::PackageImport: 3501829020
 		case umlPackage::NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND:
 		{
 			//Retrieve input parameter 'package_'
@@ -863,7 +859,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
 			break;
 		}
-		// uml::Namespace::excludeCollisions(uml::PackageableElement[*]) : uml::PackageableElement[*]: 1265638945
+		// uml::Namespace::excludeCollisions(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2855843539
 		case umlPackage::NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT:
 		{
 			//Retrieve input parameter 'imps'
@@ -875,28 +871,28 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
-		// uml::Namespace::getImportedElements() : uml::PackageableElement[*]: 951932827
+		// uml::Namespace::getImportedElements() : uml::PackageableElement[*]: 2588792065
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedElements();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
-		// uml::Namespace::getImportedMembers() : uml::PackageableElement[*]: 94967249
+		// uml::Namespace::getImportedMembers() : uml::PackageableElement[*]: 2627629447
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedMembers();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
-		// uml::Namespace::getImportedPackages() : uml::Package[*]: 152905544
+		// uml::Namespace::getImportedPackages() : uml::Package[*]: 1496815389
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package> > resultList = this->getImportedPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
-		// uml::Namespace::getNamesOfMember(uml::NamedElement) : std::string[*]: 479584053
+		// uml::Namespace::getNamesOfMember(uml::NamedElement) : std::string[*]: 3293858424
 		case umlPackage::NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'element'
@@ -907,14 +903,14 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->getNamesOfMember(incoming_param_element),0,true);
 			break;
 		}
-		// uml::Namespace::getOwnedMembers() : uml::NamedElement[*]: 802350881
+		// uml::Namespace::getOwnedMembers() : uml::NamedElement[*]: 353105181
 		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getOwnedMembers();
 			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
-		// uml::Namespace::importMembers(uml::PackageableElement[*]) : uml::PackageableElement[*]: 1832013262
+		// uml::Namespace::importMembers(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2696590848
 		case umlPackage::NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT:
 		{
 			//Retrieve input parameter 'imps'
@@ -926,13 +922,13 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
-		// uml::Namespace::membersAreDistinguishable() : bool: 2129502144
+		// uml::Namespace::membersAreDistinguishable() : bool: 1431982872
 		case umlPackage::NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE:
 		{
 			result = eAny(this->membersAreDistinguishable(),0,false);
 			break;
 		}
-		// uml::Namespace::members_distinguishable(Any, std::map) : bool: 2127128654
+		// uml::Namespace::members_distinguishable(Any, std::map) : bool: 1065132056
 		case umlPackage::NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

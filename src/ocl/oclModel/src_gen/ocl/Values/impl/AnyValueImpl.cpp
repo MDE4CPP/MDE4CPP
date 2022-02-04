@@ -1,6 +1,5 @@
 
 #include "ocl/Values/impl/AnyValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,15 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -108,7 +106,7 @@ bool AnyValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherV
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<ocl::Values::AnyValue> otherAnyValue = std::dynamic_pointer_cast<ocl::Values::AnyValue>(otherValue);
+		std::shared_ptr<ocl::Values::AnyValue> otherAnyValue = std::dynamic_pointer_cast<ocl::Values::AnyValue>(otherValue);
 
 	Any otherAny=otherAnyValue->getValue();
 	if(otherAny==m_value) // same anyPtr
@@ -342,7 +340,7 @@ Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// ocl::Values::AnyValue::equals(fUML::Semantics::Values::Value) : bool: 103556546
+		// ocl::Values::AnyValue::equals(fUML::Semantics::Values::Value) : bool: 2178563841
 		case ValuesPackage::ANYVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -353,7 +351,7 @@ Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// ocl::Values::AnyValue::toString() : std::string: 944564240
+		// ocl::Values::AnyValue::toString() : std::string: 1515518266
 		case ValuesPackage::ANYVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

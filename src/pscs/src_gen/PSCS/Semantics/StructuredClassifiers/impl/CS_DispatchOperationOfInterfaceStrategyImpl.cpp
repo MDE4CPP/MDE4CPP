@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 
@@ -36,7 +35,6 @@
 #include "uml/Namespace.hpp"
 #include "uml/Interface.hpp"
 #include "uml/Parameter.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -265,10 +263,10 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newVal
 Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 153818444
+		// PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 746775994
 		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
 		{
 			//Retrieve input parameter 'ownedOperation'

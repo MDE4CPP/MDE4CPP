@@ -1,6 +1,5 @@
 
 #include "uml/impl/SendSignalActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -507,7 +503,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::SendSignalAction::number_order(Any, std::map) : bool: 1206735679
+		// uml::SendSignalAction::number_order(Any, std::map) : bool: 2140223036
 		case umlPackage::SENDSIGNALACTION_OPERATION_NUMBER_ORDER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -523,7 +519,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->number_order(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::SendSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 1247022808
+		// uml::SendSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 4161898639
 		case umlPackage::SENDSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -539,7 +535,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::SendSignalAction::type_target_pin(Any, std::map) : bool: 1927028607
+		// uml::SendSignalAction::type_target_pin(Any, std::map) : bool: 2766757954
 		case umlPackage::SENDSIGNALACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

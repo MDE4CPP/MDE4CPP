@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EEnumImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -438,7 +436,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// ecore::EEnum::getEEnumLiteral(std::string) : ecore::EEnumLiteral {const}: 1917703622
+		// ecore::EEnum::getEEnumLiteral(std::string) : ecore::EEnumLiteral {const}: 3677841704
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -449,7 +447,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAnyObject(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
-		// ecore::EEnum::getEEnumLiteral(int) : ecore::EEnumLiteral {const}: 1070395435
+		// ecore::EEnum::getEEnumLiteral(int) : ecore::EEnumLiteral {const}: 2705850257
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -460,7 +458,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAnyObject(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
-		// ecore::EEnum::getEEnumLiteralByLiteral(std::string) : ecore::EEnumLiteral {const}: 582537382
+		// ecore::EEnum::getEEnumLiteralByLiteral(std::string) : ecore::EEnumLiteral {const}: 1911297172
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'literal'

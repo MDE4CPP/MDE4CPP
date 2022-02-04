@@ -1,6 +1,5 @@
 
 #include "uml/impl/LinkEndDataImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -508,14 +504,14 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::LinkEndData::allPins() : uml::InputPin[*]: 1232620149
+		// uml::LinkEndData::allPins() : uml::InputPin[*]: 3830825810
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
 			std::shared_ptr<Bag<uml::InputPin> > resultList = this->allPins();
 			return eAnyBag(resultList,uml::umlPackage::INPUTPIN_CLASS);
 			break;
 		}
-		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1213117792
+		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1499623387
 		case umlPackage::LINKENDDATA_OPERATION_END_OBJECT_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -531,7 +527,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->end_object_input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkEndData::multiplicity(Any, std::map) : bool: 1093089992
+		// uml::LinkEndData::multiplicity(Any, std::map) : bool: 1418649966
 		case umlPackage::LINKENDDATA_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -547,7 +543,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkEndData::property_is_association_end(Any, std::map) : bool: 781012681
+		// uml::LinkEndData::property_is_association_end(Any, std::map) : bool: 1912245967
 		case umlPackage::LINKENDDATA_OPERATION_PROPERTY_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -563,7 +559,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->property_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkEndData::qualifiers(Any, std::map) : bool: 762800978
+		// uml::LinkEndData::qualifiers(Any, std::map) : bool: 3617554078
 		case umlPackage::LINKENDDATA_OPERATION_QUALIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -579,7 +575,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->qualifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LinkEndData::same_type(Any, std::map) : bool: 1930031988
+		// uml::LinkEndData::same_type(Any, std::map) : bool: 2876739916
 		case umlPackage::LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/SignalImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -569,7 +566,7 @@ Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Signal::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 1210890242
+		// uml::Signal::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2958211947
 		case umlPackage::SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'

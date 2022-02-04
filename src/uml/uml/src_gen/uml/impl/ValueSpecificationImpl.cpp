@@ -1,6 +1,5 @@
 
 #include "uml/impl/ValueSpecificationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -475,43 +472,43 @@ Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::ValueSpecification::booleanValue() : bool: 1922865696
+		// uml::ValueSpecification::booleanValue() : bool: 1350723800
 		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
 		{
 			result = eAny(this->booleanValue(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::integerValue() : int: 1670693406
+		// uml::ValueSpecification::integerValue() : int: 2449030041
 		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
 		{
 			result = eAny(this->integerValue(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::isComputable() : bool: 1614461825
+		// uml::ValueSpecification::isComputable() : bool: 3895370351
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::isNull() : bool: 1604304741
+		// uml::ValueSpecification::isNull() : bool: 1141016246
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
 		{
 			result = eAny(this->isNull(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::realValue() : double: 1827075769
+		// uml::ValueSpecification::realValue() : double: 1448638351
 		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
 		{
 			result = eAny(this->realValue(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::stringValue() : std::string: 1605002008
+		// uml::ValueSpecification::stringValue() : std::string: 1518605845
 		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
 		{
 			result = eAny(this->stringValue(),0,false);
 			break;
 		}
-		// uml::ValueSpecification::unlimitedValue() : int: 1854981431
+		// uml::ValueSpecification::unlimitedValue() : int: 1134102830
 		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
 		{
 			result = eAny(this->unlimitedValue(),0,false);

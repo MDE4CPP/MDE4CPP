@@ -1,6 +1,5 @@
 
 #include "uml/impl/ObjectFlowImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -561,7 +557,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::ObjectFlow::compatible_types(Any, std::map) : bool: 108756439
+		// uml::ObjectFlow::compatible_types(Any, std::map) : bool: 444512325
 		case umlPackage::OBJECTFLOW_OPERATION_COMPATIBLE_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -577,7 +573,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->compatible_types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::input_and_output_parameter(Any, std::map) : bool: 500085511
+		// uml::ObjectFlow::input_and_output_parameter(Any, std::map) : bool: 454017867
 		case umlPackage::OBJECTFLOW_OPERATION_INPUT_AND_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -593,7 +589,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->input_and_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::is_multicast_or_is_multireceive(Any, std::map) : bool: 1659419022
+		// uml::ObjectFlow::is_multicast_or_is_multireceive(Any, std::map) : bool: 1585471646
 		case umlPackage::OBJECTFLOW_OPERATION_IS_MULTICAST_OR_IS_MULTIRECEIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -609,7 +605,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->is_multicast_or_is_multireceive(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::no_executable_nodes(Any, std::map) : bool: 1274842614
+		// uml::ObjectFlow::no_executable_nodes(Any, std::map) : bool: 1429127995
 		case umlPackage::OBJECTFLOW_OPERATION_NO_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -625,7 +621,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::same_upper_bounds(Any, std::map) : bool: 1826610676
+		// uml::ObjectFlow::same_upper_bounds(Any, std::map) : bool: 1180579764
 		case umlPackage::OBJECTFLOW_OPERATION_SAME_UPPER_BOUNDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -641,7 +637,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->same_upper_bounds(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::selection_behavior(Any, std::map) : bool: 1730287836
+		// uml::ObjectFlow::selection_behavior(Any, std::map) : bool: 1575197034
 		case umlPackage::OBJECTFLOW_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -657,7 +653,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::target(Any, std::map) : bool: 179239825
+		// uml::ObjectFlow::target(Any, std::map) : bool: 818403920
 		case umlPackage::OBJECTFLOW_OPERATION_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -673,7 +669,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::transformation_behavior(Any, std::map) : bool: 1595389435
+		// uml::ObjectFlow::transformation_behavior(Any, std::map) : bool: 3901325479
 		case umlPackage::OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

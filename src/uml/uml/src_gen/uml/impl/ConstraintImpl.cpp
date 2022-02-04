@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConstraintImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -535,7 +531,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::Constraint::boolean_value(Any, std::map) : bool: 383317525
+		// uml::Constraint::boolean_value(Any, std::map) : bool: 2957172679
 		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -551,7 +547,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Constraint::no_side_effects(Any, std::map) : bool: 125849084
+		// uml::Constraint::no_side_effects(Any, std::map) : bool: 2403847167
 		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -567,7 +563,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Constraint::not_apply_to_self(Any, std::map) : bool: 454887471
+		// uml::Constraint::not_apply_to_self(Any, std::map) : bool: 2965731128
 		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

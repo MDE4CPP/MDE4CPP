@@ -1,6 +1,5 @@
 
 #include "uml/impl/StructuralFeatureActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -506,7 +502,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// uml::StructuralFeatureAction::multiplicity(Any, std::map) : bool: 980879933
+		// uml::StructuralFeatureAction::multiplicity(Any, std::map) : bool: 2647396586
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -522,7 +518,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuralFeatureAction::not_static(Any, std::map) : bool: 1113147911
+		// uml::StructuralFeatureAction::not_static(Any, std::map) : bool: 2735452101
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -538,7 +534,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuralFeatureAction::object_type(Any, std::map) : bool: 2084182676
+		// uml::StructuralFeatureAction::object_type(Any, std::map) : bool: 3530213701
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -554,7 +550,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuralFeatureAction::one_featuring_classifier(Any, std::map) : bool: 355366750
+		// uml::StructuralFeatureAction::one_featuring_classifier(Any, std::map) : bool: 2331798963
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_ONE_FEATURING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -570,7 +566,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->one_featuring_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuralFeatureAction::visibility(Any, std::map) : bool: 1005766649
+		// uml::StructuralFeatureAction::visibility(Any, std::map) : bool: 1315419741
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

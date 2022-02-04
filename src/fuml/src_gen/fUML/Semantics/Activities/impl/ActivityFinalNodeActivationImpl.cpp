@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityFinalNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ExpansionActivationGroup.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "uml/ActivityNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -290,7 +288,7 @@ Any ActivityFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ActivityFinalNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1184244438
+		// fUML::Semantics::Activities::ActivityFinalNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 3991177345
 		case ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'

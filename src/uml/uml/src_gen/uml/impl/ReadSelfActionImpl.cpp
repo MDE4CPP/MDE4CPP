@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadSelfActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -449,7 +445,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::ReadSelfAction::contained(Any, std::map) : bool: 1913193802
+		// uml::ReadSelfAction::contained(Any, std::map) : bool: 1429647307
 		case umlPackage::READSELFACTION_OPERATION_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -465,7 +461,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::multiplicity(Any, std::map) : bool: 977718197
+		// uml::ReadSelfAction::multiplicity(Any, std::map) : bool: 1954322947
 		case umlPackage::READSELFACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -481,7 +477,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::not_static(Any, std::map) : bool: 635700599
+		// uml::ReadSelfAction::not_static(Any, std::map) : bool: 2987315762
 		case umlPackage::READSELFACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -497,7 +493,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::type(Any, std::map) : bool: 100140744
+		// uml::ReadSelfAction::type(Any, std::map) : bool: 503695280
 		case umlPackage::READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EModelElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -375,7 +373,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// ecore::EModelElement::getEAnnotation(std::string) : ecore::EAnnotation: 304921690
+		// ecore::EModelElement::getEAnnotation(std::string) : ecore::EAnnotation: 3174938665
 		case ecorePackage::EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING:
 		{
 			//Retrieve input parameter 'source'

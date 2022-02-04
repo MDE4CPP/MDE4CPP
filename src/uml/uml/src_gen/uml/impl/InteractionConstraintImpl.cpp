@@ -1,6 +1,5 @@
 
 #include "uml/impl/InteractionConstraintImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -472,7 +468,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// uml::InteractionConstraint::dynamic_variables(Any, std::map) : bool: 1640911984
+		// uml::InteractionConstraint::dynamic_variables(Any, std::map) : bool: 1417059224
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_DYNAMIC_VARIABLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -488,7 +484,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->dynamic_variables(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionConstraint::global_data(Any, std::map) : bool: 1767879253
+		// uml::InteractionConstraint::global_data(Any, std::map) : bool: 1271686561
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_GLOBAL_DATA_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -504,7 +500,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->global_data(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionConstraint::maxint_greater_equal_minint(Any, std::map) : bool: 1980235317
+		// uml::InteractionConstraint::maxint_greater_equal_minint(Any, std::map) : bool: 1516750290
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_MAXINT_GREATER_EQUAL_MININT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -520,7 +516,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->maxint_greater_equal_minint(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionConstraint::maxint_positive(Any, std::map) : bool: 988787343
+		// uml::InteractionConstraint::maxint_positive(Any, std::map) : bool: 399579334
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_MAXINT_POSITIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -536,7 +532,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->maxint_positive(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionConstraint::minint_maxint(Any, std::map) : bool: 783845238
+		// uml::InteractionConstraint::minint_maxint(Any, std::map) : bool: 2113565290
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_MININT_MAXINT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -552,7 +548,7 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->minint_maxint(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionConstraint::minint_non_negative(Any, std::map) : bool: 1318981624
+		// uml::InteractionConstraint::minint_non_negative(Any, std::map) : bool: 2482574670
 		case umlPackage::INTERACTIONCONSTRAINT_OPERATION_MININT_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

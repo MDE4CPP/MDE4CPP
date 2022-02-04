@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadLinkObjectEndActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -593,7 +589,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// uml::ReadLinkObjectEndAction::association_of_association(Any, std::map) : bool: 803845092
+		// uml::ReadLinkObjectEndAction::association_of_association(Any, std::map) : bool: 774342061
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -609,7 +605,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->association_of_association(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::ends_of_association(Any, std::map) : bool: 1889550142
+		// uml::ReadLinkObjectEndAction::ends_of_association(Any, std::map) : bool: 2485835230
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -625,7 +621,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->ends_of_association(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::multiplicity_of_object(Any, std::map) : bool: 477816159
+		// uml::ReadLinkObjectEndAction::multiplicity_of_object(Any, std::map) : bool: 3411979287
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -641,7 +637,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::multiplicity_of_result(Any, std::map) : bool: 845997383
+		// uml::ReadLinkObjectEndAction::multiplicity_of_result(Any, std::map) : bool: 2839851363
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -657,7 +653,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::property(Any, std::map) : bool: 421180735
+		// uml::ReadLinkObjectEndAction::property(Any, std::map) : bool: 3639004393
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -673,7 +669,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->property(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::type_of_object(Any, std::map) : bool: 1314770600
+		// uml::ReadLinkObjectEndAction::type_of_object(Any, std::map) : bool: 3153251592
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -689,7 +685,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkObjectEndAction::type_of_result(Any, std::map) : bool: 2136748102
+		// uml::ReadLinkObjectEndAction::type_of_result(Any, std::map) : bool: 3693693396
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

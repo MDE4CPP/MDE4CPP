@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ExpansionActivationGroupImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/ExpansionNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -655,13 +653,13 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ExpansionActivationGroup::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution {const}: 143187745
+		// fUML::Semantics::Activities::ExpansionActivationGroup::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution {const}: 3008748080
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION:
 		{
 			result = eAnyObject(this->getActivityExecution().lock(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionActivationGroup::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 1924328766
+		// fUML::Semantics::Activities::ExpansionActivationGroup::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 156883141
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -672,7 +670,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionActivationGroup::resume(fUML::Semantics::Activities::ActivityNodeActivation): 1703655313
+		// fUML::Semantics::Activities::ExpansionActivationGroup::resume(fUML::Semantics::Activities::ActivityNodeActivation): 4278059019
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -683,7 +681,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			this->resume(incoming_param_activation);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionActivationGroup::suspend(fUML::Semantics::Activities::ActivityNodeActivation): 908663768
+		// fUML::Semantics::Activities::ExpansionActivationGroup::suspend(fUML::Semantics::Activities::ActivityNodeActivation): 415784904
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'

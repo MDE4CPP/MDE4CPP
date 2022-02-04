@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/SendSignalActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -273,7 +270,7 @@ Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::SendSignalActionActivation::doAction(): 1497979288
+		// fUML::Semantics::Actions::SendSignalActionActivation::doAction(): 4006251730
 		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();

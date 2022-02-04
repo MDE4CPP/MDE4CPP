@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -121,7 +122,7 @@ UML4CPPPackageImpl& UML4CPPPackageImpl::operator=(const UML4CPPPackageImpl & obj
 }
 
 
-std::shared_ptr<uml::Class> UML4CPPPackageImpl::getMetaClass()
+std::shared_ptr<uml::Class> UML4CPPPackageImpl::getMetaClass() const
 {
 	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_UML4CPPPackage();
 }

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,21 +20,20 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/NamedElement.hpp"
 #include "uml/Class.hpp"
 #include "uml/Operation.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -297,7 +295,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 1256965492
+		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 3748574732
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
 		{
 			//Retrieve input parameter 'ownedOperation'
@@ -313,7 +311,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 2137388834
+		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 2932518700
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'

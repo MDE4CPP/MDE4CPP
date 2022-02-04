@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReclassifyObjectActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -647,7 +643,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::ReclassifyObjectAction::classifier_not_abstract(Any, std::map) : bool: 1111669922
+		// uml::ReclassifyObjectAction::classifier_not_abstract(Any, std::map) : bool: 4071786936
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -663,7 +659,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReclassifyObjectAction::input_pin(Any, std::map) : bool: 1910336897
+		// uml::ReclassifyObjectAction::input_pin(Any, std::map) : bool: 1732837234
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -679,7 +675,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReclassifyObjectAction::multiplicity(Any, std::map) : bool: 1719223328
+		// uml::ReclassifyObjectAction::multiplicity(Any, std::map) : bool: 1033085717
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

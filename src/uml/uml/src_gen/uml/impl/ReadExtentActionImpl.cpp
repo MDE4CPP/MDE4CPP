@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadExtentActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -498,7 +494,7 @@ Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::ReadExtentAction::multiplicity_of_result(Any, std::map) : bool: 796840948
+		// uml::ReadExtentAction::multiplicity_of_result(Any, std::map) : bool: 3672868947
 		case umlPackage::READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -514,7 +510,7 @@ Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadExtentAction::type_is_classifier(Any, std::map) : bool: 163178380
+		// uml::ReadExtentAction::type_is_classifier(Any, std::map) : bool: 3792071533
 		case umlPackage::READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActivityParameterNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -436,7 +432,7 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// uml::ActivityParameterNode::has_parameters(Any, std::map) : bool: 1893745114
+		// uml::ActivityParameterNode::has_parameters(Any, std::map) : bool: 1133881025
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_HAS_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -452,7 +448,7 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->has_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_edges(Any, std::map) : bool: 1062640643
+		// uml::ActivityParameterNode::no_edges(Any, std::map) : bool: 1392135778
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -468,7 +464,7 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->no_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_incoming_edges(Any, std::map) : bool: 801848101
+		// uml::ActivityParameterNode::no_incoming_edges(Any, std::map) : bool: 99476997
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -484,7 +480,7 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->no_incoming_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_outgoing_edges(Any, std::map) : bool: 1531866347
+		// uml::ActivityParameterNode::no_outgoing_edges(Any, std::map) : bool: 1460759441
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -500,7 +496,7 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->no_outgoing_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::same_type(Any, std::map) : bool: 74291663
+		// uml::ActivityParameterNode::same_type(Any, std::map) : bool: 1979271357
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

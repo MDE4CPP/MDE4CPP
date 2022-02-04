@@ -1,6 +1,5 @@
 
 #include "uml/impl/ProfileApplicationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -482,13 +479,13 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1871054573
+		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1478312265
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
 			result = eAnyObject(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
-		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1978495829
+		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1076549117
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'namedElement'

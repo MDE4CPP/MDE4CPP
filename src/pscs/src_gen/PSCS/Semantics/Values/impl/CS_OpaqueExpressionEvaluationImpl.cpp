@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Values/impl/CS_OpaqueExpressionEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/fUMLFactory.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/OpaqueExpression.hpp"
 #include "uml/Behavior.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -293,20 +291,20 @@ bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::evaluate() : fUML::Semantics::Values::Value: 1951868314
+		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::evaluate() : fUML::Semantics::Values::Value: 3286539554
 		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::executeExpressionBehavior() : fUML::Semantics::Values::Value[*]: 1129867171
+		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::executeExpressionBehavior() : fUML::Semantics::Values::Value[*]: 4286290164
 		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->executeExpressionBehavior();
-			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
+			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConnectorEndImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -445,7 +441,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::ConnectorEnd::multiplicity(Any, std::map) : bool: 931479953
+		// uml::ConnectorEnd::multiplicity(Any, std::map) : bool: 1376035873
 		case umlPackage::CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,7 +457,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConnectorEnd::part_with_port_empty(Any, std::map) : bool: 1300949541
+		// uml::ConnectorEnd::part_with_port_empty(Any, std::map) : bool: 1246926808
 		case umlPackage::CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -477,7 +473,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->part_with_port_empty(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConnectorEnd::role_and_part_with_port(Any, std::map) : bool: 1121458246
+		// uml::ConnectorEnd::role_and_part_with_port(Any, std::map) : bool: 1158537213
 		case umlPackage::CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,7 +489,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->role_and_part_with_port(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConnectorEnd::self_part_with_port(Any, std::map) : bool: 1132520274
+		// uml::ConnectorEnd::self_part_with_port(Any, std::map) : bool: 1871016491
 		case umlPackage::CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

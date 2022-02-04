@@ -1,6 +1,5 @@
 
 #include "uml/impl/LifelineImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -594,7 +590,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::Lifeline::interaction_uses_share_lifeline(Any, std::map) : bool: 1328915244
+		// uml::Lifeline::interaction_uses_share_lifeline(Any, std::map) : bool: 3700000358
 		case umlPackage::LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -610,7 +606,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::same_classifier(Any, std::map) : bool: 520184878
+		// uml::Lifeline::same_classifier(Any, std::map) : bool: 3995889812
 		case umlPackage::LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -626,7 +622,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::selector_int_or_string(Any, std::map) : bool: 1159498731
+		// uml::Lifeline::selector_int_or_string(Any, std::map) : bool: 3739382587
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -642,7 +638,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::selector_specified(Any, std::map) : bool: 1628682169
+		// uml::Lifeline::selector_specified(Any, std::map) : bool: 288066678
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/Classification/impl/CS_InstanceValueEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -49,7 +48,6 @@
 #include "uml/Enumeration.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Slot.hpp"
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -358,13 +356,13 @@ bool CS_InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::Classification::CS_InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 71521778
+		// PSCS::Semantics::Classification::CS_InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 410122665
 		case ClassificationPackage::CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

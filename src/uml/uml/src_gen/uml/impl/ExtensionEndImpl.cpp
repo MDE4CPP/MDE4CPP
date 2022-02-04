@@ -1,6 +1,5 @@
 
 #include "uml/impl/ExtensionEndImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -443,7 +439,7 @@ Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::ExtensionEnd::aggregation(Any, std::map) : bool: 1897744733
+		// uml::ExtensionEnd::aggregation(Any, std::map) : bool: 3261618618
 		case umlPackage::EXTENSIONEND_OPERATION_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -459,7 +455,7 @@ Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->aggregation(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExtensionEnd::multiplicity(Any, std::map) : bool: 1281334886
+		// uml::ExtensionEnd::multiplicity(Any, std::map) : bool: 1193805419
 		case umlPackage::EXTENSIONEND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

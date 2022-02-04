@@ -1,6 +1,5 @@
 
 #include "uml/impl/TransitionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -910,13 +906,13 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::Transition::containingStateMachine() : uml::StateMachine: 1765667922
+		// uml::Transition::containingStateMachine() : uml::StateMachine: 3793766704
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
-		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 909121488
+		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 1015992162
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -932,7 +928,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::fork_segment_state(Any, std::map) : bool: 1112316898
+		// uml::Transition::fork_segment_state(Any, std::map) : bool: 2022274173
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -948,7 +944,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::initial_transition(Any, std::map) : bool: 1797542133
+		// uml::Transition::initial_transition(Any, std::map) : bool: 2806356813
 		case umlPackage::TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -964,7 +960,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::join_segment_guards(Any, std::map) : bool: 1538095167
+		// uml::Transition::join_segment_guards(Any, std::map) : bool: 429318740
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -980,7 +976,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::join_segment_state(Any, std::map) : bool: 1741290577
+		// uml::Transition::join_segment_state(Any, std::map) : bool: 1435600751
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -996,7 +992,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::outgoing_pseudostates(Any, std::map) : bool: 432953338
+		// uml::Transition::outgoing_pseudostates(Any, std::map) : bool: 1876038156
 		case umlPackage::TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1012,13 +1008,13 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::redefinitionContext() : uml::Classifier: 1971879180
+		// uml::Transition::redefinitionContext() : uml::Classifier: 4168264280
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// uml::Transition::state_is_external(Any, std::map) : bool: 1155164645
+		// uml::Transition::state_is_external(Any, std::map) : bool: 1017523375
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1034,7 +1030,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::state_is_internal(Any, std::map) : bool: 1164838571
+		// uml::Transition::state_is_internal(Any, std::map) : bool: 3747710289
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1050,7 +1046,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Transition::state_is_local(Any, std::map) : bool: 923777817
+		// uml::Transition::state_is_local(Any, std::map) : bool: 3031218091
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

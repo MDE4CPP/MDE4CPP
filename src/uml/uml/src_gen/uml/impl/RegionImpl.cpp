@@ -1,6 +1,5 @@
 
 #include "uml/impl/RegionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -807,19 +803,19 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Region::belongsToPSM() : bool: 701066281
+		// uml::Region::belongsToPSM() : bool: 1481257058
 		case umlPackage::REGION_OPERATION_BELONGSTOPSM:
 		{
 			result = eAny(this->belongsToPSM(),0,false);
 			break;
 		}
-		// uml::Region::containingStateMachine() : uml::StateMachine: 1752814481
+		// uml::Region::containingStateMachine() : uml::StateMachine: 3298185933
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
-		// uml::Region::deep_history_vertex(Any, std::map) : bool: 629096106
+		// uml::Region::deep_history_vertex(Any, std::map) : bool: 2568391094
 		case umlPackage::REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -835,7 +831,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Region::initial_vertex(Any, std::map) : bool: 709638913
+		// uml::Region::initial_vertex(Any, std::map) : bool: 3908107437
 		case umlPackage::REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -851,7 +847,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Region::owned(Any, std::map) : bool: 118469315
+		// uml::Region::owned(Any, std::map) : bool: 2693807543
 		case umlPackage::REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -867,13 +863,13 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Region::redefinitionContext() : uml::Classifier: 2039075134
+		// uml::Region::redefinitionContext() : uml::Classifier: 2569630837
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 771598032
+		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 338218634
 		case umlPackage::REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

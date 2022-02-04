@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/DataStoreNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Values/Value.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -286,7 +284,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::DataStoreNodeActivation::addToken(fUML::Semantics::Activities::Token): 131946306
+		// fUML::Semantics::Activities::DataStoreNodeActivation::addToken(fUML::Semantics::Activities::Token): 2150799315
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -297,7 +295,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			this->addToken(incoming_param_token);
 			break;
 		}
-		// fUML::Semantics::Activities::DataStoreNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 1985388858
+		// fUML::Semantics::Activities::DataStoreNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 4235365301
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'

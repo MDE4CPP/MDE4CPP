@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ExpansionNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/ExpansionNode.hpp"
 #include "uml/ExpansionRegion.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -295,7 +293,7 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ExpansionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1801862850
+		// fUML::Semantics::Activities::ExpansionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 2655396851
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -306,19 +304,19 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionNodeActivation::getExpansionRegionActivation() : fUML::Semantics::Activities::ExpansionRegionActivation: 1117119621
+		// fUML::Semantics::Activities::ExpansionNodeActivation::getExpansionRegionActivation() : fUML::Semantics::Activities::ExpansionRegionActivation: 451366782
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
 		{
 			result = eAnyObject(this->getExpansionRegionActivation(), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionNodeActivation::isReady() : bool: 14712609
+		// fUML::Semantics::Activities::ExpansionNodeActivation::isReady() : bool: 2578844217
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionNodeActivation::receiveOffer(): 913023797
+		// fUML::Semantics::Activities::ExpansionNodeActivation::receiveOffer(): 935567755
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();

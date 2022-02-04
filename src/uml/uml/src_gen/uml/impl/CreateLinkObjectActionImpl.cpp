@@ -1,6 +1,5 @@
 
 #include "uml/impl/CreateLinkObjectActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -471,7 +467,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::CreateLinkObjectAction::association_class(Any, std::map) : bool: 1963606051
+		// uml::CreateLinkObjectAction::association_class(Any, std::map) : bool: 2324088491
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -487,7 +483,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->association_class(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateLinkObjectAction::multiplicity(Any, std::map) : bool: 430552770
+		// uml::CreateLinkObjectAction::multiplicity(Any, std::map) : bool: 2861417742
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -503,7 +499,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateLinkObjectAction::type_of_result(Any, std::map) : bool: 91124541
+		// uml::CreateLinkObjectAction::type_of_result(Any, std::map) : bool: 3018502509
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EObjectImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,23 +18,20 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Union.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "ecore/EObjectContainer.hpp"
 #include "ecore/EObjectAny.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -567,50 +563,50 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// ecore::EObject::eAllContents() : Any {const}: 345308248
+		// ecore::EObject::eAllContents() : Any {const}: 3701410932
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
 			result = this->eAllContents();
 			break;
 		}
-		// ecore::EObject::eClass() : ecore::EClass {const}: 1897829605
+		// ecore::EObject::eClass() : ecore::EClass {const}: 3378392784
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
 			result = eAnyObject(this->eClass(), ecore::ecorePackage::ECLASS_CLASS);
 			break;
 		}
-		// ecore::EObject::eContainer() : ecore::EObject: 1564505762
+		// ecore::EObject::eContainer() : ecore::EObject: 1835273223
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINER:
 		{
 			result = eAnyObject(this->eContainer(), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// ecore::EObject::eContainingFeature() : ecore::EStructuralFeature {const}: 1314774326
+		// ecore::EObject::eContainingFeature() : ecore::EStructuralFeature {const}: 3924601239
 		case ecorePackage::EOBJECT_OPERATION_ECONTAININGFEATURE:
 		{
 			result = eAnyObject(this->eContainingFeature(), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
-		// ecore::EObject::eContainmentFeature() : ecore::EReference {const}: 1559436300
+		// ecore::EObject::eContainmentFeature() : ecore::EReference {const}: 3796420659
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINMENTFEATURE:
 		{
 			result = eAnyObject(this->eContainmentFeature(), ecore::ecorePackage::EREFERENCE_CLASS);
 			break;
 		}
-		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1140157049
+		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1440229147
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject> > resultList = this->eContents();
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// ecore::EObject::eCrossReferences() : std::list {const}: 1830400680
+		// ecore::EObject::eCrossReferences() : std::list {const}: 4256013160
 		case ecorePackage::EOBJECT_OPERATION_ECROSSREFERENCES:
 		{
 			result = eAny(this->eCrossReferences(),0,false);
 			break;
 		}
-		// ecore::EObject::eGet(ecore::EStructuralFeature) : Any {const}: 765237638
+		// ecore::EObject::eGet(ecore::EStructuralFeature) : Any {const}: 2925960689
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -621,7 +617,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = this->eGet(incoming_param_feature);
 			break;
 		}
-		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 728807147
+		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 1046173981
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'feature'
@@ -637,7 +633,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = this->eGet(incoming_param_feature,incoming_param_resolve);
 			break;
 		}
-		// ecore::EObject::eInvoke(ecore::EOperation, std::list) : Any: 447398534
+		// ecore::EObject::eInvoke(ecore::EOperation, std::list) : Any: 952707013
 		case ecorePackage::EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST:
 		{
 			//Retrieve input parameter 'operation'
@@ -653,13 +649,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = this->eInvoke(incoming_param_operation,incoming_param_arguments);
 			break;
 		}
-		// ecore::EObject::eIsProxy() : bool {const}: 780766387
+		// ecore::EObject::eIsProxy() : bool {const}: 3785601175
 		case ecorePackage::EOBJECT_OPERATION_EISPROXY:
 		{
 			result = eAny(this->eIsProxy(),0,false);
 			break;
 		}
-		// ecore::EObject::eIsSet(ecore::EStructuralFeature) : bool {const}: 527097480
+		// ecore::EObject::eIsSet(ecore::EStructuralFeature) : bool {const}: 3154058889
 		case ecorePackage::EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -670,13 +666,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->eIsSet(incoming_param_feature),0,false);
 			break;
 		}
-		// ecore::EObject::eResource() : int {const}: 281242010
+		// ecore::EObject::eResource() : int {const}: 1807854576
 		case ecorePackage::EOBJECT_OPERATION_ERESOURCE:
 		{
 			result = eAny(this->eResource(),0,false);
 			break;
 		}
-		// ecore::EObject::eSet(ecore::EStructuralFeature, Any): 921412853
+		// ecore::EObject::eSet(ecore::EStructuralFeature, Any): 955320472
 		case ecorePackage::EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'feature'
@@ -692,7 +688,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			this->eSet(incoming_param_feature,incoming_param_newValue);
 			break;
 		}
-		// ecore::EObject::eUnset(ecore::EStructuralFeature) {const}: 640572767
+		// ecore::EObject::eUnset(ecore::EStructuralFeature) {const}: 427638394
 		case ecorePackage::EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'

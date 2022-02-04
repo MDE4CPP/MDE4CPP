@@ -1,6 +1,5 @@
 
 #include "uml/impl/LoopNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1195,7 +1191,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::LoopNode::body_output_pins(Any, std::map) : bool: 2141690272
+		// uml::LoopNode::body_output_pins(Any, std::map) : bool: 2594560461
 		case umlPackage::LOOPNODE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1211,7 +1207,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::executable_nodes(Any, std::map) : bool: 1456712769
+		// uml::LoopNode::executable_nodes(Any, std::map) : bool: 1236405140
 		case umlPackage::LOOPNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1227,7 +1223,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::input_edges(Any, std::map) : bool: 1724786530
+		// uml::LoopNode::input_edges(Any, std::map) : bool: 1422262437
 		case umlPackage::LOOPNODE_OPERATION_INPUT_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1243,7 +1239,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->input_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::loop_variable_outgoing(Any, std::map) : bool: 1413799573
+		// uml::LoopNode::loop_variable_outgoing(Any, std::map) : bool: 2617524372
 		case umlPackage::LOOPNODE_OPERATION_LOOP_VARIABLE_OUTGOING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1259,7 +1255,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->loop_variable_outgoing(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::matching_loop_variables(Any, std::map) : bool: 1009662775
+		// uml::LoopNode::matching_loop_variables(Any, std::map) : bool: 3371755158
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_LOOP_VARIABLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1275,7 +1271,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->matching_loop_variables(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::matching_output_pins(Any, std::map) : bool: 1016601316
+		// uml::LoopNode::matching_output_pins(Any, std::map) : bool: 2386670494
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1291,7 +1287,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::matching_result_pins(Any, std::map) : bool: 518260818
+		// uml::LoopNode::matching_result_pins(Any, std::map) : bool: 1109391776
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1307,7 +1303,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->matching_result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::result_no_incoming(Any, std::map) : bool: 328518130
+		// uml::LoopNode::result_no_incoming(Any, std::map) : bool: 1882743452
 		case umlPackage::LOOPNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1323,7 +1319,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::LoopNode::setup_test_and_body(Any, std::map) : bool: 942624726
+		// uml::LoopNode::setup_test_and_body(Any, std::map) : bool: 4028967581
 		case umlPackage::LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

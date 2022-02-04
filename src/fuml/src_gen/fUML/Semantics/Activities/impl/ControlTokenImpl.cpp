@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ControlTokenImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,17 +20,16 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -263,13 +261,13 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ControlToken::_copy() : fUML::Semantics::Activities::Token: 186948332
+		// fUML::Semantics::Activities::ControlToken::_copy() : fUML::Semantics::Activities::Token: 4065084616
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ControlToken::equals(fUML::Semantics::Activities::Token) : bool: 1420478842
+		// fUML::Semantics::Activities::ControlToken::equals(fUML::Semantics::Activities::Token) : bool: 338981101
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -280,7 +278,7 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ControlToken::isControl() : bool: 2106407034
+		// fUML::Semantics::Activities::ControlToken::isControl() : bool: 972980650
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl(),0,false);

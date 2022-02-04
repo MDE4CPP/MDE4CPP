@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ExpansionRegionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
@@ -38,7 +37,6 @@
 #include "uml/ExpansionRegion.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -970,25 +968,25 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ExpansionRegionActivation::doAction(): 1088415189
+		// fUML::Semantics::Activities::ExpansionRegionActivation::doAction(): 2818883973
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::doOutput(): 1921844053
+		// fUML::Semantics::Activities::ExpansionRegionActivation::doOutput(): 3223295572
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT:
 		{
 			this->doOutput();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::doStructuredActivity(): 1554321336
+		// fUML::Semantics::Activities::ExpansionRegionActivation::doStructuredActivity(): 3512627221
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::getExpansionNodeActivation(uml::ExpansionNode) : fUML::Semantics::Activities::ExpansionNodeActivation: 148113187
+		// fUML::Semantics::Activities::ExpansionRegionActivation::getExpansionNodeActivation(uml::ExpansionNode) : fUML::Semantics::Activities::ExpansionNodeActivation: 684269277
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -999,19 +997,19 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			result = eAnyObject(this->getExpansionNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::isSuspended() : bool: 1266640523
+		// fUML::Semantics::Activities::ExpansionRegionActivation::isSuspended() : bool: 939459401
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED:
 		{
 			result = eAny(this->isSuspended(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::numberOfValues() : int: 1919951608
+		// fUML::Semantics::Activities::ExpansionRegionActivation::numberOfValues() : int: 1113964543
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES:
 		{
 			result = eAny(this->numberOfValues(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::resume(fUML::Semantics::Activities::ExpansionActivationGroup): 740436313
+		// fUML::Semantics::Activities::ExpansionRegionActivation::resume(fUML::Semantics::Activities::ExpansionActivationGroup): 2463471261
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'
@@ -1022,7 +1020,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			this->resume(incoming_param_activationGroup);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::runGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 1225445794
+		// fUML::Semantics::Activities::ExpansionRegionActivation::runGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 717168838
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'
@@ -1033,38 +1031,38 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			this->runGroup(incoming_param_activationGroup);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::runIterative(): 892067958
+		// fUML::Semantics::Activities::ExpansionRegionActivation::runIterative(): 1467340922
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE:
 		{
 			this->runIterative();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::runParallel(): 1378819259
+		// fUML::Semantics::Activities::ExpansionRegionActivation::runParallel(): 2412031918
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL:
 		{
 			this->runParallel();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::sendOffers(): 896679763
+		// fUML::Semantics::Activities::ExpansionRegionActivation::sendOffers(): 1622572467
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1467051328
+		// fUML::Semantics::Activities::ExpansionRegionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1713936329
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::terminate(): 664627780
+		// fUML::Semantics::Activities::ExpansionRegionActivation::terminate(): 1114479685
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
-		// fUML::Semantics::Activities::ExpansionRegionActivation::terminateGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 1648185759
+		// fUML::Semantics::Activities::ExpansionRegionActivation::terminateGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 2109160294
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'

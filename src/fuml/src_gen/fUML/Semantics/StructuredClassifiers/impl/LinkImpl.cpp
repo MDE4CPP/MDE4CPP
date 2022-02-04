@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/LinkImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -436,13 +434,13 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::Link::_copy() : fUML::Semantics::Values::Value: 1029670453
+		// fUML::Semantics::StructuredClassifiers::Link::_copy() : fUML::Semantics::Values::Value: 3125386239
 		case StructuredClassifiersPackage::LINK_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Link::addTo(fUML::Semantics::Loci::Locus): 750371157
+		// fUML::Semantics::StructuredClassifiers::Link::addTo(fUML::Semantics::Loci::Locus): 3672267639
 		case StructuredClassifiersPackage::LINK_OPERATION_ADDTO_LOCUS:
 		{
 			//Retrieve input parameter 'locus'
@@ -453,7 +451,7 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			this->addTo(incoming_param_locus);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Link::getOtherFeatureValues(fUML::Semantics::StructuredClassifiers::ExtensionalValue[*], uml::Property) : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 704042565
+		// fUML::Semantics::StructuredClassifiers::Link::getOtherFeatureValues(fUML::Semantics::StructuredClassifiers::ExtensionalValue[*], uml::Property) : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 1256957395
 		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'extent'
@@ -470,14 +468,14 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Link::getTypes() : uml::Classifier[*] {const}: 202529784
+		// fUML::Semantics::StructuredClassifiers::Link::getTypes() : uml::Classifier[*] {const}: 2319995210
 		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Link::isMatchingLink(fUML::Semantics::StructuredClassifiers::ExtensionalValue, uml::Property) : bool: 1155151383
+		// fUML::Semantics::StructuredClassifiers::Link::isMatchingLink(fUML::Semantics::StructuredClassifiers::ExtensionalValue, uml::Property) : bool: 995981000
 		case StructuredClassifiersPackage::LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'link'
@@ -493,7 +491,7 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Link::new_() : fUML::Semantics::Values::Value: 432830578
+		// fUML::Semantics::StructuredClassifiers::Link::new_() : fUML::Semantics::Values::Value: 3155204086
 		case StructuredClassifiersPackage::LINK_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

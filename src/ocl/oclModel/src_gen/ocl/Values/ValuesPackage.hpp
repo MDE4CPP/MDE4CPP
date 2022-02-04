@@ -68,14 +68,14 @@ namespace ocl::Values
 
 			// Begin Class AnyValue
 			//Class and Feature IDs 
-			static const long long ANYVALUE_CLASS = 1772675012;
+			static const unsigned long ANYVALUE_CLASS = 1772675012;
 			static const unsigned int ANYVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 13;
-			static const long long ANYVALUE_ATTRIBUTE_VALUE = 79068194;
+			static const unsigned long ANYVALUE_ATTRIBUTE_VALUE = 79068194;
 			
 			
-			static const int ANYVALUE_OPERATION_EQUALS_VALUE = 103556546;
-			static const int ANYVALUE_OPERATION_TOSTRING = 944564240;
+			static const unsigned int ANYVALUE_OPERATION_EQUALS_VALUE = 2178563841;
+			static const unsigned int ANYVALUE_OPERATION_TOSTRING = 1515518266;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAnyValue_Class() const = 0;
@@ -91,12 +91,12 @@ namespace ocl::Values
 
 			// Begin Class BagTypeValue
 			//Class and Feature IDs 
-			static const long long BAGTYPEVALUE_CLASS = 1755720122;
+			static const unsigned long BAGTYPEVALUE_CLASS = 1755720122;
 			static const unsigned int BAGTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int BAGTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
-			static const int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 794069208;
+			static const unsigned int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 4256862520;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBagTypeValue_Class() const = 0;
@@ -110,16 +110,16 @@ namespace ocl::Values
 
 			// Begin Class CollectionValue
 			//Class and Feature IDs 
-			static const long long COLLECTIONVALUE_CLASS = 539163728;
+			static const unsigned long COLLECTIONVALUE_CLASS = 539163728;
 			static const unsigned int COLLECTIONVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int COLLECTIONVALUE_CLASS_OPERATION_COUNT = 15;
 			
-			static const long long COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 1816541873;
+			static const unsigned long COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 1816541873;
 			
-			static const int COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE = 1275818346;
-			static const int COLLECTIONVALUE_OPERATION_EQUALS_VALUE = 2069036065;
-			static const int COLLECTIONVALUE_OPERATION_FIND_VALUE = 1127442822;
-			static const int COLLECTIONVALUE_OPERATION_TOSTRING = 168353461;
+			static const unsigned int COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE = 2527489752;
+			static const unsigned int COLLECTIONVALUE_OPERATION_EQUALS_VALUE = 4237584245;
+			static const unsigned int COLLECTIONVALUE_OPERATION_FIND_VALUE = 844392547;
+			static const unsigned int COLLECTIONVALUE_OPERATION_TOSTRING = 744572618;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCollectionValue_Class() const = 0;
@@ -137,12 +137,12 @@ namespace ocl::Values
 
 			// Begin Class Element
 			//Class and Feature IDs 
-			static const long long ELEMENT_CLASS = 1129659260;
+			static const unsigned long ELEMENT_CLASS = 1129659260;
 			static const unsigned int ELEMENT_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ELEMENT_CLASS_OPERATION_COUNT = 0;
-			static const long long ELEMENT_ATTRIBUTE_INDEXNR = 990738204;
+			static const unsigned long ELEMENT_ATTRIBUTE_INDEXNR = 990738204;
 			
-			static const long long ELEMENT_ATTRIBUTE_VALUE = 1057185855;
+			static const unsigned long ELEMENT_ATTRIBUTE_VALUE = 1057185855;
 			
 			
 			//Class and Feature Getter
@@ -158,17 +158,17 @@ namespace ocl::Values
 
 			// Begin Class LocalSnapshot
 			//Class and Feature IDs 
-			static const long long LOCALSNAPSHOT_CLASS = 48802612;
+			static const unsigned long LOCALSNAPSHOT_CLASS = 48802612;
 			static const unsigned int LOCALSNAPSHOT_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int LOCALSNAPSHOT_CLASS_OPERATION_COUNT = 0;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_ISPOST = 1295359485;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_ISPRE = 1089347506;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_ISPOST = 1295359485;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_ISPRE = 1089347506;
 			
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_BINDINGS = 1818532267;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_INPUTQ = 1823900805;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ = 555264842;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_PRED = 1423646703;
-			static const long long LOCALSNAPSHOT_ATTRIBUTE_SUCC = 1862179524;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_BINDINGS = 1818532267;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_INPUTQ = 1823900805;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ = 555264842;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_PRED = 1423646703;
+			static const unsigned long LOCALSNAPSHOT_ATTRIBUTE_SUCC = 1862179524;
 			
 			
 			//Class and Feature Getter
@@ -189,12 +189,12 @@ namespace ocl::Values
 
 			// Begin Class NameValueBinding
 			//Class and Feature IDs 
-			static const long long NAMEVALUEBINDING_CLASS = 510142670;
+			static const unsigned long NAMEVALUEBINDING_CLASS = 510142670;
 			static const unsigned int NAMEVALUEBINDING_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int NAMEVALUEBINDING_CLASS_OPERATION_COUNT = 0;
-			static const long long NAMEVALUEBINDING_ATTRIBUTE_NAME = 233592511;
+			static const unsigned long NAMEVALUEBINDING_ATTRIBUTE_NAME = 233592511;
 			
-			static const long long NAMEVALUEBINDING_ATTRIBUTE_VALUE = 1439285098;
+			static const unsigned long NAMEVALUEBINDING_ATTRIBUTE_VALUE = 1439285098;
 			
 			
 			//Class and Feature Getter
@@ -210,15 +210,15 @@ namespace ocl::Values
 
 			// Begin Class ObjectValue
 			//Class and Feature IDs 
-			static const long long OBJECTVALUE_CLASS = 712225641;
+			static const unsigned long OBJECTVALUE_CLASS = 712225641;
 			static const unsigned int OBJECTVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int OBJECTVALUE_CLASS_OPERATION_COUNT = 13;
 			
-			static const long long OBJECTVALUE_ATTRIBUTE_HISTORY = 1037531673;
-			static const long long OBJECTVALUE_ATTRIBUTE_VALUE = 1959943819;
+			static const unsigned long OBJECTVALUE_ATTRIBUTE_HISTORY = 1037531673;
+			static const unsigned long OBJECTVALUE_ATTRIBUTE_VALUE = 1959943819;
 			
-			static const int OBJECTVALUE_OPERATION_EQUALS_VALUE = 1285091917;
-			static const int OBJECTVALUE_OPERATION_TOSTRING = 1100996867;
+			static const unsigned int OBJECTVALUE_OPERATION_EQUALS_VALUE = 356131236;
+			static const unsigned int OBJECTVALUE_OPERATION_TOSTRING = 3648393225;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectValue_Class() const = 0;
@@ -235,20 +235,20 @@ namespace ocl::Values
 
 			// Begin Class OclMessageValue
 			//Class and Feature IDs 
-			static const long long OCLMESSAGEVALUE_CLASS = 1848978034;
+			static const unsigned long OCLMESSAGEVALUE_CLASS = 1848978034;
 			static const unsigned int OCLMESSAGEVALUE_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int OCLMESSAGEVALUE_CLASS_OPERATION_COUNT = 12;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION = 1876672302;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL = 338313797;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION = 421025364;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_NAME = 182499172;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION = 1876672302;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL = 338313797;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION = 421025364;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_NAME = 182499172;
 			
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS = 1943564980;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE = 298970664;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_SOURCE = 1003533157;
-			static const long long OCLMESSAGEVALUE_ATTRIBUTE_TARGET = 1865672338;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS = 1943564980;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE = 298970664;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_SOURCE = 1003533157;
+			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_TARGET = 1865672338;
 			
-			static const int OCLMESSAGEVALUE_OPERATION_TOSTRING = 1478167767;
+			static const unsigned int OCLMESSAGEVALUE_OPERATION_TOSTRING = 3653382429;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOclMessageValue_Class() const = 0;
@@ -270,13 +270,13 @@ namespace ocl::Values
 
 			// Begin Class OclVoidValue
 			//Class and Feature IDs 
-			static const long long OCLVOIDVALUE_CLASS = 316834162;
+			static const unsigned long OCLVOIDVALUE_CLASS = 316834162;
 			static const unsigned int OCLVOIDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int OCLVOIDVALUE_CLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int OCLVOIDVALUE_OPERATION_EQUALS_VALUE = 613975732;
-			static const int OCLVOIDVALUE_OPERATION_TOSTRING = 1594356317;
+			static const unsigned int OCLVOIDVALUE_OPERATION_EQUALS_VALUE = 3635156929;
+			static const unsigned int OCLVOIDVALUE_OPERATION_TOSTRING = 2031383210;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOclVoidValue_Class() const = 0;
@@ -291,12 +291,12 @@ namespace ocl::Values
 
 			// Begin Class OrderedSetTypeValue
 			//Class and Feature IDs 
-			static const long long ORDEREDSETTYPEVALUE_CLASS = 119598672;
+			static const unsigned long ORDEREDSETTYPEVALUE_CLASS = 119598672;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
-			static const int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 1906377029;
+			static const unsigned int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 2208028395;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOrderedSetTypeValue_Class() const = 0;
@@ -310,12 +310,12 @@ namespace ocl::Values
 
 			// Begin Class SequenceTypeValue
 			//Class and Feature IDs 
-			static const long long SEQUENCETYPEVALUE_CLASS = 695063447;
+			static const unsigned long SEQUENCETYPEVALUE_CLASS = 695063447;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
-			static const int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 1931133348;
+			static const unsigned int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 2149349627;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSequenceTypeValue_Class() const = 0;
@@ -329,12 +329,12 @@ namespace ocl::Values
 
 			// Begin Class SetTypeValue
 			//Class and Feature IDs 
-			static const long long SETTYPEVALUE_CLASS = 139010578;
+			static const unsigned long SETTYPEVALUE_CLASS = 139010578;
 			static const unsigned int SETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int SETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
-			static const int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 1324843311;
+			static const unsigned int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 836523242;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSetTypeValue_Class() const = 0;
@@ -348,7 +348,7 @@ namespace ocl::Values
 
 			// Begin Class StaticValue
 			//Class and Feature IDs 
-			static const long long STATICVALUE_CLASS = 565102340;
+			static const unsigned long STATICVALUE_CLASS = 565102340;
 			static const unsigned int STATICVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int STATICVALUE_CLASS_OPERATION_COUNT = 11;
 			
@@ -365,15 +365,15 @@ namespace ocl::Values
 
 			// Begin Class TupleValue
 			//Class and Feature IDs 
-			static const long long TUPLEVALUE_CLASS = 2104534521;
+			static const unsigned long TUPLEVALUE_CLASS = 2104534521;
 			static const unsigned int TUPLEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int TUPLEVALUE_CLASS_OPERATION_COUNT = 13;
 			
-			static const long long TUPLEVALUE_ATTRIBUTE_ELEMENTS = 7877962;
-			static const long long TUPLEVALUE_ATTRIBUTE_MODEL = 1645448795;
+			static const unsigned long TUPLEVALUE_ATTRIBUTE_ELEMENTS = 7877962;
+			static const unsigned long TUPLEVALUE_ATTRIBUTE_MODEL = 1645448795;
 			
-			static const int TUPLEVALUE_OPERATION_EQUALS_VALUE = 1507564928;
-			static const int TUPLEVALUE_OPERATION_TOSTRING = 1666165674;
+			static const unsigned int TUPLEVALUE_OPERATION_EQUALS_VALUE = 2778619799;
+			static const unsigned int TUPLEVALUE_OPERATION_TOSTRING = 4438792;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTupleValue_Class() const = 0;
@@ -390,13 +390,13 @@ namespace ocl::Values
 
 			// Begin Class UndefinedValue
 			//Class and Feature IDs 
-			static const long long UNDEFINEDVALUE_CLASS = 1732994739;
+			static const unsigned long UNDEFINEDVALUE_CLASS = 1732994739;
 			static const unsigned int UNDEFINEDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int UNDEFINEDVALUE_CLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int UNDEFINEDVALUE_OPERATION_EQUALS_VALUE = 1032526186;
-			static const int UNDEFINEDVALUE_OPERATION_TOSTRING = 1847553997;
+			static const unsigned int UNDEFINEDVALUE_OPERATION_EQUALS_VALUE = 1274785983;
+			static const unsigned int UNDEFINEDVALUE_OPERATION_TOSTRING = 1695102816;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUndefinedValue_Class() const = 0;

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/DataValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
 #include "uml/umlFactory.hpp"
@@ -37,7 +36,6 @@
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "uml/DataType.hpp"
 #include "uml/Classifier.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -334,20 +332,20 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::DataValue::_copy() : fUML::Semantics::Values::Value: 1504394808
+		// fUML::Semantics::SimpleClassifiers::DataValue::_copy() : fUML::Semantics::Values::Value: 3736200145
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::DataValue::getTypes() : uml::Classifier[*]: 133859574
+		// fUML::Semantics::SimpleClassifiers::DataValue::getTypes() : uml::Classifier[*]: 120141329
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::DataValue::new_() : fUML::Semantics::Values::Value: 2084136138
+		// fUML::Semantics::SimpleClassifiers::DataValue::new_() : fUML::Semantics::Values::Value: 1021578740
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

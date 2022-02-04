@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueListImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -266,7 +263,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::addValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue) : bool: 935741283
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::addValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue) : bool: 3582653359
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -277,7 +274,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::addValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue, int): 160454059
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::addValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue, int): 4225194188
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -293,13 +290,13 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			this->addValue(incoming_param_value,incoming_param_i);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::getValue() : fUML::Semantics::StructuredClassifiers::ExtensionalValue: 1588146499
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::getValue() : fUML::Semantics::StructuredClassifiers::ExtensionalValue: 295539058
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_GETVALUE:
 		{
 			result = eAnyObject(this->getValue(), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::removeValue(int) : std::string: 1425086792
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::removeValue(int) : std::string: 3954070346
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT:
 		{
 			//Retrieve input parameter 'i'
@@ -310,7 +307,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->removeValue(incoming_param_i),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::setValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue, int) : fUML::Semantics::Values::Value: 950923814
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::setValue(fUML::Semantics::StructuredClassifiers::ExtensionalValue, int) : fUML::Semantics::Values::Value: 1959097273
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT:
 		{
 			//Retrieve input parameter 'value'

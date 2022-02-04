@@ -1,6 +1,5 @@
 
 #include "ocl/Evaluations/impl/EvalEnvironmentImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "ocl/Values/UndefinedValue.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -380,7 +378,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// ocl::Evaluations::EvalEnvironment::add(ocl::Values::NameValueBinding): 1479022861
+		// ocl::Evaluations::EvalEnvironment::add(ocl::Values::NameValueBinding): 819092171
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'n'
@@ -391,7 +389,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			this->add(incoming_param_n);
 			break;
 		}
-		// ocl::Evaluations::EvalEnvironment::addAll(ocl::Values::NameValueBinding[*]): 1063443542
+		// ocl::Evaluations::EvalEnvironment::addAll(ocl::Values::NameValueBinding[*]): 2588656498
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'nvbs'
@@ -402,7 +400,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			this->addAll(incoming_param_nvbs);
 			break;
 		}
-		// ocl::Evaluations::EvalEnvironment::find(std::string) : ocl::Values::NameValueBinding: 946058698
+		// ocl::Evaluations::EvalEnvironment::find(std::string) : ocl::Values::NameValueBinding: 3222422135
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_FIND_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -413,7 +411,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAnyObject(this->find(incoming_param_name), ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS);
 			break;
 		}
-		// ocl::Evaluations::EvalEnvironment::getValueOf(std::string) : fUML::Semantics::Values::Value: 1187543967
+		// ocl::Evaluations::EvalEnvironment::getValueOf(std::string) : fUML::Semantics::Values::Value: 2836441165
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING:
 		{
 			//Retrieve input parameter 'n'
@@ -424,7 +422,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAnyObject(this->getValueOf(incoming_param_n), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// ocl::Evaluations::EvalEnvironment::replace(ocl::Values::NameValueBinding): 483482254
+		// ocl::Evaluations::EvalEnvironment::replace(ocl::Values::NameValueBinding): 185377546
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'n'

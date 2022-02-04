@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ClauseActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -365,45 +362,45 @@ Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ClauseActivation::getDecision() : fUML::Semantics::SimpleClassifiers::BooleanValue: 1084984079
+		// fUML::Semantics::Actions::ClauseActivation::getDecision() : fUML::Semantics::SimpleClassifiers::BooleanValue: 2567080846
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
 		{
 			result = eAnyObject(this->getDecision(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::getPredecessors() : fUML::Semantics::Actions::ClauseActivation[*]: 712913762
+		// fUML::Semantics::Actions::ClauseActivation::getPredecessors() : fUML::Semantics::Actions::ClauseActivation[*]: 1373824501
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getPredecessors();
 			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::getSuccessors() : fUML::Semantics::Actions::ClauseActivation[*]: 970094705
+		// fUML::Semantics::Actions::ClauseActivation::getSuccessors() : fUML::Semantics::Actions::ClauseActivation[*]: 3983311568
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getSuccessors();
 			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::isReady() : bool: 1218269216
+		// fUML::Semantics::Actions::ClauseActivation::isReady() : bool: 1310509787
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::recieveControl(): 1814524618
+		// fUML::Semantics::Actions::ClauseActivation::recieveControl(): 101593756
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
 		{
 			this->recieveControl();
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::runTest(): 507684446
+		// fUML::Semantics::Actions::ClauseActivation::runTest(): 386773557
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
 		{
 			this->runTest();
 			break;
 		}
-		// fUML::Semantics::Actions::ClauseActivation::selectBody(): 693250888
+		// fUML::Semantics::Actions::ClauseActivation::selectBody(): 3950615986
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
 		{
 			this->selectBody();

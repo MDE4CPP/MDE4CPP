@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EFactoryImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,25 +18,22 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "ecore/EObjectContainer.hpp"
 #include "ecore/EObjectAny.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EOperation.hpp"
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -744,7 +740,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// ecore::EFactory::convertToString(ecore::EDataType, Any) : std::string {const}: 776190528
+		// ecore::EFactory::convertToString(ecore::EDataType, Any) : std::string {const}: 197002689
 		case ecorePackage::EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -760,7 +756,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue),0,false);
 			break;
 		}
-		// ecore::EFactory::create(ecore::EClass) : ecore::EObject {const}: 2062111577
+		// ecore::EFactory::create(ecore::EClass) : ecore::EObject {const}: 3809046360
 		case ecorePackage::EFACTORY_OPERATION_CREATE_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -771,7 +767,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAnyObject(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 1793041850
+		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 351752421
 		case ecorePackage::EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING:
 		{
 			//Retrieve input parameter 'eDataType'

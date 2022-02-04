@@ -1,6 +1,5 @@
 
 #include "uml/impl/CallActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -582,7 +578,7 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::CallAction::argument_pins(Any, std::map) : bool: 1200715811
+		// uml::CallAction::argument_pins(Any, std::map) : bool: 2885155724
 		case umlPackage::CALLACTION_OPERATION_ARGUMENT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -598,21 +594,21 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->argument_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CallAction::inputParameters() : uml::Parameter[*]: 1722506140
+		// uml::CallAction::inputParameters() : uml::Parameter[*]: 105388692
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::CallAction::outputParameters() : uml::Parameter[*]: 138816985
+		// uml::CallAction::outputParameters() : uml::Parameter[*]: 4183905689
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::CallAction::result_pins(Any, std::map) : bool: 1421824785
+		// uml::CallAction::result_pins(Any, std::map) : bool: 123365832
 		case umlPackage::CALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -628,7 +624,7 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CallAction::synchronous_call(Any, std::map) : bool: 1233077375
+		// uml::CallAction::synchronous_call(Any, std::map) : bool: 1601333858
 		case umlPackage::CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

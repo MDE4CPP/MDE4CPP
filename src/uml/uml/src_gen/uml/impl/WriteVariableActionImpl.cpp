@@ -1,6 +1,5 @@
 
 #include "uml/impl/WriteVariableActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -434,7 +430,7 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<
  
   	switch(operationID)
 	{
-		// uml::WriteVariableAction::multiplicity(Any, std::map) : bool: 438779608
+		// uml::WriteVariableAction::multiplicity(Any, std::map) : bool: 542146666
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -450,7 +446,7 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::WriteVariableAction::value_type(Any, std::map) : bool: 1745615647
+		// uml::WriteVariableAction::value_type(Any, std::map) : bool: 2138124691
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

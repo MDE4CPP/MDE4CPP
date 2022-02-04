@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <algorithm>
 #include <iterator>
@@ -56,7 +54,6 @@
 #include "uml/umlFactory.hpp"
 #include "uml/ForkNode.hpp"
 #include "uml/Activity.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1188,7 +1185,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ActionActivation::addOutgoingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 742629207
+		// fUML::Semantics::Actions::ActionActivation::addOutgoingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 1241788814
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -1199,7 +1196,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->addOutgoingEdge(incoming_param_edge);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::addPinActivation(fUML::Semantics::Actions::PinActivation): 1470350045
+		// fUML::Semantics::Actions::ActionActivation::addPinActivation(fUML::Semantics::Actions::PinActivation): 3005291216
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDPINACTIVATION_PINACTIVATION:
 		{
 			//Retrieve input parameter 'pinActivation'
@@ -1210,26 +1207,26 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->addPinActivation(incoming_param_pinActivation);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 1326769552
+		// fUML::Semantics::Actions::ActionActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 3464717817
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_COMPLETEACTION:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->completeAction();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::createNodeActivations(): 1517171940
+		// fUML::Semantics::Actions::ActionActivation::createNodeActivations(): 1074089216
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::doAction(): 1791647146
+		// fUML::Semantics::Actions::ActionActivation::doAction(): 700884178
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1802709999
+		// fUML::Semantics::Actions::ActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1791268998
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -1240,7 +1237,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::getTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 2138916189
+		// fUML::Semantics::Actions::ActionActivation::getTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 3624516414
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_GETTOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1252,19 +1249,19 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::isFirng() : bool: 1010960154
+		// fUML::Semantics::Actions::ActionActivation::isFirng() : bool: 392760869
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISFIRNG:
 		{
 			result = eAny(this->isFirng(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::isReady() : bool: 1902692005
+		// fUML::Semantics::Actions::ActionActivation::isReady() : bool: 215874108
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 353708760
+		// fUML::Semantics::Actions::ActionActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 655850474
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -1275,7 +1272,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::makeBooleanValue(bool) : fUML::Semantics::SimpleClassifiers::BooleanValue: 347406919
+		// fUML::Semantics::Actions::ActionActivation::makeBooleanValue(bool) : fUML::Semantics::SimpleClassifiers::BooleanValue: 2643519300
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_MAKEBOOLEANVALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -1286,7 +1283,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->makeBooleanValue(incoming_param_value), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::putToken(uml::OutputPin, fUML::Semantics::Values::Value): 1698981854
+		// fUML::Semantics::Actions::ActionActivation::putToken(uml::OutputPin, fUML::Semantics::Values::Value): 1450940469
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKEN_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1302,7 +1299,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->putToken(incoming_param_pin,incoming_param_value);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::putTokens(uml::OutputPin, fUML::Semantics::Values::Value[*]): 1943011643
+		// fUML::Semantics::Actions::ActionActivation::putTokens(uml::OutputPin, fUML::Semantics::Values::Value[*]): 2426696642
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKENS_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1318,7 +1315,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->putTokens(incoming_param_pin,incoming_param_values);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::retrievePinActivation(uml::Pin) : fUML::Semantics::Actions::PinActivation: 180803235
+		// fUML::Semantics::Actions::ActionActivation::retrievePinActivation(uml::Pin) : fUML::Semantics::Actions::PinActivation: 1625370816
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RETRIEVEPINACTIVATION_PIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1329,26 +1326,26 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAnyObject(this->retrievePinActivation(incoming_param_pin), fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::run(): 1723642497
+		// fUML::Semantics::Actions::ActionActivation::run(): 4008736986
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::sendOffers(): 2099243507
+		// fUML::Semantics::Actions::ActionActivation::sendOffers(): 2377121568
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1433380378
+		// fUML::Semantics::Actions::ActionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 4135421142
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::takeTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 260635550
+		// fUML::Semantics::Actions::ActionActivation::takeTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 175770991
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKETOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1360,13 +1357,13 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::terminate(): 1477472746
+		// fUML::Semantics::Actions::ActionActivation::terminate(): 1071084434
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::valueParticipatesInLink(fUML::Semantics::Values::Value, fUML::Semantics::StructuredClassifiers::Link) : bool: 1676355490
+		// fUML::Semantics::Actions::ActionActivation::valueParticipatesInLink(fUML::Semantics::Values::Value, fUML::Semantics::StructuredClassifiers::Link) : bool: 3425114248
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_VALUEPARTICIPATESINLINK_VALUE_LINK:
 		{
 			//Retrieve input parameter 'value'

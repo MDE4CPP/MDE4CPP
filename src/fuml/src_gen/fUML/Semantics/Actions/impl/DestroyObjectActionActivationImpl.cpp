@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,24 +18,23 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/Property.hpp"
 #include "uml/DestroyObjectAction.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -483,7 +481,7 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1843594424
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1147845695
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -504,13 +502,13 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
 			break;
 		}
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::doAction(): 1060442259
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::doAction(): 393014891
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 1102528616
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 4063746999
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
 		{
 			//Retrieve input parameter 'reference'

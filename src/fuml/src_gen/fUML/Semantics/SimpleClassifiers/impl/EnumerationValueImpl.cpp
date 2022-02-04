@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/EnumerationValueImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,14 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "uml/Class.hpp"
@@ -37,7 +36,6 @@
 #include "uml/InstanceSpecification.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/umlFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -411,13 +409,13 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::_copy() : fUML::Semantics::Values::Value: 2039932483
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::_copy() : fUML::Semantics::Values::Value: 412360958
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::equals(fUML::Semantics::Values::Value) : bool: 1509384347
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::equals(fUML::Semantics::Values::Value) : bool: 594639323
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -428,26 +426,26 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::getTypes() : uml::Classifier[*]: 850869043
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::getTypes() : uml::Classifier[*]: 1927916094
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::new_() : fUML::Semantics::Values::Value: 873040755
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::new_() : fUML::Semantics::Values::Value: 2131877013
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::specify() : uml::ValueSpecification: 1719232753
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::specify() : uml::ValueSpecification: 2045018959
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
 		{
 			result = eAnyObject(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::SimpleClassifiers::EnumerationValue::toString() : std::string: 1081001181
+		// fUML::Semantics::SimpleClassifiers::EnumerationValue::toString() : std::string: 3964346320
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString(),0,false);

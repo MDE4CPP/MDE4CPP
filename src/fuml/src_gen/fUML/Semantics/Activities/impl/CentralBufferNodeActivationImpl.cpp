@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/CentralBufferNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -258,7 +256,7 @@ Any CentralBufferNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::CentralBufferNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 2134504634
+		// fUML::Semantics::Activities::CentralBufferNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 3196789593
 		case ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'

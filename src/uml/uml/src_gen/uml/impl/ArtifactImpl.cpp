@@ -1,6 +1,5 @@
 
 #include "uml/impl/ArtifactImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -991,7 +988,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::Artifact::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 330725447
+		// uml::Artifact::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2148983055
 		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
@@ -1017,7 +1014,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::Artifact::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1664248193
+		// uml::Artifact::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 153390480
 		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'

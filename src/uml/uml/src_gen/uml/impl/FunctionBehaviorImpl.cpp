@@ -1,6 +1,5 @@
 
 #include "uml/impl/FunctionBehaviorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -533,7 +529,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::FunctionBehavior::hasAllDataTypeAttributes(uml::DataType) : bool: 534549777
+		// uml::FunctionBehavior::hasAllDataTypeAttributes(uml::DataType) : bool: 206268165
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE:
 		{
 			//Retrieve input parameter 'd'
@@ -544,7 +540,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d),0,false);
 			break;
 		}
-		// uml::FunctionBehavior::one_output_parameter(Any, std::map) : bool: 1588666836
+		// uml::FunctionBehavior::one_output_parameter(Any, std::map) : bool: 22939982
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -560,7 +556,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FunctionBehavior::types_of_parameters(Any, std::map) : bool: 719673523
+		// uml::FunctionBehavior::types_of_parameters(Any, std::map) : bool: 166402892
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

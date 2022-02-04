@@ -1,6 +1,5 @@
 
 #include "uml/impl/TemplateBindingImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -566,7 +562,7 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// uml::TemplateBinding::one_parameter_substitution(Any, std::map) : bool: 654929774
+		// uml::TemplateBinding::one_parameter_substitution(Any, std::map) : bool: 1714852527
 		case umlPackage::TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -582,7 +578,7 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TemplateBinding::parameter_substitution_formal(Any, std::map) : bool: 1000422805
+		// uml::TemplateBinding::parameter_substitution_formal(Any, std::map) : bool: 97895006
 		case umlPackage::TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

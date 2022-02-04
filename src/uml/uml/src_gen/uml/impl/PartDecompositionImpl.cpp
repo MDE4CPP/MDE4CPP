@@ -1,6 +1,5 @@
 
 #include "uml/impl/PartDecompositionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -333,7 +329,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::PartDecomposition::assume(Any, std::map) : bool: 827444235
+		// uml::PartDecomposition::assume(Any, std::map) : bool: 2132247724
 		case umlPackage::PARTDECOMPOSITION_OPERATION_ASSUME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -349,7 +345,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->assume(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::PartDecomposition::commutativity_of_decomposition(Any, std::map) : bool: 1212458071
+		// uml::PartDecomposition::commutativity_of_decomposition(Any, std::map) : bool: 2415887113
 		case umlPackage::PARTDECOMPOSITION_OPERATION_COMMUTATIVITY_OF_DECOMPOSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -365,7 +361,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->commutativity_of_decomposition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::PartDecomposition::parts_of_internal_structures(Any, std::map) : bool: 808457235
+		// uml::PartDecomposition::parts_of_internal_structures(Any, std::map) : bool: 4164163091
 		case umlPackage::PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

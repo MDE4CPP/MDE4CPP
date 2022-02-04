@@ -1,6 +1,5 @@
 
 #include "uml/impl/NodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -645,7 +641,7 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
  
   	switch(operationID)
 	{
-		// uml::Node::createCommunicationPath(bool, uml::AggregationKind, std::string, int, int, uml::Node, bool, uml::AggregationKind, std::string, int, int) : uml::CommunicationPath: 584788215
+		// uml::Node::createCommunicationPath(bool, uml::AggregationKind, std::string, int, int, uml::Node, bool, uml::AggregationKind, std::string, int, int) : uml::CommunicationPath: 2087191607
 		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
@@ -706,14 +702,14 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			result = eAnyObject(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
-		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 1487234918
+		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 810632424
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
 			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
 			return eAnyBag(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
-		// uml::Node::internal_structure(Any, std::map) : bool: 3509535
+		// uml::Node::internal_structure(Any, std::map) : bool: 1965611485
 		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

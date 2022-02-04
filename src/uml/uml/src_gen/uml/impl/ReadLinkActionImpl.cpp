@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadLinkActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -483,7 +479,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::ReadLinkAction::compatible_multiplicity(Any, std::map) : bool: 1004154613
+		// uml::ReadLinkAction::compatible_multiplicity(Any, std::map) : bool: 524559594
 		case umlPackage::READLINKACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -499,7 +495,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->compatible_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::navigable_open_end(Any, std::map) : bool: 501248652
+		// uml::ReadLinkAction::navigable_open_end(Any, std::map) : bool: 3877559242
 		case umlPackage::READLINKACTION_OPERATION_NAVIGABLE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -515,7 +511,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->navigable_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::one_open_end(Any, std::map) : bool: 111068527
+		// uml::ReadLinkAction::one_open_end(Any, std::map) : bool: 3737340267
 		case umlPackage::READLINKACTION_OPERATION_ONE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -531,14 +527,14 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->one_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::openEnd() : uml::Property[*]: 397079616
+		// uml::ReadLinkAction::openEnd() : uml::Property[*]: 4152235483
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->openEnd();
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1848164464
+		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1660612367
 		case umlPackage::READLINKACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -554,7 +550,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::visibility(Any, std::map) : bool: 1775556670
+		// uml::ReadLinkAction::visibility(Any, std::map) : bool: 138000618
 		case umlPackage::READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

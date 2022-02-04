@@ -1,6 +1,5 @@
 
 #include "uml/impl/UnmarshallActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -646,7 +642,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::UnmarshallAction::multiplicity_of_object(Any, std::map) : bool: 621569527
+		// uml::UnmarshallAction::multiplicity_of_object(Any, std::map) : bool: 3775595378
 		case umlPackage::UNMARSHALLACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -662,7 +658,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UnmarshallAction::number_of_result(Any, std::map) : bool: 1876449113
+		// uml::UnmarshallAction::number_of_result(Any, std::map) : bool: 2179134906
 		case umlPackage::UNMARSHALLACTION_OPERATION_NUMBER_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -678,7 +674,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->number_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UnmarshallAction::object_type(Any, std::map) : bool: 1616753275
+		// uml::UnmarshallAction::object_type(Any, std::map) : bool: 4019536035
 		case umlPackage::UNMARSHALLACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -694,7 +690,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UnmarshallAction::structural_feature(Any, std::map) : bool: 1250827823
+		// uml::UnmarshallAction::structural_feature(Any, std::map) : bool: 1053679643
 		case umlPackage::UNMARSHALLACTION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -710,7 +706,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::UnmarshallAction::type_ordering_and_multiplicity(Any, std::map) : bool: 900645369
+		// uml::UnmarshallAction::type_ordering_and_multiplicity(Any, std::map) : bool: 1424955868
 		case umlPackage::UNMARSHALLACTION_OPERATION_TYPE_ORDERING_AND_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

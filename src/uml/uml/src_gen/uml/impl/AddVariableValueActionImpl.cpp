@@ -1,6 +1,5 @@
 
 #include "uml/impl/AddVariableValueActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -492,7 +488,7 @@ Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// uml::AddVariableValueAction::insertAt_pin(Any, std::map) : bool: 39023039
+		// uml::AddVariableValueAction::insertAt_pin(Any, std::map) : bool: 1031733752
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -508,7 +504,7 @@ Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AddVariableValueAction::required_value(Any, std::map) : bool: 1623846851
+		// uml::AddVariableValueAction::required_value(Any, std::map) : bool: 3962080929
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

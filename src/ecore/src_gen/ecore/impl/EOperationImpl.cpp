@@ -1,6 +1,5 @@
 
 #include "ecore/impl/EOperationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -749,7 +746,7 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// ecore::EOperation::isOverrideOf(ecore::EOperation) : bool {const}: 861941010
+		// ecore::EOperation::isOverrideOf(ecore::EOperation) : bool {const}: 4079142759
 		case ecorePackage::EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION:
 		{
 			//Retrieve input parameter 'someOperation'

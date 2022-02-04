@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CallEventOccurrenceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <memory>
 #include "uml/Trigger.hpp"
 #include "uml/CallEvent.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -341,20 +339,20 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getOperation() : uml::Operation: 1654121439
+		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getOperation() : uml::Operation: 1750182594
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETOPERATION:
 		{
 			result = eAnyObject(this->getOperation(), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1038563063
+		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2035047579
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventOccurrence::match(uml::Trigger) : bool: 1118833879
+		// fUML::Semantics::CommonBehavior::CallEventOccurrence::match(uml::Trigger) : bool: 3680623661
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
 		{
 			//Retrieve input parameter 'trigger'
@@ -365,13 +363,13 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			result = eAny(this->match(incoming_param_trigger),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventOccurrence::releaseCaller(): 460125797
+		// fUML::Semantics::CommonBehavior::CallEventOccurrence::releaseCaller(): 4220461060
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER:
 		{
 			this->releaseCaller();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventOccurrence::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1021816772
+		// fUML::Semantics::CommonBehavior::CallEventOccurrence::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 2726106774
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'parameterValues'

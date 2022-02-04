@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -38,7 +37,6 @@
 #include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -519,13 +517,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::Object::_copy() : fUML::Semantics::Values::Value: 1873295857
+		// fUML::Semantics::StructuredClassifiers::Object::_copy() : fUML::Semantics::Values::Value: 3671744428
 		case StructuredClassifiersPackage::OBJECT_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::_register(fUML::Semantics::CommonBehavior::EventAccepter): 124401504
+		// fUML::Semantics::StructuredClassifiers::Object::_register(fUML::Semantics::CommonBehavior::EventAccepter): 1864202817
 		case StructuredClassifiersPackage::OBJECT_OPERATION__REGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -536,13 +534,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			this->_register(incoming_param_accepter);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::destroy(): 317518727
+		// fUML::Semantics::StructuredClassifiers::Object::destroy(): 460122578
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DESTROY:
 		{
 			this->destroy();
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 961736535
+		// fUML::Semantics::StructuredClassifiers::Object::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 2139786497
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DISPATCH_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -553,13 +551,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAnyObject(this->dispatch(incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::new_() : fUML::Semantics::Values::Value: 387331642
+		// fUML::Semantics::StructuredClassifiers::Object::new_() : fUML::Semantics::Values::Value: 1530730731
 		case StructuredClassifiersPackage::OBJECT_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 1733005088
+		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 3964109098
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -570,7 +568,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			this->send(incoming_param_signalInstance);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::CommonBehavior::EventOccurrence): 878633364
+		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::CommonBehavior::EventOccurrence): 2448917045
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -581,7 +579,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			this->send(incoming_param_eventOccurrence);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 31089561
+		// fUML::Semantics::StructuredClassifiers::Object::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 3045812578
 		case StructuredClassifiersPackage::OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -597,7 +595,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::Object::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1522780229
+		// fUML::Semantics::StructuredClassifiers::Object::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1701490649
 		case StructuredClassifiersPackage::OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'

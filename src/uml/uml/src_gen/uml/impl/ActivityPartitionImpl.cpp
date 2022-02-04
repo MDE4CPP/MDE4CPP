@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActivityPartitionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -909,7 +905,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::ActivityPartition::dimension_not_contained(Any, std::map) : bool: 1076567983
+		// uml::ActivityPartition::dimension_not_contained(Any, std::map) : bool: 1628990959
 		case umlPackage::ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -925,7 +921,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->dimension_not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityPartition::represents_classifier(Any, std::map) : bool: 639011092
+		// uml::ActivityPartition::represents_classifier(Any, std::map) : bool: 1131267184
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -941,7 +937,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->represents_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityPartition::represents_property(Any, std::map) : bool: 511389922
+		// uml::ActivityPartition::represents_property(Any, std::map) : bool: 1297206016
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -957,7 +953,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->represents_property(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityPartition::represents_property_and_is_contained(Any, std::map) : bool: 1105654129
+		// uml::ActivityPartition::represents_property_and_is_contained(Any, std::map) : bool: 637234829
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

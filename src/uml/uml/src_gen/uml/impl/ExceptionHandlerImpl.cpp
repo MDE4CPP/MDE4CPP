@@ -1,6 +1,5 @@
 
 #include "uml/impl/ExceptionHandlerImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -520,7 +516,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::ExceptionHandler::edge_source_target(Any, std::map) : bool: 2069883868
+		// uml::ExceptionHandler::edge_source_target(Any, std::map) : bool: 359316574
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -536,7 +532,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::exception_input_type(Any, std::map) : bool: 246495643
+		// uml::ExceptionHandler::exception_input_type(Any, std::map) : bool: 3735675314
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -552,7 +548,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::handler_body_edges(Any, std::map) : bool: 925333255
+		// uml::ExceptionHandler::handler_body_edges(Any, std::map) : bool: 3689633901
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -568,7 +564,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::handler_body_owner(Any, std::map) : bool: 1200757114
+		// uml::ExceptionHandler::handler_body_owner(Any, std::map) : bool: 3173316564
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -584,7 +580,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::one_input(Any, std::map) : bool: 2043514136
+		// uml::ExceptionHandler::one_input(Any, std::map) : bool: 2531493072
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -600,7 +596,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::output_pins(Any, std::map) : bool: 1444145046
+		// uml::ExceptionHandler::output_pins(Any, std::map) : bool: 4230900057
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

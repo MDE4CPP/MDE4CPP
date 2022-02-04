@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
@@ -45,7 +44,6 @@
 #include "uml/ActivityParameterNode.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -513,25 +511,25 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ActivityExecution::_copy() : fUML::Semantics::Values::Value: 268283450
+		// fUML::Semantics::Activities::ActivityExecution::_copy() : fUML::Semantics::Values::Value: 2012185658
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityExecution::execute(): 1727608078
+		// fUML::Semantics::Activities::ActivityExecution::execute(): 2440252333
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityExecution::new_() : fUML::Semantics::Values::Value: 929802882
+		// fUML::Semantics::Activities::ActivityExecution::new_() : fUML::Semantics::Values::Value: 4166139257
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityExecution::terminate(): 679246932
+		// fUML::Semantics::Activities::ActivityExecution::terminate(): 1105822471
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();

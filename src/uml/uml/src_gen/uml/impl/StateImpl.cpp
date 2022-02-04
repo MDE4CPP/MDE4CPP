@@ -1,6 +1,5 @@
 
 #include "uml/impl/StateImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1266,7 +1262,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// uml::State::composite_states(Any, std::map) : bool: 1735758508
+		// uml::State::composite_states(Any, std::map) : bool: 3266078165
 		case umlPackage::STATE_OPERATION_COMPOSITE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1282,7 +1278,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->composite_states(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::State::destinations_or_sources_of_transitions(Any, std::map) : bool: 694309769
+		// uml::State::destinations_or_sources_of_transitions(Any, std::map) : bool: 1353658856
 		case umlPackage::STATE_OPERATION_DESTINATIONS_OR_SOURCES_OF_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1298,7 +1294,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->destinations_or_sources_of_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::State::entry_or_exit(Any, std::map) : bool: 927974608
+		// uml::State::entry_or_exit(Any, std::map) : bool: 4262428494
 		case umlPackage::STATE_OPERATION_ENTRY_OR_EXIT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1314,37 +1310,37 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->entry_or_exit(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::State::isComposite() : bool: 1887131105
+		// uml::State::isComposite() : bool: 3032748621
 		case umlPackage::STATE_OPERATION_ISCOMPOSITE:
 		{
 			result = eAny(this->isComposite(),0,false);
 			break;
 		}
-		// uml::State::isOrthogonal() : bool: 1848860248
+		// uml::State::isOrthogonal() : bool: 2196397295
 		case umlPackage::STATE_OPERATION_ISORTHOGONAL:
 		{
 			result = eAny(this->isOrthogonal(),0,false);
 			break;
 		}
-		// uml::State::isSimple() : bool: 993070579
+		// uml::State::isSimple() : bool: 1376170544
 		case umlPackage::STATE_OPERATION_ISSIMPLE:
 		{
 			result = eAny(this->isSimple(),0,false);
 			break;
 		}
-		// uml::State::isSubmachineState() : bool: 1954820373
+		// uml::State::isSubmachineState() : bool: 3460868526
 		case umlPackage::STATE_OPERATION_ISSUBMACHINESTATE:
 		{
 			result = eAny(this->isSubmachineState(),0,false);
 			break;
 		}
-		// uml::State::redefinitionContext() : uml::Classifier: 871920175
+		// uml::State::redefinitionContext() : uml::Classifier: 2354287234
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// uml::State::submachine_or_regions(Any, std::map) : bool: 1111971003
+		// uml::State::submachine_or_regions(Any, std::map) : bool: 1422616656
 		case umlPackage::STATE_OPERATION_SUBMACHINE_OR_REGIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1360,7 +1356,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->submachine_or_regions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::State::submachine_states(Any, std::map) : bool: 2047311099
+		// uml::State::submachine_states(Any, std::map) : bool: 3284388305
 		case umlPackage::STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

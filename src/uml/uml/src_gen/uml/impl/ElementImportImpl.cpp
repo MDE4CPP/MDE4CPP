@@ -1,6 +1,5 @@
 
 #include "uml/impl/ElementImportImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -554,13 +550,13 @@ Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// uml::ElementImport::getName() : std::string: 991755702
+		// uml::ElementImport::getName() : std::string: 2948686225
 		case umlPackage::ELEMENTIMPORT_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 533790703
+		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 3938107701
 		case umlPackage::ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -576,7 +572,7 @@ Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 336841407
+		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 3497731579
 		case umlPackage::ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

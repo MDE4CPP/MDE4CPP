@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,25 +18,23 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "ecore/EClass.hpp"
 #include "fUML/Semantics/Activities/ForkedToken.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/Class.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1057,7 +1054,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ActivityNodeActivation::addIncomingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 52378121
+		// fUML::Semantics::Activities::ActivityNodeActivation::addIncomingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 2329513027
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -1068,7 +1065,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->addIncomingEdge(incoming_param_edge);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::addOutgoingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 570001578
+		// fUML::Semantics::Activities::ActivityNodeActivation::addOutgoingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 3040559551
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -1079,7 +1076,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->addOutgoingEdge(incoming_param_edge);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::addToken(fUML::Semantics::Activities::Token): 1812265104
+		// fUML::Semantics::Activities::ActivityNodeActivation::addToken(fUML::Semantics::Activities::Token): 1438112633
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -1090,7 +1087,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->addToken(incoming_param_token);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::addTokens(fUML::Semantics::Activities::Token[*]): 1110687853
+		// fUML::Semantics::Activities::ActivityNodeActivation::addTokens(fUML::Semantics::Activities::Token[*]): 1994943910
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDTOKENS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -1101,25 +1098,25 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->addTokens(incoming_param_tokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::clearTokens(): 294271267
+		// fUML::Semantics::Activities::ActivityNodeActivation::clearTokens(): 305402021
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::createEdgeInstances(): 661826812
+		// fUML::Semantics::Activities::ActivityNodeActivation::createEdgeInstances(): 2189392667
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES:
 		{
 			this->createEdgeInstances();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::createNodeActivations(): 249914126
+		// fUML::Semantics::Activities::ActivityNodeActivation::createNodeActivations(): 1346898969
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1249178361
+		// fUML::Semantics::Activities::ActivityNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 3892530199
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -1130,25 +1127,25 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution: 2125708528
+		// fUML::Semantics::Activities::ActivityNodeActivation::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution: 415943298
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION:
 		{
 			result = eAnyObject(this->getActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : fUML::Semantics::StructuredClassifiers::Object: 786203858
+		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : fUML::Semantics::StructuredClassifiers::Object: 769426444
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
 			result = eAnyObject(this->getExecutionContext(), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionLocus() : fUML::Semantics::Loci::Locus: 1480581087
+		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionLocus() : fUML::Semantics::Loci::Locus: 4097970094
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS:
 		{
 			result = eAnyObject(this->getExecutionLocus(), fUML::Semantics::Loci::LociPackage::LOCUS_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 774473218
+		// fUML::Semantics::Activities::ActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 4201354494
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1159,26 +1156,26 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getRunning() : bool: 858692644
+		// fUML::Semantics::Activities::ActivityNodeActivation::getRunning() : bool: 254630437
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING:
 		{
 			result = eAny(this->getRunning(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getTokens() : fUML::Semantics::Activities::Token[*]: 1779350108
+		// fUML::Semantics::Activities::ActivityNodeActivation::getTokens() : fUML::Semantics::Activities::Token[*]: 3137100059
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::isReady() : bool: 1093902867
+		// fUML::Semantics::Activities::ActivityNodeActivation::isReady() : bool: 2594491909
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 1423480990
+		// fUML::Semantics::Activities::ActivityNodeActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 2410514251
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstances'
@@ -1189,13 +1186,13 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->isSourceFor(incoming_param_edgeInstances),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::receiveOffer(): 2002260441
+		// fUML::Semantics::Activities::ActivityNodeActivation::receiveOffer(): 4022154831
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 753234615
+		// fUML::Semantics::Activities::ActivityNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 2530926611
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -1206,19 +1203,19 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAny(this->removeToken(incoming_param_token),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::resume(): 295698417
+		// fUML::Semantics::Activities::ActivityNodeActivation::resume(): 1522436987
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RESUME:
 		{
 			this->resume();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::run(): 603025050
+		// fUML::Semantics::Activities::ActivityNodeActivation::run(): 3682367227
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::sendOffers(fUML::Semantics::Activities::Token[*]): 839493281
+		// fUML::Semantics::Activities::ActivityNodeActivation::sendOffers(fUML::Semantics::Activities::Token[*]): 3528690584
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -1229,27 +1226,27 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			this->sendOffers(incoming_param_tokens);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::suspend(): 1911522686
+		// fUML::Semantics::Activities::ActivityNodeActivation::suspend(): 1833763532
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_SUSPEND:
 		{
 			this->suspend();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1366572667
+		// fUML::Semantics::Activities::ActivityNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 4181507751
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::takeTokens() : fUML::Semantics::Activities::Token[*]: 739906654
+		// fUML::Semantics::Activities::ActivityNodeActivation::takeTokens() : fUML::Semantics::Activities::Token[*]: 1423548432
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::terminate(): 686579592
+		// fUML::Semantics::Activities::ActivityNodeActivation::terminate(): 1536647187
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

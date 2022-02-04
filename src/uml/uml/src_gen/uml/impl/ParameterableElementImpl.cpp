@@ -1,6 +1,5 @@
 
 #include "uml/impl/ParameterableElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -372,7 +369,7 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// uml::ParameterableElement::isCompatibleWith(uml::ParameterableElement) : bool: 1783372574
+		// uml::ParameterableElement::isCompatibleWith(uml::ParameterableElement) : bool: 2979209573
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
 		{
 			//Retrieve input parameter 'p'
@@ -383,7 +380,7 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->isCompatibleWith(incoming_param_p),0,false);
 			break;
 		}
-		// uml::ParameterableElement::isTemplateParameter() : bool: 414546068
+		// uml::ParameterableElement::isTemplateParameter() : bool: 2453023377
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
 		{
 			result = eAny(this->isTemplateParameter(),0,false);

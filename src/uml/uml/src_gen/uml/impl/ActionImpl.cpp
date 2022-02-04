@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -740,21 +737,21 @@ Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Action::allActions() : uml::Action[*]: 547817094
+		// uml::Action::allActions() : uml::Action[*]: 666610799
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
 			std::shared_ptr<Bag<uml::Action> > resultList = this->allActions();
 			return eAnyBag(resultList,uml::umlPackage::ACTION_CLASS);
 			break;
 		}
-		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1538297391
+		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1529799585
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->allOwnedNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
-		// uml::Action::containingBehavior() : uml::Behavior: 959584979
+		// uml::Action::containingBehavior() : uml::Behavior: 3666051963
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
 			result = eAnyObject(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS);

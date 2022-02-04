@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -217,7 +214,7 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::SemanticStrategy::getName() : std::string: 1330583593
+		// fUML::Semantics::Loci::SemanticStrategy::getName() : std::string: 3310607623
 		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);

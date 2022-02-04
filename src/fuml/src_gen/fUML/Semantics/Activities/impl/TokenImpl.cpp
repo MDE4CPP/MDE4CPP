@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,22 +20,20 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 
 #include "uml/ActivityNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -388,13 +385,13 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::Token::_copy() : fUML::Semantics::Activities::Token: 1757807572
+		// fUML::Semantics::Activities::Token::_copy() : fUML::Semantics::Activities::Token: 2860108519
 		case ActivitiesPackage::TOKEN_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::equals(fUML::Semantics::Activities::Token) : bool: 1923944023
+		// fUML::Semantics::Activities::Token::equals(fUML::Semantics::Activities::Token) : bool: 378713648
 		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -405,19 +402,19 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 1836665410
+		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 3442224848
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
 			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::isControl() : bool: 2050511719
+		// fUML::Semantics::Activities::Token::isControl() : bool: 2683482097
 		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl(),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::transfer(fUML::Semantics::Activities::ActivityNodeActivation) : fUML::Semantics::Activities::Token: 1196367815
+		// fUML::Semantics::Activities::Token::transfer(fUML::Semantics::Activities::ActivityNodeActivation) : fUML::Semantics::Activities::Token: 2200060239
 		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'holder'
@@ -428,7 +425,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAnyObject(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::withdraw(): 1727020278
+		// fUML::Semantics::Activities::Token::withdraw(): 81284716
 		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();

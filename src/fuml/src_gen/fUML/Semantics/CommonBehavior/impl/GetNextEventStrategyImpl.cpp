@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/GetNextEventStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,16 +20,14 @@
 #include <stdexcept>
 
 
-
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -234,13 +231,13 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::getName() : std::string: 905122154
+		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::getName() : std::string: 1005896878
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::SimpleClassifiers::SignalInstance: 51332097
+		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::SimpleClassifiers::SignalInstance: 3137357395
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
 		{
 			//Retrieve input parameter 'objectActivation'

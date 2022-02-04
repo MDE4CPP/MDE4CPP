@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralRealImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,13 +408,13 @@ Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
  
   	switch(operationID)
 	{
-		// uml::LiteralReal::isComputable() : bool: 1259887142
+		// uml::LiteralReal::isComputable() : bool: 2284792698
 		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		// uml::LiteralReal::realValue() : double: 998704641
+		// uml::LiteralReal::realValue() : double: 1756286746
 		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
 		{
 			result = eAny(this->realValue(),0,false);

@@ -1,6 +1,5 @@
 
 #include "uml/impl/InteractionUseImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -733,7 +729,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::InteractionUse::all_lifelines(Any, std::map) : bool: 558716346
+		// uml::InteractionUse::all_lifelines(Any, std::map) : bool: 1011637994
 		case umlPackage::INTERACTIONUSE_OPERATION_ALL_LIFELINES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -749,7 +745,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionUse::arguments_are_constants(Any, std::map) : bool: 575523977
+		// uml::InteractionUse::arguments_are_constants(Any, std::map) : bool: 733280904
 		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_ARE_CONSTANTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -765,7 +761,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionUse::arguments_correspond_to_parameters(Any, std::map) : bool: 1624485963
+		// uml::InteractionUse::arguments_correspond_to_parameters(Any, std::map) : bool: 3043306836
 		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_CORRESPOND_TO_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -781,7 +777,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionUse::gates_match(Any, std::map) : bool: 1291555823
+		// uml::InteractionUse::gates_match(Any, std::map) : bool: 1724788051
 		case umlPackage::INTERACTIONUSE_OPERATION_GATES_MATCH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -797,7 +793,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionUse::returnValueRecipient_coverage(Any, std::map) : bool: 272508456
+		// uml::InteractionUse::returnValueRecipient_coverage(Any, std::map) : bool: 1468221886
 		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUERECIPIENT_COVERAGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -813,7 +809,7 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionUse::returnValue_type_recipient_correspondence(Any, std::map) : bool: 1838270170
+		// uml::InteractionUse::returnValue_type_recipient_correspondence(Any, std::map) : bool: 31244600
 		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

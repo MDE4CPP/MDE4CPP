@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -284,7 +282,7 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value[*], int) : int: 665074260
+		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value[*], int) : int: 202391032
 		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
 		{
 			//Retrieve input parameter 'value'

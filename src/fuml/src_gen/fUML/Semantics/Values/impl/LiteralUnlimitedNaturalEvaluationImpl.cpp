@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Values/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,20 +20,19 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -250,7 +248,7 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation::evaluate() : fUML::Semantics::Values::Value: 1159124191
+		// fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation::evaluate() : fUML::Semantics::Values::Value: 926755692
 		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);

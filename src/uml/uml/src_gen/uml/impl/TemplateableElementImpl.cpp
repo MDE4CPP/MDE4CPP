@@ -1,6 +1,5 @@
 
 #include "uml/impl/TemplateableElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -425,13 +422,13 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
  
   	switch(operationID)
 	{
-		// uml::TemplateableElement::isTemplate() : bool: 175010214
+		// uml::TemplateableElement::isTemplate() : bool: 2563687071
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
 		{
 			result = eAny(this->isTemplate(),0,false);
 			break;
 		}
-		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 546853023
+		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 3445105528
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();

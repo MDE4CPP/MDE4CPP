@@ -1,6 +1,5 @@
 
 #include "uml/impl/LiteralBooleanImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -410,13 +408,13 @@ Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
  
   	switch(operationID)
 	{
-		// uml::LiteralBoolean::booleanValue() : bool: 844586416
+		// uml::LiteralBoolean::booleanValue() : bool: 1974710047
 		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
 		{
 			result = eAny(this->booleanValue(),0,false);
 			break;
 		}
-		// uml::LiteralBoolean::isComputable() : bool: 27416872
+		// uml::LiteralBoolean::isComputable() : bool: 243741030
 		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable(),0,false);

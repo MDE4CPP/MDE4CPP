@@ -1,6 +1,5 @@
 
 #include "uml/impl/BroadcastSignalActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -450,7 +446,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// uml::BroadcastSignalAction::no_onport(Any, std::map) : bool: 2075676186
+		// uml::BroadcastSignalAction::no_onport(Any, std::map) : bool: 1046703603
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -466,7 +462,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BroadcastSignalAction::number_of_arguments(Any, std::map) : bool: 1285195715
+		// uml::BroadcastSignalAction::number_of_arguments(Any, std::map) : bool: 1154776483
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -482,7 +478,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			result = eAny(this->number_of_arguments(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BroadcastSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 554703156
+		// uml::BroadcastSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 12726760
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

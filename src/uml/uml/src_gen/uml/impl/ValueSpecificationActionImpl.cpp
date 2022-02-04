@@ -1,6 +1,5 @@
 
 #include "uml/impl/ValueSpecificationActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -490,7 +486,7 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// uml::ValueSpecificationAction::compatible_type(Any, std::map) : bool: 1309355490
+		// uml::ValueSpecificationAction::compatible_type(Any, std::map) : bool: 221776171
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -506,7 +502,7 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
 			result = eAny(this->compatible_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ValueSpecificationAction::multiplicity(Any, std::map) : bool: 1973662613
+		// uml::ValueSpecificationAction::multiplicity(Any, std::map) : bool: 3796831131
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/ClearStructuralFeatureActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -462,7 +458,7 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
  
   	switch(operationID)
 	{
-		// uml::ClearStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 838051871
+		// uml::ClearStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 1242747875
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -478,7 +474,7 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClearStructuralFeatureAction::type_of_result(Any, std::map) : bool: 424656956
+		// uml::ClearStructuralFeatureAction::type_of_result(Any, std::map) : bool: 361464888
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

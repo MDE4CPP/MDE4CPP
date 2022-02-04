@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -111,7 +112,7 @@ SetterNameImpl& SetterNameImpl::operator=(const SetterNameImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SetterNameImpl::getMetaClass()
+std::shared_ptr<uml::Class> SetterNameImpl::getMetaClass() const
 {
 	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_SetterName();
 }

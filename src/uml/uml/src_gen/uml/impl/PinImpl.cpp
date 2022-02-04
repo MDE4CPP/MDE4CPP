@@ -1,6 +1,5 @@
 
 #include "uml/impl/PinImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -429,7 +425,7 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
  
   	switch(operationID)
 	{
-		// uml::Pin::control_pins(Any, std::map) : bool: 633209512
+		// uml::Pin::control_pins(Any, std::map) : bool: 2848049727
 		case umlPackage::PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -445,7 +441,7 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 			result = eAny(this->control_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Pin::not_unique(Any, std::map) : bool: 2131680405
+		// uml::Pin::not_unique(Any, std::map) : bool: 3758597056
 		case umlPackage::PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

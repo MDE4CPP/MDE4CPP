@@ -1,6 +1,5 @@
 
 #include "uml/impl/WriteStructuralFeatureActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -513,7 +509,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
  
   	switch(operationID)
 	{
-		// uml::WriteStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 1698582669
+		// uml::WriteStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 2122701011
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -529,7 +525,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::WriteStructuralFeatureAction::multiplicity_of_value(Any, std::map) : bool: 2073600200
+		// uml::WriteStructuralFeatureAction::multiplicity_of_value(Any, std::map) : bool: 1583316513
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -545,7 +541,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->multiplicity_of_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::WriteStructuralFeatureAction::type_of_result(Any, std::map) : bool: 1285187754
+		// uml::WriteStructuralFeatureAction::type_of_result(Any, std::map) : bool: 1241418024
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -561,7 +557,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::WriteStructuralFeatureAction::type_of_value(Any, std::map) : bool: 607994000
+		// uml::WriteStructuralFeatureAction::type_of_value(Any, std::map) : bool: 4292166454
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

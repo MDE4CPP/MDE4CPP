@@ -1,6 +1,5 @@
 
 #include "uml/impl/TestIdentityActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -562,7 +558,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::TestIdentityAction::multiplicity(Any, std::map) : bool: 936405543
+		// uml::TestIdentityAction::multiplicity(Any, std::map) : bool: 3031328427
 		case umlPackage::TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -578,7 +574,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TestIdentityAction::no_type(Any, std::map) : bool: 1029204157
+		// uml::TestIdentityAction::no_type(Any, std::map) : bool: 1965487056
 		case umlPackage::TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -594,7 +590,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TestIdentityAction::result_is_boolean(Any, std::map) : bool: 327867118
+		// uml::TestIdentityAction::result_is_boolean(Any, std::map) : bool: 3147734331
 		case umlPackage::TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

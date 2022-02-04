@@ -1,6 +1,5 @@
 
 #include "uml/impl/VertexImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -388,27 +385,27 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Vertex::containingStateMachine() : uml::StateMachine: 1261919053
+		// uml::Vertex::containingStateMachine() : uml::StateMachine: 2007948051
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
-		// uml::Vertex::getIncomings() : uml::Transition[*]: 773358148
+		// uml::Vertex::getIncomings() : uml::Transition[*]: 124960789
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition> > resultList = this->getIncomings();
 			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
-		// uml::Vertex::getOutgoings() : uml::Transition[*]: 1266036165
+		// uml::Vertex::getOutgoings() : uml::Transition[*]: 3840074001
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition> > resultList = this->getOutgoings();
 			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
-		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 846277715
+		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 1632706225
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINREGION_REGION:
 		{
 			//Retrieve input parameter 'r'
@@ -419,7 +416,7 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->isContainedInRegion(incoming_param_r),0,false);
 			break;
 		}
-		// uml::Vertex::isContainedInState(uml::State) : bool: 26280316
+		// uml::Vertex::isContainedInState(uml::State) : bool: 3997919607
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE:
 		{
 			//Retrieve input parameter 's'

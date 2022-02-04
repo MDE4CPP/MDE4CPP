@@ -1,6 +1,5 @@
 
 #include "uml/impl/FinalStateImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -394,7 +390,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::FinalState::cannot_reference_submachine(Any, std::map) : bool: 859062182
+		// uml::FinalState::cannot_reference_submachine(Any, std::map) : bool: 1277074672
 		case umlPackage::FINALSTATE_OPERATION_CANNOT_REFERENCE_SUBMACHINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -410,7 +406,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->cannot_reference_submachine(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FinalState::no_entry_behavior(Any, std::map) : bool: 1012688132
+		// uml::FinalState::no_entry_behavior(Any, std::map) : bool: 4265979006
 		case umlPackage::FINALSTATE_OPERATION_NO_ENTRY_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -426,7 +422,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_entry_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FinalState::no_exit_behavior(Any, std::map) : bool: 259242061
+		// uml::FinalState::no_exit_behavior(Any, std::map) : bool: 2460932850
 		case umlPackage::FINALSTATE_OPERATION_NO_EXIT_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -442,7 +438,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_exit_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FinalState::no_outgoing_transitions(Any, std::map) : bool: 2122901800
+		// uml::FinalState::no_outgoing_transitions(Any, std::map) : bool: 435711094
 		case umlPackage::FINALSTATE_OPERATION_NO_OUTGOING_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -458,7 +454,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_outgoing_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FinalState::no_regions(Any, std::map) : bool: 1553987285
+		// uml::FinalState::no_regions(Any, std::map) : bool: 1865421932
 		case umlPackage::FINALSTATE_OPERATION_NO_REGIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -474,7 +470,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->no_regions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::FinalState::no_state_behavior(Any, std::map) : bool: 756861980
+		// uml::FinalState::no_state_behavior(Any, std::map) : bool: 893127205
 		case umlPackage::FINALSTATE_OPERATION_NO_STATE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

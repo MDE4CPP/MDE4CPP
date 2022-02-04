@@ -1,6 +1,5 @@
 
 #include "uml/impl/StateMachineImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -963,7 +959,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::StateMachine::LCA(uml::Vertex, uml::Vertex) : uml::Region: 475472255
+		// uml::StateMachine::LCA(uml::Vertex, uml::Vertex) : uml::Region: 1015890553
 		case umlPackage::STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
@@ -979,7 +975,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAnyObject(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
 			break;
 		}
-		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 296092779
+		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 3201604183
 		case umlPackage::STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 'v1'
@@ -995,7 +991,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAnyObject(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
 			break;
 		}
-		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 235532453
+		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 2492087526
 		case umlPackage::STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
@@ -1011,7 +1007,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2),0,false);
 			break;
 		}
-		// uml::StateMachine::classifier_context(Any, std::map) : bool: 2045587773
+		// uml::StateMachine::classifier_context(Any, std::map) : bool: 649285641
 		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1027,7 +1023,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::connection_points(Any, std::map) : bool: 378768249
+		// uml::StateMachine::connection_points(Any, std::map) : bool: 2667881420
 		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1043,7 +1039,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::context_classifier(Any, std::map) : bool: 1332478160
+		// uml::StateMachine::context_classifier(Any, std::map) : bool: 3859423129
 		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1059,7 +1055,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::method(Any, std::map) : bool: 1154910431
+		// uml::StateMachine::method(Any, std::map) : bool: 292291073
 		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

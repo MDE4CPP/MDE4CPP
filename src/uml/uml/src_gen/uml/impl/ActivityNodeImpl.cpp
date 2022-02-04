@@ -1,6 +1,5 @@
 
 #include "uml/impl/ActivityNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -921,7 +918,7 @@ Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::ActivityNode::containingActivity() : uml::Activity: 2064733269
+		// uml::ActivityNode::containingActivity() : uml::Activity: 3068363550
 		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
 		{
 			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);

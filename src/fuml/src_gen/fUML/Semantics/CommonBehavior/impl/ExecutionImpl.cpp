@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <algorithm>
 #include <uml/Parameter.hpp>
@@ -41,7 +39,6 @@
 #include "fUML/fUMLFactory.hpp"
 
 #include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
-
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -568,26 +565,26 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::Execution::_copy() : fUML::Semantics::Values::Value: 2119596406
+		// fUML::Semantics::CommonBehavior::Execution::_copy() : fUML::Semantics::Values::Value: 101589981
 		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::execute(): 650217545
+		// fUML::Semantics::CommonBehavior::Execution::execute(): 2717216448
 		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::getOutputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 990554645
+		// fUML::Semantics::CommonBehavior::Execution::getOutputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3117320457
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getOutputParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::getParameterValue(uml::Parameter) : fUML::Semantics::CommonBehavior::ParameterValue: 190986849
+		// fUML::Semantics::CommonBehavior::Execution::getParameterValue(uml::Parameter) : fUML::Semantics::CommonBehavior::ParameterValue: 972104598
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER:
 		{
 			//Retrieve input parameter 'parameter'
@@ -598,13 +595,13 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->getParameterValue(incoming_param_parameter), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::new_() : fUML::Semantics::Values::Value: 1338828288
+		// fUML::Semantics::CommonBehavior::Execution::new_() : fUML::Semantics::Values::Value: 1051110988
 		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
 		{
 			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::setParameterValue(fUML::Semantics::CommonBehavior::ParameterValue): 680977365
+		// fUML::Semantics::CommonBehavior::Execution::setParameterValue(fUML::Semantics::CommonBehavior::ParameterValue): 1714178337
 		case CommonBehaviorPackage::EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'parameterValue'
@@ -615,7 +612,7 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setParameterValue(incoming_param_parameterValue);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::Execution::terminate(): 938662950
+		// fUML::Semantics::CommonBehavior::Execution::terminate(): 1246638906
 		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();

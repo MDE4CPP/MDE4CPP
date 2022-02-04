@@ -1,6 +1,5 @@
 
 #include "uml/impl/InformationItemImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -529,7 +525,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// uml::InformationItem::has_no(Any, std::map) : bool: 1598598328
+		// uml::InformationItem::has_no(Any, std::map) : bool: 3702189299
 		case umlPackage::INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -545,7 +541,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationItem::not_instantiable(Any, std::map) : bool: 2094046008
+		// uml::InformationItem::not_instantiable(Any, std::map) : bool: 1262924613
 		case umlPackage::INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -561,7 +557,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationItem::sources_and_targets(Any, std::map) : bool: 41648181
+		// uml::InformationItem::sources_and_targets(Any, std::map) : bool: 3123170382
 		case umlPackage::INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

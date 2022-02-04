@@ -10,6 +10,7 @@
 
 
 #include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
 #include "uml/Property.hpp"
@@ -105,7 +106,7 @@ NonExecutableImpl& NonExecutableImpl::operator=(const NonExecutableImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> NonExecutableImpl::getMetaClass()
+std::shared_ptr<uml::Class> NonExecutableImpl::getMetaClass() const
 {
 	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_NonExecutable();
 }

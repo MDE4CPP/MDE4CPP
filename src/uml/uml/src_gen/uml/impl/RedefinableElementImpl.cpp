@@ -1,6 +1,5 @@
 
 #include "uml/impl/RedefinableElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -386,7 +382,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::RedefinableElement::isConsistentWith(uml::RedefinableElement) : bool: 1261679630
+		// uml::RedefinableElement::isConsistentWith(uml::RedefinableElement) : bool: 2046464111
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT:
 		{
 			//Retrieve input parameter 'redefiningElement'
@@ -397,7 +393,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->isConsistentWith(incoming_param_redefiningElement),0,false);
 			break;
 		}
-		// uml::RedefinableElement::isRedefinitionContextValid(uml::RedefinableElement) : bool: 723412742
+		// uml::RedefinableElement::isRedefinitionContextValid(uml::RedefinableElement) : bool: 3034109494
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT:
 		{
 			//Retrieve input parameter 'redefinedElement'
@@ -408,7 +404,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement),0,false);
 			break;
 		}
-		// uml::RedefinableElement::non_leaf_redefinition(Any, std::map) : bool: 1008093363
+		// uml::RedefinableElement::non_leaf_redefinition(Any, std::map) : bool: 1672313130
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -424,7 +420,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::RedefinableElement::redefinition_consistent(Any, std::map) : bool: 448655647
+		// uml::RedefinableElement::redefinition_consistent(Any, std::map) : bool: 566994478
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -440,7 +436,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::RedefinableElement::redefinition_context_valid(Any, std::map) : bool: 701030538
+		// uml::RedefinableElement::redefinition_context_valid(Any, std::map) : bool: 1062628144
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

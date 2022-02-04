@@ -1,6 +1,5 @@
 
 #include "uml/impl/OperationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1295,7 +1291,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Operation::at_most_one_return(Any, std::map) : bool: 12386545
+		// uml::Operation::at_most_one_return(Any, std::map) : bool: 1796067314
 		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1311,37 +1307,37 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Operation::getLower() : int: 264279180
+		// uml::Operation::getLower() : int: 2432712746
 		case umlPackage::OPERATION_OPERATION_GETLOWER:
 		{
 			result = eAny(this->getLower(),0,false);
 			break;
 		}
-		// uml::Operation::getReturnResult() : uml::Parameter: 425885811
+		// uml::Operation::getReturnResult() : uml::Parameter: 3209085960
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
 			result = eAnyObject(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::Operation::getUpper() : int: 658132292
+		// uml::Operation::getUpper() : int: 1198605197
 		case umlPackage::OPERATION_OPERATION_GETUPPER:
 		{
 			result = eAny(this->getUpper(),0,false);
 			break;
 		}
-		// uml::Operation::isOrdered() : bool: 2046966888
+		// uml::Operation::isOrdered() : bool: 2709191195
 		case umlPackage::OPERATION_OPERATION_ISORDERED:
 		{
 			result = eAny(this->isOrdered(),0,false);
 			break;
 		}
-		// uml::Operation::isUnique() : bool: 49097112
+		// uml::Operation::isUnique() : bool: 4020565657
 		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
 		{
 			result = eAny(this->isUnique(),0,false);
 			break;
 		}
-		// uml::Operation::matches(uml::Operation) : bool: 189559370
+		// uml::Operation::matches(uml::Operation) : bool: 1582514854
 		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
 		{
 			//Retrieve input parameter 'comparedOperation'
@@ -1352,7 +1348,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->matches(incoming_param_comparedOperation),0,false);
 			break;
 		}
-		// uml::Operation::only_body_for_query(Any, std::map) : bool: 1181713863
+		// uml::Operation::only_body_for_query(Any, std::map) : bool: 2418925081
 		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1368,13 +1364,13 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Operation::returnResult() : uml::Parameter: 831929813
+		// uml::Operation::returnResult() : uml::Parameter: 3088060264
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
 			result = eAnyObject(this->returnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::Operation::setIsOrdered(bool): 995733814
+		// uml::Operation::setIsOrdered(bool): 563533641
 		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsOrdered'
@@ -1385,7 +1381,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setIsOrdered(incoming_param_newIsOrdered);
 			break;
 		}
-		// uml::Operation::setIsUnique(bool): 1673854407
+		// uml::Operation::setIsUnique(bool): 1317393399
 		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsUnique'
@@ -1396,7 +1392,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setIsUnique(incoming_param_newIsUnique);
 			break;
 		}
-		// uml::Operation::setLower(int): 1123488961
+		// uml::Operation::setLower(int): 3045305040
 		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
 		{
 			//Retrieve input parameter 'newLower'
@@ -1407,7 +1403,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setLower(incoming_param_newLower);
 			break;
 		}
-		// uml::Operation::setType(uml::Type): 1580697963
+		// uml::Operation::setType(uml::Type): 295406386
 		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
 		{
 			//Retrieve input parameter 'newType'
@@ -1418,7 +1414,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			this->setType(incoming_param_newType);
 			break;
 		}
-		// uml::Operation::setUpper(int): 1517342073
+		// uml::Operation::setUpper(int): 1811197491
 		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'newUpper'

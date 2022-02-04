@@ -1,6 +1,5 @@
 
 #include "uml/impl/MessageEndImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -348,26 +345,26 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 767566935
+		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 3122365935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
 			return eAnyBag(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 			break;
 		}
-		// uml::MessageEnd::isReceive() : bool: 786128866
+		// uml::MessageEnd::isReceive() : bool: 3791628316
 		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
 		{
 			result = eAny(this->isReceive(),0,false);
 			break;
 		}
-		// uml::MessageEnd::isSend() : bool: 379994457
+		// uml::MessageEnd::isSend() : bool: 2112067343
 		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
 		{
 			result = eAny(this->isSend(),0,false);
 			break;
 		}
-		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 1336350422
+		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 2418148191
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
 			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();

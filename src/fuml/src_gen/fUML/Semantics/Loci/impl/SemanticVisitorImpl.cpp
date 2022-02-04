@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/SemanticVisitorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,15 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -227,13 +225,13 @@ Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::SemanticVisitor::_beginIsolation(): 1202559749
+		// fUML::Semantics::Loci::SemanticVisitor::_beginIsolation(): 1570555301
 		case LociPackage::SEMANTICVISITOR_OPERATION__BEGINISOLATION:
 		{
 			this->_beginIsolation();
 			break;
 		}
-		// fUML::Semantics::Loci::SemanticVisitor::_endIsolation(): 1758854823
+		// fUML::Semantics::Loci::SemanticVisitor::_endIsolation(): 3956519543
 		case LociPackage::SEMANTICVISITOR_OPERATION__ENDISOLATION:
 		{
 			this->_endIsolation();

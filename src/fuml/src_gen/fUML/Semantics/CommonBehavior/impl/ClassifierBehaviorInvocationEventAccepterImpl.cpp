@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/ClassifierBehaviorInvocationEventAccepterImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,23 +18,22 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/InvocationEventOccurrence.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -434,7 +432,7 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std:
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 700456347
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 4127849364
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -445,7 +443,7 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std:
 			this->accept(incoming_param_eventOccurrence);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 621566743
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 3161444755
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -456,7 +454,7 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std:
 			result = eAny(this->match(incoming_param_eventOccurrence),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::terminate(): 1314087765
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::terminate(): 1434169574
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE:
 		{
 			this->terminate();

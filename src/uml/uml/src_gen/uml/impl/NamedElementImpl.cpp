@@ -1,6 +1,5 @@
 
 #include "uml/impl/NamedElementImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,19 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include <algorithm>
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -591,21 +587,21 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2032137401
+		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2409538685
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
 			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
 			return eAnyBag(resultList,uml::umlPackage::NAMESPACE_CLASS);
 			break;
 		}
-		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 1344070418
+		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 2217156650
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
-		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 859532136
+		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 2833389569
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
@@ -616,7 +612,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAnyObject(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
-		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 274373089
+		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 3040273665
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
@@ -627,20 +623,20 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAnyObject(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
 			break;
 		}
-		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 1863743641
+		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 3811456257
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
 			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
 			return eAnyBag(resultList,uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
-		// uml::NamedElement::getLabel() : std::string: 1812636995
+		// uml::NamedElement::getLabel() : std::string: 2648850226
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL:
 		{
 			result = eAny(this->getLabel(),0,false);
 			break;
 		}
-		// uml::NamedElement::getLabel(bool) : std::string: 860924116
+		// uml::NamedElement::getLabel(bool) : std::string: 1545748466
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN:
 		{
 			//Retrieve input parameter 'localize'
@@ -651,13 +647,13 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->getLabel(incoming_param_localize),0,false);
 			break;
 		}
-		// uml::NamedElement::getQualifiedName() : std::string {const}: 646487924
+		// uml::NamedElement::getQualifiedName() : std::string {const}: 679696374
 		case umlPackage::NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME:
 		{
 			result = eAny(this->getQualifiedName(),0,false);
 			break;
 		}
-		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 711098709
+		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 539959656
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -673,7 +669,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2097992942
+		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2208944440
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -689,7 +685,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 420809074
+		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 3034150359
 		case umlPackage::NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE:
 		{
 			//Retrieve input parameter 'n'
@@ -705,13 +701,13 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
 			break;
 		}
-		// uml::NamedElement::separator() : std::string {const}: 8320228
+		// uml::NamedElement::separator() : std::string {const}: 2764162934
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
 			result = eAny(this->separator(),0,false);
 			break;
 		}
-		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 405478997
+		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 3453868149
 		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

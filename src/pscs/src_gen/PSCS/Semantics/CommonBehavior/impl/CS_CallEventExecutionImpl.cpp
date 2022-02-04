@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/CommonBehavior/impl/CS_CallEventExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -355,25 +353,25 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::_copy() : fUML::Semantics::Values::Value: 900135867
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::_copy() : fUML::Semantics::Values::Value: 3905320853
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 801253865
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 2530527065
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
 		{
-			result = eAny(this->createEventOccurrence(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS,false);
+			result = eAnyObject(this->createEventOccurrence(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::new_() : fUML::Semantics::Values::Value: 161317237
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::new_() : fUML::Semantics::Values::Value: 2187711348
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
+			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
 

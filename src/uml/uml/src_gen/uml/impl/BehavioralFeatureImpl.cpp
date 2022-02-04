@@ -1,6 +1,5 @@
 
 #include "uml/impl/BehavioralFeatureImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -862,7 +858,7 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 506804351
+		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 862631547
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -878,7 +874,7 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BehavioralFeature::createReturnResult(std::string, uml::Type) : uml::Parameter: 561652659
+		// uml::BehavioralFeature::createReturnResult(std::string, uml::Type) : uml::Parameter: 2358256606
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
@@ -894,14 +890,14 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAnyObject(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 1757399347
+		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 2494913883
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 370844008
+		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 3232178764
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();

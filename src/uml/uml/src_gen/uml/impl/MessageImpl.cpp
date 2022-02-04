@@ -1,6 +1,5 @@
 
 #include "uml/impl/MessageImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -790,7 +786,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
  
   	switch(operationID)
 	{
-		// uml::Message::arguments(Any, std::map) : bool: 1899252778
+		// uml::Message::arguments(Any, std::map) : bool: 2315785773
 		case umlPackage::MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -806,7 +802,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::cannot_cross_boundaries(Any, std::map) : bool: 558087146
+		// uml::Message::cannot_cross_boundaries(Any, std::map) : bool: 771684206
 		case umlPackage::MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -822,13 +818,13 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::getMessageKind() : uml::MessageKind: 1841698888
+		// uml::Message::getMessageKind() : uml::MessageKind: 1342630738
 		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
 		{
 			result = eAny(this->getMessageKind(),0,false);
 			break;
 		}
-		// uml::Message::occurrence_specifications(Any, std::map) : bool: 794631385
+		// uml::Message::occurrence_specifications(Any, std::map) : bool: 3654259023
 		case umlPackage::MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -844,7 +840,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::sending_receiving_message_event(Any, std::map) : bool: 1304019371
+		// uml::Message::sending_receiving_message_event(Any, std::map) : bool: 2667842979
 		case umlPackage::MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -860,7 +856,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::signature_is_operation_reply(Any, std::map) : bool: 1755211186
+		// uml::Message::signature_is_operation_reply(Any, std::map) : bool: 3249613031
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -876,7 +872,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::signature_is_operation_request(Any, std::map) : bool: 555346418
+		// uml::Message::signature_is_operation_request(Any, std::map) : bool: 1347631112
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -892,7 +888,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::signature_is_signal(Any, std::map) : bool: 295075675
+		// uml::Message::signature_is_signal(Any, std::map) : bool: 1922116441
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -908,7 +904,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Message::signature_refer_to(Any, std::map) : bool: 1691024653
+		// uml::Message::signature_refer_to(Any, std::map) : bool: 2916908006
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

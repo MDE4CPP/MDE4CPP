@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/ClassifierBehaviorExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -389,13 +386,13 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::_startObjectBehavior(): 981714484
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::_startObjectBehavior(): 3631119842
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
 			this->_startObjectBehavior();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::execute(uml::Class[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 787236707
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::execute(uml::Class[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 98640831
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -411,7 +408,7 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 			this->execute(incoming_param_classifier,incoming_param_inputs);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::terminate(): 506895083
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::terminate(): 4162680347
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();

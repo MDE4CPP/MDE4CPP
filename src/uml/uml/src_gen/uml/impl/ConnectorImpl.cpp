@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConnectorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -780,13 +776,13 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
  
   	switch(operationID)
 	{
-		// uml::Connector::getKind() : uml::ConnectorKind: 1738876455
+		// uml::Connector::getKind() : uml::ConnectorKind: 401249273
 		case umlPackage::CONNECTOR_OPERATION_GETKIND:
 		{
 			result = eAny(this->getKind(),0,false);
 			break;
 		}
-		// uml::Connector::roles(Any, std::map) : bool: 1203441862
+		// uml::Connector::roles(Any, std::map) : bool: 1319646034
 		case umlPackage::CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -802,7 +798,7 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Connector::types(Any, std::map) : bool: 388310687
+		// uml::Connector::types(Any, std::map) : bool: 3612765002
 		case umlPackage::CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

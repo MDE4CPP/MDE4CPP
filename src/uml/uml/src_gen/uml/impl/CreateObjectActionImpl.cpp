@@ -1,6 +1,5 @@
 
 #include "uml/impl/CreateObjectActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -508,7 +504,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::CreateObjectAction::classifier_not_abstract(Any, std::map) : bool: 635180
+		// uml::CreateObjectAction::classifier_not_abstract(Any, std::map) : bool: 2225728707
 		case umlPackage::CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -524,7 +520,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateObjectAction::classifier_not_association_class(Any, std::map) : bool: 855656155
+		// uml::CreateObjectAction::classifier_not_association_class(Any, std::map) : bool: 1151840293
 		case umlPackage::CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -540,7 +536,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->classifier_not_association_class(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateObjectAction::multiplicity(Any, std::map) : bool: 353712302
+		// uml::CreateObjectAction::multiplicity(Any, std::map) : bool: 355912624
 		case umlPackage::CREATEOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -556,7 +552,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateObjectAction::same_type(Any, std::map) : bool: 127783180
+		// uml::CreateObjectAction::same_type(Any, std::map) : bool: 988938262
 		case umlPackage::CREATEOBJECTACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

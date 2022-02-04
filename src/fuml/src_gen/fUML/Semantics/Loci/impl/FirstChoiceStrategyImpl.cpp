@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Loci/impl/FirstChoiceStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -21,15 +20,14 @@
 
 
 
-
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -233,7 +231,7 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::FirstChoiceStrategy::choose(int) : int: 1148186745
+		// fUML::Semantics::Loci::FirstChoiceStrategy::choose(int) : int: 1235408894
 		case LociPackage::FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT:
 		{
 			//Retrieve input parameter 'size'

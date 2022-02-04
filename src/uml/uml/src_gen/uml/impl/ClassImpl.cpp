@@ -1,6 +1,5 @@
 
 #include "uml/impl/ClassImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1138,7 +1134,7 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
-		// uml::Class::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1692428043
+		// uml::Class::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 2458539796
 		case umlPackage::CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
@@ -1164,34 +1160,34 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::Class::getAllOperations() : uml::Operation[*]: 1306968088
+		// uml::Class::getAllOperations() : uml::Operation[*]: 3178057285
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::Class::getExtensions() : uml::Extension[*]: 448268741
+		// uml::Class::getExtensions() : uml::Extension[*]: 4033444456
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
 			std::shared_ptr<Bag<uml::Extension> > resultList = this->getExtensions();
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
-		// uml::Class::getSuperClasses() : uml::Class[*]: 313726634
+		// uml::Class::getSuperClasses() : uml::Class[*]: 1013854710
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class> > resultList = this->getSuperClasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Class::isMetaclass() : bool: 251508775
+		// uml::Class::isMetaclass() : bool: 3169682088
 		case umlPackage::CLASS_OPERATION_ISMETACLASS:
 		{
 			result = eAny(this->isMetaclass(),0,false);
 			break;
 		}
-		// uml::Class::passive_class(Any, std::map) : bool: 1167069382
+		// uml::Class::passive_class(Any, std::map) : bool: 3738386724
 		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/AssociationClassImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -536,7 +532,7 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::AssociationClass::cannot_be_defined(Any, std::map) : bool: 166637851
+		// uml::AssociationClass::cannot_be_defined(Any, std::map) : bool: 4242283820
 		case umlPackage::ASSOCIATIONCLASS_OPERATION_CANNOT_BE_DEFINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -552,7 +548,7 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->cannot_be_defined(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AssociationClass::disjoint_attributes_ends(Any, std::map) : bool: 1427500408
+		// uml::AssociationClass::disjoint_attributes_ends(Any, std::map) : bool: 3687752876
 		case umlPackage::ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

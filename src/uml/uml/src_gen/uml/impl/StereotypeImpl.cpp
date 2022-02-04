@@ -1,6 +1,5 @@
 
 #include "uml/impl/StereotypeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -697,7 +693,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// uml::Stereotype::associationEndOwnership(Any, std::map) : bool: 1029914472
+		// uml::Stereotype::associationEndOwnership(Any, std::map) : bool: 970518141
 		case umlPackage::STEREOTYPE_OPERATION_ASSOCIATIONENDOWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -713,7 +709,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_multiplicity_multiple_extension(Any, std::map) : bool: 1658268944
+		// uml::Stereotype::base_property_multiplicity_multiple_extension(Any, std::map) : bool: 1355961636
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -729,7 +725,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_multiplicity_single_extension(Any, std::map) : bool: 405707472
+		// uml::Stereotype::base_property_multiplicity_single_extension(Any, std::map) : bool: 547814422
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -745,7 +741,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_upper_bound(Any, std::map) : bool: 1471967545
+		// uml::Stereotype::base_property_upper_bound(Any, std::map) : bool: 3083226999
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_UPPER_BOUND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -761,7 +757,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::binaryAssociationsOnly(Any, std::map) : bool: 1511655553
+		// uml::Stereotype::binaryAssociationsOnly(Any, std::map) : bool: 1954710553
 		case umlPackage::STEREOTYPE_OPERATION_BINARYASSOCIATIONSONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -777,13 +773,13 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::containingProfile() : uml::Profile: 85871630
+		// uml::Stereotype::containingProfile() : uml::Profile: 3116027671
 		case umlPackage::STEREOTYPE_OPERATION_CONTAININGPROFILE:
 		{
 			result = eAnyObject(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
-		// uml::Stereotype::createExtension(uml::Class, bool) : uml::Extension: 620742710
+		// uml::Stereotype::createExtension(uml::Class, bool) : uml::Extension: 2355039413
 		case umlPackage::STEREOTYPE_OPERATION_CREATEEXTENSION_CLASS_BOOLEAN:
 		{
 			//Retrieve input parameter 'metaclass'
@@ -799,7 +795,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAnyObject(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
-		// uml::Stereotype::createIcon(std::string) : uml::Image: 160986637
+		// uml::Stereotype::createIcon(std::string) : uml::Image: 4268768905
 		case umlPackage::STEREOTYPE_OPERATION_CREATEICON_STRING:
 		{
 			//Retrieve input parameter 'location'
@@ -810,7 +806,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAnyObject(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
-		// uml::Stereotype::createIcon(std::string, std::string) : uml::Image: 1271729538
+		// uml::Stereotype::createIcon(std::string, std::string) : uml::Image: 1814185679
 		case umlPackage::STEREOTYPE_OPERATION_CREATEICON_STRING_STRING:
 		{
 			//Retrieve input parameter 'format'
@@ -826,7 +822,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAnyObject(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
-		// uml::Stereotype::generalize(Any, std::map) : bool: 1697077053
+		// uml::Stereotype::generalize(Any, std::map) : bool: 3688775516
 		case umlPackage::STEREOTYPE_OPERATION_GENERALIZE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -842,33 +838,33 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::getAllExtendedMetaclasses() : uml::Class[*]: 1454411218
+		// uml::Stereotype::getAllExtendedMetaclasses() : uml::Class[*]: 912925586
 		case umlPackage::STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class> > resultList = this->getAllExtendedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Stereotype::getDefinition() : ecore::EClass: 1419432166
+		// uml::Stereotype::getDefinition() : ecore::EClass: 1669546995
 		case umlPackage::STEREOTYPE_OPERATION_GETDEFINITION:
 		{
 			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::ECLASS_CLASS);
 			break;
 		}
-		// uml::Stereotype::getExtendedMetaclasses() : uml::Class[*]: 431083020
+		// uml::Stereotype::getExtendedMetaclasses() : uml::Class[*]: 1491956517
 		case umlPackage::STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class> > resultList = this->getExtendedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
-		// uml::Stereotype::getKeyword() : std::string: 332618161
+		// uml::Stereotype::getKeyword() : std::string: 263636712
 		case umlPackage::STEREOTYPE_OPERATION_GETKEYWORD:
 		{
 			result = eAny(this->getKeyword(),0,false);
 			break;
 		}
-		// uml::Stereotype::getKeyword(bool) : std::string: 1528388929
+		// uml::Stereotype::getKeyword(bool) : std::string: 3455502248
 		case umlPackage::STEREOTYPE_OPERATION_GETKEYWORD_BOOLEAN:
 		{
 			//Retrieve input parameter 'localize'
@@ -879,7 +875,7 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			result = eAny(this->getKeyword(incoming_param_localize),0,false);
 			break;
 		}
-		// uml::Stereotype::name_not_clash(Any, std::map) : bool: 476274924
+		// uml::Stereotype::name_not_clash(Any, std::map) : bool: 344796417
 		case umlPackage::STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

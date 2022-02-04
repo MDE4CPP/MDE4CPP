@@ -1,6 +1,5 @@
 
 #include "uml/impl/AcceptCallActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -447,7 +443,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::AcceptCallAction::result_pins(Any, std::map) : bool: 1687719587
+		// uml::AcceptCallAction::result_pins(Any, std::map) : bool: 649338040
 		case umlPackage::ACCEPTCALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -463,7 +459,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptCallAction::trigger_call_event(Any, std::map) : bool: 543743192
+		// uml::AcceptCallAction::trigger_call_event(Any, std::map) : bool: 1188633728
 		case umlPackage::ACCEPTCALLACTION_OPERATION_TRIGGER_CALL_EVENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -479,7 +475,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->trigger_call_event(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptCallAction::unmarshall(Any, std::map) : bool: 392805844
+		// uml::AcceptCallAction::unmarshall(Any, std::map) : bool: 3758873039
 		case umlPackage::ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

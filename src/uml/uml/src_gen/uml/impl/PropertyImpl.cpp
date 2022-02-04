@@ -1,6 +1,5 @@
 
 #include "uml/impl/PropertyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,19 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "uml/AggregationKind.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1483,7 +1479,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::Property::binding_to_attribute(Any, std::map) : bool: 1056930161
+		// uml::Property::binding_to_attribute(Any, std::map) : bool: 892935515
 		case umlPackage::PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1499,7 +1495,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::deployment_target(Any, std::map) : bool: 1451308280
+		// uml::Property::deployment_target(Any, std::map) : bool: 3702053202
 		case umlPackage::PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1515,7 +1511,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::derived_union_is_derived(Any, std::map) : bool: 2088980284
+		// uml::Property::derived_union_is_derived(Any, std::map) : bool: 2814245107
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1531,7 +1527,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::derived_union_is_read_only(Any, std::map) : bool: 487748595
+		// uml::Property::derived_union_is_read_only(Any, std::map) : bool: 3192319857
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1547,37 +1543,37 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::getOtherEnd() : uml::Property: 1860005684
+		// uml::Property::getOtherEnd() : uml::Property: 3759990426
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
 			result = eAnyObject(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::Property::isAttribute() : bool: 1679656582
+		// uml::Property::isAttribute() : bool: 2655051450
 		case umlPackage::PROPERTY_OPERATION_ISATTRIBUTE:
 		{
 			result = eAny(this->isAttribute(),0,false);
 			break;
 		}
-		// uml::Property::isComposite() : bool: 136444713
+		// uml::Property::isComposite() : bool: 656738949
 		case umlPackage::PROPERTY_OPERATION_ISCOMPOSITE:
 		{
 			result = eAny(this->isComposite(),0,false);
 			break;
 		}
-		// uml::Property::isNavigable() : bool: 1815246865
+		// uml::Property::isNavigable() : bool: 2533598543
 		case umlPackage::PROPERTY_OPERATION_ISNAVIGABLE:
 		{
 			result = eAny(this->isNavigable(),0,false);
 			break;
 		}
-		// uml::Property::isSetDefault() : bool: 1613101097
+		// uml::Property::isSetDefault() : bool: 3535385199
 		case umlPackage::PROPERTY_OPERATION_ISSETDEFAULT:
 		{
 			result = eAny(this->isSetDefault(),0,false);
 			break;
 		}
-		// uml::Property::multiplicity_of_composite(Any, std::map) : bool: 897292100
+		// uml::Property::multiplicity_of_composite(Any, std::map) : bool: 3608563570
 		case umlPackage::PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1593,7 +1589,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::qualified_is_association_end(Any, std::map) : bool: 763035670
+		// uml::Property::qualified_is_association_end(Any, std::map) : bool: 179080540
 		case umlPackage::PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1609,7 +1605,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::redefined_property_inherited(Any, std::map) : bool: 1140838564
+		// uml::Property::redefined_property_inherited(Any, std::map) : bool: 2738896892
 		case umlPackage::PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1625,7 +1621,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::setBooleanDefaultValue(bool): 1947611129
+		// uml::Property::setBooleanDefaultValue(bool): 3743362958
 		case umlPackage::PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -1636,7 +1632,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::setIntegerDefaultValue(int): 635550506
+		// uml::Property::setIntegerDefaultValue(int): 2377444691
 		case umlPackage::PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
 		{
 			//Retrieve input parameter 'value'
@@ -1647,7 +1643,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::setIsNavigable(bool): 1084890443
+		// uml::Property::setIsNavigable(bool): 3193042677
 		case umlPackage::PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN:
 		{
 			//Retrieve input parameter 'isNavigable'
@@ -1658,13 +1654,13 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setIsNavigable(incoming_param_isNavigable);
 			break;
 		}
-		// uml::Property::setNullDefaultValue(): 1385757410
+		// uml::Property::setNullDefaultValue(): 3954861497
 		case umlPackage::PROPERTY_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
 			break;
 		}
-		// uml::Property::setRealDefaultValue(double): 1503561658
+		// uml::Property::setRealDefaultValue(double): 2801791145
 		case umlPackage::PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL:
 		{
 			//Retrieve input parameter 'value'
@@ -1675,7 +1671,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setRealDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::setStringDefaultValue(std::string): 748800765
+		// uml::Property::setStringDefaultValue(std::string): 142360535
 		case umlPackage::PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
 		{
 			//Retrieve input parameter 'value'
@@ -1686,7 +1682,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setStringDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::setUnlimitedNaturalDefaultValue(int): 486798804
+		// uml::Property::setUnlimitedNaturalDefaultValue(int): 1546322219
 		case umlPackage::PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'value'
@@ -1697,7 +1693,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::subsetted_property_names(Any, std::map) : bool: 1501045410
+		// uml::Property::subsetted_property_names(Any, std::map) : bool: 2615350293
 		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1713,14 +1709,14 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::subsettingContext() : uml::Type[*]: 124204192
+		// uml::Property::subsettingContext() : uml::Type[*]: 2305810549
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->subsettingContext();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
-		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 236653454
+		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 2882708741
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1736,7 +1732,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::subsetting_rules(Any, std::map) : bool: 569617743
+		// uml::Property::subsetting_rules(Any, std::map) : bool: 4221533565
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1752,7 +1748,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::type_of_opposite_end(Any, std::map) : bool: 446766831
+		// uml::Property::type_of_opposite_end(Any, std::map) : bool: 1991290293
 		case umlPackage::PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1768,7 +1764,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::unsetDefault(): 1216643635
+		// uml::Property::unsetDefault(): 1637600012
 		case umlPackage::PROPERTY_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();

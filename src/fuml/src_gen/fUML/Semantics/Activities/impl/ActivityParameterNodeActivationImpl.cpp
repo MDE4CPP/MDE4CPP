@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityParameterNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,17 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ForkedToken.hpp"
@@ -38,7 +37,6 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityParameterNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -304,13 +302,13 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::ActivityParameterNodeActivation::clearTokens(): 1135371975
+		// fUML::Semantics::Activities::ActivityParameterNodeActivation::clearTokens(): 779512874
 		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityParameterNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1889603308
+		// fUML::Semantics::Activities::ActivityParameterNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1225512580
 		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'

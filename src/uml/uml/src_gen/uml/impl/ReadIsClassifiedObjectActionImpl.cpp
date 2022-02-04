@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadIsClassifiedObjectActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -613,7 +609,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
  
   	switch(operationID)
 	{
-		// uml::ReadIsClassifiedObjectAction::boolean_result(Any, std::map) : bool: 1594582560
+		// uml::ReadIsClassifiedObjectAction::boolean_result(Any, std::map) : bool: 879439704
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_BOOLEAN_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -629,7 +625,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->boolean_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadIsClassifiedObjectAction::multiplicity_of_input(Any, std::map) : bool: 2021986095
+		// uml::ReadIsClassifiedObjectAction::multiplicity_of_input(Any, std::map) : bool: 283873246
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -645,7 +641,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->multiplicity_of_input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadIsClassifiedObjectAction::multiplicity_of_output(Any, std::map) : bool: 2130862958
+		// uml::ReadIsClassifiedObjectAction::multiplicity_of_output(Any, std::map) : bool: 1528670395
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -661,7 +657,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			result = eAny(this->multiplicity_of_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadIsClassifiedObjectAction::no_type(Any, std::map) : bool: 990896155
+		// uml::ReadIsClassifiedObjectAction::no_type(Any, std::map) : bool: 3290549392
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -272,7 +269,7 @@ Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1906305416
+		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::checkAllParents(uml::Classifier, uml::Classifier) : bool: 2265886499
 		case ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'

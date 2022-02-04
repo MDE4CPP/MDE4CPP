@@ -1,6 +1,5 @@
 
 #include "uml/impl/InformationFlowImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1033,7 +1029,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
  
   	switch(operationID)
 	{
-		// uml::InformationFlow::convey_classifiers(Any, std::map) : bool: 260413641
+		// uml::InformationFlow::convey_classifiers(Any, std::map) : bool: 1016869023
 		case umlPackage::INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1049,7 +1045,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationFlow::must_conform(Any, std::map) : bool: 641047489
+		// uml::InformationFlow::must_conform(Any, std::map) : bool: 3956315628
 		case umlPackage::INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1065,7 +1061,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationFlow::sources_and_targets_kind(Any, std::map) : bool: 1011309815
+		// uml::InformationFlow::sources_and_targets_kind(Any, std::map) : bool: 238166996
 		case umlPackage::INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

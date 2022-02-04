@@ -1,6 +1,5 @@
 
 #include "uml/impl/ClauseImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -708,7 +704,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
-		// uml::Clause::body_output_pins(Any, std::map) : bool: 555602658
+		// uml::Clause::body_output_pins(Any, std::map) : bool: 3629525042
 		case umlPackage::CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -724,7 +720,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Clause::decider_output(Any, std::map) : bool: 1781490540
+		// uml::Clause::decider_output(Any, std::map) : bool: 1450067495
 		case umlPackage::CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -740,7 +736,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Clause::test_and_body(Any, std::map) : bool: 1862078178
+		// uml::Clause::test_and_body(Any, std::map) : bool: 4255472206
 		case umlPackage::CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

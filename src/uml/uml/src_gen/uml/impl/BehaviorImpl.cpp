@@ -1,6 +1,5 @@
 
 #include "uml/impl/BehaviorImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -1285,7 +1281,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// uml::Behavior::behavioredClassifier(uml::Element) : uml::BehavioredClassifier: 612359873
+		// uml::Behavior::behavioredClassifier(uml::Element) : uml::BehavioredClassifier: 880896847
 		case umlPackage::BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT:
 		{
 			//Retrieve input parameter 'from'
@@ -1296,7 +1292,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAnyObject(this->behavioredClassifier(incoming_param_from), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS);
 			break;
 		}
-		// uml::Behavior::feature_of_context_classifier(Any, std::map) : bool: 1483589484
+		// uml::Behavior::feature_of_context_classifier(Any, std::map) : bool: 1319475110
 		case umlPackage::BEHAVIOR_OPERATION_FEATURE_OF_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1312,14 +1308,14 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->feature_of_context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Behavior::inputParameters() : uml::Parameter[*]: 1386831040
+		// uml::Behavior::inputParameters() : uml::Parameter[*]: 2569274578
 		case umlPackage::BEHAVIOR_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::Behavior::most_one_behavior(Any, std::map) : bool: 1307543230
+		// uml::Behavior::most_one_behavior(Any, std::map) : bool: 3335171525
 		case umlPackage::BEHAVIOR_OPERATION_MOST_ONE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1335,14 +1331,14 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			result = eAny(this->most_one_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Behavior::outputParameters() : uml::Parameter[*]: 1208902989
+		// uml::Behavior::outputParameters() : uml::Parameter[*]: 2790902847
 		case umlPackage::BEHAVIOR_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
-		// uml::Behavior::parameters_match(Any, std::map) : bool: 1912163781
+		// uml::Behavior::parameters_match(Any, std::map) : bool: 573973654
 		case umlPackage::BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/LinkActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -277,7 +274,7 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData) : bool: 767035740
+		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData) : bool: 429767905
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'
@@ -293,13 +290,13 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::LinkActionActivation::getAssociation() : uml::Association: 1506375580
+		// fUML::Semantics::Actions::LinkActionActivation::getAssociation() : uml::Association: 3068227173
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_GETASSOCIATION:
 		{
 			result = eAnyObject(this->getAssociation(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData[*]) : bool: 1981105116
+		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData[*]) : bool: 570901206
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'

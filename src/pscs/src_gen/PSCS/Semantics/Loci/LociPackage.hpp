@@ -55,15 +55,15 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_ExecutionFactory
 			//Class and Feature IDs 
-			static const long long CS_EXECUTIONFACTORY_CLASS = 1845389668;
+			static const unsigned long CS_EXECUTIONFACTORY_CLASS = 1845389668;
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 13;
 			
-			static const long long CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 167161141;
+			static const unsigned long CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 167161141;
 			
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 305337573;
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 1716538227;
-			static const int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 689017765;
+			static const unsigned int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 96017842;
+			static const unsigned int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 2486099920;
+			static const unsigned int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 3579698249;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_ExecutionFactory_Class() const = 0;
@@ -80,12 +80,12 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_Executor
 			//Class and Feature IDs 
-			static const long long CS_EXECUTOR_CLASS = 1795074587;
+			static const unsigned long CS_EXECUTOR_CLASS = 1795074587;
 			static const unsigned int CS_EXECUTOR_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int CS_EXECUTOR_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 1767369396;
+			static const unsigned int CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 435271847;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_Executor_Class() const = 0;
@@ -99,12 +99,12 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_Locus
 			//Class and Feature IDs 
-			static const long long CS_LOCUS_CLASS = 264779363;
+			static const unsigned long CS_LOCUS_CLASS = 264779363;
 			static const unsigned int CS_LOCUS_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CS_LOCUS_CLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 1523861822;
+			static const unsigned int CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 3451729688;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_Locus_Class() const = 0;

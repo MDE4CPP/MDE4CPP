@@ -1,6 +1,5 @@
 
 #include "uml/impl/CollaborationUseImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -471,7 +467,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// uml::CollaborationUse::client_elements(Any, std::map) : bool: 123075857
+		// uml::CollaborationUse::client_elements(Any, std::map) : bool: 771861991
 		case umlPackage::COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -487,7 +483,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CollaborationUse::connectors(Any, std::map) : bool: 851332840
+		// uml::CollaborationUse::connectors(Any, std::map) : bool: 730508454
 		case umlPackage::COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -503,7 +499,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CollaborationUse::every_role(Any, std::map) : bool: 1617953717
+		// uml::CollaborationUse::every_role(Any, std::map) : bool: 2785303016
 		case umlPackage::COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1,6 +1,5 @@
 
 #include "uml/impl/ProtocolTransitionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -509,7 +505,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::ProtocolTransition::associated_actions(Any, std::map) : bool: 222746916
+		// uml::ProtocolTransition::associated_actions(Any, std::map) : bool: 2063258255
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -525,7 +521,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolTransition::belongs_to_psm(Any, std::map) : bool: 402420591
+		// uml::ProtocolTransition::belongs_to_psm(Any, std::map) : bool: 277614638
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -541,14 +537,14 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolTransition::getReferreds() : uml::Operation[*]: 1380815811
+		// uml::ProtocolTransition::getReferreds() : uml::Operation[*]: 37225025
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getReferreds();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 1225665035
+		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 205735088
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

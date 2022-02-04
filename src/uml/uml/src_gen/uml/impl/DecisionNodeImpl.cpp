@@ -1,6 +1,5 @@
 
 #include "uml/impl/DecisionNodeImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -491,7 +487,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
  
   	switch(operationID)
 	{
-		// uml::DecisionNode::decision_input_flow_incoming(Any, std::map) : bool: 1478029581
+		// uml::DecisionNode::decision_input_flow_incoming(Any, std::map) : bool: 4272300193
 		case umlPackage::DECISIONNODE_OPERATION_DECISION_INPUT_FLOW_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -507,7 +503,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->decision_input_flow_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::edges(Any, std::map) : bool: 922337066
+		// uml::DecisionNode::edges(Any, std::map) : bool: 754495230
 		case umlPackage::DECISIONNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -523,7 +519,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::incoming_control_one_input_parameter(Any, std::map) : bool: 369422792
+		// uml::DecisionNode::incoming_control_one_input_parameter(Any, std::map) : bool: 1428414222
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_CONTROL_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -539,7 +535,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->incoming_control_one_input_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::incoming_object_one_input_parameter(Any, std::map) : bool: 2140105925
+		// uml::DecisionNode::incoming_object_one_input_parameter(Any, std::map) : bool: 1630246256
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_OBJECT_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -555,7 +551,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->incoming_object_one_input_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::incoming_outgoing_edges(Any, std::map) : bool: 397009690
+		// uml::DecisionNode::incoming_outgoing_edges(Any, std::map) : bool: 1662300060
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -571,7 +567,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->incoming_outgoing_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::parameters(Any, std::map) : bool: 1666719950
+		// uml::DecisionNode::parameters(Any, std::map) : bool: 2591877330
 		case umlPackage::DECISIONNODE_OPERATION_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -587,7 +583,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::two_input_parameters(Any, std::map) : bool: 1310848977
+		// uml::DecisionNode::two_input_parameters(Any, std::map) : bool: 1517660354
 		case umlPackage::DECISIONNODE_OPERATION_TWO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -603,7 +599,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->two_input_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DecisionNode::zero_input_parameters(Any, std::map) : bool: 707758549
+		// uml::DecisionNode::zero_input_parameters(Any, std::map) : bool: 418702236
 		case umlPackage::DECISIONNODE_OPERATION_ZERO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

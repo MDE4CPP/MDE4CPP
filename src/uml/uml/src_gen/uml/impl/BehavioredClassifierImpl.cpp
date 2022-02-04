@@ -1,6 +1,5 @@
 
 #include "uml/impl/BehavioredClassifierImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -733,7 +729,7 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 1882586927
+		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 3269019581
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -749,14 +745,14 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BehavioredClassifier::getAllImplementedInterfaces() : uml::Interface[*]: 1253009224
+		// uml::BehavioredClassifier::getAllImplementedInterfaces() : uml::Interface[*]: 3121381189
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 1944346500
+		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 329551508
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();

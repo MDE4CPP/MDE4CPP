@@ -1,6 +1,5 @@
 
 #include "uml/impl/GeneralizationSetImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -533,7 +529,7 @@ Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
  
   	switch(operationID)
 	{
-		// uml::GeneralizationSet::generalization_same_classifier(Any, std::map) : bool: 2025134361
+		// uml::GeneralizationSet::generalization_same_classifier(Any, std::map) : bool: 3124290395
 		case umlPackage::GENERALIZATIONSET_OPERATION_GENERALIZATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -549,7 +545,7 @@ Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			result = eAny(this->generalization_same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::GeneralizationSet::maps_to_generalization_set(Any, std::map) : bool: 1048697575
+		// uml::GeneralizationSet::maps_to_generalization_set(Any, std::map) : bool: 3958412351
 		case umlPackage::GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

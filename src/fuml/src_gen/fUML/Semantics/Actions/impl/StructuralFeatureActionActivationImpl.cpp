@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Actions/impl/StructuralFeatureActionActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,22 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Subset.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -362,7 +360,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getAssociation(uml::StructuralFeature) : uml::Association: 1275297557
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getAssociation(uml::StructuralFeature) : uml::Association: 4112546735
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -373,7 +371,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			result = eAnyObject(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 1331426136
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 21740794
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE:
 		{
 			//Retrieve input parameter 'association'
@@ -395,7 +393,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 1009305296
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 3435112333
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_VALUE:
 		{
 			//Retrieve input parameter 'association'
@@ -422,7 +420,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1780438725
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1289289959
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'association'

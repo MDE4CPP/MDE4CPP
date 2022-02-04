@@ -1,6 +1,5 @@
 
 #include "uml/impl/ConnectionPointReferenceImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -528,7 +524,7 @@ Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// uml::ConnectionPointReference::entry_pseudostates(Any, std::map) : bool: 1348223732
+		// uml::ConnectionPointReference::entry_pseudostates(Any, std::map) : bool: 3367242240
 		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -544,7 +540,7 @@ Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::
 			result = eAny(this->entry_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConnectionPointReference::exit_pseudostates(Any, std::map) : bool: 1938887954
+		// uml::ConnectionPointReference::exit_pseudostates(Any, std::map) : bool: 3610740388
 		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

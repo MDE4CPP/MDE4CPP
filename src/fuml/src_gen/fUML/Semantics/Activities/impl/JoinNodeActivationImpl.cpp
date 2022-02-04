@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/Activities/impl/JoinNodeActivationImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "uml/ActivityNode.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -309,7 +307,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::JoinNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1177783705
+		// fUML::Semantics::Activities::JoinNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1770507194
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -320,7 +318,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Activities::JoinNodeActivation::isReady() : bool: 1317433736
+		// fUML::Semantics::Activities::JoinNodeActivation::isReady() : bool: 1408588552
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady(),0,false);

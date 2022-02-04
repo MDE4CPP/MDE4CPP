@@ -1,6 +1,5 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,21 +18,19 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -243,16 +240,16 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any 
 Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::getName() : std::string: 1736966120
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::getName() : std::string: 2308162148
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::read(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 1000626778
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::read(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 3747474563
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_CS_OBJECT_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'cs_Object'
@@ -265,10 +262,10 @@ Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, 
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->read(incoming_param_cs_Object,incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
+			result = eAnyObject(this->read(incoming_param_cs_Object,incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
-		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::write(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 118949078
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::write(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 2987083979
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_INTEGER:
 		{
 			//Retrieve input parameter 'cs_Object'

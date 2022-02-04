@@ -1,6 +1,5 @@
 
 #include "uml/impl/ProtocolStateMachineImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -656,7 +652,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// uml::ProtocolStateMachine::deep_or_shallow_history(Any, std::map) : bool: 2140613199
+		// uml::ProtocolStateMachine::deep_or_shallow_history(Any, std::map) : bool: 1437873406
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -672,7 +668,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolStateMachine::entry_exit_do(Any, std::map) : bool: 1716936520
+		// uml::ProtocolStateMachine::entry_exit_do(Any, std::map) : bool: 2827711187
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -688,7 +684,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolStateMachine::protocol_transitions(Any, std::map) : bool: 1236567633
+		// uml::ProtocolStateMachine::protocol_transitions(Any, std::map) : bool: 3134446549
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

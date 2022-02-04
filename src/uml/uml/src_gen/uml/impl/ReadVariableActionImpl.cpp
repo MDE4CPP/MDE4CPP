@@ -1,6 +1,5 @@
 
 #include "uml/impl/ReadVariableActionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,20 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -442,7 +438,7 @@ Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// uml::ReadVariableAction::compatible_multiplicity(Any, std::map) : bool: 311196748
+		// uml::ReadVariableAction::compatible_multiplicity(Any, std::map) : bool: 3854416734
 		case umlPackage::READVARIABLEACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -458,7 +454,7 @@ Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			result = eAny(this->compatible_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadVariableAction::type_and_ordering(Any, std::map) : bool: 862234793
+		// uml::ReadVariableAction::type_and_ordering(Any, std::map) : bool: 1906125427
 		case umlPackage::READVARIABLEACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

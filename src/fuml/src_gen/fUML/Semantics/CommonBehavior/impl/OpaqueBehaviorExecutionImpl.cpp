@@ -1,6 +1,5 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
-
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
 #else
@@ -19,18 +18,17 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-
 #include "abstractDataTypes/Bag.hpp"
 
 
+#include "abstractDataTypes/AnyEObject.hpp"
+#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
-
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -38,7 +36,6 @@
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
 #include "fUML/fUMLFactory.hpp"
-
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -308,7 +305,7 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::doBody(fUML::Semantics::CommonBehavior::ParameterValue[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 90990798
+		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::doBody(fUML::Semantics::CommonBehavior::ParameterValue[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 2608685513
 		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'inputParameters'
@@ -324,7 +321,7 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::execute(): 249216936
+		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::execute(): 3076952147
 		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
