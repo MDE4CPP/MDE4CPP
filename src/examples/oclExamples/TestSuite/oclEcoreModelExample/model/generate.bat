@@ -1,7 +1,7 @@
 @echo off
 
 SET modelFolder=%cd%
-SET modelFile=%modelFolder%/BookStore_ecore.ecore
+SET modelFile=%modelFolder%/Library_ecore.ecore
 
 REM Go to MDE4CPP home folder to call the gradle task 'generateModel'
 REM Task 'generateModel' is defined in $MDE4CPP_HOME/src/common/universalGradleTasks/build.gradle

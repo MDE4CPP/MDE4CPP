@@ -1,5 +1,5 @@
 modelFolder=$PWD
-modelFile=$modelFolder/BookStore_ecore.ecore
+modelFile=$modelFolder/Library_ecore.ecore
 
 # Go to MDE4CPP home folder to call the gradle task 'generateModel'
 # Task 'generateModel' is defined in $MDE4CPP_HOME/src/common/universalGradleTasks/build.gradle
