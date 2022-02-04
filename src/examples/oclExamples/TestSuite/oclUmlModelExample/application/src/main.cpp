@@ -1,16 +1,15 @@
-
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "BookStore_uml/BookStore_umlFactory.hpp"
-#include "BookStore_uml/BookStore_umlPackage.hpp"
+#include "Library_uml/Library_umlFactory.hpp"
+#include "Library_uml/Library_umlPackage.hpp"
 
-#include "BookStore_uml/Book.hpp"
-#include "BookStore_uml/Library.hpp"
-#include "BookStore_uml/Loan.hpp"
-#include "BookStore_uml/Member.hpp"
-#include "BookStore_uml/Writer.hpp"
-#include "BookStore_uml/BookCategory.hpp"
+#include "Library_uml/Book.hpp"
+#include "Library_uml/Library.hpp"
+#include "Library_uml/Loan.hpp"
+#include "Library_uml/Member.hpp"
+#include "Library_uml/Writer.hpp"
+#include "Library_uml/BookCategory.hpp"
 
 //Includes from main behavior main
 #include <string>
@@ -50,7 +49,7 @@
 
 // End of user code
 
-using namespace BookStore_uml;
+using namespace Library_uml;
 
 // Start of user code functions 
 // You may manually edit additional functions, won't be overwritten upon generation.
@@ -310,17 +309,17 @@ std::string print(Any value) {
 				break;
 			}
 			// Model types are not supported right now --> manual handling
-			case BookStore_uml::BookStore_umlPackage::BOOK_CLASS:
+			case Library_uml::Library_umlPackage::BOOK_CLASS:
 			{
-				std::shared_ptr<BookStore_uml::Book> book= nullptr;
+				std::shared_ptr<Library_uml::Book> book= nullptr;
 				try
 				{
-					book= value->get<std::shared_ptr<BookStore_uml::Book>>();
+					book= value->get<std::shared_ptr<Library_uml::Book>>();
 				}
 				catch(...)
 				{
 					std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
-					book= std::dynamic_pointer_cast<BookStore_uml::Book>(object);
+					book= std::dynamic_pointer_cast<Library_uml::Book>(object);
 				}
 				if(nullptr !=book)
 				{
@@ -329,17 +328,17 @@ std::string print(Any value) {
 				}
 		        break;
 			}
-			case BookStore_uml::BookStore_umlPackage::MEMBER_CLASS:
+			case Library_uml::Library_umlPackage::MEMBER_CLASS:
 			{
-		        std::shared_ptr<BookStore_uml::Member> member=nullptr;
+		        std::shared_ptr<Library_uml::Member> member=nullptr;
 		        try
 		        {
-		        	member = value->get<std::shared_ptr<BookStore_uml::Member>>();
+		        	member = value->get<std::shared_ptr<Library_uml::Member>>();
 		        }
 				catch(...)
 				{
 					std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
-					member= std::dynamic_pointer_cast<BookStore_uml::Member>(object);
+					member= std::dynamic_pointer_cast<Library_uml::Member>(object);
 				}
 				if(nullptr !=member)
 				{
@@ -348,17 +347,17 @@ std::string print(Any value) {
 				}
 		        break;
 			}
-			case BookStore_uml::BookStore_umlPackage::LOAN_CLASS:
+			case Library_uml::Library_umlPackage::LOAN_CLASS:
 			{
-		        std::shared_ptr<BookStore_uml::Loan> loan = nullptr;
+		        std::shared_ptr<Library_uml::Loan> loan = nullptr;
 		        try
 		        {
-		        	loan = value->get<std::shared_ptr<BookStore_uml::Loan>>();
+		        	loan = value->get<std::shared_ptr<Library_uml::Loan>>();
 		        }
 				catch(...)
 				{
 					std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
-					loan= std::dynamic_pointer_cast<BookStore_uml::Loan>(object);
+					loan= std::dynamic_pointer_cast<Library_uml::Loan>(object);
 				}
 				if(nullptr !=loan)
 				{
@@ -454,60 +453,60 @@ Actual OCL functions
 */
 void query1() {
     std::string qry = "self.member";
-    std::shared_ptr<uml::Package> context = BookStore_uml::BookStore_umlPackage::eInstance();
+    std::shared_ptr<uml::Package> context = Library_uml::Library_umlPackage::eInstance();
 
-    std::cout << "START Query_1 (context[Package] = BookStore_umlPackage): " << qry << std::endl;
+    std::cout << "START Query_1 (context[Package] = Library_umlPackage): " << qry << std::endl;
     query(context, qry);
     std::cout << "END Query_1 -------------------------------------------\n" << std::endl;
 }
 void query2() {
     std::string qry = "self.feature";
-    std::shared_ptr<uml::Class> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library();
+    std::shared_ptr<uml::Class> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library();
     std::cout << "START Query_2 (context[Class] = Library): " << qry << std::endl;
     query(context, qry);
     std::cout << "END Query_2 -------------------------------------------\n" << std::endl;
 }
 void query3() {
     std::string qry = "self.name";
-    std::shared_ptr<uml::Property> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Book_title();
+    std::shared_ptr<uml::Property> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Book_title();
     std::cout << "START Query_3 (context[Property] = Book::title): " << qry << std::endl;
     query(context, qry);
     std::cout << "END Query_3 -------------------------------------------\n" << std::endl;
 }
 void query4() {
     std::string qry = "self";
-    std::shared_ptr<uml::Property> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library_books();
+    std::shared_ptr<uml::Property> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library_books();
     std::cout << "START Query_4 (context[Property] = Book::books): " << qry << std::endl;
     query(context, qry);
     std::cout << "END Query_4 -------------------------------------------\n" << std::endl;
 }
 void query5() {
     std::string qry = "self";
-    std::shared_ptr<uml::Operation> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library_addBook_Book_Book();
+    std::shared_ptr<uml::Operation> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library_addBook_Book_Book();
     std::cout << "START Query_5 (context[EOperation] = Book::addBook): " << qry << std::endl;
     query(context, qry);
     std::cout << "END Query_5 -------------------------------------------\n" << std::endl;
 }
 void query6() {
     std::string qry = "self.ownedElement";
-    std::shared_ptr<uml::Classifier> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_BookCategory();
-    std::cout << "START Query_5 (context[Enumeration] = BookCategory): " << qry << std::endl;
+    std::shared_ptr<uml::Classifier> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_BookCategory();
+    std::cout << "START Query_6 (context[Enumeration] = BookCategory): " << qry << std::endl;
     query(context, qry);
-    std::cout << "END Query_5 -------------------------------------------\n" << std::endl;
+    std::cout << "END Query_6 -------------------------------------------\n" << std::endl;
 }
 
 void uml_any_query1() {
     std::string qry = "self.member";
-    std::shared_ptr<uml::Package> context = BookStore_uml::BookStore_umlPackage::eInstance();
+    std::shared_ptr<uml::Package> context = Library_uml::Library_umlPackage::eInstance();
     Any value = queryValue(context, qry);
 
-    std::cout << "START Query_Any_1 (context[Package] = BookStore_umlPackage): " << qry << std::endl;
+    std::cout << "START Query_Any_1 (context[Package] = Library_umlPackage): " << qry << std::endl;
     std::cout << print(value, true) << std::endl;
     std::cout << "END Query_Any_1 -------------------------------------------\n" << std::endl;
 }
 void uml_any_query2() {
     std::string qry = "self.feature";
-    std::shared_ptr<uml::Class> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library();
+    std::shared_ptr<uml::Class> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_2 (context[Class] = Library): " << qry << std::endl;
@@ -516,7 +515,7 @@ void uml_any_query2() {
 }
 void uml_any_query3() {
     std::string qry = "self.name";
-    std::shared_ptr<uml::Property> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Book_title();
+    std::shared_ptr<uml::Property> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Book_title();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_3 (context[Property] = Book::title): " << qry << std::endl;
@@ -527,7 +526,7 @@ void uml_any_query3() {
 }
 void uml_any_query4() {
     std::string qry = "self";
-    std::shared_ptr<uml::Property> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library_books();
+    std::shared_ptr<uml::Property> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library_books();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_4 (context[Property] = Book::books): " << qry << std::endl;
@@ -536,7 +535,7 @@ void uml_any_query4() {
 }
 void uml_any_query5() {
     std::string qry = "self";
-    std::shared_ptr<uml::Operation> context =  BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_Library_addBook_Book_Book();
+    std::shared_ptr<uml::Operation> context =  Library_uml::Library_umlPackage::eInstance()->get_Library_uml_Library_addBook_Book_Book();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_5 (context[EOperation] = Book::addBook): " << qry << std::endl;
@@ -545,7 +544,7 @@ void uml_any_query5() {
 }
 void uml_any_query6() {
     std::string qry = "self.ownedElement";
-    std::shared_ptr<uml::Classifier> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_BookCategory();
+    std::shared_ptr<uml::Classifier> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_BookCategory();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_6 (context[Enumeration] = BookCategory): " << qry << std::endl;
@@ -555,7 +554,7 @@ void uml_any_query6() {
 
 void uml_any_query7() {
     std::string qry = "Set{20, 1 .. 10}";
-    std::shared_ptr<uml::Classifier> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_BookCategory();
+    std::shared_ptr<uml::Classifier> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_BookCategory();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_7 : " << qry << std::endl;
@@ -565,7 +564,7 @@ void uml_any_query7() {
 
 void uml_any_query8() {
     std::string qry = "Set{1, 2 .. 10}->iterate(i:Integer;sum:Integer=0 | sum + i)";
-    std::shared_ptr<uml::Classifier> context = BookStore_uml::BookStore_umlPackage::eInstance()->get_BookStore_uml_BookCategory();
+    std::shared_ptr<uml::Classifier> context = Library_uml::Library_umlPackage::eInstance()->get_Library_uml_BookCategory();
     Any value = queryValue(context, qry);
 
     std::cout << "START Query_Any_8 : " << qry << std::endl;
@@ -575,14 +574,14 @@ void uml_any_query8() {
 
 void validate1() {
     std::string qry = "\ncontext Library::nbBooks : Integer init: 5  \n";
-    std::shared_ptr<uml::Object> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<uml::Object> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     std::cout << "START Validate_1 : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_1 -------------------------------------------\n" << std::endl;
 }
 void validate2() {
     std::string qry = "\ncontext Library::opened : Boolean derive: true \n";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     context->setOpened(true);
     std::cout << "START Validate_2 : " << qry << std::endl;
     validate(context, qry);
@@ -590,7 +589,7 @@ void validate2() {
 }
 void validate3() {
     std::string qry = "\ncontext Library inv: self.nbBooks > 0 \n";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     context->setNbBooks(5);
     std::cout << "START Validate_3(nbBooks = 5) : " << qry << std::endl;
     validate(context, qry);
@@ -601,7 +600,7 @@ void validate4() {
                       "def: value: Real = self.nbBooks / self.nbBooks * self.nbBooks \n"
                       "context Library \n"
                       "inv: 25 = 5 * value \n";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     context->setNbBooks(5);
     std::cout << "START Validate_4(nbBooks = 5) : " << qry << std::endl;
     validate(context, qry);
@@ -614,7 +613,7 @@ void validate5() {
                       "def: rest2: Real = rest1 * 2 \n"
                       "context Library \n"
                       "inv: 15 <> let result : Integer = 0 in nbBooks - rest2 \n";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     context->setNbBooks(5);
     std::cout << "START Validate_5(nbBooks = 5) : " << qry << std::endl;
     validate(context, qry);
@@ -623,7 +622,7 @@ void validate5() {
 void validate6() {
     std::string qry = "context Book::countCopies() : Integer \n"
                       "body: self.copies \n";
-    std::shared_ptr<BookStore_uml::Book> context = BookStore_uml::BookStore_umlFactory::eInstance()->createBook();
+    std::shared_ptr<Library_uml::Book> context = Library_uml::Library_umlFactory::eInstance()->createBook();
     context->setCopies(5);
     std::cout << "START Validate_6(copies = 5) : " << qry << std::endl;
     validate(context, qry);
@@ -631,33 +630,33 @@ void validate6() {
 }
 
 void validate7() {
-    std::string qry = "\npackage BookStore_uml \n"
+    std::string qry = "\npackage Library_uml \n"
                       "context Book::addCopies(nbCopies:Integer=2): \n"
                       "pre: nbCopies > 0 \n"
                       "endpackage \n";
-    std::shared_ptr<BookStore_uml::Book> context = BookStore_uml::BookStore_umlFactory::eInstance()->createBook();
+    std::shared_ptr<Library_uml::Book> context = Library_uml::Library_umlFactory::eInstance()->createBook();
     std::cout << "START Validate_7(addCopies(2)) : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_7 -------------------------------------------\n" << std::endl;
 }
 
 void validate8() {
-    std::string qry = "\npackage BookStore_uml \n"
+    std::string qry = "\npackage Library_uml \n"
                       "context Book::addCopies(nbCopies:Integer=2): \n"
                       "post: self.copies = 2 \n"
                       "endpackage \n";
-    std::shared_ptr<BookStore_uml::Book> context = BookStore_uml::BookStore_umlFactory::eInstance()->createBook();
+    std::shared_ptr<Library_uml::Book> context = Library_uml::Library_umlFactory::eInstance()->createBook();
     std::cout << "START Validate_8(addCopies(2)) : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_8 -------------------------------------------\n" << std::endl;
 }
 
 void validate9() {
-    std::string qry = "\npackage BookStore_uml \n"
+    std::string qry = "\npackage Library_uml \n"
                       "context Library::open(): \n"
                       "pre: self.opened = false \n"
                       "endpackage \n";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
     context->setOpened(false);
     std::cout << "START Validate_9(open()) : " << qry << std::endl;
     validate(context, qry);
@@ -667,19 +666,19 @@ void validate9() {
 void validate10() {
     std::string qry = "context Library::open(): \n"
                       "post: self.opened = true";
-    std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
-    context->setOpened(false);
+    std::shared_ptr<Library_uml::Library> context = Library_uml::Library_umlFactory::eInstance()->createLibrary();
+    context->setOpened(true);
     std::cout << "START Validate_10(open()) : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_10 -------------------------------------------\n" << std::endl;
 }
 
 void validate11() {
-    std::string qry = "\npackage BookStore_uml \n"
+    std::string qry = "\npackage Library_uml \n"
                       "context Book::addCopies(nbCopies:Integer=2): \n"
                       "post: copies = copies@pre + nbCopies \n"
                       "endpackage \n";
-    std::shared_ptr<BookStore_uml::Book> context = BookStore_uml::BookStore_umlFactory::eInstance()->createBook();
+    std::shared_ptr<Library_uml::Book> context = Library_uml::Library_umlFactory::eInstance()->createBook();
     std::cout << "START Validate_11(addCopies(2)) : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_11 -------------------------------------------\n" << std::endl;
@@ -689,8 +688,8 @@ void validate11() {
 int main ()
 {
 	//Create Model Factory and Package
-	std::shared_ptr<BookStore_umlFactory> factory = BookStore_umlFactory::eInstance();
-	std::shared_ptr<BookStore_umlPackage> package = BookStore_umlPackage::eInstance();
+	std::shared_ptr<Library_umlFactory> factory = Library_umlFactory::eInstance();
+	std::shared_ptr<Library_umlPackage> package = Library_umlPackage::eInstance();
 
 	
 	query1();
