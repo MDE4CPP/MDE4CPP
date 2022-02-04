@@ -737,15 +737,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EOperation> operation, std::shared_ptr<Bag<OclExpression>> arguments, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
     std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
-    if(nullptr != colValue) {
-
+    if(nullptr != colValue)
+    {
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-//        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-//        bagType->setElementType(operation->getEType());
-//        bagValue->setModel(bagType);
 
-        for(size_t i = 0; i < colValue->getElements()->size(); i++) {
-            std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
+        for(auto elements: (*(colValue->getElements())))
+        {
+            std::shared_ptr<fUML::Semantics::Values::Value> src = elements->getValue();
             std::shared_ptr<fUML::Semantics::Values::Value> dst = createValue(operation, arguments, src);
             bagValue->addValue(dst);
         }
@@ -762,7 +760,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			// create the pre value snapshot
 			// copy object to avoid modifying the given context
 			//ToDo Don't Copy! use const
-			std::shared_ptr<ecore::EObject> preObj = obj;//->copy(); // ToDo: avoid set Values not using a copy!!
+			std::shared_ptr<ecore::EObject> preObj = obj; // TODO: Avoid operation call for Pre conditions! (see OclParserCustomVisitor)
 			std::shared_ptr<ObjectValue> preValue = std::dynamic_pointer_cast<ObjectValue>(createValue(preObj));
 			std::shared_ptr<NameValueBinding> nvbPre = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
 			std::shared_ptr<LocalSnapshot> localSnapshotPre = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
@@ -773,7 +771,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 
 			// create the post value snapshot
 			//ToDo Don't Copy! use const
-			std::shared_ptr<ecore::EObject> postObj = obj;//->copy();// ToDo: avoid set Values not using a copy!!
+			std::shared_ptr<ecore::EObject> postObj = obj->copy();// ToDo: avoid set Values not using a copy!! It's necessary to copy, because the post evaluation is related to the result of the operation in context part
 			std::shared_ptr<ObjectValue> postValue = std::dynamic_pointer_cast<ObjectValue>(createValue(postObj));
 			std::shared_ptr<NameValueBinding> nvbPost = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
 			std::shared_ptr<LocalSnapshot> localSnapshotPost = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
@@ -791,8 +789,9 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			preValue->getHistory()->add(localSnapshotPre);
 			preValue->getHistory()->add(localSnapshotPost);
 
-			for(size_t i = 0; i < arguments->size(); i++) {
-				Any item = retrieveRawValue(arguments->at(i)->getInstance()->getResultValue());
+			for(auto anArgument: *arguments)
+			{
+				Any item = retrieveRawValue(anArgument->getInstance()->getResultValue());
 				convertArgs->push_back(item );
 			}
 			std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
@@ -848,8 +847,8 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
 		epackage = factory->createEPackage(upackage->getMetaElementID());
 		epackage->setName(upackage->getName());
 
-		for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
-			std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
+		for(std::shared_ptr<uml::Element> type: *(upackage->getOwnedElement()))
+		{
 			std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(type);
 			if(uclass != nullptr) {
 				std::shared_ptr<ecore::EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(epackage, uclass->getMetaElementID());
@@ -865,8 +864,8 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
 				}
 			}
 		}
-		for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
-			std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
+		for(std::shared_ptr<uml::Element> type: *(upackage->getOwnedElement()))
+		{
 			std::shared_ptr<uml::Classifier> utype = std::dynamic_pointer_cast<uml::Classifier>(type);
 			if(utype == nullptr) {
 				continue;

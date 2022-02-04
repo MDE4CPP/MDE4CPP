@@ -60,7 +60,7 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 	std::shared_ptr<ecore::EClassifier> classifier = nullptr;
 
 	if(element != nullptr)
-	{ 
+	{
 		std::shared_ptr<ecore::EClass> eClass=element->eClass();
 
 		// TODO alternative UML-Modellunterscheidung: 	if(nullptr!=uobj->getMetaClass())
@@ -68,20 +68,27 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 		if(nullptr!=namedElement)
 		{
 			std::shared_ptr<ecore::EPackage> package=eClass->getEPackage().lock();
-			if(nullptr!=namedElement)
+			if(nullptr!=package)
 			{
 				epackage = uml::umlPackage::eInstance(); //OclReflection::umlPackage2Ecore(element->getMetaClass()->getPackage().lock());
 				classifier = element->eClass(); //epackage->getEClassifier(element->getMetaClass()->getName());
 			}
 		}
-		if(nullptr==epackage) // UML-Modell UMLReflection (ecore-)Model necessary! --> TODO!!! über Plugin-Manager gehen!!!
+		if(nullptr==epackage) // UML-Modell UMLReflection (ecore-)Model necessary! --> TODO!!! use Plugin-Manager !!!
 		{
-			if(nullptr!=element->getMetaClass() && nullptr != element->getMetaClass()->getPackage().lock())
+			std::shared_ptr<uml::Class> metaClass=element->getMetaClass();
+			if(nullptr!=metaClass && nullptr != metaClass->getPackage().lock())
 			{
 				//Bad Workaround ToDo: Support UML-Based OCL-Reflection use uml::get instead of eGet...
 				//Use Pluginframework for unknown / uml Packages to find classifier
-				epackage = OclReflection::umlPackage2Ecore(element->getMetaClass()->getPackage().lock());
-				classifier = epackage->getEClassifier(element->getMetaClass()->getName());
+				epackage = OclReflection::umlPackage2Ecore(metaClass->getPackage().lock());
+				classifier = epackage->getEClassifier(metaClass->getName());
+			}
+			else // last chance... // use Ecore MetaMeta
+			{
+//				epackage = uml::umlPackage::eInstance(); //OclReflection::umlPackage2Ecore(element->getMetaClass()->getPackage().lock());
+				classifier = context->eClass(); //epackage->getEClassifier(element->getMetaClass()->getName());
+				epackage = classifier->getEPackage().lock();
 			}
 		}
 	}
