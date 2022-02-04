@@ -36,7 +36,6 @@
 #include <types/typesPackage.hpp>
 #include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
 
-
 bool query_syntax1();
 bool query_syntax2();
 bool query_syntax3();
