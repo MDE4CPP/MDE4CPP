@@ -85,10 +85,24 @@
 ---
 
 ## OCL
-### Additional functionalities:
-- Include first implementation of OCL to query:
--- 
-
+### Functionalities:
+- Include first implementation of OCL to query and validate models during runtime:
+  - ecore metamodel and ecore based models
+  - UML based models
+  - fUML based models (i.e. use of OCL constraints in Activity Diagrams)
+- Implementation of:
+  - different kind of constraints
+	- Invariants (inv)
+	- pre- and post conditions (pre, post)
+	- defines (def)
+	- body definitions (body)
+	- direct manipulation using self (similar to AQL)
+  - property queries (i.e. self.name), including init and derive
+  - primitive types (Integer, Boolean, String, ... ), icluding of priimitive operations (i.e. +, -, =, sum, ...)
+  - collections (Bag, Sequence, ...) i.e. Set{20, 1 .. 10}
+  - collection operation iterate (seclect or for is not supported right now)
+    - example: Set{1, 2 .. 10}->iterate(i:Integer;sum:Integer=0 | sum + i))
+  - invoke of model operations during runtime (i.e. self->eClass() or. self->printHelloWorld())
 ---
 
 ## Examples
