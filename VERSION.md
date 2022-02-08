@@ -112,6 +112,7 @@
 - Added ecore example for usage of *EObject::eInvoke()*
 - Added UML example for validation of copying objects
 - Added UML example for validation of subset/union functionalities of UML models
+- Added OCL examples (ecore, UML, fUML) and test suite
 - Added examples for custom execution strategy mechanism (*see section fUML/PSCS*)
 - Added applications for custom execution strategy mechanism (*"PingModel" and "LoadBalance"*)
 - Added generation scripts to various examples
