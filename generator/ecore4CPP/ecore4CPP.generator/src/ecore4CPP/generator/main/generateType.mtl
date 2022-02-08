@@ -279,45 +279,49 @@ std::string
 [/template]
 
 [query public getDefaultValue(anEClassifier : EClassifier) : String = 
-		if ((name = 'EBoolean' ) or 
-			(name = 'EBooleanObject' ) or 
-			(name = 'Boolean' )) 
+let shortName:String = name.replace('java.lang.', '').replace('java.util.','') in
+		if ((shortName = 'EBoolean' ) or 
+			(shortName = 'EBooleanObject' ) or 
+			(shortName = 'Boolean' )) 
 		then getDefaultBooleanValue()
 		else getDefaultValueCheckString()
 		endif
 /]
 [query private getDefaultValueCheckString(anEClassifier : EClassifier) : String = 
-		if ((name = 'EString') or 
-			(name = 'String')) 
+let shortName:String = name.replace('java.lang.', '').replace('java.util.','') in
+		if ((shortName = 'EString') or 
+			(shortName = 'String')) 
 		then getDefaultStringValue() 
 		else getDefaultValueCheckInteger()
 		endif
 /]
 [query private getDefaultValueCheckInteger(anEClassifier : EClassifier) : String = 
-		if ((name = 'UnlimitedNatural') or 
-			(name = 'EResource') or 
-			(name = 'EInt') or 
-			(name = 'EIntegerObject') or 
-			(name = 'EBigInteger') or 
-			(name = 'Integer') or 
-			(name = 'EDouble') or 
-			(name = 'EDoubleObject') or 
-			(name = 'EBigDecimal') or 
-			(name = 'Real') or 
-			(name = 'ELong') or 
-			(name = 'ELongObject') or 
-			(name = 'EFloat') or 
-			(name = 'EFloatObject') or 
-			(name = 'EDate')) 
+let shortName:String = name.replace('java.lang.', '').replace('java.util.','') in
+		if ((shortName = 'UnlimitedNatural') or 
+			(shortName = 'EResource') or 
+			(shortName = 'EInt') or 
+			(shortName = 'EIntegerObject') or 
+			(shortName = 'EBigInteger') or 
+			(shortName = 'Integer') or 
+			(shortName = 'EDouble') or 
+			(shortName = 'EDoubleObject') or 
+			(shortName = 'EBigDecimal') or 
+			(shortName = 'Real') or 
+			(shortName = 'ELong') or 
+			(shortName = 'ELongObject') or 
+			(shortName = 'EFloat') or 
+			(shortName = 'EFloatObject') or 
+			(shortName = 'EDate')) 
 		then getDefaultNumberValue() 
 		else getDefaultValueCheckChar() 
 		endif
 /]
-[query private getDefaultValueCheckChar(anEClassifier : EClassifier) : String = 
-		if ((name = 'EByte') or 
-			(name = 'EByteObject') or 
-			(name = 'EByteArray') or 
-			(name = 'EChar') or 
+[query private getDefaultValueCheckChar(anEClassifier : EClassifier) : String =
+let shortName:String = name.replace('java.lang.', '').replace('java.util.','') in 
+		if ((shortName = 'EByte') or 
+			(shortName = 'EByteObject') or 
+			(shortName = 'EByteArray') or 
+			(shortName = 'EChar') or 
 			(name = 'ECharacterObject')) 
 		then getDefaultCharValue() 
 		else getDefaultPointerValue()

@@ -94,8 +94,13 @@ virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatu
 [/if]
 [/template]
 
-[query public getDefaultValue(anEAttribute : EAttribute) : String = if (defaultValueLiteral->notEmpty()) then defaultValueLiteral else eType.getDefaultValue() endif/]
-
+[query public getDefaultValue(anEAttribute : EAttribute) : String = 
+	let shortName:String = anEAttribute.eType.name.replace('java.lang.', '').replace('java.util.','') in
+		if (defaultValueLiteral->notEmpty()) then 
+				if ((shortName = 'EString') or (shortName = 'String') )	then '"'+defaultValueLiteral+'"' 
+				else defaultValueLiteral
+				endif
+		else eType.getDefaultValue() endif/]
 
 [***###########################################################################################
  * Section for generating the implementation of Getter & Setter methods for EAttribute elements in the generated class source file
