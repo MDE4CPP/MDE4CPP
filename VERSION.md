@@ -1,12 +1,12 @@
 # Version 1.4
 
 ## General
-- Updated CXX standard to C++-17
 - Integrated OCL implementation in MDE4CPP (*see section 'OCL'*)
-- Updated Gradle to version 7.3.1
-- Added support for JDK 16
 - Added generation-based machanism to extend fUML/PSCS-execution-strategies (*see section 'fUML/PSCS'*)
 - Extended generic container-class *Any* (*see section 'Any'*)
+- Updated CXX standard to C++-17
+- Updated Gradle to version 7.3.1
+- Added support for JDK 16
 - Added main eclipse project in MDE4CPP root directory
 - Unimplemented methods in generated model code now thorw *std::runtime_error*
 - Added project-specific extensions for Gradle build environment (custom tasks for generating and compiling model libraries) which were formerly handled by external plugins
@@ -14,6 +14,9 @@
 
 ## Ecore
 ### Additional functionalities:
+- Added support of *EObject::eInvoke()* for generic operation invocation
+- Added implementation of *EObject::eContents()* and *EObject::eAllContents()*
+- Added support of *EFactory::convertToString()*
 - Added support of generic types using C++ templates
 - Added support of templated containers (Map, List, etc.) using C++ STL containers
 - Added new keywords to specify behavior of ecore4CPP generator using *EAnnotations* (*see newly introduced AnnotationsExample in examples*)
@@ -25,10 +28,8 @@
 - *EEnums* are now generated as C++ enum classes for type safety
 - Reworked validation mechanism of ecore4CPP generator: a model's structure is now validated before the actual generation process
 - Added hierarchical logging system to the generator for flexible ouput during generation 
+- Changed naming conventions for create-methods for containments in generated model factory to *create\<type-of-contained-property\>_as_\<name-of-contained-property\>_in_\<type-of-container\>*
 ### Model changes:
-- Added support of *EObject::eInvoke()*
-- Added implementation of *EObject::eContents()* and *EObject::eAllContents()*
-- Added support of *EFactory::convertToString()*
 - Added EClass *EObjectAny* as subclass of *EObject* which may contain an instance of *Any*
 - Added EClass *EObjectContainer* as subclass of *EObject* which may contain a list of *EObject* instances
 ### Bugfixes and minor changes:
@@ -38,7 +39,6 @@
 - Moved copy-functionality of generated classes from copy constructor to overloaded assignment operator ('='); copy constructor now only calls overloaded assignment
 - Introduced queries to retrieve keywords in ecore4CPP generator instead of hard-coding them
 - Introduced explicit symbol handling when linking libraries generated with ecore4CPP generator (fixes bug of exceeding the maximum number of exported symbols on Windows platforms for large models)
-- Changed naming conventions for create-methods for containments in generated model factory to *create\<type-of-contained-property\>_as_\<name-of-contained-property\>_in_\<type-of-container\>*
 - *create\<type-of-contained-property\>_as_\<name-of-contained-property\>_in_\<type-of-container\>*-methods are now also generated for subsets of compositions in model factory
 - Enhanced support for back references for compositions
 - Fixed creation of objects in subsetted *EAttributes* and *EReferences* (were formerly created into unions in some situations)
@@ -85,6 +85,10 @@
 ---
 
 ## OCL
+### Additional functionalities:
+- Include first implementation of OCL to query:
+-- 
+
 ---
 
 ## Examples
