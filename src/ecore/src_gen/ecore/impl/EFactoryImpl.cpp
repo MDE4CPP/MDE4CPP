@@ -219,7 +219,7 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 						std::shared_ptr<ecore::ENamedElement> eNamedElement= std::dynamic_pointer_cast<ecore::ENamedElement>(aObject);
 						if(nullptr != eNamedElement)
 						{
-							returnStringStream << "<EObject name:"<< eNamedElement->getName() << "> :" ;
+							returnStringStream << "name:"<< eNamedElement->getName() << " :" ;
 						}
 						else
 						{
@@ -235,9 +235,9 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 						returnStringStream << "<EClass>:" << aValue->getName() << ":"<< aValue->getName()<<std::endl;
 
 						std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> attributes = aValue->getEAttributes();
-						convertToString(nullptr, eAnyBag(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));
+						returnStringStream << convertToString(nullptr, eAnyBag(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));
 						std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> references = aValue->getEReferences();
-						convertToString(nullptr, eAnyBag(attributes,ecore::ecorePackage::EREFERENCE_CLASS));
+						returnStringStream << convertToString(nullptr, eAnyBag(references,ecore::ecorePackage::EREFERENCE_CLASS));
 						handled = true; break;
 					}
 					case ecore::ecorePackage::EOBJECTANY_CLASS:
@@ -457,7 +457,7 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 						{
 							try
 							{
-								std::shared_ptr<ecore::EObjectAny> eObjectAny= instanceValue->get<std::shared_ptr<ecore::EObjectAny>>();
+								eObjectAny= instanceValue->get<std::shared_ptr<ecore::EObjectAny>>();
 							}
 							catch(...) // 2. last try
 							{

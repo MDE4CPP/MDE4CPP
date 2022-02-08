@@ -186,135 +186,135 @@ namespace StandardProfile
 
 			//Static IDs
 				//Class StandardProfile::Auxiliary
-				static const long long AUXILIARY_CLASS = 1466047990;
+				static const unsigned long AUXILIARY_CLASS = 1466047990;
 				static const unsigned int AUXILIARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int AUXILIARY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::BuildComponent
-				static const long long BUILDCOMPONENT_CLASS = 133779747;
+				static const unsigned long BUILDCOMPONENT_CLASS = 133779747;
 				static const unsigned int BUILDCOMPONENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int BUILDCOMPONENT_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Call
-				static const long long CALL_CLASS = 495006810;
+				static const unsigned long CALL_CLASS = 495006810;
 				static const unsigned int CALL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int CALL_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Create
-				static const long long CREATE_CLASS = 841207773;
+				static const unsigned long CREATE_CLASS = 841207773;
 				static const unsigned int CREATE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int CREATE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Derive
-				static const long long DERIVE_CLASS = 501351344;
+				static const unsigned long DERIVE_CLASS = 501351344;
 				static const unsigned int DERIVE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DERIVE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Destroy
-				static const long long DESTROY_CLASS = 308948604;
+				static const unsigned long DESTROY_CLASS = 308948604;
 				static const unsigned int DESTROY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DESTROY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Document
-				static const long long DOCUMENT_CLASS = 301496007;
+				static const unsigned long DOCUMENT_CLASS = 301496007;
 				static const unsigned int DOCUMENT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int DOCUMENT_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Entity
-				static const long long ENTITY_CLASS = 2070209470;
+				static const unsigned long ENTITY_CLASS = 2070209470;
 				static const unsigned int ENTITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int ENTITY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Executable
-				static const long long EXECUTABLE_CLASS = 1083872305;
+				static const unsigned long EXECUTABLE_CLASS = 1083872305;
 				static const unsigned int EXECUTABLE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int EXECUTABLE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::File
-				static const long long FILE_CLASS = 242613410;
+				static const unsigned long FILE_CLASS = 242613410;
 				static const unsigned int FILE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FILE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Focus
-				static const long long FOCUS_CLASS = 2011110723;
+				static const unsigned long FOCUS_CLASS = 2011110723;
 				static const unsigned int FOCUS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FOCUS_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Framework
-				static const long long FRAMEWORK_CLASS = 758834892;
+				static const unsigned long FRAMEWORK_CLASS = 758834892;
 				static const unsigned int FRAMEWORK_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FRAMEWORK_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Implement
-				static const long long IMPLEMENT_CLASS = 1810753173;
+				static const unsigned long IMPLEMENT_CLASS = 1810753173;
 				static const unsigned int IMPLEMENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENT_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::ImplementationClass
-				static const long long IMPLEMENTATIONCLASS_CLASS = 1555601512;
+				static const unsigned long IMPLEMENTATIONCLASS_CLASS = 1555601512;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Instantiate
-				static const long long INSTANTIATE_CLASS = 1393463882;
+				static const unsigned long INSTANTIATE_CLASS = 1393463882;
 				static const unsigned int INSTANTIATE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int INSTANTIATE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Library
-				static const long long LIBRARY_CLASS = 1931384455;
+				static const unsigned long LIBRARY_CLASS = 1931384455;
 				static const unsigned int LIBRARY_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int LIBRARY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Metaclass
-				static const long long METACLASS_CLASS = 1110600536;
+				static const unsigned long METACLASS_CLASS = 1110600536;
 				static const unsigned int METACLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METACLASS_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Metamodel
-				static const long long METAMODEL_CLASS = 269527075;
+				static const unsigned long METAMODEL_CLASS = 269527075;
 				static const unsigned int METAMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METAMODEL_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::ModelLibrary
-				static const long long MODELLIBRARY_CLASS = 690477192;
+				static const unsigned long MODELLIBRARY_CLASS = 690477192;
 				static const unsigned int MODELLIBRARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int MODELLIBRARY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Process
-				static const long long PROCESS_CLASS = 985526206;
+				static const unsigned long PROCESS_CLASS = 985526206;
 				static const unsigned int PROCESS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int PROCESS_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Realization
-				static const long long REALIZATION_CLASS = 1122657704;
+				static const unsigned long REALIZATION_CLASS = 1122657704;
 				static const unsigned int REALIZATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REALIZATION_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Refine
-				static const long long REFINE_CLASS = 1523062016;
+				static const unsigned long REFINE_CLASS = 1523062016;
 				static const unsigned int REFINE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REFINE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Responsibility
-				static const long long RESPONSIBILITY_CLASS = 737133505;
+				static const unsigned long RESPONSIBILITY_CLASS = 737133505;
 				static const unsigned int RESPONSIBILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int RESPONSIBILITY_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Script
-				static const long long SCRIPT_CLASS = 364379155;
+				static const unsigned long SCRIPT_CLASS = 364379155;
 				static const unsigned int SCRIPT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SCRIPT_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Send
-				static const long long SEND_CLASS = 1722014911;
+				static const unsigned long SEND_CLASS = 1722014911;
 				static const unsigned int SEND_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SEND_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Service
-				static const long long SERVICE_CLASS = 1531161909;
+				static const unsigned long SERVICE_CLASS = 1531161909;
 				static const unsigned int SERVICE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SERVICE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Source
-				static const long long SOURCE_CLASS = 548518589;
+				static const unsigned long SOURCE_CLASS = 548518589;
 				static const unsigned int SOURCE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SOURCE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Specification
-				static const long long SPECIFICATION_CLASS = 504804019;
+				static const unsigned long SPECIFICATION_CLASS = 504804019;
 				static const unsigned int SPECIFICATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SPECIFICATION_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Subsystem
-				static const long long SUBSYSTEM_CLASS = 1825466533;
+				static const unsigned long SUBSYSTEM_CLASS = 1825466533;
 				static const unsigned int SUBSYSTEM_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SUBSYSTEM_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::SystemModel
-				static const long long SYSTEMMODEL_CLASS = 275535946;
+				static const unsigned long SYSTEMMODEL_CLASS = 275535946;
 				static const unsigned int SYSTEMMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SYSTEMMODEL_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Trace
-				static const long long TRACE_CLASS = 1903938062;
+				static const unsigned long TRACE_CLASS = 1903938062;
 				static const unsigned int TRACE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TRACE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Type
-				static const long long TYPE_CLASS = 66837757;
+				static const unsigned long TYPE_CLASS = 66837757;
 				static const unsigned int TYPE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TYPE_CLASS_OPERATION_COUNT = 0;
 				//Class StandardProfile::Utility
-				static const long long UTILITY_CLASS = 995008667;
+				static const unsigned long UTILITY_CLASS = 995008667;
 				static const unsigned int UTILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int UTILITY_CLASS_OPERATION_COUNT = 0;
 			

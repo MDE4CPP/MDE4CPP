@@ -52,17 +52,17 @@ DocumentImpl::DocumentImpl()
 	// init Get Set
 	//getter init
 		//Property base_Artifact
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1856461285,[this](){ return eAny(this->getBase_Artifact(), uml::umlPackage::ARTIFACT_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1856461285,[this](){ return eAny(this->getBase_Artifact(), uml::umlPackage::ARTIFACT_CLASS, false);}));
 	
 	
 	//setter init
 	//Property base_Artifact
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1856461285,[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1856461285,[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
 	
 	
 	//unsetter init
 		//Property base_Artifact
-		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(1856461285,[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
+		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1856461285,[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	
 	
 	
@@ -163,13 +163,13 @@ Any DocumentImpl::get(std::shared_ptr<uml::Property> _property) const
 
 Any DocumentImpl::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any DocumentImpl::get(long long _uID) const
+Any DocumentImpl::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -194,13 +194,13 @@ void DocumentImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 
 void DocumentImpl::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void DocumentImpl::set(long long _uID, Any value)
+void DocumentImpl::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -218,13 +218,13 @@ void DocumentImpl::unset(std::shared_ptr<uml::Property> _property)
 
 void DocumentImpl::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void DocumentImpl::unset(long long _uID)
+void DocumentImpl::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -252,13 +252,13 @@ Any DocumentImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared
 
 Any DocumentImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any DocumentImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any DocumentImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation

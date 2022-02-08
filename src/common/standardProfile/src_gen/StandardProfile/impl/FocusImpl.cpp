@@ -52,17 +52,17 @@ FocusImpl::FocusImpl()
 	// init Get Set
 	//getter init
 		//Property base_Class
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1705935987,[this](){ return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1705935987,[this](){ return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);}));
 	
 	
 	//setter init
 	//Property base_Class
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1705935987,[this](Any object){this->setBase_Class(object->get<std::shared_ptr<uml::Class>>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1705935987,[this](Any object){this->setBase_Class(object->get<std::shared_ptr<uml::Class>>());}));
 	
 	
 	//unsetter init
 		//Property base_Class
-		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(1705935987,[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
+		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1705935987,[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	
 	
 	
@@ -162,13 +162,13 @@ Any FocusImpl::get(std::shared_ptr<uml::Property> _property) const
 
 Any FocusImpl::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any FocusImpl::get(long long _uID) const
+Any FocusImpl::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -187,13 +187,13 @@ void FocusImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 
 void FocusImpl::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void FocusImpl::set(long long _uID, Any value)
+void FocusImpl::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -210,13 +210,13 @@ void FocusImpl::unset(std::shared_ptr<uml::Property> _property)
 
 void FocusImpl::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void FocusImpl::unset(long long _uID)
+void FocusImpl::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -243,13 +243,13 @@ Any FocusImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_pt
 
 Any FocusImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any FocusImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any FocusImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation

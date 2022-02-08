@@ -52,17 +52,17 @@ DeriveImpl::DeriveImpl()
 	// init Get Set
 	//getter init
 		//Property base_Abstraction
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(893379002,[this](){ return eAny(this->getBase_Abstraction(), uml::umlPackage::ABSTRACTION_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(893379002,[this](){ return eAny(this->getBase_Abstraction(), uml::umlPackage::ABSTRACTION_CLASS, false);}));
 	
 	
 	//setter init
 	//Property base_Abstraction
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(893379002,[this](Any object){this->setBase_Abstraction(object->get<std::shared_ptr<uml::Abstraction>>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(893379002,[this](Any object){this->setBase_Abstraction(object->get<std::shared_ptr<uml::Abstraction>>());}));
 	
 	
 	//unsetter init
 		//Property base_Abstraction
-		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(893379002,[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
+		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(893379002,[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
 	
 	
 	
@@ -162,13 +162,13 @@ Any DeriveImpl::get(std::shared_ptr<uml::Property> _property) const
 
 Any DeriveImpl::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any DeriveImpl::get(long long _uID) const
+Any DeriveImpl::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -187,13 +187,13 @@ void DeriveImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 
 void DeriveImpl::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void DeriveImpl::set(long long _uID, Any value)
+void DeriveImpl::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -210,13 +210,13 @@ void DeriveImpl::unset(std::shared_ptr<uml::Property> _property)
 
 void DeriveImpl::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void DeriveImpl::unset(long long _uID)
+void DeriveImpl::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -243,13 +243,13 @@ Any DeriveImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_p
 
 Any DeriveImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any DeriveImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any DeriveImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation

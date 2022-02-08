@@ -53,29 +53,29 @@ ExternalLibraryImpl::ExternalLibraryImpl()
 	// init Get Set
 	//getter init
 		//Property base_Package
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(441090789,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(441090789,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
 		//Property includePath
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(83544771,[this](){ return eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(83544771,[this](){ return eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);}));
 		//Property libraryName
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(596096889,[this](){ return eAny(this->getLibraryName(), types::typesPackage::STRING_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(596096889,[this](){ return eAny(this->getLibraryName(), types::typesPackage::STRING_CLASS, false);}));
 		//Property libraryPath
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1321918160,[this](){ return eAny(this->getLibraryPath(), types::typesPackage::STRING_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1321918160,[this](){ return eAny(this->getLibraryPath(), types::typesPackage::STRING_CLASS, false);}));
 	
 	
 	//setter init
 	//Property base_Package
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(441090789,[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(441090789,[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
 	//Property includePath
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(83544771,[this](Any object){this->setIncludePath(object->get<std::string>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(83544771,[this](Any object){this->setIncludePath(object->get<std::string>());}));
 	//Property libraryName
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(596096889,[this](Any object){this->setLibraryName(object->get<std::string>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(596096889,[this](Any object){this->setLibraryName(object->get<std::string>());}));
 	//Property libraryPath
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1321918160,[this](Any object){this->setLibraryPath(object->get<std::string>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1321918160,[this](Any object){this->setLibraryPath(object->get<std::string>());}));
 	
 	
 	//unsetter init
 		//Property base_Package
-		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(441090789,[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
+		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(441090789,[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
 	
 	
 	
@@ -217,13 +217,13 @@ Any ExternalLibraryImpl::get(std::shared_ptr<uml::Property> _property) const
 
 Any ExternalLibraryImpl::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any ExternalLibraryImpl::get(long long _uID) const
+Any ExternalLibraryImpl::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -242,13 +242,13 @@ void ExternalLibraryImpl::set(std::shared_ptr<uml::Property> _property, Any valu
 
 void ExternalLibraryImpl::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void ExternalLibraryImpl::set(long long _uID, Any value)
+void ExternalLibraryImpl::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -265,13 +265,13 @@ void ExternalLibraryImpl::unset(std::shared_ptr<uml::Property> _property)
 
 void ExternalLibraryImpl::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void ExternalLibraryImpl::unset(long long _uID)
+void ExternalLibraryImpl::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -298,13 +298,13 @@ Any ExternalLibraryImpl::invoke(std::shared_ptr<uml::Operation> _operation, std:
 
 Any ExternalLibraryImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any ExternalLibraryImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any ExternalLibraryImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation

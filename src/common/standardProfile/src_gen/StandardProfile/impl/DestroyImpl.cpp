@@ -52,17 +52,17 @@ DestroyImpl::DestroyImpl()
 	// init Get Set
 	//getter init
 		//Property base_BehavioralFeature
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(891766883,[this](){ return eAny(this->getBase_BehavioralFeature(), uml::umlPackage::BEHAVIORALFEATURE_CLASS, false);}));
+		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(891766883,[this](){ return eAny(this->getBase_BehavioralFeature(), uml::umlPackage::BEHAVIORALFEATURE_CLASS, false);}));
 	
 	
 	//setter init
 	//Property base_BehavioralFeature
-		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(891766883,[this](Any object){this->setBase_BehavioralFeature(object->get<std::shared_ptr<uml::BehavioralFeature>>());}));
+		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(891766883,[this](Any object){this->setBase_BehavioralFeature(object->get<std::shared_ptr<uml::BehavioralFeature>>());}));
 	
 	
 	//unsetter init
 		//Property base_BehavioralFeature
-		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(891766883,[this](){m_base_BehavioralFeature = std::shared_ptr<uml::BehavioralFeature>(nullptr);}));
+		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(891766883,[this](){m_base_BehavioralFeature = std::shared_ptr<uml::BehavioralFeature>(nullptr);}));
 	
 	
 	
@@ -162,13 +162,13 @@ Any DestroyImpl::get(std::shared_ptr<uml::Property> _property) const
 
 Any DestroyImpl::get(std::string _qualifiedName) const
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->get(uID);
 }
 
-Any DestroyImpl::get(long long _uID) const
+Any DestroyImpl::get(unsigned long _uID) const
 {
-	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
+	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
@@ -187,13 +187,13 @@ void DestroyImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 
 void DestroyImpl::set(std::string _qualifiedName, Any value)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void DestroyImpl::set(long long _uID, Any value)
+void DestroyImpl::set(unsigned long _uID, Any value)
 {
-	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
     {
         //invoke the setter function
@@ -210,13 +210,13 @@ void DestroyImpl::unset(std::shared_ptr<uml::Property> _property)
 
 void DestroyImpl::unset(std::string _qualifiedName)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->unset(uID);
 }
 
-void DestroyImpl::unset(long long _uID)
+void DestroyImpl::unset(unsigned long _uID)
 {
-	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
     if(iter != m_unsetterMap.cend())
     {
         //invoke the unsetter function
@@ -243,13 +243,13 @@ Any DestroyImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_
 
 Any DestroyImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
-	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any DestroyImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any DestroyImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
     if(iter != m_invocationMap.cend())
     {
         //invoke the operation
