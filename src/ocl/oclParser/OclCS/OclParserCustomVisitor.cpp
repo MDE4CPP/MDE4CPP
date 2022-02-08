@@ -1562,7 +1562,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::Prim
     OclParser::BooleanLiteralExpCSContext* boolCS = ctx->booleanLiteralExpCS();
     OclParser::NullLiteralExpCSContext* nullCS = ctx->nullLiteralExpCS();
     OclParser::UnlimitedNaturalLiteralExpCSContext* unlimitedCS = ctx->unlimitedNaturalLiteralExpCS();
-
+    //TODO different ValueTypes EInt or UML Int are necessary (depends on context)
     if(intCS != nullptr) {
         std::shared_ptr<IntegerLiteralExp> intExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIntegerLiteralExp();
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();

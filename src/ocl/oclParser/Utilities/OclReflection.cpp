@@ -152,24 +152,38 @@ bool OclReflection::kindOf(std::shared_ptr<ecore::EClassifier> type, std::shared
 
 std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_ptr<ecore::EClass> eclass, const std::string& name, std::shared_ptr<Bag<OclExpression>> arguments)
 {
+	std::shared_ptr<ecore::EOperation> returnOperation=nullptr;
     std::shared_ptr<Bag<ecore::EOperation>> ecore_operations = eclass->getEAllOperations();
     Bag<ecore::EOperation>::const_iterator endIt_operation = ecore_operations->end();
     for (Bag<ecore::EOperation>::const_iterator it_operation = ecore_operations->begin();
          it_operation != endIt_operation; ++it_operation)
     {
         //std::cout << (*it_operation)->getName() << std::endl;
-        if ((*it_operation)->getName() == name && (*it_operation)->getEParameters()->size() == arguments->size()) {
-            for(size_t i = 0; i < (*it_operation)->getEParameters()->size(); i++) {
-                std::shared_ptr<ecore::EParameter> p = (*it_operation)->getEParameters()->at(i);
+    	std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> operationParameter=(*it_operation)->getEParameters();
+    	size_t sizeParam=(*it_operation)->getEParameters()->size();
+        if ((*it_operation)->getName() == name && sizeParam == arguments->size())
+        {
+        	returnOperation=(*it_operation); // Type issue of primitive Types of UML and Ecore! --> look for best matched operation. It's possible to work with primitive types from different sources
+            bool parameterTest=true;
+            for(size_t i = 0; i < sizeParam; i++)
+            {
+                std::shared_ptr<ecore::EParameter> p = operationParameter->at(i);
                 std::shared_ptr<OclExpression> e = arguments->at(i);
-                if(p->getEType()->getClassifierID() != e->getEType()->getClassifierID()) {
-                    return nullptr; // different parameter
+                std::cout << "a: "<<p->getEType()->getName() << "b" << e->getEType()->getName();
+                //Test of compatible (primitive) types (ecore EInt / UML / fUML Integer)
+                if(p->getEType()->getClassifierID() != e->getEType()->getClassifierID())
+                {
+                	parameterTest=false;
+					break; // different parameter
                 }
             }
-            return (*it_operation);
+            if(true==parameterTest) // correct operation found
+            {
+            	return (*it_operation);
+            }
         }
     }
-    return nullptr;
+    return returnOperation;
 }
 
 std::shared_ptr<ecore::EAttribute> OclReflection::lookupProperty(std::shared_ptr<ecore::EClass> eclass, const std::string& name)
