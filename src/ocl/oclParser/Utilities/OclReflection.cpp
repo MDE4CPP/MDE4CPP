@@ -169,7 +169,6 @@ std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_pt
             {
                 std::shared_ptr<ecore::EParameter> p = operationParameter->at(i);
                 std::shared_ptr<OclExpression> e = arguments->at(i);
-                std::cout << "a: "<<p->getEType()->getName() << "b" << e->getEType()->getName();
                 //Test of compatible (primitive) types (ecore EInt / UML / fUML Integer)
                 if(p->getEType()->getClassifierID() != e->getEType()->getClassifierID())
                 {
