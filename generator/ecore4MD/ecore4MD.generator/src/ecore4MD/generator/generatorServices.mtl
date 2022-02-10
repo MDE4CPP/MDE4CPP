@@ -1,7 +1,0 @@
-[comment encoding = Cp1252 /]
-[module generatorServices('http://www.eclipse.org/emf/2002/Ecore')/]
-
-[query public myString(arg0 : EPackage) : String
-	= invoke('ecore4MD.generator.GeneratorServices', 'myString(org.eclipse.emf.ecore.EPackage)', Sequence{arg0})
-/]                                                             
-
