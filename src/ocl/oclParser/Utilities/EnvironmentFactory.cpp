@@ -94,7 +94,23 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 	}
 	else {
 		classifier = context->eClass();
-		epackage = classifier->getEPackage().lock();
+		std::shared_ptr<ecore::EClassifier> contextAsClass = std::dynamic_pointer_cast<ecore::EClassifier>(context); // if the context is an Ecore Model element, the package can be uses
+		if(nullptr!=contextAsClass)// if the context is an Ecore Classifier, the package can be uses
+		{
+			epackage = contextAsClass->getEPackage().lock();
+		}
+		else
+		{
+			std::shared_ptr<ecore::EPackage> contextAsPackage = std::dynamic_pointer_cast<ecore::EPackage>(context); // if the context is an Ecore Model element, the package can be uses
+			if(nullptr!=contextAsPackage)// 2. try if the context is an Ecore Package
+			{
+				epackage = contextAsPackage;
+			}
+			else
+			{ // last try use Metainformation as Package
+				epackage = classifier->getEPackage().lock();
+			}
+		}
 	}
 
 	std::shared_ptr<Variable> self = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
