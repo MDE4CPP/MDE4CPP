@@ -2,13 +2,13 @@
 
 ## General
 - Integrated OCL implementation in MDE4CPP (*see section 'OCL'*)
-- Added generation-based machanism to extend fUML/PSCS-execution-strategies (*see section 'fUML/PSCS'*)
-- Extended generic container-class *Any* (*see section 'Any'*)
+- Added generation-based mechanism to extend fUML/PSCS-execution-strategies (*see section 'fUML/PSCS'*)
+- Extended generic container class *Any* (*see section 'Any'*)
 - Updated CXX standard to C++-17
 - Updated Gradle to version 7.3.1
 - Added support for JDK 16
 - Added main eclipse project in MDE4CPP root directory
-- Unimplemented methods in generated model code now thorw *std::runtime_error*
+- Unimplemented methods in generated model code now throw *std::runtime_error*
 - Added project-specific extensions for Gradle build environment (custom tasks for generating and compiling model libraries) which were formerly handled by external plugins
 ---
 
@@ -86,23 +86,24 @@
 
 ## OCL
 ### Functionalities:
-- Include first implementation of OCL to query and validate models during runtime:
-  - ecore metamodel and ecore based models
+- Included first implementation of OCL to query and validate models at runtime:
+  - Ecore metamodel and ecore based models
   - UML based models
   - fUML based models (i.e. use of OCL constraints in Activity Diagrams)
-- Implementation of:
-  - different kind of constraints
+- Implementated features:
+  - different kinds of constraints
 	- Invariants (inv)
 	- pre- and post conditions (pre, post)
 	- defines (def)
 	- body definitions (body)
 	- direct manipulation using self (similar to AQL)
-  - property queries (i.e. self.name), including init and derive
-  - primitive types (Integer, Boolean, String, ... ), icluding of priimitive operations (i.e. +, -, =, sum, ...)
-  - collections (Bag, Sequence, ...) i.e. Set{20, 1 .. 10}
-  - collection operation iterate (seclect or for is not supported right now)
-    - example: Set{1, 2 .. 10}->iterate(i:Integer;sum:Integer=0 | sum + i))
-  - invoke of model operations during runtime (i.e. self->eClass() or. self->printHelloWorld())
+  - property queries (e.g. self.name), including init and derive
+  - primitive types (*Integer*, *Boolean*, *String*, ... )
+  - operations on primitive types (e.g. +, -, =, sum, ...)
+  - collection types (*Bag*, *Sequence*, ...), e.g. *Set{20, 1 .. 10}*
+  - operation *iterate* on collection types (*select* or *for* are not supported right now)
+    - example: *Set{1, 2 .. 10}->iterate(i:Integer;sum:Integer=0 | sum + i))*
+  - operation invocation on model elements during runtime (e.g. *self->eClass()* or *self->printHelloWorld()*)
 ---
 
 ## Examples
@@ -112,6 +113,7 @@
 - Added ecore example for usage of *EObject::eInvoke()*
 - Added UML example for validation of copying objects
 - Added UML example for validation of subset/union functionalities of UML models
+- Added OCL examples (ecore, UML, fUML) as well as OCL test suite
 - Added examples for custom execution strategy mechanism (*see section fUML/PSCS*)
 - Added applications for custom execution strategy mechanism (*"PingModel" and "LoadBalance"*)
 - Added generation scripts to various examples
