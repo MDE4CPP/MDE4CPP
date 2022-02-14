@@ -12,4 +12,6 @@ task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	structureOnly = false
 
 	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'oclParser']
+
+	dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')
 }

@@ -63,11 +63,9 @@ task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
 
-	dependsOn tasks.getByPath('generator:createAllGenerators')
 	dependsOn tasks.getByPath('generateAll')
 	dependsOn tasks.getByPath('compileAll')
 	
-	tasks.getByPath('generateAll').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
 }
 
@@ -133,7 +131,7 @@ task setEnvironment(type:Exec){
 	}
 }
 
-task startEclipseModeling(type:Exec){
+task startModelingEclipse(type:Exec){
 	group 'Utilities'
 	description 'sets and checks the environment variables and starts the Eclipse instance (EMF) specified in the setenv file'
 
@@ -155,7 +153,7 @@ task startEclipseModeling(type:Exec){
 	}
 }
 
-task startCPPIDE(type:Exec){
+task startCPPEclipse(type:Exec){
 	group 'Utilities'
 	description 'sets and checks the environment variables and starts the C++ IDE specified in the setenv file'
 
