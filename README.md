@@ -4,17 +4,16 @@
 ## Content
 Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4cpp)
 
-## Installation instructions
+## Installation instructions (find detailed instructions [here](https://www.tu-ilmenau.de/fileadmin/Bereiche/IA/sse/Software/MDE4CPP/Tutorials/MDE4CPP_Setup_Installation_Guide.pdf))
 1. Install following software:
-  * Java Development Kit (JDK) version 1.8
+  * Java Development Kit (JDK) version 16
   * Eclipse Modeling Tool
-    * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
-  * MinGW:
-	* for building 32 bit applications: (choose one)
-		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc
-		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = i686 during installation
-	* for building 64 bit applications:
-		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = x86_64 during installation
+    * install Eclipse 2021-12 
+    * add plugin [Acceleo 3.7.11](https://www.eclipse.org/acceleo/)
+    * add plugin [Amalgam 1.11](https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/)
+    * add plugin [Sirius 6.6](https://www.eclipse.org/sirius/)
+  * MinGW 64 bit:
+    * [mingw-w64](https://mingw-w64.org), select architecture = x86_64 during installation
   * CMake
 
 2. Checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
@@ -75,7 +74,6 @@ For instance, to compile the example project `ecoreExample`, just call `gradlew 
 		* ORG_GRADLE_PROJECT_RELEASE=1 ... build release version
 		* This build mode is always used when compiling.
 	* A build mode can be disabled by setting the variable to `0`. For instance, the debug version is not built if `ORG_GRADLE_PROJECT_RELEASE=0` is defined in environment settings files or `-PDEBUG=0` is defined in a gradle command.
-	* Further information for configuration and execution of compile tasks can be found on [MDE4CPPCompile-Plugin](https://github.com/MDE4CPP/MDE4CPPGradlePlugins).
   * examples:
 	* no preconfigured build mode inside gradle.properies:
 		* `buildEcore` - generate and compile ecore.ecore in debug and release
@@ -89,6 +87,10 @@ For instance, to compile the example project `ecoreExample`, just call `gradlew 
 
   All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks.
 
+9. Tutorials
+  * Please find an ecore tutorial [here](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/ecore-tutorial)
+  * Please find a UML tutorial [here](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/uml-tutorial)
+
 ## License
 
 The projects is generally subjected to the **MIT** license.
@@ -97,7 +99,6 @@ Excluded from this license are the following folders, which are subjected to **E
 - src/common/ecoreReflection/model
 - src/common/primitivetypesReflection/model
 - src/common/umlReflection/model
-- src/ecore/ecore/model
-- src/ecore/types/model
-- src/ecore/fuml/model
-- src/ecore/uml/model
+- src/ecore/model
+- src/uml/types/model
+- src/uml/uml/model
