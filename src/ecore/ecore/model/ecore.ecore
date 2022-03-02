@@ -810,9 +810,12 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="any" lowerBound="1" eType="#//EJavaObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Any" instanceTypeName="Any">
+  <eClassifiers xsi:type="ecore:EClass" name="Any" instanceTypeName="Any">
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="doNotGenerate"/>
+    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Any is a generic base-datatype that can include primitiveDatatype values and EObject instances for further extensions, and improvements are presented at the end. "/>
+      <details key="documentation" value="Any is a generic container class that can contain any type of object. It is used in MDE4CPP as a substitution of Java's general base class 'Object' as no such concept exists in C++.&#xA;This class is not generated as it is included from an external library (see %MDE4CPP_root%\src\common\abstractDataTypes\src\abstractDataTypes)."/>
     </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>
