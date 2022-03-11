@@ -34,8 +34,6 @@
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
-#include <functional>
-
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 [for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
@@ -145,7 +143,6 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			static [aClass.name.toUpperFirst()/] * create();
 [/if]
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
-			[aClass.generateGetSetMemeberInit()/]
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(className)/]

@@ -147,8 +147,6 @@
 	*/
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	[aClass.generateGetSetInvokeInit()/]
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
