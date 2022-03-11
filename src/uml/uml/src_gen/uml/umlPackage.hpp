@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
+	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EEnum;
 	class EAnnotation;
 	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EAttribute;
-	class EGenericType;
 }
 
 namespace uml 
@@ -4388,7 +4388,7 @@ namespace uml
 			
 			
 			static const unsigned int OBJECT_OPERATION_GET_PROPERTY = 511579154;
-			static const unsigned int OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT = 1605333897;
+			static const unsigned int OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2090376847;
 			static const unsigned int OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 183386425;
 			static const unsigned int OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
 			
@@ -4398,7 +4398,7 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_get_Property() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_invoke_Operation_Argument() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_invoke_Operation_EJavaObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_set_Property_EJavaObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unset_Property() const = 0;
 			

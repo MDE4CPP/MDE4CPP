@@ -7,17 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -2258,7 +2258,7 @@ void umlPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> packag
 	
 	
 	m_object_Operation_get_Property = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_GET_PROPERTY);
-	m_object_Operation_invoke_Operation_Argument = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT);
+	m_object_Operation_invoke_Operation_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT);
 	m_object_Operation_set_Property_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT);
 	m_object_Operation_unset_Property = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_UNSET_PROPERTY);
 	

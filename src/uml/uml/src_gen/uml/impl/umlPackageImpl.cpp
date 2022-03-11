@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -4785,9 +4785,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_get_
 {
 	return m_object_Operation_get_Property;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_invoke_Operation_Argument() const
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_invoke_Operation_EJavaObject() const
 {
-	return m_object_Operation_invoke_Operation_Argument;
+	return m_object_Operation_invoke_Operation_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_set_Property_EJavaObject() const
 {
