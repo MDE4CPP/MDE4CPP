@@ -168,7 +168,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any v
 					if(!(container->empty()))
 					{
 						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->[aProperty.setterName()/](container->at(0));
+						this->[aProperty.setterName()/]([if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if]);
 					}
 				}
 			}
@@ -227,7 +227,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, Any v
 					if(!(container->empty()))
 					{
 						// If a non-empty container is passed, the first value of the container will be added to the property
-						valueToAdd = container->at(0);
+						valueToAdd = [if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if];
 					}
 				}
 			}
