@@ -2257,6 +2257,8 @@ void umlPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> packag
 	m_object_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECT_CLASS);
 	
 	
+	m_object_Operation_add_Property_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT);
+	m_object_Operation_add_Property_EInt = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_ADD_PROPERTY_EINT);
 	m_object_Operation_get_Property = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_GET_PROPERTY);
 	m_object_Operation_invoke_Operation_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT);
 	m_object_Operation_set_Property_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT);

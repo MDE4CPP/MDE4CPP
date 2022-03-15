@@ -45,6 +45,16 @@ virtual public Object
 			// Operations
 			//*********************************
 			/*!
+			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
+			*/
+			 
+			virtual void add(std::shared_ptr<uml::Property> _property,Any value) ;
+			/*!
+			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
+			*/
+			 
+			virtual void add(std::shared_ptr<uml::Property> _property,Any value,int insertAt) ;
+			/*!
 			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
@@ -57,10 +67,10 @@ virtual public Object
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<Any> > invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments) ;
+			virtual Any invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments) ;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
-			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
+			parameter.
 			*/
 			 
 			virtual void set(std::shared_ptr<uml::Property> _property,Any value) ;

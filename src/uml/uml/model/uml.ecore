@@ -2829,15 +2829,33 @@
     </eOperations>
     <eOperations name="set">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object&#xD;&#xA;parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection."/>
+        <details key="documentation" value="If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object&#xA;parameter."/>
       </eAnnotations>
       <eParameters name="_property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
+    <eOperations name="add">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection."/>
+      </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="this->add(_property, value, -1);"/>
+      </eAnnotations>
+      <eParameters name="_property" eType="#//Property"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="add">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection."/>
+      </eAnnotations>
+      <eParameters name="_property" eType="#//Property"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="insertAt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
     <eOperations name="unset">
       <eParameters name="_property" eType="#//Property"/>
     </eOperations>
-    <eOperations name="invoke" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+    <eOperations name="invoke" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.&#xA;The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.&#xA;If an Argument is not supplied for a Parameter, its default value, if any, will be used."/>
       </eAnnotations>

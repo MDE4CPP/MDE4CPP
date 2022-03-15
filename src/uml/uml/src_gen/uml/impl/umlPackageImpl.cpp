@@ -4781,6 +4781,14 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getObject_Class() const
 
 
 
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_add_Property_EJavaObject() const
+{
+	return m_object_Operation_add_Property_EJavaObject;
+}
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_add_Property_EInt() const
+{
+	return m_object_Operation_add_Property_EInt;
+}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_get_Property() const
 {
 	return m_object_Operation_get_Property;

@@ -101,12 +101,25 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property,Any value)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->add(_property, value, -1);
+	//end of body
+}
+
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property,Any value,int insertAt)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
 Any ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<Any> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments)
+Any ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -238,6 +251,43 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
  
   	switch(operationID)
 	{
+		// uml::Object::add(uml::Property, Any): 637724934
+		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
+			//Retrieve input parameter 'value'
+			//parameter 1
+			Any incoming_param_value;
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			this->add(incoming_param__property,incoming_param_value);
+			break;
+		}
+		// uml::Object::add(uml::Property, Any, int): 319727429
+		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
+			//Retrieve input parameter 'value'
+			//parameter 1
+			Any incoming_param_value;
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			//Retrieve input parameter 'insertAt'
+			//parameter 2
+			int incoming_param_insertAt;
+			std::list<Any>::const_iterator incoming_param_insertAt_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_insertAt = (*incoming_param_insertAt_arguments_citer)->get<int >();
+			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
+			break;
+		}
 		// uml::Object::get(uml::Property) : Any {const}: 511579154
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
@@ -249,7 +299,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			result = this->get(incoming_param__property);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, Any[*]) : Any[*]: 2090376847
+		// uml::Object::invoke(uml::Operation, Any[*]) : Any: 2657839141
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_operation'
@@ -262,7 +312,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<Bag<Any>> incoming_param_arguments;
 			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
-			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments),0,true);
+			result = this->invoke(incoming_param__operation,incoming_param_arguments);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 183386425
