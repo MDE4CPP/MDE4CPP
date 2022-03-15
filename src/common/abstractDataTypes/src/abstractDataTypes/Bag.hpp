@@ -151,6 +151,18 @@ class Bag
 			m_bag.push_back(el);
 		}
 
+		virtual void add(std::shared_ptr<T> el, int index)
+		{
+			if(index < 0)
+			{
+				add(el);
+			}
+			else
+			{
+				insert(begin() + index, el);
+			}
+		}
+
 		virtual void push_back(std::shared_ptr<T> el)
 		{
 			add(el);
