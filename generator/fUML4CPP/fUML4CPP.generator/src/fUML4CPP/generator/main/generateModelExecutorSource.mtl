@@ -1,0 +1,110 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModelExecutorSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+
+
+[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
+[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
+
+[template public generateModelExecutorSource(aPackage : Package) 
+{
+packageName : String = aPackage.getPackageName().sanitize(); 
+originalName : String = aPackage.generateNamespacePath(false);
+}]
+
+[file (originalName.concat('Exec/impl/') + packageName.concat('ExecutorImpl.cpp'), false, 'UTF-8')]
+#include "[packageName/]ExecutorImpl.hpp"
+#include <iostream>
+
+[defineDebugMacro()/]
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/EnumerationLiteral.hpp"
+
+[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction())]
+#include "[enumerationPackage.generateNamespacePath(true)/]/[enumerationPackage.myNamespaceName()/]Package.hpp"
+[if (enumerationPackage.isReflectionModel())]
+#include "[enumerationPackage.generateNamespacePath(false)/]/[enumerationPackage.name/]Package.hpp"
+[/if]
+[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(isGeneratable())->sortedBy(myQualifiedName()))]
+#include "[anEnumeration.getNearestPackage().generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+[/for]
+[/for]
+
+
+using namespace [aPackage.generateNamespace(false)/];
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[packageName/]ExecutorImpl::[packageName/]ExecutorImpl()
+{
+}
+
+[packageName/]ExecutorImpl::~[packageName/]ExecutorImpl()
+{
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [packageName/]Executor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
+}
+
+Any [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+{
+	[let packageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()]
+	[if (packageList->size() > 0)]
+	switch (specification->eClass()->getClassifierID())
+	{
+		case uml::umlPackage::ENUMERATIONLITERAL_CLASS:
+		{
+			std::shared_ptr<uml::EnumerationLiteral> literal = std::dynamic_pointzer_cast<uml::EnumerationLiteral>(specification);
+			std::shared_ptr<uml::Enumeration> enumeration = literal->getEnumeration();
+			std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
+
+			[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction())]
+			if(enumerationPackage == [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::eInstance())
+			{
+				[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = enumerationPackage))]
+				if(enumeration == [anEnumeration.generatePackageGetterCall()/])
+				{
+					[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
+					if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
+					{	
+						return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+					}
+					[/for]
+				}
+				[/for]
+			}
+			[/for]
+		}
+		default:
+		{
+			return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
+			//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
+		}
+	}
+	[else]
+	return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
+	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
+	[/if]
+	[/let]
+}
+[/file]
+[/template]

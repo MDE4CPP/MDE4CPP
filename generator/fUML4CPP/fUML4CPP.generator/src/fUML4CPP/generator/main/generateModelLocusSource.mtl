@@ -53,7 +53,6 @@ originalName : String = aPackage.generateNamespacePath(false);
 [/if]
 [for (aClass : Class | classPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName()))]
 #include "[aClass.getNearestPackage().generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
-#include "[aClass.getNearestPackage().generateNamespacePath(false)/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
 
@@ -73,7 +72,8 @@ using namespace [aPackage.generateNamespace(false)/];
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [packageName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+
+std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
 [let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
 [if (packageList->size() > 0)]
@@ -88,25 +88,24 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]Lo
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object());
-				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue([packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
-				object->setLocus(this->getThisLocusPtr());
-				return object;
+				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
+				return instance;
 			}
 [/let]
 [/for]
 [/let]
 			default:
 			{
-				return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
+				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+				//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 			}
 		}
 	}
 [/for]
 [/if]
 [/let]
-	return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
+	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 [/file]
 [/template]

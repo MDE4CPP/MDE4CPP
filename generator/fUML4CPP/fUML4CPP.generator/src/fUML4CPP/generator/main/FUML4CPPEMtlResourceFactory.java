@@ -39,6 +39,8 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateExecutionProjectFiles",
 								"generateModelExecutionFactoryHeader",
 								"generateModelExecutionFactorySource",
+								"generateModelExecutorHeader",
+								"generateModelExecutorSource",
 								"generateModelLocusHeader",
 								"generateModelLocusSource",
 								"generateFUML",

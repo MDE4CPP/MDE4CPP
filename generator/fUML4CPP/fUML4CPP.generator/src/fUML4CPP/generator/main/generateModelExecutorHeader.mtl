@@ -12,66 +12,66 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateModelLocusHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateModelExecutorHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateModelLocusHeader(aPackage : Package) {
+[template public generateModelExecutorHeader(aPackage : Package) {
 upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
-[file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'LocusExecution')/]
+[file (originalName.concat('Exec/') + upperName.concat('Executor.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'Executor')/]
 
-//#include "PSCS/Semantics/Loci/CS_Locus.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
+//#include "PSCS/Semantics/Loci/CS_Executor.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]Locus: virtual public /*PSCS::Semantics::Loci::CS_Locus*/ fUML::Semantics::Loci::Locus
+	class [upperName/]Executor: virtual public /*PSCS::Semantics::Loci::CS_Executor*/ fUML::Semantics::Loci::Executor
 	{
 		public: 
-			[upperName/]Locus (){};
+			[upperName/]Executor (){};
 		public:
 			//destructor
-			virtual ~[upperName/]Locus(){};
+			virtual ~[upperName/]Executor(){};
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type) = 0;
+			virtual Any evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
 	};
 }
-[endGuard(aPackage,'LocusExecution')/]
+[endGuard(aPackage,'Executor')/]
 [/file]
 
-[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'LocusImpl_Execution')/]
+[file (originalName.concat('Exec/impl/') + upperName.concat('ExecutorImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'ExecutorImpl')/]
 
-#include "../[upperName/]Locus.hpp"
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
+#include "../[upperName/]Executor.hpp"
+#include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
+//#include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
+	class [upperName/]ExecutorImpl :virtual public /*PSCS::Semantics::Loci::CS_ExecutorImpl*/ fUML::Semantics::Loci::ExecutorImpl, virtual public [upperName/]Executor
 	{
 		private:    
-			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
+			[upperName/]ExecutorImpl& operator=([upperName/]ExecutorImpl const&) = delete;
 
 		public:
-			[upperName/]LocusImpl();
+			[upperName/]ExecutorImpl();
 
 		public:
 			//destructor
-			virtual ~[upperName/]LocusImpl();
+			virtual ~[upperName/]ExecutorImpl();
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type);
-			virtual void setThisLocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisLocusPtr){/*PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr)*/ fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);};
+			virtual Any evaluate(std::shared_ptr<uml::ValueSpecification> specification);
+			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr){/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);};
 	};
 }
-[endGuard(aPackage,'LocusImpl_Execution')/]
+[endGuard(aPackage,'ExecutorImpl')/]
 [/file]
 [/template]
