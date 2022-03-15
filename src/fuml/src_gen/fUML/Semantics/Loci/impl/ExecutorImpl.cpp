@@ -44,19 +44,15 @@
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -128,13 +124,49 @@ std::shared_ptr<ecore::EObject> ExecutorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+Any ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if (auto locus = this->getLocus().lock())
+		if (auto locus = this->getLocus().lock())
 	{
-		return locus->getFactory()->createEvaluation(specification)->evaluate();
+		switch (specification->eClass()->getClassifierID())
+			{
+				case uml::umlPackage::LITERALBOOLEAN_CLASS:
+				{
+					return eAny(specification->booleanValue());
+				}
+				case uml::umlPackage::LITERALSTRING_CLASS:
+				{
+					return eAny(specification->stringValue());
+				}
+				case uml::umlPackage::LITERALNULL_CLASS:
+				{
+					return eAny();
+				}
+				case uml::umlPackage::INSTANCEVALUE_CLASS:
+				{
+					DEBUG_MESSAGE(std::cout<<"fUML::Semantics::Loci::Executor::evaluate()	:	uml::ValueSpecification of type uml::InstanceValue currently not supported!\nNOTE: specifications of type uml::EnumerationLiteral are handled by auto-generated, model-specific Executor class."<<std::endl;)
+					return nullptr;
+				}
+				case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+				{
+					return eAny(specification->unlimitedValue());
+				}
+				case uml::umlPackage::LITERALINTEGER_CLASS:
+				{
+					return eAny(specification->integerValue());
+				}
+				case uml::umlPackage::LITERALREAL_CLASS:
+				{
+					return eAny(specification->realValue());
+				}
+				default:
+				{
+					DEBUG_MESSAGE(std::cout<<"fUML::Semantics::Loci::Executor::evaluate()	:	Unsupported instance of uml::ValueSpecification!"<<std::endl;)
+					return nullptr;
+				}
+			}
 	}
 	else
 	{
@@ -143,7 +175,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shar
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<uml::Element> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +204,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorI
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<uml::Element> ExecutorImpl::start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -356,7 +388,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::Executor::evaluate(uml::ValueSpecification) : fUML::Semantics::Values::Value: 2026288311
+		// fUML::Semantics::Loci::Executor::evaluate(uml::ValueSpecification) : Any: 321446891
 		case LociPackage::EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION:
 		{
 			//Retrieve input parameter 'specification'
@@ -364,10 +396,10 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<uml::ValueSpecification> incoming_param_specification;
 			std::list<Any>::const_iterator incoming_param_specification_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_specification = (*incoming_param_specification_arguments_citer)->get<std::shared_ptr<uml::ValueSpecification> >();
-			result = eAnyObject(this->evaluate(incoming_param_specification), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->evaluate(incoming_param_specification);
 			break;
 		}
-		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1195525632
+		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, uml::Element, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3205044137
 		case LociPackage::EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'behavior'
@@ -377,9 +409,9 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_context;
+			std::shared_ptr<uml::Element> incoming_param_context;
 			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'inputs'
 			//parameter 2
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
@@ -389,7 +421,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::StructuredClassifiers::Reference: 2928260845
+		// fUML::Semantics::Loci::Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : uml::Element: 2158458358
 		case LociPackage::EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'type'
@@ -402,7 +434,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			result = eAnyObject(this->start(incoming_param_type,incoming_param_inputs), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
+			result = eAnyObject(this->start(incoming_param_type,incoming_param_inputs), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 

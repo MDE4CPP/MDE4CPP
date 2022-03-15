@@ -21,18 +21,6 @@ namespace fUML::Semantics::Actions
 	class CallActionActivation;
 	class StructuredActivityNodeActivation;
 }
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::Loci
-{
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
-}
 
 
 
@@ -64,10 +52,6 @@ namespace fUML::Semantics::Activities
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_callExecutions_in_CallActionActivation(std::shared_ptr<fUML::Semantics::Actions::CallActionActivation> par_CallActionActivation, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_decisionInputExecution_in_DecisionNodeActivation(std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> par_DecisionNodeActivation, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation(const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const = 0;

@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <string>
+#include "abstractDataTypes/Any.hpp"
 // forward declarations
 
 
@@ -35,10 +36,6 @@ namespace fUML
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivation;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // namespace macro header include
@@ -78,12 +75,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual Any getValue() const = 0;
+			virtual void setValue (Any _value)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -105,11 +102,11 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
+			Any m_value= nullptr;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::Values::Value> m_value;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_OBJECTTOKEN_HPP */

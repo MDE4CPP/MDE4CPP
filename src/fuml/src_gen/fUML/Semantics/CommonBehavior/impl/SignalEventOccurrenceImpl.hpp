@@ -53,8 +53,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const ;
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) ;
+			virtual std::shared_ptr<uml::Element> getSignalInstance() const ;
+			virtual void setSignalInstance(std::shared_ptr<uml::Element>) ;
 			
 			//*********************************
 			// Union Reference Getters

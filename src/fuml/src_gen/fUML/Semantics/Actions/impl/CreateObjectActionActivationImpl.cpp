@@ -40,9 +40,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -137,17 +137,19 @@ void CreateObjectActionActivationImpl::doAction()
 // Place a reference to the object on the result pin of the action.
 
 std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
+
 if(action)
 {
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	std::shared_ptr<uml::Class> type= std::dynamic_pointer_cast<uml::Class> (action->getClassifier());
+
 	if(type)
 	{
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> newObject=this->getExecutionLocus()->instantiate(type);
+		std::shared_ptr<uml::Element> newObject = this->getExecutionLocus()->instantiate(type);
+
 		if(newObject)
 		{
-			reference->setReferent(newObject);
-			this->putToken(action->getResult(), reference);
+			Any value = eAny(newObject);
+			this->putToken(action->getResult(), value);
 		}
 		else
 		{

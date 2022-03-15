@@ -5,13 +5,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -112,13 +112,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getEx
 {
 	return m_executionFactory_Operation_assignStrategy_SemanticStrategy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_createEvaluation_ValueSpecification() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_createExecution_Behavior_Element() const
 {
-	return m_executionFactory_Operation_createEvaluation_ValueSpecification;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_createExecution_Behavior_Object() const
-{
-	return m_executionFactory_Operation_createExecution_Behavior_Object;
+	return m_executionFactory_Operation_createExecution_Behavior_Element;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_getBuiltInType_EString() const
 {
@@ -205,9 +201,9 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Loci::LociPackageImpl::getLo
 	return m_locus_Attribute_factory;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_add_ExtensionalValue() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_add_Element() const
 {
-	return m_locus_Operation_add_ExtensionalValue;
+	return m_locus_Operation_add_Element;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_assignExecutor_Executor() const
 {
@@ -225,9 +221,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLo
 {
 	return m_locus_Operation_instantiate_Class;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_remove_ExtensionalValue() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_remove_Element() const
 {
-	return m_locus_Operation_remove_ExtensionalValue;
+	return m_locus_Operation_remove_Element;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_retrieveExtent_Classifier() const
 {

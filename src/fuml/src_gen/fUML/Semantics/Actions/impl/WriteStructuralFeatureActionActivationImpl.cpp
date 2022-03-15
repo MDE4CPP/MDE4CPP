@@ -34,9 +34,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -46,13 +46,11 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -115,7 +113,7 @@ WriteStructuralFeatureActionActivationImpl& WriteStructuralFeatureActionActivati
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list,int startAt)
+int WriteStructuralFeatureActionActivationImpl::position(Any value,std::shared_ptr<Bag<Any>> list,int startAt)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -282,19 +280,19 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value[*], int) : int: 202391032
-		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
+		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(Any, Any[*], int) : int: 455262104
+		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_EJAVAOBJECT_EINT:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			Any incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'list'
 			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_list;
+			std::shared_ptr<Bag<Any>> incoming_param_list;
 			std::list<Any>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_list = (*incoming_param_list_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			incoming_param_list = (*incoming_param_list_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
 			//Retrieve input parameter 'startAt'
 			//parameter 2
 			int incoming_param_startAt;

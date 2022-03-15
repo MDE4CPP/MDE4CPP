@@ -34,15 +34,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -128,7 +127,7 @@ bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target)
+void EventOccurrenceImpl::sendTo(std::shared_ptr<uml::Element> target)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -141,11 +140,11 @@ void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClas
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference target */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> EventOccurrenceImpl::getTarget() const
+std::shared_ptr<uml::Element> EventOccurrenceImpl::getTarget() const
 {
     return m_target;
 }
-void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target)
+void EventOccurrenceImpl::setTarget(std::shared_ptr<uml::Element> _target)
 {
     m_target = _target;
 	
@@ -222,7 +221,7 @@ void EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>( references.front() );
+				std::shared_ptr<uml::Element> _target = std::dynamic_pointer_cast<uml::Element>( references.front() );
 				setTarget(_target);
 			}
 			
@@ -245,7 +244,7 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class()); 
+		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -266,7 +265,7 @@ Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-			return eAny(getTarget(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,false); //450
+			return eAny(getTarget(),uml::umlPackage::ELEMENT_CLASS,false); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -287,9 +286,9 @@ bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
 		{
-			// CAST Any to fUML::Semantics::StructuredClassifiers::Reference
+			// CAST Any to uml::Element
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(_temp);
+			std::shared_ptr<uml::Element> _target = std::dynamic_pointer_cast<uml::Element>(_temp);
 			setTarget(_target); //450
 			return true;
 		}
@@ -342,14 +341,14 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			result = eAny(this->matchAny(incoming_param_triggers),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::EventOccurrence::sendTo(fUML::Semantics::StructuredClassifiers::Reference): 1965482620
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE:
+		// fUML::Semantics::CommonBehavior::EventOccurrence::sendTo(uml::Element): 2881178737
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_SENDTO_ELEMENT:
 		{
 			//Retrieve input parameter 'target'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_target;
+			std::shared_ptr<uml::Element> incoming_param_target;
 			std::list<Any>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_target = (*incoming_param_target_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			this->sendTo(incoming_param_target);
 			break;
 		}

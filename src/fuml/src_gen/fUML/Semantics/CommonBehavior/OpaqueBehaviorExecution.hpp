@@ -42,14 +42,11 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
 namespace uml 
 {
 	class Behavior;
 	class Classifier;
+	class Element;
 }
 
 // namespace macro header include

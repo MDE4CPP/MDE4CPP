@@ -32,13 +32,10 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
 namespace uml 
 {
 	class Behavior;
+	class Element;
 	class Operation;
 }
 
@@ -73,7 +70,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			virtual bool operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation) = 0;
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) = 0;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

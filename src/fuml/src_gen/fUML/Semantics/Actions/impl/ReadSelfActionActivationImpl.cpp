@@ -31,16 +31,14 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "uml/ReadSelfAction.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -132,36 +130,26 @@ void ReadSelfActionActivationImpl::doAction()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
-
 	std::shared_ptr<uml::ReadSelfAction> action = this->getReadSelfAction();
-	if(action)
-	{
 
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context=this->getExecutionContext();	
-		if(context)
+	std::shared_ptr<uml::Element> context=this->getExecutionContext();	
+	if(context)
+	{
+		Any value = eAny(context);
+		std::shared_ptr<uml::OutputPin> resultPin = action->getResult();
+		if(resultPin)
 		{
-			reference->setReferent(context);
-			std::shared_ptr<uml::OutputPin > outputPin=action->getResult();
-			if(outputPin)
-			{
-				this->putToken(action->getResult(), reference);
-			}
-			else
-			{
-				throw "invalid output pin";
-			}
+			this->putToken(resultPin, value);
 		}
 		else
 		{
-			throw "Invalid ExecutionContext";
+			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL result pin."<<std::endl;)
 		}
 	}
 	else
 	{
-		throw "Unexpected invalid ReadSelfAction";
+		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL context."<<std::endl;)
 	}
-
 	//end of body
 }
 

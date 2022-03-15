@@ -17,12 +17,14 @@
 #include "../Execution.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
+
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class FUML_API ExecutionImpl : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl, virtual public Execution 
+	class FUML_API ExecutionImpl : virtual public ecore::EModelElementImpl,
+virtual public Execution 
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
@@ -43,12 +45,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			virtual Any _copy() ;
 			virtual void execute() ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() ;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
+			virtual Any new_() ;
 			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) ;
 			virtual void terminate() ;
 			
@@ -61,8 +63,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
 			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getContext() const ;
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
+			virtual std::shared_ptr<uml::Element> getContext() const ;
+			virtual void setContext(std::shared_ptr<uml::Element>) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const ;
 			
 			//*********************************

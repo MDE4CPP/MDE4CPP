@@ -30,12 +30,7 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
 #include "uml/StructuralFeature.hpp"
@@ -44,13 +39,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -116,6 +112,7 @@ ClearStructuralFeatureActionActivationImpl& ClearStructuralFeatureActionActivati
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_clearStructuralFeatureAction  = obj.getClearStructuralFeatureAction();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -135,35 +132,44 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(m_node);
+	std::shared_ptr<uml::ClearStructuralFeatureAction> action = this->getClearStructuralFeatureAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 
-	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
+	Any objectValue = nullptr;
 	
 	/* MDE4CPP specific implementation for handling "self"-Pin */
 	std::string objectPinName = action->getObject()->getName();
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//objectValue is set to the context of the current activity execution
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-		contextReference->setReferent(context);
+		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		objectValue = contextReference;
+		objectValue = eAny(context);
 	}
 	else{
 		objectValue = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
 
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(objectValue);
-	if (structuredValue)
+	std::shared_ptr<uml::Element> structuredValue = nullptr;
+
+	try
 	{
-		structuredValue->removeValue(feature, nullptr);
+		structuredValue = objectValue->get<uml::Element>();
+
+		if (structuredValue)
+		{
+			structuredValue->unset(feature);
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL context."<<std::endl;)
+		}
 	}
-	else
+	catch(...)
 	{
-		throw "unhandled fUML::Value instance";
+		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
 	}
+
 	putToken(action->getResult(), objectValue);
 	//end of body
 }
@@ -175,6 +181,49 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference clearStructuralFeatureAction */
+std::shared_ptr<uml::ClearStructuralFeatureAction> ClearStructuralFeatureActionActivationImpl::getClearStructuralFeatureAction() const
+{
+    return m_clearStructuralFeatureAction;
+}
+void ClearStructuralFeatureActionActivationImpl::setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction)
+{
+    m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_clearStructuralFeatureAction);
+}
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void ClearStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_action);
+	if(_clearStructuralFeatureAction)
+	{
+		m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_clearStructuralFeatureAction);
+	}
+	else
+	{
+		std::cerr<<"[ClearStructuralFeatureActionActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::ClearStructuralFeatureAction>'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ClearStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_node);
+	if(_clearStructuralFeatureAction)
+	{
+		m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[ClearStructuralFeatureActionActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::ClearStructuralFeatureAction>'"<<std::endl;
+	}
+}
 
 //*********************************
 // Union Getter
@@ -227,6 +276,25 @@ void ClearStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistenc
 
 void ClearStructuralFeatureActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("clearStructuralFeatureAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("clearStructuralFeatureAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	StructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -240,6 +308,20 @@ void ClearStructuralFeatureActionActivationImpl::loadNode(std::string nodeName, 
 
 void ClearStructuralFeatureActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>( references.front() );
+				setClearStructuralFeatureAction(_clearStructuralFeatureAction);
+			}
+			
+			return;
+		}
+	}
 	StructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -263,6 +345,8 @@ void ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getClearStructuralFeatureAction(), "clearStructuralFeatureAction", getClearStructuralFeatureAction()->eClass() != uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -282,6 +366,8 @@ Any ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+			return eAny(getClearStructuralFeatureAction(),uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS,false); //2811
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -290,6 +376,8 @@ bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+			return getClearStructuralFeatureAction() != nullptr; //2811
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -298,6 +386,14 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		{
+			// CAST Any to uml::ClearStructuralFeatureAction
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_temp);
+			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //2811
+			return true;
+		}
 	}
 
 	return StructuralFeatureActionActivationImpl::eSet(featureID, newValue);

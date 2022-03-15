@@ -39,12 +39,10 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
 
@@ -135,7 +133,7 @@ bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> ForkedTokenImpl::getValue() const
+Any ForkedTokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -446,10 +444,10 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->equals(incoming_param_otherToken),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::ForkedToken::getValue() : fUML::Semantics::Values::Value {const}: 3937215927
+		// fUML::Semantics::Activities::ForkedToken::getValue() : Any {const}: 776594391
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
-			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->getValue();
 			break;
 		}
 		// fUML::Semantics::Activities::ForkedToken::isControl() : bool: 919245696

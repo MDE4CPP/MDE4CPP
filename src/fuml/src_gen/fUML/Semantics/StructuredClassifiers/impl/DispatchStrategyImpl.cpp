@@ -38,8 +38,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/Behavior.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject> DispatchStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -128,7 +128,7 @@ std::string DispatchStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -263,14 +263,14 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::dispatch(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 2597265996
-		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION:
+		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::dispatch(uml::Element, uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 2531361209
+		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_DISPATCH_ELEMENT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
+			std::shared_ptr<uml::Element> incoming_param_object;
 			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
@@ -285,14 +285,14 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 3819358925
-		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
+		// fUML::Semantics::StructuredClassifiers::DispatchStrategy::retrieveMethod(uml::Element, uml::Operation) : uml::Behavior: 2607212722
+		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
+			std::shared_ptr<uml::Element> incoming_param_object;
 			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;

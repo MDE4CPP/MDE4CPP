@@ -33,11 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -108,7 +107,7 @@ std::shared_ptr<ecore::EObject> LiteralNullEvaluationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> LiteralNullEvaluationImpl::evaluate()
+Any LiteralNullEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,10 +239,10 @@ Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : fUML::Semantics::Values::Value: 297899813
+		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : Any: 3505594073
 		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->evaluate();
 			break;
 		}
 

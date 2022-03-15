@@ -36,16 +36,9 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class SignalInstance;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
 namespace uml 
 {
+	class Element;
 	class Trigger;
 }
 
@@ -89,8 +82,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const = 0;
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) = 0;
+			virtual std::shared_ptr<uml::Element> getSignalInstance() const = 0;
+			virtual void setSignalInstance(std::shared_ptr<uml::Element>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -116,7 +109,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> m_signalInstance;
+			std::shared_ptr<uml::Element> m_signalInstance;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP */

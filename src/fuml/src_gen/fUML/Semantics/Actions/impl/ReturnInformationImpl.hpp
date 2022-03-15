@@ -17,12 +17,14 @@
 #include "../ReturnInformation.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/ValueImpl.hpp"
+
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class FUML_API ReturnInformationImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public ReturnInformation 
+	class FUML_API ReturnInformationImpl : virtual public ecore::EModelElementImpl,
+virtual public ReturnInformation 
 	{
 		public: 
 			ReturnInformationImpl(const ReturnInformationImpl & obj);
@@ -43,11 +45,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual Any _copy() ;
+			virtual bool equals(Any otherValue) ;
 			virtual std::shared_ptr<uml::Operation> getOperation() ;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
+			virtual Any new_() ;
 			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			virtual std::string toString() ;

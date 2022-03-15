@@ -57,11 +57,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -133,7 +132,7 @@ std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::evaluate()
+Any InstanceValueEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -336,10 +335,10 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 2581799787
+		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : Any: 2570786047
 		case ClassificationPackage::INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->evaluate();
 			break;
 		}
 

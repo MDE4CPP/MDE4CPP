@@ -43,9 +43,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			virtual Any _copy() ;
 			virtual void execute() ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
+			virtual Any new_() ;
 			virtual void terminate() ;
 			
 			//*********************************

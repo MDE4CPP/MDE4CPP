@@ -15,13 +15,13 @@
 namespace ecore 
 {
 	class EParameter;
-	class EOperation;
 	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
 	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Loci 
@@ -82,7 +82,7 @@ namespace fUML::Semantics::Loci
 			//Class and Feature IDs 
 			static const unsigned long EXECUTIONFACTORY_CLASS = 102788675;
 			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 10;
+			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 9;
 			
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 1371486848;
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 648263615;
@@ -92,8 +92,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 1000019030;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 2237491026;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4022033692;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION = 2830428948;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT = 1344567686;
+			static const unsigned int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT = 2395760303;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 3934172273;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4148006243;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 353629829;
@@ -112,8 +111,7 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_createEvaluation_ValueSpecification() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_createExecution_Behavior_Object() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_createExecution_Behavior_Element() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategy_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
@@ -131,9 +129,9 @@ namespace fUML::Semantics::Loci
 			
 			static const unsigned long EXECUTOR_ATTRIBUTE_LOCUS = 32912316;
 			
-			static const unsigned int EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 2026288311;
-			static const unsigned int EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 1195525632;
-			static const unsigned int EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2928260845;
+			static const unsigned int EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 321446891;
+			static const unsigned int EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 3205044137;
+			static const unsigned int EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutor_Class() const = 0;
@@ -177,13 +175,13 @@ namespace fUML::Semantics::Loci
 			static const unsigned long LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 1315349633;
 			static const unsigned long LOCUS_ATTRIBUTE_FACTORY = 897667860;
 			
-			static const unsigned int LOCUS_OPERATION_ADD_EXTENSIONALVALUE = 2767538417;
+			static const unsigned int LOCUS_OPERATION_ADD_ELEMENT = 2336178890;
 			static const unsigned int LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 4071294562;
 			static const unsigned int LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2681202388;
 			static const unsigned int LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 2253046160;
-			static const unsigned int LOCUS_OPERATION_INSTANTIATE_CLASS = 2294841442;
-			static const unsigned int LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE = 3347304930;
-			static const unsigned int LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 3026082825;
+			static const unsigned int LOCUS_OPERATION_INSTANTIATE_CLASS = 928635219;
+			static const unsigned int LOCUS_OPERATION_REMOVE_ELEMENT = 2186013543;
+			static const unsigned int LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLocus_Class() const = 0;
@@ -193,12 +191,12 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EReference> getLocus_Attribute_extensionalValues() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getLocus_Attribute_factory() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_add_ExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_add_Element() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_assignExecutor_Executor() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_assignFactory_ExecutionFactory() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_conforms_Classifier_Classifier() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_instantiate_Class() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_remove_ExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_remove_Element() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_retrieveExtent_Classifier() const = 0;
 			
 			// End Class Locus

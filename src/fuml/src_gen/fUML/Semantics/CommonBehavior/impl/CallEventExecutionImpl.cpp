@@ -42,30 +42,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -131,7 +125,7 @@ std::shared_ptr<ecore::EObject> CallEventExecutionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::_copy()
+Any CallEventExecutionImpl::_copy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -226,7 +220,7 @@ void CallEventExecutionImpl::makeCall()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::new_()
+Any CallEventExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -384,18 +378,6 @@ void CallEventExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 
 	ExecutionImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::StructuredClassifiers::ObjectImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
 
@@ -469,10 +451,10 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::CallEventExecution::_copy() : fUML::Semantics::Values::Value: 3198945315
+		// fUML::Semantics::CommonBehavior::CallEventExecution::_copy() : Any: 2770734647
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->_copy();
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 1959549943
@@ -512,10 +494,10 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			this->makeCall();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::CallEventExecution::new_() : fUML::Semantics::Values::Value: 557164094
+		// fUML::Semantics::CommonBehavior::CallEventExecution::new_() : Any: 3061235330
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
-			result = eAnyObject(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->new_();
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::releaseCaller(): 1070213359

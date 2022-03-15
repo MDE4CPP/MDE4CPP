@@ -45,7 +45,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual int position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list,int startAt) ;
+			virtual int position(Any value,std::shared_ptr<Bag<Any>> list,int startAt) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -22,7 +22,6 @@
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -623,7 +622,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	}
 	
 	m_actionActivation_Operation_getTokens_InputPin->setName("getTokens");
-	m_actionActivation_Operation_getTokens_InputPin->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_actionActivation_Operation_getTokens_InputPin->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_actionActivation_Operation_getTokens_InputPin->setLowerBound(0);
 	m_actionActivation_Operation_getTokens_InputPin->setUpperBound(-1);
 	m_actionActivation_Operation_getTokens_InputPin->setUnique(true);
@@ -668,36 +667,20 @@ void ActionsPackageImpl::initializeActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setName("makeBooleanValue");
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getBooleanValue_Class());
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setLowerBound(1);
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setUpperBound(1);
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setUnique(true);
-	m_actionActivation_Operation_makeBooleanValue_EBoolean->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_makeBooleanValue_EBoolean);
-		parameter->setName("value");
-		parameter->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_actionActivation_Operation_putToken_OutputPin_Value->setName("putToken");
+	m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setName("putToken");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_actionActivation_Operation_putToken_OutputPin_Value->setEType(unknownClass);
+		m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setEType(unknownClass);
 	}
-	m_actionActivation_Operation_putToken_OutputPin_Value->setLowerBound(1);
-	m_actionActivation_Operation_putToken_OutputPin_Value->setUpperBound(1);
-	m_actionActivation_Operation_putToken_OutputPin_Value->setUnique(true);
-	m_actionActivation_Operation_putToken_OutputPin_Value->setOrdered(false);
+	m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setLowerBound(1);
+	m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setUpperBound(1);
+	m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setUnique(true);
+	m_actionActivation_Operation_putToken_OutputPin_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putToken_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putToken_OutputPin_EJavaObject);
 		parameter->setName("pin");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -707,7 +690,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putToken_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putToken_OutputPin_EJavaObject);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -716,20 +699,20 @@ void ActionsPackageImpl::initializeActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_actionActivation_Operation_putTokens_OutputPin_Value->setName("putTokens");
+	m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setName("putTokens");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_actionActivation_Operation_putTokens_OutputPin_Value->setEType(unknownClass);
+		m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setEType(unknownClass);
 	}
-	m_actionActivation_Operation_putTokens_OutputPin_Value->setLowerBound(1);
-	m_actionActivation_Operation_putTokens_OutputPin_Value->setUpperBound(1);
-	m_actionActivation_Operation_putTokens_OutputPin_Value->setUnique(true);
-	m_actionActivation_Operation_putTokens_OutputPin_Value->setOrdered(false);
+	m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setLowerBound(1);
+	m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setUpperBound(1);
+	m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setUnique(true);
+	m_actionActivation_Operation_putTokens_OutputPin_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putTokens_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putTokens_OutputPin_EJavaObject);
 		parameter->setName("pin");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -739,7 +722,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putTokens_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_putTokens_OutputPin_EJavaObject);
 		parameter->setName("values");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -798,7 +781,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Operation_takeOfferedTokens->setOrdered(false);
 	
 	m_actionActivation_Operation_takeTokens_InputPin->setName("takeTokens");
-	m_actionActivation_Operation_takeTokens_InputPin->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_actionActivation_Operation_takeTokens_InputPin->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_actionActivation_Operation_takeTokens_InputPin->setLowerBound(0);
 	m_actionActivation_Operation_takeTokens_InputPin->setUpperBound(-1);
 	m_actionActivation_Operation_takeTokens_InputPin->setUnique(true);
@@ -826,16 +809,16 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Operation_terminate->setUnique(true);
 	m_actionActivation_Operation_terminate->setOrdered(false);
 	
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setName("valueParticipatesInLink");
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setLowerBound(1);
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setUpperBound(1);
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setUnique(true);
-	m_actionActivation_Operation_valueParticipatesInLink_Value_Link->setOrdered(false);
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setName("valueParticipatesInLink");
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setLowerBound(1);
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setUpperBound(1);
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setUnique(true);
+	m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_valueParticipatesInLink_Value_Link);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element);
 		parameter->setName("value");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -843,9 +826,9 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_valueParticipatesInLink_Value_Link);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element);
 		parameter->setName("link");
-		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1144,7 +1127,7 @@ void ActionsPackageImpl::initializeClauseActivationContent()
 	}
 	
 	m_clauseActivation_Operation_getDecision->setName("getDecision");
-	m_clauseActivation_Operation_getDecision->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getBooleanValue_Class());
+	m_clauseActivation_Operation_getDecision->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clauseActivation_Operation_getDecision->setLowerBound(0);
 	m_clauseActivation_Operation_getDecision->setUpperBound(1);
 	m_clauseActivation_Operation_getDecision->setUnique(true);
@@ -1231,6 +1214,28 @@ void ActionsPackageImpl::initializeClearStructuralFeatureActionActivationContent
 	m_clearStructuralFeatureActionActivation_Class->setInterface(false);
 	
 	
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setName("clearStructuralFeatureAction");
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setEType(uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class());
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setLowerBound(1);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setUpperBound(1);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setTransient(false);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setVolatile(false);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setChangeable(true);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setUnsettable(false);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setUnique(true);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setDerived(false);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setOrdered(true);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setContainment(false);
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_clearStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -1461,20 +1466,20 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setName("destroyObject");
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setName("destroyObject");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setEType(unknownClass);
+		m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setEType(unknownClass);
 	}
-	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setLowerBound(1);
-	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setUpperBound(1);
-	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setUnique(true);
-	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setOrdered(false);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setLowerBound(1);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setUpperBound(1);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setUnique(true);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1484,7 +1489,7 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
 		parameter->setName("isDestroyLinks");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1494,7 +1499,7 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
 		parameter->setName("isDestroyOwnedObjects");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1516,16 +1521,16 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	m_destroyObjectActionActivation_Operation_doAction->setUnique(true);
 	m_destroyObjectActionActivation_Operation_doAction->setOrdered(true);
 	
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setName("objectIsComposite");
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setLowerBound(1);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setUpperBound(1);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setUnique(true);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link->setOrdered(false);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setName("objectIsComposite");
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setLowerBound(1);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUpperBound(1);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUnique(true);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
 		parameter->setName("reference");
-		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1533,9 +1538,9 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
 		parameter->setName("link");
-		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1595,16 +1600,16 @@ void ActionsPackageImpl::initializeLinkActionActivationContent()
 	
 	
 	
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setName("endMatchesEndData");
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setLowerBound(1);
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setUpperBound(1);
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setUnique(true);
-	m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData->setOrdered(false);
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setName("endMatchesEndData");
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setLowerBound(1);
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setUpperBound(1);
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setUnique(true);
+	m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData);
 		parameter->setName("link");
-		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1612,7 +1617,7 @@ void ActionsPackageImpl::initializeLinkActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData);
 		parameter->setName("endData");
 		parameter->setEType(uml::umlPackage::eInstance()->getLinkEndData_Class());
 		parameter->setLowerBound(0);
@@ -1628,16 +1633,16 @@ void ActionsPackageImpl::initializeLinkActionActivationContent()
 	m_linkActionActivation_Operation_getAssociation->setUnique(true);
 	m_linkActionActivation_Operation_getAssociation->setOrdered(false);
 	
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setName("linkMatchesEndData");
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setLowerBound(1);
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setUpperBound(1);
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setUnique(true);
-	m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData->setOrdered(false);
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setName("linkMatchesEndData");
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setLowerBound(1);
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setUpperBound(1);
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setUnique(true);
+	m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData);
 		parameter->setName("link");
-		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1645,7 +1650,7 @@ void ActionsPackageImpl::initializeLinkActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData);
 		parameter->setName("endDataList");
 		parameter->setEType(uml::umlPackage::eInstance()->getLinkEndData_Class());
 		parameter->setLowerBound(0);
@@ -2124,22 +2129,22 @@ void ActionsPackageImpl::initializeReturnInformationContent()
 	}
 	
 	m_returnInformation_Operation__copy->setName("_copy");
-	m_returnInformation_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_returnInformation_Operation__copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_returnInformation_Operation__copy->setLowerBound(1);
 	m_returnInformation_Operation__copy->setUpperBound(1);
 	m_returnInformation_Operation__copy->setUnique(true);
 	m_returnInformation_Operation__copy->setOrdered(true);
 	
-	m_returnInformation_Operation_equals_Value->setName("equals");
-	m_returnInformation_Operation_equals_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_returnInformation_Operation_equals_Value->setLowerBound(1);
-	m_returnInformation_Operation_equals_Value->setUpperBound(1);
-	m_returnInformation_Operation_equals_Value->setUnique(true);
-	m_returnInformation_Operation_equals_Value->setOrdered(true);
+	m_returnInformation_Operation_equals_EJavaObject->setName("equals");
+	m_returnInformation_Operation_equals_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_returnInformation_Operation_equals_EJavaObject->setLowerBound(1);
+	m_returnInformation_Operation_equals_EJavaObject->setUpperBound(1);
+	m_returnInformation_Operation_equals_EJavaObject->setUnique(true);
+	m_returnInformation_Operation_equals_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_returnInformation_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_returnInformation_Operation_equals_EJavaObject);
 		parameter->setName("otherValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2161,7 +2166,7 @@ void ActionsPackageImpl::initializeReturnInformationContent()
 	m_returnInformation_Operation_getTypes->setOrdered(true);
 	
 	m_returnInformation_Operation_new_->setName("new_");
-	m_returnInformation_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_returnInformation_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_returnInformation_Operation_new_->setLowerBound(1);
 	m_returnInformation_Operation_new_->setUpperBound(1);
 	m_returnInformation_Operation_new_->setUnique(true);
@@ -2302,14 +2307,14 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setName("getMatchingLinks");
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setLowerBound(0);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setUpperBound(-1);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setUnique(true);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value->setOrdered(false);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setName("getMatchingLinks");
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setLowerBound(0);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setUpperBound(-1);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setUnique(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
 		parameter->setName("association");
 		parameter->setEType(uml::umlPackage::eInstance()->getAssociation_Class());
 		parameter->setLowerBound(0);
@@ -2319,7 +2324,7 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -2329,23 +2334,23 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
 		parameter->setName("oppositeValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setName("getMatchingLinksForEndValue");
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class());
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setLowerBound(0);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setUpperBound(-1);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setUnique(true);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value->setOrdered(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setName("getMatchingLinksForEndValue");
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setLowerBound(0);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setUpperBound(-1);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setUnique(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
 		parameter->setName("association");
 		parameter->setEType(uml::umlPackage::eInstance()->getAssociation_Class());
 		parameter->setLowerBound(0);
@@ -2355,7 +2360,7 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -2365,9 +2370,9 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
 		parameter->setName("oppositeValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2375,9 +2380,9 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
 		parameter->setName("endValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2522,7 +2527,7 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 	}
 	
 	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setName("getPinValues");
-	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setLowerBound(0);
 	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setUpperBound(-1);
 	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setUnique(true);
@@ -2576,20 +2581,20 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setName("putPinValues");
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setName("putPinValues");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setEType(unknownClass);
+		m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setEType(unknownClass);
 	}
-	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setLowerBound(1);
-	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setUpperBound(1);
-	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setUnique(true);
-	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value->setOrdered(false);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject);
 		parameter->setName("pin");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -2599,7 +2604,7 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject);
 		parameter->setName("values");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -2691,9 +2696,9 @@ void ActionsPackageImpl::initializeValuesContent()
 	m_values_Class->setAbstract(false);
 	m_values_Class->setInterface(false);
 	
-	
+	m_values_Attribute_values = getValues_Attribute_values();
 	m_values_Attribute_values->setName("values");
-	m_values_Attribute_values->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		m_values_Attribute_values->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_values_Attribute_values->setLowerBound(0);
 	m_values_Attribute_values->setUpperBound(-1);
 	m_values_Attribute_values->setTransient(false);
@@ -2702,18 +2707,16 @@ void ActionsPackageImpl::initializeValuesContent()
 	m_values_Attribute_values->setUnsettable(false);
 	m_values_Attribute_values->setUnique(true);
 	m_values_Attribute_values->setDerived(false);
-	m_values_Attribute_values->setOrdered(false);
-	m_values_Attribute_values->setContainment(false);
-	m_values_Attribute_values->setResolveProxies(true);
+	m_values_Attribute_values->setOrdered(true);
+	m_values_Attribute_values->setID(false);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_values_Attribute_values->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		   m_values_Attribute_values->setDefaultValueLiteral(defaultValue);
+		}
 	}
+	
 	
 	
 }
@@ -2737,16 +2740,16 @@ void ActionsPackageImpl::initializeWriteStructuralFeatureActionActivationContent
 	
 	
 	
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setName("position");
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setLowerBound(1);
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setUpperBound(1);
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setUnique(true);
-	m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt->setOrdered(false);
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setName("position");
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setLowerBound(1);
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setUpperBound(1);
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setUnique(true);
+	m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt);
 		parameter->setName("value");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2754,9 +2757,9 @@ void ActionsPackageImpl::initializeWriteStructuralFeatureActionActivationContent
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt);
 		parameter->setName("list");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2764,7 +2767,7 @@ void ActionsPackageImpl::initializeWriteStructuralFeatureActionActivationContent
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt);
 		parameter->setName("startAt");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);

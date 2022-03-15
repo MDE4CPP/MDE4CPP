@@ -34,17 +34,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Association.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "uml/LinkEndData.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -54,7 +54,6 @@
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -117,7 +116,7 @@ LinkActionActivationImpl& LinkActionActivationImpl::operator=(const LinkActionAc
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<uml::LinkEndData> endData)
+bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<uml::Element> link,std::shared_ptr<uml::LinkEndData> endData)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -127,7 +126,7 @@ std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList)
+bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<uml::Element> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -274,14 +273,14 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData) : bool: 429767905
-		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA:
+		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(uml::Element, uml::LinkEndData) : bool: 3966493559
+		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_ELEMENT_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::shared_ptr<uml::Element> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'endData'
 			//parameter 1
 			std::shared_ptr<uml::LinkEndData> incoming_param_endData;
@@ -296,14 +295,14 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAnyObject(this->getAssociation(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData[*]) : bool: 570901206
-		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA:
+		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(uml::Element, uml::LinkEndData[*]) : bool: 3471346404
+		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_ELEMENT_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::shared_ptr<uml::Element> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'endDataList'
 			//parameter 1
 			std::shared_ptr<Bag<uml::LinkEndData>> incoming_param_endDataList;

@@ -45,8 +45,8 @@ virtual public EventAccepter
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
-			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
+			virtual void accept(std::shared_ptr<uml::Element> signalInstance) ;
+			virtual bool match(std::shared_ptr<uml::Element> signalInstance) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

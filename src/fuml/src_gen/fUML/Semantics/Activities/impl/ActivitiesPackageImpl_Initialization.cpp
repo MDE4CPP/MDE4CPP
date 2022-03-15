@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -22,8 +22,6 @@
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -353,7 +351,7 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	}
 	
 	m_activityExecution_Operation__copy->setName("_copy");
-	m_activityExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation__copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_activityExecution_Operation__copy->setLowerBound(1);
 	m_activityExecution_Operation__copy->setUpperBound(1);
 	m_activityExecution_Operation__copy->setUnique(true);
@@ -373,7 +371,7 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Operation_execute->setOrdered(false);
 	
 	m_activityExecution_Operation_new_->setName("new_");
-	m_activityExecution_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_activityExecution_Operation_new_->setLowerBound(1);
 	m_activityExecution_Operation_new_->setUpperBound(1);
 	m_activityExecution_Operation_new_->setUnique(true);
@@ -735,7 +733,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_getActivityExecution->setOrdered(false);
 	
 	m_activityNodeActivation_Operation_getExecutionContext->setName("getExecutionContext");
-	m_activityNodeActivation_Operation_getExecutionContext->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
+	m_activityNodeActivation_Operation_getExecutionContext->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_activityNodeActivation_Operation_getExecutionContext->setLowerBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUpperBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUnique(true);
@@ -1646,16 +1644,16 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setName("executeDecisionInputBehavior");
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setLowerBound(1);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setUpperBound(1);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setUnique(true);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setOrdered(false);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setName("executeDecisionInputBehavior");
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setLowerBound(1);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setUpperBound(1);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setUnique(true);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject);
 		parameter->setName("inputValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1663,9 +1661,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject);
 		parameter->setName("decisionInputValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1702,14 +1700,14 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance->setOrdered(false);
 	
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setName("getDecisionInputFlowValue");
-	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setLowerBound(0);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setUpperBound(1);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setUnique(true);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setOrdered(false);
 	
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setName("getDecisionValues");
-	m_decisionNodeActivation_Operation_getDecisionValues_Token->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_decisionNodeActivation_Operation_getDecisionValues_Token->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setLowerBound(0);
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setUpperBound(-1);
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setUnique(true);
@@ -1774,14 +1772,14 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_terminate->setUnique(true);
 	m_decisionNodeActivation_Operation_terminate->setOrdered(false);
 	
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setName("test");
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setLowerBound(1);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setUpperBound(1);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setUnique(true);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setOrdered(false);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setName("test");
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setLowerBound(1);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setUpperBound(1);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setUnique(true);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject);
 		parameter->setName("gaurd");
 		parameter->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 		parameter->setLowerBound(0);
@@ -1791,9 +1789,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject);
 		parameter->setName("value");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2491,7 +2489,7 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	}
 	
 	m_forkedToken_Operation_getValue->setName("getValue");
-	m_forkedToken_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_forkedToken_Operation_getValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_forkedToken_Operation_getValue->setLowerBound(0);
 	m_forkedToken_Operation_getValue->setUpperBound(1);
 	m_forkedToken_Operation_getValue->setUnique(true);
@@ -2781,9 +2779,9 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Class->setAbstract(false);
 	m_objectToken_Class->setInterface(false);
 	
-	
+	m_objectToken_Attribute_value = getObjectToken_Attribute_value();
 	m_objectToken_Attribute_value->setName("value");
-	m_objectToken_Attribute_value->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		m_objectToken_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_objectToken_Attribute_value->setLowerBound(0);
 	m_objectToken_Attribute_value->setUpperBound(1);
 	m_objectToken_Attribute_value->setTransient(false);
@@ -2792,18 +2790,16 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Attribute_value->setUnsettable(false);
 	m_objectToken_Attribute_value->setUnique(true);
 	m_objectToken_Attribute_value->setDerived(false);
-	m_objectToken_Attribute_value->setOrdered(false);
-	m_objectToken_Attribute_value->setContainment(true);
-	m_objectToken_Attribute_value->setResolveProxies(true);
+	m_objectToken_Attribute_value->setOrdered(true);
+	m_objectToken_Attribute_value->setID(false);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_objectToken_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		   m_objectToken_Attribute_value->setDefaultValueLiteral(defaultValue);
+		}
 	}
+	
 	
 	m_objectToken_Operation__copy->setName("_copy");
 	m_objectToken_Operation__copy->setEType(getToken_Class());
@@ -3004,7 +3000,7 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	}
 	
 	m_token_Operation_getValue->setName("getValue");
-	m_token_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_token_Operation_getValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_token_Operation_getValue->setLowerBound(1);
 	m_token_Operation_getValue->setUpperBound(1);
 	m_token_Operation_getValue->setUnique(true);

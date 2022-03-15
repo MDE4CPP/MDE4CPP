@@ -35,12 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/CallActionActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 using namespace fUML::Semantics::Activities;
@@ -128,30 +122,6 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 					{
 						std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation> (container);;
 						return this->createActivityExecution_as_decisionInputExecution_in_DecisionNodeActivation(castedContainer,metaElementID);
-					}
-					//ActivityExecution has extensionalValues as a containment
-					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
-					{
-						std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus> (container);;
-						return this->createActivityExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
-					}
-					//ActivityExecution has value as a containment
-					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
-					{
-						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
-						return this->createActivityExecution_as_value_in_ObjectToken(castedContainer,metaElementID);
-					}
-					//ActivityExecution has values as a containment
-					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
-					{
-						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
-						return this->createActivityExecution_as_values_in_FeatureValue(castedContainer,metaElementID);
-					}
-					//ActivityExecution has values as a containment
-					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
-					{
-						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
-						return this->createActivityExecution_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -524,58 +494,6 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_DecisionNodeActivation)
 	{
 		par_DecisionNodeActivation->setDecisionInputExecution(element);
-	}
-	
-	element->setThisActivityExecutionPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Activities::ActivityExecutionImpl> element(new fUML::Semantics::Activities::ActivityExecutionImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_Locus)
-	{
-		par_Locus->getExtensionalValues()->push_back(element);
-	}
-	
-	element->setThisActivityExecutionPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Activities::ActivityExecutionImpl> element(new fUML::Semantics::Activities::ActivityExecutionImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_ObjectToken)
-	{
-		par_ObjectToken->setValue(element);
-	}
-	
-	element->setThisActivityExecutionPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Activities::ActivityExecutionImpl> element(new fUML::Semantics::Activities::ActivityExecutionImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_FeatureValue)
-	{
-		par_FeatureValue->getValues()->push_back(element);
-	}
-	
-	element->setThisActivityExecutionPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Activities::ActivityExecutionImpl> element(new fUML::Semantics::Activities::ActivityExecutionImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_ParameterValue)
-	{
-		par_ParameterValue->getValues()->push_back(element);
 	}
 	
 	element->setThisActivityExecutionPtr(element);

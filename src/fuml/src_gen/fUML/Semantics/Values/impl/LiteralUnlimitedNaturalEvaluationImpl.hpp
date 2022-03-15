@@ -43,7 +43,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
+			virtual Any evaluate() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

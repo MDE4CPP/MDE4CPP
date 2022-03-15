@@ -52,12 +52,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual Any getValue() const ;
+			virtual void setValue (Any _value);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
 			
 			//*********************************
 			// Union Reference Getters

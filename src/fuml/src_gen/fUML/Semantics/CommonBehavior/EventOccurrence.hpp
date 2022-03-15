@@ -37,12 +37,9 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
 namespace uml 
 {
+	class Element;
 	class Trigger;
 }
 
@@ -79,7 +76,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) = 0;
-			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) = 0;
+			virtual void sendTo(std::shared_ptr<uml::Element> target) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -88,8 +85,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> getTarget() const = 0;
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>) = 0;
+			virtual std::shared_ptr<uml::Element> getTarget() const = 0;
+			virtual void setTarget(std::shared_ptr<uml::Element>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -115,7 +112,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> m_target;
+			std::shared_ptr<uml::Element> m_target;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EVENTOCCURRENCE_HPP */

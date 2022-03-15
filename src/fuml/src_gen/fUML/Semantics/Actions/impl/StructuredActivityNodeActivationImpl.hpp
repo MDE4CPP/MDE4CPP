@@ -51,11 +51,11 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() ;
 			virtual void doStructuredActivity() ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin> pin) ;
+			virtual std::shared_ptr<Bag<Any> > getPinValues(std::shared_ptr<uml::OutputPin> pin) ;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) ;
 			virtual bool isSuspended() ;
 			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) ;
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) ;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<Any>> values) ;
 			virtual void resume() ;
 			virtual void terminate() ;
 			virtual void terminateAll() ;

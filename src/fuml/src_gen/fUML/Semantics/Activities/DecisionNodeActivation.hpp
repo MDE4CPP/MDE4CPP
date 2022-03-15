@@ -13,6 +13,8 @@
 // forward declarations
 template<class T> class Bag; 
 
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -42,10 +44,6 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 namespace uml 
 {
@@ -84,17 +82,17 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue) = 0;
+			virtual Any executeDecisionInputBehavior(Any inputValue,Any decisionInputValue) = 0;
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> getDecisionInputFlowInstance() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getDecisionInputFlowValue() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
+			virtual Any getDecisionInputFlowValue() = 0;
+			virtual std::shared_ptr<Bag<Any> > getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			virtual bool hasObjectFlowInput() = 0;
 			virtual bool isReady() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
 			virtual void terminate() = 0;
-			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd,Any value) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

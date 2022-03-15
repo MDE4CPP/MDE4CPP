@@ -45,15 +45,12 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
 namespace uml 
 {
 	class Activity;
 	class Behavior;
 	class Classifier;
+	class Element;
 }
 
 // namespace macro header include
@@ -86,9 +83,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			virtual Any _copy() = 0;
 			virtual void execute() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			virtual Any new_() = 0;
 			virtual void terminate() = 0;
 
 			//*********************************

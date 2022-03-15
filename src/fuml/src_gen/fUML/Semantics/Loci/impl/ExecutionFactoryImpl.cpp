@@ -150,14 +150,13 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/OpaqueBehavior.hpp"
 #include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -169,7 +168,6 @@
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -278,20 +276,9 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification> specification)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Values::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Semantics::Values::Evaluation>(this->instantiateVisitor(specification));
 
-    evaluation->setSpecification(specification);
-    evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;
 
-    return evaluation;
-	//end of body
-}
-
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<uml::Element> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -453,41 +440,6 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 
 	switch (element->eClass()->getClassifierID()) 
 	{
-		case uml::umlPackage::LITERALBOOLEAN_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralBooleanEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALSTRING_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralStringEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALNULL_CLASS:
-		{
-			visitor =  fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralNullEvaluation();
-			break;
-		}
-		case uml::umlPackage::INSTANCEVALUE_CLASS:
-		{
-			visitor = fUML::Semantics::Classification::ClassificationFactory::eInstance()->createInstanceValueEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALINTEGER_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralIntegerEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALREAL_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralRealEvaluation();
-			break;
-		}
 		case uml::umlPackage::ACTIVITY_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
@@ -1139,19 +1091,8 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->assignStrategy(incoming_param_strategy);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::createEvaluation(uml::ValueSpecification) : fUML::Semantics::Values::Evaluation: 2830428948
-		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION:
-		{
-			//Retrieve input parameter 'specification'
-			//parameter 0
-			std::shared_ptr<uml::ValueSpecification> incoming_param_specification;
-			std::list<Any>::const_iterator incoming_param_specification_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_specification = (*incoming_param_specification_arguments_citer)->get<std::shared_ptr<uml::ValueSpecification> >();
-			result = eAnyObject(this->createEvaluation(incoming_param_specification), fUML::Semantics::Values::ValuesPackage::EVALUATION_CLASS);
-			break;
-		}
-		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object) : fUML::Semantics::CommonBehavior::Execution: 1344567686
-		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT:
+		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, uml::Element) : fUML::Semantics::CommonBehavior::Execution: 2395760303
+		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0
@@ -1160,9 +1101,9 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_context;
+			std::shared_ptr<uml::Element> incoming_param_context;
 			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			result = eAnyObject(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}

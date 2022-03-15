@@ -10,8 +10,8 @@
 
 #include <memory>
 #include <string>
+#include "abstractDataTypes/Any.hpp"
 // forward declarations
-template<class T> class Bag; 
 
 
 //*********************************
@@ -33,10 +33,6 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Parameter;
@@ -76,13 +72,13 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<Bag<Any>> getValues() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
 			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -104,12 +100,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Members
 			//*********************************
+			mutable std::shared_ptr<Bag<Any>> m_values;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			std::shared_ptr<uml::Parameter> m_parameter;
-			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_PARAMETERVALUE_HPP */

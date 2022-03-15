@@ -59,32 +59,27 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
+#include "uml/Element.hpp"
 #include "uml/InputPin.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "uml/OutputPin.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -382,7 +377,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<Any> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -485,17 +480,9 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activiti
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ActionActivationImpl::makeBooleanValue(bool value)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	 std::shared_ptr<uml::LiteralBoolean> booleanValue = uml::umlFactory::eInstance()->createLiteralBoolean_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
-    booleanValue->setValue(value);
-    return std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(this->getExecutionLocus()->getExecutor()->evaluate(booleanValue));
-	//end of body
-}
 
-void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value)
+
+void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,Any value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -511,7 +498,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,std::sha
 	//end of body
 }
 
-void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values)
+void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<Any>> values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -642,7 +629,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<Any> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -683,7 +670,7 @@ void ActionActivationImpl::terminate()
 	//end of body
 }
 
-bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
+bool ActionActivationImpl::valueParticipatesInLink(Any value,std::shared_ptr<uml::Element> link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1237,7 +1224,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::getTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 3624516414
+		// fUML::Semantics::Actions::ActionActivation::getTokens(uml::InputPin) : Any[*]: 4209096250
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_GETTOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1245,8 +1232,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getTokens(incoming_param_pin);
-			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = eAny(this->getTokens(incoming_param_pin),0,true);
 			break;
 		}
 		// fUML::Semantics::Actions::ActionActivation::isFirng() : bool: 392760869
@@ -1272,19 +1258,8 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::makeBooleanValue(bool) : fUML::Semantics::SimpleClassifiers::BooleanValue: 2643519300
-		case ActionsPackage::ACTIONACTIVATION_OPERATION_MAKEBOOLEANVALUE_EBOOLEAN:
-		{
-			//Retrieve input parameter 'value'
-			//parameter 0
-			bool incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
-			result = eAnyObject(this->makeBooleanValue(incoming_param_value), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS);
-			break;
-		}
-		// fUML::Semantics::Actions::ActionActivation::putToken(uml::OutputPin, fUML::Semantics::Values::Value): 1450940469
-		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKEN_OUTPUTPIN_VALUE:
+		// fUML::Semantics::Actions::ActionActivation::putToken(uml::OutputPin, Any): 2145374429
+		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKEN_OUTPUTPIN_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'pin'
 			//parameter 0
@@ -1293,14 +1268,14 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::OutputPin> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			Any incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			this->putToken(incoming_param_pin,incoming_param_value);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::putTokens(uml::OutputPin, fUML::Semantics::Values::Value[*]): 2426696642
-		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKENS_OUTPUTPIN_VALUE:
+		// fUML::Semantics::Actions::ActionActivation::putTokens(uml::OutputPin, Any[*]): 3216810370
+		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKENS_OUTPUTPIN_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'pin'
 			//parameter 0
@@ -1309,9 +1284,9 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::OutputPin> >();
 			//Retrieve input parameter 'values'
 			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
+			std::shared_ptr<Bag<Any>> incoming_param_values;
 			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
 			this->putTokens(incoming_param_pin,incoming_param_values);
 			break;
 		}
@@ -1345,7 +1320,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::takeTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 175770991
+		// fUML::Semantics::Actions::ActionActivation::takeTokens(uml::InputPin) : Any[*]: 1093731227
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKETOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1353,8 +1328,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->takeTokens(incoming_param_pin);
-			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = eAny(this->takeTokens(incoming_param_pin),0,true);
 			break;
 		}
 		// fUML::Semantics::Actions::ActionActivation::terminate(): 1071084434
@@ -1363,19 +1337,19 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->terminate();
 			break;
 		}
-		// fUML::Semantics::Actions::ActionActivation::valueParticipatesInLink(fUML::Semantics::Values::Value, fUML::Semantics::StructuredClassifiers::Link) : bool: 3425114248
-		case ActionsPackage::ACTIONACTIVATION_OPERATION_VALUEPARTICIPATESINLINK_VALUE_LINK:
+		// fUML::Semantics::Actions::ActionActivation::valueParticipatesInLink(Any, uml::Element) : bool: 3874903198
+		case ActionsPackage::ACTIONACTIVATION_OPERATION_VALUEPARTICIPATESINLINK_EJAVAOBJECT_ELEMENT:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			Any incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'link'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::shared_ptr<uml::Element> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			result = eAny(this->valueParticipatesInLink(incoming_param_value,incoming_param_link),0,false);
 			break;
 		}

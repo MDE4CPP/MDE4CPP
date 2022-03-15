@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 
 
 #include "abstractDataTypes/AnyEObject.hpp"
@@ -34,13 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
 
@@ -87,9 +83,21 @@ ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Values "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	std::shared_ptr<Bag<Any>> valuesList = obj.getValues();
+	if(valuesList)
+	{	
+		m_values.reset(new Bag<Any>());
+		for(const std::shared_ptr<Any> it: *valuesList) 
+		{
+			m_values->push_back(it);
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr values."<< std::endl;)
+	}
 
 	//copy references with no containment (soft copy)
-	m_values  = obj.getValues();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -109,21 +117,19 @@ std::shared_ptr<ecore::EObject> ValuesImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute values */
+std::shared_ptr<Bag<Any>> ValuesImpl::getValues() const 
+{
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<Any>());
+	}
+	return m_values;
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference values */
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() const
-{
-	if(m_values == nullptr)
-	{
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-		
-		
-	}
-    return m_values;
-}
 
 //*********************************
 // Union Getter
@@ -158,15 +164,18 @@ void ValuesImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 
 void ValuesImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ValuesImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
 	try
 	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("values");
-		if ( iter != attr_list.end() )
+		if (nodeName.compare("values") == 0)
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("values")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			std::cout << "| ERROR    | unhandled attribute with upperbound <> 1" << std::endl;
+			return;
 		}
 	}
 	catch (std::exception& e)
@@ -178,33 +187,11 @@ void ValuesImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ValuesImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
 	//load BasePackage Nodes
 }
 
 void ValuesImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = getValues();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Values::Value>  _r = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(ref);
-				if (_r != nullptr)
-				{
-					_values->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
 
@@ -220,8 +207,14 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-	// Add references
-		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());
+		// Add attributes
+		if ( this->eIsSet(package->getValues_Attribute_values()) )
+		{
+			for (std::shared_ptr<Any> value : *m_values)
+			{
+				saveHandler->addAttributeAsNode("values", std::to_string(*value));
+			}
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -242,7 +235,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-			return eAnyBag(getValues(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS); //1200
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //1200
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -263,39 +256,8 @@ bool ValuesImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
-			// CAST Any to Bag<fUML::Semantics::Values::Value>
-			if((newValue->isContainer()) && (fUML::Semantics::Values::ValuesPackage::VALUE_CLASS ==newValue->getTypeId()))
-			{ 
-				try
-				{
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
-					{
-						if (valuesList->find(indexValues) == -1)
-						{
-							_values->erase(indexValues);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
-					{
-						if (_values->find(indexValues) == -1)
-						{
-							_values->add(indexValues);
-						}
-					}
-				}
-				catch(...)
-				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
-					return false;
-				}
-			}
-			else
-			{
-				return false;
-			}
+			// CAST Any to Bag<Any>
+			// nothing to do
 			return true;
 		}
 	}

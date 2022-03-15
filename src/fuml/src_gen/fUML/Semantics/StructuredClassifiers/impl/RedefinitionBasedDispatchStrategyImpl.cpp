@@ -41,7 +41,7 @@
 #include <exception> // used in Persistence
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "uml/Element.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -133,7 +133,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -311,14 +311,14 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
 			break;
 		}
-		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 2932518700
-		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
+		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(uml::Element, uml::Operation) : uml::Behavior: 4193381461
+		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
+			std::shared_ptr<uml::Element> incoming_param_object;
 			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;

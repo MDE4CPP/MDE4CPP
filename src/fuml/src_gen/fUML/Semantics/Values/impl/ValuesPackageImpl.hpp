@@ -25,8 +25,7 @@ namespace fUML::Semantics::Values
 	class LiteralNullEvaluation;
 	class LiteralRealEvaluation;
 	class LiteralStringEvaluation;
-	class LiteralUnlimitedNaturalEvaluation;
-	class Value;}
+	class LiteralUnlimitedNaturalEvaluation;}
 
 namespace ecore
 {
@@ -129,34 +128,16 @@ namespace fUML::Semantics::Values
 			
 			// End Class LiteralUnlimitedNaturalEvaluation
 
-			// Begin Class Value
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValue_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_checkAllParents_Classifier_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_getTypes() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_hasTypes_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_new_() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_objectId() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_specify() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_toString() const ;
-			
-			// End Class Value
-
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_evaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalBooleanEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalIntegerEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalNullEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalRealEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalStringEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalUnlimitedNaturalEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_value_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_evaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalBooleanEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalIntegerEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalNullEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalRealEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalStringEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalUnlimitedNaturalEvaluation_Class = nullptr;
 			
 			
 			std::shared_ptr<ecore::EReference> m_evaluation_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_evaluation_Attribute_specification = nullptr;
-			std::shared_ptr<ecore::EOperation> m_value_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_checkAllParents_Classifier_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_evaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalBooleanEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalIntegerEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalNullEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalRealEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalStringEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalUnlimitedNaturalEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalEvaluation_Operation_getType_EString = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_hasTypes_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_objectId = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_toString = nullptr;
+			std::shared_ptr<ecore::EOperation> m_evaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalBooleanEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalIntegerEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalNullEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalRealEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalStringEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalUnlimitedNaturalEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalEvaluation_Operation_getType_EString = nullptr;
 
 			friend class ValuesPackage;
 
@@ -180,7 +161,6 @@ namespace fUML::Semantics::Values
 			void createLiteralRealEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLiteralStringEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLiteralUnlimitedNaturalEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeEvaluationContent();
@@ -191,7 +171,6 @@ namespace fUML::Semantics::Values
 			void initializeLiteralRealEvaluationContent();
 			void initializeLiteralStringEvaluationContent();
 			void initializeLiteralUnlimitedNaturalEvaluationContent();
-			void initializeValueContent();
 			void initializePackageEDataTypes();
 
 

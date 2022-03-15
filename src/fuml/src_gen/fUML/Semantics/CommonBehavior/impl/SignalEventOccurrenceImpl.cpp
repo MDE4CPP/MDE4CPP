@@ -34,19 +34,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -130,11 +126,11 @@ bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signalInstance */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SignalEventOccurrenceImpl::getSignalInstance() const
+std::shared_ptr<uml::Element> SignalEventOccurrenceImpl::getSignalInstance() const
 {
     return m_signalInstance;
 }
-void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance)
+void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<uml::Element> _signalInstance)
 {
     m_signalInstance = _signalInstance;
 	
@@ -212,7 +208,7 @@ void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vect
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>( references.front() );
+				std::shared_ptr<uml::Element> _signalInstance = std::dynamic_pointer_cast<uml::Element>( references.front() );
 				setSignalInstance(_signalInstance);
 			}
 			
@@ -237,7 +233,7 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getSignalInstance(), "signalInstance", getSignalInstance()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class()); 
+		saveHandler->addReference(this->getSignalInstance(), "signalInstance", getSignalInstance()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -258,7 +254,7 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(getSignalInstance(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS,false); //1061
+			return eAny(getSignalInstance(),uml::umlPackage::ELEMENT_CLASS,false); //1061
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -279,9 +275,9 @@ bool SignalEventOccurrenceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::SignalInstance
+			// CAST Any to uml::Element
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_temp);
+			std::shared_ptr<uml::Element> _signalInstance = std::dynamic_pointer_cast<uml::Element>(_temp);
 			setSignalInstance(_signalInstance); //1061
 			return true;
 		}

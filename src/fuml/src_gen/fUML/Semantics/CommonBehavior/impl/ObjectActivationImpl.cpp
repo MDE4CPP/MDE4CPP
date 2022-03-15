@@ -40,21 +40,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -126,15 +122,15 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 	}
 
 	//clone reference 'eventPool'
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> eventPoolList = obj.getEventPool();
+	std::shared_ptr<Bag<uml::Element>> eventPoolList = obj.getEventPool();
 	if(eventPoolList)
 	{
-		m_eventPool.reset(new Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>());
+		m_eventPool.reset(new Bag<uml::Element>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> eventPoolindexElem: *eventPoolList) 
+		for(const std::shared_ptr<uml::Element> eventPoolindexElem: *eventPoolList) 
 		{
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>((eventPoolindexElem)->copy());
+			std::shared_ptr<uml::Element> temp = std::dynamic_pointer_cast<uml::Element>((eventPoolindexElem)->copy());
 			m_eventPool->push_back(temp);
 		}
 	}
@@ -193,12 +189,12 @@ void ObjectActivationImpl::dispatchNextEvent()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> ObjectActivationImpl::retrieveNextEvent()
+std::shared_ptr<uml::Element> ObjectActivationImpl::retrieveNextEvent()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectActivationImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
+void ObjectActivationImpl::send(std::shared_ptr<uml::Element> signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,11 +300,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution
 }
 
 /* Getter & Setter for reference eventPool */
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> ObjectActivationImpl::getEventPool() const
+std::shared_ptr<Bag<uml::Element>> ObjectActivationImpl::getEventPool() const
 {
 	if(m_eventPool == nullptr)
 	{
-		m_eventPool.reset(new Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>());
+		m_eventPool.reset(new Bag<uml::Element>());
 		
 		
 	}
@@ -316,11 +312,11 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> ObjectA
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ObjectActivationImpl::getObject() const
+std::shared_ptr<uml::Element> ObjectActivationImpl::getObject() const
 {
     return m_object;
 }
-void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object)
+void ObjectActivationImpl::setObject(std::shared_ptr<uml::Element> _object)
 {
     m_object = _object;
 	
@@ -423,9 +419,10 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "SignalInstance";
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::SimpleClassifiers::SignalInstance>(this->getEventPool());  
+			loadHandler->handleChildContainer<uml::Element>(this->getEventPool());  
 
 			return; 
 		}
@@ -450,7 +447,7 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>( references.front() );
+				std::shared_ptr<uml::Element> _object = std::dynamic_pointer_cast<uml::Element>( references.front() );
 				setObject(_object);
 			}
 			
@@ -487,7 +484,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class()); 
+		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventAccepter>("waitingEventAccepters", this->getWaitingEventAccepters());
 		//
 		// Add new tags (from references)
@@ -499,7 +496,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 
 		// Save 'eventPool'
 
-		saveHandler->addReferences<fUML::Semantics::SimpleClassifiers::SignalInstance>("eventPool", this->getEventPool());
+		saveHandler->addReferences<uml::Element>("eventPool", this->getEventPool());
 	}
 	catch (std::exception& e)
 	{
@@ -522,9 +519,9 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return eAnyBag(getClassifierBehaviorExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS); //813
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return eAnyBag(getEventPool(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS); //811
+			return eAnyBag(getEventPool(),uml::umlPackage::ELEMENT_CLASS); //811
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(getObject(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false); //812
+			return eAny(getObject(),uml::umlPackage::ELEMENT_CLASS,false); //812
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 			return eAnyBag(getWaitingEventAccepters(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTACCEPTER_CLASS); //810
 	}
@@ -590,14 +587,14 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 		{
-			// CAST Any to Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>
-			if((newValue->isContainer()) && (fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS ==newValue->getTypeId()))
+			// CAST Any to Bag<uml::Element>
+			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
 			{ 
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> eventPoolList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>>>();
-					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> _eventPool=getEventPool();
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> indexEventPool: *_eventPool)
+					std::shared_ptr<Bag<uml::Element>> eventPoolList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
+					std::shared_ptr<Bag<uml::Element>> _eventPool=getEventPool();
+					for(const std::shared_ptr<uml::Element> indexEventPool: *_eventPool)
 					{
 						if (eventPoolList->find(indexEventPool) == -1)
 						{
@@ -605,7 +602,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> indexEventPool: *eventPoolList)
+					for(const std::shared_ptr<uml::Element> indexEventPool: *eventPoolList)
 					{
 						if (_eventPool->find(indexEventPool) == -1)
 						{
@@ -627,9 +624,9 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 		{
-			// CAST Any to fUML::Semantics::StructuredClassifiers::Object
+			// CAST Any to uml::Element
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(_temp);
+			std::shared_ptr<uml::Element> _object = std::dynamic_pointer_cast<uml::Element>(_temp);
 			setObject(_object); //812
 			return true;
 		}
@@ -718,20 +715,20 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			this->dispatchNextEvent();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : fUML::Semantics::SimpleClassifiers::SignalInstance: 1292799887
+		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : uml::Element: 2723579027
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT:
 		{
-			result = eAnyObject(this->retrieveNextEvent(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS);
+			result = eAnyObject(this->retrieveNextEvent(), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 3214058052
-		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE:
+		// fUML::Semantics::CommonBehavior::ObjectActivation::send(uml::Element): 1663035856
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_ELEMENT:
 		{
 			//Retrieve input parameter 'signalInstance'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
+			std::shared_ptr<uml::Element> incoming_param_signalInstance;
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			this->send(incoming_param_signalInstance);
 			break;
 		}

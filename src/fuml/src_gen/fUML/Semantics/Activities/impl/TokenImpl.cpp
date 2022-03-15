@@ -42,12 +42,10 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
 
@@ -124,7 +122,7 @@ bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> TokenImpl::getValue() const
+Any TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -402,10 +400,10 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 3442224848
+		// fUML::Semantics::Activities::Token::getValue() : Any {const}: 900354032
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
-			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->getValue();
 			break;
 		}
 		// fUML::Semantics::Activities::Token::isControl() : bool: 2683482097

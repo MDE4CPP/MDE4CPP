@@ -36,10 +36,6 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class ValueSpecification;
@@ -75,7 +71,7 @@ namespace fUML::Semantics::Classification
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
+			virtual Any evaluate() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

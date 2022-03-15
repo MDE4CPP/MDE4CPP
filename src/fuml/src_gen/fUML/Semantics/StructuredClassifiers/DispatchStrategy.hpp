@@ -36,13 +36,10 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class Execution;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
 namespace uml 
 {
 	class Behavior;
+	class Element;
 	class Operation;
 }
 
@@ -76,9 +73,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation) = 0;
 			virtual std::string getName() = 0;
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) = 0;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<uml::Element> object,std::shared_ptr<uml::Operation> operation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

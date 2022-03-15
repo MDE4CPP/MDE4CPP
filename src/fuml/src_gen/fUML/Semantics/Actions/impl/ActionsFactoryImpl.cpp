@@ -50,11 +50,6 @@
 
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 using namespace fUML::Semantics::Actions;
@@ -511,36 +506,8 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 		}
 		case ActionsPackage::RETURNINFORMATION_CLASS:
 		{
-			if (nullptr == container)
-			{
 				return this->createReturnInformation(metaElementID);
-			}
-			else
-			{
-				switch(referenceID)
-				{
-					//ReturnInformation has value as a containment
-					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
-					{
-						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
-						return this->createReturnInformation_as_value_in_ObjectToken(castedContainer,metaElementID);
-					}
-					//ReturnInformation has values as a containment
-					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
-					{
-						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
-						return this->createReturnInformation_as_values_in_FeatureValue(castedContainer,metaElementID);
-					}
-					//ReturnInformation has values as a containment
-					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
-					{
-						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
-						return this->createReturnInformation_as_values_in_ParameterValue(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
-			}
+			
 			break;
 		}
 		case ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS:
@@ -1215,45 +1182,6 @@ std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ActionsFactoryImpl:
 	element->setMetaElementID(metaElementID);
 	element->setThisReturnInformationPtr(element);
 	return element;
-}
-std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ActionsFactoryImpl::createReturnInformation_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Actions::ReturnInformationImpl> element(new fUML::Semantics::Actions::ReturnInformationImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_ObjectToken)
-	{
-		par_ObjectToken->setValue(element);
-	}
-	
-	element->setThisReturnInformationPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ActionsFactoryImpl::createReturnInformation_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Actions::ReturnInformationImpl> element(new fUML::Semantics::Actions::ReturnInformationImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_FeatureValue)
-	{
-		par_FeatureValue->getValues()->push_back(element);
-	}
-	
-	element->setThisReturnInformationPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ActionsFactoryImpl::createReturnInformation_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Actions::ReturnInformationImpl> element(new fUML::Semantics::Actions::ReturnInformationImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_ParameterValue)
-	{
-		par_ParameterValue->getValues()->push_back(element);
-	}
-	
-	element->setThisReturnInformationPtr(element);
-	return element;
-	
 }
 std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation(const int metaElementID/*=-1*/) const
 {

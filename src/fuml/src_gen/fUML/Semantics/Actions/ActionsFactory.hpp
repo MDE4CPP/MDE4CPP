@@ -19,15 +19,6 @@
 namespace fUML::Semantics::Activities
 {
 	class ActivityNodeActivationGroup;
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
 }
 
 
@@ -133,10 +124,6 @@ namespace fUML::Semantics::Actions
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> createReplyActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::REPLYACTIONACTIVATION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> createReturnInformation(const int metaElementID = ActionsPackage::RETURNINFORMATION_CLASS) const = 0;
-			//Add as contained object
-			virtual std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> createReturnInformation_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ActionsPackage::RETURNINFORMATION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> createReturnInformation_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ActionsPackage::RETURNINFORMATION_CLASS) const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> createReturnInformation_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ActionsPackage::RETURNINFORMATION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> createSendSignalActionActivation(const int metaElementID = ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> createSendSignalActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS) const = 0;

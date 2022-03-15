@@ -13,6 +13,8 @@
 // forward declarations
 template<class T> class Bag; 
 
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -44,10 +46,6 @@ namespace fUML::Semantics::Activities
 	class ActivityEdgeInstance;
 	class ActivityNodeActivationGroup;
 	class Token;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 namespace uml 
 {
@@ -85,7 +83,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual int position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list,int startAt) = 0;
+			virtual int position(Any value,std::shared_ptr<Bag<Any>> list,int startAt) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

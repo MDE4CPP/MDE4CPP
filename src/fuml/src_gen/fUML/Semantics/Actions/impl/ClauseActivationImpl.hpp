@@ -45,7 +45,7 @@ virtual public ClauseActivation
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() ;
+			virtual bool getDecision() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() ;
 			virtual bool isReady() ;

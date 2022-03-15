@@ -23,7 +23,6 @@ namespace Values
 	class LiteralRealEvaluation;
 	class LiteralStringEvaluation;
 	class LiteralUnlimitedNaturalEvaluation;
-	class Value;
 }
 
 namespace fUML::Semantics::Values 

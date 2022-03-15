@@ -33,9 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Clause.hpp"
 #include "fUML/Semantics/Actions/ClauseActivation.hpp"
 #include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
@@ -43,7 +42,6 @@
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -110,7 +108,7 @@ std::shared_ptr<ecore::EObject> ClauseActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ClauseActivationImpl::getDecision()
+bool ClauseActivationImpl::getDecision()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -362,10 +360,10 @@ Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ClauseActivation::getDecision() : fUML::Semantics::SimpleClassifiers::BooleanValue: 2567080846
+		// fUML::Semantics::Actions::ClauseActivation::getDecision() : bool: 3277823760
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
 		{
-			result = eAnyObject(this->getDecision(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS);
+			result = eAny(this->getDecision(),0,false);
 			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::getPredecessors() : fUML::Semantics::Actions::ClauseActivation[*]: 1373824501

@@ -48,6 +48,7 @@ namespace uml
 {
 	class Action;
 	class ActivityNode;
+	class ClearStructuralFeatureAction;
 }
 
 // namespace macro header include
@@ -89,6 +90,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const = 0;
+			virtual void setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction>) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'clearStructuralFeatureAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'clearStructuralFeatureAction'*/
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -115,6 +122,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::ClearStructuralFeatureAction> m_clearStructuralFeatureAction;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_HPP */

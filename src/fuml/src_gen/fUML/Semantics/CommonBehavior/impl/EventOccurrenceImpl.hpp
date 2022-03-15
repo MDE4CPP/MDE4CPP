@@ -49,7 +49,7 @@ virtual public EventOccurrence
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) ;
-			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) ;
+			virtual void sendTo(std::shared_ptr<uml::Element> target) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -58,8 +58,8 @@ virtual public EventOccurrence
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> getTarget() const ;
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>) ;
+			virtual std::shared_ptr<uml::Element> getTarget() const ;
+			virtual void setTarget(std::shared_ptr<uml::Element>) ;
 			
 			//*********************************
 			// Union Reference Getters

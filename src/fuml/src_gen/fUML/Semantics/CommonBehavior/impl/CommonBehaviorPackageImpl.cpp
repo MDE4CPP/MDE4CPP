@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -250,13 +250,13 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPa
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_accept_SignalInstance() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_accept_Element() const
 {
-	return m_eventAccepter_Operation_accept_SignalInstance;
+	return m_eventAccepter_Operation_accept_Element;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_match_SignalInstance() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_match_Element() const
 {
-	return m_eventAccepter_Operation_match_SignalInstance;
+	return m_eventAccepter_Operation_match_Element;
 }
 
 // End Class EventAccepter
@@ -300,9 +300,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehavi
 {
 	return m_eventOccurrence_Operation_matchAny_Trigger;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_sendTo_Reference() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_sendTo_Element() const
 {
-	return m_eventOccurrence_Operation_sendTo_Reference;
+	return m_eventOccurrence_Operation_sendTo_Element;
 }
 
 // End Class EventOccurrence
@@ -455,9 +455,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehavi
 {
 	return m_objectActivation_Operation_retrieveNextEvent;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_send_SignalInstance() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_send_Element() const
 {
-	return m_objectActivation_Operation_send_SignalInstance;
+	return m_objectActivation_Operation_send_Element;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_startBehavior_Class_ParameterValue() const
 {
@@ -499,14 +499,14 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPa
 	return m_parameterValue_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
+{
+	return m_parameterValue_Attribute_values;
+}
 
 std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_parameter() const
 {
 	return m_parameterValue_Attribute_parameter;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
-{
-	return m_parameterValue_Attribute_values;
 }
 
 std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const

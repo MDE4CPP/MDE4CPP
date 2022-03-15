@@ -47,8 +47,8 @@
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
@@ -56,7 +56,6 @@
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -269,7 +268,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActi
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ActivityNodeActivationImpl::getExecutionContext()
+std::shared_ptr<uml::Element> ActivityNodeActivationImpl::getExecutionContext()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1133,10 +1132,10 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			result = eAnyObject(this->getActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : fUML::Semantics::StructuredClassifiers::Object: 769426444
+		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : uml::Element: 3574975649
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
-			result = eAnyObject(this->getExecutionContext(), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS);
+			result = eAnyObject(this->getExecutionContext(), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionLocus() : fUML::Semantics::Loci::Locus: 4097970094

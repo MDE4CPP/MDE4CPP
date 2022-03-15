@@ -8,13 +8,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -42,7 +42,6 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 	createLiteralRealEvaluationContent(package, factory);
 	createLiteralStringEvaluationContent(package, factory);
 	createLiteralUnlimitedNaturalEvaluationContent(package, factory);
-	createValueContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
 
@@ -119,23 +118,6 @@ void ValuesPackageImpl::createLiteralUnlimitedNaturalEvaluationContent(std::shar
 	
 	
 	m_literalUnlimitedNaturalEvaluation_Operation_evaluate = factory->createEOperation_as_eOperations_in_EClass(m_literalUnlimitedNaturalEvaluation_Class, LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE);
-	
-}
-
-void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_value_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VALUE_CLASS);
-	
-	
-	m_value_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION__COPY);
-	m_value_Operation_checkAllParents_Classifier_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER);
-	m_value_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_EQUALS_VALUE);
-	m_value_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_GETTYPES);
-	m_value_Operation_hasTypes_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_HASTYPES_CLASSIFIER);
-	m_value_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_NEW_);
-	m_value_Operation_objectId = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_OBJECTID);
-	m_value_Operation_specify = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_SPECIFY);
-	m_value_Operation_toString = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_TOSTRING);
 	
 }
 

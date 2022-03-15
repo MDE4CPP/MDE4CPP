@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -218,17 +218,13 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_actionActivation_Operation_isSourceFor_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_makeBooleanValue_EBoolean() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_putToken_OutputPin_EJavaObject() const
 {
-	return m_actionActivation_Operation_makeBooleanValue_EBoolean;
+	return m_actionActivation_Operation_putToken_OutputPin_EJavaObject;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_putToken_OutputPin_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_putTokens_OutputPin_EJavaObject() const
 {
-	return m_actionActivation_Operation_putToken_OutputPin_Value;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_putTokens_OutputPin_Value() const
-{
-	return m_actionActivation_Operation_putTokens_OutputPin_Value;
+	return m_actionActivation_Operation_putTokens_OutputPin_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_retrievePinActivation_Pin() const
 {
@@ -254,9 +250,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_actionActivation_Operation_terminate;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_valueParticipatesInLink_Value_Link() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_valueParticipatesInLink_EJavaObject_Element() const
 {
-	return m_actionActivation_Operation_valueParticipatesInLink_Value_Link;
+	return m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element;
 }
 
 // End Class ActionActivation
@@ -418,6 +414,10 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::get
 }
 
 
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getClearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction() const
+{
+	return m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction;
+}
 
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClearStructuralFeatureActionActivation_Operation_doAction() const
 {
@@ -510,17 +510,17 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl:
 	return m_destroyObjectActionActivation_Attribute_destroyObjectAction;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_Value_EBoolean() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const
 {
-	return m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean;
+	return m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_doAction() const
 {
 	return m_destroyObjectActionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Reference_Link() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const
 {
-	return m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link;
+	return m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element;
 }
 
 // End Class DestroyObjectActionActivation
@@ -563,17 +563,17 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::get
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_endMatchesEndData_Link_LinkEndData() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_endMatchesEndData_Element_LinkEndData() const
 {
-	return m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData;
+	return m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_getAssociation() const
 {
 	return m_linkActionActivation_Operation_getAssociation;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData() const
 {
-	return m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData;
+	return m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData;
 }
 
 // End Class LinkActionActivation
@@ -798,9 +798,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_returnInformation_Operation__copy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_equals_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_equals_EJavaObject() const
 {
-	return m_returnInformation_Operation_equals_Value;
+	return m_returnInformation_Operation_equals_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_getOperation() const
 {
@@ -886,13 +886,13 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject() const
 {
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value;
+	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject() const
 {
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_Value;
+	return m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const
 {
@@ -953,9 +953,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const
 {
-	return m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value;
+	return m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_resume() const
 {
@@ -1004,11 +1004,11 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::get
 	return m_values_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getValues_Attribute_values() const
+std::shared_ptr<ecore::EAttribute> fUML::Semantics::Actions::ActionsPackageImpl::getValues_Attribute_values() const
 {
 	return m_values_Attribute_values;
 }
+
 
 
 // End Class Values
@@ -1032,9 +1032,9 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::get
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getWriteStructuralFeatureActionActivation_Operation_position_Value_EInt() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getWriteStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt() const
 {
-	return m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt;
+	return m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt;
 }
 
 // End Class WriteStructuralFeatureActionActivation

@@ -38,11 +38,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -113,7 +112,7 @@ std::shared_ptr<ecore::EObject> LiteralIntegerEvaluationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> LiteralIntegerEvaluationImpl::evaluate()
+Any LiteralIntegerEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -249,10 +248,10 @@ Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::LiteralIntegerEvaluation::evaluate() : fUML::Semantics::Values::Value: 1437295956
+		// fUML::Semantics::Values::LiteralIntegerEvaluation::evaluate() : Any: 216967032
 		case ValuesPackage::LITERALINTEGEREVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->evaluate();
 			break;
 		}
 

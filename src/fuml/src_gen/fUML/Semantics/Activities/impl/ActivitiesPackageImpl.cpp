@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -527,9 +527,9 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackag
 	return m_decisionNodeActivation_Attribute_decisionNode;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const
 {
-	return m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value;
+	return m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_fire_Token() const
 {
@@ -567,9 +567,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 {
 	return m_decisionNodeActivation_Operation_terminate;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const
 {
-	return m_decisionNodeActivation_Operation_test_ValueSpecification_Value;
+	return m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject;
 }
 
 // End Class DecisionNodeActivation
@@ -914,11 +914,11 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImp
 	return m_objectToken_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Attribute_value() const
+std::shared_ptr<ecore::EAttribute> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Attribute_value() const
 {
 	return m_objectToken_Attribute_value;
 }
+
 
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Operation__copy() const
 {

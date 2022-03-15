@@ -8,14 +8,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -251,7 +251,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	m_decisionNodeActivation_Attribute_decisionInputExecution = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION);
 	m_decisionNodeActivation_Attribute_decisionNode = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
 	
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
 	m_decisionNodeActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE);
@@ -261,7 +261,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN);
 	m_decisionNodeActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
 	m_decisionNodeActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TERMINATE);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT);
 	
 }
 
@@ -404,8 +404,8 @@ void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ec
 void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectToken_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECTTOKEN_CLASS);
+	m_objectToken_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_objectToken_Class, OBJECTTOKEN_ATTRIBUTE_VALUE);
 	
-	m_objectToken_Attribute_value = factory->createEReference_as_eReferences_in_EClass(m_objectToken_Class, OBJECTTOKEN_ATTRIBUTE_VALUE);
 	
 	m_objectToken_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_objectToken_Class, OBJECTTOKEN_OPERATION__COPY);
 	m_objectToken_Operation_equals_Token = factory->createEOperation_as_eOperations_in_EClass(m_objectToken_Class, OBJECTTOKEN_OPERATION_EQUALS_TOKEN);

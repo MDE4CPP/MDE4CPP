@@ -36,10 +36,6 @@ namespace fUML::Semantics::Actions
 {
 	class ConditionalNodeActivation;
 }
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class BooleanValue;
-}
 namespace uml 
 {
 	class Clause;
@@ -74,7 +70,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() = 0;
+			virtual bool getDecision() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() = 0;
 			virtual bool isReady() = 0;

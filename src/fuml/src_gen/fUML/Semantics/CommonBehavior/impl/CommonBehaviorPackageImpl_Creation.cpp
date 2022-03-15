@@ -8,14 +8,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -134,8 +134,8 @@ void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore
 	m_eventAccepter_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVENTACCEPTER_CLASS);
 	
 	
-	m_eventAccepter_Operation_accept_SignalInstance = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE);
-	m_eventAccepter_Operation_match_SignalInstance = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE);
+	m_eventAccepter_Operation_accept_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_ACCEPT_ELEMENT);
+	m_eventAccepter_Operation_match_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_MATCH_ELEMENT);
 	
 }
 
@@ -157,7 +157,7 @@ void CommonBehaviorPackageImpl::createEventOccurrenceContent(std::shared_ptr<eco
 	m_eventOccurrence_Operation_getParameterValues = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES);
 	m_eventOccurrence_Operation_match_Trigger = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER);
 	m_eventOccurrence_Operation_matchAny_Trigger = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER);
-	m_eventOccurrence_Operation_sendTo_Reference = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE);
+	m_eventOccurrence_Operation_sendTo_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_SENDTO_ELEMENT);
 	
 }
 
@@ -222,7 +222,7 @@ void CommonBehaviorPackageImpl::createObjectActivationContent(std::shared_ptr<ec
 	m_objectActivation_Operation__startObjectBehavior = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR);
 	m_objectActivation_Operation_dispatchNextEvent = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT);
 	m_objectActivation_Operation_retrieveNextEvent = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT);
-	m_objectActivation_Operation_send_SignalInstance = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE);
+	m_objectActivation_Operation_send_Element = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_SEND_ELEMENT);
 	m_objectActivation_Operation_startBehavior_Class_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
 	m_objectActivation_Operation_stop = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_STOP);
 	m_objectActivation_Operation_unregister_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER);
@@ -242,9 +242,9 @@ void CommonBehaviorPackageImpl::createOpaqueBehaviorExecutionContent(std::shared
 void CommonBehaviorPackageImpl::createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_parameterValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, PARAMETERVALUE_CLASS);
+	m_parameterValue_Attribute_values = factory->createEAttribute_as_eAttributes_in_EClass(m_parameterValue_Class, PARAMETERVALUE_ATTRIBUTE_VALUES);
 	
 	m_parameterValue_Attribute_parameter = factory->createEReference_as_eReferences_in_EClass(m_parameterValue_Class, PARAMETERVALUE_ATTRIBUTE_PARAMETER);
-	m_parameterValue_Attribute_values = factory->createEReference_as_eReferences_in_EClass(m_parameterValue_Class, PARAMETERVALUE_ATTRIBUTE_VALUES);
 	
 	m_parameterValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_parameterValue_Class, PARAMETERVALUE_OPERATION__COPY);
 	

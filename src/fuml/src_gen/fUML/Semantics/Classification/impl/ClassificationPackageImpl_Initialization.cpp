@@ -4,11 +4,11 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -16,6 +16,7 @@
 //depending model packages
 
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 
 
@@ -54,7 +55,7 @@ void ClassificationPackageImpl::initializeInstanceValueEvaluationContent()
 	
 	
 	m_instanceValueEvaluation_Operation_evaluate->setName("evaluate");
-	m_instanceValueEvaluation_Operation_evaluate->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_instanceValueEvaluation_Operation_evaluate->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_instanceValueEvaluation_Operation_evaluate->setLowerBound(0);
 	m_instanceValueEvaluation_Operation_evaluate->setUpperBound(1);
 	m_instanceValueEvaluation_Operation_evaluate->setUnique(true);

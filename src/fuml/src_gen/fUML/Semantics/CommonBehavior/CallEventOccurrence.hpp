@@ -38,12 +38,9 @@ namespace fUML::Semantics::CommonBehavior
 	class CallEventExecution;
 	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
 namespace uml 
 {
+	class Element;
 	class Operation;
 	class Trigger;
 }

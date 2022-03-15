@@ -41,17 +41,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
@@ -59,8 +57,6 @@
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -235,18 +231,6 @@ void OpaqueBehaviorExecutionImpl::save(std::shared_ptr<persistence::interfaces::
 	saveContent(saveHandler);
 
 	ExecutionImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::StructuredClassifiers::ObjectImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }

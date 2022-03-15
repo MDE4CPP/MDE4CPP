@@ -38,30 +38,27 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Association.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "uml/Property.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -143,7 +140,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue)
+std::shared_ptr<Bag<uml::Element> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +151,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue)
+std::shared_ptr<Bag<uml::Element> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue,Any endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -371,8 +368,8 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			result = eAnyObject(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 21740794
-		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE:
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, Any) : uml::Element[*]: 2765304632
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'association'
 			//parameter 0
@@ -386,15 +383,15 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
+			Any incoming_param_oppositeValue;
 			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
-			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<Any >();
+			std::shared_ptr<Bag<uml::Element> > resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
+			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::StructuredClassifiers::Link[*]: 3435112333
-		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_VALUE:
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, Any, Any) : uml::Element[*]: 2298435547
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'association'
 			//parameter 0
@@ -408,16 +405,16 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
+			Any incoming_param_oppositeValue;
 			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'endValue'
 			//parameter 3
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_endValue;
+			Any incoming_param_endValue;
 			std::list<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
-			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
+			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<Any >();
+			std::shared_ptr<Bag<uml::Element> > resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
+			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1289289959

@@ -13,6 +13,8 @@
 // forward declarations
 template<class T> class Bag; 
 
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -48,17 +50,16 @@ namespace uml
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
-// base class includes
-#include "fUML/Semantics/Values/Value.hpp"
 
 
+#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ReturnInformation: virtual public fUML::Semantics::Values::Value
+	class FUML_API ReturnInformation : virtual public ecore::EModelElement
 	{
 		public:
  			ReturnInformation(const ReturnInformation &) {}
@@ -75,11 +76,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
+			virtual Any _copy() = 0;
+			virtual bool equals(Any otherValue) = 0;
 			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			virtual Any new_() = 0;
 			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) = 0;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			virtual std::string toString() = 0;

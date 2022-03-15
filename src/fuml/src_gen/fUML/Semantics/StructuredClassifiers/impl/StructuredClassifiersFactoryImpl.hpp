@@ -16,12 +16,7 @@
 
 namespace StructuredClassifiers 
 {	class DispatchStrategy;
-	class ExtensionalValue;
-	class ExtensionalValueList;
-	class Link;
-	class Object;
 	class RedefinitionBasedDispatchStrategy;
-	class Reference;
 }
 
 namespace fUML::Semantics::StructuredClassifiers 
@@ -45,30 +40,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			//Creator functions
 			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> createDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::DISPATCHSTRATEGY_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList(const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink(const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject(const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference(const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const ;
 			 
 
 		private:

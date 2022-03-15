@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EGenericType;
 	class EOperation;
 	class EAnnotation;
 	class EClass;
-	class EStringToStringMapEntry;
-	class EGenericType;
 }
 
 namespace fUML::Semantics::Classification 
@@ -55,7 +55,7 @@ namespace fUML::Semantics::Classification
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const unsigned int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 2581799787;
+			static const unsigned int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 2570786047;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;

@@ -41,29 +41,25 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/DestroyObjectAction.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -135,7 +131,7 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects)
+void DestroyObjectActionActivationImpl::destroyObject(Any value,bool isDestroyLinks,bool isDestroyOwnedObjects)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -218,7 +214,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
+bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<uml::Element> reference,std::shared_ptr<uml::Element> link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -481,14 +477,14 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1147845695
-		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN:
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(Any, bool, bool): 3697661383
+		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			Any incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'isDestroyLinks'
 			//parameter 1
 			bool incoming_param_isDestroyLinks;
@@ -508,19 +504,19 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 4063746999
-		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(uml::Element, uml::Element) : bool: 4059157106
+		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT:
 		{
 			//Retrieve input parameter 'reference'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_reference;
+			std::shared_ptr<uml::Element> incoming_param_reference;
 			std::list<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
+			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			//Retrieve input parameter 'link'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::shared_ptr<uml::Element> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
 			break;
 		}

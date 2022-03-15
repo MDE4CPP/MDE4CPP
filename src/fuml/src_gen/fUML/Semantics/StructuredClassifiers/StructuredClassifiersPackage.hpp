@@ -15,24 +15,19 @@
 namespace ecore 
 {
 	class EParameter;
-	class EOperation;
 	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
 	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class DispatchStrategy;
-	class ExtensionalValue;
-	class ExtensionalValueList;
-	class Link;
-	class Object;
 	class RedefinitionBasedDispatchStrategy;
-	class Reference;
 }
  
 namespace fUML::Semantics::StructuredClassifiers 
@@ -64,140 +59,20 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const unsigned int DISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const unsigned int DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION = 2597265996;
+			static const unsigned int DISPATCHSTRATEGY_OPERATION_DISPATCH_ELEMENT_OPERATION = 2531361209;
 			static const unsigned int DISPATCHSTRATEGY_OPERATION_GETNAME = 1474882685;
-			static const unsigned int DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 3819358925;
+			static const unsigned int DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 2607212722;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_dispatch_Object_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_dispatch_Element_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_retrieveMethod_Object_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
 			
 			// End Class DispatchStrategy
-
-
-			// Begin Class ExtensionalValue
-			//Class and Feature IDs 
-			static const unsigned long EXTENSIONALVALUE_CLASS = 1972653315;
-			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 28;
-			
-			static const unsigned long EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 783805933;
-			
-			static const unsigned int EXTENSIONALVALUE_OPERATION__COPY = 3680179428;
-			static const unsigned int EXTENSIONALVALUE_OPERATION_DESTROY = 891501082;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValue_Class() const = 0;
-			
-			
-			virtual std::shared_ptr<ecore::EReference> getExtensionalValue_Attribute_locus() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation_destroy() const = 0;
-			
-			// End Class ExtensionalValue
-
-
-			// Begin Class ExtensionalValueList
-			//Class and Feature IDs 
-			static const unsigned long EXTENSIONALVALUELIST_CLASS = 823739257;
-			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 33;
-			
-			
-			static const unsigned int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 3582653359;
-			static const unsigned int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 4225194188;
-			static const unsigned int EXTENSIONALVALUELIST_OPERATION_GETVALUE = 295539058;
-			static const unsigned int EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT = 3954070346;
-			static const unsigned int EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 1959097273;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList_Class() const = 0;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_addValue_ExtensionalValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_addValue_ExtensionalValue_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_getValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_removeValue_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_setValue_ExtensionalValue_EInt() const = 0;
-			
-			// End Class ExtensionalValueList
-
-
-			// Begin Class Link
-			//Class and Feature IDs 
-			static const unsigned long LINK_CLASS = 1823394283;
-			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int LINK_CLASS_OPERATION_COUNT = 34;
-			
-			static const unsigned long LINK_ATTRIBUTE_TYPE = 1804520989;
-			
-			static const unsigned int LINK_OPERATION__COPY = 3125386239;
-			static const unsigned int LINK_OPERATION_ADDTO_LOCUS = 3672267639;
-			static const unsigned int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 1256957395;
-			static const unsigned int LINK_OPERATION_GETTYPES = 2319995210;
-			static const unsigned int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 995981000;
-			static const unsigned int LINK_OPERATION_NEW_ = 3155204086;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLink_Class() const = 0;
-			
-			
-			virtual std::shared_ptr<ecore::EReference> getLink_Attribute_type() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_addTo_Locus() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_isMatchingLink_ExtensionalValue_Property() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_new_() const = 0;
-			
-			// End Class Link
-
-
-			// Begin Class Object
-			//Class and Feature IDs 
-			static const unsigned long OBJECT_CLASS = 208025094;
-			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 37;
-			
-			static const unsigned long OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1045746932;
-			static const unsigned long OBJECT_ATTRIBUTE_TYPES = 1845487453;
-			
-			static const unsigned int OBJECT_OPERATION__COPY = 3671744428;
-			static const unsigned int OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 1864202817;
-			static const unsigned int OBJECT_OPERATION_DESTROY = 460122578;
-			static const unsigned int OBJECT_OPERATION_DISPATCH_OPERATION = 2139786497;
-			static const unsigned int OBJECT_OPERATION_NEW_ = 1530730731;
-			static const unsigned int OBJECT_OPERATION_SEND_SIGNALINSTANCE = 3964109098;
-			static const unsigned int OBJECT_OPERATION_SEND_EVENTOCCURRENCE = 2448917045;
-			static const unsigned int OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 3045812578;
-			static const unsigned int OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 1701490649;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
-			
-			
-			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_objectActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_types() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__register_EventAccepter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_dispatch_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_send_SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_send_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_startBehavior_Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unregister_EventAccepter() const = 0;
-			
-			// End Class Object
 
 
 			// Begin Class RedefinitionBasedDispatchStrategy
@@ -208,7 +83,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 3748574732;
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 2932518700;
+			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 4193381461;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_Class() const = 0;
@@ -216,60 +91,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
 			
 			// End Class RedefinitionBasedDispatchStrategy
-
-
-			// Begin Class Reference
-			//Class and Feature IDs 
-			static const unsigned long REFERENCE_CLASS = 408530163;
-			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 35;
-			
-			static const unsigned long REFERENCE_ATTRIBUTE_REFERENT = 823252190;
-			
-			static const unsigned int REFERENCE_OPERATION__COPY = 2246782116;
-			static const unsigned int REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 1085611334;
-			static const unsigned int REFERENCE_OPERATION_DESTROY = 2854846866;
-			static const unsigned int REFERENCE_OPERATION_DISPATCH_OPERATION = 299240821;
-			static const unsigned int REFERENCE_OPERATION_EQUALS_VALUE = 3163550005;
-			static const unsigned int REFERENCE_OPERATION_GETTYPES = 1569155812;
-			static const unsigned int REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 1202148299;
-			static const unsigned int REFERENCE_OPERATION_NEW_ = 1253519191;
-			static const unsigned int REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 1682139462;
-			static const unsigned int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 3277957386;
-			static const unsigned int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 92970232;
-			static const unsigned int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 3423180042;
-			static const unsigned int REFERENCE_OPERATION_SEND_EVENTOCCURRENCE = 2153258777;
-			static const unsigned int REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 1148624901;
-			static const unsigned int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 3296170978;
-			static const unsigned int REFERENCE_OPERATION_TOSTRING = 1371206974;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReference_Class() const = 0;
-			
-			
-			virtual std::shared_ptr<ecore::EReference> getReference_Attribute_referent() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_dispatch_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_removeValue_StructuralFeature_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_startBehavior_Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_toString() const = 0;
-			
-			// End Class Reference
 
 			
 			

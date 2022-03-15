@@ -15,14 +15,14 @@
 namespace ecore 
 {
 	class EParameter;
-	class EOperation;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
 	class EAnnotation;
 	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EAttribute;
-	class EGenericType;
 }
 
 namespace fUML::Semantics::CommonBehavior 
@@ -89,19 +89,19 @@ namespace fUML::Semantics::CommonBehavior
 			// Begin Class CallEventExecution
 			//Class and Feature IDs 
 			static const unsigned long CALLEVENTEXECUTION_CLASS = 1815999052;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 21;
 			static const unsigned long CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 679982988;
 			
 			
-			static const unsigned int CALLEVENTEXECUTION_OPERATION__COPY = 3198945315;
+			static const unsigned int CALLEVENTEXECUTION_OPERATION__COPY = 2770734647;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1959549943;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1935201218;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 4255424542;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 375307381;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 2898441339;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_MAKECALL = 2619341921;
-			static const unsigned int CALLEVENTEXECUTION_OPERATION_NEW_ = 557164094;
+			static const unsigned int CALLEVENTEXECUTION_OPERATION_NEW_ = 3061235330;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1070213359;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 2257574777;
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 349016100;
@@ -223,16 +223,16 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int EVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
 			
 			
-			static const unsigned int EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE = 1764686554;
-			static const unsigned int EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE = 2264525893;
+			static const unsigned int EVENTACCEPTER_OPERATION_ACCEPT_ELEMENT = 276753846;
+			static const unsigned int EVENTACCEPTER_OPERATION_MATCH_ELEMENT = 2574095009;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEventAccepter_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_accept_SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_match_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_accept_Element() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_match_Element() const = 0;
 			
 			// End Class EventAccepter
 
@@ -266,7 +266,7 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES = 2905522987;
 			static const unsigned int EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 3505679709;
 			static const unsigned int EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER = 2005940351;
-			static const unsigned int EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE = 1965482620;
+			static const unsigned int EVENTOCCURRENCE_OPERATION_SENDTO_ELEMENT = 2881178737;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEventOccurrence_Class() const = 0;
@@ -278,7 +278,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_getParameterValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_match_Trigger() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_matchAny_Trigger() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_sendTo_Reference() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_sendTo_Element() const = 0;
 			
 			// End Class EventOccurrence
 
@@ -286,18 +286,18 @@ namespace fUML::Semantics::CommonBehavior
 			// Begin Class Execution
 			//Class and Feature IDs 
 			static const unsigned long EXECUTION_CLASS = 921905715;
-			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 3;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 9;
 			
 			static const unsigned long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const unsigned long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;
 			static const unsigned long EXECUTION_ATTRIBUTE_PARAMETERVALUES = 1718346120;
 			
-			static const unsigned int EXECUTION_OPERATION__COPY = 101589981;
+			static const unsigned int EXECUTION_OPERATION__COPY = 4021493409;
 			static const unsigned int EXECUTION_OPERATION_EXECUTE = 2717216448;
 			static const unsigned int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 3117320457;
 			static const unsigned int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 972104598;
-			static const unsigned int EXECUTION_OPERATION_NEW_ = 1051110988;
+			static const unsigned int EXECUTION_OPERATION_NEW_ = 1530257024;
 			static const unsigned int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 1714178337;
 			static const unsigned int EXECUTION_OPERATION_TERMINATE = 1246638906;
 			
@@ -345,7 +345,7 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			static const unsigned int GETNEXTEVENTSTRATEGY_OPERATION_GETNAME = 1005896878;
-			static const unsigned int GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 3137357395;
+			static const unsigned int GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 897901799;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGetNextEventStrategy_Class() const = 0;
@@ -396,8 +396,8 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT = 3568620231;
 			static const unsigned int OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR = 3886431562;
 			static const unsigned int OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT = 3009954687;
-			static const unsigned int OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT = 1292799887;
-			static const unsigned int OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE = 3214058052;
+			static const unsigned int OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT = 2723579027;
+			static const unsigned int OBJECTACTIVATION_OPERATION_SEND_ELEMENT = 1663035856;
 			static const unsigned int OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 3087048988;
 			static const unsigned int OBJECTACTIVATION_OPERATION_STOP = 2767061188;
 			static const unsigned int OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER = 1357284263;
@@ -416,7 +416,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation__startObjectBehavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_dispatchNextEvent() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_retrieveNextEvent() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_send_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_send_Element() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_startBehavior_Class_ParameterValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_stop() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_unregister_EventAccepter() const = 0;
@@ -427,8 +427,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Begin Class OpaqueBehaviorExecution
 			//Class and Feature IDs 
 			static const unsigned long OPAQUEBEHAVIOREXECUTION_CLASS = 1247403081;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 46;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 3;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 11;
 			
 			
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 2608685513;
@@ -450,18 +450,18 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned long PARAMETERVALUE_CLASS = 1804530160;
 			static const unsigned int PARAMETERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int PARAMETERVALUE_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long PARAMETERVALUE_ATTRIBUTE_VALUES = 937768762;
 			
 			static const unsigned long PARAMETERVALUE_ATTRIBUTE_PARAMETER = 1803315899;
-			static const unsigned long PARAMETERVALUE_ATTRIBUTE_VALUES = 937768762;
 			
 			static const unsigned int PARAMETERVALUE_OPERATION__COPY = 2742640749;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterValue_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getParameterValue_Attribute_values() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_parameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_values() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getParameterValue_Operation__copy() const = 0;
 			

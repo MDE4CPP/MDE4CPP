@@ -33,11 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -102,7 +101,7 @@ EvaluationImpl& EvaluationImpl::operator=(const EvaluationImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> EvaluationImpl::evaluate()
+Any EvaluationImpl::evaluate()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -327,10 +326,10 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Values::Evaluation::evaluate() : fUML::Semantics::Values::Value: 3829887513
+		// fUML::Semantics::Values::Evaluation::evaluate() : Any: 3253629981
 		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAnyObject(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = this->evaluate();
 			break;
 		}
 
