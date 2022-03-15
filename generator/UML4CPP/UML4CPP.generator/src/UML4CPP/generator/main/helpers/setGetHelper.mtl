@@ -26,6 +26,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [**
  * checks if setter for a StructuralFeature should be generated
@@ -48,6 +49,10 @@ virtual Any get(unsigned long _uID) const [abstractSuffix(impl)/];
 virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
 virtual void set(std::string _qualifiedName, Any value) [abstractSuffix(impl)/];
 virtual void set(unsigned long _uID, Any value) [abstractSuffix(impl)/];
+//Add
+virtual void add(std::shared_ptr<uml::Property> _property, Any value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(std::string _qualifiedName, Any value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(unsigned long _uID, Any value, int insertAt = -1) [abstractSuffix(impl)/];
 //Unset
 virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
@@ -64,30 +69,8 @@ virtual Any invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _argume
 virtual Any invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
 [/template]
 
-[query private getSetGetProperties(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->sortedBy(myQualifiedName())/]
-
-[**
- * generate special set function declaration for properties with enumeration type
-*/]
-[template public generateESetFunctionForEnumerationDecl(aProperty : Property)]
-virtual void [aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal); 
-[/template]
-
-[**
- * generate special set function implementation for properties with enumeration type
-*/]
-[template public generateESetFunctionForEnumerationImpl(aProperty : Property, aClass : Class)]
-void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
-{
-[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
-	if (literal == [literal.generatePackageGetterCall()/])
-	{	
-		[aProperty.setterName()/]([if (not (literal.getNearestPackage() = aClass.getNearestPackage()))][literal.getNearestPackage().name/]::[/if][literal.enumeration.name/]::[literal.name.toUpper()/]);
-		return;
-	}
-[/for]
-}
-[/template]
+[query private getPropertiesForGetAndSet(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
+[query private getOperationsForInvoke(aClass : Class) : OrderedSet(Operation) = aClass.ownedOperation->addAll(aClass.interfaceRealization.contract.ownedOperation)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
 
 [**
  * generate get, set and unset function implementation
@@ -98,6 +81,9 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_pt
 
 //Set
 [aClass.generateSetImplementation()/]
+
+//Add
+[aClass.generateAddImplementation()/]
 
 //Unset
 [aClass.generateUnSetImplementation()/]
@@ -118,9 +104,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName
 
 Any [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 {
+[if (not aClass.getPropertiesForGetAndSet()->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getSetGetProperties())]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
 			[let anyBagRequired : Boolean = ((aProperty.upper <> 1) and not(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration)))]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 			return [if(anyBagRequired)]eAnyBag[else]eAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(aProperty.upper = 1)]false[else]true[/if][/if]);
@@ -132,8 +119,9 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 		[/for]
 	}
 
-	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-	[if (classList->size() > 0)]
+[/if]
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() > 0)]
 	Any result;
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call get() for base class [sClass.name/]
@@ -144,10 +132,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 	}
 	[/for]
 	return result;
-	[else]
+[else]
 	return eAny(nullptr, -1, false);
-	[/if]
-	[/let]
+[/if]
+[/let]
 }
 [/template]
 
@@ -166,16 +154,28 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedNam
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any value)
 {
+[if (not aClass.getPropertiesForGetAndSet()->select(hasSetter())->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getSetGetProperties()->select(hasSetter()))]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(hasSetter()))]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
-			[if (aProperty.type.oclIsKindOf(Enumeration))]
-			this->[aProperty.setterName()/](value->get<std::shared_ptr<uml::EnumerationLiteral>>());
-			[else]
-			this->[aProperty.setterName()/](value->get<[aProperty.type.generateCppType(false)/]>());
-			[/if]
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->[aProperty.setterName()/](container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->[aProperty.setterName()/](value->get<[aProperty.type.generateCppType(false)/]>());
+			}
 			return;
 		}
 		[/for]
@@ -189,10 +189,73 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any v
 		[/for]
 	}
 
-	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+[/if]
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call set() for base class [sClass.name/]
 	[sClass.generateNamespaceName(true)/]Impl::set(_uID, value);
-	[/for]
+[/for]
+}
+[/template]
+
+[template private generateAddImplementation(aClass : Class)]
+void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, Any value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, Any value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, Any value, int insertAt /*= -1*/)
+{
+[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+			[aProperty.type.generateCppType(false)/] valueToAdd;
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						valueToAdd = container->at(0);
+					}
+				}
+			}
+			else
+			{
+				valueToAdd = value->get<[aProperty.type.generateCppType(false)/]>();
+			}
+
+			[if (aProperty.isUnique)]
+			// [aProperty.name/] is unique
+			if(this->[aProperty.getterName()/]()->find(valueToAdd) == -1)
+			{
+				this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+			}
+			[else]
+			this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+			[/if]
+
+			return;
+		}
+		[/for]
+	}
+
+[/if]
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [sClass.name/]
+	[sClass.generateNamespaceName(true)/]Impl::add(_uID, value);
+[/for]
 }
 [/template]
 
@@ -211,9 +274,10 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedN
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
+[if (not aClass.getPropertiesForGetAndSet()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration))->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getSetGetProperties()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
@@ -233,7 +297,8 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 		}
 		[/for]
 	}
-	
+
+[/if]
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call unset() for base class [sClass.name/]
 	[sClass.generateNamespaceName(true)/]Impl::unset(_uID);
@@ -270,10 +335,11 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedN
 
 Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
+[if (not aClass.getOperationsForInvoke()->isEmpty())]
 	switch(_uID)
 	{
-		[for (anOperation : Operation | aClass.ownedOperation)]
-		case [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]:
+		[for (anOperation : Operation | aClass.getOperationsForInvoke())]
+		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
 		{
 			[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))]
 			[for (anInputParameter : Parameter | inputParameterList) after('\n')]
@@ -298,7 +364,8 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std
 		}
 		[/for]
 	}
-	
+
+[/if]	
 	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
 	[if (classList->size() > 0)]
 	Any result;

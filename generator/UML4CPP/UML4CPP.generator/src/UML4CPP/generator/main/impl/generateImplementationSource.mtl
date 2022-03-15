@@ -353,7 +353,6 @@ void [className/]::destroy()
 // Structural Feature Getter/Setter
 //*********************************
 [aClass.generateeGetSetImpl()/]
-[aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationImpl(aClass)/]
 
 //*********************************
 // Operation Invoction

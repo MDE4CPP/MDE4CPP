@@ -131,7 +131,6 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			// Structural Feature Getter/Setter
 			//*********************************
 			[aClass.generateeGetSetDel(true)/]
-			[aClass.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
 		
 			//*********************************
 			// Operation Invocation
