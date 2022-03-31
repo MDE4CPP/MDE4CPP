@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -91,10 +91,6 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Loci::LociPackageImpl::getEx
 {
 	return m_executionFactory_Attribute_locus;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Attribute_primitiveBehaviorPrototypes() const
-{
-	return m_executionFactory_Attribute_primitiveBehaviorPrototypes;
-}
 std::shared_ptr<ecore::EReference> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Attribute_strategies() const
 {
 	return m_executionFactory_Attribute_strategies;
@@ -103,10 +99,6 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Loci::LociPackageImpl::getEx
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const
 {
 	return m_executionFactory_Operation_addBuiltInType_PrimitiveType;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const
-{
-	return m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const
 {
@@ -127,10 +119,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getEx
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_getStrategyIndex_EString() const
 {
 	return m_executionFactory_Operation_getStrategyIndex_EString;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const
-{
-	return m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_instantiateVisitor_Element() const
 {

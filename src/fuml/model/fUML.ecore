@@ -7,6 +7,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="InstanceValueEvaluation" eSuperTypes="#//Semantics/Values/Evaluation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;&#xA;#include &quot;abstractDataTypes/Subset.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/DataValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/Values/Value.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/DataType.hpp&quot;&#xA;#include &quot;uml/Enumeration.hpp&quot;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xA;#include &quot;uml/Slot.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -18,6 +19,9 @@
     <eSubpackages name="Values" nsURI="http:///fUML_Semantics/Semantics/Values.ecore"
         nsPrefix="fUML_Semantics.Semantics.Values">
       <eClassifiers xsi:type="ecore:EClass" name="Evaluation" abstract="true" eSuperTypes="#//Semantics/Loci/SemanticVisitor">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
         </eOperations>
@@ -30,6 +34,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/BooleanValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
           <details key="library" value="primitivetypesReflection"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -41,6 +46,7 @@
           eSuperTypes="#//Semantics/Values/Evaluation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getType" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//PrimitiveType">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -53,6 +59,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/IntegerValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
           <details key="library" value="primitivetypesReflection"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -61,6 +68,9 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralNullEvaluation" eSuperTypes="#//Semantics/Values/LiteralEvaluation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="return nullptr;"/>
@@ -71,6 +81,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/RealValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
           <details key="library" value="primitivetypesReflection"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -82,6 +93,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/StringValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
           <details key="library" value="primitivetypesReflection"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -94,6 +106,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
           <details key="library" value="primitivetypesReflection"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -852,6 +865,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallEventBehavior">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="assignOperation">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -866,6 +880,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallEventExecution" eSuperTypes="#//Semantics/CommonBehavior/Execution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CallEventBehavior.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="_copy" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -937,6 +952,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallEventOccurrence" eSuperTypes="#//Semantics/CommonBehavior/EventOccurrence">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &lt;memory>&#xA;#include &quot;uml/Trigger.hpp&quot;&#xA;#include &quot;uml/CallEvent.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getOperation" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -972,6 +988,7 @@
           eSuperTypes="#//Semantics/CommonBehavior/EventAccepter">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ObjectActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/InvocationEventOccurrence.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="accept">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1005,6 +1022,9 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="objectActivation" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassifierBehaviorExecution">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="execute" ordered="false" lowerBound="1">
           <eParameters name="classifier" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
@@ -1019,6 +1039,9 @@
             eType="#//Semantics/CommonBehavior/ObjectActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventAccepter" abstract="true">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="accept" ordered="false" lowerBound="1">
           <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
@@ -1027,6 +1050,9 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventOccurrence">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="doSend" lowerBound="1"/>
         <eOperations name="getParameterValues" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         <eOperations name="match" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1040,9 +1066,12 @@
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Execution" abstract="true" eSuperTypes="#//Semantics/StructuredClassifiers/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="Execution" abstract="true">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &lt;algorithm>&#xA;#include &lt;uml/Parameter.hpp>&#xA;#include &lt;uml/ParameterDirectionKind.hpp>&#xA;#include &lt;fUML/Semantics/CommonBehavior/ParameterValue.hpp>&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp&quot;&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Was subclass of fUML::Semantics::StructuredClassifiers::Object"/>
         </eAnnotations>
         <eOperations name="execute" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1104,9 +1133,16 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="FIFOGetNextEventStrategy" eSuperTypes="#//Semantics/CommonBehavior/GetNextEventStrategy"/>
+      <eClassifiers xsi:type="ecore:EClass" name="FIFOGetNextEventStrategy" eSuperTypes="#//Semantics/CommonBehavior/GetNextEventStrategy">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="GetNextEventStrategy" abstract="true"
           eSuperTypes="#//Semantics/Loci/SemanticStrategy">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
           <eParameters name="objectActivation" ordered="false" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
         </eOperations>
@@ -1117,6 +1153,9 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="InvocationEventOccurrence" eSuperTypes="#//Semantics/CommonBehavior/EventOccurrence">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="getParameterValues" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// An invocation event occurrence does not have any associated data.&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>> parameterValueList(new Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>());&#xA;&#xA;return parameterValueList;"/>
@@ -1134,6 +1173,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ObjectActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp&quot;&#xA;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1200,6 +1240,7 @@
           eSuperTypes="#//Semantics/CommonBehavior/Execution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;abstractDataTypes/Subset.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doBody" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
@@ -1227,6 +1268,9 @@
             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SignalEventOccurrence" eSuperTypes="#//Semantics/CommonBehavior/EventOccurrence">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="getParameterValues" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         <eOperations name="match" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eParameters name="trigger" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
@@ -1238,6 +1282,9 @@
     <eSubpackages name="Actions" nsURI="http:///fUML_Semantics/Semantics/Actions.ecore"
         nsPrefix="fUML_Semantics.Semantics.Actions">
       <eClassifiers xsi:type="ecore:EClass" name="AcceptEventActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="accept" ordered="false" lowerBound="1">
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence"/>
         </eOperations>
@@ -1262,10 +1309,16 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="AcceptEventActionEventAccepter"
           eSuperTypes="#//Semantics/CommonBehavior/EventAccepter">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="actionActivation" ordered="false"
             lowerBound="1" eType="#//Semantics/Actions/AcceptEventActionActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="AcceptCallActionActivation" eSuperTypes="#//Semantics/Actions/AcceptEventActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="accept" lowerBound="1">
           <eParameters name="eventOccurrence" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence"/>
         </eOperations>
@@ -1273,7 +1326,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ActionActivation" abstract="true"
           eSuperTypes="#//Semantics/Activities/ActivityNodeActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &lt;algorithm>&#xA;#include &lt;iterator>&#xA;#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkNodeActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Link.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/PinActivation.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/ForkNode.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;"/>
+          <details key="implIncludes" value="#include &lt;algorithm>&#xA;#include &lt;iterator>&#xA;#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;//#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkNodeActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Link.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/PinActivation.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/ForkNode.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="isFirng" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1307,14 +1360,14 @@
         </eOperations>
         <eOperations name="putTokens" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="for (std::shared_ptr&lt;fUML::Semantics::Values::Value> value : *values)&#xA;    {&#xA;        this->putToken(pin,value);&#xA;    }"/>
+            <details key="body" value="for (Any value : *values)&#xA;    {&#xA;        this->putToken(pin,value);&#xA;    }"/>
           </eAnnotations>
           <eParameters name="pin" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//OutputPin"/>
           <eParameters name="values" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="getTokens" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[getTokens] node = &quot;  &lt;&lt; this->getNode()->getName()  &lt;&lt; &quot;, pin = &quot;  &lt;&lt; pin->getName()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::Actions::PinActivation> pinActivation(this->retrievePinActivation(pin));&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value> > values(new Bag&lt;fUML::Semantics::Values::Value>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokenList = pinActivation->getUnofferedTokens();&#xA;    for(std::shared_ptr&lt;fUML::Semantics::Activities::Token> token : *tokenList)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ObjectToken> objToken = std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::ObjectToken>(token);&#xA;        if(objToken!=nullptr)&#xA;        {&#xA;        &#x9;std::shared_ptr&lt;fUML::Semantics::Values::Value> value = objToken->getValue();&#xA;            if(value != nullptr)&#xA;            {&#xA;                values->push_back(value);&#xA;            }&#xA;        }&#xA;    }&#xA;&#xA;    return values;"/>
+            <details key="body" value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[getTokens] node = &quot;  &lt;&lt; this->getNode()->getName()  &lt;&lt; &quot;, pin = &quot;  &lt;&lt; pin->getName()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::Actions::PinActivation> pinActivation(this->retrievePinActivation(pin));&#xA;&#x9;std::shared_ptr&lt;Bag&lt;AnyObject>> values(new Bag&lt;AnyObject>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokenList = pinActivation->getUnofferedTokens();&#xA;    for(std::shared_ptr&lt;fUML::Semantics::Activities::Token> token : *tokenList)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ObjectToken> objToken = std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::ObjectToken>(token);&#xA;        if(objToken!=nullptr)&#xA;        {&#xA;            Any value = objToken->getValue();&#xA;            if(value != nullptr)&#xA;            {&#xA;                values->push_back(value);&#xA;            }&#xA;        }&#xA;    }&#xA;&#xA;    return values;"/>
           </eAnnotations>
           <eParameters name="pin" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//InputPin"/>
         </eOperations>
@@ -1426,6 +1479,7 @@
           eSuperTypes="#//Semantics/Actions/InvocationActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/CallAction.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/Execution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1458,6 +1512,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallBehaviorActionActivation" eSuperTypes="#//Semantics/Actions/CallActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/CallBehaviorAction.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/Execution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1472,6 +1527,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallOperationActionActivation" eSuperTypes="#//Semantics/Actions/CallActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/Execution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1484,6 +1540,9 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClauseActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="recieveControl" ordered="false" lowerBound="1"/>
         <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eOperations name="runTest" ordered="false" lowerBound="1"/>
@@ -1497,7 +1556,11 @@
             ordered="false" lowerBound="1" eType="#//Semantics/Actions/ConditionalNodeActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClearAssociationActionActivation"
-          eSuperTypes="#//Semantics/Actions/ActionActivation"/>
+          eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClearStructuralFeatureActionActivation"
           eSuperTypes="#//Semantics/Actions/StructuralFeatureActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1514,6 +1577,9 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ConditionalNodeActivation" eSuperTypes="#//Semantics/Actions/StructuredActivityNodeActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="getClauseActivation" ordered="false" lowerBound="1" eType="#//Semantics/Actions/ClauseActivation">
           <eParameters name="clause" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Clause"/>
         </eOperations>
@@ -1529,7 +1595,11 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="selectedClauses" ordered="false"
             upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Clause"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="CreateLinkActionActivation" eSuperTypes="#//Semantics/Actions/WriteLinkActionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CreateLinkActionActivation" eSuperTypes="#//Semantics/Actions/WriteLinkActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateObjectActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/CreateObjectAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;"/>
@@ -1544,10 +1614,15 @@
           <eAnnotations source="redefines" references="#//Semantics/Actions/ActionActivation/action"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="DestroyLinkActionActivation" eSuperTypes="#//Semantics/Actions/WriteLinkActionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DestroyLinkActionActivation" eSuperTypes="#//Semantics/Actions/WriteLinkActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/Property.hpp&quot;&#xA;#include &quot;uml/DestroyObjectAction.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="destroyObject" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1591,9 +1666,16 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="InvocationActionActivation" abstract="true"
-          eSuperTypes="#//Semantics/Actions/ActionActivation"/>
+          eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LinkActionActivation" abstract="true"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="linkMatchesEndData" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eParameters name="link" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
           <eParameters name="endDataList" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//LinkEndData"/>
@@ -1605,6 +1687,9 @@
         <eOperations name="getAssociation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LoopNodeActivation" eSuperTypes="#//Semantics/Actions/StructuredActivityNodeActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="runTest" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eOperations name="runBody" ordered="false" lowerBound="1"/>
         <eOperations name="runLoopVariables" ordered="false" lowerBound="1"/>
@@ -1639,15 +1724,26 @@
           <eAnnotations source="redefines" references="#//Semantics/Activities/ActivityNodeActivation/node"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ReadExtentActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ReadExtentActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadIsClassifiedObjectActionActivation"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="checkAllParents" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
           <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ReadLinkActionActivation" eSuperTypes="#//Semantics/Actions/LinkActionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ReadLinkActionActivation" eSuperTypes="#//Semantics/Actions/LinkActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/ReadSelfAction.hpp&quot;"/>
@@ -1666,6 +1762,7 @@
           eSuperTypes="#//Semantics/Actions/StructuralFeatureActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/StructuredValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Values/Value.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/ReadStructuralFeatureAction.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1678,8 +1775,15 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReclassifyObjectActionActivation"
-          eSuperTypes="#//Semantics/Actions/ActionActivation"/>
+          eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReduceActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="currentExecution" ordered="false"
             eType="#//Semantics/CommonBehavior/Execution"/>
       </eClassifiers>
@@ -1687,6 +1791,7 @@
           eSuperTypes="#//Semantics/Actions/WriteStructuralFeatureActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/StructuredValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Values/Value.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/RemoveStructuralFeatureValueAction.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1701,6 +1806,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ReplyActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/ReplyAction.hpp&quot;&#xA;#include &quot;uml/CallEvent.hpp&quot;&#xA;#include &quot;uml/Trigger.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/ReturnInformation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1711,6 +1817,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ReturnInformation" eSuperTypes="#//Semantics/Values/Value">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/Classifier.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="getOperation" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1758,12 +1865,16 @@
             lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventOccurrence"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SendSignalActionActivation" eSuperTypes="#//Semantics/Actions/InvocationActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
         <eOperations name="doAction" ordered="false" lowerBound="1"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StartClassifierBehaviorActionActivation"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/StartClassifierBehaviorAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1775,6 +1886,7 @@
           eSuperTypes="#//Semantics/Actions/InvocationActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/StartObjectBehaviorAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1822,6 +1934,7 @@
           eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivitiesPackage.hpp&quot;&#xA;#include &quot;uml/StructuredActivityNode.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
+          <details key="doNotGenerate"/>
         </eAnnotations>
         <eOperations name="doStructuredActivity" ordered="false">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1903,7 +2016,11 @@
             lowerBound="1" eType="#//Semantics/Activities/ActivityNodeActivationGroup"
             containment="true" eOpposite="#//Semantics/Activities/ActivityNodeActivationGroup/containingNodeActivation"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestIdentityActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TestIdentityActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Values">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -1920,7 +2037,11 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="WriteLinkActionActivation" abstract="true"
-          eSuperTypes="#//Semantics/Actions/LinkActionActivation"/>
+          eSuperTypes="#//Semantics/Actions/LinkActionActivation">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="WriteStructuralFeatureActionActivation"
           abstract="true" eSuperTypes="#//Semantics/Actions/StructuralFeatureActionActivation">
         <eOperations name="position" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
@@ -1932,7 +2053,11 @@
           <eParameters name="startAt" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="AcceptCallActionActivations"/>
+      <eClassifiers xsi:type="ecore:EClass" name="AcceptCallActionActivations">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="doNotGenerate"/>
+        </eAnnotations>
+      </eClassifiers>
     </eSubpackages>
     <eSubpackages name="Activities" nsURI="http:///fUML_Semantics/Semantics/Activities.ecore"
         nsPrefix="fUML_Semantics.Semantics.Activities">
@@ -1996,7 +2121,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ActivityExecution" eSuperTypes="#//Semantics/CommonBehavior/Execution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkedToken.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;uml/umlPackage.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkedToken.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;uml/umlPackage.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="execute" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -2032,11 +2157,11 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ActivityFinalNodeActivation" eSuperTypes="#//Semantics/Activities/ControlNodeActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ExpansionActivationGroup.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ExpansionRegionActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;//#include &quot;fUML/Semantics/Activities/ExpansionActivationGroup.hpp&quot;&#xA;//#include &quot;fUML/Semantics/Activities/ExpansionRegionActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="fire" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Activity final node &quot; &lt;&lt; this->getNode()->getName()&lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xA;&#xA;    if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) &#xA;    {&#xA;&#x9;&#x9;auto this_group = this->getGroup().lock();&#xA;&#x9;&#x9;if(this_group )&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;auto activityExecution = this_group->getActivityExecution().lock();&#xA;&#x9;&#x9;&#x9;if (activityExecution)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;activityExecution->terminate();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (this_group->getContainingNodeActivation().lock())&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;auto activation= this_group->getContainingNodeActivation().lock();&#xA;&#x9;&#x9;&#x9;&#x9;if(activation)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;activation->terminateAll();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if (this_group->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;    }&#xA;&#xA;"/>
+            <details key="body" value="&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Activity final node &quot; &lt;&lt; this->getNode()->getName()&lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xA;&#xA;    if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) &#xA;    {&#xA;&#x9;&#x9;auto this_group = this->getGroup().lock();&#xA;&#x9;&#x9;if(this_group )&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;auto activityExecution = this_group->getActivityExecution().lock();&#xA;&#x9;&#x9;&#x9;if (activityExecution)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;activityExecution->terminate();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;/*Currently not supported&#xA;&#x9;&#x9;&#x9;else if (this_group->getContainingNodeActivation().lock())&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;auto activation= this_group->getContainingNodeActivation().lock();&#xA;&#x9;&#x9;&#x9;&#x9;if(activation)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;activation->terminateAll();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if (this_group->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;*/&#xA;&#x9;&#x9;}&#xA;    }&#xA;&#xA;"/>
           </eAnnotations>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2310,7 +2435,11 @@
             eType="#//Semantics/Activities/ActivityExecution" eOpposite="#//Semantics/Activities/ActivityExecution/activationGroup"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="containingNodeActivation"
             ordered="false" eType="#//Semantics/Actions/StructuredActivityNodeActivation"
-            eOpposite="#//Semantics/Actions/StructuredActivityNodeActivation/activationGroup"/>
+            eOpposite="#//Semantics/Actions/StructuredActivityNodeActivation/activationGroup">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="doNotGenerate"/>
+          </eAnnotations>
+        </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="suspendedActivations"
             ordered="false" upperBound="-1" eType="#//Semantics/Activities/ActivityNodeActivation"/>
       </eClassifiers>
@@ -2921,6 +3050,7 @@
             eType="#//Semantics/CommonBehavior/OpaqueBehaviorExecution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="std::shared_ptr&lt;fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution = nullptr;&#xA;    unsigned int i = 0;&#xA;    //DEBUG_MESSAGE(std::cout&lt;&lt;&quot;SIZE PROTOTYPES &quot;&lt;&lt; this->getPrimitiveBehaviorPrototypes()->size()&lt;&lt;std::endl;)&#xA;    auto primitiveBehaviorPrototypes = this->getPrimitiveBehaviorPrototypes();&#xA;    while(execution == nullptr &amp;&amp; (i &lt; primitiveBehaviorPrototypes->size()))&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> prototype = primitiveBehaviorPrototypes->at(i);&#xA;        //DEBUG_MESSAGE(std::cout&lt;&lt;&quot;BEHAVIOUR NAME:&quot;&lt;&lt;prototype->getBehavior()->getName()&lt;&lt;&quot;AND&quot;&lt;&lt;behavior->getName()&lt;&lt;std::endl;)&#xA;        if(prototype->getBehavior() == behavior)&#xA;        {&#xA;            execution = std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(prototype->copy());&#xA;        }&#xA;        i++;&#xA;    }&#xA;&#xA;    if(execution == nullptr)&#xA;    {&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[instantiateOpaqueExecution] No prototype execution found for &quot; &lt;&lt; behavior->getName() &lt;&lt;std::endl;)&#xA;    }&#xA;&#xA;    return execution;"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
           <eAnnotations source="MDE4CPP_Substitutes">
             <details key="doc" value="This operation substitutes:&#xA;&quot;this.instantiateOpaqueBehaviorExecution(OpaqueBehavior) : OpaqueBehaviorExecution&quot;&#xA;"/>
@@ -2930,6 +3060,7 @@
         <eOperations name="addPrimitiveBehaviorPrototype" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> > primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();&#xA;    primBehaviorExecution->push_back(execution);"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
           <eParameters name="execution" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/OpaqueBehaviorExecution"/>
         </eOperations>
@@ -2971,6 +3102,7 @@
             upperBound="-1" eType="#//Semantics/CommonBehavior/OpaqueBehaviorExecution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="map_key" value="Behavior"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="builtInTypes" ordered="false"

@@ -18,14 +18,7 @@
 
 namespace fUML::Semantics::Values 
 {
-	class Evaluation;
-	class LiteralBooleanEvaluation;
-	class LiteralEvaluation;
-	class LiteralIntegerEvaluation;
-	class LiteralNullEvaluation;
-	class LiteralRealEvaluation;
-	class LiteralStringEvaluation;
-	class LiteralUnlimitedNaturalEvaluation;}
+}
 
 namespace ecore
 {
@@ -46,98 +39,17 @@ namespace fUML::Semantics::Values
 		public:
 			virtual ~ValuesPackageImpl();
 
-			// Begin Class Evaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvaluation_Class() const ;
-			
-			
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Attribute_locus() const ;
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Attribute_specification() const ;
-			
-			virtual std::shared_ptr<ecore::EOperation> getEvaluation_Operation_evaluate() const ;
-			
-			// End Class Evaluation
-
-			// Begin Class LiteralBooleanEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralBooleanEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralBooleanEvaluation
-
-			// Begin Class LiteralEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralEvaluation_Operation_getType_EString() const ;
-			
-			// End Class LiteralEvaluation
-
-			// Begin Class LiteralIntegerEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralIntegerEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralIntegerEvaluation
-
-			// Begin Class LiteralNullEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralNullEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralNullEvaluation
-
-			// Begin Class LiteralRealEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralRealEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralRealEvaluation
-
-			// Begin Class LiteralStringEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralStringEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralStringEvaluation
-
-			// Begin Class LiteralUnlimitedNaturalEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNaturalEvaluation_Operation_evaluate() const ;
-			
-			// End Class LiteralUnlimitedNaturalEvaluation
 
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_evaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalBooleanEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalIntegerEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalNullEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalRealEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalStringEvaluation_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalUnlimitedNaturalEvaluation_Class = nullptr;
 			
 			
-			std::shared_ptr<ecore::EReference> m_evaluation_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_evaluation_Attribute_specification = nullptr;
-			std::shared_ptr<ecore::EOperation> m_evaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalBooleanEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalIntegerEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalNullEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalRealEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalStringEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalUnlimitedNaturalEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalEvaluation_Operation_getType_EString = nullptr;
+			
+			
+			
 
 			friend class ValuesPackage;
 
@@ -153,24 +65,8 @@ namespace fUML::Semantics::Values
 			void initializePackageContents();
 
 		private:
-			void createEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralBooleanEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralIntegerEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralNullEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralRealEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralStringEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createLiteralUnlimitedNaturalEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
-			void initializeEvaluationContent();
-			void initializeLiteralBooleanEvaluationContent();
-			void initializeLiteralEvaluationContent();
-			void initializeLiteralIntegerEvaluationContent();
-			void initializeLiteralNullEvaluationContent();
-			void initializeLiteralRealEvaluationContent();
-			void initializeLiteralStringEvaluationContent();
-			void initializeLiteralUnlimitedNaturalEvaluationContent();
 			void initializePackageEDataTypes();
 
 

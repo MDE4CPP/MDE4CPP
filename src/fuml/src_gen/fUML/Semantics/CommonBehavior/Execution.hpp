@@ -35,17 +35,11 @@ namespace fUML
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ObjectActivation;
 	class ParameterValue;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
 }
 namespace uml 
 {
 	class Behavior;
-	class Classifier;
 	class Element;
 	class Parameter;
 }
@@ -61,6 +55,9 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
+	/*!
+	Was subclass of fUML::Semantics::StructuredClassifiers::Object
+	*/
 	
 	class FUML_API Execution : virtual public ecore::EModelElement
 	{

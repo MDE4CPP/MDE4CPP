@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/ActivityNode.hpp"
@@ -46,10 +46,9 @@
 #include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -78,13 +77,6 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::S
 :ExpansionActivationGroupImpl()
 {
 	m_activityExecution = par_activityExecution;
-}
-
-//Additional constructor for the containments back reference
-ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation)
-:ExpansionActivationGroupImpl()
-{
-	m_containingNodeActivation = par_containingNodeActivation;
 }
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj): ExpansionActivationGroupImpl()
@@ -281,11 +273,6 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionAct
 std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
 {
 	if(auto wp = m_activityExecution.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_containingNodeActivation.lock())
 	{
 		return wp;
 	}

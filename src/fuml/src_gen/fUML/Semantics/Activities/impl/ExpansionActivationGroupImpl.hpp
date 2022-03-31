@@ -37,8 +37,6 @@ namespace fUML::Semantics::Activities
 
 			//Additional constructors for the containments back reference
 			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution);
-			//Additional constructors for the containments back reference
-			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation);
 
 		public:
 			//destructor

@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -146,28 +146,6 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	   		m_executionFactory_Attribute_locus->setEOpposite(otherEnd);
 	    }
 	}
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setName("primitiveBehaviorPrototypes");
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class());
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setLowerBound(0);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setUpperBound(-1);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setTransient(false);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setVolatile(false);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setChangeable(true);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setUnsettable(false);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setUnique(true);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setDerived(false);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setOrdered(true);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setContainment(false);
-	m_executionFactory_Attribute_primitiveBehaviorPrototypes->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_executionFactory_Attribute_primitiveBehaviorPrototypes->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
 	m_executionFactory_Attribute_strategies->setName("strategies");
 	m_executionFactory_Attribute_strategies->setEType(getSemanticStrategy_Class());
 	m_executionFactory_Attribute_strategies->setLowerBound(0);
@@ -206,28 +184,6 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_addBuiltInType_PrimitiveType);
 		parameter->setName("type");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setName("addPrimitiveBehaviorPrototype");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setEType(unknownClass);
-	}
-	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setLowerBound(1);
-	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setUpperBound(1);
-	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setUnique(true);
-	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution);
-		parameter->setName("execution");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -325,22 +281,6 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_getStrategyIndex_EString);
 		parameter->setName("name");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setName("instantiateOpaqueBehaviorExecution");
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class());
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setLowerBound(1);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setUpperBound(1);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setUnique(true);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior);
-		parameter->setName("behavior");
-		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

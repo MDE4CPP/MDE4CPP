@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -57,98 +57,6 @@ void ActionsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 }
 
 
-
-// Begin Class AcceptCallActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptCallActionActivation_Class() const
-{
-	return m_acceptCallActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptCallActionActivation_Operation_accept_EventOccurrence() const
-{
-	return m_acceptCallActionActivation_Operation_accept_EventOccurrence;
-}
-
-// End Class AcceptCallActionActivation
-
-// Begin Class AcceptCallActionActivations
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptCallActionActivations_Class() const
-{
-	return m_acceptCallActionActivations_Class;
-}
-
-
-
-
-// End Class AcceptCallActionActivations
-
-// Begin Class AcceptEventActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Class() const
-{
-	return m_acceptEventActionActivation_Class;
-}
-
-std::shared_ptr<ecore::EAttribute> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_waiting() const
-{
-	return m_acceptEventActionActivation_Attribute_waiting;
-}
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_eventAccepter() const
-{
-	return m_acceptEventActionActivation_Attribute_eventAccepter;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_accept_EventOccurrence() const
-{
-	return m_acceptEventActionActivation_Operation_accept_EventOccurrence;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_doAction() const
-{
-	return m_acceptEventActionActivation_Operation_doAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_fire_Token() const
-{
-	return m_acceptEventActionActivation_Operation_fire_Token;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const
-{
-	return m_acceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_isReady() const
-{
-	return m_acceptEventActionActivation_Operation_isReady;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_match_EventOccurrence() const
-{
-	return m_acceptEventActionActivation_Operation_match_EventOccurrence;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_run() const
-{
-	return m_acceptEventActionActivation_Operation_run;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_terminate() const
-{
-	return m_acceptEventActionActivation_Operation_terminate;
-}
-
-// End Class AcceptEventActionActivation
-
-// Begin Class AcceptEventActionEventAccepter
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Class() const
-{
-	return m_acceptEventActionEventAccepter_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Attribute_actionActivation() const
-{
-	return m_acceptEventActionEventAccepter_Attribute_actionActivation;
-}
-
-
-// End Class AcceptEventActionEventAccepter
 
 // Begin Class ActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Class() const
@@ -276,137 +184,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class AddStructuralFeatureValueActionActivation
 
-// Begin Class CallActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Class() const
-{
-	return m_callActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Attribute_callAction() const
-{
-	return m_callActionActivation_Attribute_callAction;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Attribute_callExecutions() const
-{
-	return m_callActionActivation_Attribute_callExecutions;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_doAction() const
-{
-	return m_callActionActivation_Operation_doAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_getCallExecution() const
-{
-	return m_callActionActivation_Operation_getCallExecution;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_removeCallExecution_Execution() const
-{
-	return m_callActionActivation_Operation_removeCallExecution_Execution;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_terminate() const
-{
-	return m_callActionActivation_Operation_terminate;
-}
-
-// End Class CallActionActivation
-
-// Begin Class CallBehaviorActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Class() const
-{
-	return m_callBehaviorActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Attribute_callBehaviorAction() const
-{
-	return m_callBehaviorActionActivation_Attribute_callBehaviorAction;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Operation_getCallExecution() const
-{
-	return m_callBehaviorActionActivation_Operation_getCallExecution;
-}
-
-// End Class CallBehaviorActionActivation
-
-// Begin Class CallOperationActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Class() const
-{
-	return m_callOperationActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Attribute_callOperationAction() const
-{
-	return m_callOperationActionActivation_Attribute_callOperationAction;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Operation_getCallExecution() const
-{
-	return m_callOperationActionActivation_Operation_getCallExecution;
-}
-
-// End Class CallOperationActionActivation
-
-// Begin Class ClauseActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Class() const
-{
-	return m_clauseActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Attribute_clause() const
-{
-	return m_clauseActivation_Attribute_clause;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Attribute_conditionalNodeActivation() const
-{
-	return m_clauseActivation_Attribute_conditionalNodeActivation;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_getDecision() const
-{
-	return m_clauseActivation_Operation_getDecision;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_getPredecessors() const
-{
-	return m_clauseActivation_Operation_getPredecessors;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_getSuccessors() const
-{
-	return m_clauseActivation_Operation_getSuccessors;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_isReady() const
-{
-	return m_clauseActivation_Operation_isReady;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_recieveControl() const
-{
-	return m_clauseActivation_Operation_recieveControl;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_runTest() const
-{
-	return m_clauseActivation_Operation_runTest;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getClauseActivation_Operation_selectBody() const
-{
-	return m_clauseActivation_Operation_selectBody;
-}
-
-// End Class ClauseActivation
-
-// Begin Class ClearAssociationActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getClearAssociationActionActivation_Class() const
-{
-	return m_clearAssociationActionActivation_Class;
-}
-
-
-
-
-// End Class ClearAssociationActionActivation
-
 // Begin Class ClearStructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getClearStructuralFeatureActionActivation_Class() const
 {
@@ -425,48 +202,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class ClearStructuralFeatureActionActivation
-
-// Begin Class ConditionalNodeActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Class() const
-{
-	return m_conditionalNodeActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Attribute_clauseActivations() const
-{
-	return m_conditionalNodeActivation_Attribute_clauseActivations;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Attribute_selectedClauses() const
-{
-	return m_conditionalNodeActivation_Attribute_selectedClauses;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Operation_getClauseActivation_Clause() const
-{
-	return m_conditionalNodeActivation_Operation_getClauseActivation_Clause;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Operation_runTest_Clause() const
-{
-	return m_conditionalNodeActivation_Operation_runTest_Clause;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getConditionalNodeActivation_Operation_selectBody_Clause() const
-{
-	return m_conditionalNodeActivation_Operation_selectBody_Clause;
-}
-
-// End Class ConditionalNodeActivation
-
-// Begin Class CreateLinkActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCreateLinkActionActivation_Class() const
-{
-	return m_createLinkActionActivation_Class;
-}
-
-
-
-
-// End Class CreateLinkActionActivation
 
 // Begin Class CreateObjectActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCreateObjectActionActivation_Class() const
@@ -487,44 +222,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class CreateObjectActionActivation
 
-// Begin Class DestroyLinkActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyLinkActionActivation_Class() const
-{
-	return m_destroyLinkActionActivation_Class;
-}
-
-
-
-
-// End Class DestroyLinkActionActivation
-
-// Begin Class DestroyObjectActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Class() const
-{
-	return m_destroyObjectActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Attribute_destroyObjectAction() const
-{
-	return m_destroyObjectActionActivation_Attribute_destroyObjectAction;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const
-{
-	return m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_doAction() const
-{
-	return m_destroyObjectActionActivation_Operation_doAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const
-{
-	return m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element;
-}
-
-// End Class DestroyObjectActionActivation
-
 // Begin Class InputPinActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getInputPinActivation_Class() const
 {
@@ -543,71 +240,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class InputPinActivation
-
-// Begin Class InvocationActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getInvocationActionActivation_Class() const
-{
-	return m_invocationActionActivation_Class;
-}
-
-
-
-
-// End Class InvocationActionActivation
-
-// Begin Class LinkActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Class() const
-{
-	return m_linkActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_endMatchesEndData_Element_LinkEndData() const
-{
-	return m_linkActionActivation_Operation_endMatchesEndData_Element_LinkEndData;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_getAssociation() const
-{
-	return m_linkActionActivation_Operation_getAssociation;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData() const
-{
-	return m_linkActionActivation_Operation_linkMatchesEndData_Element_LinkEndData;
-}
-
-// End Class LinkActionActivation
-
-// Begin Class LoopNodeActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Class() const
-{
-	return m_loopNodeActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Attribute_bodyOutputLists() const
-{
-	return m_loopNodeActivation_Attribute_bodyOutputLists;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Operation_makeLoopVariableList() const
-{
-	return m_loopNodeActivation_Operation_makeLoopVariableList;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Operation_runBody() const
-{
-	return m_loopNodeActivation_Operation_runBody;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Operation_runLoopVariables() const
-{
-	return m_loopNodeActivation_Operation_runLoopVariables;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getLoopNodeActivation_Operation_runTest() const
-{
-	return m_loopNodeActivation_Operation_runTest;
-}
-
-// End Class LoopNodeActivation
 
 // Begin Class OutputPinActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getOutputPinActivation_Class() const
@@ -647,43 +279,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class PinActivation
 
-// Begin Class ReadExtentActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadExtentActionActivation_Class() const
-{
-	return m_readExtentActionActivation_Class;
-}
-
-
-
-
-// End Class ReadExtentActionActivation
-
-// Begin Class ReadIsClassifiedObjectActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Class() const
-{
-	return m_readIsClassifiedObjectActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Operation_checkAllParents_Classifier_Classifier() const
-{
-	return m_readIsClassifiedObjectActionActivation_Operation_checkAllParents_Classifier_Classifier;
-}
-
-// End Class ReadIsClassifiedObjectActionActivation
-
-// Begin Class ReadLinkActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadLinkActionActivation_Class() const
-{
-	return m_readLinkActionActivation_Class;
-}
-
-
-
-
-// End Class ReadLinkActionActivation
-
 // Begin Class ReadSelfActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadSelfActionActivation_Class() const
 {
@@ -702,177 +297,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class ReadSelfActionActivation
-
-// Begin Class ReadStructuralFeatureActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Class() const
-{
-	return m_readStructuralFeatureActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const
-{
-	return m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Operation_doAction() const
-{
-	return m_readStructuralFeatureActionActivation_Operation_doAction;
-}
-
-// End Class ReadStructuralFeatureActionActivation
-
-// Begin Class ReclassifyObjectActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReclassifyObjectActionActivation_Class() const
-{
-	return m_reclassifyObjectActionActivation_Class;
-}
-
-
-
-
-// End Class ReclassifyObjectActionActivation
-
-// Begin Class ReduceActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReduceActionActivation_Class() const
-{
-	return m_reduceActionActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReduceActionActivation_Attribute_currentExecution() const
-{
-	return m_reduceActionActivation_Attribute_currentExecution;
-}
-
-
-// End Class ReduceActionActivation
-
-// Begin Class RemoveStructuralFeatureValueActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Class() const
-{
-	return m_removeStructuralFeatureValueActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const
-{
-	return m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Operation_doAction() const
-{
-	return m_removeStructuralFeatureValueActivation_Operation_doAction;
-}
-
-// End Class RemoveStructuralFeatureValueActivation
-
-// Begin Class ReplyActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReplyActionActivation_Class() const
-{
-	return m_replyActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReplyActionActivation_Operation_doAction() const
-{
-	return m_replyActionActivation_Operation_doAction;
-}
-
-// End Class ReplyActionActivation
-
-// Begin Class ReturnInformation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Class() const
-{
-	return m_returnInformation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Attribute_callEventOccurrence() const
-{
-	return m_returnInformation_Attribute_callEventOccurrence;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation__copy() const
-{
-	return m_returnInformation_Operation__copy;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_equals_EJavaObject() const
-{
-	return m_returnInformation_Operation_equals_EJavaObject;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_getOperation() const
-{
-	return m_returnInformation_Operation_getOperation;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_getTypes() const
-{
-	return m_returnInformation_Operation_getTypes;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_new_() const
-{
-	return m_returnInformation_Operation_new_;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_reply_ParameterValue() const
-{
-	return m_returnInformation_Operation_reply_ParameterValue;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_specify() const
-{
-	return m_returnInformation_Operation_specify;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReturnInformation_Operation_toString() const
-{
-	return m_returnInformation_Operation_toString;
-}
-
-// End Class ReturnInformation
-
-// Begin Class SendSignalActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Class() const
-{
-	return m_sendSignalActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Operation_doAction() const
-{
-	return m_sendSignalActionActivation_Operation_doAction;
-}
-
-// End Class SendSignalActionActivation
-
-// Begin Class StartClassifierBehaviorActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStartClassifierBehaviorActionActivation_Class() const
-{
-	return m_startClassifierBehaviorActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStartClassifierBehaviorActionActivation_Operation_doAction() const
-{
-	return m_startClassifierBehaviorActionActivation_Operation_doAction;
-}
-
-// End Class StartClassifierBehaviorActionActivation
-
-// Begin Class StartObjectBehaviorActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStartObjectBehaviorActionActivation_Class() const
-{
-	return m_startObjectBehaviorActionActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStartObjectBehaviorActionActivation_Operation_doAction() const
-{
-	return m_startObjectBehaviorActionActivation_Operation_doAction;
-}
-
-// End Class StartObjectBehaviorActionActivation
 
 // Begin Class StructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Class() const
@@ -900,88 +324,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class StructuralFeatureActionActivation
-
-// Begin Class StructuredActivityNodeActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Class() const
-{
-	return m_structuredActivityNodeActivation_Class;
-}
-
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Attribute_activationGroup() const
-{
-	return m_structuredActivityNodeActivation_Attribute_activationGroup;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_completeAction() const
-{
-	return m_structuredActivityNodeActivation_Operation_completeAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_createEdgeInstances() const
-{
-	return m_structuredActivityNodeActivation_Operation_createEdgeInstances;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_createNodeActivations() const
-{
-	return m_structuredActivityNodeActivation_Operation_createNodeActivations;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_doAction() const
-{
-	return m_structuredActivityNodeActivation_Operation_doAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_doStructuredActivity() const
-{
-	return m_structuredActivityNodeActivation_Operation_doStructuredActivity;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const
-{
-	return m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const
-{
-	return m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const
-{
-	return m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_isSuspended() const
-{
-	return m_structuredActivityNodeActivation_Operation_isSuspended;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const
-{
-	return m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const
-{
-	return m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_resume() const
-{
-	return m_structuredActivityNodeActivation_Operation_resume;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_terminate() const
-{
-	return m_structuredActivityNodeActivation_Operation_terminate;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_terminateAll() const
-{
-	return m_structuredActivityNodeActivation_Operation_terminateAll;
-}
-
-// End Class StructuredActivityNodeActivation
-
-// Begin Class TestIdentityActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getTestIdentityActionActivation_Class() const
-{
-	return m_testIdentityActionActivation_Class;
-}
-
-
-
-
-// End Class TestIdentityActionActivation
 
 // Begin Class ValueSpecificationActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getValueSpecificationActionActivation_Class() const
@@ -1012,17 +354,6 @@ std::shared_ptr<ecore::EAttribute> fUML::Semantics::Actions::ActionsPackageImpl:
 
 
 // End Class Values
-
-// Begin Class WriteLinkActionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getWriteLinkActionActivation_Class() const
-{
-	return m_writeLinkActionActivation_Class;
-}
-
-
-
-
-// End Class WriteLinkActionActivation
 
 // Begin Class WriteStructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getWriteStructuralFeatureActionActivation_Class() const

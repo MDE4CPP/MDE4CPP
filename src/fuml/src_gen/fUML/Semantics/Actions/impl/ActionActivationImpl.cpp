@@ -37,10 +37,10 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
 #include "fUML/fUMLFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -59,9 +59,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -76,8 +76,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -384,7 +384,7 @@ std::shared_ptr<Bag<Any> > ActionActivationImpl::getTokens(std::shared_ptr<uml::
 	DEBUG_MESSAGE(std::cout<<"[getTokens] node = "  << this->getNode()->getName()  << ", pin = "  << pin->getName()<<std::endl;)
 
 	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation(this->retrievePinActivation(pin));
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values(new Bag<fUML::Semantics::Values::Value>());
+	std::shared_ptr<Bag<AnyObject>> values(new Bag<AnyObject>());
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = pinActivation->getUnofferedTokens();
     for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
@@ -392,7 +392,7 @@ std::shared_ptr<Bag<Any> > ActionActivationImpl::getTokens(std::shared_ptr<uml::
     	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> objToken = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(token);
         if(objToken!=nullptr)
         {
-        	std::shared_ptr<fUML::Semantics::Values::Value> value = objToken->getValue();
+            Any value = objToken->getValue();
             if(value != nullptr)
             {
                 values->push_back(value);
@@ -502,7 +502,7 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::sh
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (std::shared_ptr<fUML::Semantics::Values::Value> value : *values)
+	for (Any value : *values)
     {
         this->putToken(pin,value);
     }

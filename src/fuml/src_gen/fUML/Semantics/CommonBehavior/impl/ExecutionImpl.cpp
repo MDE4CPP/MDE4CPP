@@ -45,22 +45,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
-#include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -452,11 +446,11 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //466
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //462
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(getContext(),uml::umlPackage::ELEMENT_CLASS,false); //464
+			return eAny(getContext(),uml::umlPackage::ELEMENT_CLASS,false); //460
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return eAnyBag(getParameterValues(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS); //465
+			return eAnyBag(getParameterValues(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS); //461
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -466,11 +460,11 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //466
+			return getBehavior() != nullptr; //462
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //464
+			return getContext() != nullptr; //460
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return getParameterValues() != nullptr; //465
+			return getParameterValues() != nullptr; //461
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -484,7 +478,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //466
+			setBehavior(_behavior); //462
 			return true;
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
@@ -492,7 +486,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 			// CAST Any to uml::Element
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Element> _context = std::dynamic_pointer_cast<uml::Element>(_temp);
-			setContext(_context); //464
+			setContext(_context); //460
 			return true;
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
@@ -620,7 +614,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionImpl::getTh
 void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::Execution> thisExecutionPtr)
 {
 	m_thisExecutionPtr = thisExecutionPtr;
-	setThisObjectPtr(thisExecutionPtr);
 }
 
 

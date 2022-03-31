@@ -39,8 +39,6 @@ virtual public ActivityNodeActivationGroup
 
 			//Additional constructors for the containments back reference
 			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution);
-			//Additional constructors for the containments back reference
-			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation);
 
 		public:
 			//destructor
@@ -76,8 +74,7 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ;
 			virtual void setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution>) ;
-			virtual std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> getContainingNodeActivation() const ;
-			virtual void setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation>) ;
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getEdgeInstances() const ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getNodeActivations() const ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getSuspendedActivations() const ;

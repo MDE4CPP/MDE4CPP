@@ -36,17 +36,12 @@ namespace fUML
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
-	class OpaqueBehaviorExecution;
 }
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 	class SemanticStrategy;
 	class SemanticVisitor;
-}
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
 }
 namespace uml 
 {
@@ -89,7 +84,7 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType> type) = 0;
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution) = 0;
+			
 			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) = 0;
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<uml::Element> context) = 0;
@@ -97,7 +92,7 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) = 0;
 			virtual int getStrategyIndex(std::string name) = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior) = 0;
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) = 0;
 
 			//*********************************
@@ -110,7 +105,7 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const = 0;
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const = 0;
 
 			//*********************************
@@ -139,7 +134,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			mutable std::shared_ptr<Bag<uml::PrimitiveType>> m_builtInTypes;
 			std::weak_ptr<fUML::Semantics::Loci::Locus> m_locus;
-			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> m_primitiveBehaviorPrototypes;
+			
 			mutable std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> m_strategies;
 	};
 }

@@ -22,19 +22,10 @@ namespace fUML::Semantics::Activities
 }
 
 
-namespace fUML::Semantics::Actions
-{
-	class CallActionActivation;
-	class StructuredActivityNodeActivation;
-}
 
 
 
 
-namespace fUML::Semantics::Actions
-{
-	class CallActionActivation;
-}
 namespace fUML::Semantics::Activities
 {
 	class DecisionNodeActivation;

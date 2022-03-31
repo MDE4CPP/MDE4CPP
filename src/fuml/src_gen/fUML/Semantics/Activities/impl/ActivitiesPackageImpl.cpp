@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -309,10 +309,6 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImp
 std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivationGroup_Attribute_activityExecution() const
 {
 	return m_activityNodeActivationGroup_Attribute_activityExecution;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivationGroup_Attribute_containingNodeActivation() const
-{
-	return m_activityNodeActivationGroup_Attribute_containingNodeActivation;
 }
 std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivationGroup_Attribute_edgeInstances() const
 {

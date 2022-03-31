@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::Loci 
@@ -81,22 +81,19 @@ namespace fUML::Semantics::Loci
 			// Begin Class ExecutionFactory
 			//Class and Feature IDs 
 			static const unsigned long EXECUTIONFACTORY_CLASS = 102788675;
-			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 9;
+			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 3;
+			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 7;
 			
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 1371486848;
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 648263615;
-			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES = 846327382;
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES = 1614243054;
 			
 			static const unsigned int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 1000019030;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 2237491026;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4022033692;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT = 2395760303;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 3934172273;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4148006243;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 353629829;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR = 1913492013;
 			static const unsigned int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 442268567;
 			
 			//Class and Feature Getter
@@ -105,17 +102,14 @@ namespace fUML::Semantics::Loci
 			
 			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_builtInTypes() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_locus() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_primitiveBehaviorPrototypes() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_strategies() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_createExecution_Behavior_Element() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategy_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactory

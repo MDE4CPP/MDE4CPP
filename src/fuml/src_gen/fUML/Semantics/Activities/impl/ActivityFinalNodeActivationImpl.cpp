@@ -31,10 +31,10 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/Activities/ExpansionActivationGroup.hpp"
-#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
+//#include "fUML/Semantics/Activities/ExpansionActivationGroup.hpp"
+//#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
 #include "fUML/fUMLFactory.hpp"
-#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
+//#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "uml/ActivityNode.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -138,6 +138,7 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 			{
 				activityExecution->terminate();
 			}
+			/*Currently not supported
 			else if (this_group->getContainingNodeActivation().lock())
 			{
 				auto activation= this_group->getContainingNodeActivation().lock();
@@ -153,6 +154,7 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 					std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();
 				}
 			}
+			*/
 		}
     }
 

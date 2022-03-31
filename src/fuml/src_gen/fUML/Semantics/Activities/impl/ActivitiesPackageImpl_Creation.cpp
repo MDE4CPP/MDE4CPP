@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -154,7 +154,6 @@ void ActivitiesPackageImpl::createActivityNodeActivationGroupContent(std::shared
 	m_activityNodeActivationGroup_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACTIVITYNODEACTIVATIONGROUP_CLASS);
 	
 	m_activityNodeActivationGroup_Attribute_activityExecution = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivationGroup_Class, ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION);
-	m_activityNodeActivationGroup_Attribute_containingNodeActivation = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivationGroup_Class, ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION);
 	m_activityNodeActivationGroup_Attribute_edgeInstances = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivationGroup_Class, ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES);
 	m_activityNodeActivationGroup_Attribute_nodeActivations = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivationGroup_Class, ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivationGroup_Class, ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS);

@@ -5,9 +5,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
 //metamodel factory
@@ -52,18 +52,4 @@ void ClassificationPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
-// Begin Class InstanceValueEvaluation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Class() const
-{
-	return m_instanceValueEvaluation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Operation_evaluate() const
-{
-	return m_instanceValueEvaluation_Operation_evaluate;
-}
-
-// End Class InstanceValueEvaluation
 

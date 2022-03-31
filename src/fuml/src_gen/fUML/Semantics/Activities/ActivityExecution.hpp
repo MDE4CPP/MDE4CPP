@@ -38,18 +38,12 @@ namespace fUML::Semantics::Activities
 }
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ObjectActivation;
 	class ParameterValue;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
 }
 namespace uml 
 {
 	class Activity;
 	class Behavior;
-	class Classifier;
 	class Element;
 }
 

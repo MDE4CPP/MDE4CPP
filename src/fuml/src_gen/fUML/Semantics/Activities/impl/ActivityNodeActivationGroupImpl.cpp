@@ -60,11 +60,9 @@
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
-#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -92,13 +90,6 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<f
 :ActivityNodeActivationGroupImpl()
 {
 	m_activityExecution = par_activityExecution;
-}
-
-//Additional constructor for the containments back reference
-ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation)
-:ActivityNodeActivationGroupImpl()
-{
-	m_containingNodeActivation = par_containingNodeActivation;
 }
 
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj): ActivityNodeActivationGroupImpl()
@@ -129,7 +120,6 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 
 	//copy references with no containment (soft copy)
 	m_activityExecution  = obj.getActivityExecution();
-	m_containingNodeActivation  = obj.getContainingNodeActivation();
 	m_suspendedActivations  = obj.getSuspendedActivations();
 	//Clone references with containment (deep copy)
 	//clone reference 'edgeInstances'
@@ -611,16 +601,7 @@ void ActivityNodeActivationGroupImpl::setActivityExecution(std::weak_ptr<fUML::S
 	
 }
 
-/* Getter & Setter for reference containingNodeActivation */
-std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
-{
-    return m_containingNodeActivation;
-}
-void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation)
-{
-    m_containingNodeActivation = _containingNodeActivation;
-	
-}
+
 
 /* Getter & Setter for reference edgeInstances */
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationGroupImpl::getEdgeInstances() const
@@ -668,11 +649,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> Activi
 std::shared_ptr<ecore::EObject> ActivityNodeActivationGroupImpl::eContainer() const
 {
 	if(auto wp = m_activityExecution.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_containingNodeActivation.lock())
 	{
 		return wp;
 	}
@@ -780,18 +756,6 @@ void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>( references.front() );
-				setContainingNodeActivation(_containingNodeActivation);
-			}
-			
-			return;
-		}
-
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
@@ -858,11 +822,6 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			std::shared_ptr<ecore::EObject> returnValue=getActivityExecution().lock();
 			return eAnyObject(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS); //102
 		}
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContainingNodeActivation().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS); //103
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 			return eAnyBag(getEdgeInstances(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //100
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
@@ -879,8 +838,6 @@ bool ActivityNodeActivationGroupImpl::internalEIsSet(int featureID) const
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
 			return getActivityExecution().lock() != nullptr; //102
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-			return getContainingNodeActivation().lock() != nullptr; //103
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 			return getEdgeInstances() != nullptr; //100
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
@@ -901,14 +858,6 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(_temp);
 			setActivityExecution(_activityExecution); //102
-			return true;
-		}
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-		{
-			// CAST Any to fUML::Semantics::Actions::StructuredActivityNodeActivation
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(_temp);
-			setContainingNodeActivation(_containingNodeActivation); //103
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
