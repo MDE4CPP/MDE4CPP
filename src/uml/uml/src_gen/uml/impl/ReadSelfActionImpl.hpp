@@ -55,26 +55,26 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,14 +151,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReadSelfAction> m_thisReadSelfActionPtr;

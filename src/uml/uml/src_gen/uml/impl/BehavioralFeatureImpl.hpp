@@ -52,26 +52,26 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) ;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name, std::shared_ptr<uml::Type> type) ;
 			/*!
 			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() ;
 			/*!
 			The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -178,14 +178,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::BehavioralFeature> m_thisBehavioralFeaturePtr;

@@ -151,12 +151,12 @@ bool TypeImpl::conformsTo(std::shared_ptr<uml::Type> other)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, std::shared_ptr<uml::Type> end1Type, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
+std::shared_ptr<Bag<uml::Association>> TypeImpl::getAssociations()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -328,7 +328,7 @@ std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -351,7 +351,7 @@ bool TypeImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool TypeImpl::eSet(int featureID, Any newValue)
+bool TypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -371,9 +371,9 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -383,7 +383,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<uml::Type> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			result = eAny(this->conformsTo(incoming_param_other),0,false);
 			break;
@@ -394,57 +394,57 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
-			std::list<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
-			std::list<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
-			std::list<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
-			std::list<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
+			Bag<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
 			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Type'
 			//parameter 5
 			std::shared_ptr<uml::Type> incoming_param_end1Type;
-			std::list<Any>::const_iterator incoming_param_end1Type_arguments_citer = std::next(arguments->begin(), 5);
+			Bag<Any>::const_iterator incoming_param_end1Type_arguments_citer = std::next(arguments->begin(), 5);
 			incoming_param_end1Type = (*incoming_param_end1Type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
+			Bag<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
 			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
-			std::list<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
+			Bag<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
 			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
-			std::list<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
+			Bag<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
 			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
-			std::list<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
+			Bag<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
 			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
-			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
+			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
 			result = eAnyObject(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
@@ -452,7 +452,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		// uml::Type::getAssociations() : uml::Association[*]: 831147640
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
-			std::shared_ptr<Bag<uml::Association> > resultList = this->getAssociations();
+			std::shared_ptr<Bag<uml::Association>> resultList = this->getAssociations();
 			return eAnyBag(resultList,uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}

@@ -212,17 +212,17 @@ std::shared_ptr<ecore::EObject> NodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, std::shared_ptr<uml::Node> end1Node, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
+std::shared_ptr<Bag<uml::CommunicationPath>> NodeImpl::getCommunicationPaths()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NodeImpl::internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NodeImpl::internal_structure(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -545,14 +545,14 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 			return eAnyBag(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -579,7 +579,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool NodeImpl::eSet(int featureID, Any newValue)
+bool NodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -635,9 +635,9 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -647,57 +647,57 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
-			std::list<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
-			std::list<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
-			std::list<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
-			std::list<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
+			Bag<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
 			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Node'
 			//parameter 5
 			std::shared_ptr<uml::Node> incoming_param_end1Node;
-			std::list<Any>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
+			Bag<Any>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
 			incoming_param_end1Node = (*incoming_param_end1Node_arguments_citer)->get<std::shared_ptr<uml::Node> >();
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
+			Bag<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
 			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
-			std::list<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
+			Bag<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
 			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
-			std::list<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
+			Bag<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
 			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
-			std::list<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
+			Bag<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
 			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
-			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
+			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
 			result = eAnyObject(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
@@ -705,23 +705,23 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 810632424
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
-			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
+			std::shared_ptr<Bag<uml::CommunicationPath>> resultList = this->getCommunicationPaths();
 			return eAnyBag(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
-		// uml::Node::internal_structure(Any, std::map) : bool: 1965611485
+		// uml::Node::internal_structure(std::shared_ptr<Any>, std::map) : bool: 1124179530
 		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->internal_structure(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

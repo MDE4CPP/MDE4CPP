@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -89,13 +88,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool first_event_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2
 			*/
 			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool has_one_or_two_constrainedElements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

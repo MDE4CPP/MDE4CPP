@@ -207,17 +207,17 @@ std::shared_ptr<ecore::EObject> CombinedFragmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::break_(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::consider_and_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::opt_loop_break_neg(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -576,7 +576,7 @@ std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -604,7 +604,7 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
+bool CombinedFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -697,57 +697,57 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::CombinedFragment::break_(Any, std::map) : bool: 3240199571
+		// uml::CombinedFragment::break_(std::shared_ptr<Any>, std::map) : bool: 2398767616
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CombinedFragment::consider_and_ignore(Any, std::map) : bool: 161942571
+		// uml::CombinedFragment::consider_and_ignore(std::shared_ptr<Any>, std::map) : bool: 1842328908
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CombinedFragment::opt_loop_break_neg(Any, std::map) : bool: 1641284448
+		// uml::CombinedFragment::opt_loop_break_neg(std::shared_ptr<Any>, std::map) : bool: 1510915613
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -88,13 +87,13 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_parameter_substitution(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool parameter_substitution_formal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

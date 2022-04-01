@@ -55,7 +55,7 @@ namespace uml
 			connectionPoint->notEmpty() implies isComposite
 			*/
 			 
-			virtual bool composite_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool composite_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
@@ -63,13 +63,13 @@ namespace uml
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
 			*/
 			 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool destinations_or_sources_of_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool entry_or_exit(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool entry_or_exit(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A composite State is a State with at least one Region.
 			result = (region->notEmpty())
@@ -115,13 +115,13 @@ namespace uml
 			isComposite implies not isSubmachineState
 			*/
 			 
-			virtual bool submachine_or_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool submachine_or_regions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( )
 			*/
 			 
-			virtual bool submachine_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool submachine_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -312,14 +312,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::State> m_thisStatePtr;

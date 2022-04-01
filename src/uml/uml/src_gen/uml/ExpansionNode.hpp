@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -97,7 +96,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool region_as_input_or_output(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

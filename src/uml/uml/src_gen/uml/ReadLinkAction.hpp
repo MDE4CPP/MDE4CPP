@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -98,32 +97,32 @@ namespace uml
 			self.openEnd()->first().compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The open end must be navigable.
 			self.openEnd()->first().isNavigable()
 			*/
 			 
-			virtual bool navigable_open_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool navigable_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1
 			*/
 			 
-			virtual bool one_open_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
 			result = (endData->select(value=null).end->asOrderedSet())
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > openEnd() = 0;
+			virtual std::shared_ptr<Bag<uml::Property>> openEnd() = 0;
 			/*!
 			The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Visibility of the open end must allow access from the object performing the action.
 			let openEnd : Property = self.openEnd()->first() in
@@ -135,7 +134,7 @@ namespace uml
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

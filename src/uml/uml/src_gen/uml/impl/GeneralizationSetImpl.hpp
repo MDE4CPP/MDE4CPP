@@ -55,7 +55,7 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool generalization_same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
@@ -63,7 +63,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -159,14 +159,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::GeneralizationSet> m_thisGeneralizationSetPtr;

@@ -155,22 +155,22 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadSelfActionImpl::contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -399,7 +399,7 @@ std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -419,7 +419,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
+bool ReadSelfActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -439,73 +439,73 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ReadSelfAction::contained(Any, std::map) : bool: 1429647307
+		// uml::ReadSelfAction::contained(std::shared_ptr<Any>, std::map) : bool: 4078393948
 		case umlPackage::READSELFACTION_OPERATION_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::multiplicity(Any, std::map) : bool: 1954322947
+		// uml::ReadSelfAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 1280680160
 		case umlPackage::READSELFACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::not_static(Any, std::map) : bool: 2987315762
+		// uml::ReadSelfAction::not_static(std::shared_ptr<Any>, std::map) : bool: 1636966967
 		case umlPackage::READSELFACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadSelfAction::type(Any, std::map) : bool: 503695280
+		// uml::ReadSelfAction::type(std::shared_ptr<Any>, std::map) : bool: 3458100909
 		case umlPackage::READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -227,12 +227,12 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ValuePinImpl::compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValuePinImpl::compatible_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValuePinImpl::no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -486,7 +486,7 @@ std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -506,7 +506,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	return InputPinImpl::internalEIsSet(featureID);
 }
 
-bool ValuePinImpl::eSet(int featureID, Any newValue)
+bool ValuePinImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -526,41 +526,41 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ValuePinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ValuePin::compatible_type(Any, std::map) : bool: 3127068883
+		// uml::ValuePin::compatible_type(std::shared_ptr<Any>, std::map) : bool: 1480848228
 		case umlPackage::VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->compatible_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ValuePin::no_incoming_edges(Any, std::map) : bool: 1023340225
+		// uml::ValuePin::no_incoming_edges(std::shared_ptr<Any>, std::map) : bool: 2469298122
 		case umlPackage::VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->no_incoming_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

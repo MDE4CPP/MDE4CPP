@@ -163,12 +163,12 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValueSpecificationActionImpl::compatible_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValueSpecificationActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -428,7 +428,7 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() cons
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -452,7 +452,7 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -480,41 +480,41 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ValueSpecificationAction::compatible_type(Any, std::map) : bool: 221776171
+		// uml::ValueSpecificationAction::compatible_type(std::shared_ptr<Any>, std::map) : bool: 3017510524
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->compatible_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ValueSpecificationAction::multiplicity(Any, std::map) : bool: 3796831131
+		// uml::ValueSpecificationAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 2662993776
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

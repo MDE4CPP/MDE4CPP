@@ -15,8 +15,7 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -144,7 +143,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source)
 			*/
 			 
-			virtual bool incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool incoming_edges_structured_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

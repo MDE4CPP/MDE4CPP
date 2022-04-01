@@ -60,13 +60,13 @@ namespace uml
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
 			*/
 			 
-			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool conforming_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			AcceptEventActions may have no input pins.
 			input->size() = 0
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_input_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
 			(self.oclIsTypeOf(AcceptEventAction) and
@@ -75,14 +75,14 @@ namespace uml
 			implies output->size() = 0
 			*/
 			 
-			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1)
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_output_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
 			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
@@ -96,7 +96,7 @@ namespace uml
 					result->at(i).includesMultiplicity(attribute->at(i)))
 			*/
 			 
-			virtual bool unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool unmarshall_signal_events(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -185,14 +185,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::AcceptEventAction> m_thisAcceptEventActionPtr;

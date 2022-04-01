@@ -63,13 +63,13 @@ namespace uml
 			self.aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -142,14 +142,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExtensionEnd> m_thisExtensionEndPtr;

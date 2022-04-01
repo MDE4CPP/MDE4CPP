@@ -271,7 +271,7 @@ std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -287,7 +287,7 @@ bool MessageEventImpl::internalEIsSet(int featureID) const
 	return EventImpl::internalEIsSet(featureID);
 }
 
-bool MessageEventImpl::eSet(int featureID, Any newValue)
+bool MessageEventImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -299,9 +299,9 @@ bool MessageEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> MessageEventImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

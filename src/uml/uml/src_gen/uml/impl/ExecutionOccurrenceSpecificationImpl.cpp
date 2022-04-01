@@ -325,7 +325,7 @@ std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClas
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -345,7 +345,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -365,9 +365,9 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

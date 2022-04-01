@@ -76,14 +76,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() ;
+			virtual std::shared_ptr<Bag<uml::Transition>> getIncomings() ;
 			/*!
 			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() ;
+			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoings() ;
 			/*!
 			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
@@ -190,14 +190,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Vertex> m_thisVertexPtr;

@@ -88,7 +88,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements() = 0;
+			virtual std::shared_ptr<Bag<uml::ParameterableElement>> parameterableElements() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

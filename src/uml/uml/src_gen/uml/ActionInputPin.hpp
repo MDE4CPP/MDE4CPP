@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -105,7 +104,7 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
@@ -113,13 +112,13 @@ namespace uml
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_control_or_object_flow(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_output_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

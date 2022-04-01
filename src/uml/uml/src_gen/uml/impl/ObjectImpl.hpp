@@ -48,32 +48,32 @@ virtual public Object
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property,Any value) ;
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
 			/*!
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property,Any value,int insertAt) ;
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt) ;
 			/*!
 			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property> _property) const ;
+			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const ;
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual Any invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments) ;
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments) ;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property> _property,Any value) ;
+			virtual void set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 			
 			//*********************************
@@ -109,14 +109,14 @@ virtual public Object
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Object> m_thisObjectPtr;

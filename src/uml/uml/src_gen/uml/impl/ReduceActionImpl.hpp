@@ -54,13 +54,13 @@ namespace uml
 			The type of the collection InputPin must be a collection.
 			*/
 			 
-			virtual bool input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_type_is_collection(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type))
 			*/
 			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool output_types_are_compatible(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
 			let inputs: OrderedSet(Parameter) = reducer.inputParameters() in
@@ -72,7 +72,7 @@ namespace uml
 				collection.upperBound()>1 implies collection.type.conformsTo(t))
 			*/
 			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool reducer_inputs_output(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -191,14 +191,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReduceAction> m_thisReduceActionPtr;

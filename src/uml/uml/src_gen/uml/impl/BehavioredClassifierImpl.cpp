@@ -232,17 +232,17 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehavioredClassifierImpl::class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getAllImplementedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> BehavioredClassifierImpl::getAllImplementedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> BehavioredClassifierImpl::getImplementedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -601,7 +601,7 @@ std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -629,7 +629,7 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
+bool BehavioredClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -723,39 +723,39 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 3269019581
+		// uml::BehavioredClassifier::class_behavior(std::shared_ptr<Any>, std::map) : bool: 3138650746
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 		// uml::BehavioredClassifier::getAllImplementedInterfaces() : uml::Interface[*]: 3121381189
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getAllImplementedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 329551508
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getImplementedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}

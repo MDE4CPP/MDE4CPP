@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -96,19 +95,19 @@ namespace uml
 			first.is(1,1) and second.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The InputPins have no type.
 			first.type= null and second.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The type of the result OutputPin is Boolean.
 			result.type=Boolean
 			*/
 			 
-			virtual bool result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_is_boolean(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

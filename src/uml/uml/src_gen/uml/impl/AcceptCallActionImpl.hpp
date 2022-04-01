@@ -60,20 +60,20 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool trigger_call_event(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool unmarshall(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -150,14 +150,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::AcceptCallAction> m_thisAcceptCallActionPtr;

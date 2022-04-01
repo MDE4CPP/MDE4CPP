@@ -15,8 +15,7 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -102,17 +101,17 @@ namespace uml
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
 			*/
 			 
-			virtual bool class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getAllImplementedInterfaces() = 0;
 			/*!
 			Retrieves the interfaces on which this behaviored classifier has an interface realization dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getImplementedInterfaces() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

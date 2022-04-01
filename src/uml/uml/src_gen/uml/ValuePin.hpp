@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -105,13 +104,13 @@ namespace uml
 			value.type.conformsTo(type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -90,13 +89,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter>> getInheritedParameters() = 0;
 			/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool redefines_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

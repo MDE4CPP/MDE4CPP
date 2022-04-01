@@ -101,7 +101,7 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ObjectImpl::add(std::shared_ptr<uml::Property> _property,Any value)
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -109,22 +109,22 @@ void ObjectImpl::add(std::shared_ptr<uml::Property> _property,Any value)
 	//end of body
 }
 
-void ObjectImpl::add(std::shared_ptr<uml::Property> _property,Any value,int insertAt)
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property> _property,Any value)
+void ObjectImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -217,7 +217,7 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -233,7 +233,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ObjectImpl::eSet(int featureID, Any newValue)
+bool ObjectImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -245,89 +245,89 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Object::add(uml::Property, Any): 637724934
+		// uml::Object::add(uml::Property, std::shared_ptr<Any>): 761121103
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param__property;
-			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
-			Any incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
 			this->add(incoming_param__property,incoming_param_value);
 			break;
 		}
-		// uml::Object::add(uml::Property, Any, int): 319727429
+		// uml::Object::add(uml::Property, std::shared_ptr<Any>, int): 1115033242
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param__property;
-			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
-			Any incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'insertAt'
 			//parameter 2
 			int incoming_param_insertAt;
-			std::list<Any>::const_iterator incoming_param_insertAt_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_insertAt_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_insertAt = (*incoming_param_insertAt_arguments_citer)->get<int >();
 			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
 			break;
 		}
-		// uml::Object::get(uml::Property) : Any {const}: 511579154
+		// uml::Object::get(uml::Property) : std::shared_ptr<Any> {const}: 1887868203
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param__property;
-			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-			result = this->get(incoming_param__property);
+			result = eAny(this->get(incoming_param__property),0,false);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, Any[*]) : Any: 2657839141
+		// uml::Object::invoke(uml::Operation, std::shared_ptr<Any>[*]) : std::shared_ptr<Any>: 4204369167
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_operation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param__operation;
-			std::list<Any>::const_iterator incoming_param__operation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__operation = (*incoming_param__operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			//Retrieve input parameter 'arguments'
 			//parameter 1
 			std::shared_ptr<Bag<Any>> incoming_param_arguments;
-			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
-			result = this->invoke(incoming_param__operation,incoming_param_arguments);
+			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments),0,false);
 			break;
 		}
-		// uml::Object::set(uml::Property, Any): 183386425
+		// uml::Object::set(uml::Property, std::shared_ptr<Any>): 306782594
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param__property;
-			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
-			Any incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
 			this->set(incoming_param__property,incoming_param_value);
 			break;
 		}
@@ -337,7 +337,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter '_property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param__property;
-			std::list<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param__property = (*incoming_param__property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			this->unset(incoming_param__property);
 			break;

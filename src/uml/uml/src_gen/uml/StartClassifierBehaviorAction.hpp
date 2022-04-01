@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -96,14 +95,14 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null)
 			*/
 			 
-			virtual bool type_has_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_has_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

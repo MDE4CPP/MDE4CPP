@@ -49,7 +49,7 @@ namespace uml
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool body_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
@@ -57,13 +57,13 @@ namespace uml
 			decider.is(1,1)
 			*/
 			 
-			virtual bool decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool decider_output(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty()
 			*/
 			 
-			virtual bool test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool test_and_body(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -146,14 +146,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Clause> m_thisClausePtr;

@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -97,19 +96,19 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

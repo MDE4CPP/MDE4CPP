@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -104,7 +103,7 @@ namespace uml
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity
 			*/
 			 
-			virtual bool source_and_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool source_and_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

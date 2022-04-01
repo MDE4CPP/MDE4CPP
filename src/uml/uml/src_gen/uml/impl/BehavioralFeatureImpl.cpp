@@ -193,22 +193,22 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehavioralFeatureImpl::abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type> type)
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name, std::shared_ptr<uml::Type> type)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters()
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::inputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::outputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -617,7 +617,7 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -634,7 +634,7 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 			return eAnyBag(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -671,7 +671,7 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
+bool BehavioralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -852,25 +852,25 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 862631547
+		// uml::BehavioralFeature::abstract_no_method(std::shared_ptr<Any>, std::map) : bool: 2543017884
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -880,12 +880,12 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			result = eAnyObject(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
 			break;
@@ -893,14 +893,14 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 2494913883
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 3232178764
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->outputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}

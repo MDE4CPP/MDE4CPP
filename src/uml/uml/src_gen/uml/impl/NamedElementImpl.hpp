@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Namespace> > allNamespaces() const ;
+			virtual std::shared_ptr<Bag<uml::Namespace>> allNamespaces() const ;
 			/*!
 			The query allOwningPackages() returns the set of all the enclosing Namespaces of this NamedElement, working outwards, that are Packages, up to but not including the first such Namespace that is not a Package.
 			result = (if namespace.oclIsKindOf(Package)
@@ -76,7 +76,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > allOwningPackages() ;
+			virtual std::shared_ptr<Bag<uml::Package>> allOwningPackages() ;
 			/*!
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
@@ -92,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Dependency> > getClientDependencies() ;
+			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependencies() ;
 			/*!
 			Retrieves a localized label for this named element.
 			*/
@@ -121,14 +121,14 @@ namespace uml
 			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null
 			*/
 			 
-			virtual bool has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_no_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
 			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
 			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))
 			*/
 			 
-			virtual bool has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
 			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
@@ -137,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns) ;
+			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns) ;
 			/*!
 			The query separator() gives the string that is used to separate names when constructing a qualifiedName.
 			result = ('::')
@@ -150,7 +150,7 @@ namespace uml
 			(namespace = null and owner <> null) implies visibility = null
 			*/
 			 
-			virtual bool visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool visibility_needs_ownership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -247,14 +247,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::NamedElement> m_thisNamedElementPtr;

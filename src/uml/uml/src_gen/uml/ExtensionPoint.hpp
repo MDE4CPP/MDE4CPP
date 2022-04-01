@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -95,7 +94,7 @@ namespace uml
 			name->notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

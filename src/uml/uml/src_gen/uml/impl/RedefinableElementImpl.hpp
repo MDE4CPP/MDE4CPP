@@ -66,19 +66,19 @@ namespace uml
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool non_leaf_redefinition(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool redefinition_consistent(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool redefinition_context_valid(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,14 +151,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::RedefinableElement> m_thisRedefinableElementPtr;

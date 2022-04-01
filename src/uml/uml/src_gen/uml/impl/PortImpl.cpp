@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject> PortImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::basicProvided()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -234,7 +234,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::basicRequired()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -248,17 +248,17 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 	//end of body
 }
 
-bool PortImpl::default_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PortImpl::encapsulated_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvideds()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -267,7 +267,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequireds()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -276,7 +276,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 	//end of body
 }
 
-bool PortImpl::port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -682,7 +682,7 @@ std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -726,7 +726,7 @@ bool PortImpl::internalEIsSet(int featureID) const
 	return PropertyImpl::internalEIsSet(featureID);
 }
 
-bool PortImpl::eSet(int featureID, Any newValue)
+bool PortImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -804,85 +804,85 @@ bool PortImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::Port::basicProvided() : uml::Interface[*]: 2234995286
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicProvided();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->basicProvided();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::basicRequired() : uml::Interface[*]: 149776146
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicRequired();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->basicRequired();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::default_value(Any, std::map) : bool: 1564189360
+		// uml::Port::default_value(std::shared_ptr<Any>, std::map) : bool: 4132083545
 		case umlPackage::PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Port::encapsulated_owner(Any, std::map) : bool: 2364621826
+		// uml::Port::encapsulated_owner(std::shared_ptr<Any>, std::map) : bool: 1523189871
 		case umlPackage::PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 		// uml::Port::getProvideds() : uml::Interface[*]: 4122866187
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getProvideds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::getRequireds() : uml::Interface[*]: 2874458023
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getRequireds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
-		// uml::Port::port_aggregation(Any, std::map) : bool: 1332067907
+		// uml::Port::port_aggregation(std::shared_ptr<Any>, std::map) : bool: 2380663896
 		case umlPackage::PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->port_aggregation(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

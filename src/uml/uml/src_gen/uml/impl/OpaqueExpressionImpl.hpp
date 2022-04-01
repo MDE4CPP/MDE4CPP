@@ -83,20 +83,20 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool language_body_size(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_return_result_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool only_return_result_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
@@ -188,14 +188,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::OpaqueExpression> m_thisOpaqueExpressionPtr;

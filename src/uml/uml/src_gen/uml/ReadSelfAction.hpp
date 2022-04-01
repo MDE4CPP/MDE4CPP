@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -96,26 +95,26 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

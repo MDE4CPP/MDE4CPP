@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PackageImportImpl::public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -431,7 +431,7 @@ std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -462,7 +462,7 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool PackageImportImpl::eSet(int featureID, Any newValue)
+bool PackageImportImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -497,25 +497,25 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> PackageImportImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::PackageImport::public_or_private(Any, std::map) : bool: 421704902
+		// uml::PackageImport::public_or_private(std::shared_ptr<Any>, std::map) : bool: 436278035
 		case umlPackage::PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -97,14 +96,14 @@ namespace uml
 			variable.compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

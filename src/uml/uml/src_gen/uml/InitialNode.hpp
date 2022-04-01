@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -91,13 +90,13 @@ namespace uml
 			outgoing->forAll(oclIsKindOf(ControlFlow))
 			*/
 			 
-			virtual bool control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool control_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

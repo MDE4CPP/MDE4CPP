@@ -15,8 +15,7 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -100,25 +99,25 @@ namespace uml
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 			*/
 			 
-			virtual bool association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool association_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			memberEnd->forAll(type->notEmpty())
 			*/
 			 
-			virtual bool ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool ends_must_be_typed(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() = 0;
+			virtual std::shared_ptr<Bag<uml::Type>> getEndTypes() = 0;
 			/*!
 			Determines whether this association is a binary association, i.e. whether it has exactly two member ends.
 			*/
@@ -129,7 +128,7 @@ namespace uml
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
 			*/
 			 
-			virtual bool specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool specialized_end_number(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
@@ -137,7 +136,7 @@ namespace uml
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
 			*/
 			 
-			virtual bool specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool specialized_end_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

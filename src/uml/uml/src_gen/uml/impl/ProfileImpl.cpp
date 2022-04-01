@@ -232,7 +232,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options,Any diagnostics,std::shared_ptr<std::unordered_map < Any, Any>> context)
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -247,17 +247,17 @@ std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly)
+std::shared_ptr<Bag<uml::Extension>> ProfileImpl::getOwnedExtensions(bool requiredOnly)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> ProfileImpl::getReferencedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels()
+std::shared_ptr<Bag<uml::Model>> ProfileImpl::getReferencedMetamodels()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -267,12 +267,12 @@ bool ProfileImpl::isDefined()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProfileImpl::metaclass_reference_not_specialized(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProfileImpl::references_same_metamodel(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProfileImpl::references_same_metamodel(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -559,7 +559,7 @@ std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -583,7 +583,7 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	return PackageImpl::internalEIsSet(featureID);
 }
 
-bool ProfileImpl::eSet(int featureID, Any newValue)
+bool ProfileImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -669,9 +669,9 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -681,7 +681,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'classifier'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
 			result = eAnyObject(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
@@ -692,24 +692,24 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAnyObject(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
-		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1280241598
+		// uml::Profile::define(std::map, std::shared_ptr<Any>, std::map) : ecore::EPackage: 1859504635
 		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EMAP:
 		{
 			//Retrieve input parameter 'options'
 			//parameter 0
 			std::shared_ptr<std::unordered_map < std::string, std::string>> incoming_param_options;
-			std::list<Any>::const_iterator incoming_param_options_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_options_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_options = (*incoming_param_options_arguments_citer)->get<std::shared_ptr<std::unordered_map < std::string, std::string>> >();
 			//Retrieve input parameter 'diagnostics'
 			//parameter 1
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 2
-			std::shared_ptr<std::unordered_map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::unordered_map < Any, Any>> >();
+			std::shared_ptr<std::unordered_map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::unordered_map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAnyObject(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
@@ -725,7 +725,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'namedElement'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
-			std::list<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
 			result = eAnyObject(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
@@ -736,23 +736,23 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'requiredOnly'
 			//parameter 0
 			bool incoming_param_requiredOnly;
-			std::list<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get<bool >();
-			std::shared_ptr<Bag<uml::Extension> > resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
+			std::shared_ptr<Bag<uml::Extension>> resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 2481786676
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getReferencedMetaclasses();
+			std::shared_ptr<Bag<uml::Class>> resultList = this->getReferencedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 2762577013
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
-			std::shared_ptr<Bag<uml::Model> > resultList = this->getReferencedMetamodels();
+			std::shared_ptr<Bag<uml::Model>> resultList = this->getReferencedMetamodels();
 			return eAnyBag(resultList,uml::umlPackage::MODEL_CLASS);
 			break;
 		}
@@ -762,35 +762,35 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->isDefined(),0,false);
 			break;
 		}
-		// uml::Profile::metaclass_reference_not_specialized(Any, std::map) : bool: 4152976330
+		// uml::Profile::metaclass_reference_not_specialized(std::shared_ptr<Any>, std::map) : bool: 3710559847
 		case umlPackage::PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Profile::references_same_metamodel(Any, std::map) : bool: 2161741941
+		// uml::Profile::references_same_metamodel(std::shared_ptr<Any>, std::map) : bool: 147999578
 		case umlPackage::PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->references_same_metamodel(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

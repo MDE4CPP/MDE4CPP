@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndCreationDataImpl::insertAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -296,7 +296,7 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -320,7 +320,7 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
 
-bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
+bool LinkEndCreationDataImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -347,25 +347,25 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::LinkEndCreationData::insertAt_pin(Any, std::map) : bool: 1790704694
+		// uml::LinkEndCreationData::insertAt_pin(std::shared_ptr<Any>, std::map) : bool: 2563080743
 		case umlPackage::LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

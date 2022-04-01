@@ -448,7 +448,7 @@ std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DeviceImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DeviceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -464,7 +464,7 @@ bool DeviceImpl::internalEIsSet(int featureID) const
 	return NodeImpl::internalEIsSet(featureID);
 }
 
-bool DeviceImpl::eSet(int featureID, Any newValue)
+bool DeviceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -476,9 +476,9 @@ bool DeviceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DeviceImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

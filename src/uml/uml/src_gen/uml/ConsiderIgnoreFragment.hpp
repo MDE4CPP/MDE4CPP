@@ -14,8 +14,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -91,13 +90,13 @@ namespace uml
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
 			*/
 			 
-			virtual bool consider_or_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool consider_or_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
 			*/
 			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

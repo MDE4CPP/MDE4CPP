@@ -304,12 +304,12 @@ std::shared_ptr<ecore::EObject> ArtifactImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -758,7 +758,7 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -773,7 +773,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //2042
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -808,7 +808,7 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ArtifactImpl::eSet(int featureID, Any newValue)
+bool ArtifactImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -982,9 +982,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -994,22 +994,22 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			//Retrieve input parameter 'lower'
 			//parameter 2
 			int incoming_param_lower;
-			std::list<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'upper'
 			//parameter 3
 			int incoming_param_upper;
-			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
 			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
@@ -1020,22 +1020,22 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
 			//Retrieve input parameter 'returnType'
 			//parameter 3
 			std::shared_ptr<uml::Type> incoming_param_returnType;
-			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;

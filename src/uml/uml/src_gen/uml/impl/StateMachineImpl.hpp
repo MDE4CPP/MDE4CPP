@@ -67,7 +67,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) ;
+			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) ;
 			/*!
 			This utility funciton is like the LCA, except that it returns the nearest composite State that contains both input Vertices.
 			result = (if v2.oclIsTypeOf(State) and ancestor(v1, v2) then
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2) ;
+			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1, std::shared_ptr<uml::Vertex> v2) ;
 			/*!
 			The query ancestor(s1, s2) checks whether Vertex s2 is an ancestor of Vertex s1.
 			result = (if (s2 = s1) then 
@@ -100,31 +100,31 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) ;
+			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) ;
 			/*!
 			The Classifier context of a StateMachine cannot be an Interface.
 			_'context' <> null implies not _'context'.oclIsKindOf(Interface)
 			*/
 			 
-			virtual bool classifier_context(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_context(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The connection points of a StateMachine are Pseudostates of kind entry point or exit point.
 			connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool connection_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool connection_points(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The context Classifier of the method StateMachine of a BehavioralFeature must be the Classifier that owns the BehavioralFeature.
 			specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context'))
 			*/
 			 
-			virtual bool context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool context_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A StateMachine as the method for a BehavioralFeature cannot have entry/exit connection points.
 			specification <> null implies connectionPoint->isEmpty()
 			*/
 			 
-			virtual bool method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -244,14 +244,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::StateMachine> m_thisStateMachinePtr;

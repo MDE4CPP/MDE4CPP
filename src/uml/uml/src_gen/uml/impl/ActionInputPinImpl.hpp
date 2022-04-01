@@ -71,7 +71,7 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
@@ -79,13 +79,13 @@ namespace uml
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_control_or_object_flow(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_output_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -156,14 +156,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ActionInputPin> m_thisActionInputPinPtr;

@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -112,19 +111,19 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

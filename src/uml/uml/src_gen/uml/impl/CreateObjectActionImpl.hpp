@@ -55,25 +55,25 @@ namespace uml
 			not classifier.isAbstract
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_not_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_not_association_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -162,14 +162,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::CreateObjectAction> m_thisCreateObjectActionPtr;

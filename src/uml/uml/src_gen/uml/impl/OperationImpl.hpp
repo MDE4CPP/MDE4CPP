@@ -61,7 +61,7 @@ namespace uml
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
 			*/
 			 
-			virtual bool at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
@@ -102,7 +102,7 @@ namespace uml
 			bodyCondition <> null implies isQuery
 			*/
 			 
-			virtual bool only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -307,14 +307,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Operation> m_thisOperationPtr;

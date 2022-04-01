@@ -13,8 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -80,32 +79,32 @@ namespace uml
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property,Any value) = 0;
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) = 0;
 			/*!
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property,Any value,int insertAt) = 0;
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt) = 0;
 			/*!
 			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property> _property) const = 0;
+			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const = 0;
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual Any invoke(std::shared_ptr<uml::Operation> _operation,std::shared_ptr<Bag<Any>> arguments) = 0;
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments) = 0;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property> _property,Any value) = 0;
+			virtual void set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) = 0;
 			virtual void unset(std::shared_ptr<uml::Property> _property) = 0;
 
 			//*********************************

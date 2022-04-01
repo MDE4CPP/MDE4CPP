@@ -72,7 +72,7 @@ namespace uml
 			_'context'.feature->includes(specification)
 			*/
 			 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool feature_of_context_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			/*!
 			The in and inout ownedParameters of the Behavior.
@@ -80,26 +80,26 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() ;
 			/*!
 			There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
 			*/
 			 
-			virtual bool most_one_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool most_one_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
 			/*!
 			If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
 			*/
 			 
-			virtual bool parameters_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool parameters_match(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -263,14 +263,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Behavior> m_thisBehaviorPtr;

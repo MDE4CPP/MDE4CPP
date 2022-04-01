@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -92,7 +91,7 @@ namespace uml
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type.
 			*/
 			 
-			virtual bool compatible_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A selection Behavior has one input Parameter and one output Parameter. The input Parameter must have the same as or a supertype of the type of the source ObjectNode, be non-unique and have multiplicity 0..*. The output Parameter must be the same or a subtype of the type of source ObjectNode. The Behavior cannot have side effects.
 			selection<>null implies
@@ -101,35 +100,35 @@ namespace uml
 				selection.outputParameters()->size()=1
 			*/
 			 
-			virtual bool input_and_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_and_output_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive)
 			*/
 			 
-			virtual bool is_multicast_or_is_multireceive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool is_multicast_or_is_multireceive(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode))
 			*/
 			 
-			virtual bool no_executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds.
 			*/
 			 
-			virtual bool same_upper_bounds(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_upper_bounds(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool selection_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight.
 			*/
 			 
-			virtual bool target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
@@ -137,7 +136,7 @@ namespace uml
 				transformation.outputParameters()->size()=1
 			*/
 			 
-			virtual bool transformation_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool transformation_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

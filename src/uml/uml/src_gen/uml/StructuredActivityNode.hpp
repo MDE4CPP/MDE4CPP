@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -100,19 +99,19 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
@@ -120,7 +119,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > sourceNodes() = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> sourceNodes() = 0;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as targets of edges owned by the StructuredActivityNode.
 			result = (node->union(output.oclAsType(ActivityNode)->asSet())->
@@ -128,7 +127,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > targetNodes() = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> targetNodes() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

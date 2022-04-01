@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -93,13 +92,13 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool break_(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool consider_and_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
 			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
@@ -108,7 +107,7 @@ namespace uml
 			implies operand->size()=1
 			*/
 			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool opt_loop_break_neg(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -325,7 +325,7 @@ std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -345,7 +345,7 @@ bool ChangeEventImpl::internalEIsSet(int featureID) const
 	return EventImpl::internalEIsSet(featureID);
 }
 
-bool ChangeEventImpl::eSet(int featureID, Any newValue)
+bool ChangeEventImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -365,9 +365,9 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

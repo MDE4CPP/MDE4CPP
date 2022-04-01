@@ -57,19 +57,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() ;
+			virtual std::shared_ptr<Bag<uml::ConnectableElement>> allRoles() ;
 			/*!
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper) ;
 			/*!
 			Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > getParts() ;
+			virtual std::shared_ptr<Bag<uml::Property>> getParts() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -178,14 +178,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::StructuredClassifier> m_thisStructuredClassifierPtr;

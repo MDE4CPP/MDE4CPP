@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements() ;
+			virtual std::shared_ptr<Bag<uml::ParameterableElement>> parameterableElements() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -116,14 +116,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::TemplateableElement> m_thisTemplateableElementPtr;

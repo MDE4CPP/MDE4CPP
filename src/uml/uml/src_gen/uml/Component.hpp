@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -110,7 +109,7 @@ namespace uml
 			Creates a(n) (abstract) class with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) = 0;
+			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name, bool isAbstract) = 0;
 			/*!
 			Creates a enumeration with the specified name as a packaged element of this component.
 			*/
@@ -138,7 +137,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getProvideds() = 0;
 			/*!
 			Derivation for Component::/required
 			result = (let 	uis : Set(Interface) = allUsedInterfaces(),
@@ -152,19 +151,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() = 0;
 			/*!
 			A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty()
 			*/
 			 
-			virtual bool no_nested_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_nested_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty()
 			*/
 			 
-			virtual bool no_packaged_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_packaged_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

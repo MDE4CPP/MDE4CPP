@@ -199,7 +199,7 @@ std::shared_ptr<ecore::EObject> SignalImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -491,7 +491,7 @@ std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -511,7 +511,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool SignalImpl::eSet(int featureID, Any newValue)
+bool SignalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -560,9 +560,9 @@ bool SignalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> SignalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -572,22 +572,22 @@ Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			//Retrieve input parameter 'lower'
 			//parameter 2
 			int incoming_param_lower;
-			std::list<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'upper'
 			//parameter 3
 			int incoming_param_upper;
-			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
 			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;

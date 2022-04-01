@@ -67,46 +67,46 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicProvided() ;
 			/*!
 			The union of the sets of Interfaces used by the type of the Port and its supertypes.
 			result = ( type.oclAsType(Classifier).allUsedInterfaces() )
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicRequired() ;
 			/*!
 			A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
 			*/
 			 
-			virtual bool default_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier
 			*/
 			 
-			virtual bool encapsulated_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getProvideds() ;
 			/*!
 			Derivation for Port::/required
 			result = (if isConjugated then basicProvided() else basicRequired() endif)
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() ;
 			/*!
 			Port.aggregation must be composite.
 			aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -245,14 +245,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Port> m_thisPortPtr;

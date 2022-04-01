@@ -55,13 +55,13 @@ namespace uml
 			activity.ownedParameter->includes(parameter)
 			*/
 			 
-			virtual bool has_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
 			incoming->isEmpty() or outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
 			(outgoing->notEmpty() and incoming->isEmpty()) implies 
@@ -69,7 +69,7 @@ namespace uml
 				 parameter.direction = ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An ActivityParameterNode with no outgoing ActivityEdges and one or more incoming ActivityEdges must have a parameter with direction out, inout, or return.
 			(incoming->notEmpty() and outgoing->isEmpty()) implies 
@@ -78,13 +78,13 @@ namespace uml
 				 parameter.direction = ParameterDirectionKind::return)
 			*/
 			 
-			virtual bool no_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_outgoing_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of an ActivityParameterNode is the same as the type of its parameter.
 			type = parameter.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -155,14 +155,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ActivityParameterNode> m_thisActivityParameterNodePtr;

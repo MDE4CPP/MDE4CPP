@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -117,13 +116,13 @@ namespace uml
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool deployed_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool deployed_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

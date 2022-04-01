@@ -60,19 +60,19 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_output_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_flow_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool selection_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -185,14 +185,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ObjectNode> m_thisObjectNodePtr;

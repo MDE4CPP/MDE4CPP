@@ -86,7 +86,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElements() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

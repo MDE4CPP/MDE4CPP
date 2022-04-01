@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -98,7 +97,7 @@ namespace uml
 			connectionPoint->notEmpty() implies isComposite
 			*/
 			 
-			virtual bool composite_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool composite_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
@@ -106,13 +105,13 @@ namespace uml
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
 			*/
 			 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool destinations_or_sources_of_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool entry_or_exit(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool entry_or_exit(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A composite State is a State with at least one Region.
 			result = (region->notEmpty())
@@ -158,13 +157,13 @@ namespace uml
 			isComposite implies not isSubmachineState
 			*/
 			 
-			virtual bool submachine_or_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool submachine_or_regions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( )
 			*/
 			 
-			virtual bool submachine_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool submachine_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

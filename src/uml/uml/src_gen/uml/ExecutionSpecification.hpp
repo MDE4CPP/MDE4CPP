@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -89,7 +88,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_lifeline(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

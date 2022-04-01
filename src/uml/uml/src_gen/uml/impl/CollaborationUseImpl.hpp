@@ -59,7 +59,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool client_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
@@ -73,13 +73,13 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool connectors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool every_role(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -144,14 +144,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::CollaborationUse> m_thisCollaborationUsePtr;

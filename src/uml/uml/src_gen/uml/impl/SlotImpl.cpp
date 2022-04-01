@@ -387,7 +387,7 @@ std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -418,7 +418,7 @@ bool SlotImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool SlotImpl::eSet(int featureID, Any newValue)
+bool SlotImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -483,9 +483,9 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> SlotImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

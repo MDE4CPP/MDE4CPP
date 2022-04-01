@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -103,46 +102,46 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicProvided() = 0;
 			/*!
 			The union of the sets of Interfaces used by the type of the Port and its supertypes.
 			result = ( type.oclAsType(Classifier).allUsedInterfaces() )
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicRequired() = 0;
 			/*!
 			A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
 			*/
 			 
-			virtual bool default_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier
 			*/
 			 
-			virtual bool encapsulated_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getProvideds() = 0;
 			/*!
 			Derivation for Port::/required
 			result = (if isConjugated then basicProvided() else basicRequired() endif)
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() = 0;
 			/*!
 			Port.aggregation must be composite.
 			aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -285,12 +285,12 @@ std::shared_ptr<ecore::EObject> ClassImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassImpl::getAllOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassImpl::getAllOperations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -311,12 +311,12 @@ return allOperations;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
+std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtensions()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
+std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClasses()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -340,7 +340,7 @@ bool ClassImpl::isMetaclass()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassImpl::passive_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassImpl::passive_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -859,7 +859,7 @@ std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -878,7 +878,7 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 			return eAnyBag(getSuperClass(),uml::umlPackage::CLASS_CLASS); //3551
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -917,7 +917,7 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ClassImpl::eSet(int featureID, Any newValue)
+bool ClassImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -1128,9 +1128,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -1140,22 +1140,22 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
 			//Retrieve input parameter 'returnType'
 			//parameter 3
 			std::shared_ptr<uml::Type> incoming_param_returnType;
-			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
@@ -1163,21 +1163,21 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// uml::Class::getAllOperations() : uml::Operation[*]: 3178057285
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
+			std::shared_ptr<Bag<uml::Operation>> resultList = this->getAllOperations();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Class::getExtensions() : uml::Extension[*]: 4033444456
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
-			std::shared_ptr<Bag<uml::Extension> > resultList = this->getExtensions();
+			std::shared_ptr<Bag<uml::Extension>> resultList = this->getExtensions();
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Class::getSuperClasses() : uml::Class[*]: 1013854710
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getSuperClasses();
+			std::shared_ptr<Bag<uml::Class>> resultList = this->getSuperClasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
@@ -1187,19 +1187,19 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			result = eAny(this->isMetaclass(),0,false);
 			break;
 		}
-		// uml::Class::passive_class(Any, std::map) : bool: 3738386724
+		// uml::Class::passive_class(std::shared_ptr<Any>, std::map) : bool: 2397825057
 		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

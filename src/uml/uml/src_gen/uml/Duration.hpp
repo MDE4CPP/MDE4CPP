@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -92,7 +91,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_expr_requires_observation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

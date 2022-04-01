@@ -118,14 +118,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;
+			virtual std::shared_ptr<Bag<uml::Transition>> getIncomings() = 0;
 			/*!
 			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;
+			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoings() = 0;
 			/*!
 			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then

@@ -62,19 +62,19 @@ namespace uml
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_association(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,14 +151,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::LinkAction> m_thisLinkActionPtr;

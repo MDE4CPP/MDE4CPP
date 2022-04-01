@@ -55,25 +55,25 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size()
 			*/
 			 
-			virtual bool number_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool number_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
 			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
@@ -83,7 +83,7 @@ namespace uml
 				attribute->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_ordering_and_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -184,14 +184,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::UnmarshallAction> m_thisUnmarshallActionPtr;

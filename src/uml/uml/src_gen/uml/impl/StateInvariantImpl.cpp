@@ -321,7 +321,7 @@ std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -341,7 +341,7 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool StateInvariantImpl::eSet(int featureID, Any newValue)
+bool StateInvariantImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -361,9 +361,9 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

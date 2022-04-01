@@ -57,25 +57,25 @@ namespace uml
 			slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature)))
 			*/
 			 
-			virtual bool defining_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool defining_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
 			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact))
 			*/
 			 
-			virtual bool deployment_artifact(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deployment_artifact(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An InstanceSpecification can act as a DeploymentTarget if it represents an instance of a Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node)))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			No more than one slot in an InstanceSpecification may have the same definingFeature.
 			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1)))
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -153,14 +153,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::InstanceSpecification> m_thisInstanceSpecificationPtr;

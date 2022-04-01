@@ -269,7 +269,7 @@ std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -285,7 +285,7 @@ bool ObservationImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool ObservationImpl::eSet(int featureID, Any newValue)
+bool ObservationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -297,9 +297,9 @@ bool ObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObservationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

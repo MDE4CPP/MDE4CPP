@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -95,13 +94,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool incoming_object_flow(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_outgoing_edge(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -55,18 +55,18 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool boolean_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_apply_to_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -150,14 +150,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Constraint> m_thisConstraintPtr;

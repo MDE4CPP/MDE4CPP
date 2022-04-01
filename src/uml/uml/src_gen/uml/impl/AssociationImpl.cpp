@@ -283,22 +283,22 @@ std::shared_ptr<ecore::EObject> AssociationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::association_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::ends_must_be_typed(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes()
+std::shared_ptr<Bag<uml::Type>> AssociationImpl::getEndTypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -308,12 +308,12 @@ bool AssociationImpl::isBinary()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::specialized_end_number(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::specialized_end_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -754,7 +754,7 @@ std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -769,7 +769,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 			return eAnyBag(getOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2142
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -804,7 +804,7 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool AssociationImpl::eSet(int featureID, Any newValue)
+bool AssociationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -941,64 +941,64 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Association::association_ends(Any, std::map) : bool: 2930642913
+		// uml::Association::association_ends(std::shared_ptr<Any>, std::map) : bool: 1587313570
 		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::binary_associations(Any, std::map) : bool: 3742063439
+		// uml::Association::binary_associations(std::shared_ptr<Any>, std::map) : bool: 3756636572
 		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 3676775068
+		// uml::Association::ends_must_be_typed(std::shared_ptr<Any>, std::map) : bool: 1245936469
 		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 		// uml::Association::getEndTypes() : uml::Type[*]: 2690402644
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
-			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
+			std::shared_ptr<Bag<uml::Type>> resultList = this->getEndTypes();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
@@ -1008,35 +1008,35 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->isBinary(),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_number(Any, std::map) : bool: 1286424394
+		// uml::Association::specialized_end_number(std::shared_ptr<Any>, std::map) : bool: 1932261555
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_types(Any, std::map) : bool: 3385560362
+		// uml::Association::specialized_end_types(std::shared_ptr<Any>, std::map) : bool: 1371817999
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

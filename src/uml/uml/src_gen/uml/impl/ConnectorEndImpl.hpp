@@ -52,26 +52,26 @@ namespace uml
 			self.compatibleWith(definingEnd)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
 			*/
 			 
-			virtual bool part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool part_with_port_empty(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
 			*/
 			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool role_and_part_with_port(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
 			*/
 			 
-			virtual bool self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool self_part_with_port(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -144,14 +144,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ConnectorEnd> m_thisConnectorEndPtr;

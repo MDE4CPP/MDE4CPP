@@ -395,7 +395,7 @@ std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -407,7 +407,7 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //11213
 		}
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -436,7 +436,7 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool IncludeImpl::eSet(int featureID, Any newValue)
+bool IncludeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -471,9 +471,9 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> IncludeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

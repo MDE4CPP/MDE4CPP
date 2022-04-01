@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -102,20 +101,20 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool trigger_call_event(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool unmarshall(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -61,19 +61,19 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > sourceNodes() ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> sourceNodes() ;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as targets of edges owned by the StructuredActivityNode.
 			result = (node->union(output.oclAsType(ActivityNode)->asSet())->
@@ -89,7 +89,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > targetNodes() ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> targetNodes() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -226,14 +226,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::StructuredActivityNode> m_thisStructuredActivityNodePtr;

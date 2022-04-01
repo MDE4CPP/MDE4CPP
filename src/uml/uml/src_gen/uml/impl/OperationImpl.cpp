@@ -270,7 +270,7 @@ std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OperationImpl::at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -331,7 +331,7 @@ return equals;
 	//end of body
 }
 
-bool OperationImpl::only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OperationImpl::only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -969,7 +969,7 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -1011,7 +1011,7 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
 			return eAny(getUpper(),0,false); //16742
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -1074,7 +1074,7 @@ bool OperationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool OperationImpl::eSet(int featureID, Any newValue)
+bool OperationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -1285,25 +1285,25 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Operation::at_most_one_return(Any, std::map) : bool: 1796067314
+		// uml::Operation::at_most_one_return(std::shared_ptr<Any>, std::map) : bool: 452737971
 		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1343,24 +1343,24 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'comparedOperation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_comparedOperation;
-			std::list<Any>::const_iterator incoming_param_comparedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_comparedOperation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_comparedOperation = (*incoming_param_comparedOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			result = eAny(this->matches(incoming_param_comparedOperation),0,false);
 			break;
 		}
-		// uml::Operation::only_body_for_query(Any, std::map) : bool: 2418925081
+		// uml::Operation::only_body_for_query(std::shared_ptr<Any>, std::map) : bool: 4236913934
 		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1376,7 +1376,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'newIsOrdered'
 			//parameter 0
 			bool incoming_param_newIsOrdered;
-			std::list<Any>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newIsOrdered = (*incoming_param_newIsOrdered_arguments_citer)->get<bool >();
 			this->setIsOrdered(incoming_param_newIsOrdered);
 			break;
@@ -1387,7 +1387,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'newIsUnique'
 			//parameter 0
 			bool incoming_param_newIsUnique;
-			std::list<Any>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newIsUnique = (*incoming_param_newIsUnique_arguments_citer)->get<bool >();
 			this->setIsUnique(incoming_param_newIsUnique);
 			break;
@@ -1398,7 +1398,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'newLower'
 			//parameter 0
 			int incoming_param_newLower;
-			std::list<Any>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newLower = (*incoming_param_newLower_arguments_citer)->get<int >();
 			this->setLower(incoming_param_newLower);
 			break;
@@ -1409,7 +1409,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'newType'
 			//parameter 0
 			std::shared_ptr<uml::Type> incoming_param_newType;
-			std::list<Any>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newType = (*incoming_param_newType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			this->setType(incoming_param_newType);
 			break;
@@ -1420,7 +1420,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'newUpper'
 			//parameter 0
 			int incoming_param_newUpper;
-			std::list<Any>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newUpper = (*incoming_param_newUpper_arguments_citer)->get<int >();
 			this->setUpper(incoming_param_newUpper);
 			break;

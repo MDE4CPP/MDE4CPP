@@ -65,7 +65,7 @@ namespace uml
 			containedEdge->forAll(activity = self.containingActivity())
 			*/
 			 
-			virtual bool nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
 			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
@@ -74,7 +74,7 @@ namespace uml
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -161,14 +161,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ActivityGroup> m_thisActivityGroupPtr;

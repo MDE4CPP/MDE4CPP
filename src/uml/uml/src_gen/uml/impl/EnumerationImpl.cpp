@@ -201,7 +201,7 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool EnumerationImpl::immutable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -495,7 +495,7 @@ std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -515,7 +515,7 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 	return DataTypeImpl::internalEIsSet(featureID);
 }
 
-bool EnumerationImpl::eSet(int featureID, Any newValue)
+bool EnumerationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -564,25 +564,25 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EnumerationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Enumeration::immutable(Any, std::map) : bool: 3717688929
+		// uml::Enumeration::immutable(std::shared_ptr<Any>, std::map) : bool: 471317622
 		case umlPackage::ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->immutable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

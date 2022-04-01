@@ -50,37 +50,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;
+			virtual std::shared_ptr<Bag<uml::InputPin>> allPins() ;
 			/*!
 			The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value)
 			*/
 			 
-			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool end_object_input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool property_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier)
 			*/
 			 
-			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool qualifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type)
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,14 +151,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::LinkEndData> m_thisLinkEndDataPtr;

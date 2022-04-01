@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -98,25 +97,25 @@ namespace uml
 			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool body_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The loopVariableInputs must not have outgoing edges.
 			loopVariableInput.outgoing->isEmpty()
 			*/
 			 
-			virtual bool input_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
 			allOwnedNodes()->includesAll(loopVariable.outgoing.target)
 			*/
 			 
-			virtual bool loop_variable_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool loop_variable_outgoing(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
 			loopVariableInput->size()=loopVariable->size() and
@@ -126,7 +125,7 @@ namespace uml
 			loopVariableInput.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_loop_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_loop_variables(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
 			bodyOutput->size()=loopVariable->size() and
@@ -137,7 +136,7 @@ namespace uml
 				loopVariable->at(i).includesMultiplicity(bodyOutput->at(i)))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
 			result->size()=loopVariable->size() and
@@ -147,13 +146,13 @@ namespace uml
 			result.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_no_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			setupPart->intersection(test)->isEmpty() and
@@ -161,7 +160,7 @@ namespace uml
 			test->intersection(bodyPart)->isEmpty()
 			*/
 			 
-			virtual bool setup_test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool setup_test_and_body(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

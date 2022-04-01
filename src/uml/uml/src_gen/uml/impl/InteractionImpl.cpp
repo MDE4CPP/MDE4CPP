@@ -376,7 +376,7 @@ std::shared_ptr<ecore::EObject> InteractionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionImpl::not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -889,7 +889,7 @@ std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -904,7 +904,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 			return eAnyBag(getMessage(),uml::umlPackage::MESSAGE_CLASS); //11970
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -939,7 +939,7 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InteractionImpl::eSet(int featureID, Any newValue)
+bool InteractionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -1143,25 +1143,25 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> InteractionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Interaction::not_contained(Any, std::map) : bool: 3628466367
+		// uml::Interaction::not_contained(std::shared_ptr<Any>, std::map) : bool: 2278117572
 		case umlPackage::INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

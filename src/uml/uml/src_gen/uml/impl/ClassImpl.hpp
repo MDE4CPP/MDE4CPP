@@ -56,8 +56,8 @@ namespace uml
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) ;
-			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType) ;
+			virtual std::shared_ptr<Bag<uml::Operation>> getAllOperations() ;
 			/*!
 			Derivation for Class::/extension : Extension
 			result = (Extension.allInstances()->select(ext | 
@@ -66,14 +66,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions() ;
+			virtual std::shared_ptr<Bag<uml::Extension>> getExtensions() ;
 			/*!
 			Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses() ;
+			virtual std::shared_ptr<Bag<uml::Class>> getSuperClasses() ;
 			/*!
 			Determines whether this class is a metaclass.
 			*/
@@ -84,7 +84,7 @@ namespace uml
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null)
 			*/
 			 
-			virtual bool passive_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool passive_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -217,14 +217,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Class> m_thisClassPtr;

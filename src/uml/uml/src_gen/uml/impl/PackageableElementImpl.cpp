@@ -133,7 +133,7 @@ PackageableElementImpl& PackageableElementImpl::operator=(const PackageableEleme
 //*********************************
 // Operations
 //*********************************
-bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PackageableElementImpl::namespace_needs_visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -301,7 +301,7 @@ std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -311,7 +311,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //17311
 		}
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -338,7 +338,7 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PackageableElementImpl::eSet(int featureID, Any newValue)
+bool PackageableElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -365,25 +365,25 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::PackageableElement::namespace_needs_visibility(Any, std::map) : bool: 369327334
+		// uml::PackageableElement::namespace_needs_visibility(std::shared_ptr<Any>, std::map) : bool: 3161942427
 		case umlPackage::PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->namespace_needs_visibility(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

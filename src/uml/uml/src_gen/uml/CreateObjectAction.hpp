@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -96,25 +95,25 @@ namespace uml
 			not classifier.isAbstract
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_association_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -493,7 +493,7 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -502,7 +502,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 			return eAnyBag(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -531,7 +531,7 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool DependencyImpl::eSet(int featureID, Any newValue)
+bool DependencyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -624,9 +624,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DependencyImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

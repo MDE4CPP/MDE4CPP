@@ -342,27 +342,27 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::sourceNodes()
+std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeImpl::sourceNodes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes()
+std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeImpl::targetNodes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -897,7 +897,7 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -914,7 +914,7 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 			return eAnyBag(getVariable(),uml::umlPackage::VARIABLE_CLASS); //22742
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ActionImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -961,7 +961,7 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
+bool StructuredActivityNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -1177,71 +1177,71 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 2175188978
+		// uml::StructuredActivityNode::edges(std::shared_ptr<Any>, std::map) : bool: 831859635
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1705277235
+		// uml::StructuredActivityNode::input_pin_edges(std::shared_ptr<Any>, std::map) : bool: 1741439564
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 3435203420
+		// uml::StructuredActivityNode::output_pin_edges(std::shared_ptr<Any>, std::map) : bool: 1056839561
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 3462902530
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
+			std::shared_ptr<Bag<uml::ActivityNode>> resultList = this->sourceNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 2207842792
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();
+			std::shared_ptr<Bag<uml::ActivityNode>> resultList = this->targetNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}

@@ -189,7 +189,7 @@ bool ExtensionImpl::isRequired()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExtensionImpl::is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionImpl::is_binary(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -199,7 +199,7 @@ std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExtensionImpl::non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionImpl::non_owned_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -454,7 +454,7 @@ std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -478,7 +478,7 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	return AssociationImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionImpl::eSet(int featureID, Any newValue)
+bool ExtensionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -490,9 +490,9 @@ bool ExtensionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -514,19 +514,19 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAny(this->isRequired(),0,false);
 			break;
 		}
-		// uml::Extension::is_binary(Any, std::map) : bool: 2411406819
+		// uml::Extension::is_binary(std::shared_ptr<Any>, std::map) : bool: 1070845152
 		case umlPackage::EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -536,19 +536,19 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			result = eAnyObject(this->metaclassEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::Extension::non_owned_end(Any, std::map) : bool: 8830304
+		// uml::Extension::non_owned_end(std::shared_ptr<Any>, std::map) : bool: 3462365645
 		case umlPackage::EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

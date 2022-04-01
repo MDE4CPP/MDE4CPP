@@ -56,14 +56,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions() ;
+			virtual std::shared_ptr<Bag<uml::Action>> allActions() ;
 			/*!
 			Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> allOwnedNodes() ;
 			/*!
 			result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
 			else if activity<>null then activity
@@ -178,14 +178,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Action> m_thisActionPtr;

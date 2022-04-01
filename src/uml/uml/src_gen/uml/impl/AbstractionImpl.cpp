@@ -381,7 +381,7 @@ std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -401,7 +401,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 	return DependencyImpl::internalEIsSet(featureID);
 }
 
-bool AbstractionImpl::eSet(int featureID, Any newValue)
+bool AbstractionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -421,9 +421,9 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AbstractionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

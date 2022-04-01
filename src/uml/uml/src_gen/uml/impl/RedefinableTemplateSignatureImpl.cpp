@@ -188,12 +188,12 @@ std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters()
+std::shared_ptr<Bag<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RedefinableTemplateSignatureImpl::redefines_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -490,7 +490,7 @@ std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -504,7 +504,7 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 			return eAnyBag(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -535,7 +535,7 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
+bool RedefinableTemplateSignatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -599,32 +599,32 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 1729090337
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
+			std::shared_ptr<Bag<uml::TemplateParameter>> resultList = this->getInheritedParameters();
 			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}
-		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 2810722782
+		// uml::RedefinableTemplateSignature::redefines_parents(std::shared_ptr<Any>, std::map) : bool: 495467351
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

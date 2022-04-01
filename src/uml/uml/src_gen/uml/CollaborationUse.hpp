@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -94,7 +93,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool client_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
@@ -108,13 +107,13 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool connectors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool every_role(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

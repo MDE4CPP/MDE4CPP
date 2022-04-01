@@ -81,20 +81,20 @@ namespace uml
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A Region can have at most one initial Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
@@ -113,7 +113,7 @@ namespace uml
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -232,14 +232,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Region> m_thisRegionPtr;

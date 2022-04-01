@@ -57,12 +57,12 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool convey_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool must_conform(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
@@ -81,7 +81,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool sources_and_targets_kind(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -195,14 +195,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::InformationFlow> m_thisInformationFlowPtr;

@@ -127,7 +127,7 @@ NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
+std::shared_ptr<Bag<uml::Namespace>> NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +152,7 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
+std::shared_ptr<Bag<uml::Package>> NamedElementImpl::allOwningPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +167,7 @@ std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::N
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies()
+std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependencies()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -207,17 +207,17 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::has_no_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamedElementImpl::has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::has_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns)
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -230,7 +230,7 @@ std::string NamedElementImpl::separator() const
 	//end of body
 }
 
-bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::visibility_needs_ownership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -504,7 +504,7 @@ std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -547,7 +547,7 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool NamedElementImpl::eSet(int featureID, Any newValue)
+bool NamedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -581,23 +581,23 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2409538685
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
-			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
+			std::shared_ptr<Bag<uml::Namespace>> resultList = this->allNamespaces();
 			return eAnyBag(resultList,uml::umlPackage::NAMESPACE_CLASS);
 			break;
 		}
 		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 2217156650
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
+			std::shared_ptr<Bag<uml::Package>> resultList = this->allOwningPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
@@ -607,7 +607,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
 			result = eAnyObject(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
 			break;
@@ -618,7 +618,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
 			result = eAnyObject(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
 			break;
@@ -626,7 +626,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 3811456257
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
-			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
+			std::shared_ptr<Bag<uml::Dependency>> resultList = this->getClientDependencies();
 			return eAnyBag(resultList,uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
@@ -642,7 +642,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'localize'
 			//parameter 0
 			bool incoming_param_localize;
-			std::list<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
 			result = eAny(this->getLabel(incoming_param_localize),0,false);
 			break;
@@ -653,35 +653,35 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->getQualifiedName(),0,false);
 			break;
 		}
-		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 539959656
+		// uml::NamedElement::has_no_qualified_name(std::shared_ptr<Any>, std::map) : bool: 1185796817
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2208944440
+		// uml::NamedElement::has_qualified_name(std::shared_ptr<Any>, std::map) : bool: 2223517573
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -691,12 +691,12 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_n;
-			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
 			//Retrieve input parameter 'ns'
 			//parameter 1
 			std::shared_ptr<uml::Namespace> incoming_param_ns;
-			std::list<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_ns = (*incoming_param_ns_arguments_citer)->get<std::shared_ptr<uml::Namespace> >();
 			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
 			break;
@@ -707,19 +707,19 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			result = eAny(this->separator(),0,false);
 			break;
 		}
-		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 3453868149
+		// uml::NamedElement::visibility_needs_ownership(std::shared_ptr<Any>, std::map) : bool: 1075504290
 		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

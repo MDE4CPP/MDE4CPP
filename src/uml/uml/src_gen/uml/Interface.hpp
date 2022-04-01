@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -101,18 +100,18 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper) = 0;
 			/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType) = 0;
 			/*!
 			The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public)
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

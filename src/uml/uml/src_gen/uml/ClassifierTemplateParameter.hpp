@@ -14,8 +14,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -83,7 +82,7 @@ namespace uml
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))
 			*/
 			 
-			virtual bool actual_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool actual_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			templateParameterSubstitution.actual->forAll( a |
@@ -95,7 +94,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool constraining_classifiers_constrain_args(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			constrainingClassifier->forAll(
@@ -103,25 +102,25 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool constraining_classifiers_constrain_parametered_element(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If allowSubstitutable is true, then there must be a constrainingClassifier.
 			allowSubstitutable implies constrainingClassifier->notEmpty()
 			*/
 			 
-			virtual bool has_constraining_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool has_constraining_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
 			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract)
 			*/
 			 
-			virtual bool matching_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
 			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())
 			*/
 			 
-			virtual bool parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool parametered_element_no_features(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

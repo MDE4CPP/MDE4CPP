@@ -14,8 +14,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -89,7 +88,7 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool generalization_same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
@@ -97,7 +96,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

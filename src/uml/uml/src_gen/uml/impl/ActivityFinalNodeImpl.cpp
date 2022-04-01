@@ -312,7 +312,7 @@ std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -328,7 +328,7 @@ bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
 	return FinalNodeImpl::internalEIsSet(featureID);
 }
 
-bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
+bool ActivityFinalNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -340,9 +340,9 @@ bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ActivityFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

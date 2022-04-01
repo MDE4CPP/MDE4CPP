@@ -60,19 +60,19 @@ namespace uml
 				argument->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool argument_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool argument_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() ;
 			/*!
 			Return the inout, out and return ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
 			/*!
 			The number of result OutputPins must be the same as the number of output (inout, out and return) ownedParameters of the called Behavior or Operation. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
 			let parameter: OrderedSet(Parameter) = self.outputParameters() in
@@ -83,13 +83,13 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous
 			*/
 			 
-			virtual bool synchronous_call(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool synchronous_call(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -178,14 +178,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::CallAction> m_thisCallActionPtr;

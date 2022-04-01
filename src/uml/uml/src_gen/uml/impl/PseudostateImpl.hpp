@@ -57,43 +57,43 @@ namespace uml
 			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool choice_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool choice_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
 			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2)
 			*/
 			 
-			virtual bool fork_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool fork_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			History Vertices can have at most one outgoing Transition.
 			((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool history_vertices(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool history_vertices(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			An initial Vertex can have at most one outgoing Transition.
 			(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
 			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)
 			*/
 			 
-			virtual bool join_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool join_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool junction_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool junction_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
 			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())
 			*/
 			 
-			virtual bool outgoing_from_initial(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool outgoing_from_initial(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
 			(kind = PseudostateKind::join) implies
@@ -106,7 +106,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool transitions_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
 			(kind = PseudostateKind::fork) implies
@@ -119,7 +119,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool transitions_outgoing(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -208,14 +208,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Pseudostate> m_thisPseudostatePtr;

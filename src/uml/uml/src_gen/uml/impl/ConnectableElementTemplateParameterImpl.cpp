@@ -242,7 +242,7 @@ std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticC
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -258,7 +258,7 @@ bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) cons
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
+bool ConnectableElementTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -270,9 +270,9 @@ bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

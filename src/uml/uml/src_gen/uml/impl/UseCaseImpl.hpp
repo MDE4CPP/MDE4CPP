@@ -57,25 +57,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() ;
+			virtual std::shared_ptr<Bag<uml::UseCase>> allIncludedUseCases() ;
 			/*!
 			UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool cannot_include_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
@@ -86,7 +86,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_association_to_use_case(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -188,14 +188,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::UseCase> m_thisUseCasePtr;

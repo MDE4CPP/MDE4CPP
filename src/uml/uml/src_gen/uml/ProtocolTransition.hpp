@@ -15,8 +15,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -96,20 +95,20 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool associated_actions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool belongs_to_psm(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() = 0;
+			virtual std::shared_ptr<Bag<uml::Operation>> getReferreds() = 0;
 			/*!
 			If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
@@ -117,7 +116,7 @@ namespace uml
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool refers_to_operation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

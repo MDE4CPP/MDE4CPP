@@ -351,7 +351,7 @@ std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -375,7 +375,7 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 	return ObservationImpl::internalEIsSet(featureID);
 }
 
-bool TimeObservationImpl::eSet(int featureID, Any newValue)
+bool TimeObservationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -402,9 +402,9 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

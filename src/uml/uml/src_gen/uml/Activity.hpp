@@ -15,8 +15,7 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -117,7 +116,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maximum_one_parameter_node(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
 			ownedParameter->forAll(p | 
@@ -130,7 +129,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maximum_two_parameter_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -183,7 +182,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const = 0;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const = 0;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
@@ -327,7 +326,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> m_partition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> m_partition;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>

@@ -326,7 +326,7 @@ std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass(
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -346,7 +346,7 @@ bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+bool BehaviorExecutionSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -366,9 +366,9 @@ bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

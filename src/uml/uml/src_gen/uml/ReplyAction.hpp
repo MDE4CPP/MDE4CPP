@@ -14,8 +14,7 @@
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -97,7 +96,7 @@ namespace uml
 			replyToCall.event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool event_on_reply_to_call_trigger(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
 			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
@@ -108,7 +107,7 @@ namespace uml
 				replyValue->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool pins_match_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -52,7 +52,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElements() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,14 +111,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::DeploymentTarget> m_thisDeploymentTargetPtr;

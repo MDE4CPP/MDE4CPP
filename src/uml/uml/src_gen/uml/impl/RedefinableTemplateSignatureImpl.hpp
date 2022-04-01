@@ -55,13 +55,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() ;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter>> getInheritedParameters() ;
 			/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool redefines_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -157,14 +157,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::RedefinableTemplateSignature> m_thisRedefinableTemplateSignaturePtr;

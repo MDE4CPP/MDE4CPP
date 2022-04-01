@@ -258,37 +258,37 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
+std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2)
+std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex> v1, std::shared_ptr<uml::Vertex> v2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
+bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::classifier_context(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::classifier_context(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::connection_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::connection_points(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::context_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -761,7 +761,7 @@ std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -793,7 +793,7 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	return BehaviorImpl::internalEIsSet(featureID);
 }
 
-bool StateMachineImpl::eSet(int featureID, Any newValue)
+bool StateMachineImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -953,9 +953,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -965,12 +965,12 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 's1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			result = eAnyObject(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
 			break;
@@ -981,12 +981,12 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'v1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_v1;
-			std::list<Any>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 'v2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
-			std::list<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			result = eAnyObject(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
 			break;
@@ -997,77 +997,77 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 's1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2),0,false);
 			break;
 		}
-		// uml::StateMachine::classifier_context(Any, std::map) : bool: 649285641
+		// uml::StateMachine::classifier_context(std::shared_ptr<Any>, std::map) : bool: 663858774
 		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::connection_points(Any, std::map) : bool: 2667881420
+		// uml::StateMachine::connection_points(std::shared_ptr<Any>, std::map) : bool: 237042821
 		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::context_classifier(Any, std::map) : bool: 3859423129
+		// uml::StateMachine::context_classifier(std::shared_ptr<Any>, std::map) : bool: 3873996262
 		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StateMachine::method(Any, std::map) : bool: 292291073
+		// uml::StateMachine::method(std::shared_ptr<Any>, std::map) : bool: 3246696702
 		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
 			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -96,14 +96,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions() = 0;
+			virtual std::shared_ptr<Bag<uml::Action>> allActions() = 0;
 			/*!
 			Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> allOwnedNodes() = 0;
 			/*!
 			result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
 			else if activity<>null then activity

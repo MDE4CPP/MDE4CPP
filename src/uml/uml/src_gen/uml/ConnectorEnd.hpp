@@ -13,8 +13,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -89,26 +88,26 @@ namespace uml
 			self.compatibleWith(definingEnd)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
 			*/
 			 
-			virtual bool part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool part_with_port_empty(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
 			*/
 			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool role_and_part_with_port(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 			/*!
 			The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
 			*/
 			 
-			virtual bool self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool self_part_with_port(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
