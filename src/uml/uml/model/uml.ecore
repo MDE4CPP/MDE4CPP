@@ -804,7 +804,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name."/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = this->getMetaClass()->getAttribute();&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;return this->get(p);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return Any();"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = this->getMetaClass()->getAttribute();&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;return this->get(p);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return eAny(nullptr, -1, false);"/>
       </eAnnotations>
       <eParameters name="propertyName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1552,7 +1552,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xA;&#x9;if(stereoInstance == nullptr)&#xA;&#x9;{&#xA;&#x9;   return Any();&#xA;&#x9;}&#xA;&#xA;&#x9;return stereoInstance->getPropertyValue(propertyName);"/>
+        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xA;&#x9;if(stereoInstance == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;return eAny(nullptr, -1, false);&#xA;&#x9;}&#xA;&#xA;&#x9;return stereoInstance->getPropertyValue(propertyName);"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -2859,8 +2859,15 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.&#xA;The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.&#xA;If an Argument is not supplied for a Parameter, its default value, if any, will be used."/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="Substituted original type &quot;Argument&quot; with EJavaObject."/>
+      </eAnnotations>
       <eParameters name="_operation" eType="#//Operation"/>
-      <eParameters name="arguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="arguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+          <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
+        </eAnnotations>
+      </eParameters>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="#//Element">
