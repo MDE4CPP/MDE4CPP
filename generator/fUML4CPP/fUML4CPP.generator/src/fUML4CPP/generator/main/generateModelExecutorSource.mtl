@@ -65,7 +65,7 @@ using namespace [aPackage.generateNamespace(false)/];
 #endif
 }
 
-Any [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	[let packageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()]
 	[if (packageList->size() > 0)]

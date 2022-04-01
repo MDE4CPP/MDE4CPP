@@ -39,7 +39,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual Any evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
+			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
 	};
 }
 [endGuard(aPackage,'Executor')/]
@@ -68,7 +68,7 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual Any evaluate(std::shared_ptr<uml::ValueSpecification> specification);
+			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification);
 			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr){/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);};
 	};
 }
