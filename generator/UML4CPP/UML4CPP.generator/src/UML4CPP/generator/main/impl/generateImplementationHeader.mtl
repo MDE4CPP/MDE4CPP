@@ -47,8 +47,7 @@
 #include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
 [/if]
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 namespace uml
 {

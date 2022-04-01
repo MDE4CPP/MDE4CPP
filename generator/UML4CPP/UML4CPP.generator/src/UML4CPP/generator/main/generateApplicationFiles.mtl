@@ -162,7 +162,7 @@ int main()
 			parameterList->push_back([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
 			[/let]
 			[/for]
-			Any activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
+			std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
 
 
 			[if (mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
