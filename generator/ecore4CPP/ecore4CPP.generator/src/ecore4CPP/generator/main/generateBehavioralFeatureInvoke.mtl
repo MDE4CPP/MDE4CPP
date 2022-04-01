@@ -45,7 +45,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [template private _generateIncomingParameter(aEParameter : EParameter, index : Integer)]
 	//parameter [index/]
 	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
-	std::list<Any>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	Bag<Any>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
 	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get<[aEParameter.generateParameterType()/] >();
 [/template]
 
@@ -54,16 +54,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
  *  Declaration of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDDeclaration(aClass : EClass, impl : Boolean)]
-virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) [abstractSufix(impl)/];
+virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) [abstractSufix(impl)/];
 [/template]
 
 [**/
  *  Implementation of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDImplementation(aClass : EClass) post(trim())]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -85,9 +85,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
  		[else]
 			[comment Operation w/ return value /]
 			[if (aOperation.eType.oclIsKindOf(EDataType))] [comment Primitive Returntype/]
-				[if (aOperation.isAnyNoPtr())]
-			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-				[elseif (aOperation.upperBound = 1)]
+				[if (aOperation.upperBound = 1)]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
 				[else]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
@@ -103,7 +101,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			return eAnyBag(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 				[/if]
-			[elseif (aOperation.isAnyNoPtr())]
+			[elseif (aOperation.isOfAnyType())]
 			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			[else] [comment Unknown should be an EClass or EDataType /]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);

@@ -364,7 +364,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				[if (aReference.isAnyNoPtr())]
+				[if (aReference.isOfAnyType())]
 				std::shared_ptr<EObjectAny> _[aReference.name/] = std::dynamic_pointer_cast<EObjectAny>( references.front() );
 				[aReference.SetterName()/](_[aReference.name/]->getAny());
 				[else]
@@ -442,13 +442,13 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 		[/if]
 [/for]
 [/if][/let]	
-[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->reject(doNotGenerateEStructuralFeature())->reject(isOfAnyType())->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 		// Add attributes
 [for (aAttribute : EAttribute | attrList) separator ('\n')]
   [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
 [comment]
-// Attributes that are from type EJavaClass (void*) has not to export to xml. 
+// Attributes of type EJavaClass (resulting in void*) are not exported to xml. 
 [/comment]
 		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
 		{
@@ -468,11 +468,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
 	[else]
-		[if (aAttribute.eType.transformType() = 'Any')]
-			//Cannot save attributes of type Any (EJavaObject)
-		[else]
 			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());
-		[/if]
 	[/if]
 		}
   [else]
@@ -487,7 +483,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		[if (not (aReference.eType.oclIsUndefined()))] 
 			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-			[elseif (aReference.isAnyNoPtr())][printInfo('Can not save Any types right now', 'ecore4CPP::generator::main::generatePersistence', 2)/] 		[comment ToDo handle save Any/]
+			[elseif (aReference.isOfAnyType())][printInfo('Can not save Any types right now', 'ecore4CPP::generator::main::generatePersistence', 2)/] 		[comment ToDo handle save Any/]
 			[elseif (aReference.eType.ePackage.name = 'ecore')]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if],"[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
 			[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
 				[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]

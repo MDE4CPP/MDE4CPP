@@ -69,8 +69,7 @@
 // forward declarations
 [generateAbstractDataTypesForwardDeclaration()/]
 [if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 [/if] 
 
 //*********************************

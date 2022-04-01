@@ -25,7 +25,7 @@
  * eGet Function
 */]
 [template public generateeGetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
-virtual Any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
+virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeIsSetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
@@ -33,11 +33,11 @@ virtual bool internalEIsSet(int featureID) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeSetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
-virtual bool eSet(int featureID, Any newValue) [abstractSufix(impl)/];
+virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) [abstractSufix(impl)/];
 [/template]
 
 [template public generateeGetImplementation(aClass : EClass) post(trim())]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -70,7 +70,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 [elseif (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::eGet(featureID, resolve, coreType);
 [else]
-	Any result;
+	std::shared_ptr<Any> result;
 	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)]		
 		[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 [/template]
 
 [template public generateeSetImplementation(aClass : EClass) post(trim())]
-bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newValue)
+bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -129,7 +129,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 		{
 			// CAST Any to [struct.generateStructuralFeatureType(false)/]
 		[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
-			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(false)/]>();
+			[struct.generateStructuralFeatureType(struct.isOfAnyType())/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(struct.isOfAnyType())/]>();
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		[elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
