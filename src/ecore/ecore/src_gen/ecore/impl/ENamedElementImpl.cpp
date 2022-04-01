@@ -245,7 +245,7 @@ std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -265,7 +265,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 	return EModelElementImpl::internalEIsSet(featureID);
 }
 
-bool ENamedElementImpl::eSet(int featureID, Any newValue)
+bool ENamedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -284,9 +284,9 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

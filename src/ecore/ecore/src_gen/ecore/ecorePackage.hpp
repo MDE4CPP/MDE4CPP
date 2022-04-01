@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class ETypeParameter;
-	class EOperation;
 	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EAttribute;
-	class EGenericType;
 }
 
 namespace ecore 
@@ -205,7 +205,7 @@ namespace ecore
 			static const unsigned long ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS = 180939705;
 			
 			static const unsigned int ECLASSIFIER_OPERATION_GETCLASSIFIERID = 3270154772;
-			static const unsigned int ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT = 202200991;
+			static const unsigned int ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT = 3474633304;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEClassifier_Class() const = 0;
@@ -301,9 +301,9 @@ namespace ecore
 			
 			static const unsigned long EFACTORY_ATTRIBUTE_EPACKAGE = 1068195627;
 			
-			static const unsigned int EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 197002689;
+			static const unsigned int EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 4221360546;
 			static const unsigned int EFACTORY_OPERATION_CREATE_ECLASS = 3809046360;
-			static const unsigned int EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 351752421;
+			static const unsigned int EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 2368899730;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEFactory_Class() const = 0;
@@ -331,7 +331,7 @@ namespace ecore
 			static const unsigned long EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER = 55930959;
 			static const unsigned long EGENERICTYPE_ATTRIBUTE_EUPPERBOUND = 849919749;
 			
-			static const unsigned int EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT = 1038226181;
+			static const unsigned int EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT = 2678446930;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEGenericType_Class() const = 0;
@@ -399,20 +399,20 @@ namespace ecore
 			static const unsigned long EOBJECT_ATTRIBUTE_ECONTAINER = 1415346592;
 			static const unsigned long EOBJECT_ATTRIBUTE_ECONTENTUNION = 607674888;
 			
-			static const unsigned int EOBJECT_OPERATION_EALLCONTENTS = 3701410932;
+			static const unsigned int EOBJECT_OPERATION_EALLCONTENTS = 566931017;
 			static const unsigned int EOBJECT_OPERATION_ECLASS = 3378392784;
 			static const unsigned int EOBJECT_OPERATION_ECONTAINER = 1835273223;
 			static const unsigned int EOBJECT_OPERATION_ECONTAININGFEATURE = 3924601239;
 			static const unsigned int EOBJECT_OPERATION_ECONTAINMENTFEATURE = 3796420659;
 			static const unsigned int EOBJECT_OPERATION_ECONTENTS = 1440229147;
 			static const unsigned int EOBJECT_OPERATION_ECROSSREFERENCES = 4256013160;
-			static const unsigned int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE = 2925960689;
-			static const unsigned int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 1046173981;
-			static const unsigned int EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST = 952707013;
+			static const unsigned int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE = 2319863754;
+			static const unsigned int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 2350561374;
+			static const unsigned int EOBJECT_OPERATION_EINVOKE_EOPERATION_EJAVAOBJECT = 1397932282;
 			static const unsigned int EOBJECT_OPERATION_EISPROXY = 3785601175;
 			static const unsigned int EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE = 3154058889;
 			static const unsigned int EOBJECT_OPERATION_ERESOURCE = 1807854576;
-			static const unsigned int EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 955320472;
+			static const unsigned int EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 837754273;
 			static const unsigned int EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE = 427638394;
 			
 			//Class and Feature Getter
@@ -432,7 +432,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eCrossReferences() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eGet_EStructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eGet_EStructuralFeature_EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eInvoke_EOperation_EEList() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eInvoke_EOperation_EJavaObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eIsProxy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eIsSet_EStructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eResource() const = 0;
@@ -447,15 +447,15 @@ namespace ecore
 			static const unsigned long EOBJECTANY_CLASS = 1375380197;
 			static const unsigned int EOBJECTANY_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EOBJECTANY_CLASS_OPERATION_COUNT = 15;
-			
 			static const unsigned long EOBJECTANY_ATTRIBUTE_ANY = 2010029336;
+			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEObjectAny_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getEObjectAny_Attribute_any() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEObjectAny_Attribute_any() const = 0;
 			
 			
 			// End Class EObjectAny

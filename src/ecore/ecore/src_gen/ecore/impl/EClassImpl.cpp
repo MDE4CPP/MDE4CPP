@@ -937,7 +937,7 @@ std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -1017,7 +1017,7 @@ bool EClassImpl::internalEIsSet(int featureID) const
 	return EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool EClassImpl::eSet(int featureID, Any newValue)
+bool EClassImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -1273,9 +1273,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -1285,7 +1285,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'operationID'
 			//parameter 0
 			int incoming_param_operationID;
-			std::list<Any>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operationID = (*incoming_param_operationID_arguments_citer)->get<int >();
 			result = eAnyObject(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
@@ -1296,7 +1296,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'featureID'
 			//parameter 0
 			int incoming_param_featureID;
-			std::list<Any>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureID = (*incoming_param_featureID_arguments_citer)->get<int >();
 			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
@@ -1307,7 +1307,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'featureName'
 			//parameter 0
 			std::string incoming_param_featureName;
-			std::list<Any>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureName = (*incoming_param_featureName_arguments_citer)->get<std::string >();
 			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
@@ -1324,7 +1324,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			result = eAny(this->getFeatureID(incoming_param_feature),0,false);
 			break;
@@ -1335,7 +1335,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			result = eAnyObject(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS);
 			break;
@@ -1352,7 +1352,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
-			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
 			result = eAny(this->getOperationID(incoming_param_operation),0,false);
 			break;
@@ -1363,7 +1363,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
-			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
 			result = eAnyObject(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
@@ -1374,7 +1374,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'someClass'
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_someClass;
-			std::list<Any>::const_iterator incoming_param_someClass_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_someClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_someClass = (*incoming_param_someClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
 			result = eAny(this->isSuperTypeOf(incoming_param_someClass),0,false);
 			break;

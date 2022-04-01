@@ -45,20 +45,20 @@ virtual public EObject
 			//*********************************
 			// Operations
 			//*********************************
-			virtual Any eAllContents() const ;
+			virtual std::shared_ptr<Any> eAllContents() const ;
 			virtual std::shared_ptr<ecore::EClass> eClass() const ;
 			virtual std::shared_ptr<ecore::EObject> eContainer() ;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
-			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const ;
-			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ;
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < Any>> arguments) ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> eContents() const ;
+			virtual std::shared_ptr<std::list < std::shared_ptr<ecore::EObject>>> eCrossReferences() const ;
+			virtual std::shared_ptr<Any> eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
+			virtual std::shared_ptr<Any> eGet(std::shared_ptr<ecore::EStructuralFeature> feature, bool resolve) const ;
+			virtual std::shared_ptr<Any> eInvoke(std::shared_ptr<ecore::EOperation> operation, std::shared_ptr<Bag<Any>> arguments) ;
 			virtual bool eIsProxy() const ;
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			virtual int eResource() const ;
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature, std::shared_ptr<Any> newValue) ;
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			
 			//*********************************
@@ -99,14 +99,14 @@ virtual public EObject
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ecore::EObject> m_thisEObjectPtr;

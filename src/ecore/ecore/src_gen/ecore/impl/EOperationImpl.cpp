@@ -537,7 +537,7 @@ std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -580,7 +580,7 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool EOperationImpl::eSet(int featureID, Any newValue)
+bool EOperationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -740,9 +740,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EOperationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -752,7 +752,7 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'someOperation'
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_someOperation;
-			std::list<Any>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_someOperation = (*incoming_param_someOperation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
 			result = eAny(this->isOverrideOf(incoming_param_someOperation),0,false);
 			break;

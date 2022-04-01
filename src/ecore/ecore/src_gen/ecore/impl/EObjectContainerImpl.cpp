@@ -254,7 +254,7 @@ std::shared_ptr<EClass> EObjectContainerImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EObjectContainerImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EObjectContainerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -274,7 +274,7 @@ bool EObjectContainerImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EObjectContainerImpl::eSet(int featureID, Any newValue)
+bool EObjectContainerImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -323,9 +323,9 @@ bool EObjectContainerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -335,7 +335,7 @@ Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'container'
 			//parameter 0
 			std::shared_ptr<Bag<ecore::EObject>> incoming_param_container;
-			std::list<Any>::const_iterator incoming_param_container_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_container_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_container = (*incoming_param_container_arguments_citer)->get<std::shared_ptr<Bag<ecore::EObject>> >();
 			this->setContainer(incoming_param_container);
 			break;

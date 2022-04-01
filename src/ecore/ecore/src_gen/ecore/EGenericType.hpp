@@ -13,8 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -70,7 +69,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool isInstance(Any object) const = 0;
+			virtual bool isInstance(std::shared_ptr<Any> object) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

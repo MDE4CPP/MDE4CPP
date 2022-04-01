@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <string>
+#include "abstractDataTypes/Any.hpp"
 // forward declarations
 
 
@@ -67,12 +68,12 @@ namespace ecore
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<Any> getAny() const = 0;
+			virtual void setAny (std::shared_ptr<Any> _any)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual Any getAny() const = 0;
-			virtual void setAny(Any _any) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -94,11 +95,11 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::shared_ptr<Any> m_any= nullptr;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			Any m_any;
 	};
 }
 #endif /* end of include guard: ECORE_EOBJECTANY_HPP */

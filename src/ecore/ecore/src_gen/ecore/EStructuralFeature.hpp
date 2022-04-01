@@ -84,8 +84,8 @@ namespace ecore
 			//*********************************
 			virtual bool isChangeable() const = 0;
 			virtual void setChangeable (bool _changeable)= 0;
-			virtual Any getDefaultValue() const = 0;
-			virtual void setDefaultValue (Any _defaultValue)= 0;
+			virtual std::shared_ptr<Any> getDefaultValue() const = 0;
+			virtual void setDefaultValue (std::shared_ptr<Any> _defaultValue)= 0;
 			virtual std::string getDefaultValueLiteral() const = 0;
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;
 			virtual bool isDerived() const = 0;
@@ -125,7 +125,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			bool m_changeable= true;
-			Any m_defaultValue= nullptr;
+			std::shared_ptr<Any> m_defaultValue= nullptr;
 			std::string m_defaultValueLiteral= "";
 			bool m_derived= false;
 			int m_featureID= -1;

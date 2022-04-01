@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -1654,14 +1654,14 @@ void ecorePackageImpl::initializeEObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_eObject_Operation_eInvoke_EOperation_EEList->setName("eInvoke");
-	m_eObject_Operation_eInvoke_EOperation_EEList->setEType(getEJavaObject_Class());
-	m_eObject_Operation_eInvoke_EOperation_EEList->setLowerBound(0);
-	m_eObject_Operation_eInvoke_EOperation_EEList->setUpperBound(1);
-	m_eObject_Operation_eInvoke_EOperation_EEList->setUnique(true);
-	m_eObject_Operation_eInvoke_EOperation_EEList->setOrdered(true);
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setName("eInvoke");
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setEType(getEJavaObject_Class());
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setLowerBound(0);
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setUpperBound(1);
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setUnique(true);
+	m_eObject_Operation_eInvoke_EOperation_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EJavaObject);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -1671,9 +1671,9 @@ void ecorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EJavaObject);
 		parameter->setName("arguments");
-		parameter->setEType(getEEList_Class());
+		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1773,9 +1773,9 @@ void ecorePackageImpl::initializeEObjectAnyContent()
 	m_eObjectAny_Class->setAbstract(false);
 	m_eObjectAny_Class->setInterface(false);
 	
-	
+	m_eObjectAny_Attribute_any = getEObjectAny_Attribute_any();
 	m_eObjectAny_Attribute_any->setName("any");
-	m_eObjectAny_Attribute_any->setEType(getEJavaObject_Class());
+		m_eObjectAny_Attribute_any->setEType(getEJavaObject_Class());
 	m_eObjectAny_Attribute_any->setLowerBound(1);
 	m_eObjectAny_Attribute_any->setUpperBound(1);
 	m_eObjectAny_Attribute_any->setTransient(false);
@@ -1785,17 +1785,15 @@ void ecorePackageImpl::initializeEObjectAnyContent()
 	m_eObjectAny_Attribute_any->setUnique(true);
 	m_eObjectAny_Attribute_any->setDerived(false);
 	m_eObjectAny_Attribute_any->setOrdered(true);
-	m_eObjectAny_Attribute_any->setContainment(false);
-	m_eObjectAny_Attribute_any->setResolveProxies(true);
+	m_eObjectAny_Attribute_any->setID(false);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_eObjectAny_Attribute_any->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		   m_eObjectAny_Attribute_any->setDefaultValueLiteral(defaultValue);
+		}
 	}
+	
 	
 	
 }

@@ -14,8 +14,7 @@
 // forward declarations
 template<class T> class Bag; 
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -74,20 +73,20 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual Any eAllContents() const = 0;
+			virtual std::shared_ptr<Any> eAllContents() const = 0;
 			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
 			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
-			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const = 0;
-			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0;
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < Any>> arguments) = 0;
+			virtual std::shared_ptr<Bag<ecore::EObject>> eContents() const = 0;
+			virtual std::shared_ptr<std::list < std::shared_ptr<ecore::EObject>>> eCrossReferences() const = 0;
+			virtual std::shared_ptr<Any> eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
+			virtual std::shared_ptr<Any> eGet(std::shared_ptr<ecore::EStructuralFeature> feature, bool resolve) const = 0;
+			virtual std::shared_ptr<Any> eInvoke(std::shared_ptr<ecore::EOperation> operation, std::shared_ptr<Bag<Any>> arguments) = 0;
 			virtual bool eIsProxy() const = 0;
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 			virtual int eResource() const = 0;
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) = 0;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature, std::shared_ptr<Any> newValue) = 0;
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 
 			//*********************************

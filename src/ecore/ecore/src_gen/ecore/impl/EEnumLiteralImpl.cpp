@@ -126,11 +126,11 @@ std::shared_ptr<ecore::EObject> EEnumLiteralImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute instance */
-Any EEnumLiteralImpl::getInstance() const 
+std::shared_ptr<Any> EEnumLiteralImpl::getInstance() const 
 {
 	return m_instance;
 }
-void EEnumLiteralImpl::setInstance(Any _instance)
+void EEnumLiteralImpl::setInstance(std::shared_ptr<Any> _instance)
 {
 	m_instance = _instance;
 	
@@ -312,7 +312,7 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -347,14 +347,14 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
+bool EEnumLiteralImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 		{
 			// CAST Any to Any
-			Any _instance = newValue->get<Any>();
+			std::shared_ptr<Any> _instance = newValue->get<std::shared_ptr<Any>>();
 			setInstance(_instance); //226
 			return true;
 		}
@@ -380,9 +380,9 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

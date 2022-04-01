@@ -77,13 +77,13 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual int getClassifierID() = 0;
-			virtual bool isInstance(Any object) const = 0;
+			virtual bool isInstance(std::shared_ptr<Any> object) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual Any getDefaultValue() const = 0;
-			virtual void setDefaultValue (Any _defaultValue)= 0;
+			virtual std::shared_ptr<Any> getDefaultValue() const = 0;
+			virtual void setDefaultValue (std::shared_ptr<Any> _defaultValue)= 0;
 			virtual void * getInstanceClass() const = 0;
 			virtual std::string getInstanceClassName() const = 0;
 			virtual void setInstanceClassName (std::string _instanceClassName)= 0;
@@ -117,7 +117,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			Any m_defaultValue= nullptr;
+			std::shared_ptr<Any> m_defaultValue= nullptr;
 			void * m_instanceClass= nullptr;
 			std::string m_instanceClassName= "";
 			std::string m_instanceTypeName= "";

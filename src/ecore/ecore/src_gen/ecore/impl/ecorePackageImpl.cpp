@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -489,9 +489,9 @@ std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation
 {
 	return m_eObject_Operation_eGet_EStructuralFeature_EBoolean;
 }
-std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eInvoke_EOperation_EEList() const
+std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eInvoke_EOperation_EJavaObject() const
 {
-	return m_eObject_Operation_eInvoke_EOperation_EEList;
+	return m_eObject_Operation_eInvoke_EOperation_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eIsProxy() const
 {
@@ -522,11 +522,11 @@ std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEObjectAny_Class() co
 	return m_eObjectAny_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObjectAny_Attribute_any() const
+std::shared_ptr<ecore::EAttribute> ecore::ecorePackageImpl::getEObjectAny_Attribute_any() const
 {
 	return m_eObjectAny_Attribute_any;
 }
+
 
 
 // End Class EObjectAny

@@ -90,9 +90,9 @@ EObjectAnyImpl& EObjectAnyImpl::operator=(const EObjectAnyImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EObjectAny "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_any = obj.getAny();
 
 	//copy references with no containment (soft copy)
-	m_any  = obj.getAny();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -112,20 +112,20 @@ std::shared_ptr<ecore::EObject> EObjectAnyImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute any */
+std::shared_ptr<Any> EObjectAnyImpl::getAny() const 
+{
+	return m_any;
+}
+void EObjectAnyImpl::setAny(std::shared_ptr<Any> _any)
+{
+	m_any = _any;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference any */
-Any EObjectAnyImpl::getAny() const
-{
-    return m_any;
-}
-void EObjectAnyImpl::setAny(Any _any)
-{
-    m_any = _any;
-	
-}
 
 //*********************************
 // Union Getter
@@ -167,12 +167,13 @@ void EObjectAnyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("any");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("any")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// TODO this attribute has a non handle type
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@1cbb3d3b (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::shared_ptr<Any> value; 			this->setAny(value);
 		}
 	}
 	catch (std::exception& e)
@@ -196,20 +197,6 @@ void EObjectAnyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 
 void EObjectAnyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EOBJECTANY_ATTRIBUTE_ANY:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<EObjectAny> _any = std::dynamic_pointer_cast<EObjectAny>( references.front() );
-				setAny(_any->getAny());
-			}
-			
-			return;
-		}
-	}
 	EObjectImpl::resolveReferences(featureID, references);
 }
 
@@ -227,7 +214,6 @@ void EObjectAnyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-	// Add references
 	}
 	catch (std::exception& e)
 	{
@@ -243,7 +229,7 @@ std::shared_ptr<EClass> EObjectAnyImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EObjectAnyImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EObjectAnyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -263,14 +249,14 @@ bool EObjectAnyImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EObjectAnyImpl::eSet(int featureID, Any newValue)
+bool EObjectAnyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECTANY_ATTRIBUTE_ANY:
 		{
 			// CAST Any to Any
-			Any _any = newValue->get<Any>();
+			std::shared_ptr<Any> _any = newValue->get<std::shared_ptr<Any>>();
 			setAny(_any); //413
 			return true;
 		}
@@ -282,9 +268,9 @@ bool EObjectAnyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectAnyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EObjectAnyImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

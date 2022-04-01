@@ -298,7 +298,7 @@ std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -318,7 +318,7 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EModelElementImpl::eSet(int featureID, Any newValue)
+bool EModelElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -367,9 +367,9 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EModelElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -379,7 +379,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			//Retrieve input parameter 'source'
 			//parameter 0
 			std::string incoming_param_source;
-			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
 			result = eAnyObject(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;

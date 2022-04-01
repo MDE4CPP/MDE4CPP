@@ -141,7 +141,7 @@ int EClassifierImpl::getClassifierID()
 	//end of body
 }
 
-bool EClassifierImpl::isInstance(Any object) const
+bool EClassifierImpl::isInstance(std::shared_ptr<Any> object) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -150,11 +150,11 @@ bool EClassifierImpl::isInstance(Any object) const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute defaultValue */
-Any EClassifierImpl::getDefaultValue() const 
+std::shared_ptr<Any> EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
-void EClassifierImpl::setDefaultValue(Any _defaultValue)
+void EClassifierImpl::setDefaultValue(std::shared_ptr<Any> _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 	
@@ -383,7 +383,7 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -426,14 +426,14 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool EClassifierImpl::eSet(int featureID, Any newValue)
+bool EClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// CAST Any to Any
-			Any _defaultValue = newValue->get<Any>();
+			std::shared_ptr<Any> _defaultValue = newValue->get<std::shared_ptr<Any>>();
 			setDefaultValue(_defaultValue); //147
 			return true;
 		}
@@ -496,9 +496,9 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EClassifierImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -508,14 +508,14 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			result = eAny(this->getClassifierID(),0,false);
 			break;
 		}
-		// ecore::EClassifier::isInstance(Any) : bool {const}: 202200991
+		// ecore::EClassifier::isInstance(std::shared_ptr<Any>) : bool {const}: 3474633304
 		case ecorePackage::ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'
 			//parameter 0
-			Any incoming_param_object;
-			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<Any> >();
 			result = eAny(this->isInstance(incoming_param_object),0,false);
 			break;
 		}

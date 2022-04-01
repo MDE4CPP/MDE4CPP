@@ -54,8 +54,8 @@ namespace ecore
 			//*********************************
 			virtual bool isChangeable() const ;
 			virtual void setChangeable (bool _changeable);
-			virtual Any getDefaultValue() const ;
-			virtual void setDefaultValue (Any _defaultValue);
+			virtual std::shared_ptr<Any> getDefaultValue() const ;
+			virtual void setDefaultValue (std::shared_ptr<Any> _defaultValue);
 			virtual std::string getDefaultValueLiteral() const ;
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);
 			virtual bool isDerived() const ;
@@ -100,14 +100,14 @@ namespace ecore
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ecore::EStructuralFeature> m_thisEStructuralFeaturePtr;
