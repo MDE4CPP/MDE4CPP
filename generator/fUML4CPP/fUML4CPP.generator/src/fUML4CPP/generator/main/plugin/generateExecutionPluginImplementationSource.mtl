@@ -108,7 +108,7 @@ void [packageName/]::initialize()
 	m_IsInitialized = true;
 }
 
-Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
+std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
 	if(!m_IsInitialized)
 	{
