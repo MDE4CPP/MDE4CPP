@@ -4,10 +4,10 @@
 #include <stdexcept>
 #include "abstractDataTypes/Any.hpp"
 
-class AnyEObject: public AnyObject
+class AnyEObject: public Any
 {     
 public:
-	template <typename T> AnyEObject(T value,long long typeID, bool isContainer=true) : AnyObject(value, typeID, isContainer)
+	template <typename T> AnyEObject(T value,long long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
 	{
 	}
 
@@ -66,9 +66,9 @@ public:
 
 };
 
-template <typename T> static Any eAnyObject(T value,long long typeID)
+template <typename T> static std::shared_ptr<Any> eAnyObject(T value,long long typeID)
 {
-	Any any(new AnyGenericEObject<T>(value,typeID,false));
+	std::shared_ptr<Any> any(new AnyGenericEObject<T>(value,typeID,false));
 	return any;
 }
 #endif

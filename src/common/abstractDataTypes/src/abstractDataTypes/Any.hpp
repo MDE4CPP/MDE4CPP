@@ -3,12 +3,13 @@
 
 #include <memory>
 #include <stdexcept>
+#include <typeinfo>
 
-class AnyObject
+class Any
 {
 	public:
 		template <typename T>
-		AnyObject(T value,long long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
+		Any(T value,long long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
 		{
 			m_object = new TypedObject<T>(value);
 		}
@@ -24,7 +25,7 @@ class AnyObject
 			throw std::runtime_error("Any::get() : Bad cast");
 		}
 
-		virtual ~AnyObject()
+		virtual ~Any()
 		{
 			if (m_object != nullptr)
 			{
@@ -46,16 +47,40 @@ class AnyObject
 		{
 			return m_isContainer;
 		}
+		
+		std::string toString()
+		{
+			if(this->isEmpty())
+			{
+				return "nullptr";
+			}
+			
+			std::string retString = "typeName: "
+									+ m_object->getTypeIDName()
+									+ " ; "
+									+ "typeID: "
+									+ std::to_string(m_typeID)
+									+ " ; "
+									+ "isContainer: "
+									+ ((m_isContainer) ? "true" : "false");
+									
+			return retString;
+		}
 
 	protected:
 		const long long m_typeID=0;
 		const bool m_isContainer=false;
-		AnyObject(){}
+		Any(){}
 		class Object
 		{
 			public:
 				virtual ~Object()
 				{
+				}
+				
+				virtual std::string getTypeIDName()
+				{
+					return "NULL";
 				}
 		};
 
@@ -81,6 +106,12 @@ class AnyObject
 				{
 					m_value=value;
 				}
+				
+				std::string getTypeIDName()
+				{
+					return typeid(T).name();
+				}
+				
 			private:
 				T m_value;
 
@@ -89,11 +120,9 @@ class AnyObject
 		Object* m_object;
 };
 
-typedef std::shared_ptr<AnyObject> Any;
-
-template <typename T> static Any eAny(T value,long long typeID, bool isContainer)
+template <typename T> static std::shared_ptr<Any> eAny(T value,long long typeID, bool isContainer)
 {
-	Any any(new AnyObject(value,typeID,isContainer));
+	std::shared_ptr<Any> any(new Any(value,typeID,isContainer));
 	return any;
 }
 

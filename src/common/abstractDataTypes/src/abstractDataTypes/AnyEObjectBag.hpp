@@ -6,10 +6,10 @@
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
 
-class AnyEObjectBag: public AnyObject
+class AnyEObjectBag: public Any
 {
 public:
-	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true) : AnyObject(value, typeID, isContainer)
+	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
 	{
 	}
 
@@ -76,11 +76,11 @@ public:
 	#include "ecore/EObjectAny.hpp"
 					else // could be an Any
 					{
-						std::shared_ptr<AnyObject> anyObject= std::dynamic_pointer_cast<AnyObject>(i);
+						std::shared_ptr<Any> any = std::dynamic_pointer_cast<Any>(i);
 						if(object)
 						{
-							std::shared_ptr<ecore::EObjectAny> anyObject= ecore::ecoreFactory::eInstance()->createEObjectAny();
-							returnList->push_back(anyObject);
+							std::shared_ptr<ecore::EObjectAny> any = ecore::ecoreFactory::eInstance()->createEObjectAny();
+							returnList->push_back(any);
 						}
 					}
 	*/
@@ -96,9 +96,9 @@ public:
 
 };
 
-template <typename T> static Any eAnyBag(T value,long long typeID)
+template <typename T> static std::shared_ptr<Any> eAnyBag(T value,long long typeID)
 {
-	Any any(new AnyGenericBag<T>(value,typeID,true));
+	std::shared_ptr<Any> any(new AnyGenericBag<T>(value,typeID,true));
 	return any;
 }
 #endif
