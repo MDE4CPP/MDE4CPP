@@ -186,22 +186,22 @@ std::shared_ptr<ecore::EObject> InstanceSpecificationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InstanceSpecificationImpl::defining_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InstanceSpecificationImpl::deployment_artifact(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InstanceSpecificationImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InstanceSpecificationImpl::structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -643,7 +643,7 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// uml::InstanceSpecification::defining_feature(std::shared_ptr<Any>, std::map) : bool: 1729308748
+		// uml::InstanceSpecification::defining_feature(Any, std::map) : bool: 1693146419
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -653,13 +653,13 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::deployment_artifact(std::shared_ptr<Any>, std::map) : bool: 3485856895
+		// uml::InstanceSpecification::deployment_artifact(Any, std::map) : bool: 1340824250
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -669,13 +669,13 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::deployment_target(std::shared_ptr<Any>, std::map) : bool: 2622007476
+		// uml::InstanceSpecification::deployment_target(Any, std::map) : bool: 705404039
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -685,13 +685,13 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InstanceSpecification::structural_feature(std::shared_ptr<Any>, std::map) : bool: 3228012197
+		// uml::InstanceSpecification::structural_feature(Any, std::map) : bool: 432277844
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -701,9 +701,9 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

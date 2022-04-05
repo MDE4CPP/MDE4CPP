@@ -193,7 +193,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool BehavioralFeatureImpl::abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -858,7 +858,7 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
  
   	switch(operationID)
 	{
-		// uml::BehavioralFeature::abstract_no_method(std::shared_ptr<Any>, std::map) : bool: 2543017884
+		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 862631547
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -868,9 +868,9 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

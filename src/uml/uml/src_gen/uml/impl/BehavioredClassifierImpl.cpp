@@ -232,7 +232,7 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool BehavioredClassifierImpl::class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -729,7 +729,7 @@ std::shared_ptr<Any> BehavioredClassifierImpl::eInvoke(int operationID, std::sha
  
   	switch(operationID)
 	{
-		// uml::BehavioredClassifier::class_behavior(std::shared_ptr<Any>, std::map) : bool: 3138650746
+		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 3269019581
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -739,9 +739,9 @@ std::shared_ptr<Any> BehavioredClassifierImpl::eInvoke(int operationID, std::sha
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

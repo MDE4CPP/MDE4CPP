@@ -131,7 +131,7 @@ std::shared_ptr<ecore::EObject> ExtensionPointImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExtensionPointImpl::must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -339,7 +339,7 @@ std::shared_ptr<Any> ExtensionPointImpl::eInvoke(int operationID, std::shared_pt
  
   	switch(operationID)
 	{
-		// uml::ExtensionPoint::must_have_name(std::shared_ptr<Any>, std::map) : bool: 1604770926
+		// uml::ExtensionPoint::must_have_name(Any, std::map) : bool: 4081749369
 		case umlPackage::EXTENSIONPOINT_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -349,9 +349,9 @@ std::shared_ptr<Any> ExtensionPointImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

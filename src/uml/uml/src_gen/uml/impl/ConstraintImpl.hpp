@@ -55,18 +55,18 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool boolean_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool not_apply_to_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

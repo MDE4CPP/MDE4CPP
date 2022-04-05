@@ -55,14 +55,14 @@ namespace uml
 			variable.compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

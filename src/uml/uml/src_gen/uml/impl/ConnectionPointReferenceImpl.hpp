@@ -55,13 +55,13 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool entry_pseudostates(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool exit_pseudostates(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

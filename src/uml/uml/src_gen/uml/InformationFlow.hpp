@@ -93,12 +93,12 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool convey_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool must_conform(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
@@ -117,7 +117,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool sources_and_targets_kind(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

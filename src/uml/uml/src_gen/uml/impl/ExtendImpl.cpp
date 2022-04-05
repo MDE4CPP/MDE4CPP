@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExtendImpl::extension_points(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -617,7 +617,7 @@ std::shared_ptr<Any> ExtendImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
  
   	switch(operationID)
 	{
-		// uml::Extend::extension_points(std::shared_ptr<Any>, std::map) : bool: 2461912536
+		// uml::Extend::extension_points(Any, std::map) : bool: 3303344491
 		case umlPackage::EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -627,9 +627,9 @@ std::shared_ptr<Any> ExtendImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->extension_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

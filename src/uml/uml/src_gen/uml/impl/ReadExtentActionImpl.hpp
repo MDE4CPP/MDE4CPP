@@ -55,13 +55,13 @@ namespace uml
 			result.is(0,*)
 			*/
 			 
-			virtual bool multiplicity_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool multiplicity_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the result OutputPin is the classifier.
 			result.type = classifier
 			*/
 			 
-			virtual bool type_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool type_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -95,7 +95,7 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool abstract_no_method(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Creates a return result parameter with the specified name and type.
 			*/

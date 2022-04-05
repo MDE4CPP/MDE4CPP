@@ -58,7 +58,7 @@ namespace uml
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self)))
 			*/
 			 
-			virtual bool first_or_last_interaction_fragment(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool first_or_last_interaction_fragment(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
 			enclosingOperand->notEmpty() and
@@ -67,7 +67,7 @@ namespace uml
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol)))
 			*/
 			 
-			virtual bool global(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool global(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
 			enclosingOperand.combinedFragment->notEmpty() and
@@ -96,7 +96,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool same_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool same_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

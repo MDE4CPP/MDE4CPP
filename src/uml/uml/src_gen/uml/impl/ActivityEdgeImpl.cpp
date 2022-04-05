@@ -210,7 +210,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityEdgeImpl::source_and_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -897,7 +897,7 @@ std::shared_ptr<Any> ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// uml::ActivityEdge::source_and_target(std::shared_ptr<Any>, std::map) : bool: 3924231958
+		// uml::ActivityEdge::source_and_target(Any, std::map) : bool: 2060103261
 		case umlPackage::ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -907,9 +907,9 @@ std::shared_ptr<Any> ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->source_and_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -145,7 +145,7 @@ std::shared_ptr<ecore::EObject> ControlFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ControlFlowImpl::object_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -346,7 +346,7 @@ std::shared_ptr<Any> ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<B
  
   	switch(operationID)
 	{
-		// uml::ControlFlow::object_nodes(std::shared_ptr<Any>, std::map) : bool: 983086339
+		// uml::ControlFlow::object_nodes(Any, std::map) : bool: 2629306994
 		case umlPackage::CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -356,9 +356,9 @@ std::shared_ptr<Any> ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->object_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

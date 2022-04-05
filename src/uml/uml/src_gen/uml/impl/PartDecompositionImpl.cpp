@@ -143,17 +143,17 @@ std::shared_ptr<ecore::EObject> PartDecompositionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PartDecompositionImpl::assume(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PartDecompositionImpl::assume(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PartDecompositionImpl::commutativity_of_decomposition(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PartDecompositionImpl::commutativity_of_decomposition(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PartDecompositionImpl::parts_of_internal_structures(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PartDecompositionImpl::parts_of_internal_structures(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -329,7 +329,7 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
  
   	switch(operationID)
 	{
-		// uml::PartDecomposition::assume(std::shared_ptr<Any>, std::map) : bool: 486027069
+		// uml::PartDecomposition::assume(Any, std::map) : bool: 2132247724
 		case umlPackage::PARTDECOMPOSITION_OPERATION_ASSUME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -339,13 +339,13 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->assume(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::PartDecomposition::commutativity_of_decomposition(std::shared_ptr<Any>, std::map) : bool: 1443867578
+		// uml::PartDecomposition::commutativity_of_decomposition(Any, std::map) : bool: 2415887113
 		case umlPackage::PARTDECOMPOSITION_OPERATION_COMMUTATIVITY_OF_DECOMPOSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -355,13 +355,13 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->commutativity_of_decomposition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::PartDecomposition::parts_of_internal_structures(std::shared_ptr<Any>, std::map) : bool: 1848907660
+		// uml::PartDecomposition::parts_of_internal_structures(Any, std::map) : bool: 4164163091
 		case umlPackage::PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -371,9 +371,9 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->parts_of_internal_structures(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

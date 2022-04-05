@@ -165,12 +165,12 @@ std::shared_ptr<ecore::EObject> DurationConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool DurationConstraintImpl::first_event_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool DurationConstraintImpl::has_one_or_two_constrainedElements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -399,7 +399,7 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
  
   	switch(operationID)
 	{
-		// uml::DurationConstraint::first_event_multiplicity(std::shared_ptr<Any>, std::map) : bool: 911796227
+		// uml::DurationConstraint::first_event_multiplicity(Any, std::map) : bool: 1354212710
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -409,13 +409,13 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DurationConstraint::has_one_or_two_constrainedElements(std::shared_ptr<Any>, std::map) : bool: 1678936010
+		// uml::DurationConstraint::has_one_or_two_constrainedElements(Any, std::map) : bool: 4186177077
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -425,9 +425,9 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

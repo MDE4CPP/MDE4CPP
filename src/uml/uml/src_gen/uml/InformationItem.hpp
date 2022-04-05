@@ -97,13 +97,13 @@ namespace uml
 			self.generalization->isEmpty() and self.feature->isEmpty()
 			*/
 			 
-			virtual bool has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			It is not instantiable.
 			isAbstract
 			*/
 			 
-			virtual bool not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
 			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
@@ -113,7 +113,7 @@ namespace uml
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

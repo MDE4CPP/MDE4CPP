@@ -74,7 +74,7 @@ namespace uml
 			memberEnd->size() = 2
 			*/
 			 
-			virtual bool is_binary(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool is_binary(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
@@ -87,7 +87,7 @@ namespace uml
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
 			*/
 			 
-			virtual bool non_owned_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool non_owned_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

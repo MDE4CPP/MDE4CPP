@@ -59,7 +59,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool no_expr_requires_observation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

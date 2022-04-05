@@ -150,42 +150,42 @@ std::shared_ptr<ecore::EObject> ObjectFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::compatible_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::input_and_output_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::no_executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::no_executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::same_upper_bounds(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::same_upper_bounds(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::selection_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::selection_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::transformation_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ObjectFlowImpl::transformation_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -557,7 +557,7 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
  
   	switch(operationID)
 	{
-		// uml::ObjectFlow::compatible_types(std::shared_ptr<Any>, std::map) : bool: 4065836834
+		// uml::ObjectFlow::compatible_types(Any, std::map) : bool: 444512325
 		case umlPackage::OBJECTFLOW_OPERATION_COMPATIBLE_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -567,13 +567,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->compatible_types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::input_and_output_parameter(std::shared_ptr<Any>, std::map) : bool: 3615147808
+		// uml::ObjectFlow::input_and_output_parameter(Any, std::map) : bool: 454017867
 		case umlPackage::OBJECTFLOW_OPERATION_INPUT_AND_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -583,13 +583,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->input_and_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::is_multicast_or_is_multireceive(std::shared_ptr<Any>, std::map) : bool: 3603052135
+		// uml::ObjectFlow::is_multicast_or_is_multireceive(Any, std::map) : bool: 1585471646
 		case umlPackage::OBJECTFLOW_OPERATION_IS_MULTICAST_OR_IS_MULTIRECEIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -599,13 +599,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->is_multicast_or_is_multireceive(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::no_executable_nodes(std::shared_ptr<Any>, std::map) : bool: 3293256692
+		// uml::ObjectFlow::no_executable_nodes(Any, std::map) : bool: 1429127995
 		case umlPackage::OBJECTFLOW_OPERATION_NO_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -615,13 +615,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::same_upper_bounds(std::shared_ptr<Any>, std::map) : bool: 4132217717
+		// uml::ObjectFlow::same_upper_bounds(Any, std::map) : bool: 1180579764
 		case umlPackage::OBJECTFLOW_OPERATION_SAME_UPPER_BOUNDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -631,13 +631,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_upper_bounds(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::selection_behavior(std::shared_ptr<Any>, std::map) : bool: 3393185887
+		// uml::ObjectFlow::selection_behavior(Any, std::map) : bool: 1575197034
 		case umlPackage::OBJECTFLOW_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -647,13 +647,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::target(std::shared_ptr<Any>, std::map) : bool: 3865228149
+		// uml::ObjectFlow::target(Any, std::map) : bool: 818403920
 		case umlPackage::OBJECTFLOW_OPERATION_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -663,13 +663,13 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ObjectFlow::transformation_behavior(std::shared_ptr<Any>, std::map) : bool: 252195344
+		// uml::ObjectFlow::transformation_behavior(Any, std::map) : bool: 3901325479
 		case umlPackage::OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -679,9 +679,9 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->transformation_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

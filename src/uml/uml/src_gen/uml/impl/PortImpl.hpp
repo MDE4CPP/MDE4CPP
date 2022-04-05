@@ -80,13 +80,13 @@ namespace uml
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
 			*/
 			 
-			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier
 			*/
 			 
-			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
@@ -106,7 +106,7 @@ namespace uml
 			aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

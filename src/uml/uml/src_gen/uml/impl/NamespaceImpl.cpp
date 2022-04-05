@@ -243,12 +243,12 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool NamespaceImpl::cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamespaceImpl::cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool NamespaceImpl::cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -303,7 +303,7 @@ bool NamespaceImpl::membersAreDistinguishable()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamespaceImpl::members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool NamespaceImpl::members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -795,7 +795,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
  
   	switch(operationID)
 	{
-		// uml::Namespace::cannot_import_ownedMembers(std::shared_ptr<Any>, std::map) : bool: 3957455592
+		// uml::Namespace::cannot_import_ownedMembers(Any, std::map) : bool: 2277069255
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -805,13 +805,13 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Namespace::cannot_import_self(std::shared_ptr<Any>, std::map) : bool: 1666278638
+		// uml::Namespace::cannot_import_self(Any, std::map) : bool: 3009607981
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -821,9 +821,9 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -928,7 +928,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			result = eAny(this->membersAreDistinguishable(),0,false);
 			break;
 		}
-		// uml::Namespace::members_distinguishable(std::shared_ptr<Any>, std::map) : bool: 3346356989
+		// uml::Namespace::members_distinguishable(Any, std::map) : bool: 1065132056
 		case umlPackage::NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -938,9 +938,9 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->members_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

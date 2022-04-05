@@ -95,25 +95,25 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size()
 			*/
 			 
-			virtual bool number_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool number_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType)
 			*/
 			 
-			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1
 			*/
 			 
-			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
 			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
@@ -123,7 +123,7 @@ namespace uml
 				attribute->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool type_ordering_and_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool type_ordering_and_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

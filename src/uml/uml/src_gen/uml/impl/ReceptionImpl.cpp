@@ -133,12 +133,12 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReceptionImpl::same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReceptionImpl::same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReceptionImpl::same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReceptionImpl::same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -394,7 +394,7 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
  
   	switch(operationID)
 	{
-		// uml::Reception::same_name_as_signal(std::shared_ptr<Any>, std::map) : bool: 3687422
+		// uml::Reception::same_name_as_signal(Any, std::map) : bool: 2480665865
 		case umlPackage::RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -404,13 +404,13 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_name_as_signal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Reception::same_structure_as_signal(std::shared_ptr<Any>, std::map) : bool: 1746264214
+		// uml::Reception::same_structure_as_signal(Any, std::map) : bool: 1100427053
 		case umlPackage::RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -420,9 +420,9 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_structure_as_signal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

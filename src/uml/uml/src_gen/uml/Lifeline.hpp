@@ -135,13 +135,13 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool interaction_uses_share_lifeline(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
@@ -149,13 +149,13 @@ namespace uml
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool selector_int_or_string(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool selector_specified(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

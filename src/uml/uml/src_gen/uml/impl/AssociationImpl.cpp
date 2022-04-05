@@ -283,17 +283,17 @@ std::shared_ptr<ecore::EObject> AssociationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AssociationImpl::association_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AssociationImpl::binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::ends_must_be_typed(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AssociationImpl::ends_must_be_typed(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -308,12 +308,12 @@ bool AssociationImpl::isBinary()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_number(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AssociationImpl::specialized_end_number(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AssociationImpl::specialized_end_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -947,7 +947,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
  
   	switch(operationID)
 	{
-		// uml::Association::association_ends(std::shared_ptr<Any>, std::map) : bool: 1587313570
+		// uml::Association::association_ends(Any, std::map) : bool: 2930642913
 		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -957,13 +957,13 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::binary_associations(std::shared_ptr<Any>, std::map) : bool: 3756636572
+		// uml::Association::binary_associations(Any, std::map) : bool: 3742063439
 		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -973,13 +973,13 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::ends_must_be_typed(std::shared_ptr<Any>, std::map) : bool: 1245936469
+		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 3676775068
 		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -989,9 +989,9 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1008,7 +1008,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			result = eAny(this->isBinary(),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_number(std::shared_ptr<Any>, std::map) : bool: 1932261555
+		// uml::Association::specialized_end_number(Any, std::map) : bool: 1286424394
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1018,13 +1018,13 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Association::specialized_end_types(std::shared_ptr<Any>, std::map) : bool: 1371817999
+		// uml::Association::specialized_end_types(Any, std::map) : bool: 3385560362
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1034,9 +1034,9 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

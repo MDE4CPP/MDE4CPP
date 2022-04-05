@@ -267,22 +267,22 @@ std::shared_ptr<ecore::EObject> PropertyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::binding_to_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::derived_union_is_derived(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::derived_union_is_derived(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::derived_union_is_read_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::derived_union_is_read_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -317,17 +317,17 @@ bool PropertyImpl::isSetDefault()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::multiplicity_of_composite(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::multiplicity_of_composite(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::qualified_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::qualified_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::redefined_property_inherited(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::redefined_property_inherited(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -367,7 +367,7 @@ void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetted_property_names(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::subsetted_property_names(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -377,17 +377,17 @@ std::shared_ptr<Bag<uml::Type>> PropertyImpl::subsettingContext()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetting_context_conforms(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::subsetting_context_conforms(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetting_rules(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::subsetting_rules(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::type_of_opposite_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PropertyImpl::type_of_opposite_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1479,7 +1479,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
  
   	switch(operationID)
 	{
-		// uml::Property::binding_to_attribute(std::shared_ptr<Any>, std::map) : bool: 2710924368
+		// uml::Property::binding_to_attribute(Any, std::map) : bool: 892935515
 		case umlPackage::PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1489,13 +1489,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::deployment_target(std::shared_ptr<Any>, std::map) : bool: 853043803
+		// uml::Property::deployment_target(Any, std::map) : bool: 3702053202
 		case umlPackage::PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1505,13 +1505,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::derived_union_is_derived(std::shared_ptr<Any>, std::map) : bool: 800502744
+		// uml::Property::derived_union_is_derived(Any, std::map) : bool: 2814245107
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1521,13 +1521,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::derived_union_is_read_only(std::shared_ptr<Any>, std::map) : bool: 3061951022
+		// uml::Property::derived_union_is_read_only(Any, std::map) : bool: 3192319857
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1537,9 +1537,9 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1573,7 +1573,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			result = eAny(this->isSetDefault(),0,false);
 			break;
 		}
-		// uml::Property::multiplicity_of_composite(std::shared_ptr<Any>, std::map) : bool: 4254400731
+		// uml::Property::multiplicity_of_composite(Any, std::map) : bool: 3608563570
 		case umlPackage::PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1583,13 +1583,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::qualified_is_association_end(std::shared_ptr<Any>, std::map) : bool: 3340210481
+		// uml::Property::qualified_is_association_end(Any, std::map) : bool: 179080540
 		case umlPackage::PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1599,13 +1599,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::redefined_property_inherited(std::shared_ptr<Any>, std::map) : bool: 1605059537
+		// uml::Property::redefined_property_inherited(Any, std::map) : bool: 2738896892
 		case umlPackage::PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1615,9 +1615,9 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1693,7 +1693,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
 		}
-		// uml::Property::subsetted_property_names(std::shared_ptr<Any>, std::map) : bool: 601607930
+		// uml::Property::subsetted_property_names(Any, std::map) : bool: 2615350293
 		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1703,9 +1703,9 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1716,7 +1716,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
-		// uml::Property::subsetting_context_conforms(std::shared_ptr<Any>, std::map) : bool: 268127782
+		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 2882708741
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1726,13 +1726,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::subsetting_rules(std::shared_ptr<Any>, std::map) : bool: 2871184770
+		// uml::Property::subsetting_rules(Any, std::map) : bool: 4221533565
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1742,13 +1742,13 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Property::type_of_opposite_end(std::shared_ptr<Any>, std::map) : bool: 3809279146
+		// uml::Property::type_of_opposite_end(Any, std::map) : bool: 1991290293
 		case umlPackage::PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1758,9 +1758,9 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

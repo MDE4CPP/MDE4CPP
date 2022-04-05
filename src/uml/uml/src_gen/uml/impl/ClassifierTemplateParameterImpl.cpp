@@ -122,32 +122,32 @@ std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::actual_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::matching_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -432,7 +432,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
  
   	switch(operationID)
 	{
-		// uml::ClassifierTemplateParameter::actual_is_classifier(std::shared_ptr<Any>, std::map) : bool: 4203135442
+		// uml::ClassifierTemplateParameter::actual_is_classifier(Any, std::map) : bool: 880187681
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_ACTUAL_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -442,13 +442,13 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->actual_is_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_args(std::shared_ptr<Any>, std::map) : bool: 1087281587
+		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_args(Any, std::map) : bool: 3871983478
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -458,13 +458,13 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->constraining_classifiers_constrain_args(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_parametered_element(std::shared_ptr<Any>, std::map) : bool: 993146509
+		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_parametered_element(Any, std::map) : bool: 2071195364
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -474,13 +474,13 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->constraining_classifiers_constrain_parametered_element(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClassifierTemplateParameter::has_constraining_classifier(std::shared_ptr<Any>, std::map) : bool: 3567058275
+		// uml::ClassifierTemplateParameter::has_constraining_classifier(Any, std::map) : bool: 2660850038
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_HAS_CONSTRAINING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -490,13 +490,13 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->has_constraining_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClassifierTemplateParameter::matching_abstract(std::shared_ptr<Any>, std::map) : bool: 496570539
+		// uml::ClassifierTemplateParameter::matching_abstract(Any, std::map) : bool: 1998922742
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_MATCHING_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -506,13 +506,13 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->matching_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClassifierTemplateParameter::parametered_element_no_features(std::shared_ptr<Any>, std::map) : bool: 4263842206
+		// uml::ClassifierTemplateParameter::parametered_element_no_features(Any, std::map) : bool: 1560953665
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -522,9 +522,9 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->parametered_element_no_features(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

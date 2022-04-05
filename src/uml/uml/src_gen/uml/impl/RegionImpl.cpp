@@ -231,17 +231,17 @@ std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RegionImpl::deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RegionImpl::initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RegionImpl::owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -251,7 +251,7 @@ std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RegionImpl::shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -815,7 +815,7 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
-		// uml::Region::deep_history_vertex(std::shared_ptr<Any>, std::map) : bool: 4014348991
+		// uml::Region::deep_history_vertex(Any, std::map) : bool: 2568391094
 		case umlPackage::REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -825,13 +825,13 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Region::initial_vertex(std::shared_ptr<Any>, std::map) : bool: 661736130
+		// uml::Region::initial_vertex(Any, std::map) : bool: 3908107437
 		case umlPackage::REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -841,13 +841,13 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Region::owned(std::shared_ptr<Any>, std::map) : bool: 917756600
+		// uml::Region::owned(Any, std::map) : bool: 2693807543
 		case umlPackage::REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -857,9 +857,9 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -869,7 +869,7 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// uml::Region::shallow_history_vertex(std::shared_ptr<Any>, std::map) : bool: 2156207487
+		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 338218634
 		case umlPackage::REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -879,9 +879,9 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

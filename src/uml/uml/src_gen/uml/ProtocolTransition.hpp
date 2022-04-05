@@ -95,13 +95,13 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool associated_actions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool belongs_to_psm(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
@@ -116,7 +116,7 @@ namespace uml
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool refers_to_operation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

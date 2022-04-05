@@ -59,7 +59,7 @@ namespace uml
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
 			*/
 			 
-			virtual bool action_referenced(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool action_referenced(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

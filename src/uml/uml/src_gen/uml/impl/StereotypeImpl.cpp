@@ -212,27 +212,27 @@ std::shared_ptr<ecore::EObject> StereotypeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StereotypeImpl::associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -257,7 +257,7 @@ std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format, std::
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -289,7 +289,7 @@ std::string StereotypeImpl::getKeyword(bool localize)
 
 
 
-bool StereotypeImpl::name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StereotypeImpl::name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -693,7 +693,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
  
   	switch(operationID)
 	{
-		// uml::Stereotype::associationEndOwnership(std::shared_ptr<Any>, std::map) : bool: 1616355302
+		// uml::Stereotype::associationEndOwnership(Any, std::map) : bool: 970518141
 		case umlPackage::STEREOTYPE_OPERATION_ASSOCIATIONENDOWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -703,13 +703,13 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_multiplicity_multiple_extension(std::shared_ptr<Any>, std::map) : bool: 2140357941
+		// uml::Stereotype::base_property_multiplicity_multiple_extension(Any, std::map) : bool: 1355961636
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -719,13 +719,13 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_multiplicity_single_extension(std::shared_ptr<Any>, std::map) : bool: 808024047
+		// uml::Stereotype::base_property_multiplicity_single_extension(Any, std::map) : bool: 547814422
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -735,13 +735,13 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::base_property_upper_bound(std::shared_ptr<Any>, std::map) : bool: 468646040
+		// uml::Stereotype::base_property_upper_bound(Any, std::map) : bool: 3083226999
 		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_UPPER_BOUND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -751,13 +751,13 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Stereotype::binaryAssociationsOnly(std::shared_ptr<Any>, std::map) : bool: 4235935486
+		// uml::Stereotype::binaryAssociationsOnly(Any, std::map) : bool: 1954710553
 		case umlPackage::STEREOTYPE_OPERATION_BINARYASSOCIATIONSONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -767,9 +767,9 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -822,7 +822,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAnyObject(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
-		// uml::Stereotype::generalize(std::shared_ptr<Any>, std::map) : bool: 442404209
+		// uml::Stereotype::generalize(Any, std::map) : bool: 3688775516
 		case umlPackage::STEREOTYPE_OPERATION_GENERALIZE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -832,9 +832,9 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -875,7 +875,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAny(this->getKeyword(incoming_param_localize),0,false);
 			break;
 		}
-		// uml::Stereotype::name_not_clash(std::shared_ptr<Any>, std::map) : bool: 3289414918
+		// uml::Stereotype::name_not_clash(Any, std::map) : bool: 344796417
 		case umlPackage::STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -885,9 +885,9 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->name_not_clash(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

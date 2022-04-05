@@ -160,17 +160,17 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConstraintImpl::boolean_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConstraintImpl::no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConstraintImpl::no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConstraintImpl::not_apply_to_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConstraintImpl::not_apply_to_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -531,7 +531,7 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
  
   	switch(operationID)
 	{
-		// uml::Constraint::boolean_value(std::shared_ptr<Any>, std::map) : bool: 1310952024
+		// uml::Constraint::boolean_value(Any, std::map) : bool: 2957172679
 		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -541,13 +541,13 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Constraint::no_side_effects(std::shared_ptr<Any>, std::map) : bool: 3849805064
+		// uml::Constraint::no_side_effects(Any, std::map) : bool: 2403847167
 		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -557,13 +557,13 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Constraint::not_apply_to_self(std::shared_ptr<Any>, std::map) : bool: 1622401785
+		// uml::Constraint::not_apply_to_self(Any, std::map) : bool: 2965731128
 		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -573,9 +573,9 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

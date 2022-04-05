@@ -163,12 +163,12 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ValueSpecificationActionImpl::compatible_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValueSpecificationActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ValueSpecificationActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -486,7 +486,7 @@ std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, std:
  
   	switch(operationID)
 	{
-		// uml::ValueSpecificationAction::compatible_type(std::shared_ptr<Any>, std::map) : bool: 3017510524
+		// uml::ValueSpecificationAction::compatible_type(Any, std::map) : bool: 221776171
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -496,13 +496,13 @@ std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, std:
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->compatible_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ValueSpecificationAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 2662993776
+		// uml::ValueSpecificationAction::multiplicity(Any, std::map) : bool: 3796831131
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -512,9 +512,9 @@ std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, std:
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

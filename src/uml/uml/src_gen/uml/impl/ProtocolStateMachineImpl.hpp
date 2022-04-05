@@ -59,20 +59,20 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool deep_or_shallow_history(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool entry_exit_do(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool protocol_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -156,17 +156,17 @@ std::shared_ptr<ecore::EObject> AcceptCallActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptCallActionImpl::result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AcceptCallActionImpl::result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptCallActionImpl::trigger_call_event(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AcceptCallActionImpl::trigger_call_event(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptCallActionImpl::unmarshall(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AcceptCallActionImpl::unmarshall(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -443,7 +443,7 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// uml::AcceptCallAction::result_pins(std::shared_ptr<Any>, std::map) : bool: 3600975993
+		// uml::AcceptCallAction::result_pins(Any, std::map) : bool: 649338040
 		case umlPackage::ACCEPTCALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -453,13 +453,13 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptCallAction::trigger_call_event(std::shared_ptr<Any>, std::map) : bool: 1058264893
+		// uml::AcceptCallAction::trigger_call_event(Any, std::map) : bool: 1188633728
 		case umlPackage::ACCEPTCALLACTION_OPERATION_TRIGGER_CALL_EVENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -469,13 +469,13 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->trigger_call_event(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AcceptCallAction::unmarshall(std::shared_ptr<Any>, std::map) : bool: 3085230252
+		// uml::AcceptCallAction::unmarshall(Any, std::map) : bool: 3758873039
 		case umlPackage::ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -485,9 +485,9 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->unmarshall(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -152,17 +152,17 @@ std::shared_ptr<ecore::EObject> BroadcastSignalActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool BroadcastSignalActionImpl::no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool BroadcastSignalActionImpl::number_of_arguments(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -446,7 +446,7 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// uml::BroadcastSignalAction::no_onport(std::shared_ptr<Any>, std::map) : bool: 1061276736
+		// uml::BroadcastSignalAction::no_onport(Any, std::map) : bool: 1046703603
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -456,13 +456,13 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BroadcastSignalAction::number_of_arguments(std::shared_ptr<Any>, std::map) : bool: 3299809128
+		// uml::BroadcastSignalAction::number_of_arguments(Any, std::map) : bool: 1154776483
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -472,13 +472,13 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->number_of_arguments(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::BroadcastSignalAction::type_ordering_multiplicity(std::shared_ptr<Any>, std::map) : bool: 3335674521
+		// uml::BroadcastSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 12726760
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -488,9 +488,9 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

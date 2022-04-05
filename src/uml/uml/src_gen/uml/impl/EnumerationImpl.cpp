@@ -201,7 +201,7 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool EnumerationImpl::immutable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -570,7 +570,7 @@ std::shared_ptr<Any> EnumerationImpl::eInvoke(int operationID, std::shared_ptr<B
  
   	switch(operationID)
 	{
-		// uml::Enumeration::immutable(std::shared_ptr<Any>, std::map) : bool: 471317622
+		// uml::Enumeration::immutable(Any, std::map) : bool: 3717688929
 		case umlPackage::ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -580,9 +580,9 @@ std::shared_ptr<Any> EnumerationImpl::eInvoke(int operationID, std::shared_ptr<B
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->immutable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

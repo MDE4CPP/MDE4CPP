@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool SendObjectActionImpl::type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -482,7 +482,7 @@ std::shared_ptr<Any> SendObjectActionImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// uml::SendObjectAction::type_target_pin(std::shared_ptr<Any>, std::map) : bool: 1155601136
+		// uml::SendObjectAction::type_target_pin(Any, std::map) : bool: 383225087
 		case umlPackage::SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -492,9 +492,9 @@ std::shared_ptr<Any> SendObjectActionImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_target_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

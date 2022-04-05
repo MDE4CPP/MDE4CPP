@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool OperationTemplateParameterImpl::match_default_signature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -280,7 +280,7 @@ std::shared_ptr<Any> OperationTemplateParameterImpl::eInvoke(int operationID, st
  
   	switch(operationID)
 	{
-		// uml::OperationTemplateParameter::match_default_signature(std::shared_ptr<Any>, std::map) : bool: 2128358651
+		// uml::OperationTemplateParameter::match_default_signature(Any, std::map) : bool: 932032210
 		case umlPackage::OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -290,9 +290,9 @@ std::shared_ptr<Any> OperationTemplateParameterImpl::eInvoke(int operationID, st
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->match_default_signature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

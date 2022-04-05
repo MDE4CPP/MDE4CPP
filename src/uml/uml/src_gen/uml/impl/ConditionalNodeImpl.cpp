@@ -210,32 +210,32 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::clause_no_predecessor(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::matching_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::matching_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::no_input_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::no_input_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::one_clause_with_executable_node(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::result_no_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConditionalNodeImpl::result_no_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -797,7 +797,7 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
  
   	switch(operationID)
 	{
-		// uml::ConditionalNode::clause_no_predecessor(std::shared_ptr<Any>, std::map) : bool: 4138064796
+		// uml::ConditionalNode::clause_no_predecessor(Any, std::map) : bool: 976934855
 		case umlPackage::CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -807,13 +807,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::executable_nodes(std::shared_ptr<Any>, std::map) : bool: 4247554495
+		// uml::ConditionalNode::executable_nodes(Any, std::map) : bool: 3475178446
 		case umlPackage::CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -823,13 +823,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::matching_output_pins(std::shared_ptr<Any>, std::map) : bool: 951296209
+		// uml::ConditionalNode::matching_output_pins(Any, std::map) : bool: 3565877168
 		case umlPackage::CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -839,13 +839,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::no_input_pins(std::shared_ptr<Any>, std::map) : bool: 1030280450
+		// uml::ConditionalNode::no_input_pins(Any, std::map) : bool: 3507258893
 		case umlPackage::CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -855,13 +855,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::one_clause_with_executable_node(std::shared_ptr<Any>, std::map) : bool: 1879656272
+		// uml::ConditionalNode::one_clause_with_executable_node(Any, std::map) : bool: 34142531
 		case umlPackage::CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -871,13 +871,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConditionalNode::result_no_incoming(std::shared_ptr<Any>, std::map) : bool: 1842126879
+		// uml::ConditionalNode::result_no_incoming(Any, std::map) : bool: 1196289718
 		case umlPackage::CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -887,9 +887,9 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

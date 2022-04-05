@@ -56,7 +56,7 @@ namespace uml
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
 			*/
 			 
-			virtual bool class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool class_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/

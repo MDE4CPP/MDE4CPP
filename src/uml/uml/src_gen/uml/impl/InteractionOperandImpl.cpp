@@ -186,12 +186,12 @@ std::shared_ptr<ecore::EObject> InteractionOperandImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionOperandImpl::guard_contain_references(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InteractionOperandImpl::guard_contain_references(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionOperandImpl::guard_directly_prior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InteractionOperandImpl::guard_directly_prior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -556,7 +556,7 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
  
   	switch(operationID)
 	{
-		// uml::InteractionOperand::guard_contain_references(std::shared_ptr<Any>, std::map) : bool: 3038663871
+		// uml::InteractionOperand::guard_contain_references(Any, std::map) : bool: 3481080354
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_CONTAIN_REFERENCES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -566,13 +566,13 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->guard_contain_references(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InteractionOperand::guard_directly_prior(std::shared_ptr<Any>, std::map) : bool: 1417323533
+		// uml::InteractionOperand::guard_directly_prior(Any, std::map) : bool: 3795687392
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -582,9 +582,9 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->guard_directly_prior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

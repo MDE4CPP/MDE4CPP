@@ -96,13 +96,13 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_of_arguments(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool number_of_arguments(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
@@ -112,7 +112,7 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

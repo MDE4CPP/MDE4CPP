@@ -123,32 +123,32 @@ std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExceptionHandlerImpl::edge_source_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::edge_source_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::exception_input_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::exception_input_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::handler_body_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::handler_body_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::handler_body_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::handler_body_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::one_input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::one_input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ExceptionHandlerImpl::output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -516,7 +516,7 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// uml::ExceptionHandler::edge_source_target(std::shared_ptr<Any>, std::map) : bool: 228947739
+		// uml::ExceptionHandler::edge_source_target(Any, std::map) : bool: 359316574
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -526,13 +526,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::exception_input_type(std::shared_ptr<Any>, std::map) : bool: 2601837959
+		// uml::ExceptionHandler::exception_input_type(Any, std::map) : bool: 3735675314
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -542,13 +542,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::handler_body_edges(std::shared_ptr<Any>, std::map) : bool: 3559265066
+		// uml::ExceptionHandler::handler_body_edges(Any, std::map) : bool: 3689633901
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -558,13 +558,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::handler_body_owner(std::shared_ptr<Any>, std::map) : bool: 3042947729
+		// uml::ExceptionHandler::handler_body_owner(Any, std::map) : bool: 3173316564
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -574,13 +574,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::one_input(std::shared_ptr<Any>, std::map) : bool: 3977450969
+		// uml::ExceptionHandler::one_input(Any, std::map) : bool: 2531493072
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -590,13 +590,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ExceptionHandler::output_pins(std::shared_ptr<Any>, std::map) : bool: 2887570714
+		// uml::ExceptionHandler::output_pins(Any, std::map) : bool: 4230900057
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -606,9 +606,9 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

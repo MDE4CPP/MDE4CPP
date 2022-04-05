@@ -123,17 +123,17 @@ std::shared_ptr<ecore::EObject> GateImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool GateImpl::actual_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::actual_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::actual_gate_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::actual_gate_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::formal_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::formal_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -148,12 +148,12 @@ std::shared_ptr<uml::InteractionOperand> GateImpl::getOperand()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::inside_cf_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::inside_cf_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::inside_cf_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::inside_cf_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,12 +183,12 @@ bool GateImpl::matches(std::shared_ptr<uml::Gate> gateToMatch)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::outside_cf_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::outside_cf_gate_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::outside_cf_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool GateImpl::outside_cf_matched(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -347,7 +347,7 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
  
   	switch(operationID)
 	{
-		// uml::Gate::actual_gate_distinguishable(std::shared_ptr<Any>, std::map) : bool: 1479957456
+		// uml::Gate::actual_gate_distinguishable(Any, std::map) : bool: 707581407
 		case umlPackage::GATE_OPERATION_ACTUAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -357,13 +357,13 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->actual_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Gate::actual_gate_matched(std::shared_ptr<Any>, std::map) : bool: 1097681039
+		// uml::Gate::actual_gate_matched(Any, std::map) : bool: 2743901694
 		case umlPackage::GATE_OPERATION_ACTUAL_GATE_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -373,13 +373,13 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->actual_gate_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Gate::formal_gate_distinguishable(std::shared_ptr<Any>, std::map) : bool: 3382573419
+		// uml::Gate::formal_gate_distinguishable(Any, std::map) : bool: 2610197370
 		case umlPackage::GATE_OPERATION_FORMAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -389,9 +389,9 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->formal_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -407,7 +407,7 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			result = eAnyObject(this->getOperand(), uml::umlPackage::INTERACTIONOPERAND_CLASS);
 			break;
 		}
-		// uml::Gate::inside_cf_gate_distinguishable(std::shared_ptr<Any>, std::map) : bool: 4151824586
+		// uml::Gate::inside_cf_gate_distinguishable(Any, std::map) : bool: 4282193421
 		case umlPackage::GATE_OPERATION_INSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -417,13 +417,13 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->inside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Gate::inside_cf_matched(std::shared_ptr<Any>, std::map) : bool: 3868889137
+		// uml::Gate::inside_cf_matched(Any, std::map) : bool: 4127876568
 		case umlPackage::GATE_OPERATION_INSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -433,9 +433,9 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->inside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -474,7 +474,7 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			result = eAny(this->matches(incoming_param_gateToMatch),0,false);
 			break;
 		}
-		// uml::Gate::outside_cf_gate_distinguishable(std::shared_ptr<Any>, std::map) : bool: 1350998579
+		// uml::Gate::outside_cf_gate_distinguishable(Any, std::map) : bool: 3965579538
 		case umlPackage::GATE_OPERATION_OUTSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -484,13 +484,13 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->outside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Gate::outside_cf_matched(std::shared_ptr<Any>, std::map) : bool: 3535288966
+		// uml::Gate::outside_cf_matched(Any, std::map) : bool: 81753625
 		case umlPackage::GATE_OPERATION_OUTSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -500,9 +500,9 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->outside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

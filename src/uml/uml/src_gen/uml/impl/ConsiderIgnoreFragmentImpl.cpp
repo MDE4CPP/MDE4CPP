@@ -143,12 +143,12 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConsiderIgnoreFragmentImpl::type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ConsiderIgnoreFragmentImpl::type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -413,7 +413,7 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
  
   	switch(operationID)
 	{
-		// uml::ConsiderIgnoreFragment::consider_or_ignore(std::shared_ptr<Any>, std::map) : bool: 2284387484
+		// uml::ConsiderIgnoreFragment::consider_or_ignore(Any, std::map) : bool: 139354839
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -423,13 +423,13 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ConsiderIgnoreFragment::type(std::shared_ptr<Any>, std::map) : bool: 3596453576
+		// uml::ConsiderIgnoreFragment::type(Any, std::map) : bool: 4270096363
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -439,9 +439,9 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

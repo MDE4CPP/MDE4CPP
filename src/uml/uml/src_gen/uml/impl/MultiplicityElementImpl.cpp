@@ -144,12 +144,12 @@ int MultiplicityElementImpl::lowerBound()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::lower_ge_0(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::lower_ge_0(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::lower_is_integer(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::lower_is_integer(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -159,22 +159,22 @@ int MultiplicityElementImpl::upperBound()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::upper_ge_lower(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::upper_ge_lower(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::value_specification_constant(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::value_specification_constant(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::value_specification_no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool MultiplicityElementImpl::value_specification_no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -590,7 +590,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			result = eAny(this->lowerBound(),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::lower_ge_0(std::shared_ptr<Any>, std::map) : bool: 1891354521
+		// uml::MultiplicityElement::lower_ge_0(Any, std::map) : bool: 27225824
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -600,13 +600,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::lower_is_integer(std::shared_ptr<Any>, std::map) : bool: 865312951
+		// uml::MultiplicityElement::lower_is_integer(Any, std::map) : bool: 3479893910
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -616,9 +616,9 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -628,7 +628,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			result = eAny(this->upperBound(),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::upper_ge_lower(std::shared_ptr<Any>, std::map) : bool: 1653651061
+		// uml::MultiplicityElement::upper_ge_lower(Any, std::map) : bool: 1007813900
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -638,13 +638,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::upper_is_unlimitedNatural(std::shared_ptr<Any>, std::map) : bool: 1495984706
+		// uml::MultiplicityElement::upper_is_unlimitedNatural(Any, std::map) : bool: 2998336909
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -654,13 +654,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::value_specification_constant(std::shared_ptr<Any>, std::map) : bool: 3464661700
+		// uml::MultiplicityElement::value_specification_constant(Any, std::map) : bool: 141713939
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -670,13 +670,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::MultiplicityElement::value_specification_no_side_effects(std::shared_ptr<Any>, std::map) : bool: 4021499746
+		// uml::MultiplicityElement::value_specification_no_side_effects(Any, std::map) : bool: 3115291509
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -686,9 +686,9 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->value_specification_no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

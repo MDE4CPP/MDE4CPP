@@ -410,7 +410,7 @@ std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string 
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::elements_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool PackageImpl::elements_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1377,7 +1377,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAnyObject(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
-		// uml::Package::elements_public_or_private(std::shared_ptr<Any>, std::map) : bool: 2108790948
+		// uml::Package::elements_public_or_private(Any, std::map) : bool: 1462953787
 		case umlPackage::PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1387,9 +1387,9 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

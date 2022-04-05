@@ -157,7 +157,7 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveVariableValueActionImpl::removeAt_and_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RemoveVariableValueActionImpl::removeAt_and_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -483,7 +483,7 @@ std::shared_ptr<Any> RemoveVariableValueActionImpl::eInvoke(int operationID, std
  
   	switch(operationID)
 	{
-		// uml::RemoveVariableValueAction::removeAt_and_value(std::shared_ptr<Any>, std::map) : bool: 2543881091
+		// uml::RemoveVariableValueAction::removeAt_and_value(Any, std::map) : bool: 222150914
 		case umlPackage::REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,9 +493,9 @@ std::shared_ptr<Any> RemoveVariableValueActionImpl::eInvoke(int operationID, std
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->removeAt_and_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

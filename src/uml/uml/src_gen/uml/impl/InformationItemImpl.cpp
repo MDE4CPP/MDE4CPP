@@ -167,17 +167,17 @@ std::shared_ptr<ecore::EObject> InformationItemImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InformationItemImpl::has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationItemImpl::has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationItemImpl::not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationItemImpl::not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationItemImpl::sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationItemImpl::sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -525,7 +525,7 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
  
   	switch(operationID)
 	{
-		// uml::InformationItem::has_no(std::shared_ptr<Any>, std::map) : bool: 3443201868
+		// uml::InformationItem::has_no(Any, std::map) : bool: 3702189299
 		case umlPackage::INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -535,13 +535,13 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationItem::not_instantiable(std::shared_ptr<Any>, std::map) : bool: 2035300662
+		// uml::InformationItem::not_instantiable(Any, std::map) : bool: 1262924613
 		case umlPackage::INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -551,13 +551,13 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationItem::sources_and_targets(std::shared_ptr<Any>, std::map) : bool: 2992801547
+		// uml::InformationItem::sources_and_targets(Any, std::map) : bool: 3123170382
 		case umlPackage::INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -567,9 +567,9 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->sources_and_targets(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

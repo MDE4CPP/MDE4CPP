@@ -51,7 +51,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
 			signal.ownedAttribute->size() = ownedParameter->size() and
@@ -64,7 +64,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

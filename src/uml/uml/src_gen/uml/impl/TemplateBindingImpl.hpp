@@ -51,13 +51,13 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool one_parameter_substitution(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool parameter_substitution_formal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

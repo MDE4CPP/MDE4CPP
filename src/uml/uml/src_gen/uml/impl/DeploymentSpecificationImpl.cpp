@@ -181,12 +181,12 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DeploymentSpecificationImpl::deployed_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool DeploymentSpecificationImpl::deployed_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DeploymentSpecificationImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool DeploymentSpecificationImpl::deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -595,7 +595,7 @@ std::shared_ptr<Any> DeploymentSpecificationImpl::eInvoke(int operationID, std::
  
   	switch(operationID)
 	{
-		// uml::DeploymentSpecification::deployed_elements(std::shared_ptr<Any>, std::map) : bool: 4106491167
+		// uml::DeploymentSpecification::deployed_elements(Any, std::map) : bool: 1961458522
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -605,13 +605,13 @@ std::shared_ptr<Any> DeploymentSpecificationImpl::eInvoke(int operationID, std::
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deployed_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::DeploymentSpecification::deployment_target(std::shared_ptr<Any>, std::map) : bool: 2298280824
+		// uml::DeploymentSpecification::deployment_target(Any, std::map) : bool: 153248179
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -621,9 +621,9 @@ std::shared_ptr<Any> DeploymentSpecificationImpl::eInvoke(int operationID, std::
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

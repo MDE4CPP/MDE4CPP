@@ -137,7 +137,7 @@ namespace uml
 			_'context'.feature->includes(specification)
 			*/
 			 
-			virtual bool feature_of_context_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool feature_of_context_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			
 			/*!
 			The in and inout ownedParameters of the Behavior.
@@ -151,7 +151,7 @@ namespace uml
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
 			*/
 			 
-			virtual bool most_one_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool most_one_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
@@ -164,7 +164,7 @@ namespace uml
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
 			*/
 			 
-			virtual bool parameters_match(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool parameters_match(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

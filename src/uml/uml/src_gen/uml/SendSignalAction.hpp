@@ -97,7 +97,7 @@ namespace uml
 			argument->size()=signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_order(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool number_order(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
@@ -107,13 +107,13 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

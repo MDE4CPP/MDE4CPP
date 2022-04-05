@@ -251,7 +251,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
  
   	switch(operationID)
 	{
-		// uml::Object::add(uml::Property, std::shared_ptr<Any>): 761121103
+		// uml::Object::add(uml::Property, Any): 637724934
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'
@@ -267,7 +267,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			this->add(incoming_param__property,incoming_param_value);
 			break;
 		}
-		// uml::Object::add(uml::Property, std::shared_ptr<Any>, int): 1115033242
+		// uml::Object::add(uml::Property, Any, int): 319727429
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
 		{
 			//Retrieve input parameter '_property'
@@ -288,7 +288,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
 			break;
 		}
-		// uml::Object::get(uml::Property) : std::shared_ptr<Any> {const}: 1887868203
+		// uml::Object::get(uml::Property) : Any {const}: 511579154
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
 			//Retrieve input parameter '_property'
@@ -299,7 +299,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			result = eAny(this->get(incoming_param__property),0,false);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, std::shared_ptr<Any>[*]) : std::shared_ptr<Any>: 4204369167
+		// uml::Object::invoke(uml::Operation, Any[*]) : Any: 2657839141
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_operation'
@@ -315,7 +315,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments),0,false);
 			break;
 		}
-		// uml::Object::set(uml::Property, std::shared_ptr<Any>): 306782594
+		// uml::Object::set(uml::Property, Any): 183386425
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'

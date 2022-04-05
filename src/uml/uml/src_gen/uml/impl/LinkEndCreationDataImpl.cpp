@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool LinkEndCreationDataImpl::insertAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -353,7 +353,7 @@ std::shared_ptr<Any> LinkEndCreationDataImpl::eInvoke(int operationID, std::shar
  
   	switch(operationID)
 	{
-		// uml::LinkEndCreationData::insertAt_pin(std::shared_ptr<Any>, std::map) : bool: 2563080743
+		// uml::LinkEndCreationData::insertAt_pin(Any, std::map) : bool: 1790704694
 		case umlPackage::LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -363,9 +363,9 @@ std::shared_ptr<Any> LinkEndCreationDataImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

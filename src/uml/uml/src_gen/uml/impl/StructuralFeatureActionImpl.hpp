@@ -55,26 +55,26 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool one_featuring_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
@@ -83,7 +83,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

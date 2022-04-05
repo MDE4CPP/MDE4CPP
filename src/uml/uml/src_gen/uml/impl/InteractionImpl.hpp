@@ -63,7 +63,7 @@ namespace uml
 			enclosingInteraction->isEmpty()
 			*/
 			 
-			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -154,17 +154,17 @@ std::shared_ptr<ecore::EObject> CollaborationUseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CollaborationUseImpl::client_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CollaborationUseImpl::connectors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CollaborationUseImpl::connectors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CollaborationUseImpl::every_role(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CollaborationUseImpl::every_role(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -467,7 +467,7 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
  
   	switch(operationID)
 	{
-		// uml::CollaborationUse::client_elements(std::shared_ptr<Any>, std::map) : bool: 1544238040
+		// uml::CollaborationUse::client_elements(Any, std::map) : bool: 771861991
 		case umlPackage::COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -477,13 +477,13 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CollaborationUse::connectors(std::shared_ptr<Any>, std::map) : bool: 56865667
+		// uml::CollaborationUse::connectors(Any, std::map) : bool: 730508454
 		case umlPackage::COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,13 +493,13 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CollaborationUse::every_role(std::shared_ptr<Any>, std::map) : bool: 2111660229
+		// uml::CollaborationUse::every_role(Any, std::map) : bool: 2785303016
 		case umlPackage::COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -509,9 +509,9 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->every_role(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

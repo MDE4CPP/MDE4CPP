@@ -244,7 +244,7 @@ namespace uml
 			mustBeOwned() implies owner->notEmpty()
 			*/
 			 
-			virtual bool has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Determines whether the specified stereotype is applicable to this element.
 			*/
@@ -272,7 +272,7 @@ namespace uml
 			not allOwnedElements()->includes(self)
 			*/
 			 
-			virtual bool not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Removes the specified keyword from this element.
 			*/

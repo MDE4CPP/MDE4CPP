@@ -156,12 +156,12 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClearStructuralFeatureActionImpl::multiplicity_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClearStructuralFeatureActionImpl::multiplicity_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClearStructuralFeatureActionImpl::type_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClearStructuralFeatureActionImpl::type_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -458,7 +458,7 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
  
   	switch(operationID)
 	{
-		// uml::ClearStructuralFeatureAction::multiplicity_of_result(std::shared_ptr<Any>, std::map) : bool: 223539808
+		// uml::ClearStructuralFeatureAction::multiplicity_of_result(Any, std::map) : bool: 1242747875
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -468,13 +468,13 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ClearStructuralFeatureAction::type_of_result(std::shared_ptr<Any>, std::map) : bool: 4214015701
+		// uml::ClearStructuralFeatureAction::type_of_result(Any, std::map) : bool: 361464888
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -484,9 +484,9 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

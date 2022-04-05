@@ -117,13 +117,13 @@ namespace uml
 			lowerBound() >= 0
 			*/
 			 
-			virtual bool lower_ge_0(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool lower_ge_0(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null
 			*/
 			 
-			virtual bool lower_is_integer(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool lower_is_integer(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
@@ -136,23 +136,23 @@ namespace uml
 			upperBound() >= lowerBound()
 			*/
 			 
-			virtual bool upper_ge_lower(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool upper_ge_lower(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null
 			*/
 			 
-			virtual bool upper_is_unlimitedNatural(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool upper_is_unlimitedNatural(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
 			*/
 			 
-			virtual bool value_specification_constant(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool value_specification_constant(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
 			*/
 			 
-			virtual bool value_specification_no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool value_specification_no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

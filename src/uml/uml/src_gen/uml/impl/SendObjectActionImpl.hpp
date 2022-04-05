@@ -55,7 +55,7 @@ namespace uml
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

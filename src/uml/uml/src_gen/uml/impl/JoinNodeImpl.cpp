@@ -153,12 +153,12 @@ std::shared_ptr<ecore::EObject> JoinNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeImpl::incoming_object_flow(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool JoinNodeImpl::incoming_object_flow(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool JoinNodeImpl::one_outgoing_edge(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool JoinNodeImpl::one_outgoing_edge(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -459,7 +459,7 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
  
   	switch(operationID)
 	{
-		// uml::JoinNode::incoming_object_flow(std::shared_ptr<Any>, std::map) : bool: 1474371690
+		// uml::JoinNode::incoming_object_flow(Any, std::map) : bool: 3951350133
 		case umlPackage::JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -469,13 +469,13 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::JoinNode::one_outgoing_edge(std::shared_ptr<Any>, std::map) : bool: 3627422350
+		// uml::JoinNode::one_outgoing_edge(Any, std::map) : bool: 2181464453
 		case umlPackage::JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -485,9 +485,9 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -141,12 +141,12 @@ std::shared_ptr<uml::Activity> ActivityGroupImpl::containingActivity()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityGroupImpl::nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityGroupImpl::nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityGroupImpl::not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityGroupImpl::not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -470,7 +470,7 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
-		// uml::ActivityGroup::nodes_and_edges(std::shared_ptr<Any>, std::map) : bool: 429899179
+		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 2906877622
 		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -480,13 +480,13 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityGroup::not_contained(std::shared_ptr<Any>, std::map) : bool: 2267474670
+		// uml::ActivityGroup::not_contained(Any, std::map) : bool: 2941117457
 		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -496,9 +496,9 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

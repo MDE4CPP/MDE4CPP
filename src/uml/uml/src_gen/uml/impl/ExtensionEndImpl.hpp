@@ -63,13 +63,13 @@ namespace uml
 			self.aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
 			*/
 			 
-			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

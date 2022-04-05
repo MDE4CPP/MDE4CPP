@@ -346,7 +346,7 @@ std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string 
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InterfaceImpl::visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InterfaceImpl::visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1147,7 +1147,7 @@ std::shared_ptr<Any> InterfaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::Interface::visibility(std::shared_ptr<Any>, std::map) : bool: 1050041356
+		// uml::Interface::visibility(Any, std::map) : bool: 3380332971
 		case umlPackage::INTERFACE_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1157,9 +1157,9 @@ std::shared_ptr<Any> InterfaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

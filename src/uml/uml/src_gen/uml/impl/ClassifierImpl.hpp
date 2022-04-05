@@ -212,7 +212,7 @@ namespace uml
 			  ))
 			*/
 			 
-			virtual bool maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
 			result = (self.oclIsKindOf(c.oclType()))
@@ -225,13 +225,13 @@ namespace uml
 			not allParents()->includes(self)
 			*/
 			 
-			virtual bool no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The parents of a Classifier must be non-final.
 			parents()->forAll(not isFinalSpecialization)
 			*/
 			 
-			virtual bool non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query parents() gives all of the immediate ancestors of a generalized Classifier.
 			result = (generalization.general->asSet())
@@ -244,7 +244,7 @@ namespace uml
 			parents()->forAll(c | self.maySpecializeType(c))
 			*/
 			 
-			virtual bool specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -99,13 +99,13 @@ namespace uml
 			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public
 			*/
 			 
-			virtual bool imported_element_is_public(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool imported_element_is_public(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The visibility of an ElementImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool visibility_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool visibility_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

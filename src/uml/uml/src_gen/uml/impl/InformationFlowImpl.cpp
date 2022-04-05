@@ -204,17 +204,17 @@ std::shared_ptr<ecore::EObject> InformationFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationFlowImpl::convey_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationFlowImpl::must_conform(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationFlowImpl::must_conform(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool InformationFlowImpl::sources_and_targets_kind(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1029,7 +1029,7 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
  
   	switch(operationID)
 	{
-		// uml::InformationFlow::convey_classifiers(std::shared_ptr<Any>, std::map) : bool: 1662706184
+		// uml::InformationFlow::convey_classifiers(Any, std::map) : bool: 1016869023
 		case umlPackage::INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1039,13 +1039,13 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationFlow::must_conform(std::shared_ptr<Any>, std::map) : bool: 2612986285
+		// uml::InformationFlow::must_conform(Any, std::map) : bool: 3956315628
 		case umlPackage::INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1055,13 +1055,13 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::InformationFlow::sources_and_targets_kind(std::shared_ptr<Any>, std::map) : bool: 3033901349
+		// uml::InformationFlow::sources_and_targets_kind(Any, std::map) : bool: 238166996
 		case umlPackage::INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1071,9 +1071,9 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->sources_and_targets_kind(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

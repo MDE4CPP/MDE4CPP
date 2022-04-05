@@ -113,7 +113,7 @@ namespace uml
 			Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context) = 0;
 			/*!
 			Retrieves the current definition (Ecore representation) of this profile.
 			*/
@@ -155,14 +155,14 @@ namespace uml
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()
 			*/
 			 
-			virtual bool metaclass_reference_not_specialized(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool metaclass_reference_not_specialized(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
 			*/
 			 
-			virtual bool references_same_metamodel(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool references_same_metamodel(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

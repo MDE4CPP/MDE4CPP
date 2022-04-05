@@ -143,22 +143,22 @@ std::shared_ptr<ecore::EObject> LifelineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool LifelineImpl::interaction_uses_share_lifeline(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool LifelineImpl::same_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::selector_int_or_string(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool LifelineImpl::selector_int_or_string(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::selector_specified(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool LifelineImpl::selector_specified(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -590,7 +590,7 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
  
   	switch(operationID)
 	{
-		// uml::Lifeline::interaction_uses_share_lifeline(std::shared_ptr<Any>, std::map) : bool: 2200767415
+		// uml::Lifeline::interaction_uses_share_lifeline(Any, std::map) : bool: 3700000358
 		case umlPackage::LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -600,13 +600,13 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::same_classifier(std::shared_ptr<Any>, std::map) : bool: 2349669157
+		// uml::Lifeline::same_classifier(Any, std::map) : bool: 3995889812
 		case umlPackage::LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -616,13 +616,13 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::selector_int_or_string(std::shared_ptr<Any>, std::map) : bool: 3753955720
+		// uml::Lifeline::selector_int_or_string(Any, std::map) : bool: 3739382587
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -632,13 +632,13 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Lifeline::selector_specified(std::shared_ptr<Any>, std::map) : bool: 3909391187
+		// uml::Lifeline::selector_specified(Any, std::map) : bool: 288066678
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -648,9 +648,9 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->selector_specified(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

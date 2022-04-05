@@ -152,12 +152,12 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolTransitionImpl::associated_actions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolTransitionImpl::belongs_to_psm(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +167,7 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferreds()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolTransitionImpl::refers_to_operation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -505,7 +505,7 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
  
   	switch(operationID)
 	{
-		// uml::ProtocolTransition::associated_actions(std::shared_ptr<Any>, std::map) : bool: 929420900
+		// uml::ProtocolTransition::associated_actions(Any, std::map) : bool: 2063258255
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -515,13 +515,13 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolTransition::belongs_to_psm(std::shared_ptr<Any>, std::map) : bool: 2558839571
+		// uml::ProtocolTransition::belongs_to_psm(Any, std::map) : bool: 277614638
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -531,9 +531,9 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -544,7 +544,7 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::ProtocolTransition::refers_to_operation(std::shared_ptr<Any>, std::map) : bool: 241897417
+		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 205735088
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -554,9 +554,9 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

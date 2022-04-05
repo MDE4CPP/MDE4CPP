@@ -51,13 +51,13 @@ namespace uml
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
 			*/
 			 
-			virtual bool cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
 			*/
 			 
-			virtual bool cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
@@ -130,7 +130,7 @@ namespace uml
 			membersAreDistinguishable()
 			*/
 			 
-			virtual bool members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

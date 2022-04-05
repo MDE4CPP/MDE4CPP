@@ -132,12 +132,12 @@ std::string ElementImportImpl::getName()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImportImpl::imported_element_is_public(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ElementImportImpl::imported_element_is_public(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImportImpl::visibility_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ElementImportImpl::visibility_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -556,7 +556,7 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// uml::ElementImport::imported_element_is_public(std::shared_ptr<Any>, std::map) : bool: 2438874758
+		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 3938107701
 		case umlPackage::ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -566,13 +566,13 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ElementImport::visibility_public_or_private(std::shared_ptr<Any>, std::map) : bool: 1220344772
+		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 3497731579
 		case umlPackage::ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -582,9 +582,9 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

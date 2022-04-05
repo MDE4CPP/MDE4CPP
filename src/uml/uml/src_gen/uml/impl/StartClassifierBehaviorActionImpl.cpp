@@ -155,12 +155,12 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StartClassifierBehaviorActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StartClassifierBehaviorActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StartClassifierBehaviorActionImpl::type_has_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StartClassifierBehaviorActionImpl::type_has_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -435,7 +435,7 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
  
   	switch(operationID)
 	{
-		// uml::StartClassifierBehaviorAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 3348546149
+		// uml::StartClassifierBehaviorAction::multiplicity(Any, std::map) : bool: 1330965660
 		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -445,13 +445,13 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StartClassifierBehaviorAction::type_has_classifier(std::shared_ptr<Any>, std::map) : bool: 1335772701
+		// uml::StartClassifierBehaviorAction::type_has_classifier(Any, std::map) : bool: 1313200504
 		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,9 +461,9 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_has_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

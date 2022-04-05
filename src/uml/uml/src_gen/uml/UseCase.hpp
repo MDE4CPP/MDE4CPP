@@ -109,19 +109,19 @@ namespace uml
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool cannot_include_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
@@ -132,7 +132,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool no_association_to_use_case(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

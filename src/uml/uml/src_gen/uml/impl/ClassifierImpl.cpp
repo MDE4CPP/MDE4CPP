@@ -605,7 +605,7 @@ bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier> contrac
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierImpl::maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -615,12 +615,12 @@ bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier> c)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierImpl::no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierImpl::non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -640,7 +640,7 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 	//end of body
 }
 
-bool ClassifierImpl::specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClassifierImpl::specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1926,7 +1926,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
-		// uml::Classifier::getPropertyValue(std::string) : std::shared_ptr<Any>: 4002393371
+		// uml::Classifier::getPropertyValue(std::string) : Any: 1124921106
 		case umlPackage::CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING:
 		{
 			//Retrieve input parameter 'propertyName'
@@ -1990,7 +1990,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAny(this->isSubstitutableFor(incoming_param_contract),0,false);
 			break;
 		}
-		// uml::Classifier::maps_to_generalization_set(std::shared_ptr<Any>, std::map) : bool: 1856499585
+		// uml::Classifier::maps_to_generalization_set(Any, std::map) : bool: 2990336940
 		case umlPackage::CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -2000,9 +2000,9 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -2017,7 +2017,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAny(this->maySpecializeType(incoming_param_c),0,false);
 			break;
 		}
-		// uml::Classifier::no_cycles_in_generalization(std::shared_ptr<Any>, std::map) : bool: 3480392468
+		// uml::Classifier::no_cycles_in_generalization(Any, std::map) : bool: 3444230139
 		case umlPackage::CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -2027,13 +2027,13 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Classifier::non_final_parents(std::shared_ptr<Any>, std::map) : bool: 1922030884
+		// uml::Classifier::non_final_parents(Any, std::map) : bool: 3265360227
 		case umlPackage::CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -2043,9 +2043,9 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -2056,7 +2056,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
-		// uml::Classifier::specialize_type(std::shared_ptr<Any>, std::map) : bool: 3146625650
+		// uml::Classifier::specialize_type(Any, std::map) : bool: 1700667753
 		case umlPackage::CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -2066,9 +2066,9 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -270,7 +270,7 @@ std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool OperationImpl::at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -331,7 +331,7 @@ return equals;
 	//end of body
 }
 
-bool OperationImpl::only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool OperationImpl::only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1291,7 +1291,7 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
  
   	switch(operationID)
 	{
-		// uml::Operation::at_most_one_return(std::shared_ptr<Any>, std::map) : bool: 452737971
+		// uml::Operation::at_most_one_return(Any, std::map) : bool: 1796067314
 		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1301,9 +1301,9 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1348,7 +1348,7 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			result = eAny(this->matches(incoming_param_comparedOperation),0,false);
 			break;
 		}
-		// uml::Operation::only_body_for_query(std::shared_ptr<Any>, std::map) : bool: 4236913934
+		// uml::Operation::only_body_for_query(Any, std::map) : bool: 2418925081
 		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1358,9 +1358,9 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

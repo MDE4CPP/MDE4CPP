@@ -143,7 +143,7 @@ VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj
 //*********************************
 // Operations
 //*********************************
-bool VariableActionImpl::scope_of_variable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool VariableActionImpl::scope_of_variable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -405,7 +405,7 @@ std::shared_ptr<Any> VariableActionImpl::eInvoke(int operationID, std::shared_pt
  
   	switch(operationID)
 	{
-		// uml::VariableAction::scope_of_variable(std::shared_ptr<Any>, std::map) : bool: 1180806638
+		// uml::VariableAction::scope_of_variable(Any, std::map) : bool: 408430589
 		case umlPackage::VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -415,9 +415,9 @@ std::shared_ptr<Any> VariableActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->scope_of_variable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

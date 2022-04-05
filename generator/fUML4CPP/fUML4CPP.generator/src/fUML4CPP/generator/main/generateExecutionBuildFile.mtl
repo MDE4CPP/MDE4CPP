@@ -273,24 +273,28 @@ task clean {
 [/template]
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+[comment] Obsolete
 #ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
 [for (aClassifier : Classifier | getClassifiersForObjectClasses()->select(isGeneratable())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
+[/comment]
 #Strategy classes for Package [aPackage.generateNamespace(false)/]
 [for (aClass : Class | getPackageClasses()->select(isStrategyClass())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClass.name.toUpperFirst()/].cpp
 [/for]
+[comment] Obsolete
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
+	[/for]
 #OperationExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+	[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->sortedBy(name)/].cpp
-[/for]
+	[/for]
 [/if]
+[/comment]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
 [subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
 [/for]
@@ -347,7 +351,10 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
+[comment] PSCS and OclParser are excluded for now
 [query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten()->addAll(aPackage.addOclParser()) endif/]
+[/comment]
+[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
 [query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml'} endif/]
 [query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
 [query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]

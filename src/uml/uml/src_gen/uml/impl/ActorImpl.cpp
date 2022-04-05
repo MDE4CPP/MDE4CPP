@@ -169,12 +169,12 @@ std::shared_ptr<ecore::EObject> ActorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActorImpl::associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActorImpl::associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActorImpl::must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActorImpl::must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -435,7 +435,7 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
  
   	switch(operationID)
 	{
-		// uml::Actor::associations(std::shared_ptr<Any>, std::map) : bool: 535353012
+		// uml::Actor::associations(Any, std::map) : bool: 2262426123
 		case umlPackage::ACTOR_OPERATION_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -445,13 +445,13 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Actor::must_have_name(std::shared_ptr<Any>, std::map) : bool: 3135286124
+		// uml::Actor::must_have_name(Any, std::map) : bool: 1170610443
 		case umlPackage::ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,9 +461,9 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

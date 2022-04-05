@@ -170,7 +170,7 @@ namespace uml
 			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private)
 			*/
 			 
-			virtual bool elements_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool elements_public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s).
 			*/

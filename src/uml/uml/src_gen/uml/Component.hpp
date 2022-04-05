@@ -157,13 +157,13 @@ namespace uml
 			nestedClassifier->isEmpty()
 			*/
 			 
-			virtual bool no_nested_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool no_nested_classifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty()
 			*/
 			 
-			virtual bool no_packaged_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool no_packaged_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

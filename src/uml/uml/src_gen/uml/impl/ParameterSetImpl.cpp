@@ -155,17 +155,17 @@ std::shared_ptr<ecore::EObject> ParameterSetImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterSetImpl::input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ParameterSetImpl::input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterSetImpl::same_parameterized_entity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ParameterSetImpl::same_parameterized_entity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterSetImpl::two_parameter_sets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ParameterSetImpl::two_parameter_sets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -500,7 +500,7 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// uml::ParameterSet::input(std::shared_ptr<Any>, std::map) : bool: 3115708300
+		// uml::ParameterSet::input(Any, std::map) : bool: 547814115
 		case umlPackage::PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -510,13 +510,13 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ParameterSet::same_parameterized_entity(std::shared_ptr<Any>, std::map) : bool: 1071588790
+		// uml::ParameterSet::same_parameterized_entity(Any, std::map) : bool: 1035426461
 		case umlPackage::PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -526,13 +526,13 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ParameterSet::two_parameter_sets(std::shared_ptr<Any>, std::map) : bool: 3493594776
+		// uml::ParameterSet::two_parameter_sets(Any, std::map) : bool: 3479021643
 		case umlPackage::PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -542,9 +542,9 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->two_parameter_sets(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

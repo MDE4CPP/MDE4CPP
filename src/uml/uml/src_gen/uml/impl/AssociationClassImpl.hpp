@@ -57,13 +57,13 @@ namespace uml
 			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self)
 			*/
 			 
-			virtual bool cannot_be_defined(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool cannot_be_defined(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The owned attributes and owned ends of an AssociationClass are disjoint.
 			ownedAttribute->intersection(ownedEnd)->isEmpty()
 			*/
 			 
-			virtual bool disjoint_attributes_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool disjoint_attributes_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -151,27 +151,27 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityParameterNodeImpl::has_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityParameterNodeImpl::has_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityParameterNodeImpl::no_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityParameterNodeImpl::no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_outgoing_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityParameterNodeImpl::no_outgoing_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ActivityParameterNodeImpl::same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -432,7 +432,7 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
  
   	switch(operationID)
 	{
-		// uml::ActivityParameterNode::has_parameters(std::shared_ptr<Any>, std::map) : bool: 2814267362
+		// uml::ActivityParameterNode::has_parameters(Any, std::map) : bool: 1133881025
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_HAS_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -442,13 +442,13 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->has_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_edges(std::shared_ptr<Any>, std::map) : bool: 3256264475
+		// uml::ActivityParameterNode::no_edges(Any, std::map) : bool: 1392135778
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -458,13 +458,13 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_incoming_edges(std::shared_ptr<Any>, std::map) : bool: 2016080434
+		// uml::ActivityParameterNode::no_incoming_edges(Any, std::map) : bool: 99476997
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -474,13 +474,13 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_incoming_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::no_outgoing_edges(std::shared_ptr<Any>, std::map) : bool: 3377362878
+		// uml::ActivityParameterNode::no_outgoing_edges(Any, std::map) : bool: 1460759441
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -490,13 +490,13 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_outgoing_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ActivityParameterNode::same_type(std::shared_ptr<Any>, std::map) : bool: 1993844490
+		// uml::ActivityParameterNode::same_type(Any, std::map) : bool: 1979271357
 		case umlPackage::ACTIVITYPARAMETERNODE_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -506,9 +506,9 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

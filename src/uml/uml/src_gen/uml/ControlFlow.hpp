@@ -92,7 +92,7 @@ namespace uml
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType)
 			*/
 			 
-			virtual bool object_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool object_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

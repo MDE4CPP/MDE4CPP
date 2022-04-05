@@ -55,13 +55,13 @@ namespace uml
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
 			*/
 			 
-			virtual bool consider_or_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool consider_or_ignore(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
 			*/
 			 
-			virtual bool type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

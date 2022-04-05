@@ -331,7 +331,7 @@ bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype> stereotype, std::str
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImpl::has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ElementImpl::has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -359,7 +359,7 @@ bool ElementImpl::mustBeOwned()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImpl::not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ElementImpl::not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -887,7 +887,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
-		// uml::Element::getValue(uml::Stereotype, std::string) : std::shared_ptr<Any>: 2503511977
+		// uml::Element::getValue(uml::Stereotype, std::string) : Any: 56841400
 		case umlPackage::ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -930,7 +930,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName),0,false);
 			break;
 		}
-		// uml::Element::has_owner(std::shared_ptr<Any>, std::map) : bool: 1344358763
+		// uml::Element::has_owner(Any, std::map) : bool: 2592501830
 		case umlPackage::ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -940,9 +940,9 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->has_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -985,7 +985,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAny(this->mustBeOwned(),0,false);
 			break;
 		}
-		// uml::Element::not_own_self(std::shared_ptr<Any>, std::map) : bool: 471286106
+		// uml::Element::not_own_self(Any, std::map) : bool: 2801577721
 		case umlPackage::ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -995,9 +995,9 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->not_own_self(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1012,7 +1012,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAny(this->removeKeyword(incoming_param_keyword),0,false);
 			break;
 		}
-		// uml::Element::setValue(uml::Stereotype, std::string, std::shared_ptr<Any>): 836265823
+		// uml::Element::setValue(uml::Stereotype, std::string, Any): 813757714
 		case umlPackage::ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'stereotype'

@@ -156,17 +156,17 @@ std::shared_ptr<ecore::EObject> CreateLinkObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkObjectActionImpl::association_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CreateLinkObjectActionImpl::association_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateLinkObjectActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CreateLinkObjectActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateLinkObjectActionImpl::type_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool CreateLinkObjectActionImpl::type_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -467,7 +467,7 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
  
   	switch(operationID)
 	{
-		// uml::CreateLinkObjectAction::association_class(std::shared_ptr<Any>, std::map) : bool: 824855548
+		// uml::CreateLinkObjectAction::association_class(Any, std::map) : bool: 2324088491
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -477,13 +477,13 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->association_class(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateLinkObjectAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 2731048907
+		// uml::CreateLinkObjectAction::multiplicity(Any, std::map) : bool: 2861417742
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,13 +493,13 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::CreateLinkObjectAction::type_of_result(std::shared_ptr<Any>, std::map) : bool: 1884665154
+		// uml::CreateLinkObjectAction::type_of_result(Any, std::map) : bool: 3018502509
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -509,9 +509,9 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

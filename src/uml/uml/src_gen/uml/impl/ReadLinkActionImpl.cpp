@@ -157,17 +157,17 @@ std::shared_ptr<ecore::EObject> ReadLinkActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkActionImpl::compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReadLinkActionImpl::compatible_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkActionImpl::navigable_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReadLinkActionImpl::navigable_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkActionImpl::one_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReadLinkActionImpl::one_open_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -177,12 +177,12 @@ std::shared_ptr<Bag<uml::Property>> ReadLinkActionImpl::openEnd()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkActionImpl::type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReadLinkActionImpl::type_and_ordering(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkActionImpl::visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ReadLinkActionImpl::visibility(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -479,7 +479,7 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
  
   	switch(operationID)
 	{
-		// uml::ReadLinkAction::compatible_multiplicity(std::shared_ptr<Any>, std::map) : bool: 560721923
+		// uml::ReadLinkAction::compatible_multiplicity(Any, std::map) : bool: 524559594
 		case umlPackage::READLINKACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -489,13 +489,13 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->compatible_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::navigable_open_end(std::shared_ptr<Any>, std::map) : bool: 1863816879
+		// uml::ReadLinkAction::navigable_open_end(Any, std::map) : bool: 3877559242
 		case umlPackage::READLINKACTION_OPERATION_NAVIGABLE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -505,13 +505,13 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->navigable_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::one_open_end(std::shared_ptr<Any>, std::map) : bool: 3063697480
+		// uml::ReadLinkAction::one_open_end(Any, std::map) : bool: 3737340267
 		case umlPackage::READLINKACTION_OPERATION_ONE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -521,9 +521,9 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->one_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -534,7 +534,7 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
-		// uml::ReadLinkAction::type_and_ordering(std::shared_ptr<Any>, std::map) : bool: 2432988416
+		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1660612367
 		case umlPackage::READLINKACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -544,13 +544,13 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ReadLinkAction::visibility(std::shared_ptr<Any>, std::map) : bool: 3082619119
+		// uml::ReadLinkAction::visibility(Any, std::map) : bool: 138000618
 		case umlPackage::READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -560,9 +560,9 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

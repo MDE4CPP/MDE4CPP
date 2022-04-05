@@ -74,7 +74,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target)
 			*/
 			 
-			virtual bool outgoing_edges_structured_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool outgoing_edges_structured_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

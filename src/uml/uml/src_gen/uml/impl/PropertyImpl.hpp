@@ -69,25 +69,25 @@ namespace uml
 			    and ts.formal.oclAsType(Property).isAttribute())))
 			*/
 			 
-			virtual bool binding_to_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool binding_to_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))
 			*/
 			 
-			virtual bool deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A derived union is derived.
 			isDerivedUnion implies isDerived
 			*/
 			 
-			virtual bool derived_union_is_derived(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool derived_union_is_derived(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A derived union is read only.
 			isDerivedUnion implies isReadOnly
 			*/
 			 
-			virtual bool derived_union_is_read_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool derived_union_is_read_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			/*!
 			Retrieves the other end of the (binary) association in which this property is a member end.
@@ -121,13 +121,13 @@ namespace uml
 			isComposite and association <> null implies opposite.upperBound() <= 1
 			*/
 			 
-			virtual bool multiplicity_of_composite(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool multiplicity_of_composite(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty()
 			*/
 			 
-			virtual bool qualified_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool qualified_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A redefined Property must be inherited from a more general Classifier.
 			(redefinedProperty->notEmpty()) implies
@@ -137,7 +137,7 @@ namespace uml
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))
 			*/
 			 
-			virtual bool redefined_property_inherited(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool redefined_property_inherited(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this property to the specified Boolean value.
 			*/
@@ -178,7 +178,7 @@ namespace uml
 			subsettedProperty->forAll(sp | sp.name <> name)
 			*/
 			 
-			virtual bool subsetted_property_names(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool subsetted_property_names(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
 			result = (if association <> null
@@ -201,7 +201,7 @@ namespace uml
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
 			*/
 			 
-			virtual bool subsetting_context_conforms(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool subsetting_context_conforms(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
 			subsettedProperty->forAll(sp |
@@ -210,13 +210,13 @@ namespace uml
 			      self.upperBound() <= sp.upperBound() ))
 			*/
 			 
-			virtual bool subsetting_rules(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool subsetting_rules(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type
 			*/
 			 
-			virtual bool type_of_opposite_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool type_of_opposite_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************

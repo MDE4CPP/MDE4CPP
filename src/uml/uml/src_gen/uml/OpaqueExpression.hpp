@@ -114,20 +114,20 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool language_body_size(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool one_return_result_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool only_return_result_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()

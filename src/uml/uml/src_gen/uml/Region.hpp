@@ -129,20 +129,20 @@ namespace uml
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A Region can have at most one initial Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
@@ -161,7 +161,7 @@ namespace uml
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) = 0;
+			virtual bool shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

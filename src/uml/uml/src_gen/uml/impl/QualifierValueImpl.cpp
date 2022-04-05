@@ -112,17 +112,17 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool QualifierValueImpl::multiplicity_of_qualifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool QualifierValueImpl::qualifier_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool QualifierValueImpl::qualifier_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool QualifierValueImpl::type_of_qualifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool QualifierValueImpl::type_of_qualifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -367,7 +367,7 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
  
   	switch(operationID)
 	{
-		// uml::QualifierValue::multiplicity_of_qualifier(std::shared_ptr<Any>, std::map) : bool: 60329088
+		// uml::QualifierValue::multiplicity_of_qualifier(Any, std::map) : bool: 1559562031
 		case umlPackage::QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -377,13 +377,13 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::QualifierValue::qualifier_attribute(std::shared_ptr<Any>, std::map) : bool: 1343072895
+		// uml::QualifierValue::qualifier_attribute(Any, std::map) : bool: 697235734
 		case umlPackage::QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -393,13 +393,13 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::QualifierValue::type_of_qualifier(std::shared_ptr<Any>, std::map) : bool: 3843640173
+		// uml::QualifierValue::type_of_qualifier(Any, std::map) : bool: 3071264124
 		case umlPackage::QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -409,9 +409,9 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->type_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

@@ -58,28 +58,28 @@ namespace uml
 			->forAll(opposite.owner = association)
 			*/
 			 
-			virtual bool associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
 			*/
 			 
-			virtual bool base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
 			*/
 			 
-			virtual bool base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The upper bound of base-properties is exactly 1.
 			*/
 			 
-			virtual bool base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2)
 			*/
 			 
-			virtual bool binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
 			result = (self.namespace.oclAsType(Package).containingProfile())
@@ -108,7 +108,7 @@ namespace uml
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
 			*/
 			 
-			virtual bool generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
 			*/
@@ -139,7 +139,7 @@ namespace uml
 			Stereotype names should not clash with keyword names for the extended model element.
 			*/
 			 
-			virtual bool name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

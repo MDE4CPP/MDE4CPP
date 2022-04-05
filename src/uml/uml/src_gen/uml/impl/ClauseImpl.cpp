@@ -117,17 +117,17 @@ std::shared_ptr<ecore::EObject> ClauseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClauseImpl::body_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClauseImpl::decider_output(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClauseImpl::decider_output(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClauseImpl::test_and_body(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ClauseImpl::test_and_body(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -704,7 +704,7 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
  
   	switch(operationID)
 	{
-		// uml::Clause::body_output_pins(std::shared_ptr<Any>, std::map) : bool: 2788093087
+		// uml::Clause::body_output_pins(Any, std::map) : bool: 3629525042
 		case umlPackage::CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -714,13 +714,13 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Clause::decider_output(std::shared_ptr<Any>, std::map) : bool: 2498663484
+		// uml::Clause::decider_output(Any, std::map) : bool: 1450067495
 		case umlPackage::CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -730,13 +730,13 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::Clause::test_and_body(std::shared_ptr<Any>, std::map) : bool: 1925180591
+		// uml::Clause::test_and_body(Any, std::map) : bool: 4255472206
 		case umlPackage::CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -746,9 +746,9 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

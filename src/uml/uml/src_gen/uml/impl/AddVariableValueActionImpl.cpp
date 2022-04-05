@@ -157,12 +157,12 @@ std::shared_ptr<ecore::EObject> AddVariableValueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AddVariableValueActionImpl::insertAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AddVariableValueActionImpl::insertAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AddVariableValueActionImpl::required_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool AddVariableValueActionImpl::required_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -488,7 +488,7 @@ std::shared_ptr<Any> AddVariableValueActionImpl::eInvoke(int operationID, std::s
  
   	switch(operationID)
 	{
-		// uml::AddVariableValueAction::insertAt_pin(std::shared_ptr<Any>, std::map) : bool: 901364917
+		// uml::AddVariableValueAction::insertAt_pin(Any, std::map) : bool: 1031733752
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -498,13 +498,13 @@ std::shared_ptr<Any> AddVariableValueActionImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::AddVariableValueAction::required_value(std::shared_ptr<Any>, std::map) : bool: 2828243574
+		// uml::AddVariableValueAction::required_value(Any, std::map) : bool: 3962080929
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -514,9 +514,9 @@ std::shared_ptr<Any> AddVariableValueActionImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

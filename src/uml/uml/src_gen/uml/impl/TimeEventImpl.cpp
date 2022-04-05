@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject> TimeEventImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TimeEventImpl::when_non_negative(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -422,7 +422,7 @@ std::shared_ptr<Any> TimeEventImpl::eInvoke(int operationID, std::shared_ptr<Bag
  
   	switch(operationID)
 	{
-		// uml::TimeEvent::when_non_negative(std::shared_ptr<Any>, std::map) : bool: 1354648262
+		// uml::TimeEvent::when_non_negative(Any, std::map) : bool: 2028291049
 		case umlPackage::TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -432,9 +432,9 @@ std::shared_ptr<Any> TimeEventImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->when_non_negative(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

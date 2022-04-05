@@ -127,17 +127,17 @@ bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::Red
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RedefinableElementImpl::non_leaf_redefinition(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::redefinition_consistent(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RedefinableElementImpl::redefinition_consistent(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool RedefinableElementImpl::redefinition_context_valid(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -404,7 +404,7 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement),0,false);
 			break;
 		}
-		// uml::RedefinableElement::non_leaf_redefinition(std::shared_ptr<Any>, std::map) : bool: 173080187
+		// uml::RedefinableElement::non_leaf_redefinition(Any, std::map) : bool: 1672313130
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -414,13 +414,13 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::RedefinableElement::redefinition_consistent(std::shared_ptr<Any>, std::map) : bool: 2584574967
+		// uml::RedefinableElement::redefinition_consistent(Any, std::map) : bool: 566994478
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -430,13 +430,13 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::RedefinableElement::redefinition_context_valid(std::shared_ptr<Any>, std::map) : bool: 3855243237
+		// uml::RedefinableElement::redefinition_context_valid(Any, std::map) : bool: 1062628144
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -446,9 +446,9 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->redefinition_context_valid(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

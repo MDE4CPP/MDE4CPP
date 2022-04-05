@@ -342,17 +342,17 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StructuredActivityNodeImpl::edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StructuredActivityNodeImpl::input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool StructuredActivityNodeImpl::output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1183,7 +1183,7 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
  
   	switch(operationID)
 	{
-		// uml::StructuredActivityNode::edges(std::shared_ptr<Any>, std::map) : bool: 831859635
+		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 2175188978
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1193,13 +1193,13 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::input_pin_edges(std::shared_ptr<Any>, std::map) : bool: 1741439564
+		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1705277235
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1209,13 +1209,13 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::StructuredActivityNode::output_pin_edges(std::shared_ptr<Any>, std::map) : bool: 1056839561
+		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 3435203420
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1225,9 +1225,9 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

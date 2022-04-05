@@ -148,12 +148,12 @@ WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableA
 //*********************************
 // Operations
 //*********************************
-bool WriteVariableActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool WriteVariableActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool WriteVariableActionImpl::value_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool WriteVariableActionImpl::value_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -430,7 +430,7 @@ std::shared_ptr<Any> WriteVariableActionImpl::eInvoke(int operationID, std::shar
  
   	switch(operationID)
 	{
-		// uml::WriteVariableAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 1314522715
+		// uml::WriteVariableAction::multiplicity(Any, std::map) : bool: 542146666
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -440,13 +440,13 @@ std::shared_ptr<Any> WriteVariableActionImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::WriteVariableAction::value_type(std::shared_ptr<Any>, std::map) : bool: 4002253388
+		// uml::WriteVariableAction::value_type(Any, std::map) : bool: 2138124691
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -456,9 +456,9 @@ std::shared_ptr<Any> WriteVariableActionImpl::eInvoke(int operationID, std::shar
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->value_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

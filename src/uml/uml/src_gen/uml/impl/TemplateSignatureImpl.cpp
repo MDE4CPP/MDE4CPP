@@ -152,12 +152,12 @@ std::shared_ptr<ecore::EObject> TemplateSignatureImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TemplateSignatureImpl::own_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TemplateSignatureImpl::unique_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TemplateSignatureImpl::unique_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -533,7 +533,7 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
  
   	switch(operationID)
 	{
-		// uml::TemplateSignature::own_elements(std::shared_ptr<Any>, std::map) : bool: 772064137
+		// uml::TemplateSignature::own_elements(Any, std::map) : bool: 3202902736
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -543,13 +543,13 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TemplateSignature::unique_parameters(std::shared_ptr<Any>, std::map) : bool: 1179320347
+		// uml::TemplateSignature::unique_parameters(Any, std::map) : bool: 1309689182
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -559,9 +559,9 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->unique_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

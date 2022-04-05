@@ -65,7 +65,7 @@ namespace uml
 			containedEdge->forAll(activity = self.containingActivity())
 			*/
 			 
-			virtual bool nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
 			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
@@ -74,7 +74,7 @@ namespace uml
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
 			*/
 			 
-			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

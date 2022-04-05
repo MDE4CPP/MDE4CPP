@@ -169,17 +169,17 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TestIdentityActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TestIdentityActionImpl::multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TestIdentityActionImpl::no_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TestIdentityActionImpl::no_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TestIdentityActionImpl::result_is_boolean(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TestIdentityActionImpl::result_is_boolean(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -558,7 +558,7 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
  
   	switch(operationID)
 	{
-		// uml::TestIdentityAction::multiplicity(std::shared_ptr<Any>, std::map) : bool: 3045901560
+		// uml::TestIdentityAction::multiplicity(Any, std::map) : bool: 3031328427
 		case umlPackage::TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -568,13 +568,13 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TestIdentityAction::no_type(std::shared_ptr<Any>, std::map) : bool: 3411444953
+		// uml::TestIdentityAction::no_type(Any, std::map) : bool: 1965487056
 		case umlPackage::TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -584,13 +584,13 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TestIdentityAction::result_is_boolean(std::shared_ptr<Any>, std::map) : bool: 533153372
+		// uml::TestIdentityAction::result_is_boolean(Any, std::map) : bool: 3147734331
 		case umlPackage::TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -600,9 +600,9 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->result_is_boolean(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

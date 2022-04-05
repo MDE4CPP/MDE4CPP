@@ -53,26 +53,26 @@ namespace uml
 			nodes.incoming->forAll(nodes->includes(source))
 			*/
 			 
-			virtual bool edge_source_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool edge_source_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
 			*/
 			 
-			virtual bool exception_input_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool exception_input_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
 			*/
 			 
-			virtual bool handler_body_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool handler_body_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner
 			*/
 			 
-			virtual bool handler_body_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool handler_body_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
@@ -80,7 +80,7 @@ namespace uml
 			inputs->size()=1 and inputs->first()=exceptionInput
 			*/
 			 
-			virtual bool one_input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool one_input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
 			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
@@ -96,7 +96,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context) ;
+			virtual bool output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

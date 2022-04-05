@@ -224,17 +224,17 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolStateMachineImpl::deep_or_shallow_history(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolStateMachineImpl::deep_or_shallow_history(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolStateMachineImpl::entry_exit_do(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolStateMachineImpl::entry_exit_do(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolStateMachineImpl::protocol_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool ProtocolStateMachineImpl::protocol_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -652,7 +652,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
  
   	switch(operationID)
 	{
-		// uml::ProtocolStateMachine::deep_or_shallow_history(std::shared_ptr<Any>, std::map) : bool: 3759603583
+		// uml::ProtocolStateMachine::deep_or_shallow_history(Any, std::map) : bool: 1437873406
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -662,13 +662,13 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolStateMachine::entry_exit_do(std::shared_ptr<Any>, std::map) : bool: 3473548348
+		// uml::ProtocolStateMachine::entry_exit_do(Any, std::map) : bool: 2827711187
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -678,13 +678,13 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::ProtocolStateMachine::protocol_transitions(std::shared_ptr<Any>, std::map) : bool: 984511898
+		// uml::ProtocolStateMachine::protocol_transitions(Any, std::map) : bool: 3134446549
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -694,9 +694,9 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->protocol_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

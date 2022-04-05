@@ -159,12 +159,12 @@ std::shared_ptr<ecore::EObject> TemplateBindingImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TemplateBindingImpl::one_parameter_substitution(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> context)
+bool TemplateBindingImpl::parameter_substitution_formal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -562,7 +562,7 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
  
   	switch(operationID)
 	{
-		// uml::TemplateBinding::one_parameter_substitution(std::shared_ptr<Any>, std::map) : bool: 3732433016
+		// uml::TemplateBinding::one_parameter_substitution(Any, std::map) : bool: 1714852527
 		case umlPackage::TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -572,13 +572,13 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		// uml::TemplateBinding::parameter_substitution_formal(std::shared_ptr<Any>, std::map) : bool: 2890510099
+		// uml::TemplateBinding::parameter_substitution_formal(Any, std::map) : bool: 97895006
 		case umlPackage::TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -588,9 +588,9 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> incoming_param_context;
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < std::shared_ptr<Any>, std::shared_ptr<Any>>> >();
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
 			result = eAny(this->parameter_substitution_formal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
