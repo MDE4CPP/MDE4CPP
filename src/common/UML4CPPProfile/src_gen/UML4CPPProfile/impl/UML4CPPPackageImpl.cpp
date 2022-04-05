@@ -50,35 +50,6 @@ UML4CPPPackageImpl::UML4CPPPackageImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"UML4CPPPackage is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Package
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(364749133,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
-		//Property eclipseURI
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1162675821,[this](){ return eAny(this->getEclipseURI(), types::typesPackage::STRING_CLASS, false);}));
-		//Property ignoreNamespace
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1716152545,[this](){ return eAny(this->isIgnoreNamespace(), types::typesPackage::BOOLEAN_CLASS, false);}));
-		//Property packageOnly
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(262131715,[this](){ return eAny(this->isPackageOnly(), types::typesPackage::BOOLEAN_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Package
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(364749133,[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
-	//Property eclipseURI
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1162675821,[this](Any object){this->setEclipseURI(object->get<std::string>());}));
-	//Property ignoreNamespace
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1716152545,[this](Any object){this->setIgnoreNamespace(object->get<bool>());}));
-	//Property packageOnly
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(262131715,[this](Any object){this->setPackageOnly(object->get<bool>());}));
-	
-	
-	//unsetter init
-		//Property base_Package
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(364749133,[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -207,82 +178,184 @@ bool UML4CPPPackageImpl::isPackageOnly() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any UML4CPPPackageImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> UML4CPPPackageImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any UML4CPPPackageImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> UML4CPPPackageImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any UML4CPPPackageImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> UML4CPPPackageImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+			return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI:
+			return eAny(this->getEclipseURI(), types::typesPackage::STRING_CLASS, false);
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE:
+			return eAny(this->isIgnoreNamespace(), types::typesPackage::BOOLEAN_CLASS, false);
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY:
+			return eAny(this->isPackageOnly(), types::typesPackage::BOOLEAN_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void UML4CPPPackageImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void UML4CPPPackageImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void UML4CPPPackageImpl::set(std::string _qualifiedName, Any value)
+void UML4CPPPackageImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void UML4CPPPackageImpl::set(unsigned long _uID, Any value)
+void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Package>> container = value->get<std::shared_ptr<Bag<uml::Package>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Package(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Package(value->get<std::shared_ptr<uml::Package>>());
+			}
+			return;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setEclipseURI(*(container->at(0)));
+					}
+				}
+			}
+			else
+			{
+				this->setEclipseURI(value->get<std::string>());
+			}
+			return;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setIgnoreNamespace(*(container->at(0)));
+					}
+				}
+			}
+			else
+			{
+				this->setIgnoreNamespace(value->get<bool>());
+			}
+			return;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setPackageOnly(*(container->at(0)));
+					}
+				}
+			}
+			else
+			{
+				this->setPackageOnly(value->get<bool>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void UML4CPPPackageImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void UML4CPPPackageImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void UML4CPPPackageImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void UML4CPPPackageImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void UML4CPPPackageImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void UML4CPPPackageImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+		{
+			m_base_Package.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
 	std::string qualifiedName = _operation->getQualifiedName();
 
@@ -291,24 +364,17 @@ Any UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
 }
 
-Any UML4CPPPackageImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any UML4CPPPackageImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

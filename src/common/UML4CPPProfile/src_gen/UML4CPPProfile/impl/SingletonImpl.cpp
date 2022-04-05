@@ -49,23 +49,6 @@ SingletonImpl::SingletonImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"Singleton is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Class
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(2027377001,[this](){ return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Class
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(2027377001,[this](Any object){this->setBase_Class(object->get<std::shared_ptr<uml::Class>>());}));
-	
-	
-	//unsetter init
-		//Property base_Class
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(2027377001,[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -154,82 +137,118 @@ std::weak_ptr<uml::Class> SingletonImpl::getBase_Class() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any SingletonImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SingletonImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any SingletonImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> SingletonImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any SingletonImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> SingletonImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_ATTRIBUTE_BASE_CLASS:
+			return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void SingletonImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void SingletonImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void SingletonImpl::set(std::string _qualifiedName, Any value)
+void SingletonImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void SingletonImpl::set(unsigned long _uID, Any value)
+void SingletonImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_ATTRIBUTE_BASE_CLASS:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Class>> container = value->get<std::shared_ptr<Bag<uml::Class>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Class(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Class(value->get<std::shared_ptr<uml::Class>>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void SingletonImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void SingletonImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void SingletonImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void SingletonImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void SingletonImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void SingletonImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_ATTRIBUTE_BASE_CLASS:
+		{
+			m_base_Class.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any SingletonImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SingletonImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
 	std::string qualifiedName = _operation->getQualifiedName();
 
@@ -238,24 +257,17 @@ Any SingletonImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::share
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
 }
 
-Any SingletonImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SingletonImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any SingletonImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SingletonImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 
