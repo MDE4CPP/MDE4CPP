@@ -13,9 +13,6 @@ task buildUmlReflection() {
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
-	dependsOn getRootProject().getTasksByName('buildPSCS', true)
-	dependsOn getRootProject().getTasksByName('buildOclParser', true)
 }
 
 tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')
