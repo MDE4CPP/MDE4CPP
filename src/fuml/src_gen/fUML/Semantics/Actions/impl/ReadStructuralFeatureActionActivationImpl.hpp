@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATIONCLEARSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP
-#define FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATIONCLEARSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATIONREADSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATIONREADSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,7 +14,7 @@
 #include "fUML/fUML.hpp" 
 
 // model includes
-#include "../ClearStructuralFeatureActionActivation.hpp"
+#include "../ReadStructuralFeatureActionActivation.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuralFeatureActionActivationImpl.hpp"
@@ -22,25 +22,25 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class FUML_API ClearStructuralFeatureActionActivationImpl : virtual public StructuralFeatureActionActivationImpl, virtual public ClearStructuralFeatureActionActivation 
+	class FUML_API ReadStructuralFeatureActionActivationImpl : virtual public StructuralFeatureActionActivationImpl, virtual public ReadStructuralFeatureActionActivation 
 	{
 		public: 
-			ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj);
+			ReadStructuralFeatureActionActivationImpl(const ReadStructuralFeatureActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			ClearStructuralFeatureActionActivationImpl& operator=(ClearStructuralFeatureActionActivationImpl const&); 
+			ReadStructuralFeatureActionActivationImpl& operator=(ReadStructuralFeatureActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
-			ClearStructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> getThisClearStructuralFeatureActionActivationPtr() const;
-			virtual void setThisClearStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> thisClearStructuralFeatureActionActivationPtr);
+			ReadStructuralFeatureActionActivationImpl();
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> getThisReadStructuralFeatureActionActivationPtr() const;
+			virtual void setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
+			ReadStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~ClearStructuralFeatureActionActivationImpl();
+			virtual ~ReadStructuralFeatureActionActivationImpl();
 			
 			//*********************************
 			// Operations
@@ -54,11 +54,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const ;
-			virtual void setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction>) ;
-			/*Additional Setter for 'ActionActivation::action' redefined by reference 'clearStructuralFeatureAction'*/
+			virtual std::shared_ptr<uml::ReadStructuralFeatureAction> getReadStructuralFeatureAction() const ;
+			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction>) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readStructuralFeatureAction'*/
 			virtual void setAction(std::shared_ptr<uml::Action>) ;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'clearStructuralFeatureAction'*/
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readStructuralFeatureAction'*/
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
 			
 			//*********************************
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> m_thisClearStructuralFeatureActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> m_thisReadStructuralFeatureActionActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATIONCLEARSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATIONREADSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

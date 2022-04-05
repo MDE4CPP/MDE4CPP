@@ -13,8 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -83,7 +82,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual int position(Any value,std::shared_ptr<Bag<Any>> list,int startAt) = 0;
+			virtual int position(std::shared_ptr<Any> value, std::shared_ptr<Bag<Any>> list, int startAt) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -298,6 +298,25 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class ReadSelfActionActivation
 
+// Begin Class ReadStructuralFeatureActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Class() const
+{
+	return m_readStructuralFeatureActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const
+{
+	return m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReadStructuralFeatureActionActivation_Operation_doAction() const
+{
+	return m_readStructuralFeatureActionActivation_Operation_doAction;
+}
+
+// End Class ReadStructuralFeatureActionActivation
+
 // Begin Class StructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Class() const
 {
@@ -324,6 +343,77 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class StructuralFeatureActionActivation
+
+// Begin Class StructuredActivityNodeActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Class() const
+{
+	return m_structuredActivityNodeActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Attribute_activationGroup() const
+{
+	return m_structuredActivityNodeActivation_Attribute_activationGroup;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_completeAction() const
+{
+	return m_structuredActivityNodeActivation_Operation_completeAction;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_createEdgeInstances() const
+{
+	return m_structuredActivityNodeActivation_Operation_createEdgeInstances;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_createNodeActivations() const
+{
+	return m_structuredActivityNodeActivation_Operation_createNodeActivations;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_doAction() const
+{
+	return m_structuredActivityNodeActivation_Operation_doAction;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_doStructuredActivity() const
+{
+	return m_structuredActivityNodeActivation_Operation_doStructuredActivity;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const
+{
+	return m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const
+{
+	return m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const
+{
+	return m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_isSuspended() const
+{
+	return m_structuredActivityNodeActivation_Operation_isSuspended;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const
+{
+	return m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const
+{
+	return m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_resume() const
+{
+	return m_structuredActivityNodeActivation_Operation_resume;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_terminate() const
+{
+	return m_structuredActivityNodeActivation_Operation_terminate;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_terminateAll() const
+{
+	return m_structuredActivityNodeActivation_Operation_terminateAll;
+}
+
+// End Class StructuredActivityNodeActivation
 
 // Begin Class ValueSpecificationActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getValueSpecificationActionActivation_Class() const

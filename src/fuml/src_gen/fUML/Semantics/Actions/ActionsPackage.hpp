@@ -35,7 +35,9 @@ namespace fUML::Semantics::Actions
 	class OutputPinActivation;
 	class PinActivation;
 	class ReadSelfActionActivation;
+	class ReadStructuralFeatureActionActivation;
 	class StructuralFeatureActionActivation;
+	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
 	class Values;
 	class WriteStructuralFeatureActionActivation;
@@ -275,6 +277,27 @@ namespace fUML::Semantics::Actions
 			// End Class ReadSelfActionActivation
 
 
+			// Begin Class ReadStructuralFeatureActionActivation
+			//Class and Feature IDs 
+			static const unsigned long READSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 990872664;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			
+			static const unsigned long READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION = 2088398247;
+			
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION = 2509578359;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureActionActivation_Operation_doAction() const = 0;
+			
+			// End Class ReadStructuralFeatureActionActivation
+
+
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature IDs 
 			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_CLASS = 303469345;
@@ -298,6 +321,53 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const = 0;
 			
 			// End Class StructuralFeatureActionActivation
+
+
+			// Begin Class StructuredActivityNodeActivation
+			//Class and Feature IDs 
+			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_CLASS = 1589145908;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_OPERATION_COUNT = 60;
+			
+			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP = 1502048964;
+			
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION = 3878860807;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 4189320520;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 3493676622;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION = 3506173856;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 1244905776;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 935616927;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETPINVALUES_OUTPUTPIN = 418079140;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 3281612984;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED = 3925255716;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE = 854326129;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_PUTPINVALUES_OUTPUTPIN_EJAVAOBJECT = 362386455;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME = 568722472;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 2956351072;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL = 188036217;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNodeActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNodeActivation_Attribute_activationGroup() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_completeAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_createEdgeInstances() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_createNodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_doStructuredActivity() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_isSuspended() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_resume() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_terminate() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_terminateAll() const = 0;
+			
+			// End Class StructuredActivityNodeActivation
 
 
 			// Begin Class ValueSpecificationActionActivation

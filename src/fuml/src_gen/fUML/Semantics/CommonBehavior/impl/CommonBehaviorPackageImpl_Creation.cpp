@@ -58,9 +58,12 @@ void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EP
 	
 	m_execution_Attribute_behavior = factory->createEReference_as_eReferences_in_EClass(m_execution_Class, EXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_execution_Attribute_context = factory->createEReference_as_eReferences_in_EClass(m_execution_Class, EXECUTION_ATTRIBUTE_CONTEXT);
+	m_execution_Attribute_locus = factory->createEReference_as_eReferences_in_EClass(m_execution_Class, EXECUTION_ATTRIBUTE_LOCUS);
 	m_execution_Attribute_parameterValues = factory->createEReference_as_eReferences_in_EClass(m_execution_Class, EXECUTION_ATTRIBUTE_PARAMETERVALUES);
+	m_execution_Attribute_types = factory->createEReference_as_eReferences_in_EClass(m_execution_Class, EXECUTION_ATTRIBUTE_TYPES);
 	
 	m_execution_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_execution_Class, EXECUTION_OPERATION__COPY);
+	m_execution_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_execution_Class, EXECUTION_OPERATION_DESTROY);
 	m_execution_Operation_execute = factory->createEOperation_as_eOperations_in_EClass(m_execution_Class, EXECUTION_OPERATION_EXECUTE);
 	m_execution_Operation_getOutputParameterValues = factory->createEOperation_as_eOperations_in_EClass(m_execution_Class, EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES);
 	m_execution_Operation_getParameterValue_Parameter = factory->createEOperation_as_eOperations_in_EClass(m_execution_Class, EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER);

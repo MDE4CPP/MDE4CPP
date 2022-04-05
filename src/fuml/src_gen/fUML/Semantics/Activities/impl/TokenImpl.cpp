@@ -122,7 +122,7 @@ bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any TokenImpl::getValue() const
+std::shared_ptr<Any> TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -323,7 +323,7 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -350,7 +350,7 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool TokenImpl::eSet(int featureID, Any newValue)
+bool TokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -377,9 +377,9 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -395,7 +395,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
@@ -403,7 +403,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// fUML::Semantics::Activities::Token::getValue() : Any {const}: 900354032
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
-			result = this->getValue();
+			result = eAny(this->getValue(),0,false);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::isControl() : bool: 2683482097
@@ -418,7 +418,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			//Retrieve input parameter 'holder'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
-			std::list<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			result = eAnyObject(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;

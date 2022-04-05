@@ -46,9 +46,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature> feature) ;
-			virtual std::shared_ptr<Bag<uml::Element> > getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue) ;
-			virtual std::shared_ptr<Bag<uml::Element> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue,Any endValue) ;
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) ;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinks(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue) ;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue, std::shared_ptr<Any> endValue) ;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -84,14 +84,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> m_thisStructuralFeatureActionActivationPtr;

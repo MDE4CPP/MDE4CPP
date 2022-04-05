@@ -47,7 +47,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) ;
-			virtual Any getValue() const ;
+			virtual std::shared_ptr<Any> getValue() const ;
 			virtual bool isControl() ;
 			virtual void withdraw() ;
 			
@@ -90,14 +90,14 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ForkedToken> m_thisForkedTokenPtr;

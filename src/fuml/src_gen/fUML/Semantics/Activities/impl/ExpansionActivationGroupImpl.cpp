@@ -46,6 +46,7 @@
 #include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -77,6 +78,13 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::S
 :ExpansionActivationGroupImpl()
 {
 	m_activityExecution = par_activityExecution;
+}
+
+//Additional constructor for the containments back reference
+ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation)
+:ExpansionActivationGroupImpl()
+{
+	m_containingNodeActivation = par_containingNodeActivation;
 }
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj): ExpansionActivationGroupImpl()
@@ -276,6 +284,11 @@ std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -460,7 +473,7 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -496,7 +509,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
+bool ExpansionActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -634,9 +647,9 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -652,7 +665,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			//Retrieve input parameter 'node'
 			//parameter 0
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
-			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
 			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
@@ -663,7 +676,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			//Retrieve input parameter 'activation'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
-			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->resume(incoming_param_activation);
 			break;
@@ -674,7 +687,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			//Retrieve input parameter 'activation'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
-			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->suspend(incoming_param_activation);
 			break;

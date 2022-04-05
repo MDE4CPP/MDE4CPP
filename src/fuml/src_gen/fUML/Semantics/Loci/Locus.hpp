@@ -77,10 +77,10 @@ namespace fUML::Semantics::Loci
 			virtual void add(std::shared_ptr<uml::Element> value) = 0;
 			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) = 0;
 			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) = 0;
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
+			virtual bool conforms(std::shared_ptr<uml::Classifier> type, std::shared_ptr<uml::Classifier> classifier) = 0;
 			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type) = 0;
 			virtual void remove(std::shared_ptr<uml::Element> value) = 0;
-			virtual std::shared_ptr<Bag<uml::Element> > retrieveExtent(std::shared_ptr<uml::Classifier> classifier) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(std::shared_ptr<uml::Classifier> classifier) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

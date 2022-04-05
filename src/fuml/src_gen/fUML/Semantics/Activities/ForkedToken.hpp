@@ -69,7 +69,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0;
-			virtual Any getValue() const = 0;
+			virtual std::shared_ptr<Any> getValue() const = 0;
 			virtual bool isControl() = 0;
 			virtual void withdraw() = 0;
 

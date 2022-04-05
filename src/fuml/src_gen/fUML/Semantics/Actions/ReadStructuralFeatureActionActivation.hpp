@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_TOKEN_HPP
-#define FUML_SEMANTICS_ACTIVITIES_TOKEN_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATION_HPP
+#define FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATION_HPP
 
 
 #include <memory>
@@ -32,64 +32,75 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
+{
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
+}
 namespace fUML::Semantics::Activities 
 {
-	class ActivityNodeActivation;
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class ReadStructuralFeatureAction;
 }
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
+// base class includes
+#include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API Token : virtual public ecore::EModelElement
+	class FUML_API ReadStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
 	{
 		public:
- 			Token(const Token &) {}
+ 			ReadStructuralFeatureActionActivation(const ReadStructuralFeatureActionActivation &) {}
 
 		protected:
-			Token(){}
-			//Additional constructors for the containments back reference
-			Token(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
+			ReadStructuralFeatureActionActivation(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~Token() {}
+			virtual ~ReadStructuralFeatureActionActivation() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0;
-			virtual std::shared_ptr<Any> getValue() const = 0;
-			virtual bool isControl() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) = 0;
-			virtual void withdraw() = 0;
+			virtual void doAction() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool isWithdrawn() const = 0;
-			virtual void setWithdrawn (bool _withdrawn)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getHolder() const = 0;
-			virtual void setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) = 0;
+			virtual std::shared_ptr<uml::ReadStructuralFeatureAction> getReadStructuralFeatureAction() const = 0;
+			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction>) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readStructuralFeatureAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readStructuralFeatureAction'*/
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter
@@ -107,12 +118,11 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			bool m_withdrawn= true;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> m_holder;
+			std::shared_ptr<uml::ReadStructuralFeatureAction> m_readStructuralFeatureAction;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_TOKEN_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATION_HPP */

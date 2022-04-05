@@ -120,8 +120,8 @@ namespace fUML::Semantics::Activities
 			// Begin Class ActivityExecution
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 11;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 51;
 			
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;
@@ -247,10 +247,11 @@ namespace fUML::Semantics::Activities
 			// Begin Class ActivityNodeActivationGroup
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_CLASS = 447489606;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_CLASS_OPERATION_COUNT = 17;
 			
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION = 643167494;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION = 441933508;
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES = 1462566797;
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS = 312223170;
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS = 652260595;
@@ -278,6 +279,7 @@ namespace fUML::Semantics::Activities
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_activityExecution() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_containingNodeActivation() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_edgeInstances() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_nodeActivations() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_suspendedActivations() const = 0;
@@ -486,7 +488,7 @@ namespace fUML::Semantics::Activities
 			// Begin Class ExpansionActivationGroup
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONACTIVATIONGROUP_CLASS = 2118091381;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_OPERATION_COUNT = 21;
 			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX = 1854627739;
 			

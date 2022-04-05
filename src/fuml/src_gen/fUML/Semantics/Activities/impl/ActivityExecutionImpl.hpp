@@ -43,9 +43,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual Any _copy() ;
+			virtual std::shared_ptr<Any> _copy() ;
 			virtual void execute() ;
-			virtual Any new_() ;
+			virtual std::shared_ptr<Any> new_() ;
 			virtual void terminate() ;
 			
 			//*********************************
@@ -65,6 +65,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
 			//*********************************
 			// Container Getter
@@ -87,14 +88,14 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> m_thisActivityExecutionPtr;

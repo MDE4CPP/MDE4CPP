@@ -40,22 +40,22 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/OpaqueBehavior.hpp"
-#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
-#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+//#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
+//#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 #include "uml/CentralBufferNode.hpp"
 #include "uml/StructuredActivityNode.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Evaluation.hpp"
+//#include "fUML/Semantics/Values/Value.hpp"
+//#include "fUML/Semantics/Values/Evaluation.hpp"
 #include "uml/Element.hpp"
 #include "uml/ValueSpecification.hpp"
-#include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
+/* #include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralNullEvaluation.hpp"
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralUnlimitedNaturalEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
-#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
+#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp" 
+#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp" */
 #include "uml/umlPackage.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/LiteralBoolean.hpp"
@@ -69,15 +69,15 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
-#include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
-#include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
-#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
-#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
+//#include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
+//#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
-#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
-#include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
+//#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/FlowFinalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
 #include "fUML/Semantics/Activities/InitialNodeActivation.hpp"
@@ -85,12 +85,12 @@
 #include "fUML/Semantics/Activities/JoinNodeActivation.hpp"
 #include "fUML/Semantics/Activities/MergeNodeActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadStructuralFeatureActionActivation.hpp"
-#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
-#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
-#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
+//#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
+//#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
+//#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
 #include "fUML/Semantics/Actions/ValueSpecificationActionActivation.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityFinalNode.hpp"
@@ -119,18 +119,18 @@
 #include "uml/SendSignalAction.hpp"
 #include "uml/TestIdentityAction.hpp"
 #include "uml/ValueSpecificationAction.hpp"
-#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
-#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
+//#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/DataStoreNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
-#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
-#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReclassifyObjectActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReduceActionActivation.hpp"
-#include "fUML/Semantics/Actions/StartClassifierBehaviorActionActivation.hpp"
-#include "fUML/Semantics/Actions/StartObjectBehaviorActionActivation.hpp"
+//#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReclassifyObjectActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReduceActionActivation.hpp"
+//#include "fUML/Semantics/Actions/StartClassifierBehaviorActionActivation.hpp"
+//#include "fUML/Semantics/Actions/StartObjectBehaviorActionActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "uml/ConditionalNode.hpp"
@@ -149,8 +149,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
@@ -267,7 +267,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<uml::Element> context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -275,7 +275,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-        execution = this->instantiateOpaqueBehaviorExecution(behavior);
+	//Currently not supported
+        //execution = this->instantiateOpaqueBehaviorExecution(behavior);
     }
     else
     {
@@ -283,7 +284,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 		{
 			execution = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 			execution->getTypes()->push_back(behavior);
-            execution->createFeatureValues();	
+            		//execution->createFeatureValues();	
 		}
 		else{
 			/*
@@ -292,8 +293,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 			execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->instantiateVisitor(behavior));
 			if(execution != nullptr)
 			{
-			execution->getTypes()->push_back(behavior);
-            execution->createFeatureValues();
+				execution->getTypes()->push_back(behavior);
+            			//execution->createFeatureValues();
 			}
 		}
     }
@@ -304,6 +305,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
         return nullptr;
     }
     this->getLocus().lock()->add(execution);
+	execution->setLocus(this->getLocus().lock());
 
 
     if(context == nullptr)
@@ -399,7 +401,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
+	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 
 	switch (element->eClass()->getClassifierID()) 
 	{
@@ -470,17 +472,17 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::CALLBEHAVIORACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
 			break;
 		}
 		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSELFACTION_CLASS:
@@ -490,7 +492,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage:: TESTIDENTITYACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
 			break;
 		}
 		case uml::umlPackage::VALUESPECIFICATIONACTION_CLASS:
@@ -505,7 +507,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::DESTROYOBJECTACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS:
@@ -525,37 +527,37 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
 			break;
 		}
 		case uml::umlPackage::READLINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CLEARASSOCIATIONACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::DESTROYLINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CONDITIONALNODE_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
 			break;
 		}
 		case uml::umlPackage::LOOPNODE_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
 			break;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
@@ -565,37 +567,37 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
 			break;
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
 			break;
 		}
 		case uml::umlPackage::REDUCEACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
 			break;
 		}
 		case uml::umlPackage::DATASTORENODE_CLASS: 
@@ -608,11 +610,11 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createCentralBufferNodeActivation();
 			break;
 		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
+		/*case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
 		{
-			visitor = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
+			//visitor = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
 			break;
-		}		
+		}*/		
 		default: 
 		{
 			std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
@@ -817,7 +819,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -848,7 +850,7 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
+bool ExecutionFactoryImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -942,9 +944,9 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -954,7 +956,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'type'
 			//parameter 0
 			std::shared_ptr<uml::PrimitiveType> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::PrimitiveType> >();
 			this->addBuiltInType(incoming_param_type);
 			break;
@@ -965,7 +967,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'strategy'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> incoming_param_strategy;
-			std::list<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_strategy = (*incoming_param_strategy_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> >();
 			this->assignStrategy(incoming_param_strategy);
 			break;
@@ -976,12 +978,12 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'behavior'
 			//parameter 0
 			std::shared_ptr<uml::Behavior> incoming_param_behavior;
-			std::list<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			result = eAnyObject(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
@@ -992,7 +994,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			result = eAnyObject(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
@@ -1003,7 +1005,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			result = eAnyObject(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
 			break;
@@ -1014,7 +1016,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			result = eAny(this->getStrategyIndex(incoming_param_name),0,false);
 			break;
@@ -1025,7 +1027,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
 			result = eAnyObject(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
 			break;

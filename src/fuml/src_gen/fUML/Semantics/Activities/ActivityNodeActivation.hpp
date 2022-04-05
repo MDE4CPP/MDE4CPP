@@ -95,7 +95,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
 			virtual bool getRunning() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() = 0;
 			virtual bool isReady() = 0;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstances) = 0;
 			virtual void receiveOffer() = 0;
@@ -104,8 +104,8 @@ namespace fUML::Semantics::Activities
 			virtual void run() = 0;
 			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) = 0;
 			virtual void suspend() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeTokens() = 0;
 			virtual void terminate() = 0;
 
 			//*********************************

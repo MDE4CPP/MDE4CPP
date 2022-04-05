@@ -36,6 +36,7 @@ namespace fUML
 namespace fUML::Semantics::Actions 
 {
 	class OutputPinActivation;
+	class StructuredActivityNodeActivation;
 }
 namespace fUML::Semantics::Activities 
 {

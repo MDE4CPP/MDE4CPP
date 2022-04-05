@@ -74,14 +74,17 @@ namespace fUML::Semantics::CommonBehavior
 			// Begin Class Execution
 			//Class and Feature IDs 
 			static const unsigned long EXECUTION_CLASS = 921905715;
-			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 7;
+			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 47;
 			
 			static const unsigned long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const unsigned long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;
+			static const unsigned long EXECUTION_ATTRIBUTE_LOCUS = 352953143;
 			static const unsigned long EXECUTION_ATTRIBUTE_PARAMETERVALUES = 1718346120;
+			static const unsigned long EXECUTION_ATTRIBUTE_TYPES = 1361902853;
 			
 			static const unsigned int EXECUTION_OPERATION__COPY = 4021493409;
+			static const unsigned int EXECUTION_OPERATION_DESTROY = 2183551203;
 			static const unsigned int EXECUTION_OPERATION_EXECUTE = 2717216448;
 			static const unsigned int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 3117320457;
 			static const unsigned int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 972104598;
@@ -95,9 +98,12 @@ namespace fUML::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_behavior() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_locus() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_types() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_destroy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getParameterValue_Parameter() const = 0;

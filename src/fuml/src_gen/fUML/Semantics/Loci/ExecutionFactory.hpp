@@ -87,7 +87,7 @@ namespace fUML::Semantics::Loci
 			
 			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<uml::Element> context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context) = 0;
 			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) = 0;
 			virtual int getStrategyIndex(std::string name) = 0;

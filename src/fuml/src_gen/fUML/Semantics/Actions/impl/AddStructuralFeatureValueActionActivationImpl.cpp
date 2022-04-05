@@ -143,9 +143,17 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+
+	if(!property)
+	{
+		return;
+	}
+	
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 
-	Any value = nullptr;
+	std::shared_ptr<Any> value = nullptr;
 
 	/* MDE4CPP specific implementation for handling "self"-Pin */
 	std::string objectPinName = action->getObject()->getName();
@@ -153,7 +161,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 		//value is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		value = eAny(context);
+		value = eAny(context, context->getMetaElementID(), false);
 	}
 	else{
 		value = this->takeTokens(action->getObject())->at(0);
@@ -163,12 +171,12 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<Bag<Any>> inputValues = takeTokens(action->getValue());
 
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
-	Any inputValue = inputValues->at(0);
+	std::shared_ptr<Any> inputValue = inputValues->at(0);
 
 	int insertAt = -1;
 	if (action->getInsertAt() != nullptr)
 	{
-		Any insertValue = takeTokens(action->getInsertAt())->at(0);
+		std::shared_ptr<Any> insertValue = takeTokens(action->getInsertAt())->at(0);
 		insertAt = insertValue->get<int>();
 	}
 
@@ -225,27 +233,27 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 
 		try
 		{
-			structuredValue = value->get<uml::Element>();
+			structuredValue = value->get<std::shared_ptr<uml::Element>>();
 		
 			if (structuredValue)
 			{
 				if(action->getIsReplaceAll())
 				{
-					structuredValue->unset(feature);
+					structuredValue->unset(property);
 				}
 
 				int upperOfFeature = feature->getUpper();
-				if(upper == 1)
+				if(upperOfFeature == 1)
 				{
-					// If upper = 1, then feature is a "simple" feature
+					// If upperOfFeature = 1, then feature is a "simple" feature
 					// insertAt as well as isUnique do not apply here, since the current value will be overwritten anyway
-					structuredValue->set(feature, inputValue);
+					structuredValue->set(property, inputValue);
 				}
 				else
 				{
-					//If upper <> 1, then feature is a container
-					Any featureValue = structuredValue->get(feature);
-					if(featureValue && featureValue->isContainer)
+					//If upperOfFeature <> 1, then feature is a container
+					std::shared_ptr<Any> featureValue = structuredValue->get(property);
+					if(featureValue && featureValue->isContainer())
 					{
 						int sizeOfFeatureValue = (std::dynamic_pointer_cast<AnyEObjectBag>(featureValue))->getBag()->size();
 
@@ -259,11 +267,11 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 						if(insertAt <= 0)
 						{
 							// Note: insertAt = -1 indicates an unlimited value of "*"
-							structuredValue->add(feature, inputValue);
+							structuredValue->add(property, inputValue);
 						}
 						else
 						{
-							structuredValue->add(feature, inputValue, (insertAt - 1));
+							structuredValue->add(property, inputValue, (insertAt - 1));
 						}	
 					}
 					else
@@ -277,10 +285,10 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 				DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL context."<<std::endl;)
 			}
 		}
-	}
-	catch(...)
-	{
-		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+		catch(...)
+		{
+			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+		}
 	}
 
 	if(action->getResult() != nullptr) 
@@ -480,7 +488,7 @@ std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionActivationImpl::eS
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -500,7 +508,7 @@ bool AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
+bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -520,9 +528,9 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

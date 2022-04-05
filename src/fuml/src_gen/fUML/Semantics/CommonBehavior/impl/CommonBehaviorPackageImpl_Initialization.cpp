@@ -19,6 +19,7 @@
 
 //depending model packages
 
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -41,6 +42,8 @@ void CommonBehaviorPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
+	m_execution_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
+	m_execution_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class());
 	
 
  	// Initialize classes and features; add operations and parameters
@@ -114,6 +117,28 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	m_execution_Attribute_locus->setName("locus");
+	m_execution_Attribute_locus->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class());
+	m_execution_Attribute_locus->setLowerBound(0);
+	m_execution_Attribute_locus->setUpperBound(1);
+	m_execution_Attribute_locus->setTransient(false);
+	m_execution_Attribute_locus->setVolatile(false);
+	m_execution_Attribute_locus->setChangeable(true);
+	m_execution_Attribute_locus->setUnsettable(false);
+	m_execution_Attribute_locus->setUnique(true);
+	m_execution_Attribute_locus->setDerived(false);
+	m_execution_Attribute_locus->setOrdered(false);
+	m_execution_Attribute_locus->setContainment(false);
+	m_execution_Attribute_locus->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_execution_Attribute_locus->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	m_execution_Attribute_parameterValues->setName("parameterValues");
 	m_execution_Attribute_parameterValues->setEType(getParameterValue_Class());
 	m_execution_Attribute_parameterValues->setLowerBound(0);
@@ -136,6 +161,28 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	m_execution_Attribute_types->setName("types");
+	m_execution_Attribute_types->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+	m_execution_Attribute_types->setLowerBound(0);
+	m_execution_Attribute_types->setUpperBound(-1);
+	m_execution_Attribute_types->setTransient(false);
+	m_execution_Attribute_types->setVolatile(false);
+	m_execution_Attribute_types->setChangeable(true);
+	m_execution_Attribute_types->setUnsettable(false);
+	m_execution_Attribute_types->setUnique(true);
+	m_execution_Attribute_types->setDerived(false);
+	m_execution_Attribute_types->setOrdered(false);
+	m_execution_Attribute_types->setContainment(false);
+	m_execution_Attribute_types->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_execution_Attribute_types->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_execution_Operation__copy->setName("_copy");
 	m_execution_Operation__copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
@@ -143,6 +190,19 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation__copy->setUpperBound(1);
 	m_execution_Operation__copy->setUnique(true);
 	m_execution_Operation__copy->setOrdered(true);
+	
+	m_execution_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_execution_Operation_destroy->setEType(unknownClass);
+	}
+	m_execution_Operation_destroy->setLowerBound(1);
+	m_execution_Operation_destroy->setUpperBound(1);
+	m_execution_Operation_destroy->setUnique(true);
+	m_execution_Operation_destroy->setOrdered(false);
 	
 	m_execution_Operation_execute->setName("execute");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();

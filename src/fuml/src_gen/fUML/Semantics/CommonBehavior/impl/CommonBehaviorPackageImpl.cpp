@@ -85,14 +85,26 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehavi
 {
 	return m_execution_Attribute_context;
 }
+std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_locus() const
+{
+	return m_execution_Attribute_locus;
+}
 std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_parameterValues() const
 {
 	return m_execution_Attribute_parameterValues;
+}
+std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_types() const
+{
+	return m_execution_Attribute_types;
 }
 
 std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation__copy() const
 {
 	return m_execution_Operation__copy;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_destroy() const
+{
+	return m_execution_Operation_destroy;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_execute() const
 {

@@ -12,8 +12,7 @@
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 //*********************************
 // generated Includes
@@ -87,9 +86,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature> feature) = 0;
-			virtual std::shared_ptr<Bag<uml::Element> > getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue) = 0;
-			virtual std::shared_ptr<Bag<uml::Element> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue,Any endValue) = 0;
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinks(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue, std::shared_ptr<Any> endValue) = 0;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

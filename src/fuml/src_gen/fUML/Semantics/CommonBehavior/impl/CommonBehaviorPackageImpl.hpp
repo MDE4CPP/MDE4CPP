@@ -57,9 +57,12 @@ namespace fUML::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_behavior() const ;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const ;
+			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_locus() const ;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const ;
+			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_types() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const ;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_destroy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getParameterValue_Parameter() const ;
@@ -89,8 +92,8 @@ namespace fUML::Semantics::CommonBehavior
 			std::shared_ptr<ecore::EClass> m_eventDispatchLoop_Class = nullptr;std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_parameterValue_Attribute_values = nullptr;
-			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;
-			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;
+			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;
+			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;
 
 			friend class CommonBehaviorPackage;
 

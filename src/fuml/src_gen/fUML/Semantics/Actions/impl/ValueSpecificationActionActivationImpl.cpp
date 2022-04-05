@@ -138,7 +138,7 @@ void ValueSpecificationActionActivationImpl::doAction()
 		{
 			throw "value of ValueSpecificationAction is null";
 		}
-		std::shared_ptr<fUML::Semantics::Values::Value> value = getExecutionLocus()->getExecutor()->evaluate(valueSpecificaton);
+		std::shared_ptr<Any> value = getExecutionLocus()->getExecutor()->evaluate(valueSpecificaton);
 		putToken(action->getResult(), value);
 	}
 	//end of body
@@ -252,7 +252,7 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticCl
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ValueSpecificationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ValueSpecificationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -268,7 +268,7 @@ bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -280,9 +280,9 @@ bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

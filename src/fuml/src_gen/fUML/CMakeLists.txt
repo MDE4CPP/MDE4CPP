@@ -141,10 +141,12 @@ SET(SOURCE_FILES
 	Semantics/CommonBehavior/impl/ParameterValueImpl.cpp
 	Semantics/Actions/impl/PinActivationImpl.cpp
 	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
 	Semantics/Loci/impl/SemanticStrategyImpl.cpp
 	Semantics/Loci/impl/SemanticVisitorImpl.cpp
 	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp
+	Semantics/Actions/impl/StructuredActivityNodeActivationImpl.cpp
 	Semantics/Activities/impl/TokenImpl.cpp
 	Semantics/Activities/impl/TokenSetImpl.cpp
 	Semantics/Actions/impl/ValueSpecificationActionActivationImpl.cpp

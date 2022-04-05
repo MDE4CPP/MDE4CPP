@@ -146,11 +146,11 @@ bool ObjectTokenImpl::isControl()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-Any ObjectTokenImpl::getValue() const 
+std::shared_ptr<Any> ObjectTokenImpl::getValue() const 
 {
 	return m_value;
 }
-void ObjectTokenImpl::setValue(Any _value)
+void ObjectTokenImpl::setValue(std::shared_ptr<Any> _value)
 {
 	m_value = _value;
 	
@@ -205,8 +205,8 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@30a7c98f (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
-			Any value; 			this->setValue(value);
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@10fbbdb (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
 	catch (std::exception& e)
@@ -247,11 +247,6 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getObjectToken_Attribute_value()) )
-		{
-			//Cannot save attributes of type Any (EJavaObject)
-		}
 	}
 	catch (std::exception& e)
 	{
@@ -267,7 +262,7 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -287,14 +282,14 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	return TokenImpl::internalEIsSet(featureID);
 }
 
-bool ObjectTokenImpl::eSet(int featureID, Any newValue)
+bool ObjectTokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
 			// CAST Any to Any
-			Any _value = newValue->get<Any>();
+			std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
 			setValue(_value); //832
 			return true;
 		}
@@ -306,9 +301,9 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -324,7 +319,7 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			result = eAny(this->equals(incoming_param_other),0,false);
 			break;

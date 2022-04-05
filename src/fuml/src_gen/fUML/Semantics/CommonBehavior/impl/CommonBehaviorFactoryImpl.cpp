@@ -10,6 +10,10 @@
 
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/DirectedRelationship.hpp"
 
 
 using namespace fUML::Semantics::CommonBehavior;

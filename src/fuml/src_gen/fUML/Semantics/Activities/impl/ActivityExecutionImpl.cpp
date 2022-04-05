@@ -18,7 +18,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
 
 
 #include "abstractDataTypes/AnyEObject.hpp"
@@ -51,18 +51,26 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/Comment.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -134,7 +142,7 @@ std::shared_ptr<ecore::EObject> ActivityExecutionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-Any ActivityExecutionImpl::_copy()
+std::shared_ptr<Any> ActivityExecutionImpl::_copy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +186,7 @@ void ActivityExecutionImpl::execute()
 
 				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
 				{
-					Any value = nullptr;
+					std::shared_ptr<Any> value;
 					value = token->getValue();
 					
 					DEBUG_MESSAGE
@@ -218,12 +226,12 @@ void ActivityExecutionImpl::execute()
 	//end of body
 }
 
-Any ActivityExecutionImpl::new_()
+std::shared_ptr<Any> ActivityExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Create a new activity execution with empty properties.
-return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
+	return eAny(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS, false);
 	//end of body
 }
 
@@ -291,6 +299,20 @@ void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<uml::Element>> ActivityExecutionImpl::getOwnedElement() const
+{
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
+	return m_ownedElement;
+}
 
 //*********************************
 // Container Getter
@@ -398,6 +420,11 @@ void ActivityExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 
 	fUML::Semantics::CommonBehavior::ExecutionImpl::saveContent(saveHandler);
 	
+	uml::ElementImpl::saveContent(saveHandler);
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
 
@@ -430,14 +457,14 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //73
+			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //710
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			return eAny(getActivity(),uml::umlPackage::ACTIVITY_CLASS,false); //74
+			return eAny(getActivity(),uml::umlPackage::ACTIVITY_CLASS,false); //711
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -447,14 +474,14 @@ bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //73
+			return getActivationGroup() != nullptr; //710
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			return getActivity() != nullptr; //74
+			return getActivity() != nullptr; //711
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
 }
 
-bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
+bool ActivityExecutionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -463,7 +490,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivationGroup
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
-			setActivationGroup(_activationGroup); //73
+			setActivationGroup(_activationGroup); //710
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
@@ -471,7 +498,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivity(_activity); //74
+			setActivity(_activity); //711
 			return true;
 		}
 	}
@@ -482,16 +509,16 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ActivityExecution::_copy() : Any: 2018352062
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
 		{
-			result = this->_copy();
+			result = eAny(this->_copy(),0,false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::execute(): 2440252333
@@ -503,7 +530,7 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		// fUML::Semantics::Activities::ActivityExecution::new_() : Any: 357511021
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
 		{
-			result = this->new_();
+			result = eAny(this->new_(),0,false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::terminate(): 1105822471

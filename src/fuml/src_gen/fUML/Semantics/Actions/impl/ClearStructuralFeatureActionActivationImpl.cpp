@@ -33,7 +33,7 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
-#include "uml/StructuralFeature.hpp"
+#include "uml/Property.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -134,8 +134,14 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 	//generated from body annotation
 	std::shared_ptr<uml::ClearStructuralFeatureAction> action = this->getClearStructuralFeatureAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
-	Any objectValue = nullptr;
+	if(!property)
+	{
+		return;
+	}
+
+	std::shared_ptr<Any> objectValue = nullptr;
 	
 	/* MDE4CPP specific implementation for handling "self"-Pin */
 	std::string objectPinName = action->getObject()->getName();
@@ -143,7 +149,7 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 		//objectValue is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		objectValue = eAny(context);
+		objectValue = eAny(context, context->getMetaElementID(), false);
 	}
 	else{
 		objectValue = this->takeTokens(action->getObject())->at(0);
@@ -154,11 +160,11 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 
 	try
 	{
-		structuredValue = objectValue->get<uml::Element>();
+		structuredValue = objectValue->get<std::shared_ptr<uml::Element>>();
 
 		if (structuredValue)
 		{
-			structuredValue->unset(feature);
+			structuredValue->unset(property);
 		}
 		else
 		{
@@ -362,7 +368,7 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -382,7 +388,7 @@ bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -402,9 +408,9 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

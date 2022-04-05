@@ -951,6 +951,31 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	   		m_activityNodeActivationGroup_Attribute_activityExecution->setEOpposite(otherEnd);
 	    }
 	}
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setName("containingNodeActivation");
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEType(fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Class());
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setLowerBound(0);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setUpperBound(1);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setTransient(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setVolatile(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setChangeable(true);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setUnsettable(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setUnique(true);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDerived(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setOrdered(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setContainment(false);
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup();
+		if (otherEnd != nullptr)
+	    {
+	   		m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEOpposite(otherEnd);
+	    }
+	}
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setName("edgeInstances");
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setEType(getActivityEdgeInstance_Class());
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setLowerBound(0);

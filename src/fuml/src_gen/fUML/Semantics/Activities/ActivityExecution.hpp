@@ -40,11 +40,20 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+namespace ecore 
+{
+	class EAnnotation;
+}
 namespace uml 
 {
 	class Activity;
 	class Behavior;
-	class Element;
+	class Classifier;
+	class Comment;
 }
 
 // namespace macro header include
@@ -77,9 +86,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual Any _copy() = 0;
+			virtual std::shared_ptr<Any> _copy() = 0;
 			virtual void execute() = 0;
-			virtual Any new_() = 0;
+			virtual std::shared_ptr<Any> new_() = 0;
 			virtual void terminate() = 0;
 
 			//*********************************
@@ -99,6 +108,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

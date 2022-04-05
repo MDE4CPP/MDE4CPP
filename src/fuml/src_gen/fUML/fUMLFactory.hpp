@@ -26,6 +26,14 @@ namespace fUML::Semantics::Activities
 }
 
 
+namespace fUML::Semantics::Actions
+{
+	class StructuredActivityNodeActivation;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
 
 
 
@@ -33,6 +41,14 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities
 {
 	class DecisionNodeActivation;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace uml
+{
+	class DirectedRelationship;
 }
 
 

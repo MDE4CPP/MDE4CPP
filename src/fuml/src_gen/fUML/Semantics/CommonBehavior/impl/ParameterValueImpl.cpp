@@ -130,13 +130,15 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueI
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> newValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 newValue->setParameter(this->getParameter());
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+std::shared_ptr<Bag<Any>> values = this->getValues();
 unsigned int valuesSize = values->size();
 
 for(unsigned int i = 0; i < valuesSize; i++)
 {
-	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
+	std::shared_ptr<Any> value = values->at(i);
+	/* Currently not supported
 	newValue->getValues()->add(value->_copy());
+	*/
 }
 
 return newValue;
@@ -279,14 +281,6 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getParameterValue_Attribute_values()) )
-		{
-			for (std::shared_ptr<Any> value : *m_values)
-			{
-				saveHandler->addAttributeAsNode("values", std::to_string(*value));
-			}
-		}
 	// Add references
 		saveHandler->addReference(this->getParameter(), "parameter", getParameter()->eClass() != uml::umlPackage::eInstance()->getParameter_Class()); 
 	}
@@ -304,7 +298,7 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -328,7 +322,7 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ParameterValueImpl::eSet(int featureID, Any newValue)
+bool ParameterValueImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -354,9 +348,9 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

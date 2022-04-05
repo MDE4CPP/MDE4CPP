@@ -310,6 +310,10 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackag
 {
 	return m_activityNodeActivationGroup_Attribute_activityExecution;
 }
+std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivationGroup_Attribute_containingNodeActivation() const
+{
+	return m_activityNodeActivationGroup_Attribute_containingNodeActivation;
+}
 std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivationGroup_Attribute_edgeInstances() const
 {
 	return m_activityNodeActivationGroup_Attribute_edgeInstances;

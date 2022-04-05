@@ -146,13 +146,14 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 		if (parameterValue != nullptr) 
 		{
 			DEBUG_MESSAGE(std::cout<< "[fire] Parameter has "<< parameterValue->getValues()->size() << " value(s)."<<std::endl;)
-			Bag<fUML::Semantics::Values::Value>* valueList = parameterValue->getValues().get();
+			Bag<Any>* valueList = parameterValue->getValues().get();
 			auto factory = fUML::Semantics::Activities::ActivitiesFactory::eInstance();
-            const auto size = valueList->size();
-            std::shared_ptr<fUML::Semantics::Values::Value> value;
+            		const auto size = valueList->size();
+
+            		std::shared_ptr<Any> value;
 			for (unsigned int i = 0; i< size; i++)
 			{
-                value = (*valueList)[i];
+                			value = (*valueList)[i];
 				std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = factory->createObjectToken();
 				token->setValue(value);
 				this->addToken(token);
@@ -268,7 +269,7 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -284,7 +285,7 @@ bool ActivityParameterNodeActivationImpl::internalEIsSet(int featureID) const
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ActivityParameterNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -296,9 +297,9 @@ bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -314,7 +315,7 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
 			break;

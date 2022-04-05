@@ -113,7 +113,7 @@ WriteStructuralFeatureActionActivationImpl& WriteStructuralFeatureActionActivati
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(Any value,std::shared_ptr<Bag<Any>> list,int startAt)
+int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<Any> value, std::shared_ptr<Bag<Any>> list, int startAt)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -246,7 +246,7 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -262,7 +262,7 @@ bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -274,9 +274,9 @@ bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -285,18 +285,18 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			Any incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'list'
 			//parameter 1
 			std::shared_ptr<Bag<Any>> incoming_param_list;
-			std::list<Any>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_list = (*incoming_param_list_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
 			//Retrieve input parameter 'startAt'
 			//parameter 2
 			int incoming_param_startAt;
-			std::list<Any>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
+			Bag<Any>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get<int >();
 			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt),0,false);
 			break;

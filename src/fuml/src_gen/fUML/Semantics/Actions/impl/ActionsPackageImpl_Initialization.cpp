@@ -50,7 +50,9 @@ void ActionsPackageImpl::initializePackageContents()
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_structuralFeatureActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_structuredActivityNodeActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_valueSpecificationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_writeStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	
@@ -64,7 +66,9 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
 	initializeReadSelfActionActivationContent();
+	initializeReadStructuralFeatureActionActivationContent();
 	initializeStructuralFeatureActionActivationContent();
+	initializeStructuredActivityNodeActivationContent();
 	initializeValueSpecificationActionActivationContent();
 	initializeValuesContent();
 	initializeWriteStructuralFeatureActionActivationContent();
@@ -821,6 +825,52 @@ void ActionsPackageImpl::initializeReadSelfActionActivationContent()
 	
 }
 
+void ActionsPackageImpl::initializeReadStructuralFeatureActionActivationContent()
+{
+	m_readStructuralFeatureActionActivation_Class->setName("ReadStructuralFeatureActionActivation");
+	m_readStructuralFeatureActionActivation_Class->setAbstract(false);
+	m_readStructuralFeatureActionActivation_Class->setInterface(false);
+	
+	
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setName("readStructuralFeatureAction");
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setEType(uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Class());
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setLowerBound(1);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUpperBound(1);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setTransient(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setVolatile(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setChangeable(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUnsettable(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUnique(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDerived(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setOrdered(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setContainment(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_readStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_readStructuralFeatureActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_readStructuralFeatureActionActivation_Operation_doAction->setLowerBound(0);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setUpperBound(1);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setUnique(true);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setOrdered(true);
+	
+	
+}
+
 void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 {
 	m_structuralFeatureActionActivation_Class->setName("StructuralFeatureActionActivation");
@@ -952,6 +1002,243 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	
+}
+
+void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
+{
+	m_structuredActivityNodeActivation_Class->setName("StructuredActivityNodeActivation");
+	m_structuredActivityNodeActivation_Class->setAbstract(false);
+	m_structuredActivityNodeActivation_Class->setInterface(false);
+	
+	
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setName("activationGroup");
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setLowerBound(1);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setUpperBound(1);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setTransient(false);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setVolatile(false);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setChangeable(true);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setUnsettable(false);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setUnique(true);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setDerived(false);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setOrdered(false);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setContainment(true);
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_structuredActivityNodeActivation_Attribute_activationGroup->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_containingNodeActivation();
+		if (otherEnd != nullptr)
+	    {
+	   		m_structuredActivityNodeActivation_Attribute_activationGroup->setEOpposite(otherEnd);
+	    }
+	}
+	
+	m_structuredActivityNodeActivation_Operation_completeAction->setName("completeAction");
+	m_structuredActivityNodeActivation_Operation_completeAction->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class());
+	m_structuredActivityNodeActivation_Operation_completeAction->setLowerBound(0);
+	m_structuredActivityNodeActivation_Operation_completeAction->setUpperBound(-1);
+	m_structuredActivityNodeActivation_Operation_completeAction->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_completeAction->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_createEdgeInstances->setName("createEdgeInstances");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_createEdgeInstances->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_createEdgeInstances->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_createEdgeInstances->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_createEdgeInstances->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_createEdgeInstances->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_createNodeActivations->setName("createNodeActivations");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_createNodeActivations->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_createNodeActivations->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_createNodeActivations->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_createNodeActivations->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_createNodeActivations->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_doAction->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_doAction->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_doAction->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_doAction->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_doStructuredActivity->setName("doStructuredActivity");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_doStructuredActivity->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_doStructuredActivity->setLowerBound(0);
+	m_structuredActivityNodeActivation_Operation_doStructuredActivity->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_doStructuredActivity->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_doStructuredActivity->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class());
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode);
+		parameter->setName("node");
+		parameter->setEType(uml::umlPackage::eInstance()->getActivityNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setName("getPinValues");
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setLowerBound(0);
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setUpperBound(-1);
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin);
+		parameter->setName("pin");
+		parameter->setEType(uml::umlPackage::eInstance()->getOutputPin_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setName("isSourceFor");
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance);
+		parameter->setName("edgeInstance");
+		parameter->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredActivityNodeActivation_Operation_isSuspended->setName("isSuspended");
+	m_structuredActivityNodeActivation_Operation_isSuspended->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_structuredActivityNodeActivation_Operation_isSuspended->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_isSuspended->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_isSuspended->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_isSuspended->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setName("makeActivityNodeList");
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setEType(uml::umlPackage::eInstance()->getActivityNode_Class());
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setLowerBound(0);
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setUpperBound(-1);
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode);
+		parameter->setName("nodes");
+		parameter->setEType(uml::umlPackage::eInstance()->getExecutableNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setName("putPinValues");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject);
+		parameter->setName("pin");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredActivityNodeActivation_Operation_resume->setName("resume");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_resume->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_resume->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_resume->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_resume->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_resume->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_terminate->setName("terminate");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_terminate->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_terminate->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_terminate->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_terminate->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_terminate->setOrdered(false);
+	
+	m_structuredActivityNodeActivation_Operation_terminateAll->setName("terminateAll");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_structuredActivityNodeActivation_Operation_terminateAll->setEType(unknownClass);
+	}
+	m_structuredActivityNodeActivation_Operation_terminateAll->setLowerBound(1);
+	m_structuredActivityNodeActivation_Operation_terminateAll->setUpperBound(1);
+	m_structuredActivityNodeActivation_Operation_terminateAll->setUnique(true);
+	m_structuredActivityNodeActivation_Operation_terminateAll->setOrdered(false);
 	
 	
 }

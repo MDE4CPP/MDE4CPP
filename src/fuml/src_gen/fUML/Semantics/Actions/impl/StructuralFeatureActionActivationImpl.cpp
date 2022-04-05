@@ -30,8 +30,8 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -140,7 +140,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue)
+std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -151,7 +151,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,Any oppositeValue,Any endValue)
+std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue, std::shared_ptr<Any> endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -159,6 +159,7 @@ std::shared_ptr<Bag<uml::Element> > StructuralFeatureActionActivationImpl::getMa
 // to the given end has the given opposite value and, optionally, that
 // has a given end value for the given end.
 
+/* Currently not supported
 std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
 
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);
@@ -196,10 +197,13 @@ for(unsigned int i = 0; i < extent->size(); i++){
 }
 
 return links;
+*/
+
+throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 	//end of body
 }
 
-std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end)
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -323,7 +327,7 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticCla
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -339,7 +343,7 @@ bool StructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool StructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -351,9 +355,9 @@ bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -363,7 +367,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			result = eAnyObject(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
@@ -374,19 +378,19 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			Any incoming_param_oppositeValue;
-			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<Any >();
-			std::shared_ptr<Bag<uml::Element> > resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
+			std::shared_ptr<Any> incoming_param_oppositeValue;
+			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
 			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
@@ -396,24 +400,24 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			Any incoming_param_oppositeValue;
-			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_oppositeValue;
+			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any> >();
 			//Retrieve input parameter 'endValue'
 			//parameter 3
-			Any incoming_param_endValue;
-			std::list<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<Any >();
-			std::shared_ptr<Bag<uml::Element> > resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
+			std::shared_ptr<Any> incoming_param_endValue;
+			Bag<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
 			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
@@ -423,12 +427,12 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			result = eAnyObject(this->getOppositeEnd(incoming_param_association,incoming_param_end), uml::umlPackage::PROPERTY_CLASS);
 			break;
