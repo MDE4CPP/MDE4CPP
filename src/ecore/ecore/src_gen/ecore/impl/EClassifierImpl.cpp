@@ -508,7 +508,7 @@ std::shared_ptr<Any> EClassifierImpl::eInvoke(int operationID, std::shared_ptr<B
 			result = eAny(this->getClassifierID(),0,false);
 			break;
 		}
-		// ecore::EClassifier::isInstance(std::shared_ptr<Any>) : bool {const}: 3474633304
+		// ecore::EClassifier::isInstance(Any) : bool {const}: 202200991
 		case ecorePackage::ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'

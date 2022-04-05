@@ -563,7 +563,7 @@ std::shared_ptr<Any> EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<
  
   	switch(operationID)
 	{
-		// ecore::EGenericType::isInstance(std::shared_ptr<Any>) : bool {const}: 2678446930
+		// ecore::EGenericType::isInstance(Any) : bool {const}: 1038226181
 		case ecorePackage::EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'

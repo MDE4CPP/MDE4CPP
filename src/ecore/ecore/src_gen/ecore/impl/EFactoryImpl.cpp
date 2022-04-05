@@ -734,7 +734,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
  
   	switch(operationID)
 	{
-		// ecore::EFactory::convertToString(ecore::EDataType, std::shared_ptr<Any>) : std::string {const}: 4221360546
+		// ecore::EFactory::convertToString(ecore::EDataType, Any) : std::string {const}: 197002689
 		case ecorePackage::EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -761,7 +761,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			result = eAnyObject(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
-		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : std::shared_ptr<Any> {const}: 2368899730
+		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 351752421
 		case ecorePackage::EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -774,7 +774,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			std::string incoming_param_literalValue;
 			Bag<Any>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get<std::string >();
-			result = this->createFromString(incoming_param_eDataType,incoming_param_literalValue);
+			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue),0,false);
 			break;
 		}
 

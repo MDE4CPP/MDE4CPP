@@ -560,10 +560,10 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
  
   	switch(operationID)
 	{
-		// ecore::EObject::eAllContents() : std::shared_ptr<Any> {const}: 566931017
+		// ecore::EObject::eAllContents() : Any {const}: 3701410932
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
-			result = this->eAllContents();
+			result = eAny(this->eAllContents(),0,false);
 			break;
 		}
 		// ecore::EObject::eClass() : ecore::EClass {const}: 3378392784
@@ -603,7 +603,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAny(this->eCrossReferences(),0,false);
 			break;
 		}
-		// ecore::EObject::eGet(ecore::EStructuralFeature) : std::shared_ptr<Any> {const}: 2319863754
+		// ecore::EObject::eGet(ecore::EStructuralFeature) : Any {const}: 2925960689
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -611,10 +611,10 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = this->eGet(incoming_param_feature);
+			result = eAny(this->eGet(incoming_param_feature),0,false);
 			break;
 		}
-		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : std::shared_ptr<Any> {const}: 2350561374
+		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 1046173981
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'feature'
@@ -627,10 +627,10 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			bool incoming_param_resolve;
 			Bag<Any>::const_iterator incoming_param_resolve_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_resolve = (*incoming_param_resolve_arguments_citer)->get<bool >();
-			result = this->eGet(incoming_param_feature,incoming_param_resolve);
+			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve),0,false);
 			break;
 		}
-		// ecore::EObject::eInvoke(ecore::EOperation, std::shared_ptr<Any>[*]) : std::shared_ptr<Any>: 1397932282
+		// ecore::EObject::eInvoke(ecore::EOperation, Any[*]) : Any: 637541304
 		case ecorePackage::EOBJECT_OPERATION_EINVOKE_EOPERATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'operation'
@@ -643,7 +643,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<Bag<Any>> incoming_param_arguments;
 			Bag<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
-			result = this->eInvoke(incoming_param_operation,incoming_param_arguments);
+			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments),0,false);
 			break;
 		}
 		// ecore::EObject::eIsProxy() : bool {const}: 3785601175
@@ -669,7 +669,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			result = eAny(this->eResource(),0,false);
 			break;
 		}
-		// ecore::EObject::eSet(ecore::EStructuralFeature, std::shared_ptr<Any>): 837754273
+		// ecore::EObject::eSet(ecore::EStructuralFeature, Any): 955320472
 		case ecorePackage::EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'feature'
