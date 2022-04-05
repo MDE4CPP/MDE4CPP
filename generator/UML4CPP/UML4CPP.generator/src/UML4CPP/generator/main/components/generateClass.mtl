@@ -80,7 +80,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
  * - operation count
 */]
 [template public generateStaticClassID(aClass : Class)]
-//Class [aClass.generateNamespaceName(true)/]
+//[aClass.eClass().name/] [aClass.generateNamespaceName(true)/]
 static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generatePolynomialRollingHash()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
@@ -94,11 +94,11 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageIDs(aPackage : Package)]
-[for (c : Class | aPackage.ownedElement->selectByType(Class)->reject(isDoNotGenerateElement())->sortedBy(name))]
+[for (c : Class | aPackage.ownedElement->selectByType(Class)->addAll(aPackage.ownedElement->selectByType(Stereotype))->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
 	[comment  Properties of c/]
-	[for (aProperty : Property | c.ownedAttribute) before('//Properties\n')]
-	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	[for (aProperty : Property | c.ownedAttribute) before('\t\t//Properties\n')]
+		static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
 	[/for]
 	[comment TODO Notwendig? Hierfür werden keine Getter generiert/]
 	[comment  Properties for compositions of c/]
@@ -121,9 +121,6 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	//[anOperation.generateQualifiedNameWithSignature()/]
 	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 	[/for]
-[/for]
-[for (aClass : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
-	[generateStaticClassID(aClass)/]
 [/for]
 [for (anInterface :Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticInterfaceID(anInterface)/]
