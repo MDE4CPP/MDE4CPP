@@ -218,7 +218,7 @@ std::shared_ptr
 [elseif (anEClassifier.oclIsKindOf(EDataType))]
     [if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
     [elseif(anEClassifier.isAnyType())]
-	std::shared_ptr<Any>
+	Any
 	[else]
 	[anEClassifier.name.transformTypeName()/]
     [/if]
