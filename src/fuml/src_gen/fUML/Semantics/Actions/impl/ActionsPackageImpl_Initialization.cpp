@@ -46,6 +46,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_addStructuralFeatureValueActionActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
 	m_clearStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_createObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_destroyObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_inputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
@@ -62,6 +63,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeAddStructuralFeatureValueActionActivationContent();
 	initializeClearStructuralFeatureActionActivationContent();
 	initializeCreateObjectActionActivationContent();
+	initializeDestroyObjectActionActivationContent();
 	initializeInputPinActivationContent();
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
@@ -646,6 +648,120 @@ void ActionsPackageImpl::initializeCreateObjectActionActivationContent()
 	m_createObjectActionActivation_Operation_doAction->setUpperBound(1);
 	m_createObjectActionActivation_Operation_doAction->setUnique(true);
 	m_createObjectActionActivation_Operation_doAction->setOrdered(true);
+	
+	
+}
+
+void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
+{
+	m_destroyObjectActionActivation_Class->setName("DestroyObjectActionActivation");
+	m_destroyObjectActionActivation_Class->setAbstract(false);
+	m_destroyObjectActionActivation_Class->setInterface(false);
+	
+	
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setName("destroyObjectAction");
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setEType(uml::umlPackage::eInstance()->getDestroyObjectAction_Class());
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setLowerBound(1);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUpperBound(1);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setTransient(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setVolatile(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setChangeable(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUnsettable(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUnique(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDerived(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setOrdered(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setContainment(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setName("destroyObject");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setEType(unknownClass);
+	}
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setLowerBound(1);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setUpperBound(1);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setUnique(true);
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
+		parameter->setName("value");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
+		parameter->setName("isDestroyLinks");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean);
+		parameter->setName("isDestroyOwnedObjects");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_destroyObjectActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_destroyObjectActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_destroyObjectActionActivation_Operation_doAction->setLowerBound(0);
+	m_destroyObjectActionActivation_Operation_doAction->setUpperBound(1);
+	m_destroyObjectActionActivation_Operation_doAction->setUnique(true);
+	m_destroyObjectActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setName("objectIsComposite");
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setLowerBound(1);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUpperBound(1);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUnique(true);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
+		parameter->setName("reference");
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
+		parameter->setName("link");
+		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }

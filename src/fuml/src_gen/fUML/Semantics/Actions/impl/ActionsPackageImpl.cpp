@@ -222,6 +222,33 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class CreateObjectActionActivation
 
+// Begin Class DestroyObjectActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Class() const
+{
+	return m_destroyObjectActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Attribute_destroyObjectAction() const
+{
+	return m_destroyObjectActionActivation_Attribute_destroyObjectAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const
+{
+	return m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_doAction() const
+{
+	return m_destroyObjectActionActivation_Operation_doAction;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const
+{
+	return m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element;
+}
+
+// End Class DestroyObjectActionActivation
+
 // Begin Class InputPinActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getInputPinActivation_Class() const
 {

@@ -117,6 +117,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/CreateObjectActionActivationImpl.cpp
 	Semantics/Activities/impl/DataStoreNodeActivationImpl.cpp
 	Semantics/Activities/impl/DecisionNodeActivationImpl.cpp
+	Semantics/Actions/impl/DestroyObjectActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.cpp
 	Semantics/CommonBehavior/impl/EventDispatchLoopImpl.cpp
 	Semantics/CommonBehavior/impl/ExecutionImpl.cpp

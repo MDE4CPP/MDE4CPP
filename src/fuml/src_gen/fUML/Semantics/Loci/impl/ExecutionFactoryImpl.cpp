@@ -77,7 +77,7 @@
 #include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
 //#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
-//#include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
+#include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/FlowFinalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
 #include "fUML/Semantics/Activities/InitialNodeActivation.hpp"
@@ -507,7 +507,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::DESTROYOBJECTACTION_CLASS:
 		{
-			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS:

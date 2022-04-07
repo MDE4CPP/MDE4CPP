@@ -39,6 +39,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createAddStructuralFeatureValueActionActivationContent(package, factory);
 	createClearStructuralFeatureActionActivationContent(package, factory);
 	createCreateObjectActionActivationContent(package, factory);
+	createDestroyObjectActionActivationContent(package, factory);
 	createInputPinActivationContent(package, factory);
 	createOutputPinActivationContent(package, factory);
 	createPinActivationContent(package, factory);
@@ -113,6 +114,18 @@ void ActionsPackageImpl::createCreateObjectActionActivationContent(std::shared_p
 	m_createObjectActionActivation_Attribute_createObjectAction = factory->createEReference_as_eReferences_in_EClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION);
 	
 	m_createObjectActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createDestroyObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_destroyObjectActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, DESTROYOBJECTACTIONACTIVATION_CLASS);
+	
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction = factory->createEReference_as_eReferences_in_EClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION);
+	
+	m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean = factory->createEOperation_as_eOperations_in_EClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN);
+	m_destroyObjectActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element = factory->createEOperation_as_eOperations_in_EClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT);
 	
 }
 

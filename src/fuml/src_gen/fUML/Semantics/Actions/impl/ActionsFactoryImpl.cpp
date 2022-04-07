@@ -8,6 +8,7 @@
 #include "fUML/Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CreateObjectActionActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/InputPinActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/OutputPinActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/PinActivationImpl.hpp"
@@ -34,6 +35,7 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation", ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ClearStructuralFeatureActionActivation", ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CreateObjectActionActivation", ActionsPackage::CREATEOBJECTACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::DestroyObjectActionActivation", ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::InputPinActivation", ActionsPackage::INPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::OutputPinActivation", ActionsPackage::OUTPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadSelfActionActivation", ActionsPackage::READSELFACTIONACTIVATION_CLASS));
@@ -99,6 +101,20 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation>(this->createCreateObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createDestroyObjectActionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation>(this->createDestroyObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -305,6 +321,26 @@ std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> ActionsF
 	}
 	
 	element->setThisCreateObjectActionActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> ActionsFactoryImpl::createDestroyObjectActionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivationImpl> element(new fUML::Semantics::Actions::DestroyObjectActionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisDestroyObjectActionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> ActionsFactoryImpl::createDestroyObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivationImpl> element(new fUML::Semantics::Actions::DestroyObjectActionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisDestroyObjectActionActivationPtr(element);
 	return element;
 	
 }

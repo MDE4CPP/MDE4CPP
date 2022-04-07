@@ -31,6 +31,7 @@ namespace fUML::Semantics::Actions
 	class AddStructuralFeatureValueActionActivation;
 	class ClearStructuralFeatureActionActivation;
 	class CreateObjectActionActivation;
+	class DestroyObjectActionActivation;
 	class InputPinActivation;
 	class OutputPinActivation;
 	class PinActivation;
@@ -191,6 +192,31 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCreateObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CreateObjectActionActivation
+
+
+			// Begin Class DestroyObjectActionActivation
+			//Class and Feature IDs 
+			static const unsigned long DESTROYOBJECTACTIONACTIVATION_CLASS = 624995293;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			
+			static const unsigned long DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION = 445795804;
+			
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN = 3697661383;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION = 393014891;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT = 4059157106;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getDestroyObjectActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getDestroyObjectActionActivation_Attribute_destroyObjectAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const = 0;
+			
+			// End Class DestroyObjectActionActivation
 
 
 			// Begin Class InputPinActivation
