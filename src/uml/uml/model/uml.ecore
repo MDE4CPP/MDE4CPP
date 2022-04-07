@@ -2846,7 +2846,7 @@
     </eOperations>
     <eOperations name="add">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection."/>
+        <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.&#xA;Value will be added at the position given by insertAt."/>
       </eAnnotations>
       <eParameters name="_property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -2868,6 +2868,11 @@
           <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
         </eAnnotations>
       </eParameters>
+    </eOperations>
+    <eOperations name="destroy">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Abstract operation to destroy an instance."/>
+      </eAnnotations>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="#//Element">
