@@ -37,19 +37,19 @@ task generateAll() {
 	description 'Generate all models without compilation of generated source code'
 
 	dependsOn 'src:generateEcoreModels'
-	//dependsOn 'src:generateReflectionModels'
-	//dependsOn 'src:generateUMLProfiles'
+	dependsOn 'src:generateReflectionModels'
+	dependsOn 'src:generateUMLProfiles'
 }
 
 task compileAll() {
 	group 'MDE4CPP'
 	description 'Compile all generated source code of models without generating the models'
 
-	//dependsOn 'src:deliverBasicInterfaces'
+	dependsOn 'src:deliverBasicInterfaces'
 	
 	dependsOn 'src:compileEcoreModels'
-	//dependsOn 'src:compileReflectionModels'
-	//dependsOn 'src:compileUMLProfiles'
+	dependsOn 'src:compileReflectionModels'
+	dependsOn 'src:compileUMLProfiles'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'

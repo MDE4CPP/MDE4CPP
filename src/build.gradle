@@ -47,7 +47,7 @@ task buildEcoreModels() {
 	//dependsOn 'ocl:oclModel:buildOcl'
 }
 
-/*
+
 task buildReflectionModels() {
 	group 'Source'
 	description 'generate and compile reflection models'
@@ -64,7 +64,7 @@ task buildUMLProfiles() {
 	dependsOn 'common:standardProfile:buildStandardProfile'
 	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
-*/
+
 
 // Compile all without generating the models
 task compileEcoreModels() {
@@ -82,7 +82,7 @@ task compileEcoreModels() {
 }
 
 // Compile all without generating the models
-/*task compileReflectionModels() {
+task compileReflectionModels() {
 	group 'Source'
 	description 'compile all reflection models'
 	
@@ -102,7 +102,7 @@ task compileUMLProfiles() {
 	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
 	dependsOn 'common:UML4CPPProfile:src_gen:compileUML4CPPProfile'
 }
-*/
+
 
 task generateEcoreModels() {
 	group 'Source'
@@ -116,7 +116,7 @@ task generateEcoreModels() {
 	//dependsOn 'ocl:oclModel:model:generateOcl'
 }
 
-/*
+
 task generateReflectionModels() {
 	group 'Source'
 	description 'generate all reflection models'
@@ -133,7 +133,7 @@ task generateUMLProfiles() {
 	dependsOn 'common:standardProfile:model:generateStandardProfile'
 	dependsOn 'common:UML4CPPProfile:model:generateUML4CPPProfile'
 }
-*/
+
 
 /**
  * Convert line endings on GNU/Linux & macOS
