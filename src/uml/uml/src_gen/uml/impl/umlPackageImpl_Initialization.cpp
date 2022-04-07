@@ -18866,6 +18866,19 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_object_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_object_Operation_destroy->setEType(unknownClass);
+	}
+	m_object_Operation_destroy->setLowerBound(0);
+	m_object_Operation_destroy->setUpperBound(1);
+	m_object_Operation_destroy->setUnique(true);
+	m_object_Operation_destroy->setOrdered(true);
+	
 	m_object_Operation_get_Property->setName("get");
 	m_object_Operation_get_Property->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_object_Operation_get_Property->setLowerBound(0);

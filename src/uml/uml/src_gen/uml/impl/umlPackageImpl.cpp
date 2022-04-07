@@ -4789,6 +4789,10 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_add_
 {
 	return m_object_Operation_add_Property_EInt;
 }
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_destroy() const
+{
+	return m_object_Operation_destroy;
+}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_get_Property() const
 {
 	return m_object_Operation_get_Property;

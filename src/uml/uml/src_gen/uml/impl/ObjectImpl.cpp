@@ -114,6 +114,11 @@ void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<A
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
+void ObjectImpl::destroy()
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
 std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
@@ -286,6 +291,12 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			Bag<Any>::const_iterator incoming_param_insertAt_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_insertAt = (*incoming_param_insertAt_arguments_citer)->get<int >();
 			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
+			break;
+		}
+		// uml::Object::destroy(): 2359110280
+		case umlPackage::OBJECT_OPERATION_DESTROY:
+		{
+			this->destroy();
 			break;
 		}
 		// uml::Object::get(uml::Property) : Any {const}: 511579154

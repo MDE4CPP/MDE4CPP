@@ -51,9 +51,15 @@ virtual public Object
 			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
 			/*!
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
+			Value will be added at the position given by insertAt.
 			*/
 			 
 			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt) ;
+			/*!
+			Abstract operation to destroy an instance.
+			*/
+			 
+			virtual void destroy() ;
 			/*!
 			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
