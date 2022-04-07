@@ -9,7 +9,7 @@ class Any
 {
 	public:
 		template <typename T>
-		Any(T value,long long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
+		Any(T value,unsigned long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
 		{
 			m_object = new TypedObject<T>(value);
 		}
@@ -38,7 +38,7 @@ class Any
 			return m_object == nullptr;
 		}
 
-		long long getTypeId()
+		unsigned long getTypeId()
 		{
 			return m_typeID;
 		}
@@ -68,7 +68,7 @@ class Any
 		}
 
 	protected:
-		const long long m_typeID=0;
+		const unsigned long m_typeID=0;
 		const bool m_isContainer=false;
 		Any(){}
 		class Object
@@ -120,7 +120,7 @@ class Any
 		Object* m_object;
 };
 
-template <typename T> static std::shared_ptr<Any> eAny(T value,long long typeID, bool isContainer)
+template <typename T> static std::shared_ptr<Any> eAny(T value,unsigned long typeID, bool isContainer)
 {
 	std::shared_ptr<Any> any(new Any(value,typeID,isContainer));
 	return any;

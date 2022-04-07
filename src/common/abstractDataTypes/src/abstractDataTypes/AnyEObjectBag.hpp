@@ -9,7 +9,7 @@
 class AnyEObjectBag: public Any
 {
 public:
-	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
+	template <typename T> AnyEObjectBag(T value,unsigned long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
 	{
 	}
 
@@ -37,7 +37,7 @@ public:
 template <class T> class AnyGenericBag: public AnyEObjectBag
 {
 public:
-	AnyGenericBag(T value,long long typeID=0, bool isContainer=true) : AnyEObjectBag(value, typeID, isContainer)
+	AnyGenericBag(T value,unsigned long typeID=0, bool isContainer=true) : AnyEObjectBag(value, typeID, isContainer)
 	{
 	}
 
@@ -96,7 +96,7 @@ public:
 
 };
 
-template <typename T> static std::shared_ptr<Any> eAnyBag(T value,long long typeID)
+template <typename T> static std::shared_ptr<Any> eAnyBag(T value,unsigned long typeID)
 {
 	std::shared_ptr<Any> any(new AnyGenericBag<T>(value,typeID,true));
 	return any;

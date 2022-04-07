@@ -7,7 +7,7 @@
 class AnyEObject: public Any
 {     
 public:
-	template <typename T> AnyEObject(T value,long long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
+	template <typename T> AnyEObject(T value,unsigned long typeID, bool isContainer=true) : Any(value, typeID, isContainer)
 	{
 	}
 
@@ -31,7 +31,7 @@ public:
 template <class T> class AnyGenericEObject: public AnyEObject
 {
 public:
-	AnyGenericEObject(T value,long long typeID=0, bool isContainer=true) : AnyEObject(value, typeID, isContainer)
+	AnyGenericEObject(T value,unsigned long typeID=0, bool isContainer=true) : AnyEObject(value, typeID, isContainer)
 	{
 	}
 
@@ -66,7 +66,7 @@ public:
 
 };
 
-template <typename T> static std::shared_ptr<Any> eAnyObject(T value,long long typeID)
+template <typename T> static std::shared_ptr<Any> eAnyObject(T value,unsigned long typeID)
 {
 	std::shared_ptr<Any> any(new AnyGenericEObject<T>(value,typeID,false));
 	return any;
