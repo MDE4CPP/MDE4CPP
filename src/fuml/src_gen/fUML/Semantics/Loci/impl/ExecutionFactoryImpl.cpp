@@ -69,8 +69,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
-//#include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
-//#include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
+#include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
+#include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
 //#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
 //#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
@@ -88,7 +88,7 @@
 //#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadStructuralFeatureActionActivation.hpp"
-//#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
+#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
 //#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
 //#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
 #include "fUML/Semantics/Actions/ValueSpecificationActionActivation.hpp"
@@ -150,8 +150,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -472,12 +472,12 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::CALLBEHAVIORACTION_CLASS:
 		{
-			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
 			break;
 		}
 		case uml::umlPackage::SENDSIGNALACTION_CLASS:
@@ -527,7 +527,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
 			break;
 		}
 		case uml::umlPackage::READLINKACTION_CLASS:

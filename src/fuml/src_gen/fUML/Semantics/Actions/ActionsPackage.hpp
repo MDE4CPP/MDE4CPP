@@ -29,14 +29,19 @@ namespace fUML::Semantics::Actions
 {
 	class ActionActivation;
 	class AddStructuralFeatureValueActionActivation;
+	class CallActionActivation;
+	class CallBehaviorActionActivation;
+	class CallOperationActionActivation;
 	class ClearStructuralFeatureActionActivation;
 	class CreateObjectActionActivation;
 	class DestroyObjectActionActivation;
 	class InputPinActivation;
+	class InvocationActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
+	class RemoveStructuralFeatureValueActivation;
 	class StructuralFeatureActionActivation;
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
@@ -152,6 +157,79 @@ namespace fUML::Semantics::Actions
 			// End Class AddStructuralFeatureValueActionActivation
 
 
+			// Begin Class CallActionActivation
+			//Class and Feature IDs 
+			static const unsigned long CALLACTIONACTIVATION_CLASS = 129532533;
+			static const unsigned int CALLACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int CALLACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
+			
+			static const unsigned long CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION = 661588975;
+			
+			static const unsigned int CALLACTIONACTIVATION_OPERATION_DOACTION = 3531200850;
+			static const unsigned int CALLACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE = 27461358;
+			static const unsigned int CALLACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR = 3994859198;
+			static const unsigned int CALLACTIONACTIVATION_OPERATION_TERMINATE = 2819746834;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallActionActivation_Attribute_callAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doCall_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_retrieveBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_terminate() const = 0;
+			
+			// End Class CallActionActivation
+
+
+			// Begin Class CallBehaviorActionActivation
+			//Class and Feature IDs 
+			static const unsigned long CALLBEHAVIORACTIONACTIVATION_CLASS = 1169624682;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
+			
+			static const unsigned long CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION = 1409658851;
+			
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE = 2530900674;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR = 2035427474;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallBehaviorActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallBehaviorActionActivation_Attribute_callBehaviorAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_doCall_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_retrieveBehavior() const = 0;
+			
+			// End Class CallBehaviorActionActivation
+
+
+			// Begin Class CallOperationActionActivation
+			//Class and Feature IDs 
+			static const unsigned long CALLOPERATIONACTIONACTIVATION_CLASS = 1019024267;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
+			
+			static const unsigned long CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION = 1907981028;
+			
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE = 3826002027;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR = 3335726203;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallOperationActionActivation_Attribute_callOperationAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_doCall_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_retrieveBehavior() const = 0;
+			
+			// End Class CallOperationActionActivation
+
+
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 2133607571;
@@ -240,6 +318,23 @@ namespace fUML::Semantics::Actions
 			// End Class InputPinActivation
 
 
+			// Begin Class InvocationActionActivation
+			//Class and Feature IDs 
+			static const unsigned long INVOCATIONACTIONACTIVATION_CLASS = 520674205;
+			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 46;
+			
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInvocationActionActivation_Class() const = 0;
+			
+			
+			
+			
+			// End Class InvocationActionActivation
+
+
 			// Begin Class OutputPinActivation
 			//Class and Feature IDs 
 			static const unsigned long OUTPUTPINACTIVATION_CLASS = 1393072800;
@@ -322,6 +417,27 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ReadStructuralFeatureActionActivation
+
+
+			// Begin Class RemoveStructuralFeatureValueActivation
+			//Class and Feature IDs 
+			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS = 903259366;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_OPERATION_COUNT = 52;
+			
+			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION = 1824140801;
+			
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION = 1011652404;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActivation_Operation_doAction() const = 0;
+			
+			// End Class RemoveStructuralFeatureValueActivation
 
 
 			// Begin Class StructuralFeatureActionActivation

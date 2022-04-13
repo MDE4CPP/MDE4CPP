@@ -107,6 +107,9 @@ SET(SOURCE_FILES
 	Semantics/Activities/impl/ActivityNodeActivationGroupImpl.cpp
 	Semantics/Activities/impl/ActivityParameterNodeActivationImpl.cpp
 	Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.cpp
+	Semantics/Actions/impl/CallActionActivationImpl.cpp
+	Semantics/Actions/impl/CallBehaviorActionActivationImpl.cpp
+	Semantics/Actions/impl/CallOperationActionActivationImpl.cpp
 	Semantics/Activities/impl/CentralBufferNodeActivationImpl.cpp
 	Semantics/Loci/impl/ChoiceStrategyImpl.cpp
 	Semantics/Activities/impl/ClassifierBehaviorExecutionActivityImpl.cpp
@@ -132,6 +135,7 @@ SET(SOURCE_FILES
 	Semantics/Activities/impl/ForkedTokenImpl.cpp
 	Semantics/Activities/impl/InitialNodeActivationImpl.cpp
 	Semantics/Actions/impl/InputPinActivationImpl.cpp
+	Semantics/Actions/impl/InvocationActionActivationImpl.cpp
 	Semantics/Activities/impl/JoinNodeActivationImpl.cpp
 	Semantics/Loci/impl/LocusImpl.cpp
 	Semantics/Activities/impl/MergeNodeActivationImpl.cpp
@@ -144,6 +148,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
+	Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.cpp
 	Semantics/Loci/impl/SemanticStrategyImpl.cpp
 	Semantics/Loci/impl/SemanticVisitorImpl.cpp
 	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp

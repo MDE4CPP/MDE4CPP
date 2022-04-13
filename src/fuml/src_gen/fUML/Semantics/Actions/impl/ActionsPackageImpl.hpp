@@ -20,14 +20,19 @@ namespace fUML::Semantics::Actions
 {
 	class ActionActivation;
 	class AddStructuralFeatureValueActionActivation;
+	class CallActionActivation;
+	class CallBehaviorActionActivation;
+	class CallOperationActionActivation;
 	class ClearStructuralFeatureActionActivation;
 	class CreateObjectActionActivation;
 	class DestroyObjectActionActivation;
 	class InputPinActivation;
+	class InvocationActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
+	class RemoveStructuralFeatureValueActivation;
 	class StructuralFeatureActionActivation;
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
@@ -97,6 +102,44 @@ namespace fUML::Semantics::Actions
 			
 			// End Class AddStructuralFeatureValueActionActivation
 
+			// Begin Class CallActionActivation
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallActionActivation_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallActionActivation_Attribute_callAction() const ;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doAction() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_retrieveBehavior() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_terminate() const ;
+			
+			// End Class CallActionActivation
+
+			// Begin Class CallBehaviorActionActivation
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallBehaviorActionActivation_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallBehaviorActionActivation_Attribute_callBehaviorAction() const ;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_retrieveBehavior() const ;
+			
+			// End Class CallBehaviorActionActivation
+
+			// Begin Class CallOperationActionActivation
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallOperationActionActivation_Attribute_callOperationAction() const ;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_retrieveBehavior() const ;
+			
+			// End Class CallOperationActionActivation
+
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureActionActivation_Class() const ;
@@ -143,6 +186,15 @@ namespace fUML::Semantics::Actions
 			
 			// End Class InputPinActivation
 
+			// Begin Class InvocationActionActivation
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInvocationActionActivation_Class() const ;
+			
+			
+			
+			
+			// End Class InvocationActionActivation
+
 			// Begin Class OutputPinActivation
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPinActivation_Class() const ;
@@ -186,6 +238,17 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadStructuralFeatureActionActivation
+
+			// Begin Class RemoveStructuralFeatureValueActivation
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const ;
+			
+			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActivation_Operation_doAction() const ;
+			
+			// End Class RemoveStructuralFeatureValueActivation
 
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature Getter
@@ -259,11 +322,11 @@ namespace fUML::Semantics::Actions
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_actionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_addStructuralFeatureValueActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_clearStructuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_createObjectActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_destroyObjectActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_inputPinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_outputPinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_pinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_readSelfActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_readStructuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_structuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_structuredActivityNodeActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_valueSpecificationActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_values_Class = nullptr;std::shared_ptr<ecore::EClass> m_writeStructuralFeatureActionActivation_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_actionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_addStructuralFeatureValueActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_callActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_callBehaviorActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_callOperationActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_clearStructuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_createObjectActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_destroyObjectActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_inputPinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_invocationActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_outputPinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_pinActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_readSelfActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_readStructuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_removeStructuralFeatureValueActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_structuralFeatureActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_structuredActivityNodeActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_valueSpecificationActionActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_values_Class = nullptr;std::shared_ptr<ecore::EClass> m_writeStructuralFeatureActionActivation_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_actionActivation_Attribute_firing = nullptr;std::shared_ptr<ecore::EAttribute> m_values_Attribute_values = nullptr;
-			std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_action = nullptr;std::shared_ptr<ecore::EReference> m_pinActivation_Attribute_actionActivation = nullptr;std::shared_ptr<ecore::EReference> m_structuredActivityNodeActivation_Attribute_activationGroup = nullptr;std::shared_ptr<ecore::EReference> m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction = nullptr;std::shared_ptr<ecore::EReference> m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction = nullptr;std::shared_ptr<ecore::EReference> m_createObjectActionActivation_Attribute_createObjectAction = nullptr;std::shared_ptr<ecore::EReference> m_destroyObjectActionActivation_Attribute_destroyObjectAction = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_inputPinActivation = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_outputPinActivation = nullptr;std::shared_ptr<ecore::EReference> m_pinActivation_Attribute_pin = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_pinActivation = nullptr;std::shared_ptr<ecore::EReference> m_readSelfActionActivation_Attribute_readSelfAction = nullptr;std::shared_ptr<ecore::EReference> m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction = nullptr;
-			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_addPinActivation_PinActivation = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_completeAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_completeAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createEdgeInstances = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_createNodeActivations = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createNodeActivations = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_addStructuralFeatureValueActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_clearStructuralFeatureActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_readStructuralFeatureActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_valueSpecificationActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_doStructuredActivity = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_fire_Token = nullptr;std::shared_ptr<ecore::EOperation> m_pinActivation_Operation_fire_Token = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_getTokens_InputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isFirng = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isReady = nullptr;std::shared_ptr<ecore::EOperation> m_inputPinActivation_Operation_isReady = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isSourceFor_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_isSuspended = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element = nullptr;std::shared_ptr<ecore::EOperation> m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_putToken_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_putTokens_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_inputPinActivation_Operation_receiveOffer = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_resume = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_retrievePinActivation_Pin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_run = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_sendOffers = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_takeOfferedTokens = nullptr;std::shared_ptr<ecore::EOperation> m_pinActivation_Operation_takeOfferedTokens = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_takeTokens_InputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_terminateAll = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element = nullptr;
+			std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_action = nullptr;std::shared_ptr<ecore::EReference> m_pinActivation_Attribute_actionActivation = nullptr;std::shared_ptr<ecore::EReference> m_structuredActivityNodeActivation_Attribute_activationGroup = nullptr;std::shared_ptr<ecore::EReference> m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction = nullptr;std::shared_ptr<ecore::EReference> m_callActionActivation_Attribute_callAction = nullptr;std::shared_ptr<ecore::EReference> m_callBehaviorActionActivation_Attribute_callBehaviorAction = nullptr;std::shared_ptr<ecore::EReference> m_callOperationActionActivation_Attribute_callOperationAction = nullptr;std::shared_ptr<ecore::EReference> m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction = nullptr;std::shared_ptr<ecore::EReference> m_createObjectActionActivation_Attribute_createObjectAction = nullptr;std::shared_ptr<ecore::EReference> m_destroyObjectActionActivation_Attribute_destroyObjectAction = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_inputPinActivation = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_outputPinActivation = nullptr;std::shared_ptr<ecore::EReference> m_pinActivation_Attribute_pin = nullptr;std::shared_ptr<ecore::EReference> m_actionActivation_Attribute_pinActivation = nullptr;std::shared_ptr<ecore::EReference> m_readSelfActionActivation_Attribute_readSelfAction = nullptr;std::shared_ptr<ecore::EReference> m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction = nullptr;std::shared_ptr<ecore::EReference> m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_addPinActivation_PinActivation = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_completeAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_completeAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createEdgeInstances = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_createNodeActivations = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createNodeActivations = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_addStructuralFeatureValueActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_clearStructuralFeatureActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_readStructuralFeatureActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_removeStructuralFeatureValueActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_valueSpecificationActionActivation_Operation_doAction = nullptr;std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_doCall_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_callBehaviorActionActivation_Operation_doCall_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_callOperationActionActivation_Operation_doCall_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_doStructuredActivity = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_fire_Token = nullptr;std::shared_ptr<ecore::EOperation> m_pinActivation_Operation_fire_Token = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_getTokens_InputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isFirng = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isReady = nullptr;std::shared_ptr<ecore::EOperation> m_inputPinActivation_Operation_isReady = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_isSourceFor_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_isSuspended = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode = nullptr;std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element = nullptr;std::shared_ptr<ecore::EOperation> m_writeStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_putToken_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_putTokens_OutputPin_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_inputPinActivation_Operation_receiveOffer = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_resume = nullptr;std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_retrieveBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_callBehaviorActionActivation_Operation_retrieveBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_callOperationActionActivation_Operation_retrieveBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_retrievePinActivation_Pin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_run = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_sendOffers = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_takeOfferedTokens = nullptr;std::shared_ptr<ecore::EOperation> m_pinActivation_Operation_takeOfferedTokens = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_takeTokens_InputPin = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_terminateAll = nullptr;std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_valueParticipatesInLink_EJavaObject_Element = nullptr;
 
 			friend class ActionsPackage;
 
@@ -281,14 +344,19 @@ namespace fUML::Semantics::Actions
 		private:
 			void createActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createAddStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCallBehaviorActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createClearStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCreateObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createDestroyObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createInputPinActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createInvocationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createOutputPinActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPinActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createReadSelfActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createReadStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createRemoveStructuralFeatureValueActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createStructuredActivityNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createValueSpecificationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
@@ -298,14 +366,19 @@ namespace fUML::Semantics::Actions
 
 			void initializeActionActivationContent();
 			void initializeAddStructuralFeatureValueActionActivationContent();
+			void initializeCallActionActivationContent();
+			void initializeCallBehaviorActionActivationContent();
+			void initializeCallOperationActionActivationContent();
 			void initializeClearStructuralFeatureActionActivationContent();
 			void initializeCreateObjectActionActivationContent();
 			void initializeDestroyObjectActionActivationContent();
 			void initializeInputPinActivationContent();
+			void initializeInvocationActionActivationContent();
 			void initializeOutputPinActivationContent();
 			void initializePinActivationContent();
 			void initializeReadSelfActionActivationContent();
 			void initializeReadStructuralFeatureActionActivationContent();
+			void initializeRemoveStructuralFeatureValueActivationContent();
 			void initializeStructuralFeatureActionActivationContent();
 			void initializeStructuredActivityNodeActivationContent();
 			void initializeValueSpecificationActionActivationContent();

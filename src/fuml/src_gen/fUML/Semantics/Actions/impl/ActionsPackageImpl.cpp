@@ -184,6 +184,83 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class AddStructuralFeatureValueActionActivation
 
+// Begin Class CallActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Class() const
+{
+	return m_callActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Attribute_callAction() const
+{
+	return m_callActionActivation_Attribute_callAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_doAction() const
+{
+	return m_callActionActivation_Operation_doAction;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_doCall_ParameterValue() const
+{
+	return m_callActionActivation_Operation_doCall_ParameterValue;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_retrieveBehavior() const
+{
+	return m_callActionActivation_Operation_retrieveBehavior;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_terminate() const
+{
+	return m_callActionActivation_Operation_terminate;
+}
+
+// End Class CallActionActivation
+
+// Begin Class CallBehaviorActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Class() const
+{
+	return m_callBehaviorActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Attribute_callBehaviorAction() const
+{
+	return m_callBehaviorActionActivation_Attribute_callBehaviorAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Operation_doCall_ParameterValue() const
+{
+	return m_callBehaviorActionActivation_Operation_doCall_ParameterValue;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Operation_retrieveBehavior() const
+{
+	return m_callBehaviorActionActivation_Operation_retrieveBehavior;
+}
+
+// End Class CallBehaviorActionActivation
+
+// Begin Class CallOperationActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Class() const
+{
+	return m_callOperationActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Attribute_callOperationAction() const
+{
+	return m_callOperationActionActivation_Attribute_callOperationAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Operation_doCall_ParameterValue() const
+{
+	return m_callOperationActionActivation_Operation_doCall_ParameterValue;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Operation_retrieveBehavior() const
+{
+	return m_callOperationActionActivation_Operation_retrieveBehavior;
+}
+
+// End Class CallOperationActionActivation
+
 // Begin Class ClearStructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getClearStructuralFeatureActionActivation_Class() const
 {
@@ -268,6 +345,17 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class InputPinActivation
 
+// Begin Class InvocationActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getInvocationActionActivation_Class() const
+{
+	return m_invocationActionActivation_Class;
+}
+
+
+
+
+// End Class InvocationActionActivation
+
 // Begin Class OutputPinActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getOutputPinActivation_Class() const
 {
@@ -343,6 +431,25 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class ReadStructuralFeatureActionActivation
+
+// Begin Class RemoveStructuralFeatureValueActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Class() const
+{
+	return m_removeStructuralFeatureValueActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const
+{
+	return m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Operation_doAction() const
+{
+	return m_removeStructuralFeatureValueActivation_Operation_doAction;
+}
+
+// End Class RemoveStructuralFeatureValueActivation
 
 // Begin Class StructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Class() const

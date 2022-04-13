@@ -20,6 +20,7 @@
 //depending model packages
 
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -44,14 +45,19 @@ void ActionsPackageImpl::initializePackageContents()
 	// Add supertypes to classes
 	m_actionActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class());
 	m_addStructuralFeatureValueActionActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
+	m_callActionActivation_Class->getESuperTypes()->push_back(getInvocationActionActivation_Class());
+	m_callBehaviorActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
+	m_callOperationActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
 	m_clearStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_createObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_destroyObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_inputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
+	m_invocationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
+	m_removeStructuralFeatureValueActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
 	m_structuralFeatureActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_structuredActivityNodeActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_valueSpecificationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
@@ -61,14 +67,19 @@ void ActionsPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 	initializeActionActivationContent();
 	initializeAddStructuralFeatureValueActionActivationContent();
+	initializeCallActionActivationContent();
+	initializeCallBehaviorActionActivationContent();
+	initializeCallOperationActionActivationContent();
 	initializeClearStructuralFeatureActionActivationContent();
 	initializeCreateObjectActionActivationContent();
 	initializeDestroyObjectActionActivationContent();
 	initializeInputPinActivationContent();
+	initializeInvocationActionActivationContent();
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
 	initializeReadSelfActionActivationContent();
 	initializeReadStructuralFeatureActionActivationContent();
+	initializeRemoveStructuralFeatureValueActivationContent();
 	initializeStructuralFeatureActionActivationContent();
 	initializeStructuredActivityNodeActivationContent();
 	initializeValueSpecificationActionActivationContent();
@@ -560,6 +571,200 @@ void ActionsPackageImpl::initializeAddStructuralFeatureValueActionActivationCont
 	
 }
 
+void ActionsPackageImpl::initializeCallActionActivationContent()
+{
+	m_callActionActivation_Class->setName("CallActionActivation");
+	m_callActionActivation_Class->setAbstract(true);
+	m_callActionActivation_Class->setInterface(false);
+	
+	
+	m_callActionActivation_Attribute_callAction->setName("callAction");
+	m_callActionActivation_Attribute_callAction->setEType(uml::umlPackage::eInstance()->getCallAction_Class());
+	m_callActionActivation_Attribute_callAction->setLowerBound(1);
+	m_callActionActivation_Attribute_callAction->setUpperBound(1);
+	m_callActionActivation_Attribute_callAction->setTransient(false);
+	m_callActionActivation_Attribute_callAction->setVolatile(false);
+	m_callActionActivation_Attribute_callAction->setChangeable(true);
+	m_callActionActivation_Attribute_callAction->setUnsettable(false);
+	m_callActionActivation_Attribute_callAction->setUnique(true);
+	m_callActionActivation_Attribute_callAction->setDerived(false);
+	m_callActionActivation_Attribute_callAction->setOrdered(true);
+	m_callActionActivation_Attribute_callAction->setContainment(false);
+	m_callActionActivation_Attribute_callAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callActionActivation_Attribute_callAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_callActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_callActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_callActionActivation_Operation_doAction->setLowerBound(1);
+	m_callActionActivation_Operation_doAction->setUpperBound(1);
+	m_callActionActivation_Operation_doAction->setUnique(true);
+	m_callActionActivation_Operation_doAction->setOrdered(false);
+	
+	m_callActionActivation_Operation_doCall_ParameterValue->setName("doCall");
+	m_callActionActivation_Operation_doCall_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_callActionActivation_Operation_doCall_ParameterValue->setLowerBound(0);
+	m_callActionActivation_Operation_doCall_ParameterValue->setUpperBound(-1);
+	m_callActionActivation_Operation_doCall_ParameterValue->setUnique(true);
+	m_callActionActivation_Operation_doCall_ParameterValue->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callActionActivation_Operation_doCall_ParameterValue);
+		parameter->setName("inputParameterValues");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_callActionActivation_Operation_retrieveBehavior->setName("retrieveBehavior");
+	m_callActionActivation_Operation_retrieveBehavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
+	m_callActionActivation_Operation_retrieveBehavior->setLowerBound(1);
+	m_callActionActivation_Operation_retrieveBehavior->setUpperBound(1);
+	m_callActionActivation_Operation_retrieveBehavior->setUnique(true);
+	m_callActionActivation_Operation_retrieveBehavior->setOrdered(true);
+	
+	m_callActionActivation_Operation_terminate->setName("terminate");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_callActionActivation_Operation_terminate->setEType(unknownClass);
+	}
+	m_callActionActivation_Operation_terminate->setLowerBound(1);
+	m_callActionActivation_Operation_terminate->setUpperBound(1);
+	m_callActionActivation_Operation_terminate->setUnique(true);
+	m_callActionActivation_Operation_terminate->setOrdered(false);
+	
+	
+}
+
+void ActionsPackageImpl::initializeCallBehaviorActionActivationContent()
+{
+	m_callBehaviorActionActivation_Class->setName("CallBehaviorActionActivation");
+	m_callBehaviorActionActivation_Class->setAbstract(false);
+	m_callBehaviorActionActivation_Class->setInterface(false);
+	
+	
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setName("callBehaviorAction");
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setEType(uml::umlPackage::eInstance()->getCallBehaviorAction_Class());
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setLowerBound(1);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUpperBound(1);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setTransient(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setVolatile(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setChangeable(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUnsettable(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUnique(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDerived(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setOrdered(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setContainment(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setName("doCall");
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setLowerBound(0);
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setUpperBound(-1);
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setUnique(true);
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callBehaviorActionActivation_Operation_doCall_ParameterValue);
+		parameter->setName("inputParameterValues");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setName("retrieveBehavior");
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setLowerBound(1);
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setUpperBound(1);
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setUnique(true);
+	m_callBehaviorActionActivation_Operation_retrieveBehavior->setOrdered(true);
+	
+	
+}
+
+void ActionsPackageImpl::initializeCallOperationActionActivationContent()
+{
+	m_callOperationActionActivation_Class->setName("CallOperationActionActivation");
+	m_callOperationActionActivation_Class->setAbstract(false);
+	m_callOperationActionActivation_Class->setInterface(false);
+	
+	
+	m_callOperationActionActivation_Attribute_callOperationAction->setName("callOperationAction");
+	m_callOperationActionActivation_Attribute_callOperationAction->setEType(uml::umlPackage::eInstance()->getCallOperationAction_Class());
+	m_callOperationActionActivation_Attribute_callOperationAction->setLowerBound(1);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUpperBound(1);
+	m_callOperationActionActivation_Attribute_callOperationAction->setTransient(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setVolatile(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setChangeable(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUnsettable(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUnique(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setDerived(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setOrdered(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setContainment(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callOperationActionActivation_Attribute_callOperationAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setName("doCall");
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setLowerBound(0);
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setUpperBound(-1);
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setUnique(true);
+	m_callOperationActionActivation_Operation_doCall_ParameterValue->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callOperationActionActivation_Operation_doCall_ParameterValue);
+		parameter->setName("inputParameterValues");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_callOperationActionActivation_Operation_retrieveBehavior->setName("retrieveBehavior");
+	m_callOperationActionActivation_Operation_retrieveBehavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
+	m_callOperationActionActivation_Operation_retrieveBehavior->setLowerBound(1);
+	m_callOperationActionActivation_Operation_retrieveBehavior->setUpperBound(1);
+	m_callOperationActionActivation_Operation_retrieveBehavior->setUnique(true);
+	m_callOperationActionActivation_Operation_retrieveBehavior->setOrdered(true);
+	
+	
+}
+
 void ActionsPackageImpl::initializeClearStructuralFeatureActionActivationContent()
 {
 	m_clearStructuralFeatureActionActivation_Class->setName("ClearStructuralFeatureActionActivation");
@@ -797,6 +1002,17 @@ void ActionsPackageImpl::initializeInputPinActivationContent()
 	
 }
 
+void ActionsPackageImpl::initializeInvocationActionActivationContent()
+{
+	m_invocationActionActivation_Class->setName("InvocationActionActivation");
+	m_invocationActionActivation_Class->setAbstract(true);
+	m_invocationActionActivation_Class->setInterface(false);
+	
+	
+	
+	
+}
+
 void ActionsPackageImpl::initializeOutputPinActivationContent()
 {
 	m_outputPinActivation_Class->setName("OutputPinActivation");
@@ -983,6 +1199,52 @@ void ActionsPackageImpl::initializeReadStructuralFeatureActionActivationContent(
 	m_readStructuralFeatureActionActivation_Operation_doAction->setUpperBound(1);
 	m_readStructuralFeatureActionActivation_Operation_doAction->setUnique(true);
 	m_readStructuralFeatureActionActivation_Operation_doAction->setOrdered(true);
+	
+	
+}
+
+void ActionsPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
+{
+	m_removeStructuralFeatureValueActivation_Class->setName("RemoveStructuralFeatureValueActivation");
+	m_removeStructuralFeatureValueActivation_Class->setAbstract(false);
+	m_removeStructuralFeatureValueActivation_Class->setInterface(false);
+	
+	
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setName("removeStructuralFeatureValueAction");
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setEType(uml::umlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class());
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setLowerBound(1);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setTransient(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setVolatile(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setChangeable(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnsettable(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnique(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDerived(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setContainment(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_removeStructuralFeatureValueActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setLowerBound(0);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUnique(true);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setOrdered(true);
 	
 	
 }

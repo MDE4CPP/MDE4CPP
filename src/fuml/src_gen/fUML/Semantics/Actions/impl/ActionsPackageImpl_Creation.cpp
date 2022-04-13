@@ -37,14 +37,19 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 
 	createActionActivationContent(package, factory);
 	createAddStructuralFeatureValueActionActivationContent(package, factory);
+	createCallActionActivationContent(package, factory);
+	createCallBehaviorActionActivationContent(package, factory);
+	createCallOperationActionActivationContent(package, factory);
 	createClearStructuralFeatureActionActivationContent(package, factory);
 	createCreateObjectActionActivationContent(package, factory);
 	createDestroyObjectActionActivationContent(package, factory);
 	createInputPinActivationContent(package, factory);
+	createInvocationActionActivationContent(package, factory);
 	createOutputPinActivationContent(package, factory);
 	createPinActivationContent(package, factory);
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
+	createRemoveStructuralFeatureValueActivationContent(package, factory);
 	createStructuralFeatureActionActivationContent(package, factory);
 	createStructuredActivityNodeActivationContent(package, factory);
 	createValueSpecificationActionActivationContent(package, factory);
@@ -97,6 +102,41 @@ void ActionsPackageImpl::createAddStructuralFeatureValueActionActivationContent(
 	
 }
 
+void ActionsPackageImpl::createCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_callActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CALLACTIONACTIVATION_CLASS);
+	
+	m_callActionActivation_Attribute_callAction = factory->createEReference_as_eReferences_in_EClass(m_callActionActivation_Class, CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION);
+	
+	m_callActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_callActionActivation_Class, CALLACTIONACTIVATION_OPERATION_DOACTION);
+	m_callActionActivation_Operation_doCall_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_callActionActivation_Class, CALLACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE);
+	m_callActionActivation_Operation_retrieveBehavior = factory->createEOperation_as_eOperations_in_EClass(m_callActionActivation_Class, CALLACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR);
+	m_callActionActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_callActionActivation_Class, CALLACTIONACTIVATION_OPERATION_TERMINATE);
+	
+}
+
+void ActionsPackageImpl::createCallBehaviorActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_callBehaviorActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CALLBEHAVIORACTIONACTIVATION_CLASS);
+	
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction = factory->createEReference_as_eReferences_in_EClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION);
+	
+	m_callBehaviorActionActivation_Operation_doCall_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE);
+	m_callBehaviorActionActivation_Operation_retrieveBehavior = factory->createEOperation_as_eOperations_in_EClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR);
+	
+}
+
+void ActionsPackageImpl::createCallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_callOperationActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CALLOPERATIONACTIONACTIVATION_CLASS);
+	
+	m_callOperationActionActivation_Attribute_callOperationAction = factory->createEReference_as_eReferences_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION);
+	
+	m_callOperationActionActivation_Operation_doCall_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE);
+	m_callOperationActionActivation_Operation_retrieveBehavior = factory->createEOperation_as_eOperations_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR);
+	
+}
+
 void ActionsPackageImpl::createClearStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_clearStructuralFeatureActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
@@ -139,6 +179,14 @@ void ActionsPackageImpl::createInputPinActivationContent(std::shared_ptr<ecore::
 	
 }
 
+void ActionsPackageImpl::createInvocationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_invocationActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, INVOCATIONACTIONACTIVATION_CLASS);
+	
+	
+	
+}
+
 void ActionsPackageImpl::createOutputPinActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_outputPinActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OUTPUTPINACTIVATION_CLASS);
@@ -176,6 +224,16 @@ void ActionsPackageImpl::createReadStructuralFeatureActionActivationContent(std:
 	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction = factory->createEReference_as_eReferences_in_EClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
 	
 	m_readStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createRemoveStructuralFeatureValueActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_removeStructuralFeatureValueActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS);
+	
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction = factory->createEReference_as_eReferences_in_EClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
+	
+	m_removeStructuralFeatureValueActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION);
 	
 }
 
