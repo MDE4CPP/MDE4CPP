@@ -33,6 +33,9 @@ description 'Grammar Parser (ANTLR)'
 
 def antlr4Version = "4.9.2"
 
+//Currently commented out due to faulty third-party dependencie contained in the original ANTLR archive
+//Currently a custom, checked-in patched verion of ANTLR runtime 4.9.2 is used
+/*
 task downloadAntlr4(type: Download) {
 	description 'download antlr4'
 	group 'Grammar Parser (ANTLR)'
@@ -42,8 +45,9 @@ task downloadAntlr4(type: Download) {
     quiet true
     onlyIfModified true
 }
+*/
 
-task unzipAntlr4(dependsOn: downloadAntlr4, type: Copy) {
+task unzipAntlr4(/*dependsOn: downloadAntlr4,*/ type: Copy) {
 	description 'download and unzip antlr4'
 	group 'Grammar Parser (ANTLR)'
 	
