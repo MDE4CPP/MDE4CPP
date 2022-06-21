@@ -179,7 +179,7 @@ void CallActionActivationImpl::doAction()
 				std::shared_ptr<uml::Element> context = this->getExecutionContext();
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				/*std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -199,7 +199,7 @@ void CallActionActivationImpl::doAction()
 						}
 						attributeIter++;
 					}
-				}
+				}*/
 
 				if(attribute == nullptr)
 				{

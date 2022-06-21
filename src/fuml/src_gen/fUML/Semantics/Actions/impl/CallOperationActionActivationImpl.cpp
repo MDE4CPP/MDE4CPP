@@ -175,7 +175,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				/*std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -195,7 +195,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 						}
 						attributeIter++;
 					}
-				}
+				}*/
 
 				if(nullptr == attribute)
 				{
@@ -207,7 +207,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 
 				if (context != nullptr)
 				{
-					std::shared_ptr<Bag<Any>> attributeValues = context->get(attribute);
+					/*std::shared_ptr<Bag<Any>> attributeValues = context->get(attribute);
 					if (attributeValues->size() > 0)
 					{
 						context = attributeValues->front()->get<uml::Element>();
@@ -217,7 +217,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 								std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
 							}
 						)
-					}
+					}*/
 				}
 			}
 		}
