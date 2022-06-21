@@ -54,7 +54,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EClassifier: virtual public ENamedElement
+	class ECORE_API EClassifier : virtual public ENamedElement
 	{
 		public:
  			EClassifier(const EClassifier &) {}

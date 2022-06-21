@@ -54,7 +54,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EAttribute: virtual public EStructuralFeature
+	class ECORE_API EAttribute : virtual public EStructuralFeature
 	{
 		public:
  			EAttribute(const EAttribute &) {}

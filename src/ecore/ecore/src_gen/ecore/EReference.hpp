@@ -55,7 +55,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EReference: virtual public EStructuralFeature
+	class ECORE_API EReference : virtual public EStructuralFeature
 	{
 		public:
  			EReference(const EReference &) {}

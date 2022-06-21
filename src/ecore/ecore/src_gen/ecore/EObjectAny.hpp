@@ -47,7 +47,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EObjectAny: virtual public EObject
+	class ECORE_API EObjectAny : virtual public EObject
 	{
 		public:
  			EObjectAny(const EObjectAny &) {}

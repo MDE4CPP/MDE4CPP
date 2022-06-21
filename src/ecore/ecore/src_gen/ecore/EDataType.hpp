@@ -52,7 +52,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EDataType: virtual public EClassifier
+	class ECORE_API EDataType : virtual public EClassifier
 	{
 		public:
  			EDataType(const EDataType &) {}

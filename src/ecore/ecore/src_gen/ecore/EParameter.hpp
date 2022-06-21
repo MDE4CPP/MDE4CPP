@@ -53,7 +53,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EParameter: virtual public ETypedElement
+	class ECORE_API EParameter : virtual public ETypedElement
 	{
 		public:
  			EParameter(const EParameter &) {}

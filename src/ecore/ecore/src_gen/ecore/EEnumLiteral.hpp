@@ -52,7 +52,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EEnumLiteral: virtual public ENamedElement
+	class ECORE_API EEnumLiteral : virtual public ENamedElement
 	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}

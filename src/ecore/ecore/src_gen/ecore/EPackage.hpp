@@ -54,7 +54,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EPackage: virtual public ENamedElement
+	class ECORE_API EPackage : virtual public ENamedElement
 	{
 		public:
  			EPackage(const EPackage &) {}

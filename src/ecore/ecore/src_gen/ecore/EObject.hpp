@@ -46,6 +46,7 @@ namespace ecore
 // namespace macro header include
 #include "ecore/ecore.hpp"
 
+#include "abstractDataTypes/MDE4CPPObject.hpp"
 
 
 
@@ -54,8 +55,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EObject
-	{
+	class ECORE_API EObject : virtual public MDE4CPPObject	{
 		public:
  			EObject(const EObject &) {}
 

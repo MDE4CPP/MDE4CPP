@@ -54,7 +54,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EEnum: virtual public EDataType
+	class ECORE_API EEnum : virtual public EDataType
 	{
 		public:
  			EEnum(const EEnum &) {}

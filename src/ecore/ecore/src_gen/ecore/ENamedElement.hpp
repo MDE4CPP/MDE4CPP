@@ -50,7 +50,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API ENamedElement: virtual public EModelElement
+	class ECORE_API ENamedElement : virtual public EModelElement
 	{
 		public:
  			ENamedElement(const ENamedElement &) {}

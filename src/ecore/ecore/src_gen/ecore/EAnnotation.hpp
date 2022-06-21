@@ -49,7 +49,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ECORE_API EAnnotation: virtual public EModelElement
+	class ECORE_API EAnnotation : virtual public EModelElement
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}
