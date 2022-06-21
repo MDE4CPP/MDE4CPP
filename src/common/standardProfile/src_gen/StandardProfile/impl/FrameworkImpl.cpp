@@ -49,23 +49,6 @@ FrameworkImpl::FrameworkImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"Framework is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Package
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1921700257,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Package
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1921700257,[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
-	
-	
-	//unsetter init
-		//Property base_Package
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1921700257,[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -154,83 +137,122 @@ std::weak_ptr<uml::Package> FrameworkImpl::getBase_Package() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any FrameworkImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> FrameworkImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any FrameworkImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> FrameworkImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any FrameworkImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> FrameworkImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::FRAMEWORK_ATTRIBUTE_BASE_PACKAGE:
+			return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void FrameworkImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void FrameworkImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void FrameworkImpl::set(std::string _qualifiedName, Any value)
+void FrameworkImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void FrameworkImpl::set(unsigned long _uID, Any value)
+void FrameworkImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::FRAMEWORK_ATTRIBUTE_BASE_PACKAGE:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Package>> container = value->get<std::shared_ptr<Bag<uml::Package>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Package(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Package(value->get<std::shared_ptr<uml::Package>>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void FrameworkImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void FrameworkImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void FrameworkImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void FrameworkImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void FrameworkImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void FrameworkImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::FRAMEWORK_ATTRIBUTE_BASE_PACKAGE:
+		{
+			m_base_Package.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any FrameworkImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> FrameworkImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +260,18 @@ Any FrameworkImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::share
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any FrameworkImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> FrameworkImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any FrameworkImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> FrameworkImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

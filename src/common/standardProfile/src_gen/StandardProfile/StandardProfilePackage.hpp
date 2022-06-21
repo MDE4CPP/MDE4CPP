@@ -185,138 +185,205 @@ namespace StandardProfile
 				static std::shared_ptr<StandardProfilePackage> eInstance();
 
 			//Static IDs
-				//Class StandardProfile::Auxiliary
+				//Stereotype StandardProfile::Auxiliary
 				static const unsigned long AUXILIARY_CLASS = 1466047990;
 				static const unsigned int AUXILIARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int AUXILIARY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::BuildComponent
+					//Properties
+					static const unsigned long AUXILIARY_ATTRIBUTE_BASE_CLASS = 1570824721;
+				//Stereotype StandardProfile::BuildComponent
 				static const unsigned long BUILDCOMPONENT_CLASS = 133779747;
 				static const unsigned int BUILDCOMPONENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int BUILDCOMPONENT_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Call
+					//Properties
+					static const unsigned long BUILDCOMPONENT_ATTRIBUTE_BASE_COMPONENT = 1091275515;
+				//Stereotype StandardProfile::Call
 				static const unsigned long CALL_CLASS = 495006810;
 				static const unsigned int CALL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int CALL_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Create
+					//Properties
+					static const unsigned long CALL_ATTRIBUTE_BASE_USAGE = 803516267;
+				//Stereotype StandardProfile::Create
 				static const unsigned long CREATE_CLASS = 841207773;
 				static const unsigned int CREATE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int CREATE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Derive
+					//Properties
+					static const unsigned long CREATE_ATTRIBUTE_BASE_BEHAVIORALFEATURE = 2108279685;
+					static const unsigned long CREATE_ATTRIBUTE_BASE_USAGE = 2008362745;
+				//Stereotype StandardProfile::Derive
 				static const unsigned long DERIVE_CLASS = 501351344;
 				static const unsigned int DERIVE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DERIVE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Destroy
+					//Properties
+					static const unsigned long DERIVE_ATTRIBUTE_BASE_ABSTRACTION = 893379002;
+				//Stereotype StandardProfile::Destroy
 				static const unsigned long DESTROY_CLASS = 308948604;
 				static const unsigned int DESTROY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DESTROY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Document
+					//Properties
+					static const unsigned long DESTROY_ATTRIBUTE_BASE_BEHAVIORALFEATURE = 891766883;
+				//Stereotype StandardProfile::Document
 				static const unsigned long DOCUMENT_CLASS = 301496007;
 				static const unsigned int DOCUMENT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int DOCUMENT_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Entity
+					//Properties
+					static const unsigned long DOCUMENT_ATTRIBUTE_BASE_ARTIFACT = 1856461285;
+				//Stereotype StandardProfile::Entity
 				static const unsigned long ENTITY_CLASS = 2070209470;
 				static const unsigned int ENTITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int ENTITY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Executable
+					//Properties
+					static const unsigned long ENTITY_ATTRIBUTE_BASE_COMPONENT = 1668028860;
+				//Stereotype StandardProfile::Executable
 				static const unsigned long EXECUTABLE_CLASS = 1083872305;
 				static const unsigned int EXECUTABLE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int EXECUTABLE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::File
+					//Properties
+					static const unsigned long EXECUTABLE_ATTRIBUTE_BASE_ARTIFACT = 999600209;
+				//Stereotype StandardProfile::File
 				static const unsigned long FILE_CLASS = 242613410;
 				static const unsigned int FILE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FILE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Focus
+					//Properties
+					static const unsigned long FILE_ATTRIBUTE_BASE_ARTIFACT = 220023674;
+				//Stereotype StandardProfile::Focus
 				static const unsigned long FOCUS_CLASS = 2011110723;
 				static const unsigned int FOCUS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FOCUS_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Framework
+					//Properties
+					static const unsigned long FOCUS_ATTRIBUTE_BASE_CLASS = 1705935987;
+				//Stereotype StandardProfile::Framework
 				static const unsigned long FRAMEWORK_CLASS = 758834892;
 				static const unsigned int FRAMEWORK_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FRAMEWORK_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Implement
+					//Properties
+					static const unsigned long FRAMEWORK_ATTRIBUTE_BASE_PACKAGE = 1921700257;
+				//Stereotype StandardProfile::Implement
 				static const unsigned long IMPLEMENT_CLASS = 1810753173;
 				static const unsigned int IMPLEMENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENT_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::ImplementationClass
+					//Properties
+					static const unsigned long IMPLEMENT_ATTRIBUTE_BASE_COMPONENT = 359640210;
+				//Stereotype StandardProfile::ImplementationClass
 				static const unsigned long IMPLEMENTATIONCLASS_CLASS = 1555601512;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Instantiate
+					//Properties
+					static const unsigned long IMPLEMENTATIONCLASS_ATTRIBUTE_BASE_CLASS = 1590218076;
+				//Stereotype StandardProfile::Instantiate
 				static const unsigned long INSTANTIATE_CLASS = 1393463882;
 				static const unsigned int INSTANTIATE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int INSTANTIATE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Library
+					//Properties
+					static const unsigned long INSTANTIATE_ATTRIBUTE_BASE_USAGE = 1382406183;
+				//Stereotype StandardProfile::Library
 				static const unsigned long LIBRARY_CLASS = 1931384455;
 				static const unsigned int LIBRARY_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int LIBRARY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Metaclass
+					//Properties
+					static const unsigned long LIBRARY_ATTRIBUTE_BASE_ARTIFACT = 1798649185;
+				//Stereotype StandardProfile::Metaclass
 				static const unsigned long METACLASS_CLASS = 1110600536;
 				static const unsigned int METACLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METACLASS_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Metamodel
+					//Properties
+					static const unsigned long METACLASS_ATTRIBUTE_BASE_CLASS = 1215377267;
+				//Stereotype StandardProfile::Metamodel
 				static const unsigned long METAMODEL_CLASS = 269527075;
 				static const unsigned int METAMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METAMODEL_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::ModelLibrary
+					//Properties
+					static const unsigned long METAMODEL_ATTRIBUTE_BASE_MODEL = 377161386;
+				//Stereotype StandardProfile::ModelLibrary
 				static const unsigned long MODELLIBRARY_CLASS = 690477192;
 				static const unsigned int MODELLIBRARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int MODELLIBRARY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Process
+					//Properties
+					static const unsigned long MODELLIBRARY_ATTRIBUTE_BASE_PACKAGE = 908252098;
+				//Stereotype StandardProfile::Process
 				static const unsigned long PROCESS_CLASS = 985526206;
 				static const unsigned int PROCESS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int PROCESS_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Realization
+					//Properties
+					static const unsigned long PROCESS_ATTRIBUTE_BASE_COMPONENT = 1144790346;
+				//Stereotype StandardProfile::Realization
 				static const unsigned long REALIZATION_CLASS = 1122657704;
 				static const unsigned int REALIZATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REALIZATION_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Refine
+					//Properties
+					static const unsigned long REALIZATION_ATTRIBUTE_BASE_CLASSIFIER = 2125524565;
+				//Stereotype StandardProfile::Refine
 				static const unsigned long REFINE_CLASS = 1523062016;
 				static const unsigned int REFINE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REFINE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Responsibility
+					//Properties
+					static const unsigned long REFINE_ATTRIBUTE_BASE_ABSTRACTION = 1915089674;
+				//Stereotype StandardProfile::Responsibility
 				static const unsigned long RESPONSIBILITY_CLASS = 737133505;
 				static const unsigned int RESPONSIBILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int RESPONSIBILITY_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Script
+					//Properties
+					static const unsigned long RESPONSIBILITY_ATTRIBUTE_BASE_USAGE = 1620036731;
+				//Stereotype StandardProfile::Script
 				static const unsigned long SCRIPT_CLASS = 364379155;
 				static const unsigned int SCRIPT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SCRIPT_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Send
+					//Properties
+					static const unsigned long SCRIPT_ATTRIBUTE_BASE_ARTIFACT = 1334320141;
+				//Stereotype StandardProfile::Send
 				static const unsigned long SEND_CLASS = 1722014911;
 				static const unsigned int SEND_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SEND_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Service
+					//Properties
+					static const unsigned long SEND_ATTRIBUTE_BASE_USAGE = 2030524368;
+				//Stereotype StandardProfile::Service
 				static const unsigned long SERVICE_CLASS = 1531161909;
 				static const unsigned int SERVICE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SERVICE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Source
+					//Properties
+					static const unsigned long SERVICE_ATTRIBUTE_BASE_COMPONENT = 1690426049;
+				//Stereotype StandardProfile::Source
 				static const unsigned long SOURCE_CLASS = 548518589;
 				static const unsigned int SOURCE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SOURCE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Specification
+					//Properties
+					static const unsigned long SOURCE_ATTRIBUTE_BASE_ARTIFACT = 1518459575;
+				//Stereotype StandardProfile::Specification
 				static const unsigned long SPECIFICATION_CLASS = 504804019;
 				static const unsigned int SPECIFICATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SPECIFICATION_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Subsystem
+					//Properties
+					static const unsigned long SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER = 59271704;
+				//Stereotype StandardProfile::Subsystem
 				static const unsigned long SUBSYSTEM_CLASS = 1825466533;
 				static const unsigned int SUBSYSTEM_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SUBSYSTEM_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::SystemModel
+					//Properties
+					static const unsigned long SUBSYSTEM_ATTRIBUTE_BASE_COMPONENT = 374353570;
+				//Stereotype StandardProfile::SystemModel
 				static const unsigned long SYSTEMMODEL_CLASS = 275535946;
 				static const unsigned int SYSTEMMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SYSTEMMODEL_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Trace
+					//Properties
+					static const unsigned long SYSTEMMODEL_ATTRIBUTE_BASE_MODEL = 1972604965;
+				//Stereotype StandardProfile::Trace
 				static const unsigned long TRACE_CLASS = 1903938062;
 				static const unsigned int TRACE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TRACE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Type
+					//Properties
+					static const unsigned long TRACE_ATTRIBUTE_BASE_ABSTRACTION = 1668223454;
+				//Stereotype StandardProfile::Type
 				static const unsigned long TYPE_CLASS = 66837757;
 				static const unsigned int TYPE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TYPE_CLASS_OPERATION_COUNT = 0;
-				//Class StandardProfile::Utility
+					//Properties
+					static const unsigned long TYPE_ATTRIBUTE_BASE_CLASS = 263672540;
+				//Stereotype StandardProfile::Utility
 				static const unsigned long UTILITY_CLASS = 995008667;
 				static const unsigned int UTILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int UTILITY_CLASS_OPERATION_COUNT = 0;
+					//Properties
+					static const unsigned long UTILITY_ATTRIBUTE_BASE_CLASS = 605150396;
 			
 			
 	};

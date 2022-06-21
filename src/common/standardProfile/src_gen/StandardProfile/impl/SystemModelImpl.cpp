@@ -49,23 +49,6 @@ SystemModelImpl::SystemModelImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"SystemModel is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Model
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1972604965,[this](){ return eAny(this->getBase_Model(), uml::umlPackage::MODEL_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Model
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1972604965,[this](Any object){this->setBase_Model(object->get<std::shared_ptr<uml::Model>>());}));
-	
-	
-	//unsetter init
-		//Property base_Model
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1972604965,[this](){m_base_Model = std::shared_ptr<uml::Model>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -154,83 +137,122 @@ std::weak_ptr<uml::Model> SystemModelImpl::getBase_Model() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any SystemModelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SystemModelImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any SystemModelImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> SystemModelImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any SystemModelImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> SystemModelImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SYSTEMMODEL_ATTRIBUTE_BASE_MODEL:
+			return eAny(this->getBase_Model(), uml::umlPackage::MODEL_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void SystemModelImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void SystemModelImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void SystemModelImpl::set(std::string _qualifiedName, Any value)
+void SystemModelImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void SystemModelImpl::set(unsigned long _uID, Any value)
+void SystemModelImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SYSTEMMODEL_ATTRIBUTE_BASE_MODEL:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Model>> container = value->get<std::shared_ptr<Bag<uml::Model>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Model(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Model(value->get<std::shared_ptr<uml::Model>>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void SystemModelImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void SystemModelImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void SystemModelImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void SystemModelImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void SystemModelImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void SystemModelImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SYSTEMMODEL_ATTRIBUTE_BASE_MODEL:
+		{
+			m_base_Model.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any SystemModelImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SystemModelImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +260,18 @@ Any SystemModelImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::sha
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any SystemModelImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SystemModelImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any SystemModelImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SystemModelImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

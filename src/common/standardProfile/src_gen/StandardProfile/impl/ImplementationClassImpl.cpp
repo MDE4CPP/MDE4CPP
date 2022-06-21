@@ -49,23 +49,6 @@ ImplementationClassImpl::ImplementationClassImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"ImplementationClass is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Class
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1590218076,[this](){ return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Class
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1590218076,[this](Any object){this->setBase_Class(object->get<std::shared_ptr<uml::Class>>());}));
-	
-	
-	//unsetter init
-		//Property base_Class
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1590218076,[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -154,83 +137,122 @@ std::weak_ptr<uml::Class> ImplementationClassImpl::getBase_Class() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any ImplementationClassImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ImplementationClassImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any ImplementationClassImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> ImplementationClassImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any ImplementationClassImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> ImplementationClassImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::IMPLEMENTATIONCLASS_ATTRIBUTE_BASE_CLASS:
+			return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void ImplementationClassImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void ImplementationClassImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void ImplementationClassImpl::set(std::string _qualifiedName, Any value)
+void ImplementationClassImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void ImplementationClassImpl::set(unsigned long _uID, Any value)
+void ImplementationClassImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::IMPLEMENTATIONCLASS_ATTRIBUTE_BASE_CLASS:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Class>> container = value->get<std::shared_ptr<Bag<uml::Class>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Class(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Class(value->get<std::shared_ptr<uml::Class>>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void ImplementationClassImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void ImplementationClassImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void ImplementationClassImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void ImplementationClassImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void ImplementationClassImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void ImplementationClassImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::IMPLEMENTATIONCLASS_ATTRIBUTE_BASE_CLASS:
+		{
+			m_base_Class.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any ImplementationClassImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ImplementationClassImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +260,18 @@ Any ImplementationClassImpl::invoke(std::shared_ptr<uml::Operation> _operation, 
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any ImplementationClassImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ImplementationClassImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any ImplementationClassImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ImplementationClassImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

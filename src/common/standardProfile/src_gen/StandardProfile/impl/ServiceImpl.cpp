@@ -49,23 +49,6 @@ ServiceImpl::ServiceImpl()
 	*/
 	DEBUG_MESSAGE(std::cout<<"Service is created..."<<std::endl;)
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Component
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1690426049,[this](){ return eAny(this->getBase_Component(), uml::umlPackage::COMPONENT_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Component
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1690426049,[this](Any object){this->setBase_Component(object->get<std::shared_ptr<uml::Component>>());}));
-	
-	
-	//unsetter init
-		//Property base_Component
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1690426049,[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
-	
-	
-	
 }
 
 
@@ -154,83 +137,122 @@ std::weak_ptr<uml::Component> ServiceImpl::getBase_Component() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any ServiceImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ServiceImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any ServiceImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> ServiceImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any ServiceImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> ServiceImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SERVICE_ATTRIBUTE_BASE_COMPONENT:
+			return eAny(this->getBase_Component(), uml::umlPackage::COMPONENT_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void ServiceImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void ServiceImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void ServiceImpl::set(std::string _qualifiedName, Any value)
+void ServiceImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void ServiceImpl::set(unsigned long _uID, Any value)
+void ServiceImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SERVICE_ATTRIBUTE_BASE_COMPONENT:
+		{
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Component>> container = value->get<std::shared_ptr<Bag<uml::Component>>>();
+				if(container)
+				{
+					if(!(container->empty()))
+					{
+						// If a non-empty container is passed, the property will be set to the first value of the container
+						this->setBase_Component(container->at(0));
+					}
+				}
+			}
+			else
+			{
+				this->setBase_Component(value->get<std::shared_ptr<uml::Component>>());
+			}
+			return;
+		}
+	}
+
+}
+
+//Add
+void ServiceImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->set(qualifiedName, value);
+}
+
+void ServiceImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void ServiceImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void ServiceImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void ServiceImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void ServiceImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
-}
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SERVICE_ATTRIBUTE_BASE_COMPONENT:
+		{
+			m_base_Component.reset();
+			return;
+		}
+	}
 
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any ServiceImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ServiceImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +260,18 @@ Any ServiceImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any ServiceImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ServiceImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any ServiceImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ServiceImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 
