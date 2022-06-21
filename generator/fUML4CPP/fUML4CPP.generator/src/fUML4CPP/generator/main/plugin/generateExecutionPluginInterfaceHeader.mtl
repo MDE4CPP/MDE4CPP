@@ -39,10 +39,10 @@ namespace uml
 }
 [/if]
 
-namespace PSCS::Semantics::Loci
+namespace fUML::Semantics::Loci
 {
-	class CS_Executor;
-	class CS_ExecutionFactory;
+	class Executor;
+	class ExecutionFactory;
 }
 
 namespace [aPackage.generateNamespace(false).sanitize()/]
@@ -73,21 +73,14 @@ namespace [aPackage.generateNamespace(false)/]
 	
 		private:
 			static std::shared_ptr<MDE4CPPPlugin> instance;
+[if (not aPackage.isReflectionModel())]
 
 		protected:
 			//Execution Environment
-[if (not aPackage.isReflectionModel())]
 			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
-			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
-			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
-			//OpaqueBehaviors for primitive prototypes for activity executions
-			[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-			[if (not anOperation.name.oclIsUndefined())]
-			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
-			[/if]
-			[/for]
-[/if]
-			
+			std::shared_ptr<fUML::Semantics::Loci::Executor> m_executor;
+			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory;
+[/if]		
 	};
 }
 [endGuard(aPackage,'ExecPlugin')/]

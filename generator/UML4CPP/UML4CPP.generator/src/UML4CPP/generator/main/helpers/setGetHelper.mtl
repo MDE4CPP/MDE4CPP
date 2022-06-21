@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
@@ -317,6 +318,32 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [template private generateInvokeImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+[if (not aClass.getOperationsForInvoke()->isEmpty())]
+	[for (anOperation : Operation | aClass.getOperationsForInvoke())]
+	if(_operation == [anOperation.generatePackageGetterCall()/])
+	{
+		return this->invoke([aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/], _arguments);
+	}
+	[/for]
+[/if]	
+	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+	[if (classList->size() > 0)]
+	std::shared_ptr<Any> result;
+	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call invoke() for base class [sClass.name/]
+	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_operation, _arguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	[/for]
+	return result;
+	[else]
+	return eAny(nullptr, -1, false);
+	[/if]
+	[/let]
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -325,6 +352,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
