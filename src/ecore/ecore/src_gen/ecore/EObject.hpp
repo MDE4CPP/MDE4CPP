@@ -49,11 +49,13 @@ namespace ecore
 #include "abstractDataTypes/BaseElement.hpp"
 
 
+
+
 //*********************************
 namespace ecore 
 {
 	
-	class ECORE_API EObject : virtual public BaseElement	{
+	class ECORE_API EObject : public BaseElement	{
 		public:
  			EObject(const EObject &) {}
 

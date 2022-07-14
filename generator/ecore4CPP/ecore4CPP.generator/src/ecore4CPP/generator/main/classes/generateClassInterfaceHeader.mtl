@@ -124,7 +124,7 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 namespace [anEClass.generateNamespaceDefinition()/] 
 {
 	[anEClass.generateDocumentation()/]
-	class [anEClass.ePackage.getRootPackage().name.toUpper()/]_API [anEClass.name.toUpperFirst()/][if(anEClass.name ='EObject')] : virtual public BaseElement[elseif (anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty())] : virtual public ecore::EModelElement
+	class [anEClass.ePackage.getRootPackage().name.toUpper()/]_API [anEClass.name.toUpperFirst()/][if(anEClass.name ='EObject')] : public BaseElement[elseif (anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty())] : virtual public ecore::EModelElement
 [else]
 [for (sClass : EClass | anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) before (' :') separator (',')] virtual public [ClassWithNamespace(anEClass,sClass)/][/for]
 [/if][if(anEClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[anEClass.name.toUpperFirst()/]>[/if]	{
