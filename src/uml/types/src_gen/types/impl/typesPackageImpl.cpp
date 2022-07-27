@@ -4,8 +4,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
@@ -14,6 +14,23 @@
 //depending model packages
 
 using namespace types;
+
+//Singleton implementation 
+std::shared_ptr<typesPackage> typesPackage::eInstance()
+{
+	static std::shared_ptr<typesPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(typesPackageImpl::create());
+		std::dynamic_pointer_cast<typesPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string typesPackage::eNAME ="types";
+const std::string typesPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/Types";
+const std::string typesPackage::eNS_PREFIX ="types";
 
 bool typesPackageImpl::isInited = false;
 

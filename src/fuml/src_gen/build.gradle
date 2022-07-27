@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: fUML'
 
-task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'fUML'
 	description 'compile fUML'
 
@@ -40,23 +41,58 @@ task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
-
+	
+	
+	// dependency to model 'Activities'
+	def Activities = getRootProject().getTasksByName('compileActivities', true)
+	dependsOn Activities
+	inputs.files(Activities.outputs)
+	
+	// dependency to model 'CommonBehavior'
+	def CommonBehavior = getRootProject().getTasksByName('compileCommonBehavior', true)
+	dependsOn CommonBehavior
+	inputs.files(CommonBehavior.outputs)
+	
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
-
+	
+	// dependency to model 'SimpleClassifiers'
+	def SimpleClassifiers = getRootProject().getTasksByName('compileSimpleClassifiers', true)
+	dependsOn SimpleClassifiers
+	inputs.files(SimpleClassifiers.outputs)
+	
+	// dependency to model 'Actions'
+	def Actions = getRootProject().getTasksByName('compileActions', true)
+	dependsOn Actions
+	inputs.files(Actions.outputs)
+	
+	// dependency to model 'Values'
+	def Values = getRootProject().getTasksByName('compileValues', true)
+	dependsOn Values
+	inputs.files(Values.outputs)
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+	
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'Loci'
+	def Loci = getRootProject().getTasksByName('compileLoci', true)
+	dependsOn Loci
+	inputs.files(Loci.outputs)
+	
+	// dependency to model 'StructuredClassifiers'
+	def StructuredClassifiers = getRootProject().getTasksByName('compileStructuredClassifiers', true)
+	dependsOn StructuredClassifiers
+	inputs.files(StructuredClassifiers.outputs)
+	
 	// dependency to model 'primitivetypesReflection'
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	dependsOn primitivetypesReflection
@@ -79,4 +115,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

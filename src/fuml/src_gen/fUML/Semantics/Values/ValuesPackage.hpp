@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EParameter;
+	class EAnnotation;
 	class EOperation;
 	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace fUML::Semantics::Values 
@@ -254,9 +254,7 @@ namespace fUML::Semantics::Values
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ValuesPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ValuesPackage> eInstance();
 	};

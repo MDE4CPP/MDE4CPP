@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: PSCS'
 
-task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'PSCS'
 	description 'compile PSCS'
 
@@ -40,27 +41,42 @@ task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-
-	// dependency to model 'fUML'
-	def fUML = getRootProject().getTasksByName('compileFUML', true)
-	dependsOn fUML
-	inputs.files(fUML.outputs)
-
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
-
+	
+	
+	// dependency to model 'CommonBehavior'
+	def CommonBehavior = getRootProject().getTasksByName('compileCommonBehavior', true)
+	dependsOn CommonBehavior
+	inputs.files(CommonBehavior.outputs)
+	
+	// dependency to model 'Loci'
+	def Loci = getRootProject().getTasksByName('compileLoci', true)
+	dependsOn Loci
+	inputs.files(Loci.outputs)
+	
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
+	
+	// dependency to model 'StructuredClassifiers'
+	def StructuredClassifiers = getRootProject().getTasksByName('compileStructuredClassifiers', true)
+	dependsOn StructuredClassifiers
+	inputs.files(StructuredClassifiers.outputs)
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+	
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'fUML'
+	def fUML = getRootProject().getTasksByName('compileFUML', true)
+	dependsOn fUML
+	inputs.files(fUML.outputs)
 }
 
 task clean {
@@ -79,4 +95,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

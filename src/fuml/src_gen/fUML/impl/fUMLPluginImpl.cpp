@@ -5,6 +5,24 @@
 
 using namespace fUML;
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> fUMLPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new fUMLPluginImpl());
+	}
+	return instance;
+}
+
+FUML_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return fUMLPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

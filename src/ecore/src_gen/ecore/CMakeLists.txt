@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(ecore)
+
+PROJECT(ecore_Interface)
+set(ecore_Interface_VERSION 0.1)
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -13,6 +15,59 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
+
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	ecoreFactory.hpp
+	ecorePackage.hpp
+# Package plugin
+	ecorePlugin.hpp
+# Package content
+	EAnnotation.hpp
+	EAttribute.hpp
+	EClass.hpp
+	EClassifier.hpp
+	EDataType.hpp
+	EEnum.hpp
+	EEnumLiteral.hpp
+	EFactory.hpp
+	EGenericType.hpp
+	EModelElement.hpp
+	ENamedElement.hpp
+	EObject.hpp
+	EObjectAny.hpp
+	EObjectContainer.hpp
+	EOperation.hpp
+	EPackage.hpp
+	EParameter.hpp
+	EReference.hpp
+	EStringToStringMapEntry.hpp
+	EStructuralFeature.hpp
+	ETypeParameter.hpp
+	ETypedElement.hpp
+)
+
+ADD_LIBRARY(ecore_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+)
+ADD_LIBRARY(ecore::ecore_Interface ALIAS ecore_Interface)
+
+
+
+PROJECT(ecore)
+set(ecore_VERSION 0.1)
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/ecore})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
 
 IF(("$ENV{DEBUG_MESSAGE_ECORE}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
@@ -34,16 +89,12 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	ecoreFactory.cpp
 	impl/ecoreFactoryImpl.cpp
-	ecorePackage.cpp
 	impl/ecorePackageImpl.cpp
 	impl/ecorePackageImpl_Creation.cpp
 	impl/ecorePackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/ecorePluginImpl.cpp
-	ecorePlugin.cpp
 # Package content
 	impl/EAnnotationImpl.cpp
 	impl/EAttributeImpl.cpp
@@ -70,10 +121,6 @@ SET(SOURCE_FILES
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -81,52 +128,120 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		
-	ELSE()
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		
-	ELSE()
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		
-	ELSE()
-		
-	ENDIF()
-ENDIF()
+
+#--------------------------------------------
+
+
+
+
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+)
+#create an alias lib for ecore
+add_library(ecore::ecore ALIAS ecore)
 
 ADD_DEFINITIONS(-DBUILD_ECORE=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/ecore/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS ecore EXPORT ecoreTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS ecore_Interface EXPORT ecore_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/ecore
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT ecoreTargets
+  FILE ecoreTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ecore
+  NAMESPACE ecore::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "ecore.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ecore-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ecore
+)
+
+SET_PROPERTY(TARGET ecore PROPERTY VERSION ${ecore_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/ecore-configVersion.cmake"
+  VERSION ${ecore_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT ecore_InterfaceTargets
+  FILE ecore_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ecore
+  NAMESPACE ecore::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "ecore_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ecore_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ecore
+)
+
+SET_PROPERTY(TARGET ecore_Interface PROPERTY VERSION ${ecore_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/ecore_Interface-configVersion.cmake"
+  VERSION ${ecore_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/ecore-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/ecore-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/ecore_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/ecore_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/ecore"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+

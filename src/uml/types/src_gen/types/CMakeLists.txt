@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(types)
+
+PROJECT(types_Interface)
+set(types_Interface_VERSION 0.0.1) #No Version codegen annotation defined in model types. Use default version. 
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -13,6 +15,38 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
+
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	typesFactory.hpp
+	typesPackage.hpp
+# Package plugin
+	typesPlugin.hpp
+# Package content
+)
+
+ADD_LIBRARY(types_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	INTERFACE ecore::ecore
+)
+ADD_LIBRARY(types::types_Interface ALIAS types_Interface)
+
+
+
+PROJECT(types)
+set(types_VERSION 0.0.1) #No Version codegen annotation defined in model types. Use default version. 
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/types})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
 
 IF(("$ENV{DEBUG_MESSAGE_TYPES}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
@@ -34,24 +68,16 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	typesFactory.cpp
 	impl/typesFactoryImpl.cpp
-	typesPackage.cpp
 	impl/typesPackageImpl.cpp
 	impl/typesPackageImpl_Creation.cpp
 	impl/typesPackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/typesPluginImpl.cpp
-	typesPlugin.cpp
 # Package content
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -59,60 +85,134 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		
-	ENDIF()
-ENDIF()
+
+#--------------------------------------------
+
+
+set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+find_package(ecore CONFIG)
+find_package(ecore_Interface CONFIG)
+message("Dir_Name: ${ecore_DIR}")
+message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
+message("ecoreLibrarry ecore: ${ecore_FOUND} (Version ${ecore_VERSION})
+         ecore libs: ${ecore_LIBRARIES}
+         ecore includes: ${ecore_INCLUDE_DIRS}
+Librarry ecore_Interface: ${ecore_Interface_FOUND} (Version ${ecore_Interface_VERSION})
+         ecore libs_Interface: ${ecore_Interface_LIBRARIES}
+         ecore includes_Interface: ${ecore_Interface_INCLUDE_DIRS}
+")
+
+
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	PRIVATE ecore::ecore
+)
+#create an alias lib for types
+add_library(types::types ALIAS types)
 
 ADD_DEFINITIONS(-DBUILD_TYPES=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/types/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS types EXPORT typesTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS types_Interface EXPORT types_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/types
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT typesTargets
+  FILE typesTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/types
+  NAMESPACE types::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "types.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/types-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/types
+)
+
+SET_PROPERTY(TARGET types PROPERTY VERSION ${types_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/types-configVersion.cmake"
+  VERSION ${types_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT types_InterfaceTargets
+  FILE types_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/types
+  NAMESPACE types::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "types_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/types_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/types
+)
+
+SET_PROPERTY(TARGET types_Interface PROPERTY VERSION ${types_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/types_Interface-configVersion.cmake"
+  VERSION ${types_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/types-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/types-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/types_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/types_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/types"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+

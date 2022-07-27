@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: ecore'
 
-task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'ecore'
 	description 'compile ecore'
 
@@ -40,7 +41,7 @@ task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
+	
 }
 
 task clean {
@@ -59,4 +60,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

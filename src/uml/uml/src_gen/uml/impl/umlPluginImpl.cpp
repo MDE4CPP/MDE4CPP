@@ -5,6 +5,24 @@
 
 using namespace uml;
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> umlPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new umlPluginImpl());
+	}
+	return instance;
+}
+
+UML_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return umlPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

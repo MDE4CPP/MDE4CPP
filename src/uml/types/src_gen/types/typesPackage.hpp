@@ -14,8 +14,8 @@
 
 namespace ecore 
 {
-	class EDataType;
 	class EAnnotation;
+	class EDataType;
 	class EStringToStringMapEntry;
 }
 
@@ -63,9 +63,7 @@ namespace types
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<typesPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<typesPackage> eInstance();
 	};

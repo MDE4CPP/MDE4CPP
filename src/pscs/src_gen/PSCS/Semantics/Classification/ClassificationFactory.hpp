@@ -29,9 +29,7 @@ namespace PSCS::Semantics::Classification
 		protected:
 			ClassificationFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ClassificationFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ClassificationFactory> eInstance();
 		

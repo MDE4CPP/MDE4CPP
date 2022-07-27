@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(fUML)
+
+PROJECT(fUML_Interface)
+set(fUML_Interface_VERSION 0.0.1) #No Version codegen annotation defined in model fUML. Use default version. 
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -14,6 +16,60 @@ SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
 
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	fUMLFactory.hpp
+	fUMLPackage.hpp
+# Package plugin
+	fUMLPlugin.hpp
+# Package content
+)
+
+ADD_LIBRARY(fUML_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	INTERFACE fUML_Semantics
+	INTERFACE uml::uml
+	INTERFACE ecore::ecore
+	INTERFACE types::types
+)
+ADD_LIBRARY(fUML::fUML_Interface ALIAS fUML_Interface)
+
+
+
+PROJECT(fUML)
+set(fUML_VERSION 0.0.1) #No Version codegen annotation defined in model fUML. Use default version. 
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/fUML})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Semantics/fUML_Semantics.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Semantics/fUML_Semantics-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Semantics/fUML_Semantics_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Semantics/fUML_Semantics_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+)
+INSTALL( 
+  FILES 
+     "${CMAKE_CURRENT_BINARY_DIR}/Semantics/fUML_Semantics-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Semantics/fUML_Semantics_Interface-config.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/fUML"
+)
+
+ADD_SUBDIRECTORY("Semantics")
 IF(("$ENV{DEBUG_MESSAGE_FUML}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
 ELSE()
@@ -34,200 +90,16 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	fUMLFactory.cpp
 	impl/fUMLFactoryImpl.cpp
-	fUMLPackage.cpp
 	impl/fUMLPackageImpl.cpp
 	impl/fUMLPackageImpl_Creation.cpp
 	impl/fUMLPackageImpl_Initialization.cpp
-	Semantics/SemanticsFactory.cpp
-	Semantics/impl/SemanticsFactoryImpl.cpp
-	Semantics/SemanticsPackage.cpp
-	Semantics/impl/SemanticsPackageImpl.cpp
-	Semantics/impl/SemanticsPackageImpl_Creation.cpp
-	Semantics/impl/SemanticsPackageImpl_Initialization.cpp
-	Semantics/Classification/ClassificationFactory.cpp
-	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
-	Semantics/Classification/ClassificationPackage.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
-	Semantics/Values/ValuesFactory.cpp
-	Semantics/Values/impl/ValuesFactoryImpl.cpp
-	Semantics/Values/ValuesPackage.cpp
-	Semantics/Values/impl/ValuesPackageImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
-	Semantics/SimpleClassifiers/SimpleClassifiersFactory.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.cpp
-	Semantics/SimpleClassifiers/SimpleClassifiersPackage.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Creation.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Initialization.cpp
-	Semantics/StructuredClassifiers/StructuredClassifiersFactory.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
-	Semantics/StructuredClassifiers/StructuredClassifiersPackage.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
-	Semantics/CommonBehavior/CommonBehaviorFactory.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
-	Semantics/CommonBehavior/CommonBehaviorPackage.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Initialization.cpp
-	Semantics/Actions/ActionsFactory.cpp
-	Semantics/Actions/impl/ActionsFactoryImpl.cpp
-	Semantics/Actions/ActionsPackage.cpp
-	Semantics/Actions/impl/ActionsPackageImpl.cpp
-	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
-	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
-	Semantics/Activities/ActivitiesFactory.cpp
-	Semantics/Activities/impl/ActivitiesFactoryImpl.cpp
-	Semantics/Activities/ActivitiesPackage.cpp
-	Semantics/Activities/impl/ActivitiesPackageImpl.cpp
-	Semantics/Activities/impl/ActivitiesPackageImpl_Creation.cpp
-	Semantics/Activities/impl/ActivitiesPackageImpl_Initialization.cpp
-	Semantics/Loci/LociFactory.cpp
-	Semantics/Loci/impl/LociFactoryImpl.cpp
-	Semantics/Loci/LociPackage.cpp
-	Semantics/Loci/impl/LociPackageImpl.cpp
-	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
-	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/fUMLPluginImpl.cpp
-	fUMLPlugin.cpp
 # Package content
-	Semantics/Actions/impl/AcceptCallActionActivationImpl.cpp
-	Semantics/Actions/impl/AcceptCallActionActivationsImpl.cpp
-	Semantics/Actions/impl/AcceptEventActionActivationImpl.cpp
-	Semantics/Actions/impl/AcceptEventActionEventAccepterImpl.cpp
-	Semantics/Actions/impl/ActionActivationImpl.cpp
-	Semantics/Activities/impl/ActivityEdgeInstanceImpl.cpp
-	Semantics/Activities/impl/ActivityExecutionImpl.cpp
-	Semantics/Activities/impl/ActivityFinalNodeActivationImpl.cpp
-	Semantics/Activities/impl/ActivityNodeActivationImpl.cpp
-	Semantics/Activities/impl/ActivityNodeActivationGroupImpl.cpp
-	Semantics/Activities/impl/ActivityParameterNodeActivationImpl.cpp
-	Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/BooleanValueImpl.cpp
-	Semantics/Actions/impl/CallActionActivationImpl.cpp
-	Semantics/Actions/impl/CallBehaviorActionActivationImpl.cpp
-	Semantics/CommonBehavior/impl/CallEventBehaviorImpl.cpp
-	Semantics/CommonBehavior/impl/CallEventExecutionImpl.cpp
-	Semantics/CommonBehavior/impl/CallEventOccurrenceImpl.cpp
-	Semantics/Actions/impl/CallOperationActionActivationImpl.cpp
-	Semantics/Activities/impl/CentralBufferNodeActivationImpl.cpp
-	Semantics/Loci/impl/ChoiceStrategyImpl.cpp
-	Semantics/CommonBehavior/impl/ClassifierBehaviorExecutionImpl.cpp
-	Semantics/Activities/impl/ClassifierBehaviorExecutionActivityImpl.cpp
-	Semantics/Activities/impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.cpp
-	Semantics/CommonBehavior/impl/ClassifierBehaviorInvocationEventAccepterImpl.cpp
-	Semantics/Actions/impl/ClauseActivationImpl.cpp
-	Semantics/Actions/impl/ClearAssociationActionActivationImpl.cpp
-	Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/CompoundValueImpl.cpp
-	Semantics/Actions/impl/ConditionalNodeActivationImpl.cpp
-	Semantics/Activities/impl/ControlNodeActivationImpl.cpp
-	Semantics/Activities/impl/ControlTokenImpl.cpp
-	Semantics/Actions/impl/CreateLinkActionActivationImpl.cpp
-	Semantics/Actions/impl/CreateObjectActionActivationImpl.cpp
-	Semantics/Activities/impl/DataStoreNodeActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/DataValueImpl.cpp
-	Semantics/Activities/impl/DecisionNodeActivationImpl.cpp
-	Semantics/Actions/impl/DestroyLinkActionActivationImpl.cpp
-	Semantics/Actions/impl/DestroyObjectActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.cpp
-	Semantics/SimpleClassifiers/impl/EnumerationValueImpl.cpp
-	Semantics/Values/impl/EvaluationImpl.cpp
-	Semantics/CommonBehavior/impl/EventAccepterImpl.cpp
-	Semantics/CommonBehavior/impl/EventDispatchLoopImpl.cpp
-	Semantics/CommonBehavior/impl/EventOccurrenceImpl.cpp
-	Semantics/CommonBehavior/impl/ExecutionImpl.cpp
-	Semantics/Loci/impl/ExecutionFactoryImpl.cpp
-	Semantics/Loci/impl/ExecutorImpl.cpp
-	Semantics/Activities/impl/ExpansionActivationGroupImpl.cpp
-	Semantics/Activities/impl/ExpansionNodeActivationImpl.cpp
-	Semantics/Activities/impl/ExpansionRegionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.cpp
-	Semantics/StructuredClassifiers/impl/ExtensionalValueListImpl.cpp
-	Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.cpp
-	Semantics/SimpleClassifiers/impl/FeatureValueImpl.cpp
-	Semantics/Loci/impl/FirstChoiceStrategyImpl.cpp
-	Semantics/Activities/impl/FlowFinalNodeActivationImpl.cpp
-	Semantics/Activities/impl/ForkNodeActivationImpl.cpp
-	Semantics/Activities/impl/ForkedTokenImpl.cpp
-	Semantics/CommonBehavior/impl/GetNextEventStrategyImpl.cpp
-	Semantics/Activities/impl/InitialNodeActivationImpl.cpp
-	Semantics/Actions/impl/InputPinActivationImpl.cpp
-	Semantics/Classification/impl/InstanceValueEvaluationImpl.cpp
-	Semantics/SimpleClassifiers/impl/IntegerValueImpl.cpp
-	Semantics/Actions/impl/InvocationActionActivationImpl.cpp
-	Semantics/CommonBehavior/impl/InvocationEventOccurrenceImpl.cpp
-	Semantics/Activities/impl/JoinNodeActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/LinkImpl.cpp
-	Semantics/Actions/impl/LinkActionActivationImpl.cpp
-	Semantics/Values/impl/LiteralBooleanEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralIntegerEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralNullEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralRealEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralStringEvaluationImpl.cpp
-	Semantics/Values/impl/LiteralUnlimitedNaturalEvaluationImpl.cpp
-	Semantics/Loci/impl/LocusImpl.cpp
-	Semantics/Actions/impl/LoopNodeActivationImpl.cpp
-	Semantics/Activities/impl/MergeNodeActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/ObjectImpl.cpp
-	Semantics/CommonBehavior/impl/ObjectActivationImpl.cpp
-	Semantics/Activities/impl/ObjectNodeActivationImpl.cpp
-	Semantics/Activities/impl/ObjectTokenImpl.cpp
-	Semantics/Activities/impl/OfferImpl.cpp
-	Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.cpp
-	Semantics/Actions/impl/OutputPinActivationImpl.cpp
-	Semantics/CommonBehavior/impl/ParameterValueImpl.cpp
-	Semantics/Actions/impl/PinActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.cpp
-	Semantics/Actions/impl/ReadExtentActionActivationImpl.cpp
-	Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.cpp
-	Semantics/Actions/impl/ReadLinkActionActivationImpl.cpp
-	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
-	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/RealValueImpl.cpp
-	Semantics/Actions/impl/ReclassifyObjectActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
-	Semantics/Actions/impl/ReduceActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/ReferenceImpl.cpp
-	Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.cpp
-	Semantics/Actions/impl/ReplyActionActivationImpl.cpp
-	Semantics/Actions/impl/ReturnInformationImpl.cpp
-	Semantics/Loci/impl/SemanticStrategyImpl.cpp
-	Semantics/Loci/impl/SemanticVisitorImpl.cpp
-	Semantics/Actions/impl/SendSignalActionActivationImpl.cpp
-	Semantics/CommonBehavior/impl/SignalEventOccurrenceImpl.cpp
-	Semantics/SimpleClassifiers/impl/SignalInstanceImpl.cpp
-	Semantics/Actions/impl/StartClassifierBehaviorActionActivationImpl.cpp
-	Semantics/Actions/impl/StartObjectBehaviorActionActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/StringValueImpl.cpp
-	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp
-	Semantics/Actions/impl/StructuredActivityNodeActivationImpl.cpp
-	Semantics/SimpleClassifiers/impl/StructuredValueImpl.cpp
-	Semantics/Actions/impl/TestIdentityActionActivationImpl.cpp
-	Semantics/Activities/impl/TokenImpl.cpp
-	Semantics/Activities/impl/TokenSetImpl.cpp
-	Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.cpp
-	Semantics/Values/impl/ValueImpl.cpp
-	Semantics/Actions/impl/ValueSpecificationActionActivationImpl.cpp
-	Semantics/Actions/impl/ValuesImpl.cpp
-	Semantics/Actions/impl/WriteLinkActionActivationImpl.cpp
-	Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -235,84 +107,240 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
-		
-	ENDIF()
-ENDIF()
+
+#--------------------------------------------
+
+
+set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+find_package(fUML_Semantics_Activities CONFIG)
+find_package(fUML_Semantics_Activities_Interface CONFIG)
+find_package(fUML_Semantics_CommonBehavior CONFIG)
+find_package(fUML_Semantics_CommonBehavior_Interface CONFIG)
+find_package(uml CONFIG)
+find_package(uml_Interface CONFIG)
+find_package(fUML_Semantics_SimpleClassifiers CONFIG)
+find_package(fUML_Semantics_SimpleClassifiers_Interface CONFIG)
+find_package(fUML_Semantics_Actions CONFIG)
+find_package(fUML_Semantics_Actions_Interface CONFIG)
+find_package(fUML_Semantics_Values CONFIG)
+find_package(fUML_Semantics_Values_Interface CONFIG)
+find_package(ecore CONFIG)
+find_package(ecore_Interface CONFIG)
+find_package(types CONFIG)
+find_package(types_Interface CONFIG)
+find_package(fUML_Semantics_Loci CONFIG)
+find_package(fUML_Semantics_Loci_Interface CONFIG)
+find_package(fUML_Semantics_StructuredClassifiers CONFIG)
+find_package(fUML_Semantics_StructuredClassifiers_Interface CONFIG)
+message("Dir_Name: ${fUML_Semantics_Activities_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Activities_Interface_DIR}") 
+message("ActivitiesLibrarry fUML_Semantics_Activities: ${fUML_Semantics_Activities_FOUND} (Version ${fUML_Semantics_Activities_VERSION})
+         fUML_Semantics_Activities libs: ${fUML_Semantics_Activities_LIBRARIES}
+         fUML_Semantics_Activities includes: ${fUML_Semantics_Activities_INCLUDE_DIRS}
+Librarry fUML_Semantics_Activities_Interface: ${fUML_Semantics_Activities_Interface_FOUND} (Version ${fUML_Semantics_Activities_Interface_VERSION})
+         fUML_Semantics_Activities libs_Interface: ${fUML_Semantics_Activities_Interface_LIBRARIES}
+         fUML_Semantics_Activities includes_Interface: ${fUML_Semantics_Activities_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_CommonBehavior_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_CommonBehavior_Interface_DIR}") 
+message("CommonBehaviorLibrarry fUML_Semantics_CommonBehavior: ${fUML_Semantics_CommonBehavior_FOUND} (Version ${fUML_Semantics_CommonBehavior_VERSION})
+         fUML_Semantics_CommonBehavior libs: ${fUML_Semantics_CommonBehavior_LIBRARIES}
+         fUML_Semantics_CommonBehavior includes: ${fUML_Semantics_CommonBehavior_INCLUDE_DIRS}
+Librarry fUML_Semantics_CommonBehavior_Interface: ${fUML_Semantics_CommonBehavior_Interface_FOUND} (Version ${fUML_Semantics_CommonBehavior_Interface_VERSION})
+         fUML_Semantics_CommonBehavior libs_Interface: ${fUML_Semantics_CommonBehavior_Interface_LIBRARIES}
+         fUML_Semantics_CommonBehavior includes_Interface: ${fUML_Semantics_CommonBehavior_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${uml_DIR}")
+message("Interface_Dir_Name: ${uml_Interface_DIR}") 
+message("umlLibrarry uml: ${uml_FOUND} (Version ${uml_VERSION})
+         uml libs: ${uml_LIBRARIES}
+         uml includes: ${uml_INCLUDE_DIRS}
+Librarry uml_Interface: ${uml_Interface_FOUND} (Version ${uml_Interface_VERSION})
+         uml libs_Interface: ${uml_Interface_LIBRARIES}
+         uml includes_Interface: ${uml_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_SimpleClassifiers_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_SimpleClassifiers_Interface_DIR}") 
+message("SimpleClassifiersLibrarry fUML_Semantics_SimpleClassifiers: ${fUML_Semantics_SimpleClassifiers_FOUND} (Version ${fUML_Semantics_SimpleClassifiers_VERSION})
+         fUML_Semantics_SimpleClassifiers libs: ${fUML_Semantics_SimpleClassifiers_LIBRARIES}
+         fUML_Semantics_SimpleClassifiers includes: ${fUML_Semantics_SimpleClassifiers_INCLUDE_DIRS}
+Librarry fUML_Semantics_SimpleClassifiers_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_FOUND} (Version ${fUML_Semantics_SimpleClassifiers_Interface_VERSION})
+         fUML_Semantics_SimpleClassifiers libs_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_LIBRARIES}
+         fUML_Semantics_SimpleClassifiers includes_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_Actions_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Actions_Interface_DIR}") 
+message("ActionsLibrarry fUML_Semantics_Actions: ${fUML_Semantics_Actions_FOUND} (Version ${fUML_Semantics_Actions_VERSION})
+         fUML_Semantics_Actions libs: ${fUML_Semantics_Actions_LIBRARIES}
+         fUML_Semantics_Actions includes: ${fUML_Semantics_Actions_INCLUDE_DIRS}
+Librarry fUML_Semantics_Actions_Interface: ${fUML_Semantics_Actions_Interface_FOUND} (Version ${fUML_Semantics_Actions_Interface_VERSION})
+         fUML_Semantics_Actions libs_Interface: ${fUML_Semantics_Actions_Interface_LIBRARIES}
+         fUML_Semantics_Actions includes_Interface: ${fUML_Semantics_Actions_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_Values_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Values_Interface_DIR}") 
+message("ValuesLibrarry fUML_Semantics_Values: ${fUML_Semantics_Values_FOUND} (Version ${fUML_Semantics_Values_VERSION})
+         fUML_Semantics_Values libs: ${fUML_Semantics_Values_LIBRARIES}
+         fUML_Semantics_Values includes: ${fUML_Semantics_Values_INCLUDE_DIRS}
+Librarry fUML_Semantics_Values_Interface: ${fUML_Semantics_Values_Interface_FOUND} (Version ${fUML_Semantics_Values_Interface_VERSION})
+         fUML_Semantics_Values libs_Interface: ${fUML_Semantics_Values_Interface_LIBRARIES}
+         fUML_Semantics_Values includes_Interface: ${fUML_Semantics_Values_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${ecore_DIR}")
+message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
+message("ecoreLibrarry ecore: ${ecore_FOUND} (Version ${ecore_VERSION})
+         ecore libs: ${ecore_LIBRARIES}
+         ecore includes: ${ecore_INCLUDE_DIRS}
+Librarry ecore_Interface: ${ecore_Interface_FOUND} (Version ${ecore_Interface_VERSION})
+         ecore libs_Interface: ${ecore_Interface_LIBRARIES}
+         ecore includes_Interface: ${ecore_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${types_DIR}")
+message("Interface_Dir_Name: ${types_Interface_DIR}") 
+message("typesLibrarry types: ${types_FOUND} (Version ${types_VERSION})
+         types libs: ${types_LIBRARIES}
+         types includes: ${types_INCLUDE_DIRS}
+Librarry types_Interface: ${types_Interface_FOUND} (Version ${types_Interface_VERSION})
+         types libs_Interface: ${types_Interface_LIBRARIES}
+         types includes_Interface: ${types_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_Loci_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Loci_Interface_DIR}") 
+message("LociLibrarry fUML_Semantics_Loci: ${fUML_Semantics_Loci_FOUND} (Version ${fUML_Semantics_Loci_VERSION})
+         fUML_Semantics_Loci libs: ${fUML_Semantics_Loci_LIBRARIES}
+         fUML_Semantics_Loci includes: ${fUML_Semantics_Loci_INCLUDE_DIRS}
+Librarry fUML_Semantics_Loci_Interface: ${fUML_Semantics_Loci_Interface_FOUND} (Version ${fUML_Semantics_Loci_Interface_VERSION})
+         fUML_Semantics_Loci libs_Interface: ${fUML_Semantics_Loci_Interface_LIBRARIES}
+         fUML_Semantics_Loci includes_Interface: ${fUML_Semantics_Loci_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_StructuredClassifiers_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_StructuredClassifiers_Interface_DIR}") 
+message("StructuredClassifiersLibrarry fUML_Semantics_StructuredClassifiers: ${fUML_Semantics_StructuredClassifiers_FOUND} (Version ${fUML_Semantics_StructuredClassifiers_VERSION})
+         fUML_Semantics_StructuredClassifiers libs: ${fUML_Semantics_StructuredClassifiers_LIBRARIES}
+         fUML_Semantics_StructuredClassifiers includes: ${fUML_Semantics_StructuredClassifiers_INCLUDE_DIRS}
+Librarry fUML_Semantics_StructuredClassifiers_Interface: ${fUML_Semantics_StructuredClassifiers_Interface_FOUND} (Version ${fUML_Semantics_StructuredClassifiers_Interface_VERSION})
+         fUML_Semantics_StructuredClassifiers libs_Interface: ${fUML_Semantics_StructuredClassifiers_Interface_LIBRARIES}
+         fUML_Semantics_StructuredClassifiers includes_Interface: ${fUML_Semantics_StructuredClassifiers_Interface_INCLUDE_DIRS}
+")
+
+
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	PRIVATE fUML_Semantics
+	PRIVATE uml::uml
+	PRIVATE ecore::ecore
+	PRIVATE types::types
+)
+#create an alias lib for fUML
+add_library(fUML::fUML ALIAS fUML)
 
 ADD_DEFINITIONS(-DBUILD_FUML=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/fUML/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
-		debug ${TYPES_DEBUG}
-		debug ${UML_DEBUG}
-		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
-		optimized ${TYPES_RELEASE}
-		optimized ${UML_RELEASE}
-		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS fUML EXPORT fUMLTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS fUML_Interface EXPORT fUML_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/fUML
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT fUMLTargets
+  FILE fUMLTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+  NAMESPACE fUML::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "fUML.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/fUML-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+)
+
+SET_PROPERTY(TARGET fUML PROPERTY VERSION ${fUML_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/fUML-configVersion.cmake"
+  VERSION ${fUML_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT fUML_InterfaceTargets
+  FILE fUML_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+  NAMESPACE fUML::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "fUML_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/fUML_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/fUML
+)
+
+SET_PROPERTY(TARGET fUML_Interface PROPERTY VERSION ${fUML_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/fUML_Interface-configVersion.cmake"
+  VERSION ${fUML_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/fUML-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/fUML-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/fUML_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/fUML_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/fUML"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+

@@ -32,9 +32,6 @@ namespace PSCS
 		protected:
 			PSCSPlugin(){};
 			virtual ~PSCSPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: PSCSPLUGIN_HPP */

@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(uml)
+
+PROJECT(uml_Interface)
+set(uml_Interface_VERSION 0.0.1) #No Version codegen annotation defined in model uml. Use default version. 
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -13,6 +15,284 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
+
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	umlFactory.hpp
+	umlPackage.hpp
+# Package plugin
+	umlPlugin.hpp
+# Package content
+	Abstraction.hpp
+	AcceptCallAction.hpp
+	AcceptEventAction.hpp
+	Action.hpp
+	ActionExecutionSpecification.hpp
+	ActionInputPin.hpp
+	Activity.hpp
+	ActivityEdge.hpp
+	ActivityFinalNode.hpp
+	ActivityGroup.hpp
+	ActivityNode.hpp
+	ActivityParameterNode.hpp
+	ActivityPartition.hpp
+	Actor.hpp
+	AddStructuralFeatureValueAction.hpp
+	AddVariableValueAction.hpp
+	AnyReceiveEvent.hpp
+	Argument.hpp
+	Artifact.hpp
+	Association.hpp
+	AssociationClass.hpp
+	Behavior.hpp
+	BehaviorExecutionSpecification.hpp
+	BehavioralFeature.hpp
+	BehavioredClassifier.hpp
+	BroadcastSignalAction.hpp
+	CallAction.hpp
+	CallBehaviorAction.hpp
+	CallEvent.hpp
+	CallOperationAction.hpp
+	CentralBufferNode.hpp
+	ChangeEvent.hpp
+	Class.hpp
+	Classifier.hpp
+	ClassifierTemplateParameter.hpp
+	Clause.hpp
+	ClearAssociationAction.hpp
+	ClearStructuralFeatureAction.hpp
+	ClearVariableAction.hpp
+	Collaboration.hpp
+	CollaborationUse.hpp
+	CombinedFragment.hpp
+	Comment.hpp
+	CommunicationPath.hpp
+	Component.hpp
+	ComponentRealization.hpp
+	ConditionalNode.hpp
+	ConnectableElement.hpp
+	ConnectableElementTemplateParameter.hpp
+	ConnectionPointReference.hpp
+	Connector.hpp
+	ConnectorEnd.hpp
+	ConsiderIgnoreFragment.hpp
+	Constraint.hpp
+	Continuation.hpp
+	ControlFlow.hpp
+	ControlNode.hpp
+	CreateLinkAction.hpp
+	CreateLinkObjectAction.hpp
+	CreateObjectAction.hpp
+	DataStoreNode.hpp
+	DataType.hpp
+	DecisionNode.hpp
+	Dependency.hpp
+	DeployedArtifact.hpp
+	Deployment.hpp
+	DeploymentSpecification.hpp
+	DeploymentTarget.hpp
+	DestroyLinkAction.hpp
+	DestroyObjectAction.hpp
+	DestructionOccurrenceSpecification.hpp
+	Device.hpp
+	DirectedRelationship.hpp
+	Duration.hpp
+	DurationConstraint.hpp
+	DurationInterval.hpp
+	DurationObservation.hpp
+	Element.hpp
+	ElementImport.hpp
+	EncapsulatedClassifier.hpp
+	Enumeration.hpp
+	EnumerationLiteral.hpp
+	Event.hpp
+	ExceptionHandler.hpp
+	ExecutableNode.hpp
+	ExecutionEnvironment.hpp
+	ExecutionOccurrenceSpecification.hpp
+	ExecutionSpecification.hpp
+	ExpansionNode.hpp
+	ExpansionRegion.hpp
+	Expression.hpp
+	Extend.hpp
+	Extension.hpp
+	ExtensionEnd.hpp
+	ExtensionPoint.hpp
+	Factory.hpp
+	Feature.hpp
+	FinalNode.hpp
+	FinalState.hpp
+	FlowFinalNode.hpp
+	ForkNode.hpp
+	FunctionBehavior.hpp
+	Gate.hpp
+	GeneralOrdering.hpp
+	Generalization.hpp
+	GeneralizationSet.hpp
+	Image.hpp
+	Include.hpp
+	InformationFlow.hpp
+	InformationItem.hpp
+	InitialNode.hpp
+	InputPin.hpp
+	InstanceSpecification.hpp
+	InstanceValue.hpp
+	Interaction.hpp
+	InteractionConstraint.hpp
+	InteractionFragment.hpp
+	InteractionOperand.hpp
+	InteractionUse.hpp
+	Interface.hpp
+	InterfaceRealization.hpp
+	InterruptibleActivityRegion.hpp
+	Interval.hpp
+	IntervalConstraint.hpp
+	InvocationAction.hpp
+	JoinNode.hpp
+	Lifeline.hpp
+	LinkAction.hpp
+	LinkEndCreationData.hpp
+	LinkEndData.hpp
+	LinkEndDestructionData.hpp
+	LiteralBoolean.hpp
+	LiteralInteger.hpp
+	LiteralNull.hpp
+	LiteralReal.hpp
+	LiteralSpecification.hpp
+	LiteralString.hpp
+	LiteralUnlimitedNatural.hpp
+	LoopNode.hpp
+	Manifestation.hpp
+	MergeNode.hpp
+	Message.hpp
+	MessageEnd.hpp
+	MessageEvent.hpp
+	MessageOccurrenceSpecification.hpp
+	Model.hpp
+	MultiplicityElement.hpp
+	NamedElement.hpp
+	Namespace.hpp
+	Node.hpp
+	Object.hpp
+	ObjectFlow.hpp
+	ObjectNode.hpp
+	Observation.hpp
+	OccurrenceSpecification.hpp
+	OpaqueAction.hpp
+	OpaqueBehavior.hpp
+	OpaqueExpression.hpp
+	Operation.hpp
+	OperationTemplateParameter.hpp
+	OutputPin.hpp
+	Package.hpp
+	PackageImport.hpp
+	PackageMerge.hpp
+	PackageableElement.hpp
+	Parameter.hpp
+	ParameterSet.hpp
+	ParameterableElement.hpp
+	PartDecomposition.hpp
+	Pin.hpp
+	Port.hpp
+	PrimitiveType.hpp
+	Profile.hpp
+	ProfileApplication.hpp
+	Property.hpp
+	ProtocolConformance.hpp
+	ProtocolStateMachine.hpp
+	ProtocolTransition.hpp
+	Pseudostate.hpp
+	QualifierValue.hpp
+	RaiseExceptionAction.hpp
+	ReadExtentAction.hpp
+	ReadIsClassifiedObjectAction.hpp
+	ReadLinkAction.hpp
+	ReadLinkObjectEndAction.hpp
+	ReadLinkObjectEndQualifierAction.hpp
+	ReadSelfAction.hpp
+	ReadStructuralFeatureAction.hpp
+	ReadVariableAction.hpp
+	Realization.hpp
+	Reception.hpp
+	ReclassifyObjectAction.hpp
+	RedefinableElement.hpp
+	RedefinableTemplateSignature.hpp
+	ReduceAction.hpp
+	Region.hpp
+	Relationship.hpp
+	RemoveStructuralFeatureValueAction.hpp
+	RemoveVariableValueAction.hpp
+	ReplyAction.hpp
+	SendObjectAction.hpp
+	SendSignalAction.hpp
+	SequenceNode.hpp
+	Signal.hpp
+	SignalEvent.hpp
+	Slot.hpp
+	StartClassifierBehaviorAction.hpp
+	StartObjectBehaviorAction.hpp
+	State.hpp
+	StateInvariant.hpp
+	StateMachine.hpp
+	Stereotype.hpp
+	StringExpression.hpp
+	StructuralFeature.hpp
+	StructuralFeatureAction.hpp
+	StructuredActivityNode.hpp
+	StructuredClassifier.hpp
+	Substitution.hpp
+	TemplateBinding.hpp
+	TemplateParameter.hpp
+	TemplateParameterSubstitution.hpp
+	TemplateSignature.hpp
+	TemplateableElement.hpp
+	TestIdentityAction.hpp
+	TimeConstraint.hpp
+	TimeEvent.hpp
+	TimeExpression.hpp
+	TimeInterval.hpp
+	TimeObservation.hpp
+	Transition.hpp
+	Trigger.hpp
+	Type.hpp
+	TypedElement.hpp
+	UnmarshallAction.hpp
+	Usage.hpp
+	UseCase.hpp
+	ValuePin.hpp
+	ValueSpecification.hpp
+	ValueSpecificationAction.hpp
+	Variable.hpp
+	VariableAction.hpp
+	Vertex.hpp
+	WriteLinkAction.hpp
+	WriteStructuralFeatureAction.hpp
+	WriteVariableAction.hpp
+)
+
+ADD_LIBRARY(uml_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	INTERFACE ecore::ecore
+	INTERFACE types::types
+)
+ADD_LIBRARY(uml::uml_Interface ALIAS uml_Interface)
+
+
+
+PROJECT(uml)
+set(uml_VERSION 0.0.1) #No Version codegen annotation defined in model uml. Use default version. 
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/uml})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
 
 IF(("$ENV{DEBUG_MESSAGE_UML}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
@@ -34,16 +314,12 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	umlFactory.cpp
 	impl/umlFactoryImpl.cpp
-	umlPackage.cpp
 	impl/umlPackageImpl.cpp
 	impl/umlPackageImpl_Creation.cpp
 	impl/umlPackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/umlPluginImpl.cpp
-	umlPlugin.cpp
 # Package content
 	impl/AbstractionImpl.cpp
 	impl/AcceptCallActionImpl.cpp
@@ -296,10 +572,6 @@ SET(SOURCE_FILES
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -307,68 +579,148 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-		
-	ENDIF()
-ENDIF()
+
+#--------------------------------------------
+
+
+set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+find_package(ecore CONFIG)
+find_package(ecore_Interface CONFIG)
+find_package(types CONFIG)
+find_package(types_Interface CONFIG)
+message("Dir_Name: ${ecore_DIR}")
+message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
+message("ecoreLibrarry ecore: ${ecore_FOUND} (Version ${ecore_VERSION})
+         ecore libs: ${ecore_LIBRARIES}
+         ecore includes: ${ecore_INCLUDE_DIRS}
+Librarry ecore_Interface: ${ecore_Interface_FOUND} (Version ${ecore_Interface_VERSION})
+         ecore libs_Interface: ${ecore_Interface_LIBRARIES}
+         ecore includes_Interface: ${ecore_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${types_DIR}")
+message("Interface_Dir_Name: ${types_Interface_DIR}") 
+message("typesLibrarry types: ${types_FOUND} (Version ${types_VERSION})
+         types libs: ${types_LIBRARIES}
+         types includes: ${types_INCLUDE_DIRS}
+Librarry types_Interface: ${types_Interface_FOUND} (Version ${types_Interface_VERSION})
+         types libs_Interface: ${types_Interface_LIBRARIES}
+         types includes_Interface: ${types_Interface_INCLUDE_DIRS}
+")
+
+
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	PRIVATE ecore::ecore
+	PRIVATE types::types
+)
+#create an alias lib for uml
+add_library(uml::uml ALIAS uml)
 
 ADD_DEFINITIONS(-DBUILD_UML=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/uml/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
-		debug ${TYPES_DEBUG}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
-		optimized ${TYPES_RELEASE}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS uml EXPORT umlTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS uml_Interface EXPORT uml_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/uml
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT umlTargets
+  FILE umlTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/uml
+  NAMESPACE uml::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "uml.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/uml-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/uml
+)
+
+SET_PROPERTY(TARGET uml PROPERTY VERSION ${uml_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/uml-configVersion.cmake"
+  VERSION ${uml_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT uml_InterfaceTargets
+  FILE uml_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/uml
+  NAMESPACE uml::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "uml_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/uml_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/uml
+)
+
+SET_PROPERTY(TARGET uml_Interface PROPERTY VERSION ${uml_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/uml_Interface-configVersion.cmake"
+  VERSION ${uml_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/uml-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/uml-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/uml_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/uml_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/uml"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+

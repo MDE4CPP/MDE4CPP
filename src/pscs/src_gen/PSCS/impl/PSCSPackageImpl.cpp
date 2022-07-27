@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "PSCS/PSCSFactory.hpp"
@@ -28,6 +28,23 @@
 #include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
 
 using namespace PSCS;
+
+//Singleton implementation 
+std::shared_ptr<PSCSPackage> PSCSPackage::eInstance()
+{
+	static std::shared_ptr<PSCSPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(PSCSPackageImpl::create());
+		std::dynamic_pointer_cast<PSCSPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string PSCSPackage::eNAME ="PSCS";
+const std::string PSCSPackage::eNS_URI ="http://www.omg.org/spec/PSCS/20180801";
+const std::string PSCSPackage::eNS_PREFIX ="PSCS_Semantics";
 
 bool PSCSPackageImpl::isInited = false;
 

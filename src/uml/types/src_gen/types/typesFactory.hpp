@@ -33,9 +33,7 @@ namespace types
 		protected:
 			typesFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<typesFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<typesFactory> eInstance();
 		

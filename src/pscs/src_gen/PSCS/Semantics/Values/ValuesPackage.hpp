@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
-	class EOperation;
 	class EAnnotation;
-	class EClass;
+	class EOperation;
 	class EStringToStringMapEntry;
 	class EGenericType;
+	class EClass;
 }
 
 namespace PSCS::Semantics::Values 
@@ -73,9 +73,7 @@ namespace PSCS::Semantics::Values
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ValuesPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ValuesPackage> eInstance();
 	};

@@ -64,8 +64,8 @@ virtual public EObject
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual long long getMetaElementID() const ;
-			virtual void setMetaElementID (long long _metaElementID);
+			virtual long getMetaElementID() const ;
+			virtual void setMetaElementID (long _metaElementID);
 			
 			//*********************************
 			// Reference Getters & Setters

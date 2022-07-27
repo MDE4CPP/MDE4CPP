@@ -94,6 +94,7 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 	}
 	else {
 		classifier = context->eClass();
+		epackage = classifier->getEPackage().lock();
 		std::shared_ptr<ecore::EClassifier> contextAsClass = std::dynamic_pointer_cast<ecore::EClassifier>(context); // if the context is an Ecore Model element, the package can be uses
 		if(nullptr!=contextAsClass)// if the context is an Ecore Classifier, the package can be uses
 		{
@@ -122,14 +123,14 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
 
 	if(epackage)
 	{
-
+/*
 		std::shared_ptr<Variable> packageVar = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
 
 		packageVar->setName(epackage->getName());
 		packageVar->setEType(epackage->eClass());
 		packageVar->setValue(OclReflection::createValue(epackage));
 
-		env->addElement(packageVar->getName(), packageVar, false);
+		env->addElement(packageVar->getName(), packageVar, false);*/
 	 }
 /*    }
     else {

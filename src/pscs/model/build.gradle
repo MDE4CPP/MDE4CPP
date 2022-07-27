@@ -10,7 +10,7 @@ task generatePSCS(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	
 	modelFilePath = file('.' + File.separator + 'PSCS.ecore')
 
-	relatedModels = ['fUML', 'uml', 'ecore', 'types']
+	relatedModels = ['CommonBehavior', 'Loci', 'uml', 'StructuredClassifiers', 'ecore', 'types', 'fUML']
 	
 	outputs.files(fileTree('../src_gen/PSCS') {
         exclude '.cmake/**'

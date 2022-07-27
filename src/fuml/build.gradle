@@ -10,10 +10,17 @@ task buildFUML() {
 	dependsOn 'model:generateFUML'
 	dependsOn 'src_gen:compileFUML'
 
+	dependsOn getRootProject().getTasksByName('buildActivities', true)
+	dependsOn getRootProject().getTasksByName('buildCommonBehavior', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildSimpleClassifiers', true)
+	dependsOn getRootProject().getTasksByName('buildActions', true)
+	dependsOn getRootProject().getTasksByName('buildValues', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildLoci', true)
+	dependsOn getRootProject().getTasksByName('buildStructuredClassifiers', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 }
-
+	
 tasks.getByPath('src_gen:compileFUML').mustRunAfter tasks.getByPath('model:generateFUML')

@@ -86,9 +86,7 @@ namespace PSCS::Semantics
 		protected:
 			SemanticsFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<SemanticsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<SemanticsFactory> eInstance();
 		

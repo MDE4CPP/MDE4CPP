@@ -255,6 +255,17 @@
 
 using namespace uml;
 
+std::shared_ptr<umlFactory> umlFactory::eInstance()
+{
+	static std::shared_ptr<umlFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(umlFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

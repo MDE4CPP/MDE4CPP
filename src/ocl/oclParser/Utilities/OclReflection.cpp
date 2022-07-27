@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_pt
             {
                 std::shared_ptr<ecore::EParameter> p = operationParameter->at(i);
                 std::shared_ptr<OclExpression> e = arguments->at(i);
-                //Test of compatible (primitive) types (ecore EInt / UML / fUML Integer)
+                //ToDo: Test of compatible (primitive) types (ecore EInt / UML / fUML Integer)
                 if(p->getEType()->getClassifierID() != e->getEType()->getClassifierID())
                 {
                 	parameterTest=false;
@@ -773,6 +773,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			// create the pre value snapshot
 			// copy object to avoid modifying the given context
 			//ToDo Don't Copy! use const
+			/*
 			std::shared_ptr<ecore::EObject> preObj = obj; // TODO: Avoid operation call for Pre conditions! (see OclParserCustomVisitor)
 			std::shared_ptr<ObjectValue> preValue = std::dynamic_pointer_cast<ObjectValue>(createValue(preObj));
 			std::shared_ptr<NameValueBinding> nvbPre = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
@@ -784,7 +785,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 
 			// create the post value snapshot
 			//ToDo Don't Copy! use const
-			std::shared_ptr<ecore::EObject> postObj = obj->copy();// ToDo: avoid set Values not using a copy!! It's necessary to copy, because the post evaluation is related to the result of the operation in context part
+			std::shared_ptr<ecore::EObject> postObj = obj;//->copy();// ToDo: avoid set Values not using a copy!! It's necessary to copy, because the post evaluation is related to the result of the operation in context part
 			std::shared_ptr<ObjectValue> postValue = std::dynamic_pointer_cast<ObjectValue>(createValue(postObj));
 			std::shared_ptr<NameValueBinding> nvbPost = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
 			std::shared_ptr<LocalSnapshot> localSnapshotPost = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
@@ -801,13 +802,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			postValue->getHistory()->add(localSnapshotPost);
 			preValue->getHistory()->add(localSnapshotPre);
 			preValue->getHistory()->add(localSnapshotPost);
-
+*/
 			for(auto anArgument: *arguments)
 			{
 				Any item = retrieveRawValue(anArgument->getInstance()->getResultValue());
 				convertArgs->push_back(item );
 			}
-			std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
+			std::shared_ptr<AnyObject> value = obj->eInvoke(operation, convertArgs);
 
 			return OclReflection::createValue(operation, value);
 		}

@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
@@ -23,6 +23,23 @@
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;
+
+//Singleton implementation 
+std::shared_ptr<ActionsPackage> ActionsPackage::eInstance()
+{
+	static std::shared_ptr<ActionsPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ActionsPackageImpl::create());
+		std::dynamic_pointer_cast<ActionsPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string ActionsPackage::eNAME ="Actions";
+const std::string ActionsPackage::eNS_URI ="http:///PSCS_Semantics/Semantics/Actions.ecore";
+const std::string ActionsPackage::eNS_PREFIX ="PSCS_Semantics.Semantics.Actions";
 
 bool ActionsPackageImpl::isInited = false;
 

@@ -5,6 +5,24 @@
 
 using namespace types;
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> typesPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new typesPluginImpl());
+	}
+	return instance;
+}
+
+TYPES_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return typesPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

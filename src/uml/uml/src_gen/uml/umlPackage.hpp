@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
-	class EDataType;
 	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
+	class EEnumLiteral;
+	class EOperation;
 	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EReference;
+	class EEnum;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace uml 
@@ -7241,9 +7241,7 @@ namespace uml
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<umlPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<umlPackage> eInstance();
 	};

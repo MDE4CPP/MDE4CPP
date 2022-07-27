@@ -4,11 +4,11 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
@@ -17,6 +17,23 @@
 #include "fUML/fUMLPackage.hpp"
 
 using namespace PSCS::Semantics::Values;
+
+//Singleton implementation 
+std::shared_ptr<ValuesPackage> ValuesPackage::eInstance()
+{
+	static std::shared_ptr<ValuesPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ValuesPackageImpl::create());
+		std::dynamic_pointer_cast<ValuesPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string ValuesPackage::eNAME ="Values";
+const std::string ValuesPackage::eNS_URI ="http:///PSCS_Semantics/Semantics/Values.ecore";
+const std::string ValuesPackage::eNS_PREFIX ="PSCS_Semantics.Semantics.Values";
 
 bool ValuesPackageImpl::isInited = false;
 

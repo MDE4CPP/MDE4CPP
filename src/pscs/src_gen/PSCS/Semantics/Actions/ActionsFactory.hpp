@@ -33,9 +33,7 @@ namespace PSCS::Semantics::Actions
 		protected:
 			ActionsFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ActionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ActionsFactory> eInstance();
 		

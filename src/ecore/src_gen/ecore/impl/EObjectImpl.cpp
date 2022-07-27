@@ -279,11 +279,11 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) con
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute metaElementID */
-long long EObjectImpl::getMetaElementID() const 
+long EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
 }
-void EObjectImpl::setMetaElementID(long long _metaElementID)
+void EObjectImpl::setMetaElementID(long _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 	
@@ -360,8 +360,8 @@ void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("metaElementID");
 		if ( iter != attr_list.end() )
 		{
-			// this attribute is a 'long long'
-			long long value;
+			// this attribute is a 'long'
+			long value;
 			std::istringstream(iter->second) >> value;
 			this->setMetaElementID(value);
 		}
@@ -543,8 +543,8 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 		{
-			// CAST Any to long long
-			long long _metaElementID = newValue->get<long long>();
+			// CAST Any to long
+			long _metaElementID = newValue->get<long>();
 			setMetaElementID(_metaElementID); //402
 			return true;
 		}

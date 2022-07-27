@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -22,6 +22,23 @@
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::StructuredClassifiers;
+
+//Singleton implementation 
+std::shared_ptr<StructuredClassifiersPackage> StructuredClassifiersPackage::eInstance()
+{
+	static std::shared_ptr<StructuredClassifiersPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(StructuredClassifiersPackageImpl::create());
+		std::dynamic_pointer_cast<StructuredClassifiersPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string StructuredClassifiersPackage::eNAME ="StructuredClassifiers";
+const std::string StructuredClassifiersPackage::eNS_URI ="http:///fUML_Semantics/Semantics/StructuredClassifiers.ecore";
+const std::string StructuredClassifiersPackage::eNS_PREFIX ="fUML_Semantics.Semantics.StructuredClassifiers";
 
 bool StructuredClassifiersPackageImpl::isInited = false;
 

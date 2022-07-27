@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/fUMLFactory.hpp"
@@ -25,6 +25,23 @@
 #include "fUML/Semantics/impl/SemanticsPackageImpl.hpp"
 
 using namespace fUML;
+
+//Singleton implementation 
+std::shared_ptr<fUMLPackage> fUMLPackage::eInstance()
+{
+	static std::shared_ptr<fUMLPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(fUMLPackageImpl::create());
+		std::dynamic_pointer_cast<fUMLPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string fUMLPackage::eNAME ="fUML";
+const std::string fUMLPackage::eNS_URI ="http://www.omg.org/spec/FUML/20180501";
+const std::string fUMLPackage::eNS_PREFIX ="fUML_Semantics";
 
 bool fUMLPackageImpl::isInited = false;
 

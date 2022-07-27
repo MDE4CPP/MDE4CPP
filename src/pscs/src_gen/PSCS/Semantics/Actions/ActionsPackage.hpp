@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EParameter;
+	class EAnnotation;
 	class EOperation;
 	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace PSCS::Semantics::Actions 
@@ -368,9 +368,7 @@ namespace PSCS::Semantics::Actions
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ActionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ActionsPackage> eInstance();
 	};

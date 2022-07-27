@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: types'
 
-task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'types'
 	description 'compile types'
 
@@ -40,8 +41,8 @@ task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-
+	
+	
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
@@ -64,4 +65,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

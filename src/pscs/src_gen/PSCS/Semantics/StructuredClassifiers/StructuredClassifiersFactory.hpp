@@ -45,9 +45,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			StructuredClassifiersFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<StructuredClassifiersFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<StructuredClassifiersFactory> eInstance();
 		

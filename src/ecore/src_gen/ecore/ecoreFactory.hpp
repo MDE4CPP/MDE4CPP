@@ -33,9 +33,7 @@ namespace ecore
 		protected:
 			ecoreFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ecoreFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ecoreFactory> eInstance();
 		

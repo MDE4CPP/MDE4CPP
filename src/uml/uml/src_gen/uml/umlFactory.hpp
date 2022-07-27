@@ -33,9 +33,7 @@ namespace uml
 		protected:
 			umlFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<umlFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<umlFactory> eInstance();
 		

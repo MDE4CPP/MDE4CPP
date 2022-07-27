@@ -32,9 +32,6 @@ namespace fUML
 		protected:
 			fUMLPlugin(){};
 			virtual ~fUMLPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: FUMLPLUGIN_HPP */

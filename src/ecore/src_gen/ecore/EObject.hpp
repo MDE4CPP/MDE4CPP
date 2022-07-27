@@ -93,8 +93,8 @@ namespace ecore
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual long long getMetaElementID() const = 0;
-			virtual void setMetaElementID (long long _metaElementID)= 0;
+			virtual long getMetaElementID() const = 0;
+			virtual void setMetaElementID (long _metaElementID)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -123,7 +123,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			long long m_metaElementID= 0;
+			long m_metaElementID= 0;
 			
 			//*********************************
 			// Reference Members

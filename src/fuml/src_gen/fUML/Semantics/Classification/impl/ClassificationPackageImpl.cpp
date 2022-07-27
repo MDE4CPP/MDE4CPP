@@ -4,11 +4,11 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Classification/ClassificationFactory.hpp"
@@ -17,6 +17,23 @@
 #include "fUML/fUMLPackage.hpp"
 
 using namespace fUML::Semantics::Classification;
+
+//Singleton implementation 
+std::shared_ptr<ClassificationPackage> ClassificationPackage::eInstance()
+{
+	static std::shared_ptr<ClassificationPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ClassificationPackageImpl::create());
+		std::dynamic_pointer_cast<ClassificationPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string ClassificationPackage::eNAME ="Classification";
+const std::string ClassificationPackage::eNS_URI ="http:///fUML_Semantics/Semantics/Classification.ecore";
+const std::string ClassificationPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Classification";
 
 bool ClassificationPackageImpl::isInited = false;
 

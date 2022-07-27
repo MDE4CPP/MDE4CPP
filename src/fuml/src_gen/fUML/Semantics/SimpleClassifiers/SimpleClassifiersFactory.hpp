@@ -38,9 +38,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			SimpleClassifiersFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<SimpleClassifiersFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<SimpleClassifiersFactory> eInstance();
 		

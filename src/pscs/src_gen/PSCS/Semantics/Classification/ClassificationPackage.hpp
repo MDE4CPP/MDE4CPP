@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
-	class EOperation;
 	class EAnnotation;
-	class EClass;
+	class EOperation;
 	class EStringToStringMapEntry;
 	class EGenericType;
+	class EClass;
 }
 
 namespace PSCS::Semantics::Classification 
@@ -71,9 +71,7 @@ namespace PSCS::Semantics::Classification
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ClassificationPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ClassificationPackage> eInstance();
 	};

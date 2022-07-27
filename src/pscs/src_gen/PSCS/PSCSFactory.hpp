@@ -92,9 +92,7 @@ namespace PSCS
 		protected:
 			PSCSFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<PSCSFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<PSCSFactory> eInstance();
 		

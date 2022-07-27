@@ -10,6 +10,17 @@
 
 using namespace PSCS::Semantics::Values;
 
+std::shared_ptr<ValuesFactory> ValuesFactory::eInstance()
+{
+	static std::shared_ptr<ValuesFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ValuesFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

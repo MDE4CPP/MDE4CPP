@@ -10,7 +10,7 @@ task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	
 	modelFilePath = file('.' + File.separator + 'fUML.ecore')
 
-	relatedModels = ['uml', 'ecore', 'types']
+	relatedModels = ['Activities', 'CommonBehavior', 'uml', 'SimpleClassifiers', 'Actions', 'Values', 'ecore', 'types', 'Loci', 'StructuredClassifiers']
 	
 	outputs.files(fileTree('../src_gen/fUML') {
         exclude '.cmake/**'

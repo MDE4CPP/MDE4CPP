@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: uml'
 
-task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'uml'
 	description 'compile uml'
 
@@ -40,13 +41,13 @@ task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-
+	
+	
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
-
+	
 	// dependency to model 'types'
 	def types = getRootProject().getTasksByName('compileTypes', true)
 	dependsOn types
@@ -69,4 +70,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

@@ -9,6 +9,17 @@
 
 using namespace types;
 
+std::shared_ptr<typesFactory> typesFactory::eInstance()
+{
+	static std::shared_ptr<typesFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(typesFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

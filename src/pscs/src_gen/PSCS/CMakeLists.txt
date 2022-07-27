@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(PSCS)
+
+PROJECT(PSCS_Interface)
+set(PSCS_Interface_VERSION 0.0.1) #No Version codegen annotation defined in model PSCS. Use default version. 
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -14,6 +16,63 @@ SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
 
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	PSCSFactory.hpp
+	PSCSPackage.hpp
+# Package plugin
+	PSCSPlugin.hpp
+# Package content
+)
+
+ADD_LIBRARY(PSCS_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	INTERFACE PSCS_Semantics
+	INTERFACE fUML::Semantics::CommonBehavior::fUML_Semantics_CommonBehavior
+	INTERFACE fUML::Semantics::Loci::fUML_Semantics_Loci
+	INTERFACE uml::uml
+	INTERFACE ecore::ecore
+	INTERFACE types::types
+	INTERFACE fUML::fUML
+)
+ADD_LIBRARY(PSCS::PSCS_Interface ALIAS PSCS_Interface)
+
+
+
+PROJECT(PSCS)
+set(PSCS_VERSION 0.0.1) #No Version codegen annotation defined in model PSCS. Use default version. 
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/PSCS})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Semantics/PSCS_Semantics.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Semantics/PSCS_Semantics-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Semantics/PSCS_Semantics_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Semantics/PSCS_Semantics_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+)
+INSTALL( 
+  FILES 
+     "${CMAKE_CURRENT_BINARY_DIR}/Semantics/PSCS_Semantics-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Semantics/PSCS_Semantics_Interface-config.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/PSCS"
+)
+
+ADD_SUBDIRECTORY("Semantics")
 IF(("$ENV{DEBUG_MESSAGE_PSCS}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
 ELSE()
@@ -34,95 +93,16 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	PSCSFactory.cpp
 	impl/PSCSFactoryImpl.cpp
-	PSCSPackage.cpp
 	impl/PSCSPackageImpl.cpp
 	impl/PSCSPackageImpl_Creation.cpp
 	impl/PSCSPackageImpl_Initialization.cpp
-	Semantics/SemanticsFactory.cpp
-	Semantics/impl/SemanticsFactoryImpl.cpp
-	Semantics/SemanticsPackage.cpp
-	Semantics/impl/SemanticsPackageImpl.cpp
-	Semantics/impl/SemanticsPackageImpl_Creation.cpp
-	Semantics/impl/SemanticsPackageImpl_Initialization.cpp
-	Semantics/Actions/ActionsFactory.cpp
-	Semantics/Actions/impl/ActionsFactoryImpl.cpp
-	Semantics/Actions/ActionsPackage.cpp
-	Semantics/Actions/impl/ActionsPackageImpl.cpp
-	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
-	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
-	Semantics/StructuredClassifiers/StructuredClassifiersFactory.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
-	Semantics/StructuredClassifiers/StructuredClassifiersPackage.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
-	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
-	Semantics/Loci/LociFactory.cpp
-	Semantics/Loci/impl/LociFactoryImpl.cpp
-	Semantics/Loci/LociPackage.cpp
-	Semantics/Loci/impl/LociPackageImpl.cpp
-	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
-	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
-	Semantics/CommonBehavior/CommonBehaviorFactory.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
-	Semantics/CommonBehavior/CommonBehaviorPackage.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
-	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Initialization.cpp
-	Semantics/Values/ValuesFactory.cpp
-	Semantics/Values/impl/ValuesFactoryImpl.cpp
-	Semantics/Values/ValuesPackage.cpp
-	Semantics/Values/impl/ValuesPackageImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
-	Semantics/Classification/ClassificationFactory.cpp
-	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
-	Semantics/Classification/ClassificationPackage.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/PSCSPluginImpl.cpp
-	PSCSPlugin.cpp
 # Package content
-	Semantics/Actions/impl/CS_AcceptCallActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_AcceptEventActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.cpp
-	Semantics/CommonBehavior/impl/CS_CallEventExecutionImpl.cpp
-	Semantics/Actions/impl/CS_CallOperationActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_ClearStructuralFeatureActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_ConstructStrategyImpl.cpp
-	Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.cpp
-	Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.cpp
-	Semantics/Loci/impl/CS_ExecutionFactoryImpl.cpp
-	Semantics/Loci/impl/CS_ExecutorImpl.cpp
-	Semantics/Classification/impl/CS_InstanceValueEvaluationImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_InteractionPointImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_LinkImpl.cpp
-	Semantics/Loci/impl/CS_LocusImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_ObjectImpl.cpp
-	Semantics/Values/impl/CS_OpaqueExpressionEvaluationImpl.cpp
-	Semantics/Actions/impl/CS_ReadExtentActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_ReferenceImpl.cpp
-	Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.cpp
-	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -130,84 +110,216 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-		
-	ELSE()
-		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-		
-	ENDIF()
-ENDIF()
+
+#--------------------------------------------
+
+
+set(fUML_Semantics_CommonBehavior_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Semantics_CommonBehavior_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Semantics_Loci_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Semantics_Loci_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(fUML_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+find_package(fUML_Semantics_CommonBehavior CONFIG)
+find_package(fUML_Semantics_CommonBehavior_Interface CONFIG)
+find_package(fUML_Semantics_Loci CONFIG)
+find_package(fUML_Semantics_Loci_Interface CONFIG)
+find_package(uml CONFIG)
+find_package(uml_Interface CONFIG)
+find_package(PSCS_Semantics_StructuredClassifiers CONFIG)
+find_package(PSCS_Semantics_StructuredClassifiers_Interface CONFIG)
+find_package(ecore CONFIG)
+find_package(ecore_Interface CONFIG)
+find_package(types CONFIG)
+find_package(types_Interface CONFIG)
+find_package(fUML CONFIG)
+find_package(fUML_Interface CONFIG)
+message("Dir_Name: ${fUML_Semantics_CommonBehavior_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_CommonBehavior_Interface_DIR}") 
+message("CommonBehaviorLibrarry fUML_Semantics_CommonBehavior: ${fUML_Semantics_CommonBehavior_FOUND} (Version ${fUML_Semantics_CommonBehavior_VERSION})
+         fUML_Semantics_CommonBehavior libs: ${fUML_Semantics_CommonBehavior_LIBRARIES}
+         fUML_Semantics_CommonBehavior includes: ${fUML_Semantics_CommonBehavior_INCLUDE_DIRS}
+Librarry fUML_Semantics_CommonBehavior_Interface: ${fUML_Semantics_CommonBehavior_Interface_FOUND} (Version ${fUML_Semantics_CommonBehavior_Interface_VERSION})
+         fUML_Semantics_CommonBehavior libs_Interface: ${fUML_Semantics_CommonBehavior_Interface_LIBRARIES}
+         fUML_Semantics_CommonBehavior includes_Interface: ${fUML_Semantics_CommonBehavior_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_Loci_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Loci_Interface_DIR}") 
+message("LociLibrarry fUML_Semantics_Loci: ${fUML_Semantics_Loci_FOUND} (Version ${fUML_Semantics_Loci_VERSION})
+         fUML_Semantics_Loci libs: ${fUML_Semantics_Loci_LIBRARIES}
+         fUML_Semantics_Loci includes: ${fUML_Semantics_Loci_INCLUDE_DIRS}
+Librarry fUML_Semantics_Loci_Interface: ${fUML_Semantics_Loci_Interface_FOUND} (Version ${fUML_Semantics_Loci_Interface_VERSION})
+         fUML_Semantics_Loci libs_Interface: ${fUML_Semantics_Loci_Interface_LIBRARIES}
+         fUML_Semantics_Loci includes_Interface: ${fUML_Semantics_Loci_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${uml_DIR}")
+message("Interface_Dir_Name: ${uml_Interface_DIR}") 
+message("umlLibrarry uml: ${uml_FOUND} (Version ${uml_VERSION})
+         uml libs: ${uml_LIBRARIES}
+         uml includes: ${uml_INCLUDE_DIRS}
+Librarry uml_Interface: ${uml_Interface_FOUND} (Version ${uml_Interface_VERSION})
+         uml libs_Interface: ${uml_Interface_LIBRARIES}
+         uml includes_Interface: ${uml_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${PSCS_Semantics_StructuredClassifiers_DIR}")
+message("Interface_Dir_Name: ${PSCS_Semantics_StructuredClassifiers_Interface_DIR}") 
+message("StructuredClassifiersLibrarry PSCS_Semantics_StructuredClassifiers: ${PSCS_Semantics_StructuredClassifiers_FOUND} (Version ${PSCS_Semantics_StructuredClassifiers_VERSION})
+         PSCS_Semantics_StructuredClassifiers libs: ${PSCS_Semantics_StructuredClassifiers_LIBRARIES}
+         PSCS_Semantics_StructuredClassifiers includes: ${PSCS_Semantics_StructuredClassifiers_INCLUDE_DIRS}
+Librarry PSCS_Semantics_StructuredClassifiers_Interface: ${PSCS_Semantics_StructuredClassifiers_Interface_FOUND} (Version ${PSCS_Semantics_StructuredClassifiers_Interface_VERSION})
+         PSCS_Semantics_StructuredClassifiers libs_Interface: ${PSCS_Semantics_StructuredClassifiers_Interface_LIBRARIES}
+         PSCS_Semantics_StructuredClassifiers includes_Interface: ${PSCS_Semantics_StructuredClassifiers_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${ecore_DIR}")
+message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
+message("ecoreLibrarry ecore: ${ecore_FOUND} (Version ${ecore_VERSION})
+         ecore libs: ${ecore_LIBRARIES}
+         ecore includes: ${ecore_INCLUDE_DIRS}
+Librarry ecore_Interface: ${ecore_Interface_FOUND} (Version ${ecore_Interface_VERSION})
+         ecore libs_Interface: ${ecore_Interface_LIBRARIES}
+         ecore includes_Interface: ${ecore_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${types_DIR}")
+message("Interface_Dir_Name: ${types_Interface_DIR}") 
+message("typesLibrarry types: ${types_FOUND} (Version ${types_VERSION})
+         types libs: ${types_LIBRARIES}
+         types includes: ${types_INCLUDE_DIRS}
+Librarry types_Interface: ${types_Interface_FOUND} (Version ${types_Interface_VERSION})
+         types libs_Interface: ${types_Interface_LIBRARIES}
+         types includes_Interface: ${types_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_DIR}")
+message("Interface_Dir_Name: ${fUML_Interface_DIR}") 
+message("fUMLLibrarry fUML: ${fUML_FOUND} (Version ${fUML_VERSION})
+         fUML libs: ${fUML_LIBRARIES}
+         fUML includes: ${fUML_INCLUDE_DIRS}
+Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSION})
+         fUML libs_Interface: ${fUML_Interface_LIBRARIES}
+         fUML includes_Interface: ${fUML_Interface_INCLUDE_DIRS}
+")
+
+
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	PRIVATE PSCS_Semantics
+	PRIVATE fUML::Semantics::CommonBehavior::fUML_Semantics_CommonBehavior
+	PRIVATE fUML::Semantics::Loci::fUML_Semantics_Loci
+	PRIVATE uml::uml
+	PRIVATE ecore::ecore
+	PRIVATE types::types
+	PRIVATE fUML::fUML
+)
+#create an alias lib for PSCS
+add_library(PSCS::PSCS ALIAS PSCS)
 
 ADD_DEFINITIONS(-DBUILD_PSCS=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/PSCS/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${FUML_DEBUG}
-		debug ${ECORE_DEBUG}
-		debug ${TYPES_DEBUG}
-		debug ${UML_DEBUG}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${FUML_RELEASE}
-		optimized ${ECORE_RELEASE}
-		optimized ${TYPES_RELEASE}
-		optimized ${UML_RELEASE}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS PSCS EXPORT PSCSTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS PSCS_Interface EXPORT PSCS_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/PSCS
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT PSCSTargets
+  FILE PSCSTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+  NAMESPACE PSCS::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "PSCS.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/PSCS-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+)
+
+SET_PROPERTY(TARGET PSCS PROPERTY VERSION ${PSCS_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/PSCS-configVersion.cmake"
+  VERSION ${PSCS_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT PSCS_InterfaceTargets
+  FILE PSCS_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+  NAMESPACE PSCS::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "PSCS_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/PSCS_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/PSCS
+)
+
+SET_PROPERTY(TARGET PSCS_Interface PROPERTY VERSION ${PSCS_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/PSCS_Interface-configVersion.cmake"
+  VERSION ${PSCS_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/PSCS-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/PSCS-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/PSCS_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/PSCS_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/PSCS"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+
