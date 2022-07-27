@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="SubPackagetest" nsURI="http://www.example.org/SubPackagetest" nsPrefix="SubPackagetest">
+  <eClassifiers xsi:type="ecore:EClass" name="RootClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="k1_1" upperBound="-1" eType="#//P1/K1_1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="k2_1" upperBound="-1" eType="#//P2/K2_1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="k1_2" upperBound="-1" eType="#//P1/K1_2"
+        containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="P1" nsURI="P1" nsPrefix="P1">
+    <eClassifiers xsi:type="ecore:EClass" name="K1_1">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="k1_2" upperBound="-1"
+          eType="#//P1/K1_2" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="k11_1" upperBound="-1"
+          eType="#//P1/P11/K11_1" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="K1_2"/>
+    <eSubpackages name="P11">
+      <eClassifiers xsi:type="ecore:EClass" name="K11_1"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="P2" nsURI="P2" nsPrefix="P2">
+    <eClassifiers xsi:type="ecore:EClass" name="K2_1">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="k1_1" upperBound="-1"
+          eType="#//P1/K1_1" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="k11_1" upperBound="-1"
+          eType="#//P1/P11/K11_1" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
