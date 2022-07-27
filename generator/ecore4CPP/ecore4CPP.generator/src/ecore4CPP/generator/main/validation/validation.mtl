@@ -289,6 +289,17 @@
 	'Generating #include-statements'
 /]
 
+[**
+ * Generic message to inform about a find package information
+*/]
+[query public packageFindGenerationMessage(libraryName : String) : String = 
+	'Librarry ' + libraryName + ': ${'+ libraryName + '_FOUND} (Version ${'+ libraryName + '_VERSION})\n' +
+	'         ' + libraryName + ' libs: ${'+ libraryName + '_LIBRARIES}\n' +
+	'         ' + libraryName + ' includes: ${'+ libraryName + '_INCLUDE_DIRS}\n' 
+	'Librarry ' + libraryName + '_Interface: ${'+ libraryName + '_Interface_FOUND} (Version ${'+ libraryName + '_Interface_VERSION})\n' +
+	'         ' + libraryName + ' libs_Interface: ${'+ libraryName + '_Interface_LIBRARIES}\n' +
+	'         ' + libraryName + ' includes_Interface: ${'+ libraryName + '_Interface_INCLUDE_DIRS}\n' 
+/]
 
 
 [**
