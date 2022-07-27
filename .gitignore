@@ -22,4 +22,5 @@
 # Patched version of ANTRL runtime sources currently checked in
 !/src/common/parser/antlr4/antlr4-cpp-runtime-4.9.2-source.zip
 /src/common/persistence/xerces/
-/src/ecore/src_gen/ecore/*.cmake.in
+*.cmake.in
+*.bak
