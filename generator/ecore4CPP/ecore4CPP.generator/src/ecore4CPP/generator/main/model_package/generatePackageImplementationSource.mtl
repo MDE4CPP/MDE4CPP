@@ -22,6 +22,7 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::model_package::generatePackageHelper /]
 [import ecore4CPP::generator::main::validation::validation /]
+[import ecore4CPP::generator::main::generateSingleton/]
 
 [query private metaModelIncludes(anEPackage : EPackage) : Sequence(EPackage) = Sequence{anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten() /]
 
@@ -58,6 +59,13 @@
 [/for]
 
 using namespace [anEPackage.generateNamespaceDefinition()/];
+
+//Singleton implementation 
+[generateSingletonImpl(anEPackage.name.concat('Package'), true)/]
+//static initialisation
+const std::string [anEPackage.name.concat('Package')/]::eNAME ="[anEPackage.name/]";
+const std::string [anEPackage.name.concat('Package')/]::eNS_URI ="[anEPackage.nsURI/]";
+const std::string [anEPackage.name.concat('Package')/]::eNS_PREFIX ="[anEPackage.nsPrefix/]";
 
 bool [packageName/]::isInited = false;
 

@@ -100,10 +100,9 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 
 			[anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name).generateSubPackageGetter(false)/]
 
-			//Singleton Instance and Getter
+			//Singleton Getter
 			[generateSingletonDecl(packageName)/]
 [if anEPackage.name.equalsIgnoreCase('ecore')]
-
 			//prevent from hiding functions
 			using EPackage::getEAnnotation;
 			using EPackage::getEClassifier;

@@ -55,7 +55,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 		protected:
 			[packageName/](){}
 		
-			//Singleton Instance and Getter
+			//Singleton Getter
 			[generateSingletonDecl(packageName)/]
 		
 			//Creator functions

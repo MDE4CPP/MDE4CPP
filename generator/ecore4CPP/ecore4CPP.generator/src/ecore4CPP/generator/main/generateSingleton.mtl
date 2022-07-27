@@ -15,17 +15,14 @@
 [module generateSingleton('http://www.eclipse.org/emf/2002/Ecore')/]
 
 [template public generateSingletonDecl(packageName : String)]
-private:
-	static std::shared_ptr<[packageName/]> instance;
 public:
 	static std::shared_ptr<[packageName/]> eInstance();
 [/template]
 
 [template public generateSingletonImpl(packageName : String, callInit : Boolean)]
-std::shared_ptr<[packageName/]> [packageName/]::instance;
-
 std::shared_ptr<[packageName/]> [packageName/]::eInstance()
 {
+	static std::shared_ptr<[packageName/]> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

@@ -50,9 +50,6 @@ namespace [aPackage.name/]
 		protected:
 			[packageName/](){};
 			virtual ~[packageName/](){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 [endGuard(aPackage,'Plugin')/]
