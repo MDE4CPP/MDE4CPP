@@ -8,7 +8,7 @@ class AnyObject
 {
 	public:
 		template <typename T>
-		AnyObject(T value,long long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
+		AnyObject(T value, long typeID=0, bool isContainer=false):m_typeID(typeID), m_isContainer(isContainer)
 		{
 			m_object = new TypedObject<T>(value);
 		}
@@ -37,7 +37,7 @@ class AnyObject
 			return m_object == nullptr;
 		}
 
-		long long getTypeId()
+		long getTypeId()
 		{
 			return m_typeID;
 		}
@@ -48,7 +48,7 @@ class AnyObject
 		}
 
 	protected:
-		const long long m_typeID=0;
+		const long m_typeID=0;
 		const bool m_isContainer=false;
 		AnyObject(){}
 		class Object
@@ -91,7 +91,7 @@ class AnyObject
 
 typedef std::shared_ptr<AnyObject> Any;
 
-template <typename T> static Any eAny(T value,long long typeID, bool isContainer)
+template <typename T> static Any eAny(T value,long typeID, bool isContainer)
 {
 	Any any(new AnyObject(value,typeID,isContainer));
 	return any;

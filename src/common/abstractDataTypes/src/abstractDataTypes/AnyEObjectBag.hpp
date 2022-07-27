@@ -9,7 +9,7 @@
 class AnyEObjectBag: public AnyObject
 {
 public:
-	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true) : AnyObject(value, typeID, isContainer)
+	template <typename T> AnyEObjectBag(T value,long typeID, bool isContainer=true) : AnyObject(value, typeID, isContainer)
 	{
 	}
 
@@ -37,7 +37,7 @@ public:
 template <class T> class AnyGenericBag: public AnyEObjectBag
 {
 public:
-	AnyGenericBag(T value,long long typeID=0, bool isContainer=true) : AnyEObjectBag(value, typeID, isContainer)
+	AnyGenericBag(T value,long typeID=0, bool isContainer=true) : AnyEObjectBag(value, typeID, isContainer)
 	{
 	}
 
@@ -96,7 +96,7 @@ public:
 
 };
 
-template <typename T> static Any eAnyBag(T value,long long typeID)
+template <typename T> static Any eAnyBag(T value,long typeID)
 {
 	Any any(new AnyGenericBag<T>(value,typeID,true));
 	return any;
