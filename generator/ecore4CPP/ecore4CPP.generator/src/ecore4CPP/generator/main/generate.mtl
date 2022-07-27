@@ -26,26 +26,36 @@
 [import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
 [import ecore4CPP::generator::main::validation::validation /]
 
+
+[comment generateModel:
+generate root model package including:
+- call generatePackage to generate
+	- class sources
+	- factory & package
+	- build-files
+- generate plugin manager --> generate plugin manager for models only
+- generate main application (prepareApplication)
+/]
 [template public generateModel(anEPackage : ecore::EPackage)]
 [comment @main/]
 
 [comment Model validation /]
 [if (getValidationStatus() = false)]
-[let modelRootPackage : EPackage = anEPackage.getRootPackage()]
-	[comment]
-	 * If info messages should be disabled during model validation and generation, uncomment the line below.
-	[/comment]
-	[comment] [disableInfosAll()/] [/comment]
-	[comment]
-	 * If warning messages should be disabled during model validation and generation, uncomment the line below.
-	 * NOTE: If info messages are enabled, the generator will still inform you if warnings occured, but they won't be printed out anymore.
-	[/comment]
-	[comment] [disableWarningsAll()/] [/comment]
-	[printInfo('Validating model...')/]
-	[modelRootPackage.validateModel()/]
-	[printInfo('Finished model validation')/]
-	[printInfo('Generation started', 'ecore4CPP.generator.main.generate:generteModel')/]
-[/let]
+	[let modelRootPackage : EPackage = anEPackage.getRootPackage()]
+		[comment]
+		 * If info messages should be disabled during model validation and generation, uncomment the line below.
+		[/comment]
+		[comment] [disableInfosAll()/] [/comment]
+		[comment]
+		 * If warning messages should be disabled during model validation and generation, uncomment the line below.
+		 * NOTE: If info messages are enabled, the generator will still inform you if warnings occured, but they won't be printed out anymore.
+		[/comment]
+		[comment] [disableWarningsAll()/] [/comment]
+		[printInfo('Validating model...')/]
+		[modelRootPackage.validateModel()/]
+		[printInfo('Finished model validation')/]
+		[printInfo('Generation started', 'ecore4CPP.generator.main.generate:generteModel')/]
+	[/let]
 [/if]
 
 
@@ -59,11 +69,37 @@
 [disableInfos(2)/]
 [comment][disableWarnings(1)/] It is not recommended to disable warning messages![/comment]
 
-
 [if (not anEPackage.doNotGenerateEPackage())]
 [comment Package generation /]
 	[printInfo(anEPackage.ePackageGenerationMessage())/]
+	[generatePackage(anEPackage)/]
+	[comment Model plugin, build files, project files and main application are only generated for the root package /]
+	[if (anEPackage.eSuperPackage.oclIsUndefined())]
+		[printInfo('Generating plugin class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+		[anEPackage.generateEcorePlugin()/]
+		[if (anEPackage.prepareApplication())]
+			[printInfo('Generating main application for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+			[anEPackage.generateApplication()/]
+		[/if]
+	[anEPackage.generateProjectsFiles()/]
+	[anEPackage.generatePackageHeaderFile()/]
+	[/if]
+[else]
+	[printInfo(anEPackage.ePackageNoGenerationMessage())/]
+[/if]
+[/template]
 
+[comment generateModel:
+generate package including:
+- call generatePackage for sub-packages
+- generate class sources
+- generate factory & package
+- build-files
+/]
+[template public generatePackage(anEPackage : ecore::EPackage)]
+	[printInfo(anEPackage.name)/]
+
+	[printInfo(anEPackage.ePackageGenerationMessage())/]
 	[for (anEClass : EClass | anEPackage.eContents(EClass))]
 		[if (anEClass.doNotGenerateEClassifier())]
 			[printInfo(anEClass.eClassifierNoGenerationMessage(), 1)/]
@@ -82,26 +118,14 @@
 		[/if]
 	[/for]
 	
-		[printInfo('Generating package class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
-		[anEPackage.generateFactoryImpl()/]
-		[printInfo('Generating factory class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
-		[anEPackage.generatePackageImpl()/]
+	[printInfo('Generating package class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+	[anEPackage.generateFactoryImpl()/]
+	[printInfo('Generating factory class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+	[anEPackage.generatePackageImpl()/]
+	[printInfo('Generating build files for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+	[anEPackage.generateBuildFile()/]
 
-	[comment Model plugin, build files, project files and main application are only generated for the root package /]
-	[if (anEPackage.eSuperPackage.oclIsUndefined())]
-		[printInfo('Generating plugin class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
-		[anEPackage.generateEcorePlugin()/]
-	
-		[anEPackage.generateBuildFile()/]
-		[anEPackage.generateProjectsFiles()/]
-		[anEPackage.generatePackageHeaderFile()/]
-	
-		[if (anEPackage.prepareApplication())]
-			[printInfo('Generating main application for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
-			[anEPackage.generateApplication()/]
-		[/if]
-	[/if]
-[else]
-	[printInfo(anEPackage.ePackageNoGenerationMessage())/]
-[/if]
+	[for (aSubPackage : EPackage| anEPackage.eSubpackages)]
+		[generatePackage(aSubPackage)/]
+	[/for]
 [/template]

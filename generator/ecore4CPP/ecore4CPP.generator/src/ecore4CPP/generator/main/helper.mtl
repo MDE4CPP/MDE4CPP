@@ -25,7 +25,7 @@
 [**
  * check if application should be prepared
 */]
-[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->notEmpty() /]
+[query public prepareApplication(ePackage : EPackage) : Boolean = if ePackage.oclIsUndefined() then false else eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->notEmpty() endif/]
 [query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyBody())->notEmpty() else false endif /]
 [query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyBody())->first().value /]
 
@@ -36,7 +36,7 @@
  * namespace generation
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if anEPackage.oclIsUndefined() then '' else if (ignoreRoot) then '' else anEPackage.name endif endif/]
-[query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
+[query public getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
 [query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
 [query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
 [query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = if(anEClassifier.oclIsUndefined()) then '' else if(anEClassifier.ePackage.oclIsUndefined()) then '' else anEClassifier.ePackage.getNamespace('::', false) endif endif/]
