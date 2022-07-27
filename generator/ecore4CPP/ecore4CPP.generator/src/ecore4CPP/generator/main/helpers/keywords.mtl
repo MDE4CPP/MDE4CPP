@@ -42,7 +42,7 @@
 [query public keyConst(any : OclAny) : String = 'const'/] [** indicates that an operation should be const/]
 [query public keyDoc(any : OclAny) : String = 'doc'/] [** indicates an documentation entry which is generated as documentation/]
 [query public keyCPPType(any : OclAny) : String = 'cppType'/] [** indicates an cppType entry which substitutes the type defined in the model/]
-
+[query public keyPackageVersion(any : OclAny) : String = 'Version'/] [** Define the version of the root package/]
 [** indicates, that an operation is only on implementation layer existing (not in header file), 
  * 	values: 'true' -> operation exists only on implementation layer, otherwise -> operation exists also in header file
 */]
