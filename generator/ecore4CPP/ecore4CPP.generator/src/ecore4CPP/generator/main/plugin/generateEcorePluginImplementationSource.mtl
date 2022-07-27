@@ -31,6 +31,24 @@
 
 using namespace [aPackage.name/];
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> [aPackage.name/]Plugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new [packageName/]());
+	}
+	return instance;
+}
+
+[aPackage.getRootPackage().name.toUpper()/]_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return [packageName/]::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

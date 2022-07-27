@@ -14,14 +14,12 @@
  */]
 [module generateEcorePlugin('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::plugin::generateEcorePluginInterfaceHeader /]
-[import ecore4CPP::generator::main::plugin::generateEcorePluginInterfaceSource /]
+[import ecore4CPP::generator::main::plugin::generateEcorePluginInterfaceHeader/]
 [import ecore4CPP::generator::main::plugin::generateEcorePluginImplementationHeader /]
 [import ecore4CPP::generator::main::plugin::generateEcorePluginImplementationSource /]
 
 [template public generateEcorePlugin(aPackage : EPackage)]
 [aPackage.generateEcorePluginInterfaceHeader()/]
-[aPackage.generateEcorePluginInterfaceSource()/]
 [aPackage.generateEcorePluginImplHeader()/]
 [aPackage.generateEcorePluginImplSource()/]
 [/template]

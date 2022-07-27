@@ -18,6 +18,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::validation::validation /]
+[import ecore4CPP::generator::main::generateSingleton /]
 
 [template public generateFactoryImplSource(anEPackage : EPackage) {
 	className : String = anEPackage.name.concat('FactoryImpl');
@@ -40,6 +41,8 @@
 
 [comment namespace /]
 using namespace [anEPackage.generateNamespaceDefinition()/];
+
+[generateSingletonImpl(anEPackage.name.concat('Factory'), false)/]
 
 //*********************************
 // Constructor / Destructor
