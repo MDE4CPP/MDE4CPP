@@ -59,16 +59,6 @@
 
 using namespace fUML::Semantics::Actions;
 
-std::shared_ptr<ActionsFactory> ActionsFactory::eInstance()
-{
-	static std::shared_ptr<ActionsFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(ActionsFactoryImpl::create());
-	}	
-	return instance;
-}
 
 //*********************************
 // Constructor / Destructor

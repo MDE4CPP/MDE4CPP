@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
 	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
+	class EOperation;
 	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace ocl::Types 
@@ -38,8 +38,7 @@ namespace ocl::Types
 	class SetType;
 	class TemplateParameterType;
 	class TupleType;
-	class VoidType;
-}
+	class VoidType;}
  
 namespace ocl::Types 
 {
@@ -79,7 +78,6 @@ namespace ocl::Types
 			
 			// End Class AnyType
 
-
 			// Begin Class BagType
 			//Class and Feature IDs 
 			static const unsigned long BAGTYPE_CLASS = 1309276377;
@@ -95,7 +93,6 @@ namespace ocl::Types
 			
 			
 			// End Class BagType
-
 
 			// Begin Class CollectionType
 			//Class and Feature IDs 
@@ -119,7 +116,6 @@ namespace ocl::Types
 			
 			// End Class CollectionType
 
-
 			// Begin Class InvalidType
 			//Class and Feature IDs 
 			static const unsigned long INVALIDTYPE_CLASS = 280656823;
@@ -135,7 +131,6 @@ namespace ocl::Types
 			
 			
 			// End Class InvalidType
-
 
 			// Begin Class MessageType
 			//Class and Feature IDs 
@@ -157,7 +152,6 @@ namespace ocl::Types
 			
 			// End Class MessageType
 
-
 			// Begin Class NameTypeBinding
 			//Class and Feature IDs 
 			static const unsigned long NAMETYPEBINDING_CLASS = 238682409;
@@ -178,7 +172,6 @@ namespace ocl::Types
 			
 			// End Class NameTypeBinding
 
-
 			// Begin Class OrderedSetType
 			//Class and Feature IDs 
 			static const unsigned long ORDEREDSETTYPE_CLASS = 1790854470;
@@ -194,7 +187,6 @@ namespace ocl::Types
 			
 			
 			// End Class OrderedSetType
-
 
 			// Begin Class SequenceType
 			//Class and Feature IDs 
@@ -212,7 +204,6 @@ namespace ocl::Types
 			
 			// End Class SequenceType
 
-
 			// Begin Class SetType
 			//Class and Feature IDs 
 			static const unsigned long SETTYPE_CLASS = 1886550814;
@@ -228,7 +219,6 @@ namespace ocl::Types
 			
 			
 			// End Class SetType
-
 
 			// Begin Class TemplateParameterType
 			//Class and Feature IDs 
@@ -247,7 +237,6 @@ namespace ocl::Types
 			
 			
 			// End Class TemplateParameterType
-
 
 			// Begin Class TupleType
 			//Class and Feature IDs 
@@ -269,7 +258,6 @@ namespace ocl::Types
 			
 			// End Class TupleType
 
-
 			// Begin Class VoidType
 			//Class and Feature IDs 
 			static const unsigned long VOIDTYPE_CLASS = 1092966199;
@@ -285,17 +273,22 @@ namespace ocl::Types
 			
 			
 			// End Class VoidType
-
 			
 			
-
 			
-
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<TypesPackage> instance;
+		private:
+			friend class TypesPluginImpl;
+			// Header only sinleton like implemenation for TypesPackage eInstance()
+			private: 
+				static std::shared_ptr<TypesPackage>* getTypesPackageStaticPtr()
+				{
+					static std::shared_ptr<TypesPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<TypesPackage> _instance) {*(getTypesPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<TypesPackage> eInstance();
+				static std::shared_ptr<TypesPackage> eInstance(){return *(getTypesPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: OCL_TYPESPACKAGE_HPP */

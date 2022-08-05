@@ -18,7 +18,9 @@
 
 namespace PSCS::Semantics::Classification 
 {
-	class CS_InstanceValueEvaluation;}
+	class CS_InstanceValueEvaluation;
+	class ClassificationPluginImpl; 
+}
 
 namespace ecore
 {
@@ -60,7 +62,7 @@ namespace PSCS::Semantics::Classification
 			
 			std::shared_ptr<ecore::EOperation> m_cS_InstanceValueEvaluation_Operation_evaluate = nullptr;
 
-			friend class ClassificationPackage;
+			friend class ClassificationPluginImpl; 
 
 			static bool isInited;
 			static ClassificationPackage* create();

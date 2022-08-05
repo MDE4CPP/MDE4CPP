@@ -28,8 +28,7 @@ namespace ecore
 namespace PSCS::Semantics::CommonBehavior 
 {
 	class CS_CallEventExecution;
-	class CS_EventOccurrence;
-}
+	class CS_EventOccurrence;}
  
 namespace PSCS::Semantics::CommonBehavior 
 {
@@ -77,7 +76,6 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			// End Class CS_CallEventExecution
 
-
 			// Begin Class CS_EventOccurrence
 			//Class and Feature IDs 
 			static const unsigned long CS_EVENTOCCURRENCE_CLASS = 619124533;
@@ -111,15 +109,22 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port() const = 0;
 			
 			// End Class CS_EventOccurrence
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class CommonBehaviorPluginImpl;
+			// Header only sinleton like implemenation for CommonBehaviorPackage eInstance()
+			private: 
+				static std::shared_ptr<CommonBehaviorPackage>* getCommonBehaviorPackageStaticPtr()
+				{
+					static std::shared_ptr<CommonBehaviorPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<CommonBehaviorPackage> _instance) {*(getCommonBehaviorPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<CommonBehaviorPackage> eInstance();
+				static std::shared_ptr<CommonBehaviorPackage> eInstance(){return *(getCommonBehaviorPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_COMMONBEHAVIORPACKAGE_HPP */

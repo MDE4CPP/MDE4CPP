@@ -39,7 +39,7 @@ namespace PSCS::Semantics::Actions
 			ActionsFactoryImpl& operator=(ActionsFactoryImpl const&) = delete;
 
 		protected:
-			friend class ActionsFactory;
+			friend class ActionsPluginImpl;  
 			// Constructor
 			ActionsFactoryImpl();
 

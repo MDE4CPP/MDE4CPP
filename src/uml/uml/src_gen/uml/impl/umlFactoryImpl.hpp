@@ -271,7 +271,7 @@ namespace uml
 			umlFactoryImpl& operator=(umlFactoryImpl const&) = delete;
 
 		protected:
-			friend class umlFactory;
+			friend class umlPluginImpl;  
 			// Constructor
 			umlFactoryImpl();
 

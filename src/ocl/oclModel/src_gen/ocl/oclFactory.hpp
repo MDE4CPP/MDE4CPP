@@ -46,7 +46,10 @@ namespace fUML::Semantics::SimpleClassifiers
 
 
 
-
+namespace ocl 
+{
+	class oclFactoryPluginImpl;
+}
 namespace ocl 
 {
 	class OCL_API oclFactory : virtual public ecore::EFactory 
@@ -56,13 +59,20 @@ namespace ocl
 			oclFactory& operator=(oclFactory const&) = delete;
 		protected:
 			oclFactory(){}
+		private:    	
+			friend class oclPluginImpl; 
+		// Header only sinleton like implemenation for oclFactory eInstance()
+		private: 
+			static std::shared_ptr<oclFactory>* getoclFactoryStaticPtr()
+			{
+				static std::shared_ptr<oclFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<oclFactory> _instance) {*(getoclFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<oclFactory> eInstance(){return *(getoclFactoryStaticPtr());}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<oclFactory> instance;
-			public:
-				static std::shared_ptr<oclFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

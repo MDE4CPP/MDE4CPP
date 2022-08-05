@@ -25,18 +25,7 @@
 
 using namespace PSCS::Semantics::CommonBehavior;
 
-//Singleton implementation 
-std::shared_ptr<CommonBehaviorPackage> CommonBehaviorPackage::eInstance()
-{
-	static std::shared_ptr<CommonBehaviorPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(CommonBehaviorPackageImpl::create());
-		std::dynamic_pointer_cast<CommonBehaviorPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string CommonBehaviorPackage::eNAME ="CommonBehavior";
 const std::string CommonBehaviorPackage::eNS_URI ="http:///PSCS_Semantics/Semantics/CommonBehavior.ecore";

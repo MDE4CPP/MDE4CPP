@@ -18,7 +18,10 @@
 
 
 
-
+namespace PSCS::Semantics::Values 
+{
+	class ValuesFactoryPluginImpl;
+}
 namespace PSCS::Semantics::Values 
 {
 	class PSCS_API ValuesFactory : virtual public ecore::EFactory 
@@ -28,11 +31,20 @@ namespace PSCS::Semantics::Values
 			ValuesFactory& operator=(ValuesFactory const&) = delete;
 		protected:
 			ValuesFactory(){}
+		private:    	
+			friend class ValuesPluginImpl; 
+		// Header only sinleton like implemenation for ValuesFactory eInstance()
+		private: 
+			static std::shared_ptr<ValuesFactory>* getValuesFactoryStaticPtr()
+			{
+				static std::shared_ptr<ValuesFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<ValuesFactory> _instance) {*(getValuesFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<ValuesFactory> eInstance(){return *(getValuesFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<ValuesFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

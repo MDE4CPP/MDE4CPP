@@ -28,8 +28,7 @@ namespace PSCS::Semantics::Loci
 {
 	class CS_ExecutionFactory;
 	class CS_Executor;
-	class CS_Locus;
-}
+	class CS_Locus;}
  
 namespace PSCS::Semantics::Loci 
 {
@@ -77,7 +76,6 @@ namespace PSCS::Semantics::Loci
 			
 			// End Class CS_ExecutionFactory
 
-
 			// Begin Class CS_Executor
 			//Class and Feature IDs 
 			static const unsigned long CS_EXECUTOR_CLASS = 1795074587;
@@ -96,7 +94,6 @@ namespace PSCS::Semantics::Loci
 			
 			// End Class CS_Executor
 
-
 			// Begin Class CS_Locus
 			//Class and Feature IDs 
 			static const unsigned long CS_LOCUS_CLASS = 264779363;
@@ -114,15 +111,22 @@ namespace PSCS::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getCS_Locus_Operation_instantiate_Class() const = 0;
 			
 			// End Class CS_Locus
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class LociPluginImpl;
+			// Header only sinleton like implemenation for LociPackage eInstance()
+			private: 
+				static std::shared_ptr<LociPackage>* getLociPackageStaticPtr()
+				{
+					static std::shared_ptr<LociPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<LociPackage> _instance) {*(getLociPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<LociPackage> eInstance();
+				static std::shared_ptr<LociPackage> eInstance(){return *(getLociPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_LOCIPACKAGE_HPP */

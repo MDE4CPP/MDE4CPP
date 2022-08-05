@@ -34,8 +34,7 @@ namespace fUML::Semantics::Values
 	class LiteralRealEvaluation;
 	class LiteralStringEvaluation;
 	class LiteralUnlimitedNaturalEvaluation;
-	class Value;
-}
+	class Value;}
  
 namespace fUML::Semantics::Values 
 {
@@ -81,7 +80,6 @@ namespace fUML::Semantics::Values
 			
 			// End Class Evaluation
 
-
 			// Begin Class LiteralBooleanEvaluation
 			//Class and Feature IDs 
 			static const unsigned long LITERALBOOLEANEVALUATION_CLASS = 1405002712;
@@ -99,7 +97,6 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getLiteralBooleanEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class LiteralBooleanEvaluation
-
 
 			// Begin Class LiteralEvaluation
 			//Class and Feature IDs 
@@ -119,7 +116,6 @@ namespace fUML::Semantics::Values
 			
 			// End Class LiteralEvaluation
 
-
 			// Begin Class LiteralIntegerEvaluation
 			//Class and Feature IDs 
 			static const unsigned long LITERALINTEGEREVALUATION_CLASS = 49428087;
@@ -137,7 +133,6 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getLiteralIntegerEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class LiteralIntegerEvaluation
-
 
 			// Begin Class LiteralNullEvaluation
 			//Class and Feature IDs 
@@ -157,7 +152,6 @@ namespace fUML::Semantics::Values
 			
 			// End Class LiteralNullEvaluation
 
-
 			// Begin Class LiteralRealEvaluation
 			//Class and Feature IDs 
 			static const unsigned long LITERALREALEVALUATION_CLASS = 1312489840;
@@ -175,7 +169,6 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getLiteralRealEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class LiteralRealEvaluation
-
 
 			// Begin Class LiteralStringEvaluation
 			//Class and Feature IDs 
@@ -195,7 +188,6 @@ namespace fUML::Semantics::Values
 			
 			// End Class LiteralStringEvaluation
 
-
 			// Begin Class LiteralUnlimitedNaturalEvaluation
 			//Class and Feature IDs 
 			static const unsigned long LITERALUNLIMITEDNATURALEVALUATION_CLASS = 1271688193;
@@ -213,7 +205,6 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNaturalEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class LiteralUnlimitedNaturalEvaluation
-
 
 			// Begin Class Value
 			//Class and Feature IDs 
@@ -248,15 +239,22 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_toString() const = 0;
 			
 			// End Class Value
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ValuesPluginImpl;
+			// Header only sinleton like implemenation for ValuesPackage eInstance()
+			private: 
+				static std::shared_ptr<ValuesPackage>* getValuesPackageStaticPtr()
+				{
+					static std::shared_ptr<ValuesPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ValuesPackage> _instance) {*(getValuesPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ValuesPackage> eInstance();
+				static std::shared_ptr<ValuesPackage> eInstance(){return *(getValuesPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUESPACKAGE_HPP */

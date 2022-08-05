@@ -22,16 +22,6 @@
 
 using namespace PSCS::Semantics::CommonBehavior;
 
-std::shared_ptr<CommonBehaviorFactory> CommonBehaviorFactory::eInstance()
-{
-	static std::shared_ptr<CommonBehaviorFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(CommonBehaviorFactoryImpl::create());
-	}	
-	return instance;
-}
 
 //*********************************
 // Constructor / Destructor

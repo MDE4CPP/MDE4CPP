@@ -32,9 +32,6 @@ namespace ocl
 		protected:
 			oclPlugin(){};
 			virtual ~oclPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: OCLPLUGIN_HPP */

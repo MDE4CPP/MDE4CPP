@@ -10,10 +10,16 @@ task buildOcl() {
 	dependsOn 'model:generateOcl'
 	dependsOn 'src_gen:compileOcl'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildExpressions', true)
+	dependsOn getRootProject().getTasksByName('buildSimpleClassifiers', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildValues', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEvaluations', true)
+	dependsOn getRootProject().getTasksByName('buildValues', true)
 }
-
+	
 tasks.getByPath('src_gen:compileOcl').mustRunAfter tasks.getByPath('model:generateOcl')

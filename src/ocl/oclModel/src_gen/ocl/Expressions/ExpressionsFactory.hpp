@@ -18,7 +18,10 @@
 
 
 
-
+namespace ocl::Expressions 
+{
+	class ExpressionsFactoryPluginImpl;
+}
 namespace ocl::Expressions 
 {
 	class OCL_API ExpressionsFactory : virtual public ecore::EFactory 
@@ -28,13 +31,20 @@ namespace ocl::Expressions
 			ExpressionsFactory& operator=(ExpressionsFactory const&) = delete;
 		protected:
 			ExpressionsFactory(){}
+		private:    	
+			friend class ExpressionsPluginImpl; 
+		// Header only sinleton like implemenation for ExpressionsFactory eInstance()
+		private: 
+			static std::shared_ptr<ExpressionsFactory>* getExpressionsFactoryStaticPtr()
+			{
+				static std::shared_ptr<ExpressionsFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<ExpressionsFactory> _instance) {*(getExpressionsFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<ExpressionsFactory> eInstance(){return *(getExpressionsFactoryStaticPtr());}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ExpressionsFactory> instance;
-			public:
-				static std::shared_ptr<ExpressionsFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

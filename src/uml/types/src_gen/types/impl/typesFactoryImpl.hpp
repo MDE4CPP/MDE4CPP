@@ -15,7 +15,7 @@
 #include "types/typesFactory.hpp"
 
 namespace types 
-{
+{	class typesPluginImpl;
 }
 
 namespace types 
@@ -27,7 +27,7 @@ namespace types
 			typesFactoryImpl& operator=(typesFactoryImpl const&) = delete;
 
 		protected:
-			friend class typesFactory;
+			friend class typesPluginImpl;  
 			// Constructor
 			typesFactoryImpl();
 

@@ -9,16 +9,6 @@
 
 using namespace fUML;
 
-std::shared_ptr<fUMLFactory> fUMLFactory::eInstance()
-{
-	static std::shared_ptr<fUMLFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(fUMLFactoryImpl::create());
-	}	
-	return instance;
-}
 
 //*********************************
 // Constructor / Destructor

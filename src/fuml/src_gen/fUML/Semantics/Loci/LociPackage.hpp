@@ -32,8 +32,7 @@ namespace fUML::Semantics::Loci
 	class FirstChoiceStrategy;
 	class Locus;
 	class SemanticStrategy;
-	class SemanticVisitor;
-}
+	class SemanticVisitor;}
  
 namespace fUML::Semantics::Loci 
 {
@@ -76,7 +75,6 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy_Operation_getName() const = 0;
 			
 			// End Class ChoiceStrategy
-
 
 			// Begin Class ExecutionFactory
 			//Class and Feature IDs 
@@ -122,7 +120,6 @@ namespace fUML::Semantics::Loci
 			
 			// End Class ExecutionFactory
 
-
 			// Begin Class Executor
 			//Class and Feature IDs 
 			static const unsigned long EXECUTOR_CLASS = 1690815834;
@@ -147,7 +144,6 @@ namespace fUML::Semantics::Loci
 			
 			// End Class Executor
 
-
 			// Begin Class FirstChoiceStrategy
 			//Class and Feature IDs 
 			static const unsigned long FIRSTCHOICESTRATEGY_CLASS = 1039516550;
@@ -165,7 +161,6 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getFirstChoiceStrategy_Operation_choose_EInt() const = 0;
 			
 			// End Class FirstChoiceStrategy
-
 
 			// Begin Class Locus
 			//Class and Feature IDs 
@@ -203,7 +198,6 @@ namespace fUML::Semantics::Loci
 			
 			// End Class Locus
 
-
 			// Begin Class SemanticStrategy
 			//Class and Feature IDs 
 			static const unsigned long SEMANTICSTRATEGY_CLASS = 1874097743;
@@ -221,7 +215,6 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getSemanticStrategy_Operation_getName() const = 0;
 			
 			// End Class SemanticStrategy
-
 
 			// Begin Class SemanticVisitor
 			//Class and Feature IDs 
@@ -242,15 +235,22 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor_Operation__endIsolation() const = 0;
 			
 			// End Class SemanticVisitor
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class LociPluginImpl;
+			// Header only sinleton like implemenation for LociPackage eInstance()
+			private: 
+				static std::shared_ptr<LociPackage>* getLociPackageStaticPtr()
+				{
+					static std::shared_ptr<LociPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<LociPackage> _instance) {*(getLociPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<LociPackage> eInstance();
+				static std::shared_ptr<LociPackage> eInstance(){return *(getLociPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCIPACKAGE_HPP */

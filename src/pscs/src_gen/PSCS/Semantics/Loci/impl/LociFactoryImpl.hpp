@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Loci
 			LociFactoryImpl& operator=(LociFactoryImpl const&) = delete;
 
 		protected:
-			friend class LociFactory;
+			friend class LociPluginImpl;  
 			// Constructor
 			LociFactoryImpl();
 

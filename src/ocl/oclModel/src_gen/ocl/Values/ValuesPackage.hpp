@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
 	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
+	class EOperation;
 	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace ocl::Values 
@@ -41,8 +41,7 @@ namespace ocl::Values
 	class SetTypeValue;
 	class StaticValue;
 	class TupleValue;
-	class UndefinedValue;
-}
+	class UndefinedValue;}
  
 namespace ocl::Values 
 {
@@ -88,7 +87,6 @@ namespace ocl::Values
 			
 			// End Class AnyValue
 
-
 			// Begin Class BagTypeValue
 			//Class and Feature IDs 
 			static const unsigned long BAGTYPEVALUE_CLASS = 1755720122;
@@ -106,7 +104,6 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EOperation> getBagTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class BagTypeValue
-
 
 			// Begin Class CollectionValue
 			//Class and Feature IDs 
@@ -134,7 +131,6 @@ namespace ocl::Values
 			
 			// End Class CollectionValue
 
-
 			// Begin Class Element
 			//Class and Feature IDs 
 			static const unsigned long ELEMENT_CLASS = 1129659260;
@@ -154,7 +150,6 @@ namespace ocl::Values
 			
 			
 			// End Class Element
-
 
 			// Begin Class LocalSnapshot
 			//Class and Feature IDs 
@@ -186,7 +181,6 @@ namespace ocl::Values
 			
 			// End Class LocalSnapshot
 
-
 			// Begin Class NameValueBinding
 			//Class and Feature IDs 
 			static const unsigned long NAMEVALUEBINDING_CLASS = 510142670;
@@ -206,7 +200,6 @@ namespace ocl::Values
 			
 			
 			// End Class NameValueBinding
-
 
 			// Begin Class ObjectValue
 			//Class and Feature IDs 
@@ -231,7 +224,6 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EOperation> getObjectValue_Operation_toString() const = 0;
 			
 			// End Class ObjectValue
-
 
 			// Begin Class OclMessageValue
 			//Class and Feature IDs 
@@ -267,7 +259,6 @@ namespace ocl::Values
 			
 			// End Class OclMessageValue
 
-
 			// Begin Class OclVoidValue
 			//Class and Feature IDs 
 			static const unsigned long OCLVOIDVALUE_CLASS = 316834162;
@@ -288,7 +279,6 @@ namespace ocl::Values
 			
 			// End Class OclVoidValue
 
-
 			// Begin Class OrderedSetTypeValue
 			//Class and Feature IDs 
 			static const unsigned long ORDEREDSETTYPEVALUE_CLASS = 119598672;
@@ -306,7 +296,6 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EOperation> getOrderedSetTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class OrderedSetTypeValue
-
 
 			// Begin Class SequenceTypeValue
 			//Class and Feature IDs 
@@ -326,7 +315,6 @@ namespace ocl::Values
 			
 			// End Class SequenceTypeValue
 
-
 			// Begin Class SetTypeValue
 			//Class and Feature IDs 
 			static const unsigned long SETTYPEVALUE_CLASS = 139010578;
@@ -345,7 +333,6 @@ namespace ocl::Values
 			
 			// End Class SetTypeValue
 
-
 			// Begin Class StaticValue
 			//Class and Feature IDs 
 			static const unsigned long STATICVALUE_CLASS = 565102340;
@@ -361,7 +348,6 @@ namespace ocl::Values
 			
 			
 			// End Class StaticValue
-
 
 			// Begin Class TupleValue
 			//Class and Feature IDs 
@@ -387,7 +373,6 @@ namespace ocl::Values
 			
 			// End Class TupleValue
 
-
 			// Begin Class UndefinedValue
 			//Class and Feature IDs 
 			static const unsigned long UNDEFINEDVALUE_CLASS = 1732994739;
@@ -407,17 +392,22 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EOperation> getUndefinedValue_Operation_toString() const = 0;
 			
 			// End Class UndefinedValue
-
 			
 			
-
 			
-
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ValuesPackage> instance;
+		private:
+			friend class ValuesPluginImpl;
+			// Header only sinleton like implemenation for ValuesPackage eInstance()
+			private: 
+				static std::shared_ptr<ValuesPackage>* getValuesPackageStaticPtr()
+				{
+					static std::shared_ptr<ValuesPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ValuesPackage> _instance) {*(getValuesPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ValuesPackage> eInstance();
+				static std::shared_ptr<ValuesPackage> eInstance(){return *(getValuesPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: OCL_VALUESPACKAGE_HPP */

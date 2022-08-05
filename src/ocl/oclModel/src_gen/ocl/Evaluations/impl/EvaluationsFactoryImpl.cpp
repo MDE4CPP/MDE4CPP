@@ -45,6 +45,7 @@
 
 using namespace ocl::Evaluations;
 
+
 //*********************************
 // Constructor / Destructor
 //*********************************

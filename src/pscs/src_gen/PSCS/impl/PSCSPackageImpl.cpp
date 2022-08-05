@@ -29,18 +29,7 @@
 
 using namespace PSCS;
 
-//Singleton implementation 
-std::shared_ptr<PSCSPackage> PSCSPackage::eInstance()
-{
-	static std::shared_ptr<PSCSPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(PSCSPackageImpl::create());
-		std::dynamic_pointer_cast<PSCSPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string PSCSPackage::eNAME ="PSCS";
 const std::string PSCSPackage::eNS_URI ="http://www.omg.org/spec/PSCS/20180801";

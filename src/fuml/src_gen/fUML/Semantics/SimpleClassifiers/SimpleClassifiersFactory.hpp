@@ -27,7 +27,10 @@ namespace fUML::Semantics::CommonBehavior
 }
 
 
-
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class SimpleClassifiersFactoryPluginImpl;
+}
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FUML_API SimpleClassifiersFactory : virtual public ecore::EFactory 
@@ -37,11 +40,20 @@ namespace fUML::Semantics::SimpleClassifiers
 			SimpleClassifiersFactory& operator=(SimpleClassifiersFactory const&) = delete;
 		protected:
 			SimpleClassifiersFactory(){}
+		private:    	
+			friend class SimpleClassifiersPluginImpl; 
+		// Header only sinleton like implemenation for SimpleClassifiersFactory eInstance()
+		private: 
+			static std::shared_ptr<SimpleClassifiersFactory>* getSimpleClassifiersFactoryStaticPtr()
+			{
+				static std::shared_ptr<SimpleClassifiersFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<SimpleClassifiersFactory> _instance) {*(getSimpleClassifiersFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<SimpleClassifiersFactory> eInstance(){return *(getSimpleClassifiersFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<SimpleClassifiersFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

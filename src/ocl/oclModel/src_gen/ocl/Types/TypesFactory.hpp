@@ -22,7 +22,10 @@ namespace ecore
 }
 
 
-
+namespace ocl::Types 
+{
+	class TypesFactoryPluginImpl;
+}
 namespace ocl::Types 
 {
 	class OCL_API TypesFactory : virtual public ecore::EFactory 
@@ -32,13 +35,20 @@ namespace ocl::Types
 			TypesFactory& operator=(TypesFactory const&) = delete;
 		protected:
 			TypesFactory(){}
+		private:    	
+			friend class TypesPluginImpl; 
+		// Header only sinleton like implemenation for TypesFactory eInstance()
+		private: 
+			static std::shared_ptr<TypesFactory>* getTypesFactoryStaticPtr()
+			{
+				static std::shared_ptr<TypesFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<TypesFactory> _instance) {*(getTypesFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<TypesFactory> eInstance(){return *(getTypesFactoryStaticPtr());}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<TypesFactory> instance;
-			public:
-				static std::shared_ptr<TypesFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

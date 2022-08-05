@@ -76,7 +76,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(fUML_Semantics_Values
+PRIVATE
 # Factories and packages
 	impl/ValuesFactoryImpl.cpp
 	impl/ValuesPackageImpl.cpp
@@ -110,13 +112,13 @@ set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(fUML_Semantics_Loci_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Loci")
+set(fUML_Interface_DIR "${CMAKE_BINARY_DIR}")
 find_package(uml CONFIG)
 find_package(uml_Interface CONFIG)
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
-find_package(fUML_Semantics_Loci CONFIG)
 find_package(fUML_Semantics_Loci_Interface CONFIG)
-find_package(fUML CONFIG)
 find_package(fUML_Interface CONFIG)
 find_package(primitivetypesReflection REQUIRED)
 message("Dir_Name: ${uml_DIR}")
@@ -164,8 +166,6 @@ Librarry primitivetypesReflection_Interface: ${primitivetypesReflection_Interfac
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE uml::uml
 	PRIVATE ecore::ecore

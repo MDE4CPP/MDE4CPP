@@ -23,8 +23,7 @@ namespace ecore
 
 namespace PSCS::Semantics::Values 
 {
-	class CS_OpaqueExpressionEvaluation;
-}
+	class CS_OpaqueExpressionEvaluation;}
  
 namespace PSCS::Semantics::Values 
 {
@@ -67,15 +66,22 @@ namespace PSCS::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const = 0;
 			
 			// End Class CS_OpaqueExpressionEvaluation
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ValuesPluginImpl;
+			// Header only sinleton like implemenation for ValuesPackage eInstance()
+			private: 
+				static std::shared_ptr<ValuesPackage>* getValuesPackageStaticPtr()
+				{
+					static std::shared_ptr<ValuesPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ValuesPackage> _instance) {*(getValuesPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ValuesPackage> eInstance();
+				static std::shared_ptr<ValuesPackage> eInstance(){return *(getValuesPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_VALUESPACKAGE_HPP */

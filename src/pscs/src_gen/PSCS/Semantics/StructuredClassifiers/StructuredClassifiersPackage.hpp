@@ -36,8 +36,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Object;
 	class CS_Reference;
 	class CS_RequestPropagationStrategy;
-	class CS_StructuralFeatureOfInterfaceAccessStrategy;
-}
+	class CS_StructuralFeatureOfInterfaceAccessStrategy;}
  
 namespace PSCS::Semantics::StructuredClassifiers 
 {
@@ -79,7 +78,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
-
 			// Begin Class CS_DispatchOperationOfInterfaceStrategy
 			//Class and Feature IDs 
 			static const unsigned long CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS = 732334652;
@@ -97,7 +95,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
 			
 			// End Class CS_DispatchOperationOfInterfaceStrategy
-
 
 			// Begin Class CS_InteractionPoint
 			//Class and Feature IDs 
@@ -127,7 +124,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_InteractionPoint
 
-
 			// Begin Class CS_Link
 			//Class and Feature IDs 
 			static const unsigned long CS_LINK_CLASS = 225228270;
@@ -148,7 +144,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_Link
 
-
 			// Begin Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 			//Class and Feature IDs 
 			static const unsigned long CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 1596515744;
@@ -168,7 +163,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt() const = 0;
 			
 			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
-
 
 			// Begin Class CS_Object
 			//Class and Feature IDs 
@@ -232,7 +226,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_Object
 
-
 			// Begin Class CS_Reference
 			//Class and Feature IDs 
 			static const unsigned long CS_REFERENCE_CLASS = 1875601966;
@@ -269,7 +262,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_Reference
 
-
 			// Begin Class CS_RequestPropagationStrategy
 			//Class and Feature IDs 
 			static const unsigned long CS_REQUESTPROPAGATIONSTRATEGY_CLASS = 1044958815;
@@ -289,7 +281,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const = 0;
 			
 			// End Class CS_RequestPropagationStrategy
-
 
 			// Begin Class CS_StructuralFeatureOfInterfaceAccessStrategy
 			//Class and Feature IDs 
@@ -312,17 +303,24 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer() const = 0;
 			
 			// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
-
 			static const int CS_LINKKIND_CLASS = 19;
 			
 			virtual std::shared_ptr<ecore::EEnum> getCS_LinkKind_Class() const = 0;
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class StructuredClassifiersPluginImpl;
+			// Header only sinleton like implemenation for StructuredClassifiersPackage eInstance()
+			private: 
+				static std::shared_ptr<StructuredClassifiersPackage>* getStructuredClassifiersPackageStaticPtr()
+				{
+					static std::shared_ptr<StructuredClassifiersPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<StructuredClassifiersPackage> _instance) {*(getStructuredClassifiersPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<StructuredClassifiersPackage> eInstance();
+				static std::shared_ptr<StructuredClassifiersPackage> eInstance(){return *(getStructuredClassifiersPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGE_HPP */

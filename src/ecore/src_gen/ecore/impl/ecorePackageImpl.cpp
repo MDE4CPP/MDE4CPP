@@ -22,18 +22,7 @@
 
 using namespace ecore;
 
-//Singleton implementation 
-std::shared_ptr<ecorePackage> ecorePackage::eInstance()
-{
-	static std::shared_ptr<ecorePackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(ecorePackageImpl::create());
-		std::dynamic_pointer_cast<ecorePackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+ 
 //static initialisation
 const std::string ecorePackage::eNAME ="ecore";
 const std::string ecorePackage::eNS_URI ="http://www.eclipse.org/emf/2002/Ecore";

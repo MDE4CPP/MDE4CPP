@@ -27,7 +27,7 @@ namespace PSCS::Semantics::Classification
 			ClassificationFactoryImpl& operator=(ClassificationFactoryImpl const&) = delete;
 
 		protected:
-			friend class ClassificationFactory;
+			friend class ClassificationPluginImpl;  
 			// Constructor
 			ClassificationFactoryImpl();
 

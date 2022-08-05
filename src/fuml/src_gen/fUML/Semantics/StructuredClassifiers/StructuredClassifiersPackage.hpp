@@ -32,8 +32,7 @@ namespace fUML::Semantics::StructuredClassifiers
 	class Link;
 	class Object;
 	class RedefinitionBasedDispatchStrategy;
-	class Reference;
-}
+	class Reference;}
  
 namespace fUML::Semantics::StructuredClassifiers 
 {
@@ -79,7 +78,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			// End Class DispatchStrategy
 
-
 			// Begin Class ExtensionalValue
 			//Class and Feature IDs 
 			static const unsigned long EXTENSIONALVALUE_CLASS = 1972653315;
@@ -101,7 +99,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation_destroy() const = 0;
 			
 			// End Class ExtensionalValue
-
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature IDs 
@@ -128,7 +125,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_setValue_ExtensionalValue_EInt() const = 0;
 			
 			// End Class ExtensionalValueList
-
 
 			// Begin Class Link
 			//Class and Feature IDs 
@@ -159,7 +155,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_new_() const = 0;
 			
 			// End Class Link
-
 
 			// Begin Class Object
 			//Class and Feature IDs 
@@ -199,7 +194,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			// End Class Object
 
-
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature IDs 
 			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 784625732;
@@ -219,7 +213,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation() const = 0;
 			
 			// End Class RedefinitionBasedDispatchStrategy
-
 
 			// Begin Class Reference
 			//Class and Feature IDs 
@@ -270,15 +263,22 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_toString() const = 0;
 			
 			// End Class Reference
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class StructuredClassifiersPluginImpl;
+			// Header only sinleton like implemenation for StructuredClassifiersPackage eInstance()
+			private: 
+				static std::shared_ptr<StructuredClassifiersPackage>* getStructuredClassifiersPackageStaticPtr()
+				{
+					static std::shared_ptr<StructuredClassifiersPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<StructuredClassifiersPackage> _instance) {*(getStructuredClassifiersPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<StructuredClassifiersPackage> eInstance();
+				static std::shared_ptr<StructuredClassifiersPackage> eInstance(){return *(getStructuredClassifiersPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGE_HPP */

@@ -57,6 +57,8 @@ namespace fUML::Semantics
 	{
 		class ValuesPackage;
 	}
+
+	class SemanticsPluginImpl; 
 }
 
 namespace ecore
@@ -98,7 +100,7 @@ namespace fUML::Semantics
 			
 			
 
-			friend class SemanticsPackage;
+			friend class SemanticsPluginImpl; 
 
 			static bool isInited;
 			static SemanticsPackage* create();

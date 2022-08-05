@@ -85,7 +85,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(fUML_Semantics_CommonBehavior
+PRIVATE
 # Factories and packages
 	impl/CommonBehaviorFactoryImpl.cpp
 	impl/CommonBehaviorPackageImpl.cpp
@@ -124,23 +126,23 @@ endif(APPLE)
 
 set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(fUML_Semantics_SimpleClassifiers_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/SimpleClassifiers")
+set(fUML_Semantics_Values_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Values")
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
 set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(fUML_Semantics_StructuredClassifiers_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/StructuredClassifiers")
+set(fUML_Interface_DIR "${CMAKE_BINARY_DIR}")
 find_package(uml CONFIG)
 find_package(uml_Interface CONFIG)
-find_package(fUML_Semantics_SimpleClassifiers CONFIG)
 find_package(fUML_Semantics_SimpleClassifiers_Interface CONFIG)
-find_package(fUML_Semantics_Values CONFIG)
 find_package(fUML_Semantics_Values_Interface CONFIG)
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
 find_package(types CONFIG)
 find_package(types_Interface CONFIG)
-find_package(fUML_Semantics_StructuredClassifiers CONFIG)
 find_package(fUML_Semantics_StructuredClassifiers_Interface CONFIG)
-find_package(fUML CONFIG)
 find_package(fUML_Interface CONFIG)
 message("Dir_Name: ${uml_DIR}")
 message("Interface_Dir_Name: ${uml_Interface_DIR}") 
@@ -207,8 +209,6 @@ Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSI
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE uml::uml
 	PRIVATE fUML::Semantics::SimpleClassifiers::fUML_Semantics_SimpleClassifiers

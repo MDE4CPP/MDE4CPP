@@ -53,7 +53,7 @@ namespace fUML::Semantics::Activities
 			ActivitiesFactoryImpl& operator=(ActivitiesFactoryImpl const&) = delete;
 
 		protected:
-			friend class ActivitiesFactory;
+			friend class ActivitiesPluginImpl;  
 			// Constructor
 			ActivitiesFactoryImpl();
 

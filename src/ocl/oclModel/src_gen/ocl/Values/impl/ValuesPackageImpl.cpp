@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "ocl/Values/ValuesFactory.hpp"
@@ -24,6 +24,12 @@
 #include "types/typesPackage.hpp"
 
 using namespace ocl::Values;
+
+
+//static initialisation
+const std::string ValuesPackage::eNAME ="Values";
+const std::string ValuesPackage::eNS_URI ="http://ocl4cpp/ocl/values.ecore";
+const std::string ValuesPackage::eNS_PREFIX ="ocl.values";
 
 bool ValuesPackageImpl::isInited = false;
 

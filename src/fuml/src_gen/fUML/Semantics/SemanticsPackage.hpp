@@ -67,7 +67,6 @@ namespace fUML::Semantics
 	{
 		class ValuesPackage;
 	}
-
 }
  
 namespace fUML::Semantics 
@@ -94,7 +93,6 @@ namespace fUML::Semantics
 
 			
 			
-
 			virtual std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> getActivities_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> getClassification_Package() const = 0;
@@ -104,10 +102,19 @@ namespace fUML::Semantics
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::ValuesPackage> getValues_Package() const = 0;
 			
-
-			//Singleton Getter
+		private:
+			friend class SemanticsPluginImpl;
+			// Header only sinleton like implemenation for SemanticsPackage eInstance()
+			private: 
+				static std::shared_ptr<SemanticsPackage>* getSemanticsPackageStaticPtr()
+				{
+					static std::shared_ptr<SemanticsPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<SemanticsPackage> _instance) {*(getSemanticsPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<SemanticsPackage> eInstance();
+				static std::shared_ptr<SemanticsPackage> eInstance(){return *(getSemanticsPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICSPACKAGE_HPP */

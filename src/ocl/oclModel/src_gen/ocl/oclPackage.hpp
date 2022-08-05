@@ -14,18 +14,18 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
-	class EDataType;
-	class EPackage;
 	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
+	class EEnumLiteral;
+	class EOperation;
+	class EPackage;
 	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EReference;
+	class EEnum;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace ocl 
@@ -49,7 +49,6 @@ namespace ocl
 	{
 		class ValuesPackage;
 	}
-
 }
  
 namespace ocl 
@@ -76,18 +75,24 @@ namespace ocl
 
 			
 			
-
 			virtual std::shared_ptr<ocl::Evaluations::EvaluationsPackage> getEvaluations_Package() const = 0;
 			virtual std::shared_ptr<ocl::Expressions::ExpressionsPackage> getExpressions_Package() const = 0;
 			virtual std::shared_ptr<ocl::Types::TypesPackage> getTypes_Package() const = 0;
 			virtual std::shared_ptr<ocl::Values::ValuesPackage> getValues_Package() const = 0;
 			
-
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<oclPackage> instance;
+		private:
+			friend class oclPluginImpl;
+			// Header only sinleton like implemenation for oclPackage eInstance()
+			private: 
+				static std::shared_ptr<oclPackage>* getoclPackageStaticPtr()
+				{
+					static std::shared_ptr<oclPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<oclPackage> _instance) {*(getoclPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<oclPackage> eInstance();
+				static std::shared_ptr<oclPackage> eInstance(){return *(getoclPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: OCLPACKAGE_HPP */

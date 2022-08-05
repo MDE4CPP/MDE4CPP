@@ -47,6 +47,8 @@ namespace PSCS::Semantics
 	{
 		class ValuesPackage;
 	}
+
+	class SemanticsPluginImpl; 
 }
 
 namespace ecore
@@ -86,7 +88,7 @@ namespace PSCS::Semantics
 			
 			
 
-			friend class SemanticsPackage;
+			friend class SemanticsPluginImpl; 
 
 			static bool isInited;
 			static SemanticsPackage* create();

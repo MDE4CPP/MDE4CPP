@@ -65,7 +65,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(fUML_Semantics_Classification
+PRIVATE
 # Factories and packages
 	impl/ClassificationFactoryImpl.cpp
 	impl/ClassificationPackageImpl.cpp
@@ -89,9 +91,9 @@ endif(APPLE)
 
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(fUML_Interface_DIR "${CMAKE_BINARY_DIR}")
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
-find_package(fUML CONFIG)
 find_package(fUML_Interface CONFIG)
 message("Dir_Name: ${ecore_DIR}")
 message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
@@ -113,8 +115,6 @@ Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSI
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE ecore::ecore
 )

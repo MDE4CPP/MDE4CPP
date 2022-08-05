@@ -5,12 +5,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "ocl/Expressions/ExpressionsFactory.hpp"
@@ -23,6 +23,12 @@
 #include "uml/umlPackage.hpp"
 
 using namespace ocl::Expressions;
+
+
+//static initialisation
+const std::string ExpressionsPackage::eNAME ="Expressions";
+const std::string ExpressionsPackage::eNS_URI ="http://ocl4cpp/ocl/expressions.ecore";
+const std::string ExpressionsPackage::eNS_PREFIX ="ocl.expressions";
 
 bool ExpressionsPackageImpl::isInited = false;
 

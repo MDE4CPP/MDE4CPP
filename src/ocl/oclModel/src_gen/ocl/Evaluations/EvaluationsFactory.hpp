@@ -18,7 +18,10 @@
 
 
 
-
+namespace ocl::Evaluations 
+{
+	class EvaluationsFactoryPluginImpl;
+}
 namespace ocl::Evaluations 
 {
 	class OCL_API EvaluationsFactory : virtual public ecore::EFactory 
@@ -28,13 +31,20 @@ namespace ocl::Evaluations
 			EvaluationsFactory& operator=(EvaluationsFactory const&) = delete;
 		protected:
 			EvaluationsFactory(){}
+		private:    	
+			friend class EvaluationsPluginImpl; 
+		// Header only sinleton like implemenation for EvaluationsFactory eInstance()
+		private: 
+			static std::shared_ptr<EvaluationsFactory>* getEvaluationsFactoryStaticPtr()
+			{
+				static std::shared_ptr<EvaluationsFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<EvaluationsFactory> _instance) {*(getEvaluationsFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<EvaluationsFactory> eInstance(){return *(getEvaluationsFactoryStaticPtr());}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<EvaluationsFactory> instance;
-			public:
-				static std::shared_ptr<EvaluationsFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

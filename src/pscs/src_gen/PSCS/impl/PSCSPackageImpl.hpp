@@ -22,6 +22,8 @@ namespace PSCS
 	{
 		class SemanticsPackage;
 	}
+
+	class PSCSPluginImpl; 
 }
 
 namespace ecore
@@ -56,7 +58,7 @@ namespace PSCS
 			
 			
 
-			friend class PSCSPackage;
+			friend class PSCSPluginImpl; 
 
 			static bool isInited;
 			static PSCSPackage* create();

@@ -5,7 +5,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: ocl'
 
-task compileOcl(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileOcl(type: tui.sse.mde4cpp.MDE4CPPCompile) 
+{
 	group 'ocl'
 	description 'compile ocl'
 
@@ -40,27 +41,54 @@ task compileOcl(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
-
+	
+	
+	// dependency to model 'Expressions'
+	def Expressions = getRootProject().getTasksByName('compileExpressions', true)
+	dependsOn Expressions
+	inputs.files(Expressions.outputs)
+	
+	// dependency to model 'SimpleClassifiers'
+	def SimpleClassifiers = getRootProject().getTasksByName('compileSimpleClassifiers', true)
+	dependsOn SimpleClassifiers
+	inputs.files(SimpleClassifiers.outputs)
+	
 	// dependency to model 'fUML'
 	def fUML = getRootProject().getTasksByName('compileFUML', true)
 	dependsOn fUML
 	inputs.files(fUML.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
-
+	
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
+	
+	// dependency to model 'Values'
+	def Values = getRootProject().getTasksByName('compileValues', true)
+	dependsOn Values
+	inputs.files(Values.outputs)
+	
+	// dependency to model 'Types'
+	def Types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn Types
+	inputs.files(Types.outputs)
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+	
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'Evaluations'
+	def Evaluations = getRootProject().getTasksByName('compileEvaluations', true)
+	dependsOn Evaluations
+	inputs.files(Evaluations.outputs)
+	
+
 }
 
 task clean {
@@ -79,4 +107,4 @@ task clean {
 			}
   		}
 	}
-}
+} 

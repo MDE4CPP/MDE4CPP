@@ -2,6 +2,8 @@
 
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/impl/PSCSPackageImpl.hpp"
 
 using namespace PSCS;
 
@@ -28,6 +30,21 @@ PSCS_API std::shared_ptr<MDE4CPPPlugin> start()
 //*********************************
 PSCSPluginImpl::PSCSPluginImpl()
 {
+// plugin create factory and package during start()
+	std::shared_ptr<PSCSPackage> eInstancePackagePtr=PSCSPackage::eInstance();
+	if(nullptr==eInstancePackagePtr) // create package only ones
+	{ 
+		std::shared_ptr<PSCSPackage> uniquePackagePtr;
+		uniquePackagePtr.reset(PSCSPackageImpl::create());//plugin is fried of package
+		PSCSPackage::seteInstance(uniquePackagePtr);
+	}
+	std::shared_ptr<PSCSPackage> eInstanceFactoryPtr=PSCSPackage::eInstance();
+	if(nullptr==eInstanceFactoryPtr) // create factory only ones
+	{ 
+		std::shared_ptr<PSCSFactory> uniqueFactroyPtr;
+		uniqueFactroyPtr.reset(PSCSFactoryImpl::create());//plugin is fried of package
+		PSCSFactory::seteInstance(uniqueFactroyPtr);
+	}
 }
 
 PSCSPluginImpl::~PSCSPluginImpl()

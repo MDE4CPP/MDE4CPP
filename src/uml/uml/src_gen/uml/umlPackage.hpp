@@ -273,8 +273,7 @@ namespace uml
 	class Vertex;
 	class WriteLinkAction;
 	class WriteStructuralFeatureAction;
-	class WriteVariableAction;
-}
+	class WriteVariableAction;}
  
 namespace uml 
 {
@@ -316,7 +315,6 @@ namespace uml
 			
 			// End Class Abstraction
 
-
 			// Begin Class AcceptCallAction
 			//Class and Feature IDs 
 			static const unsigned long ACCEPTCALLACTION_CLASS = 1247250171;
@@ -340,7 +338,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getAcceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AcceptCallAction
-
 
 			// Begin Class AcceptEventAction
 			//Class and Feature IDs 
@@ -373,7 +370,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AcceptEventAction
-
 
 			// Begin Class Action
 			//Class and Feature IDs 
@@ -411,7 +407,6 @@ namespace uml
 			
 			// End Class Action
 
-
 			// Begin Class ActionExecutionSpecification
 			//Class and Feature IDs 
 			static const unsigned long ACTIONEXECUTIONSPECIFICATION_CLASS = 1249563611;
@@ -431,7 +426,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getActionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActionExecutionSpecification
-
 
 			// Begin Class ActionInputPin
 			//Class and Feature IDs 
@@ -456,7 +450,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getActionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActionInputPin
-
 
 			// Begin Class Activity
 			//Class and Feature IDs 
@@ -498,7 +491,6 @@ namespace uml
 			
 			// End Class Activity
 
-
 			// Begin Class ActivityEdge
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEDGE_CLASS = 583468403;
@@ -537,7 +529,6 @@ namespace uml
 			
 			// End Class ActivityEdge
 
-
 			// Begin Class ActivityFinalNode
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYFINALNODE_CLASS = 420698812;
@@ -553,7 +544,6 @@ namespace uml
 			
 			
 			// End Class ActivityFinalNode
-
 
 			// Begin Class ActivityGroup
 			//Class and Feature IDs 
@@ -586,7 +576,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getActivityGroup_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityGroup
-
 
 			// Begin Class ActivityNode
 			//Class and Feature IDs 
@@ -622,7 +611,6 @@ namespace uml
 			
 			// End Class ActivityNode
 
-
 			// Begin Class ActivityParameterNode
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYPARAMETERNODE_CLASS = 1778290878;
@@ -650,7 +638,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_same_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityParameterNode
-
 
 			// Begin Class ActivityPartition
 			//Class and Feature IDs 
@@ -690,7 +677,6 @@ namespace uml
 			
 			// End Class ActivityPartition
 
-
 			// Begin Class Actor
 			//Class and Feature IDs 
 			static const unsigned long ACTOR_CLASS = 434472278;
@@ -710,7 +696,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getActor_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Actor
-
 
 			// Begin Class AddStructuralFeatureValueAction
 			//Class and Feature IDs 
@@ -736,7 +721,6 @@ namespace uml
 			
 			// End Class AddStructuralFeatureValueAction
 
-
 			// Begin Class AddVariableValueAction
 			//Class and Feature IDs 
 			static const unsigned long ADDVARIABLEVALUEACTION_CLASS = 1977052307;
@@ -761,7 +745,6 @@ namespace uml
 			
 			// End Class AddVariableValueAction
 
-
 			// Begin Class AnyReceiveEvent
 			//Class and Feature IDs 
 			static const unsigned long ANYRECEIVEEVENT_CLASS = 2028211747;
@@ -777,7 +760,6 @@ namespace uml
 			
 			
 			// End Class AnyReceiveEvent
-
 
 			// Begin Class Argument
 			//Class and Feature IDs 
@@ -798,7 +780,6 @@ namespace uml
 			
 			
 			// End Class Argument
-
 
 			// Begin Class Artifact
 			//Class and Feature IDs 
@@ -829,7 +810,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getArtifact_Operation_createOwnedOperation_String_Type() const = 0;
 			
 			// End Class Artifact
-
 
 			// Begin Class Association
 			//Class and Feature IDs 
@@ -871,7 +851,6 @@ namespace uml
 			
 			// End Class Association
 
-
 			// Begin Class AssociationClass
 			//Class and Feature IDs 
 			static const unsigned long ASSOCIATIONCLASS_CLASS = 595683312;
@@ -891,7 +870,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getAssociationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AssociationClass
-
 
 			// Begin Class Behavior
 			//Class and Feature IDs 
@@ -941,7 +919,6 @@ namespace uml
 			
 			// End Class Behavior
 
-
 			// Begin Class BehaviorExecutionSpecification
 			//Class and Feature IDs 
 			static const unsigned long BEHAVIOREXECUTIONSPECIFICATION_CLASS = 467545967;
@@ -959,7 +936,6 @@ namespace uml
 			
 			
 			// End Class BehaviorExecutionSpecification
-
 
 			// Begin Class BehavioralFeature
 			//Class and Feature IDs 
@@ -997,7 +973,6 @@ namespace uml
 			
 			// End Class BehavioralFeature
 
-
 			// Begin Class BehavioredClassifier
 			//Class and Feature IDs 
 			static const unsigned long BEHAVIOREDCLASSIFIER_CLASS = 554185787;
@@ -1026,7 +1001,6 @@ namespace uml
 			
 			// End Class BehavioredClassifier
 
-
 			// Begin Class BroadcastSignalAction
 			//Class and Feature IDs 
 			static const unsigned long BROADCASTSIGNALACTION_CLASS = 1524216905;
@@ -1050,7 +1024,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getBroadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class BroadcastSignalAction
-
 
 			// Begin Class CallAction
 			//Class and Feature IDs 
@@ -1082,7 +1055,6 @@ namespace uml
 			
 			// End Class CallAction
 
-
 			// Begin Class CallBehaviorAction
 			//Class and Feature IDs 
 			static const unsigned long CALLBEHAVIORACTION_CLASS = 1295787654;
@@ -1103,7 +1075,6 @@ namespace uml
 			
 			// End Class CallBehaviorAction
 
-
 			// Begin Class CallEvent
 			//Class and Feature IDs 
 			static const unsigned long CALLEVENT_CLASS = 1107794254;
@@ -1121,7 +1092,6 @@ namespace uml
 			
 			
 			// End Class CallEvent
-
 
 			// Begin Class CallOperationAction
 			//Class and Feature IDs 
@@ -1145,7 +1115,6 @@ namespace uml
 			
 			// End Class CallOperationAction
 
-
 			// Begin Class CentralBufferNode
 			//Class and Feature IDs 
 			static const unsigned long CENTRALBUFFERNODE_CLASS = 2117245206;
@@ -1161,7 +1130,6 @@ namespace uml
 			
 			
 			// End Class CentralBufferNode
-
 
 			// Begin Class ChangeEvent
 			//Class and Feature IDs 
@@ -1180,7 +1148,6 @@ namespace uml
 			
 			
 			// End Class ChangeEvent
-
 
 			// Begin Class Class
 			//Class and Feature IDs 
@@ -1223,7 +1190,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_passive_class_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Class
-
 
 			// Begin Class Classifier
 			//Class and Feature IDs 
@@ -1325,7 +1291,6 @@ namespace uml
 			
 			// End Class Classifier
 
-
 			// Begin Class ClassifierTemplateParameter
 			//Class and Feature IDs 
 			static const unsigned long CLASSIFIERTEMPLATEPARAMETER_CLASS = 1295489145;
@@ -1357,7 +1322,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ClassifierTemplateParameter
-
 
 			// Begin Class Clause
 			//Class and Feature IDs 
@@ -1393,7 +1357,6 @@ namespace uml
 			
 			// End Class Clause
 
-
 			// Begin Class ClearAssociationAction
 			//Class and Feature IDs 
 			static const unsigned long CLEARASSOCIATIONACTION_CLASS = 2092360922;
@@ -1418,7 +1381,6 @@ namespace uml
 			
 			// End Class ClearAssociationAction
 
-
 			// Begin Class ClearStructuralFeatureAction
 			//Class and Feature IDs 
 			static const unsigned long CLEARSTRUCTURALFEATUREACTION_CLASS = 36746193;
@@ -1441,7 +1403,6 @@ namespace uml
 			
 			// End Class ClearStructuralFeatureAction
 
-
 			// Begin Class ClearVariableAction
 			//Class and Feature IDs 
 			static const unsigned long CLEARVARIABLEACTION_CLASS = 1110288757;
@@ -1457,7 +1418,6 @@ namespace uml
 			
 			
 			// End Class ClearVariableAction
-
 
 			// Begin Class Collaboration
 			//Class and Feature IDs 
@@ -1476,7 +1436,6 @@ namespace uml
 			
 			
 			// End Class Collaboration
-
 
 			// Begin Class CollaborationUse
 			//Class and Feature IDs 
@@ -1503,7 +1462,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getCollaborationUse_Operation_every_role_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CollaborationUse
-
 
 			// Begin Class CombinedFragment
 			//Class and Feature IDs 
@@ -1533,7 +1491,6 @@ namespace uml
 			
 			// End Class CombinedFragment
 
-
 			// Begin Class Comment
 			//Class and Feature IDs 
 			static const unsigned long COMMENT_CLASS = 1805292871;
@@ -1554,7 +1511,6 @@ namespace uml
 			
 			// End Class Comment
 
-
 			// Begin Class CommunicationPath
 			//Class and Feature IDs 
 			static const unsigned long COMMUNICATIONPATH_CLASS = 1528411282;
@@ -1570,7 +1526,6 @@ namespace uml
 			
 			
 			// End Class CommunicationPath
-
 
 			// Begin Class Component
 			//Class and Feature IDs 
@@ -1614,7 +1569,6 @@ namespace uml
 			
 			// End Class Component
 
-
 			// Begin Class ComponentRealization
 			//Class and Feature IDs 
 			static const unsigned long COMPONENTREALIZATION_CLASS = 1104689316;
@@ -1634,7 +1588,6 @@ namespace uml
 			
 			
 			// End Class ComponentRealization
-
 
 			// Begin Class ConditionalNode
 			//Class and Feature IDs 
@@ -1672,7 +1625,6 @@ namespace uml
 			
 			// End Class ConditionalNode
 
-
 			// Begin Class ConnectableElement
 			//Class and Feature IDs 
 			static const unsigned long CONNECTABLEELEMENT_CLASS = 931219206;
@@ -1693,7 +1645,6 @@ namespace uml
 			
 			// End Class ConnectableElement
 
-
 			// Begin Class ConnectableElementTemplateParameter
 			//Class and Feature IDs 
 			static const unsigned long CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS = 1441743605;
@@ -1709,7 +1660,6 @@ namespace uml
 			
 			
 			// End Class ConnectableElementTemplateParameter
-
 
 			// Begin Class ConnectionPointReference
 			//Class and Feature IDs 
@@ -1736,7 +1686,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getConnectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConnectionPointReference
-
 
 			// Begin Class Connector
 			//Class and Feature IDs 
@@ -1772,7 +1721,6 @@ namespace uml
 			
 			// End Class Connector
 
-
 			// Begin Class ConnectorEnd
 			//Class and Feature IDs 
 			static const unsigned long CONNECTOREND_CLASS = 786822967;
@@ -1807,7 +1755,6 @@ namespace uml
 			
 			// End Class ConnectorEnd
 
-
 			// Begin Class ConsiderIgnoreFragment
 			//Class and Feature IDs 
 			static const unsigned long CONSIDERIGNOREFRAGMENT_CLASS = 856399595;
@@ -1829,7 +1776,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getConsiderIgnoreFragment_Operation_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConsiderIgnoreFragment
-
 
 			// Begin Class Constraint
 			//Class and Feature IDs 
@@ -1859,7 +1805,6 @@ namespace uml
 			
 			// End Class Constraint
 
-
 			// Begin Class Continuation
 			//Class and Feature IDs 
 			static const unsigned long CONTINUATION_CLASS = 1418318832;
@@ -1884,7 +1829,6 @@ namespace uml
 			
 			// End Class Continuation
 
-
 			// Begin Class ControlFlow
 			//Class and Feature IDs 
 			static const unsigned long CONTROLFLOW_CLASS = 384984320;
@@ -1903,7 +1847,6 @@ namespace uml
 			
 			// End Class ControlFlow
 
-
 			// Begin Class ControlNode
 			//Class and Feature IDs 
 			static const unsigned long CONTROLNODE_CLASS = 840349800;
@@ -1919,7 +1862,6 @@ namespace uml
 			
 			
 			// End Class ControlNode
-
 
 			// Begin Class CreateLinkAction
 			//Class and Feature IDs 
@@ -1938,7 +1880,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getCreateLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CreateLinkAction
-
 
 			// Begin Class CreateLinkObjectAction
 			//Class and Feature IDs 
@@ -1963,7 +1904,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getCreateLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CreateLinkObjectAction
-
 
 			// Begin Class CreateObjectAction
 			//Class and Feature IDs 
@@ -1993,7 +1933,6 @@ namespace uml
 			
 			// End Class CreateObjectAction
 
-
 			// Begin Class DataStoreNode
 			//Class and Feature IDs 
 			static const unsigned long DATASTORENODE_CLASS = 1584652237;
@@ -2009,7 +1948,6 @@ namespace uml
 			
 			
 			// End Class DataStoreNode
-
 
 			// Begin Class DataType
 			//Class and Feature IDs 
@@ -2034,7 +1972,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getDataType_Operation_createOwnedOperation_String_Type() const = 0;
 			
 			// End Class DataType
-
 
 			// Begin Class DecisionNode
 			//Class and Feature IDs 
@@ -2072,7 +2009,6 @@ namespace uml
 			
 			// End Class DecisionNode
 
-
 			// Begin Class Dependency
 			//Class and Feature IDs 
 			static const unsigned long DEPENDENCY_CLASS = 1756692956;
@@ -2093,7 +2029,6 @@ namespace uml
 			
 			// End Class Dependency
 
-
 			// Begin Class DeployedArtifact
 			//Class and Feature IDs 
 			static const unsigned long DEPLOYEDARTIFACT_CLASS = 1764040909;
@@ -2109,7 +2044,6 @@ namespace uml
 			
 			
 			// End Class DeployedArtifact
-
 
 			// Begin Class Deployment
 			//Class and Feature IDs 
@@ -2132,7 +2066,6 @@ namespace uml
 			
 			
 			// End Class Deployment
-
 
 			// Begin Class DeploymentSpecification
 			//Class and Feature IDs 
@@ -2160,7 +2093,6 @@ namespace uml
 			
 			// End Class DeploymentSpecification
 
-
 			// Begin Class DeploymentTarget
 			//Class and Feature IDs 
 			static const unsigned long DEPLOYMENTTARGET_CLASS = 1733136821;
@@ -2183,7 +2115,6 @@ namespace uml
 			
 			// End Class DeploymentTarget
 
-
 			// Begin Class DestroyLinkAction
 			//Class and Feature IDs 
 			static const unsigned long DESTROYLINKACTION_CLASS = 2091711812;
@@ -2199,7 +2130,6 @@ namespace uml
 			
 			
 			// End Class DestroyLinkAction
-
 
 			// Begin Class DestroyObjectAction
 			//Class and Feature IDs 
@@ -2227,7 +2157,6 @@ namespace uml
 			
 			// End Class DestroyObjectAction
 
-
 			// Begin Class DestructionOccurrenceSpecification
 			//Class and Feature IDs 
 			static const unsigned long DESTRUCTIONOCCURRENCESPECIFICATION_CLASS = 1076245046;
@@ -2246,7 +2175,6 @@ namespace uml
 			
 			// End Class DestructionOccurrenceSpecification
 
-
 			// Begin Class Device
 			//Class and Feature IDs 
 			static const unsigned long DEVICE_CLASS = 670693381;
@@ -2262,7 +2190,6 @@ namespace uml
 			
 			
 			// End Class Device
-
 
 			// Begin Class DirectedRelationship
 			//Class and Feature IDs 
@@ -2283,7 +2210,6 @@ namespace uml
 			
 			
 			// End Class DirectedRelationship
-
 
 			// Begin Class Duration
 			//Class and Feature IDs 
@@ -2307,7 +2233,6 @@ namespace uml
 			
 			// End Class Duration
 
-
 			// Begin Class DurationConstraint
 			//Class and Feature IDs 
 			static const unsigned long DURATIONCONSTRAINT_CLASS = 2114835612;
@@ -2330,7 +2255,6 @@ namespace uml
 			
 			// End Class DurationConstraint
 
-
 			// Begin Class DurationInterval
 			//Class and Feature IDs 
 			static const unsigned long DURATIONINTERVAL_CLASS = 1149806382;
@@ -2346,7 +2270,6 @@ namespace uml
 			
 			
 			// End Class DurationInterval
-
 
 			// Begin Class DurationObservation
 			//Class and Feature IDs 
@@ -2369,7 +2292,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getDurationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DurationObservation
-
 
 			// Begin Class Element
 			//Class and Feature IDs 
@@ -2469,7 +2391,6 @@ namespace uml
 			
 			// End Class Element
 
-
 			// Begin Class ElementImport
 			//Class and Feature IDs 
 			static const unsigned long ELEMENTIMPORT_CLASS = 104468135;
@@ -2500,7 +2421,6 @@ namespace uml
 			
 			// End Class ElementImport
 
-
 			// Begin Class EncapsulatedClassifier
 			//Class and Feature IDs 
 			static const unsigned long ENCAPSULATEDCLASSIFIER_CLASS = 642801704;
@@ -2521,7 +2441,6 @@ namespace uml
 			
 			// End Class EncapsulatedClassifier
 
-
 			// Begin Class Enumeration
 			//Class and Feature IDs 
 			static const unsigned long ENUMERATION_CLASS = 909805055;
@@ -2541,7 +2460,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getEnumeration_Operation_immutable_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Enumeration
-
 
 			// Begin Class EnumerationLiteral
 			//Class and Feature IDs 
@@ -2565,7 +2483,6 @@ namespace uml
 			
 			// End Class EnumerationLiteral
 
-
 			// Begin Class Event
 			//Class and Feature IDs 
 			static const unsigned long EVENT_CLASS = 466273883;
@@ -2581,7 +2498,6 @@ namespace uml
 			
 			
 			// End Class Event
-
 
 			// Begin Class ExceptionHandler
 			//Class and Feature IDs 
@@ -2619,7 +2535,6 @@ namespace uml
 			
 			// End Class ExceptionHandler
 
-
 			// Begin Class ExecutableNode
 			//Class and Feature IDs 
 			static const unsigned long EXECUTABLENODE_CLASS = 1759403238;
@@ -2638,7 +2553,6 @@ namespace uml
 			
 			// End Class ExecutableNode
 
-
 			// Begin Class ExecutionEnvironment
 			//Class and Feature IDs 
 			static const unsigned long EXECUTIONENVIRONMENT_CLASS = 629658321;
@@ -2654,7 +2568,6 @@ namespace uml
 			
 			
 			// End Class ExecutionEnvironment
-
 
 			// Begin Class ExecutionOccurrenceSpecification
 			//Class and Feature IDs 
@@ -2673,7 +2586,6 @@ namespace uml
 			
 			
 			// End Class ExecutionOccurrenceSpecification
-
 
 			// Begin Class ExecutionSpecification
 			//Class and Feature IDs 
@@ -2697,7 +2609,6 @@ namespace uml
 			
 			// End Class ExecutionSpecification
 
-
 			// Begin Class ExpansionNode
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONNODE_CLASS = 316346527;
@@ -2719,7 +2630,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getExpansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExpansionNode
-
 
 			// Begin Class ExpansionRegion
 			//Class and Feature IDs 
@@ -2743,7 +2653,6 @@ namespace uml
 			
 			// End Class ExpansionRegion
 
-
 			// Begin Class Expression
 			//Class and Feature IDs 
 			static const unsigned long EXPRESSION_CLASS = 1968149587;
@@ -2763,7 +2672,6 @@ namespace uml
 			
 			
 			// End Class Expression
-
 
 			// Begin Class Extend
 			//Class and Feature IDs 
@@ -2790,7 +2698,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getExtend_Operation_extension_points_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Extend
-
 
 			// Begin Class Extension
 			//Class and Feature IDs 
@@ -2826,7 +2733,6 @@ namespace uml
 			
 			// End Class Extension
 
-
 			// Begin Class ExtensionEnd
 			//Class and Feature IDs 
 			static const unsigned long EXTENSIONEND_CLASS = 1136677900;
@@ -2846,7 +2752,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getExtensionEnd_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExtensionEnd
-
 
 			// Begin Class ExtensionPoint
 			//Class and Feature IDs 
@@ -2868,7 +2773,6 @@ namespace uml
 			
 			// End Class ExtensionPoint
 
-
 			// Begin Class Factory
 			//Class and Feature IDs 
 			static const unsigned long FACTORY_CLASS = 599584587;
@@ -2886,7 +2790,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getFactory_Operation_create_Class() const = 0;
 			
 			// End Class Factory
-
 
 			// Begin Class Feature
 			//Class and Feature IDs 
@@ -2908,7 +2811,6 @@ namespace uml
 			
 			// End Class Feature
 
-
 			// Begin Class FinalNode
 			//Class and Feature IDs 
 			static const unsigned long FINALNODE_CLASS = 464466192;
@@ -2926,7 +2828,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getFinalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class FinalNode
-
 
 			// Begin Class FinalState
 			//Class and Feature IDs 
@@ -2956,7 +2857,6 @@ namespace uml
 			
 			// End Class FinalState
 
-
 			// Begin Class FlowFinalNode
 			//Class and Feature IDs 
 			static const unsigned long FLOWFINALNODE_CLASS = 1942042735;
@@ -2972,7 +2872,6 @@ namespace uml
 			
 			
 			// End Class FlowFinalNode
-
 
 			// Begin Class ForkNode
 			//Class and Feature IDs 
@@ -2993,7 +2892,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getForkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ForkNode
-
 
 			// Begin Class FunctionBehavior
 			//Class and Feature IDs 
@@ -3016,7 +2914,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getFunctionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class FunctionBehavior
-
 
 			// Begin Class Gate
 			//Class and Feature IDs 
@@ -3062,7 +2959,6 @@ namespace uml
 			
 			// End Class Gate
 
-
 			// Begin Class GeneralOrdering
 			//Class and Feature IDs 
 			static const unsigned long GENERALORDERING_CLASS = 1235473143;
@@ -3084,7 +2980,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getGeneralOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class GeneralOrdering
-
 
 			// Begin Class Generalization
 			//Class and Feature IDs 
@@ -3109,7 +3004,6 @@ namespace uml
 			
 			
 			// End Class Generalization
-
 
 			// Begin Class GeneralizationSet
 			//Class and Feature IDs 
@@ -3139,7 +3033,6 @@ namespace uml
 			
 			// End Class GeneralizationSet
 
-
 			// Begin Class Image
 			//Class and Feature IDs 
 			static const unsigned long IMAGE_CLASS = 220845306;
@@ -3162,7 +3055,6 @@ namespace uml
 			
 			// End Class Image
 
-
 			// Begin Class Include
 			//Class and Feature IDs 
 			static const unsigned long INCLUDE_CLASS = 471307791;
@@ -3182,7 +3074,6 @@ namespace uml
 			
 			
 			// End Class Include
-
 
 			// Begin Class InformationFlow
 			//Class and Feature IDs 
@@ -3220,7 +3111,6 @@ namespace uml
 			
 			// End Class InformationFlow
 
-
 			// Begin Class InformationItem
 			//Class and Feature IDs 
 			static const unsigned long INFORMATIONITEM_CLASS = 1290782195;
@@ -3245,7 +3135,6 @@ namespace uml
 			
 			// End Class InformationItem
 
-
 			// Begin Class InitialNode
 			//Class and Feature IDs 
 			static const unsigned long INITIALNODE_CLASS = 2092677594;
@@ -3265,7 +3154,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getInitialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InitialNode
-
 
 			// Begin Class InputPin
 			//Class and Feature IDs 
@@ -3301,7 +3189,6 @@ namespace uml
 			
 			// End Class InputPin
 
-
 			// Begin Class InstanceSpecification
 			//Class and Feature IDs 
 			static const unsigned long INSTANCESPECIFICATION_CLASS = 1361270587;
@@ -3332,7 +3219,6 @@ namespace uml
 			
 			// End Class InstanceSpecification
 
-
 			// Begin Class InstanceValue
 			//Class and Feature IDs 
 			static const unsigned long INSTANCEVALUE_CLASS = 1323794366;
@@ -3350,7 +3236,6 @@ namespace uml
 			
 			
 			// End Class InstanceValue
-
 
 			// Begin Class Interaction
 			//Class and Feature IDs 
@@ -3379,7 +3264,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getInteraction_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Interaction
-
 
 			// Begin Class InteractionConstraint
 			//Class and Feature IDs 
@@ -3413,7 +3297,6 @@ namespace uml
 			
 			// End Class InteractionConstraint
 
-
 			// Begin Class InteractionFragment
 			//Class and Feature IDs 
 			static const unsigned long INTERACTIONFRAGMENT_CLASS = 1990551888;
@@ -3438,7 +3321,6 @@ namespace uml
 			
 			// End Class InteractionFragment
 
-
 			// Begin Class InteractionOperand
 			//Class and Feature IDs 
 			static const unsigned long INTERACTIONOPERAND_CLASS = 2009982547;
@@ -3462,7 +3344,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getInteractionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InteractionOperand
-
 
 			// Begin Class InteractionUse
 			//Class and Feature IDs 
@@ -3502,7 +3383,6 @@ namespace uml
 			
 			// End Class InteractionUse
 
-
 			// Begin Class Interface
 			//Class and Feature IDs 
 			static const unsigned long INTERFACE_CLASS = 578134333;
@@ -3537,7 +3417,6 @@ namespace uml
 			
 			// End Class Interface
 
-
 			// Begin Class InterfaceRealization
 			//Class and Feature IDs 
 			static const unsigned long INTERFACEREALIZATION_CLASS = 409044285;
@@ -3557,7 +3436,6 @@ namespace uml
 			
 			
 			// End Class InterfaceRealization
-
 
 			// Begin Class InterruptibleActivityRegion
 			//Class and Feature IDs 
@@ -3581,7 +3459,6 @@ namespace uml
 			
 			// End Class InterruptibleActivityRegion
 
-
 			// Begin Class Interval
 			//Class and Feature IDs 
 			static const unsigned long INTERVAL_CLASS = 1607210521;
@@ -3602,7 +3479,6 @@ namespace uml
 			
 			// End Class Interval
 
-
 			// Begin Class IntervalConstraint
 			//Class and Feature IDs 
 			static const unsigned long INTERVALCONSTRAINT_CLASS = 549394580;
@@ -3618,7 +3494,6 @@ namespace uml
 			
 			
 			// End Class IntervalConstraint
-
 
 			// Begin Class InvocationAction
 			//Class and Feature IDs 
@@ -3639,7 +3514,6 @@ namespace uml
 			
 			
 			// End Class InvocationAction
-
 
 			// Begin Class JoinNode
 			//Class and Feature IDs 
@@ -3664,7 +3538,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getJoinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class JoinNode
-
 
 			// Begin Class Lifeline
 			//Class and Feature IDs 
@@ -3700,7 +3573,6 @@ namespace uml
 			
 			// End Class Lifeline
 
-
 			// Begin Class LinkAction
 			//Class and Feature IDs 
 			static const unsigned long LINKACTION_CLASS = 224235646;
@@ -3729,7 +3601,6 @@ namespace uml
 			
 			// End Class LinkAction
 
-
 			// Begin Class LinkEndCreationData
 			//Class and Feature IDs 
 			static const unsigned long LINKENDCREATIONDATA_CLASS = 808086307;
@@ -3751,7 +3622,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getLinkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkEndCreationData
-
 
 			// Begin Class LinkEndData
 			//Class and Feature IDs 
@@ -3787,7 +3657,6 @@ namespace uml
 			
 			// End Class LinkEndData
 
-
 			// Begin Class LinkEndDestructionData
 			//Class and Feature IDs 
 			static const unsigned long LINKENDDESTRUCTIONDATA_CLASS = 676339009;
@@ -3809,7 +3678,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getLinkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkEndDestructionData
-
 
 			// Begin Class LiteralBoolean
 			//Class and Feature IDs 
@@ -3833,7 +3701,6 @@ namespace uml
 			
 			// End Class LiteralBoolean
 
-
 			// Begin Class LiteralInteger
 			//Class and Feature IDs 
 			static const unsigned long LITERALINTEGER_CLASS = 1118196165;
@@ -3856,7 +3723,6 @@ namespace uml
 			
 			// End Class LiteralInteger
 
-
 			// Begin Class LiteralNull
 			//Class and Feature IDs 
 			static const unsigned long LITERALNULL_CLASS = 124243247;
@@ -3876,7 +3742,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getLiteralNull_Operation_isNull() const = 0;
 			
 			// End Class LiteralNull
-
 
 			// Begin Class LiteralReal
 			//Class and Feature IDs 
@@ -3900,7 +3765,6 @@ namespace uml
 			
 			// End Class LiteralReal
 
-
 			// Begin Class LiteralSpecification
 			//Class and Feature IDs 
 			static const unsigned long LITERALSPECIFICATION_CLASS = 425752883;
@@ -3916,7 +3780,6 @@ namespace uml
 			
 			
 			// End Class LiteralSpecification
-
 
 			// Begin Class LiteralString
 			//Class and Feature IDs 
@@ -3940,7 +3803,6 @@ namespace uml
 			
 			// End Class LiteralString
 
-
 			// Begin Class LiteralUnlimitedNatural
 			//Class and Feature IDs 
 			static const unsigned long LITERALUNLIMITEDNATURAL_CLASS = 1643522865;
@@ -3962,7 +3824,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNatural_Operation_unlimitedValue() const = 0;
 			
 			// End Class LiteralUnlimitedNatural
-
 
 			// Begin Class LoopNode
 			//Class and Feature IDs 
@@ -4016,7 +3877,6 @@ namespace uml
 			
 			// End Class LoopNode
 
-
 			// Begin Class Manifestation
 			//Class and Feature IDs 
 			static const unsigned long MANIFESTATION_CLASS = 1556479640;
@@ -4034,7 +3894,6 @@ namespace uml
 			
 			
 			// End Class Manifestation
-
 
 			// Begin Class MergeNode
 			//Class and Feature IDs 
@@ -4055,7 +3914,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getMergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class MergeNode
-
 
 			// Begin Class Message
 			//Class and Feature IDs 
@@ -4107,7 +3965,6 @@ namespace uml
 			
 			// End Class Message
 
-
 			// Begin Class MessageEnd
 			//Class and Feature IDs 
 			static const unsigned long MESSAGEEND_CLASS = 538049257;
@@ -4134,7 +3991,6 @@ namespace uml
 			
 			// End Class MessageEnd
 
-
 			// Begin Class MessageEvent
 			//Class and Feature IDs 
 			static const unsigned long MESSAGEEVENT_CLASS = 720137390;
@@ -4151,7 +4007,6 @@ namespace uml
 			
 			// End Class MessageEvent
 
-
 			// Begin Class MessageOccurrenceSpecification
 			//Class and Feature IDs 
 			static const unsigned long MESSAGEOCCURRENCESPECIFICATION_CLASS = 863455688;
@@ -4167,7 +4022,6 @@ namespace uml
 			
 			
 			// End Class MessageOccurrenceSpecification
-
 
 			// Begin Class Model
 			//Class and Feature IDs 
@@ -4188,7 +4042,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getModel_Operation_isMetamodel() const = 0;
 			
 			// End Class Model
-
 
 			// Begin Class MultiplicityElement
 			//Class and Feature IDs 
@@ -4241,7 +4094,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class MultiplicityElement
-
 
 			// Begin Class NamedElement
 			//Class and Feature IDs 
@@ -4299,7 +4151,6 @@ namespace uml
 			
 			// End Class NamedElement
 
-
 			// Begin Class Namespace
 			//Class and Feature IDs 
 			static const unsigned long NAMESPACE_CLASS = 713364053;
@@ -4354,7 +4205,6 @@ namespace uml
 			
 			// End Class Namespace
 
-
 			// Begin Class Node
 			//Class and Feature IDs 
 			static const unsigned long NODE_CLASS = 1041077555;
@@ -4379,7 +4229,6 @@ namespace uml
 			
 			// End Class Node
 
-
 			// Begin Class Object
 			//Class and Feature IDs 
 			static const unsigned long OBJECT_CLASS = 1944725388;
@@ -4403,7 +4252,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unset_Property() const = 0;
 			
 			// End Class Object
-
 
 			// Begin Class ObjectFlow
 			//Class and Feature IDs 
@@ -4445,7 +4293,6 @@ namespace uml
 			
 			// End Class ObjectFlow
 
-
 			// Begin Class ObjectNode
 			//Class and Feature IDs 
 			static const unsigned long OBJECTNODE_CLASS = 1100606166;
@@ -4478,7 +4325,6 @@ namespace uml
 			
 			// End Class ObjectNode
 
-
 			// Begin Class Observation
 			//Class and Feature IDs 
 			static const unsigned long OBSERVATION_CLASS = 1431137305;
@@ -4494,7 +4340,6 @@ namespace uml
 			
 			
 			// End Class Observation
-
 
 			// Begin Class OccurrenceSpecification
 			//Class and Feature IDs 
@@ -4519,7 +4364,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOccurrenceSpecification_Operation_setCovered_Lifeline() const = 0;
 			
 			// End Class OccurrenceSpecification
-
 
 			// Begin Class OpaqueAction
 			//Class and Feature IDs 
@@ -4547,7 +4391,6 @@ namespace uml
 			
 			// End Class OpaqueAction
 
-
 			// Begin Class OpaqueBehavior
 			//Class and Feature IDs 
 			static const unsigned long OPAQUEBEHAVIOR_CLASS = 1759981137;
@@ -4567,7 +4410,6 @@ namespace uml
 			
 			
 			// End Class OpaqueBehavior
-
 
 			// Begin Class OpaqueExpression
 			//Class and Feature IDs 
@@ -4608,7 +4450,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_value() const = 0;
 			
 			// End Class OpaqueExpression
-
 
 			// Begin Class Operation
 			//Class and Feature IDs 
@@ -4684,7 +4525,6 @@ namespace uml
 			
 			// End Class Operation
 
-
 			// Begin Class OperationTemplateParameter
 			//Class and Feature IDs 
 			static const unsigned long OPERATIONTEMPLATEPARAMETER_CLASS = 553500193;
@@ -4702,7 +4542,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOperationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class OperationTemplateParameter
-
 
 			// Begin Class OutputPin
 			//Class and Feature IDs 
@@ -4737,7 +4576,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class OutputPin
-
 
 			// Begin Class Package
 			//Class and Feature IDs 
@@ -4819,7 +4657,6 @@ namespace uml
 			
 			// End Class Package
 
-
 			// Begin Class PackageImport
 			//Class and Feature IDs 
 			static const unsigned long PACKAGEIMPORT_CLASS = 34305688;
@@ -4844,7 +4681,6 @@ namespace uml
 			
 			// End Class PackageImport
 
-
 			// Begin Class PackageMerge
 			//Class and Feature IDs 
 			static const unsigned long PACKAGEMERGE_CLASS = 1665406148;
@@ -4865,7 +4701,6 @@ namespace uml
 			
 			// End Class PackageMerge
 
-
 			// Begin Class PackageableElement
 			//Class and Feature IDs 
 			static const unsigned long PACKAGEABLEELEMENT_CLASS = 1261869628;
@@ -4885,7 +4720,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getPackageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class PackageableElement
-
 
 			// Begin Class Parameter
 			//Class and Feature IDs 
@@ -4949,7 +4783,6 @@ namespace uml
 			
 			// End Class Parameter
 
-
 			// Begin Class ParameterSet
 			//Class and Feature IDs 
 			static const unsigned long PARAMETERSET_CLASS = 55651748;
@@ -4976,7 +4809,6 @@ namespace uml
 			
 			// End Class ParameterSet
 
-
 			// Begin Class ParameterableElement
 			//Class and Feature IDs 
 			static const unsigned long PARAMETERABLEELEMENT_CLASS = 2092034202;
@@ -5001,7 +4833,6 @@ namespace uml
 			
 			// End Class ParameterableElement
 
-
 			// Begin Class PartDecomposition
 			//Class and Feature IDs 
 			static const unsigned long PARTDECOMPOSITION_CLASS = 398001619;
@@ -5024,7 +4855,6 @@ namespace uml
 			
 			// End Class PartDecomposition
 
-
 			// Begin Class Pin
 			//Class and Feature IDs 
 			static const unsigned long PIN_CLASS = 934996748;
@@ -5046,7 +4876,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getPin_Operation_not_unique_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Pin
-
 
 			// Begin Class Port
 			//Class and Feature IDs 
@@ -5092,7 +4921,6 @@ namespace uml
 			
 			// End Class Port
 
-
 			// Begin Class PrimitiveType
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVETYPE_CLASS = 766018307;
@@ -5108,7 +4936,6 @@ namespace uml
 			
 			
 			// End Class PrimitiveType
-
 
 			// Begin Class Profile
 			//Class and Feature IDs 
@@ -5152,7 +4979,6 @@ namespace uml
 			
 			// End Class Profile
 
-
 			// Begin Class ProfileApplication
 			//Class and Feature IDs 
 			static const unsigned long PROFILEAPPLICATION_CLASS = 331068100;
@@ -5178,7 +5004,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getProfileApplication_Operation_getAppliedDefinition_NamedElement() const = 0;
 			
 			// End Class ProfileApplication
-
 
 			// Begin Class Property
 			//Class and Feature IDs 
@@ -5282,7 +5107,6 @@ namespace uml
 			
 			// End Class Property
 
-
 			// Begin Class ProtocolConformance
 			//Class and Feature IDs 
 			static const unsigned long PROTOCOLCONFORMANCE_CLASS = 495157811;
@@ -5302,7 +5126,6 @@ namespace uml
 			
 			
 			// End Class ProtocolConformance
-
 
 			// Begin Class ProtocolStateMachine
 			//Class and Feature IDs 
@@ -5327,7 +5150,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getProtocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ProtocolStateMachine
-
 
 			// Begin Class ProtocolTransition
 			//Class and Feature IDs 
@@ -5358,7 +5180,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getProtocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ProtocolTransition
-
 
 			// Begin Class Pseudostate
 			//Class and Feature IDs 
@@ -5400,7 +5221,6 @@ namespace uml
 			
 			// End Class Pseudostate
 
-
 			// Begin Class QualifierValue
 			//Class and Feature IDs 
 			static const unsigned long QUALIFIERVALUE_CLASS = 2095701169;
@@ -5427,7 +5247,6 @@ namespace uml
 			
 			// End Class QualifierValue
 
-
 			// Begin Class RaiseExceptionAction
 			//Class and Feature IDs 
 			static const unsigned long RAISEEXCEPTIONACTION_CLASS = 1605923884;
@@ -5445,7 +5264,6 @@ namespace uml
 			
 			
 			// End Class RaiseExceptionAction
-
 
 			// Begin Class ReadExtentAction
 			//Class and Feature IDs 
@@ -5470,7 +5288,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReadExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadExtentAction
-
 
 			// Begin Class ReadIsClassifiedObjectAction
 			//Class and Feature IDs 
@@ -5504,7 +5321,6 @@ namespace uml
 			
 			// End Class ReadIsClassifiedObjectAction
 
-
 			// Begin Class ReadLinkAction
 			//Class and Feature IDs 
 			static const unsigned long READLINKACTION_CLASS = 130976942;
@@ -5534,7 +5350,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadLinkAction
-
 
 			// Begin Class ReadLinkObjectEndAction
 			//Class and Feature IDs 
@@ -5571,7 +5386,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadLinkObjectEndAction
-
 
 			// Begin Class ReadLinkObjectEndQualifierAction
 			//Class and Feature IDs 
@@ -5611,7 +5425,6 @@ namespace uml
 			
 			// End Class ReadLinkObjectEndQualifierAction
 
-
 			// Begin Class ReadSelfAction
 			//Class and Feature IDs 
 			static const unsigned long READSELFACTION_CLASS = 510653806;
@@ -5638,7 +5451,6 @@ namespace uml
 			
 			// End Class ReadSelfAction
 
-
 			// Begin Class ReadStructuralFeatureAction
 			//Class and Feature IDs 
 			static const unsigned long READSTRUCTURALFEATUREACTION_CLASS = 876908300;
@@ -5658,7 +5470,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadStructuralFeatureAction
-
 
 			// Begin Class ReadVariableAction
 			//Class and Feature IDs 
@@ -5682,7 +5493,6 @@ namespace uml
 			
 			// End Class ReadVariableAction
 
-
 			// Begin Class Realization
 			//Class and Feature IDs 
 			static const unsigned long REALIZATION_CLASS = 895849765;
@@ -5698,7 +5508,6 @@ namespace uml
 			
 			
 			// End Class Realization
-
 
 			// Begin Class Reception
 			//Class and Feature IDs 
@@ -5721,7 +5530,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReception_Operation_same_structure_as_signal_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Reception
-
 
 			// Begin Class ReclassifyObjectAction
 			//Class and Feature IDs 
@@ -5752,7 +5560,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReclassifyObjectAction
-
 
 			// Begin Class RedefinableElement
 			//Class and Feature IDs 
@@ -5786,7 +5593,6 @@ namespace uml
 			
 			// End Class RedefinableElement
 
-
 			// Begin Class RedefinableTemplateSignature
 			//Class and Feature IDs 
 			static const unsigned long REDEFINABLETEMPLATESIGNATURE_CLASS = 551760388;
@@ -5812,7 +5618,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getRedefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RedefinableTemplateSignature
-
 
 			// Begin Class ReduceAction
 			//Class and Feature IDs 
@@ -5843,7 +5648,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getReduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReduceAction
-
 
 			// Begin Class Region
 			//Class and Feature IDs 
@@ -5885,7 +5689,6 @@ namespace uml
 			
 			// End Class Region
 
-
 			// Begin Class Relationship
 			//Class and Feature IDs 
 			static const unsigned long RELATIONSHIP_CLASS = 138854523;
@@ -5903,7 +5706,6 @@ namespace uml
 			
 			
 			// End Class Relationship
-
 
 			// Begin Class RemoveStructuralFeatureValueAction
 			//Class and Feature IDs 
@@ -5927,7 +5729,6 @@ namespace uml
 			
 			// End Class RemoveStructuralFeatureValueAction
 
-
 			// Begin Class RemoveVariableValueAction
 			//Class and Feature IDs 
 			static const unsigned long REMOVEVARIABLEVALUEACTION_CLASS = 640536146;
@@ -5949,7 +5750,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getRemoveVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RemoveVariableValueAction
-
 
 			// Begin Class ReplyAction
 			//Class and Feature IDs 
@@ -5977,7 +5777,6 @@ namespace uml
 			
 			// End Class ReplyAction
 
-
 			// Begin Class SendObjectAction
 			//Class and Feature IDs 
 			static const unsigned long SENDOBJECTACTION_CLASS = 1714526972;
@@ -5999,7 +5798,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getSendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class SendObjectAction
-
 
 			// Begin Class SendSignalAction
 			//Class and Feature IDs 
@@ -6027,7 +5825,6 @@ namespace uml
 			
 			// End Class SendSignalAction
 
-
 			// Begin Class SequenceNode
 			//Class and Feature IDs 
 			static const unsigned long SEQUENCENODE_CLASS = 1319746976;
@@ -6045,7 +5842,6 @@ namespace uml
 			
 			
 			// End Class SequenceNode
-
 
 			// Begin Class Signal
 			//Class and Feature IDs 
@@ -6067,7 +5863,6 @@ namespace uml
 			
 			// End Class Signal
 
-
 			// Begin Class SignalEvent
 			//Class and Feature IDs 
 			static const unsigned long SIGNALEVENT_CLASS = 1532223968;
@@ -6085,7 +5880,6 @@ namespace uml
 			
 			
 			// End Class SignalEvent
-
 
 			// Begin Class Slot
 			//Class and Feature IDs 
@@ -6109,7 +5903,6 @@ namespace uml
 			
 			// End Class Slot
 
-
 			// Begin Class StartClassifierBehaviorAction
 			//Class and Feature IDs 
 			static const unsigned long STARTCLASSIFIERBEHAVIORACTION_CLASS = 765374171;
@@ -6131,7 +5924,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getStartClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StartClassifierBehaviorAction
-
 
 			// Begin Class StartObjectBehaviorAction
 			//Class and Feature IDs 
@@ -6158,7 +5950,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StartObjectBehaviorAction
-
 
 			// Begin Class State
 			//Class and Feature IDs 
@@ -6224,7 +6015,6 @@ namespace uml
 			
 			// End Class State
 
-
 			// Begin Class StateInvariant
 			//Class and Feature IDs 
 			static const unsigned long STATEINVARIANT_CLASS = 655284210;
@@ -6242,7 +6032,6 @@ namespace uml
 			
 			
 			// End Class StateInvariant
-
 
 			// Begin Class StateMachine
 			//Class and Feature IDs 
@@ -6281,7 +6070,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_method_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StateMachine
-
 
 			// Begin Class Stereotype
 			//Class and Feature IDs 
@@ -6337,7 +6125,6 @@ namespace uml
 			
 			// End Class Stereotype
 
-
 			// Begin Class StringExpression
 			//Class and Feature IDs 
 			static const unsigned long STRINGEXPRESSION_CLASS = 1815291130;
@@ -6362,7 +6149,6 @@ namespace uml
 			
 			// End Class StringExpression
 
-
 			// Begin Class StructuralFeature
 			//Class and Feature IDs 
 			static const unsigned long STRUCTURALFEATURE_CLASS = 1491761530;
@@ -6380,7 +6166,6 @@ namespace uml
 			
 			
 			// End Class StructuralFeature
-
 
 			// Begin Class StructuralFeatureAction
 			//Class and Feature IDs 
@@ -6411,7 +6196,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StructuralFeatureAction
-
 
 			// Begin Class StructuredActivityNode
 			//Class and Feature IDs 
@@ -6451,7 +6235,6 @@ namespace uml
 			
 			// End Class StructuredActivityNode
 
-
 			// Begin Class StructuredClassifier
 			//Class and Feature IDs 
 			static const unsigned long STRUCTUREDCLASSIFIER_CLASS = 1642027075;
@@ -6482,7 +6265,6 @@ namespace uml
 			
 			// End Class StructuredClassifier
 
-
 			// Begin Class Substitution
 			//Class and Feature IDs 
 			static const unsigned long SUBSTITUTION_CLASS = 615299251;
@@ -6502,7 +6284,6 @@ namespace uml
 			
 			
 			// End Class Substitution
-
 
 			// Begin Class TemplateBinding
 			//Class and Feature IDs 
@@ -6529,7 +6310,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getTemplateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateBinding
-
 
 			// Begin Class TemplateParameter
 			//Class and Feature IDs 
@@ -6559,7 +6339,6 @@ namespace uml
 			
 			// End Class TemplateParameter
 
-
 			// Begin Class TemplateParameterSubstitution
 			//Class and Feature IDs 
 			static const unsigned long TEMPLATEPARAMETERSUBSTITUTION_CLASS = 1208766550;
@@ -6585,7 +6364,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getTemplateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateParameterSubstitution
-
 
 			// Begin Class TemplateSignature
 			//Class and Feature IDs 
@@ -6613,7 +6391,6 @@ namespace uml
 			
 			// End Class TemplateSignature
 
-
 			// Begin Class TemplateableElement
 			//Class and Feature IDs 
 			static const unsigned long TEMPLATEABLEELEMENT_CLASS = 336172473;
@@ -6637,7 +6414,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getTemplateableElement_Operation_parameterableElements() const = 0;
 			
 			// End Class TemplateableElement
-
 
 			// Begin Class TestIdentityAction
 			//Class and Feature IDs 
@@ -6667,7 +6443,6 @@ namespace uml
 			
 			// End Class TestIdentityAction
 
-
 			// Begin Class TimeConstraint
 			//Class and Feature IDs 
 			static const unsigned long TIMECONSTRAINT_CLASS = 469373492;
@@ -6687,7 +6462,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getTimeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TimeConstraint
-
 
 			// Begin Class TimeEvent
 			//Class and Feature IDs 
@@ -6711,7 +6485,6 @@ namespace uml
 			
 			// End Class TimeEvent
 
-
 			// Begin Class TimeExpression
 			//Class and Feature IDs 
 			static const unsigned long TIMEEXPRESSION_CLASS = 247399308;
@@ -6734,7 +6507,6 @@ namespace uml
 			
 			// End Class TimeExpression
 
-
 			// Begin Class TimeInterval
 			//Class and Feature IDs 
 			static const unsigned long TIMEINTERVAL_CLASS = 1627685374;
@@ -6750,7 +6522,6 @@ namespace uml
 			
 			
 			// End Class TimeInterval
-
 
 			// Begin Class TimeObservation
 			//Class and Feature IDs 
@@ -6771,7 +6542,6 @@ namespace uml
 			
 			
 			// End Class TimeObservation
-
 
 			// Begin Class Transition
 			//Class and Feature IDs 
@@ -6827,7 +6597,6 @@ namespace uml
 			
 			// End Class Transition
 
-
 			// Begin Class Trigger
 			//Class and Feature IDs 
 			static const unsigned long TRIGGER_CLASS = 509470680;
@@ -6849,7 +6618,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getTrigger_Operation_trigger_with_ports_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Trigger
-
 
 			// Begin Class Type
 			//Class and Feature IDs 
@@ -6875,7 +6643,6 @@ namespace uml
 			
 			// End Class Type
 
-
 			// Begin Class TypedElement
 			//Class and Feature IDs 
 			static const unsigned long TYPEDELEMENT_CLASS = 434581480;
@@ -6893,7 +6660,6 @@ namespace uml
 			
 			
 			// End Class TypedElement
-
 
 			// Begin Class UnmarshallAction
 			//Class and Feature IDs 
@@ -6927,7 +6693,6 @@ namespace uml
 			
 			// End Class UnmarshallAction
 
-
 			// Begin Class Usage
 			//Class and Feature IDs 
 			static const unsigned long USAGE_CLASS = 786404588;
@@ -6943,7 +6708,6 @@ namespace uml
 			
 			
 			// End Class Usage
-
 
 			// Begin Class UseCase
 			//Class and Feature IDs 
@@ -6979,7 +6743,6 @@ namespace uml
 			
 			// End Class UseCase
 
-
 			// Begin Class ValuePin
 			//Class and Feature IDs 
 			static const unsigned long VALUEPIN_CLASS = 239056974;
@@ -7001,7 +6764,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getValuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ValuePin
-
 
 			// Begin Class ValueSpecification
 			//Class and Feature IDs 
@@ -7037,7 +6799,6 @@ namespace uml
 			
 			// End Class ValueSpecification
 
-
 			// Begin Class ValueSpecificationAction
 			//Class and Feature IDs 
 			static const unsigned long VALUESPECIFICATIONACTION_CLASS = 239898752;
@@ -7062,7 +6823,6 @@ namespace uml
 			
 			// End Class ValueSpecificationAction
 
-
 			// Begin Class Variable
 			//Class and Feature IDs 
 			static const unsigned long VARIABLE_CLASS = 1446148199;
@@ -7085,7 +6845,6 @@ namespace uml
 			
 			// End Class Variable
 
-
 			// Begin Class VariableAction
 			//Class and Feature IDs 
 			static const unsigned long VARIABLEACTION_CLASS = 2098580040;
@@ -7105,7 +6864,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getVariableAction_Operation_scope_of_variable_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class VariableAction
-
 
 			// Begin Class Vertex
 			//Class and Feature IDs 
@@ -7139,7 +6897,6 @@ namespace uml
 			
 			// End Class Vertex
 
-
 			// Begin Class WriteLinkAction
 			//Class and Feature IDs 
 			static const unsigned long WRITELINKACTION_CLASS = 17620663;
@@ -7157,7 +6914,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getWriteLinkAction_Operation_allow_access_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class WriteLinkAction
-
 
 			// Begin Class WriteStructuralFeatureAction
 			//Class and Feature IDs 
@@ -7187,7 +6943,6 @@ namespace uml
 			
 			// End Class WriteStructuralFeatureAction
 
-
 			// Begin Class WriteVariableAction
 			//Class and Feature IDs 
 			static const unsigned long WRITEVARIABLEACTION_CLASS = 1970819555;
@@ -7209,7 +6964,6 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getWriteVariableAction_Operation_value_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class WriteVariableAction
-
 			static const int AGGREGATIONKIND_CLASS = 17;
 			static const int CALLCONCURRENCYKIND_CLASS = 30;
 			static const int CONNECTORKIND_CLASS = 55;
@@ -7238,12 +6992,20 @@ namespace uml
 			virtual std::shared_ptr<ecore::EEnum> getTransitionKind_Class() const = 0;
 			virtual std::shared_ptr<ecore::EEnum> getVisibilityKind_Class() const = 0;
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class umlPluginImpl;
+			// Header only sinleton like implemenation for umlPackage eInstance()
+			private: 
+				static std::shared_ptr<umlPackage>* getumlPackageStaticPtr()
+				{
+					static std::shared_ptr<umlPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<umlPackage> _instance) {*(getumlPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<umlPackage> eInstance();
+				static std::shared_ptr<umlPackage> eInstance(){return *(getumlPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: UMLPACKAGE_HPP */

@@ -22,7 +22,10 @@ namespace uml
 }
 
 
-
+namespace uml 
+{
+	class umlFactoryPluginImpl;
+}
 namespace uml 
 {
 	class UML_API umlFactory : virtual public ecore::EFactory 
@@ -32,11 +35,20 @@ namespace uml
 			umlFactory& operator=(umlFactory const&) = delete;
 		protected:
 			umlFactory(){}
+		private:    	
+			friend class umlPluginImpl; 
+		// Header only sinleton like implemenation for umlFactory eInstance()
+		private: 
+			static std::shared_ptr<umlFactory>* getumlFactoryStaticPtr()
+			{
+				static std::shared_ptr<umlFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<umlFactory> _instance) {*(getumlFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<umlFactory> eInstance(){return *(getumlFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<umlFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

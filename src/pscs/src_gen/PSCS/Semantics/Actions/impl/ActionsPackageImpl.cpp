@@ -24,18 +24,7 @@
 
 using namespace PSCS::Semantics::Actions;
 
-//Singleton implementation 
-std::shared_ptr<ActionsPackage> ActionsPackage::eInstance()
-{
-	static std::shared_ptr<ActionsPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(ActionsPackageImpl::create());
-		std::dynamic_pointer_cast<ActionsPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string ActionsPackage::eNAME ="Actions";
 const std::string ActionsPackage::eNS_URI ="http:///PSCS_Semantics/Semantics/Actions.ecore";

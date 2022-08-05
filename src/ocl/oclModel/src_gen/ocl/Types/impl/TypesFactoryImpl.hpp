@@ -38,7 +38,7 @@ namespace ocl::Types
 			TypesFactoryImpl& operator=(TypesFactoryImpl const&) = delete;
 
 		protected:
-			friend class TypesFactory;
+			friend class TypesPluginImpl;  
 			// Constructor
 			TypesFactoryImpl();
 

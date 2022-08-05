@@ -11,6 +11,7 @@
 #include "ecore/ecore.hpp"
 
 #include "ecore/EPackage.hpp"
+#include "ecore/ecorePlugin.hpp"
 
 namespace ecore 
 {
@@ -100,7 +101,6 @@ namespace ecore
 			
 			// End Class EAnnotation
 
-
 			// Begin Class EAttribute
 			//Class and Feature IDs 
 			static const unsigned long EATTRIBUTE_CLASS = 1433133167;
@@ -120,7 +120,6 @@ namespace ecore
 			
 			
 			// End Class EAttribute
-
 
 			// Begin Class EClass
 			//Class and Feature IDs 
@@ -190,7 +189,6 @@ namespace ecore
 			
 			// End Class EClass
 
-
 			// Begin Class EClassifier
 			//Class and Feature IDs 
 			static const unsigned long ECLASSIFIER_CLASS = 198601986;
@@ -223,7 +221,6 @@ namespace ecore
 			
 			// End Class EClassifier
 
-
 			// Begin Class EDataType
 			//Class and Feature IDs 
 			static const unsigned long EDATATYPE_CLASS = 1778684692;
@@ -241,7 +238,6 @@ namespace ecore
 			
 			
 			// End Class EDataType
-
 
 			// Begin Class EEnum
 			//Class and Feature IDs 
@@ -267,7 +263,6 @@ namespace ecore
 			
 			// End Class EEnum
 
-
 			// Begin Class EEnumLiteral
 			//Class and Feature IDs 
 			static const unsigned long EENUMLITERAL_CLASS = 306949309;
@@ -292,7 +287,6 @@ namespace ecore
 			
 			// End Class EEnumLiteral
 
-
 			// Begin Class EFactory
 			//Class and Feature IDs 
 			static const unsigned long EFACTORY_CLASS = 817046646;
@@ -316,7 +310,6 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EOperation> getEFactory_Operation_createFromString_EDataType_EString() const = 0;
 			
 			// End Class EFactory
-
 
 			// Begin Class EGenericType
 			//Class and Feature IDs 
@@ -348,7 +341,6 @@ namespace ecore
 			
 			// End Class EGenericType
 
-
 			// Begin Class EModelElement
 			//Class and Feature IDs 
 			static const unsigned long EMODELELEMENT_CLASS = 1193165779;
@@ -369,7 +361,6 @@ namespace ecore
 			
 			// End Class EModelElement
 
-
 			// Begin Class ENamedElement
 			//Class and Feature IDs 
 			static const unsigned long ENAMEDELEMENT_CLASS = 2138707061;
@@ -387,7 +378,6 @@ namespace ecore
 			
 			
 			// End Class ENamedElement
-
 
 			// Begin Class EObject
 			//Class and Feature IDs 
@@ -441,7 +431,6 @@ namespace ecore
 			
 			// End Class EObject
 
-
 			// Begin Class EObjectAny
 			//Class and Feature IDs 
 			static const unsigned long EOBJECTANY_CLASS = 1375380197;
@@ -459,7 +448,6 @@ namespace ecore
 			
 			
 			// End Class EObjectAny
-
 
 			// Begin Class EObjectContainer
 			//Class and Feature IDs 
@@ -480,7 +468,6 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EOperation> getEObjectContainer_Operation_setContainer_EObject() const = 0;
 			
 			// End Class EObjectContainer
-
 
 			// Begin Class EOperation
 			//Class and Feature IDs 
@@ -512,7 +499,6 @@ namespace ecore
 			
 			// End Class EOperation
 
-
 			// Begin Class EPackage
 			//Class and Feature IDs 
 			static const unsigned long EPACKAGE_CLASS = 1953920355;
@@ -543,7 +529,6 @@ namespace ecore
 			
 			// End Class EPackage
 
-
 			// Begin Class EParameter
 			//Class and Feature IDs 
 			static const unsigned long EPARAMETER_CLASS = 461177325;
@@ -561,7 +546,6 @@ namespace ecore
 			
 			
 			// End Class EParameter
-
 
 			// Begin Class EReference
 			//Class and Feature IDs 
@@ -591,7 +575,6 @@ namespace ecore
 			
 			// End Class EReference
 
-
 			// Begin Class EStringToStringMapEntry
 			//Class and Feature IDs 
 			static const unsigned long ESTRINGTOSTRINGMAPENTRY_CLASS = 1101973251;
@@ -611,7 +594,6 @@ namespace ecore
 			
 			
 			// End Class EStringToStringMapEntry
-
 
 			// Begin Class EStructuralFeature
 			//Class and Feature IDs 
@@ -649,7 +631,6 @@ namespace ecore
 			
 			// End Class EStructuralFeature
 
-
 			// Begin Class ETypeParameter
 			//Class and Feature IDs 
 			static const unsigned long ETYPEPARAMETER_CLASS = 1516033880;
@@ -667,7 +648,6 @@ namespace ecore
 			
 			
 			// End Class ETypeParameter
-
 
 			// Begin Class ETypedElement
 			//Class and Feature IDs 
@@ -700,7 +680,6 @@ namespace ecore
 			
 			
 			// End Class ETypedElement
-
 			static const int ANY_CLASS = 1;
 			static const int EBIGDECIMAL_CLASS = 4;
 			static const int EBIGINTEGER_CLASS = 5;
@@ -771,12 +750,15 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EDataType> getEString_Class() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getETreeIterator_Class() const = 0;
 			
-
 			
-
-			//Singleton Getter
-			public:
-				static std::shared_ptr<ecorePackage> eInstance();
+		private:
+			friend class ecorePluginImpl;		
+		public:
+			static std::shared_ptr<ecorePackage> eInstance()
+			{
+				std::shared_ptr<ecorePlugin> plugin=ecorePlugin::eInstance();
+				return plugin->getecorePackage();
+			}
 			//prevent from hiding functions
 			using EPackage::getEAnnotation;
 			using EPackage::getEClassifier;

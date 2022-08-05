@@ -42,7 +42,7 @@ namespace fUML::Semantics::CommonBehavior
 			CommonBehaviorFactoryImpl& operator=(CommonBehaviorFactoryImpl const&) = delete;
 
 		protected:
-			friend class CommonBehaviorFactory;
+			friend class CommonBehaviorPluginImpl;  
 			// Constructor
 			CommonBehaviorFactoryImpl();
 

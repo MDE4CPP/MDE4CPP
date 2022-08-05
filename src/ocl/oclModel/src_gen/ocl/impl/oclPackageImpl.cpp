@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "ocl/oclFactory.hpp"
@@ -34,6 +34,12 @@
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
 using namespace ocl;
+
+
+//static initialisation
+const std::string oclPackage::eNAME ="ocl";
+const std::string oclPackage::eNS_URI ="http://ocl4cpp/ocl";
+const std::string oclPackage::eNS_PREFIX ="ocl";
 
 bool oclPackageImpl::isInited = false;
 

@@ -38,8 +38,7 @@ namespace fUML::Semantics::SimpleClassifiers
 	class SignalInstance;
 	class StringValue;
 	class StructuredValue;
-	class UnlimitedNaturalValue;
-}
+	class UnlimitedNaturalValue;}
  
 namespace fUML::Semantics::SimpleClassifiers 
 {
@@ -91,7 +90,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class BooleanValue
 
-
 			// Begin Class CompoundValue
 			//Class and Feature IDs 
 			static const unsigned long COMPOUNDVALUE_CLASS = 960723248;
@@ -124,7 +122,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class CompoundValue
 
-
 			// Begin Class DataValue
 			//Class and Feature IDs 
 			static const unsigned long DATAVALUE_CLASS = 622084858;
@@ -148,7 +145,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation_new_() const = 0;
 			
 			// End Class DataValue
-
 
 			// Begin Class EnumerationValue
 			//Class and Feature IDs 
@@ -182,7 +178,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class EnumerationValue
 
-
 			// Begin Class FeatureValue
 			//Class and Feature IDs 
 			static const unsigned long FEATUREVALUE_CLASS = 1582063511;
@@ -208,7 +203,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_Operation_hasEqualValues_FeatureValue() const = 0;
 			
 			// End Class FeatureValue
-
 
 			// Begin Class IntegerValue
 			//Class and Feature IDs 
@@ -238,7 +232,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class IntegerValue
 
-
 			// Begin Class PrimitiveValue
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVEVALUE_CLASS = 884702000;
@@ -260,7 +253,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_Operation_getTypes() const = 0;
 			
 			// End Class PrimitiveValue
-
 
 			// Begin Class RealValue
 			//Class and Feature IDs 
@@ -290,7 +282,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class RealValue
 
-
 			// Begin Class SignalInstance
 			//Class and Feature IDs 
 			static const unsigned long SIGNALINSTANCE_CLASS = 1044212856;
@@ -312,7 +303,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_new_() const = 0;
 			
 			// End Class SignalInstance
-
 
 			// Begin Class StringValue
 			//Class and Feature IDs 
@@ -341,7 +331,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_toString() const = 0;
 			
 			// End Class StringValue
-
 
 			// Begin Class StructuredValue
 			//Class and Feature IDs 
@@ -375,7 +364,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			// End Class StructuredValue
 
-
 			// Begin Class UnlimitedNaturalValue
 			//Class and Feature IDs 
 			static const unsigned long UNLIMITEDNATURALVALUE_CLASS = 459381760;
@@ -403,15 +391,22 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_toString() const = 0;
 			
 			// End Class UnlimitedNaturalValue
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class SimpleClassifiersPluginImpl;
+			// Header only sinleton like implemenation for SimpleClassifiersPackage eInstance()
+			private: 
+				static std::shared_ptr<SimpleClassifiersPackage>* getSimpleClassifiersPackageStaticPtr()
+				{
+					static std::shared_ptr<SimpleClassifiersPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<SimpleClassifiersPackage> _instance) {*(getSimpleClassifiersPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<SimpleClassifiersPackage> eInstance();
+				static std::shared_ptr<SimpleClassifiersPackage> eInstance(){return *(getSimpleClassifiersPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERSPACKAGE_HPP */

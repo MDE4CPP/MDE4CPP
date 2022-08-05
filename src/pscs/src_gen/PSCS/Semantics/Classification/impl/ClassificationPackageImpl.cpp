@@ -18,18 +18,7 @@
 
 using namespace PSCS::Semantics::Classification;
 
-//Singleton implementation 
-std::shared_ptr<ClassificationPackage> ClassificationPackage::eInstance()
-{
-	static std::shared_ptr<ClassificationPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(ClassificationPackageImpl::create());
-		std::dynamic_pointer_cast<ClassificationPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string ClassificationPackage::eNAME ="Classification";
 const std::string ClassificationPackage::eNS_URI ="http:///PSCS_Semantics/Semantics/Classification.ecore";

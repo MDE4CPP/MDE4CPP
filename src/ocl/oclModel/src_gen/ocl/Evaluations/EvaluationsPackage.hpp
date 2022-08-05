@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
 	class EAnnotation;
-	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
+	class EOperation;
 	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EClass;
 }
 
 namespace ocl::Evaluations 
@@ -62,8 +62,7 @@ namespace ocl::Evaluations
 	class UnlimitedNaturalLiteralExpEval;
 	class UnspecifiedValueExpEval;
 	class VariableDeclEval;
-	class VariableExpEval;
-}
+	class VariableExpEval;}
  
 namespace ocl::Evaluations 
 {
@@ -105,7 +104,6 @@ namespace ocl::Evaluations
 			
 			// End Class AssociationClassCallExpEval
 
-
 			// Begin Class AssociationEndCallExpEval
 			//Class and Feature IDs 
 			static const unsigned long ASSOCIATIONENDCALLEXPEVAL_CLASS = 528258550;
@@ -123,7 +121,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class AssociationEndCallExpEval
-
 
 			// Begin Class AttributeCallExpEval
 			//Class and Feature IDs 
@@ -143,7 +140,6 @@ namespace ocl::Evaluations
 			
 			// End Class AttributeCallExpEval
 
-
 			// Begin Class BooleanLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long BOOLEANLITERALEXPEVAL_CLASS = 888886148;
@@ -159,7 +155,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class BooleanLiteralExpEval
-
 
 			// Begin Class CollectionItemEval
 			//Class and Feature IDs 
@@ -179,7 +174,6 @@ namespace ocl::Evaluations
 			
 			// End Class CollectionItemEval
 
-
 			// Begin Class CollectionLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONLITERALEXPEVAL_CLASS = 838178519;
@@ -198,7 +192,6 @@ namespace ocl::Evaluations
 			
 			// End Class CollectionLiteralExpEval
 
-
 			// Begin Class CollectionLiteralPartEval
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONLITERALPARTEVAL_CLASS = 357481470;
@@ -216,7 +209,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class CollectionLiteralPartEval
-
 
 			// Begin Class CollectionRangeEval
 			//Class and Feature IDs 
@@ -238,7 +230,6 @@ namespace ocl::Evaluations
 			
 			// End Class CollectionRangeEval
 
-
 			// Begin Class EnumLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long ENUMLITERALEXPEVAL_CLASS = 395704758;
@@ -254,7 +245,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class EnumLiteralExpEval
-
 
 			// Begin Class EvalEnvironment
 			//Class and Feature IDs 
@@ -284,7 +274,6 @@ namespace ocl::Evaluations
 			
 			// End Class EvalEnvironment
 
-
 			// Begin Class EvalNameSpace
 			//Class and Feature IDs 
 			static const unsigned long EVALNAMESPACE_CLASS = 228902947;
@@ -300,7 +289,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class EvalNameSpace
-
 
 			// Begin Class ExpressionInOclEval
 			//Class and Feature IDs 
@@ -321,7 +309,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class ExpressionInOclEval
-
 
 			// Begin Class IfExpEval
 			//Class and Feature IDs 
@@ -345,7 +332,6 @@ namespace ocl::Evaluations
 			
 			// End Class IfExpEval
 
-
 			// Begin Class IntegerLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long INTEGERLITERALEXPEVAL_CLASS = 937125875;
@@ -361,7 +347,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class IntegerLiteralExpEval
-
 
 			// Begin Class IterateExpEval
 			//Class and Feature IDs 
@@ -381,7 +366,6 @@ namespace ocl::Evaluations
 			
 			// End Class IterateExpEval
 
-
 			// Begin Class IteratorExpEval
 			//Class and Feature IDs 
 			static const unsigned long ITERATOREXPEVAL_CLASS = 907082345;
@@ -397,7 +381,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class IteratorExpEval
-
 
 			// Begin Class LetExpEval
 			//Class and Feature IDs 
@@ -421,7 +404,6 @@ namespace ocl::Evaluations
 			
 			// End Class LetExpEval
 
-
 			// Begin Class LiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long LITERALEXPEVAL_CLASS = 520640664;
@@ -437,7 +419,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class LiteralExpEval
-
 
 			// Begin Class LoopExpEval
 			//Class and Feature IDs 
@@ -459,7 +440,6 @@ namespace ocl::Evaluations
 			
 			// End Class LoopExpEval
 
-
 			// Begin Class ModelPropertyCallExpEval
 			//Class and Feature IDs 
 			static const unsigned long MODELPROPERTYCALLEXPEVAL_CLASS = 952179936;
@@ -477,7 +457,6 @@ namespace ocl::Evaluations
 			virtual std::shared_ptr<ecore::EOperation> getModelPropertyCallExpEval_Operation_atPre() const = 0;
 			
 			// End Class ModelPropertyCallExpEval
-
 
 			// Begin Class NavigationCallExpEval
 			//Class and Feature IDs 
@@ -499,7 +478,6 @@ namespace ocl::Evaluations
 			
 			// End Class NavigationCallExpEval
 
-
 			// Begin Class NumericLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long NUMERICLITERALEXPEVAL_CLASS = 1683283489;
@@ -515,7 +493,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class NumericLiteralExpEval
-
 
 			// Begin Class OclExpEval
 			//Class and Feature IDs 
@@ -541,7 +518,6 @@ namespace ocl::Evaluations
 			
 			// End Class OclExpEval
 
-
 			// Begin Class OclMessageArgEval
 			//Class and Feature IDs 
 			static const unsigned long OCLMESSAGEARGEVAL_CLASS = 1513124741;
@@ -563,7 +539,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class OclMessageArgEval
-
 
 			// Begin Class OclMessageExpEval
 			//Class and Feature IDs 
@@ -587,7 +562,6 @@ namespace ocl::Evaluations
 			
 			// End Class OclMessageExpEval
 
-
 			// Begin Class OperationCallExpEval
 			//Class and Feature IDs 
 			static const unsigned long OPERATIONCALLEXPEVAL_CLASS = 1550289763;
@@ -608,7 +582,6 @@ namespace ocl::Evaluations
 			
 			// End Class OperationCallExpEval
 
-
 			// Begin Class PrimitiveLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVELITERALEXPEVAL_CLASS = 2064904225;
@@ -624,7 +597,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class PrimitiveLiteralExpEval
-
 
 			// Begin Class PropertyCallExpEval
 			//Class and Feature IDs 
@@ -644,7 +616,6 @@ namespace ocl::Evaluations
 			
 			// End Class PropertyCallExpEval
 
-
 			// Begin Class RealLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long REALLITERALEXPEVAL_CLASS = 1116784610;
@@ -661,7 +632,6 @@ namespace ocl::Evaluations
 			
 			// End Class RealLiteralExpEval
 
-
 			// Begin Class StringLiteralExpEval
 			//Class and Feature IDs 
 			static const unsigned long STRINGLITERALEXPEVAL_CLASS = 608295728;
@@ -677,7 +647,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class StringLiteralExpEval
-
 
 			// Begin Class TupleLiteralExpEval
 			//Class and Feature IDs 
@@ -697,7 +666,6 @@ namespace ocl::Evaluations
 			
 			// End Class TupleLiteralExpEval
 
-
 			// Begin Class TupleLiteralExpPartEval
 			//Class and Feature IDs 
 			static const unsigned long TUPLELITERALEXPPARTEVAL_CLASS = 1391982024;
@@ -713,7 +681,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class TupleLiteralExpPartEval
-
 
 			// Begin Class UnlimitedNaturalLiteralExpEval
 			//Class and Feature IDs 
@@ -731,7 +698,6 @@ namespace ocl::Evaluations
 			
 			// End Class UnlimitedNaturalLiteralExpEval
 
-
 			// Begin Class UnspecifiedValueExpEval
 			//Class and Feature IDs 
 			static const unsigned long UNSPECIFIEDVALUEEXPEVAL_CLASS = 55905302;
@@ -747,7 +713,6 @@ namespace ocl::Evaluations
 			
 			
 			// End Class UnspecifiedValueExpEval
-
 
 			// Begin Class VariableDeclEval
 			//Class and Feature IDs 
@@ -769,7 +734,6 @@ namespace ocl::Evaluations
 			
 			// End Class VariableDeclEval
 
-
 			// Begin Class VariableExpEval
 			//Class and Feature IDs 
 			static const unsigned long VARIABLEEXPEVAL_CLASS = 317258607;
@@ -787,17 +751,22 @@ namespace ocl::Evaluations
 			
 			
 			// End Class VariableExpEval
-
 			
 			
-
 			
-
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<EvaluationsPackage> instance;
+		private:
+			friend class EvaluationsPluginImpl;
+			// Header only sinleton like implemenation for EvaluationsPackage eInstance()
+			private: 
+				static std::shared_ptr<EvaluationsPackage>* getEvaluationsPackageStaticPtr()
+				{
+					static std::shared_ptr<EvaluationsPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<EvaluationsPackage> _instance) {*(getEvaluationsPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<EvaluationsPackage> eInstance();
+				static std::shared_ptr<EvaluationsPackage> eInstance(){return *(getEvaluationsPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONSPACKAGE_HPP */

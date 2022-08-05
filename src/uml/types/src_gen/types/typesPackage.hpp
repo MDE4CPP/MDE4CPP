@@ -60,12 +60,11 @@ namespace types
 			virtual std::shared_ptr<ecore::EDataType> getString_Class() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const = 0;
 			
-
 			
-
-			//Singleton Getter
-			public:
-				static std::shared_ptr<typesPackage> eInstance();
+		private:
+			friend class typesPluginImpl;		
+		public:
+			static std::shared_ptr<typesPackage> eInstance();
 	};
 }
 #endif /* end of include guard: TYPESPACKAGE_HPP */

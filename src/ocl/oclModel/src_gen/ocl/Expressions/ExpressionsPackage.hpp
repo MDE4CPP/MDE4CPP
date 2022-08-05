@@ -15,12 +15,12 @@
 namespace ecore 
 {
 	class EEnumLiteral;
-	class EEnum;
-	class EDataType;
-	class EClass;
-	class EReference;
 	class EAttribute;
+	class EDataType;
+	class EReference;
+	class EEnum;
 	class EGenericType;
+	class EClass;
 }
 
 namespace ocl::Expressions 
@@ -61,8 +61,7 @@ namespace ocl::Expressions
 	class UnlimitedNaturalExp;
 	class UnspecifiedValueExp;
 	class Variable;
-	class VariableExp;
-}
+	class VariableExp;}
  
 namespace ocl::Expressions 
 {
@@ -104,7 +103,6 @@ namespace ocl::Expressions
 			
 			// End Class AssociationClassCallExp
 
-
 			// Begin Class BooleanLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long BOOLEANLITERALEXP_CLASS = 225873423;
@@ -122,7 +120,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class BooleanLiteralExp
-
 
 			// Begin Class CallExp
 			//Class and Feature IDs 
@@ -142,7 +139,6 @@ namespace ocl::Expressions
 			
 			// End Class CallExp
 
-
 			// Begin Class CollectionItem
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONITEM_CLASS = 2033004063;
@@ -160,7 +156,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class CollectionItem
-
 
 			// Begin Class CollectionLiteralExp
 			//Class and Feature IDs 
@@ -182,7 +177,6 @@ namespace ocl::Expressions
 			
 			// End Class CollectionLiteralExp
 
-
 			// Begin Class CollectionLiteralPart
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONLITERALPART_CLASS = 525693555;
@@ -198,7 +192,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class CollectionLiteralPart
-
 
 			// Begin Class CollectionRange
 			//Class and Feature IDs 
@@ -220,7 +213,6 @@ namespace ocl::Expressions
 			
 			// End Class CollectionRange
 
-
 			// Begin Class EnumLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long ENUMLITERALEXP_CLASS = 1896746244;
@@ -238,7 +230,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class EnumLiteralExp
-
 
 			// Begin Class ExpressionInOcl
 			//Class and Feature IDs 
@@ -264,7 +255,6 @@ namespace ocl::Expressions
 			
 			// End Class ExpressionInOcl
 
-
 			// Begin Class FeatureCallExp
 			//Class and Feature IDs 
 			static const unsigned long FEATURECALLEXP_CLASS = 108542242;
@@ -282,7 +272,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class FeatureCallExp
-
 
 			// Begin Class IfExp
 			//Class and Feature IDs 
@@ -306,7 +295,6 @@ namespace ocl::Expressions
 			
 			// End Class IfExp
 
-
 			// Begin Class InfixedExp
 			//Class and Feature IDs 
 			static const unsigned long INFIXEDEXP_CLASS = 938428434;
@@ -324,7 +312,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class InfixedExp
-
 
 			// Begin Class IntegerLiteralExp
 			//Class and Feature IDs 
@@ -344,7 +331,6 @@ namespace ocl::Expressions
 			
 			// End Class IntegerLiteralExp
 
-
 			// Begin Class InvalidLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long INVALIDLITERALEXP_CLASS = 1953131443;
@@ -360,7 +346,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class InvalidLiteralExp
-
 
 			// Begin Class IterateExp
 			//Class and Feature IDs 
@@ -380,7 +365,6 @@ namespace ocl::Expressions
 			
 			// End Class IterateExp
 
-
 			// Begin Class IteratorExp
 			//Class and Feature IDs 
 			static const unsigned long ITERATOREXP_CLASS = 1427874836;
@@ -396,7 +380,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class IteratorExp
-
 
 			// Begin Class LetExp
 			//Class and Feature IDs 
@@ -418,7 +401,6 @@ namespace ocl::Expressions
 			
 			// End Class LetExp
 
-
 			// Begin Class LiteralExp
 			//Class and Feature IDs 
 			static const unsigned long LITERALEXP_CLASS = 509208412;
@@ -434,7 +416,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class LiteralExp
-
 
 			// Begin Class LoopExp
 			//Class and Feature IDs 
@@ -455,7 +436,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class LoopExp
-
 
 			// Begin Class MessageExp
 			//Class and Feature IDs 
@@ -481,7 +461,6 @@ namespace ocl::Expressions
 			
 			// End Class MessageExp
 
-
 			// Begin Class NavigationCallExp
 			//Class and Feature IDs 
 			static const unsigned long NAVIGATIONCALLEXP_CLASS = 833199948;
@@ -502,7 +481,6 @@ namespace ocl::Expressions
 			
 			// End Class NavigationCallExp
 
-
 			// Begin Class NullLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long NULLLITERALEXP_CLASS = 863530749;
@@ -519,7 +497,6 @@ namespace ocl::Expressions
 			
 			// End Class NullLiteralExp
 
-
 			// Begin Class NumericLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long NUMERICLITERALEXP_CLASS = 1020270764;
@@ -535,7 +512,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class NumericLiteralExp
-
 
 			// Begin Class OclExpression
 			//Class and Feature IDs 
@@ -577,7 +553,6 @@ namespace ocl::Expressions
 			
 			// End Class OclExpression
 
-
 			// Begin Class OperationCallExp
 			//Class and Feature IDs 
 			static const unsigned long OPERATIONCALLEXP_CLASS = 1030298851;
@@ -598,7 +573,6 @@ namespace ocl::Expressions
 			
 			// End Class OperationCallExp
 
-
 			// Begin Class PrimitiveLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVELITERALEXP_CLASS = 95355624;
@@ -616,7 +590,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class PrimitiveLiteralExp
-
 
 			// Begin Class PropertyCallExp
 			//Class and Feature IDs 
@@ -636,7 +609,6 @@ namespace ocl::Expressions
 			
 			// End Class PropertyCallExp
 
-
 			// Begin Class RealLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long REALLITERALEXP_CLASS = 470342449;
@@ -654,7 +626,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class RealLiteralExp
-
 
 			// Begin Class StateExp
 			//Class and Feature IDs 
@@ -674,7 +645,6 @@ namespace ocl::Expressions
 			
 			// End Class StateExp
 
-
 			// Begin Class StringLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long STRINGLITERALEXP_CLASS = 88304816;
@@ -692,7 +662,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class StringLiteralExp
-
 
 			// Begin Class TupleLiteralExp
 			//Class and Feature IDs 
@@ -712,7 +681,6 @@ namespace ocl::Expressions
 			
 			// End Class TupleLiteralExp
 
-
 			// Begin Class TupleLiteralPart
 			//Class and Feature IDs 
 			static const unsigned long TUPLELITERALPART_CLASS = 2008604788;
@@ -730,7 +698,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class TupleLiteralPart
-
 
 			// Begin Class TypeExp
 			//Class and Feature IDs 
@@ -750,7 +717,6 @@ namespace ocl::Expressions
 			
 			// End Class TypeExp
 
-
 			// Begin Class UnlimitedNaturalExp
 			//Class and Feature IDs 
 			static const unsigned long UNLIMITEDNATURALEXP_CLASS = 521207252;
@@ -769,7 +735,6 @@ namespace ocl::Expressions
 			
 			// End Class UnlimitedNaturalExp
 
-
 			// Begin Class UnspecifiedValueExp
 			//Class and Feature IDs 
 			static const unsigned long UNSPECIFIEDVALUEEXP_CLASS = 233840348;
@@ -785,7 +750,6 @@ namespace ocl::Expressions
 			
 			
 			// End Class UnspecifiedValueExp
-
 
 			// Begin Class Variable
 			//Class and Feature IDs 
@@ -821,7 +785,6 @@ namespace ocl::Expressions
 			
 			// End Class Variable
 
-
 			// Begin Class VariableExp
 			//Class and Feature IDs 
 			static const unsigned long VARIABLEEXP_CLASS = 838051098;
@@ -839,19 +802,24 @@ namespace ocl::Expressions
 			
 			
 			// End Class VariableExp
-
 			static const int COLLECTIONKIND_CLASS = 14;
 			
 			virtual std::shared_ptr<ecore::EEnum> getCollectionKind_Class() const = 0;
 			
-
 			
-
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ExpressionsPackage> instance;
+		private:
+			friend class ExpressionsPluginImpl;
+			// Header only sinleton like implemenation for ExpressionsPackage eInstance()
+			private: 
+				static std::shared_ptr<ExpressionsPackage>* getExpressionsPackageStaticPtr()
+				{
+					static std::shared_ptr<ExpressionsPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ExpressionsPackage> _instance) {*(getExpressionsPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ExpressionsPackage> eInstance();
+				static std::shared_ptr<ExpressionsPackage> eInstance(){return *(getExpressionsPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONSPACKAGE_HPP */

@@ -9,6 +9,7 @@
 
 using namespace ocl;
 
+
 //*********************************
 // Constructor / Destructor
 //*********************************

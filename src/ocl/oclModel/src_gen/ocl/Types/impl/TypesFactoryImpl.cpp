@@ -23,6 +23,7 @@
 
 using namespace ocl::Types;
 
+
 //*********************************
 // Constructor / Destructor
 //*********************************

@@ -14,16 +14,6 @@
 
 using namespace PSCS::Semantics::Loci;
 
-std::shared_ptr<LociFactory> LociFactory::eInstance()
-{
-	static std::shared_ptr<LociFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(LociFactoryImpl::create());
-	}	
-	return instance;
-}
 
 //*********************************
 // Constructor / Destructor

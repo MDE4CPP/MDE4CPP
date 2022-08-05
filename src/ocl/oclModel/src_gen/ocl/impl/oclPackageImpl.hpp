@@ -37,6 +37,8 @@ namespace ocl
 	{
 		class ValuesPackage;
 	}
+
+	class oclPluginImpl; 
 }
 
 namespace ecore
@@ -74,7 +76,7 @@ namespace ocl
 			
 			
 
-			friend class oclPackage;
+			friend class oclPluginImpl; 
 
 			static bool isInited;
 			static oclPackage* create();

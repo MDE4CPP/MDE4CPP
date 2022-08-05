@@ -69,7 +69,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(PSCS_Semantics_CommonBehavior
+PRIVATE
 # Factories and packages
 	impl/CommonBehaviorFactoryImpl.cpp
 	impl/CommonBehaviorPackageImpl.cpp
@@ -94,17 +96,17 @@ endif(APPLE)
 
 set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(PSCS_Semantics_StructuredClassifiers_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/StructuredClassifiers")
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(PSCS_Interface_DIR "${CMAKE_BINARY_DIR}")
 set(fUML_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
 set(fUML_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
 find_package(uml CONFIG)
 find_package(uml_Interface CONFIG)
-find_package(PSCS_Semantics_StructuredClassifiers CONFIG)
 find_package(PSCS_Semantics_StructuredClassifiers_Interface CONFIG)
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
-find_package(PSCS CONFIG)
 find_package(PSCS_Interface CONFIG)
 find_package(fUML CONFIG)
 find_package(fUML_Interface CONFIG)
@@ -155,8 +157,6 @@ Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSI
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE uml::uml
 	PRIVATE PSCS::Semantics::StructuredClassifiers::PSCS_Semantics_StructuredClassifiers

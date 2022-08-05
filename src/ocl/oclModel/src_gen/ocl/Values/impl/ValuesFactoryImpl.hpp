@@ -41,7 +41,7 @@ namespace ocl::Values
 			ValuesFactoryImpl& operator=(ValuesFactoryImpl const&) = delete;
 
 		protected:
-			friend class ValuesFactory;
+			friend class ValuesPluginImpl;  
 			// Constructor
 			ValuesFactoryImpl();
 

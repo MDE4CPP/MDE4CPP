@@ -27,7 +27,7 @@ namespace fUML
 			fUMLFactoryImpl& operator=(fUMLFactoryImpl const&) = delete;
 
 		protected:
-			friend class fUMLFactory;
+			friend class fUMLPluginImpl;  
 			// Constructor
 			fUMLFactoryImpl();
 

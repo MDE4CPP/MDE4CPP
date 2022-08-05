@@ -23,18 +23,7 @@
 
 using namespace fUML::Semantics::Loci;
 
-//Singleton implementation 
-std::shared_ptr<LociPackage> LociPackage::eInstance()
-{
-	static std::shared_ptr<LociPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(LociPackageImpl::create());
-		std::dynamic_pointer_cast<LociPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string LociPackage::eNAME ="Loci";
 const std::string LociPackage::eNS_URI ="http:///fUML_Semantics/Semantics/Loci.ecore";

@@ -20,7 +20,9 @@ namespace PSCS::Semantics::Loci
 {
 	class CS_ExecutionFactory;
 	class CS_Executor;
-	class CS_Locus;}
+	class CS_Locus;
+	class LociPluginImpl; 
+}
 
 namespace ecore
 {
@@ -85,7 +87,7 @@ namespace PSCS::Semantics::Loci
 			std::shared_ptr<ecore::EReference> m_cS_ExecutionFactory_Attribute_appliedProfiles = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element = nullptr;std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString = nullptr;std::shared_ptr<ecore::EOperation> m_cS_Locus_Operation_instantiate_Class = nullptr;std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_instantiateVisitor_Element = nullptr;std::shared_ptr<ecore::EOperation> m_cS_Executor_Operation_start_Class_ParameterValue = nullptr;
 
-			friend class LociPackage;
+			friend class LociPluginImpl; 
 
 			static bool isInited;
 			static LociPackage* create();

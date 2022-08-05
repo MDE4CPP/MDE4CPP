@@ -32,7 +32,6 @@ namespace fUML
 	{
 		class SemanticsPackage;
 	}
-
 }
  
 namespace fUML 
@@ -59,13 +58,21 @@ namespace fUML
 
 			
 			
-
 			virtual std::shared_ptr<fUML::Semantics::SemanticsPackage> getSemantics_Package() const = 0;
 			
-
-			//Singleton Getter
+		private:
+			friend class fUMLPluginImpl;
+			// Header only sinleton like implemenation for fUMLPackage eInstance()
+			private: 
+				static std::shared_ptr<fUMLPackage>* getfUMLPackageStaticPtr()
+				{
+					static std::shared_ptr<fUMLPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<fUMLPackage> _instance) {*(getfUMLPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<fUMLPackage> eInstance();
+				static std::shared_ptr<fUMLPackage> eInstance(){return *(getfUMLPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUMLPACKAGE_HPP */

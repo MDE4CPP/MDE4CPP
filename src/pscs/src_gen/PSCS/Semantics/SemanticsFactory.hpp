@@ -75,7 +75,10 @@ namespace fUML::Semantics::SimpleClassifiers
 
 
 
-
+namespace PSCS::Semantics 
+{
+	class SemanticsFactoryPluginImpl;
+}
 namespace PSCS::Semantics 
 {
 	class PSCS_API SemanticsFactory : virtual public ecore::EFactory 
@@ -85,11 +88,20 @@ namespace PSCS::Semantics
 			SemanticsFactory& operator=(SemanticsFactory const&) = delete;
 		protected:
 			SemanticsFactory(){}
+		private:    	
+			friend class SemanticsPluginImpl; 
+		// Header only sinleton like implemenation for SemanticsFactory eInstance()
+		private: 
+			static std::shared_ptr<SemanticsFactory>* getSemanticsFactoryStaticPtr()
+			{
+				static std::shared_ptr<SemanticsFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<SemanticsFactory> _instance) {*(getSemanticsFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<SemanticsFactory> eInstance(){return *(getSemanticsFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<SemanticsFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

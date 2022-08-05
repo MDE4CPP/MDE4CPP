@@ -27,7 +27,7 @@ namespace PSCS
 			PSCSFactoryImpl& operator=(PSCSFactoryImpl const&) = delete;
 
 		protected:
-			friend class PSCSFactory;
+			friend class PSCSPluginImpl;  
 			// Constructor
 			PSCSFactoryImpl();
 

@@ -35,7 +35,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			StructuredClassifiersFactoryImpl& operator=(StructuredClassifiersFactoryImpl const&) = delete;
 
 		protected:
-			friend class StructuredClassifiersFactory;
+			friend class StructuredClassifiersPluginImpl;  
 			// Constructor
 			StructuredClassifiersFactoryImpl();
 

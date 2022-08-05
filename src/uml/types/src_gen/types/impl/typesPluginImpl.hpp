@@ -16,10 +16,8 @@ namespace types
 {
 	class TYPES_API typesPluginImpl : virtual public typesPlugin 
 	{
-		public:
-			typesPluginImpl();
+		public:	
 			virtual ~typesPluginImpl();
-		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
@@ -29,6 +27,15 @@ namespace types
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory();
 			virtual std::shared_ptr<ecore::EPackage> getEPackage();
+
+			virtual std::shared_ptr<typesPackage> gettypesPackage();
+			virtual std::shared_ptr<typesFactory> gettypesFactory();
+		protected:
+			typesPluginImpl();
+			friend std::shared_ptr<typesPlugin> typesPlugin::eInstance();
+			std::shared_ptr<typesPackage> m_typesPackage = nullptr;
+			std::shared_ptr<typesFactory> m_typesFactory = nullptr;
+
 	};
 }
 #endif /* end of include guard: TYPESPLUGINIMPL_HPP */

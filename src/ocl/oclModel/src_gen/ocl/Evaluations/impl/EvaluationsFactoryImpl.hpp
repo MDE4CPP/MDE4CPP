@@ -62,7 +62,7 @@ namespace ocl::Evaluations
 			EvaluationsFactoryImpl& operator=(EvaluationsFactoryImpl const&) = delete;
 
 		protected:
-			friend class EvaluationsFactory;
+			friend class EvaluationsPluginImpl;  
 			// Constructor
 			EvaluationsFactoryImpl();
 

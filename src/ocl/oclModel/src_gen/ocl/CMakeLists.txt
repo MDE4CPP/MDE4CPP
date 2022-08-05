@@ -5,7 +5,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-PROJECT(ocl)
+
+PROJECT(ocl_Interface)
+set(ocl_Interface_VERSION 0.0.1) #No Version codegen annotation defined in model ocl. Use default version. 
 
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
@@ -14,6 +16,105 @@ SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 17)
 
+SET(SOURCE_FILES_Interface
+# Factories and packages
+	oclFactory.hpp
+	oclPackage.hpp
+# Package plugin
+	oclPlugin.hpp
+# Package content
+)
+
+ADD_LIBRARY(ocl_Interface INTERFACE ${SOURCE_FILES_Interface})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	INTERFACE ocl_Expressions
+	INTERFACE ocl_Types
+	INTERFACE ocl_Values
+	INTERFACE ocl_Evaluations
+	INTERFACE fUML::Semantics::SimpleClassifiers::fUML_Semantics_SimpleClassifiers
+	INTERFACE fUML::fUML
+	INTERFACE uml::uml
+	INTERFACE ecore::ecore
+	INTERFACE types::types
+	INTERFACE fUML::Semantics::Values::fUML_Semantics_Values
+)
+ADD_LIBRARY(ocl::ocl_Interface ALIAS ocl_Interface)
+
+
+
+PROJECT(ocl)
+set(ocl_VERSION 0.0.1) #No Version codegen annotation defined in model ocl. Use default version. 
+
+#list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/})
+#list(APPEND CMAKE_MODULE_PATH ${MDE4CPP_HOME}/application/lib/cmake/ocl})
+
+IF(NOT CMAKE_BUILD_TYPE) 
+    SET(CMAKE_BUILD_TYPE Debug)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+SET(CMAKE_DEBUG_POSTFIX d)
+
+SET(CMAKE_CXX_STANDARD 17)
+				
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Evaluations/ocl_Evaluations.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Evaluations/ocl_Evaluations-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Evaluations/ocl_Evaluations_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Evaluations/ocl_Evaluations_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Expressions/ocl_Expressions.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Expressions/ocl_Expressions-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Expressions/ocl_Expressions_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Expressions/ocl_Expressions_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Types/ocl_Types.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Types/ocl_Types-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Types/ocl_Types_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Types/ocl_Types_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Values/ocl_Values.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Values/ocl_Values-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "Values/ocl_Values_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Values/ocl_Values_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+INSTALL( 
+  FILES 
+     "${CMAKE_CURRENT_BINARY_DIR}/Evaluations/ocl_Evaluations-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Evaluations/ocl_Evaluations_Interface-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Expressions/ocl_Expressions-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Expressions/ocl_Expressions_Interface-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Types/ocl_Types-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Types/ocl_Types_Interface-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Values/ocl_Values-config.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/Values/ocl_Values_Interface-config.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/ocl"
+)
+
+ADD_SUBDIRECTORY("Evaluations")
+ADD_SUBDIRECTORY("Expressions")
+ADD_SUBDIRECTORY("Types")
+ADD_SUBDIRECTORY("Values")
 IF(("$ENV{DEBUG_MESSAGE_OCL}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
 ELSE()
@@ -32,150 +133,20 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(ocl
+PRIVATE
 # Factories and packages
-	oclFactory.cpp
 	impl/oclFactoryImpl.cpp
-	oclPackage.cpp
 	impl/oclPackageImpl.cpp
 	impl/oclPackageImpl_Creation.cpp
 	impl/oclPackageImpl_Initialization.cpp
-	Expressions/ExpressionsFactory.cpp
-	Expressions/impl/ExpressionsFactoryImpl.cpp
-	Expressions/ExpressionsPackage.cpp
-	Expressions/impl/ExpressionsPackageImpl.cpp
-	Expressions/impl/ExpressionsPackageImpl_Creation.cpp
-	Expressions/impl/ExpressionsPackageImpl_Initialization.cpp
-	Types/TypesFactory.cpp
-	Types/impl/TypesFactoryImpl.cpp
-	Types/TypesPackage.cpp
-	Types/impl/TypesPackageImpl.cpp
-	Types/impl/TypesPackageImpl_Creation.cpp
-	Types/impl/TypesPackageImpl_Initialization.cpp
-	Values/ValuesFactory.cpp
-	Values/impl/ValuesFactoryImpl.cpp
-	Values/ValuesPackage.cpp
-	Values/impl/ValuesPackageImpl.cpp
-	Values/impl/ValuesPackageImpl_Creation.cpp
-	Values/impl/ValuesPackageImpl_Initialization.cpp
-	Evaluations/EvaluationsFactory.cpp
-	Evaluations/impl/EvaluationsFactoryImpl.cpp
-	Evaluations/EvaluationsPackage.cpp
-	Evaluations/impl/EvaluationsPackageImpl.cpp
-	Evaluations/impl/EvaluationsPackageImpl_Creation.cpp
-	Evaluations/impl/EvaluationsPackageImpl_Initialization.cpp
-	
 # Package plugin
 	impl/oclPluginImpl.cpp
-	oclPlugin.cpp
 # Package content
-	Types/impl/AnyTypeImpl.cpp
-	Values/impl/AnyValueImpl.cpp
-	Expressions/impl/AssociationClassCallExpImpl.cpp
-	Evaluations/impl/AssociationClassCallExpEvalImpl.cpp
-	Evaluations/impl/AssociationEndCallExpEvalImpl.cpp
-	Evaluations/impl/AttributeCallExpEvalImpl.cpp
-	Types/impl/BagTypeImpl.cpp
-	Values/impl/BagTypeValueImpl.cpp
-	Expressions/impl/BooleanLiteralExpImpl.cpp
-	Evaluations/impl/BooleanLiteralExpEvalImpl.cpp
-	Expressions/impl/CallExpImpl.cpp
-	Expressions/impl/CollectionItemImpl.cpp
-	Evaluations/impl/CollectionItemEvalImpl.cpp
-	Expressions/impl/CollectionLiteralExpImpl.cpp
-	Evaluations/impl/CollectionLiteralExpEvalImpl.cpp
-	Expressions/impl/CollectionLiteralPartImpl.cpp
-	Evaluations/impl/CollectionLiteralPartEvalImpl.cpp
-	Expressions/impl/CollectionRangeImpl.cpp
-	Evaluations/impl/CollectionRangeEvalImpl.cpp
-	Types/impl/CollectionTypeImpl.cpp
-	Values/impl/CollectionValueImpl.cpp
-	Values/impl/ElementImpl.cpp
-	Expressions/impl/EnumLiteralExpImpl.cpp
-	Evaluations/impl/EnumLiteralExpEvalImpl.cpp
-	Evaluations/impl/EvalEnvironmentImpl.cpp
-	Evaluations/impl/EvalNameSpaceImpl.cpp
-	Expressions/impl/ExpressionInOclImpl.cpp
-	Evaluations/impl/ExpressionInOclEvalImpl.cpp
-	Expressions/impl/FeatureCallExpImpl.cpp
-	Expressions/impl/IfExpImpl.cpp
-	Evaluations/impl/IfExpEvalImpl.cpp
-	Expressions/impl/InfixedExpImpl.cpp
-	Expressions/impl/IntegerLiteralExpImpl.cpp
-	Evaluations/impl/IntegerLiteralExpEvalImpl.cpp
-	Expressions/impl/InvalidLiteralExpImpl.cpp
-	Types/impl/InvalidTypeImpl.cpp
-	Expressions/impl/IterateExpImpl.cpp
-	Evaluations/impl/IterateExpEvalImpl.cpp
-	Expressions/impl/IteratorExpImpl.cpp
-	Evaluations/impl/IteratorExpEvalImpl.cpp
-	Expressions/impl/LetExpImpl.cpp
-	Evaluations/impl/LetExpEvalImpl.cpp
-	Expressions/impl/LiteralExpImpl.cpp
-	Evaluations/impl/LiteralExpEvalImpl.cpp
-	Values/impl/LocalSnapshotImpl.cpp
-	Expressions/impl/LoopExpImpl.cpp
-	Evaluations/impl/LoopExpEvalImpl.cpp
-	Expressions/impl/MessageExpImpl.cpp
-	Types/impl/MessageTypeImpl.cpp
-	Evaluations/impl/ModelPropertyCallExpEvalImpl.cpp
-	Types/impl/NameTypeBindingImpl.cpp
-	Values/impl/NameValueBindingImpl.cpp
-	Expressions/impl/NavigationCallExpImpl.cpp
-	Evaluations/impl/NavigationCallExpEvalImpl.cpp
-	Expressions/impl/NullLiteralExpImpl.cpp
-	Expressions/impl/NumericLiteralExpImpl.cpp
-	Evaluations/impl/NumericLiteralExpEvalImpl.cpp
-	Values/impl/ObjectValueImpl.cpp
-	Evaluations/impl/OclExpEvalImpl.cpp
-	Expressions/impl/OclExpressionImpl.cpp
-	Evaluations/impl/OclMessageArgEvalImpl.cpp
-	Evaluations/impl/OclMessageExpEvalImpl.cpp
-	Values/impl/OclMessageValueImpl.cpp
-	Values/impl/OclVoidValueImpl.cpp
-	Expressions/impl/OperationCallExpImpl.cpp
-	Evaluations/impl/OperationCallExpEvalImpl.cpp
-	Types/impl/OrderedSetTypeImpl.cpp
-	Values/impl/OrderedSetTypeValueImpl.cpp
-	Expressions/impl/PrimitiveLiteralExpImpl.cpp
-	Evaluations/impl/PrimitiveLiteralExpEvalImpl.cpp
-	Expressions/impl/PropertyCallExpImpl.cpp
-	Evaluations/impl/PropertyCallExpEvalImpl.cpp
-	Expressions/impl/RealLiteralExpImpl.cpp
-	Evaluations/impl/RealLiteralExpEvalImpl.cpp
-	Types/impl/SequenceTypeImpl.cpp
-	Values/impl/SequenceTypeValueImpl.cpp
-	Types/impl/SetTypeImpl.cpp
-	Values/impl/SetTypeValueImpl.cpp
-	Expressions/impl/StateExpImpl.cpp
-	Values/impl/StaticValueImpl.cpp
-	Expressions/impl/StringLiteralExpImpl.cpp
-	Evaluations/impl/StringLiteralExpEvalImpl.cpp
-	Types/impl/TemplateParameterTypeImpl.cpp
-	Expressions/impl/TupleLiteralExpImpl.cpp
-	Evaluations/impl/TupleLiteralExpEvalImpl.cpp
-	Evaluations/impl/TupleLiteralExpPartEvalImpl.cpp
-	Expressions/impl/TupleLiteralPartImpl.cpp
-	Types/impl/TupleTypeImpl.cpp
-	Values/impl/TupleValueImpl.cpp
-	Expressions/impl/TypeExpImpl.cpp
-	Values/impl/UndefinedValueImpl.cpp
-	Expressions/impl/UnlimitedNaturalExpImpl.cpp
-	Evaluations/impl/UnlimitedNaturalLiteralExpEvalImpl.cpp
-	Expressions/impl/UnspecifiedValueExpImpl.cpp
-	Evaluations/impl/UnspecifiedValueExpEvalImpl.cpp
-	Expressions/impl/VariableImpl.cpp
-	Evaluations/impl/VariableDeclEvalImpl.cpp
-	Expressions/impl/VariableExpImpl.cpp
-	Evaluations/impl/VariableExpEvalImpl.cpp
-	Types/impl/VoidTypeImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
-INCLUDE_DIRECTORIES(
-	../
-	${MDE4CPP_HOME}/application/include
-)
 
 # Apple specific stuff
 if(APPLE)
@@ -183,84 +154,206 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
-		
-	ENDIF()
-ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-		
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-		
-	ENDIF()
-ENDIF()
 
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+#--------------------------------------------
+
+
+set(fUML_Semantics_SimpleClassifiers_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Semantics_SimpleClassifiers_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
+set(fUML_Semantics_Values_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+set(fUML_Semantics_Values_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/fUML")
+find_package(fUML_Semantics_SimpleClassifiers CONFIG)
+find_package(fUML_Semantics_SimpleClassifiers_Interface CONFIG)
+find_package(fUML CONFIG)
+find_package(fUML_Interface CONFIG)
+find_package(uml CONFIG)
+find_package(uml_Interface CONFIG)
+find_package(ecore CONFIG)
+find_package(ecore_Interface CONFIG)
+find_package(types CONFIG)
+find_package(types_Interface CONFIG)
+find_package(fUML_Semantics_Values CONFIG)
+find_package(fUML_Semantics_Values_Interface CONFIG)
+message("Dir_Name: ${fUML_Semantics_SimpleClassifiers_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_SimpleClassifiers_Interface_DIR}") 
+message("SimpleClassifiersLibrarry fUML_Semantics_SimpleClassifiers: ${fUML_Semantics_SimpleClassifiers_FOUND} (Version ${fUML_Semantics_SimpleClassifiers_VERSION})
+         fUML_Semantics_SimpleClassifiers libs: ${fUML_Semantics_SimpleClassifiers_LIBRARIES}
+         fUML_Semantics_SimpleClassifiers includes: ${fUML_Semantics_SimpleClassifiers_INCLUDE_DIRS}
+Librarry fUML_Semantics_SimpleClassifiers_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_FOUND} (Version ${fUML_Semantics_SimpleClassifiers_Interface_VERSION})
+         fUML_Semantics_SimpleClassifiers libs_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_LIBRARIES}
+         fUML_Semantics_SimpleClassifiers includes_Interface: ${fUML_Semantics_SimpleClassifiers_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_DIR}")
+message("Interface_Dir_Name: ${fUML_Interface_DIR}") 
+message("fUMLLibrarry fUML: ${fUML_FOUND} (Version ${fUML_VERSION})
+         fUML libs: ${fUML_LIBRARIES}
+         fUML includes: ${fUML_INCLUDE_DIRS}
+Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSION})
+         fUML libs_Interface: ${fUML_Interface_LIBRARIES}
+         fUML includes_Interface: ${fUML_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${uml_DIR}")
+message("Interface_Dir_Name: ${uml_Interface_DIR}") 
+message("umlLibrarry uml: ${uml_FOUND} (Version ${uml_VERSION})
+         uml libs: ${uml_LIBRARIES}
+         uml includes: ${uml_INCLUDE_DIRS}
+Librarry uml_Interface: ${uml_Interface_FOUND} (Version ${uml_Interface_VERSION})
+         uml libs_Interface: ${uml_Interface_LIBRARIES}
+         uml includes_Interface: ${uml_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${ecore_DIR}")
+message("Interface_Dir_Name: ${ecore_Interface_DIR}") 
+message("ecoreLibrarry ecore: ${ecore_FOUND} (Version ${ecore_VERSION})
+         ecore libs: ${ecore_LIBRARIES}
+         ecore includes: ${ecore_INCLUDE_DIRS}
+Librarry ecore_Interface: ${ecore_Interface_FOUND} (Version ${ecore_Interface_VERSION})
+         ecore libs_Interface: ${ecore_Interface_LIBRARIES}
+         ecore includes_Interface: ${ecore_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${types_DIR}")
+message("Interface_Dir_Name: ${types_Interface_DIR}") 
+message("typesLibrarry types: ${types_FOUND} (Version ${types_VERSION})
+         types libs: ${types_LIBRARIES}
+         types includes: ${types_INCLUDE_DIRS}
+Librarry types_Interface: ${types_Interface_FOUND} (Version ${types_Interface_VERSION})
+         types libs_Interface: ${types_Interface_LIBRARIES}
+         types includes_Interface: ${types_Interface_INCLUDE_DIRS}
+")
+message("Dir_Name: ${fUML_Semantics_Values_DIR}")
+message("Interface_Dir_Name: ${fUML_Semantics_Values_Interface_DIR}") 
+message("ValuesLibrarry fUML_Semantics_Values: ${fUML_Semantics_Values_FOUND} (Version ${fUML_Semantics_Values_VERSION})
+         fUML_Semantics_Values libs: ${fUML_Semantics_Values_LIBRARIES}
+         fUML_Semantics_Values includes: ${fUML_Semantics_Values_INCLUDE_DIRS}
+Librarry fUML_Semantics_Values_Interface: ${fUML_Semantics_Values_Interface_FOUND} (Version ${fUML_Semantics_Values_Interface_VERSION})
+         fUML_Semantics_Values libs_Interface: ${fUML_Semantics_Values_Interface_LIBRARIES}
+         fUML_Semantics_Values includes_Interface: ${fUML_Semantics_Values_Interface_INCLUDE_DIRS}
+")
+
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	PRIVATE ocl_Expressions
+	PRIVATE ocl_Types
+	PRIVATE ocl_Values
+	PRIVATE ocl_Evaluations
+	PRIVATE fUML::Semantics::SimpleClassifiers::fUML_Semantics_SimpleClassifiers
+	PRIVATE fUML::fUML
+	PRIVATE uml::uml
+	PRIVATE ecore::ecore
+	PRIVATE types::types
+	PRIVATE fUML::Semantics::Values::fUML_Semantics_Values
+)
+#create an alias lib for ocl
+add_library(ocl::ocl ALIAS ocl)
 
 ADD_DEFINITIONS(-DBUILD_OCL=1)
 
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE
+		${MDE4CPP_HOME}/application/include        
+		${CMAKE_SOURCE_DIR}/.. 
+		${MDE4CPP_HOME}/src/ocl/src_gen
+)
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
-		debug ${FUML_DEBUG}
-		debug ${TYPES_DEBUG}
-		debug ${UML_DEBUG}
-	)
-ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
-		optimized ${FUML_RELEASE}
-		optimized ${TYPES_RELEASE}
-		optimized ${UML_RELEASE}
-	)
-ENDIF()
-
 #-----------------------------------------------------
-# DELIVERING binaries and header to ${MDE4CPP_HOME}
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
 #-----------------------------------------------------
 
-INSTALL(TARGETS ${PROJECT_NAME}
+INSTALL(TARGETS ocl EXPORT oclTargets
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
     LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+#-----------------------------------------------------
+# DELIVERING binaries and header to ${MDE4CPP_HOME} 
+#-----------------------------------------------------
+
+INSTALL(TARGETS ocl_Interface EXPORT ocl_InterfaceTargets
+	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+  	INCLUDES DESTINATION ${MDE4CPP_HOME}/application/include
+)
+
+
+INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/ocl
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
+
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT oclTargets
+  FILE oclTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+  NAMESPACE ocl::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "ocl.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ocl-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+
+SET_PROPERTY(TARGET ocl PROPERTY VERSION ${ocl_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/ocl-configVersion.cmake"
+  VERSION ${ocl_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+#-----------------------------------------------------------------------
+# CREATE, Configure and DELIVER cmake package targets to ${MDE4CPP_HOME} 
+#-----------------------------------------------------------------------
+
+INSTALL(
+  EXPORT ocl_InterfaceTargets
+  FILE ocl_InterfaceTargets.cmake
+  DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+  NAMESPACE ocl::
+)
+
+INCLUDE(CMakePackageConfigHelpers)
+CONFIGURE_PACKAGE_CONFIG_FILE(
+    "ocl_Interface.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ocl_Interface-config.cmake"
+    INSTALL_DESTINATION ${MDE4CPP_HOME}/application/lib/cmake/ocl
+)
+
+SET_PROPERTY(TARGET ocl_Interface PROPERTY VERSION ${ocl_Interface_VERSION})
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  "${CMAKE_CURRENT_BINARY_DIR}/ocl_Interface-configVersion.cmake"
+  VERSION ${ocl_Interface_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+INSTALL(
+  FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/ocl-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/ocl-configVersion.cmake"
+     "${CMAKE_CURRENT_BINARY_DIR}/ocl_Interface-config.cmake"
+ 	 "${CMAKE_CURRENT_BINARY_DIR}/ocl_Interface-configVersion.cmake"
+  DESTINATION
+   "${MDE4CPP_HOME}/application/lib/cmake/ocl"
+)
+INCLUDE(GenerateExportHeader)
+GENERATE_EXPORT_HEADER(${PROJECT_NAME})
+
+

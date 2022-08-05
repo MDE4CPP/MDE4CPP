@@ -38,8 +38,7 @@ namespace PSCS::Semantics::Actions
 	class CS_ReadExtentActionActivation;
 	class CS_ReadSelfActionActivation;
 	class CS_RemoveStructuralFeatureValueActionActivation;
-	class CS_SendSignalActionActivation;
-}
+	class CS_SendSignalActionActivation;}
  
 namespace PSCS::Semantics::Actions 
 {
@@ -81,7 +80,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_AcceptCallActionActivation
 
-
 			// Begin Class CS_AcceptEventActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_ACCEPTEVENTACTIONACTIVATION_CLASS = 967219298;
@@ -99,7 +97,6 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const = 0;
 			
 			// End Class CS_AcceptEventActionActivation
-
 
 			// Begin Class CS_AddStructuralFeatureValueActionActivation
 			//Class and Feature IDs 
@@ -120,7 +117,6 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault() const = 0;
 			
 			// End Class CS_AddStructuralFeatureValueActionActivation
-
 
 			// Begin Class CS_CallOperationActionActivation
 			//Class and Feature IDs 
@@ -150,7 +146,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_CallOperationActionActivation
 
-
 			// Begin Class CS_ClearStructuralFeatureActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 116608301;
@@ -173,7 +168,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_ClearStructuralFeatureActionActivation
 
-
 			// Begin Class CS_ConstructStrategy
 			//Class and Feature IDs 
 			static const unsigned long CS_CONSTRUCTSTRATEGY_CLASS = 983698108;
@@ -194,7 +188,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_ConstructStrategy
 
-
 			// Begin Class CS_CreateLinkActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATELINKACTIONACTIVATION_CLASS = 606847404;
@@ -213,7 +206,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_CreateLinkActionActivation
 
-
 			// Begin Class CS_CreateObjectActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATEOBJECTACTIONACTIVATION_CLASS = 1438312354;
@@ -231,7 +223,6 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCS_CreateObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_CreateObjectActionActivation
-
 
 			// Begin Class CS_DefaultConstructStrategy
 			//Class and Feature IDs 
@@ -283,7 +274,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_DefaultConstructStrategy
 
-
 			// Begin Class CS_ReadExtentActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_READEXTENTACTIONACTIVATION_CLASS = 1846972855;
@@ -302,7 +292,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_ReadExtentActionActivation
 
-
 			// Begin Class CS_ReadSelfActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_READSELFACTIONACTIVATION_CLASS = 1154790487;
@@ -320,7 +309,6 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCS_ReadSelfActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_ReadSelfActionActivation
-
 
 			// Begin Class CS_RemoveStructuralFeatureValueActionActivation
 			//Class and Feature IDs 
@@ -344,7 +332,6 @@ namespace PSCS::Semantics::Actions
 			
 			// End Class CS_RemoveStructuralFeatureValueActionActivation
 
-
 			// Begin Class CS_SendSignalActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CS_SENDSIGNALACTIONACTIVATION_CLASS = 263661846;
@@ -362,15 +349,22 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCS_SendSignalActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_SendSignalActionActivation
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ActionsPluginImpl;
+			// Header only sinleton like implemenation for ActionsPackage eInstance()
+			private: 
+				static std::shared_ptr<ActionsPackage>* getActionsPackageStaticPtr()
+				{
+					static std::shared_ptr<ActionsPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ActionsPackage> _instance) {*(getActionsPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ActionsPackage> eInstance();
+				static std::shared_ptr<ActionsPackage> eInstance(){return *(getActionsPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONSPACKAGE_HPP */

@@ -18,7 +18,9 @@
 
 namespace fUML::Semantics::Classification 
 {
-	class InstanceValueEvaluation;}
+	class InstanceValueEvaluation;
+	class ClassificationPluginImpl; 
+}
 
 namespace ecore
 {
@@ -60,7 +62,7 @@ namespace fUML::Semantics::Classification
 			
 			std::shared_ptr<ecore::EOperation> m_instanceValueEvaluation_Operation_evaluate = nullptr;
 
-			friend class ClassificationPackage;
+			friend class ClassificationPluginImpl; 
 
 			static bool isInited;
 			static ClassificationPackage* create();

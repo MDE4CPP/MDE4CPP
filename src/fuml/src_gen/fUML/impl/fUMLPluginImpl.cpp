@@ -2,6 +2,8 @@
 
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/impl/fUMLFactoryImpl.hpp"
+#include "fUML/impl/fUMLPackageImpl.hpp"
 
 using namespace fUML;
 
@@ -28,6 +30,21 @@ FUML_API std::shared_ptr<MDE4CPPPlugin> start()
 //*********************************
 fUMLPluginImpl::fUMLPluginImpl()
 {
+// plugin create factory and package during start()
+	std::shared_ptr<fUMLPackage> eInstancePackagePtr=fUMLPackage::eInstance();
+	if(nullptr==eInstancePackagePtr) // create package only ones
+	{ 
+		std::shared_ptr<fUMLPackage> uniquePackagePtr;
+		uniquePackagePtr.reset(fUMLPackageImpl::create());//plugin is fried of package
+		fUMLPackage::seteInstance(uniquePackagePtr);
+	}
+	std::shared_ptr<fUMLPackage> eInstanceFactoryPtr=fUMLPackage::eInstance();
+	if(nullptr==eInstanceFactoryPtr) // create factory only ones
+	{ 
+		std::shared_ptr<fUMLFactory> uniqueFactroyPtr;
+		uniqueFactroyPtr.reset(fUMLFactoryImpl::create());//plugin is fried of package
+		fUMLFactory::seteInstance(uniqueFactroyPtr);
+	}
 }
 
 fUMLPluginImpl::~fUMLPluginImpl()

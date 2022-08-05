@@ -41,18 +41,7 @@
 
 using namespace fUML::Semantics;
 
-//Singleton implementation 
-std::shared_ptr<SemanticsPackage> SemanticsPackage::eInstance()
-{
-	static std::shared_ptr<SemanticsPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(SemanticsPackageImpl::create());
-		std::dynamic_pointer_cast<SemanticsPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string SemanticsPackage::eNAME ="Semantics";
 const std::string SemanticsPackage::eNS_URI ="http:///fUML_Semantics/Semantics.ecore";

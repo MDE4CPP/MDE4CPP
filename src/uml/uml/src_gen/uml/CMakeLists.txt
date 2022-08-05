@@ -312,7 +312,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(uml
+PRIVATE
 # Factories and packages
 	impl/umlFactoryImpl.cpp
 	impl/umlPackageImpl.cpp
@@ -611,8 +613,6 @@ Librarry types_Interface: ${types_Interface_FOUND} (Version ${types_Interface_VE
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE ecore::ecore
 	PRIVATE types::types

@@ -19,7 +19,9 @@
 namespace PSCS::Semantics::CommonBehavior 
 {
 	class CS_CallEventExecution;
-	class CS_EventOccurrence;}
+	class CS_EventOccurrence;
+	class CommonBehaviorPluginImpl; 
+}
 
 namespace ecore
 {
@@ -82,7 +84,7 @@ namespace PSCS::Semantics::CommonBehavior
 			std::shared_ptr<ecore::EReference> m_cS_CallEventExecution_Attribute_interactionPoint = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_interactionPoint = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_onPort = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_wrappedEventOccurrence = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_createEventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_getParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port = nullptr;
 
-			friend class CommonBehaviorPackage;
+			friend class CommonBehaviorPluginImpl; 
 
 			static bool isInited;
 			static CommonBehaviorPackage* create();

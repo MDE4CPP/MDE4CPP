@@ -32,7 +32,9 @@ namespace ocl::Values
 	class SetTypeValue;
 	class StaticValue;
 	class TupleValue;
-	class UndefinedValue;}
+	class UndefinedValue;
+	class ValuesPluginImpl; 
+}
 
 namespace ecore
 {
@@ -243,7 +245,7 @@ namespace ocl::Values
 			std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_bindings = nullptr;std::shared_ptr<ecore::EReference> m_collectionValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_history = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_inputQ = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_outputQ = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_pred = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_returnMessage = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_succ = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_nameValueBinding_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_element_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_bagTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_sequenceTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_setTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_orderedSetTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_anyValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_find_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclMessageValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_anyValue_Operation_toString = nullptr;
 
-			friend class ValuesPackage;
+			friend class ValuesPluginImpl; 
 
 			static bool isInited;
 			static ValuesPackage* create();

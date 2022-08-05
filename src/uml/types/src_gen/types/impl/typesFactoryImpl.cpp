@@ -4,20 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "types/typesPlugin.hpp"
 
 
 
 using namespace types;
 
+
 std::shared_ptr<typesFactory> typesFactory::eInstance()
 {
-	static std::shared_ptr<typesFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(typesFactoryImpl::create());
-	}	
-	return instance;
+	std::shared_ptr<typesPlugin> plugin=typesPlugin::eInstance();
+	return plugin->gettypesFactory();
 }
 
 //*********************************

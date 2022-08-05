@@ -23,8 +23,7 @@ namespace ecore
 
 namespace fUML::Semantics::Classification 
 {
-	class InstanceValueEvaluation;
-}
+	class InstanceValueEvaluation;}
  
 namespace fUML::Semantics::Classification 
 {
@@ -65,15 +64,22 @@ namespace fUML::Semantics::Classification
 			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class InstanceValueEvaluation
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ClassificationPluginImpl;
+			// Header only sinleton like implemenation for ClassificationPackage eInstance()
+			private: 
+				static std::shared_ptr<ClassificationPackage>* getClassificationPackageStaticPtr()
+				{
+					static std::shared_ptr<ClassificationPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ClassificationPackage> _instance) {*(getClassificationPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ClassificationPackage> eInstance();
+				static std::shared_ptr<ClassificationPackage> eInstance(){return *(getClassificationPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_CLASSIFICATIONPACKAGE_HPP */

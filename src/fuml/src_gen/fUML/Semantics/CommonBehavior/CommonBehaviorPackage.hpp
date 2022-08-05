@@ -42,8 +42,7 @@ namespace fUML::Semantics::CommonBehavior
 	class ObjectActivation;
 	class OpaqueBehaviorExecution;
 	class ParameterValue;
-	class SignalEventOccurrence;
-}
+	class SignalEventOccurrence;}
  
 namespace fUML::Semantics::CommonBehavior 
 {
@@ -84,7 +83,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			// End Class CallEventBehavior
-
 
 			// Begin Class CallEventExecution
 			//Class and Feature IDs 
@@ -128,7 +126,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class CallEventExecution
 
-
 			// Begin Class CallEventOccurrence
 			//Class and Feature IDs 
 			static const unsigned long CALLEVENTOCCURRENCE_CLASS = 1651938494;
@@ -156,7 +153,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const = 0;
 			
 			// End Class CallEventOccurrence
-
 
 			// Begin Class ClassifierBehaviorExecution
 			//Class and Feature IDs 
@@ -186,7 +182,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class ClassifierBehaviorExecution
 
-
 			// Begin Class ClassifierBehaviorInvocationEventAccepter
 			//Class and Feature IDs 
 			static const unsigned long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS = 165051968;
@@ -215,7 +210,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class ClassifierBehaviorInvocationEventAccepter
 
-
 			// Begin Class EventAccepter
 			//Class and Feature IDs 
 			static const unsigned long EVENTACCEPTER_CLASS = 720513438;
@@ -236,7 +230,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class EventAccepter
 
-
 			// Begin Class EventDispatchLoop
 			//Class and Feature IDs 
 			static const unsigned long EVENTDISPATCHLOOP_CLASS = 1354650361;
@@ -252,7 +245,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			// End Class EventDispatchLoop
-
 
 			// Begin Class EventOccurrence
 			//Class and Feature IDs 
@@ -281,7 +273,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_sendTo_Reference() const = 0;
 			
 			// End Class EventOccurrence
-
 
 			// Begin Class Execution
 			//Class and Feature IDs 
@@ -319,7 +310,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class Execution
 
-
 			// Begin Class FIFOGetNextEventStrategy
 			//Class and Feature IDs 
 			static const unsigned long FIFOGETNEXTEVENTSTRATEGY_CLASS = 860953508;
@@ -335,7 +325,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			// End Class FIFOGetNextEventStrategy
-
 
 			// Begin Class GetNextEventStrategy
 			//Class and Feature IDs 
@@ -356,7 +345,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
 			
 			// End Class GetNextEventStrategy
-
 
 			// Begin Class InvocationEventOccurrence
 			//Class and Feature IDs 
@@ -379,7 +367,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getInvocationEventOccurrence_Operation_match_Trigger() const = 0;
 			
 			// End Class InvocationEventOccurrence
-
 
 			// Begin Class ObjectActivation
 			//Class and Feature IDs 
@@ -423,7 +410,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class ObjectActivation
 
-
 			// Begin Class OpaqueBehaviorExecution
 			//Class and Feature IDs 
 			static const unsigned long OPAQUEBEHAVIOREXECUTION_CLASS = 1247403081;
@@ -443,7 +429,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution_Operation_execute() const = 0;
 			
 			// End Class OpaqueBehaviorExecution
-
 
 			// Begin Class ParameterValue
 			//Class and Feature IDs 
@@ -467,7 +452,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class ParameterValue
 
-
 			// Begin Class SignalEventOccurrence
 			//Class and Feature IDs 
 			static const unsigned long SIGNALEVENTOCCURRENCE_CLASS = 1277756023;
@@ -489,15 +473,22 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EOperation> getSignalEventOccurrence_Operation_match_Trigger() const = 0;
 			
 			// End Class SignalEventOccurrence
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class CommonBehaviorPluginImpl;
+			// Header only sinleton like implemenation for CommonBehaviorPackage eInstance()
+			private: 
+				static std::shared_ptr<CommonBehaviorPackage>* getCommonBehaviorPackageStaticPtr()
+				{
+					static std::shared_ptr<CommonBehaviorPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<CommonBehaviorPackage> _instance) {*(getCommonBehaviorPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<CommonBehaviorPackage> eInstance();
+				static std::shared_ptr<CommonBehaviorPackage> eInstance(){return *(getCommonBehaviorPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIORPACKAGE_HPP */

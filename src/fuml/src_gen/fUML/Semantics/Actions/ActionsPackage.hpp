@@ -69,8 +69,7 @@ namespace fUML::Semantics::Actions
 	class ValueSpecificationActionActivation;
 	class Values;
 	class WriteLinkActionActivation;
-	class WriteStructuralFeatureActionActivation;
-}
+	class WriteStructuralFeatureActionActivation;}
  
 namespace fUML::Semantics::Actions 
 {
@@ -112,7 +111,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class AcceptCallActionActivation
 
-
 			// Begin Class AcceptCallActionActivations
 			//Class and Feature IDs 
 			static const unsigned long ACCEPTCALLACTIONACTIVATIONS_CLASS = 1758720387;
@@ -128,7 +126,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class AcceptCallActionActivations
-
 
 			// Begin Class AcceptEventActionActivation
 			//Class and Feature IDs 
@@ -166,7 +163,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class AcceptEventActionActivation
 
-
 			// Begin Class AcceptEventActionEventAccepter
 			//Class and Feature IDs 
 			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_CLASS = 704487621;
@@ -184,7 +180,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class AcceptEventActionEventAccepter
-
 
 			// Begin Class ActionActivation
 			//Class and Feature IDs 
@@ -252,7 +247,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ActionActivation
 
-
 			// Begin Class AddStructuralFeatureValueActionActivation
 			//Class and Feature IDs 
 			static const unsigned long ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 1064766578;
@@ -272,7 +266,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
 			
 			// End Class AddStructuralFeatureValueActionActivation
-
 
 			// Begin Class CallActionActivation
 			//Class and Feature IDs 
@@ -302,7 +295,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class CallActionActivation
 
-
 			// Begin Class CallBehaviorActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CALLBEHAVIORACTIONACTIVATION_CLASS = 1169624682;
@@ -323,7 +315,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class CallBehaviorActionActivation
 
-
 			// Begin Class CallOperationActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CALLOPERATIONACTIONACTIVATION_CLASS = 1019024267;
@@ -343,7 +334,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_getCallExecution() const = 0;
 			
 			// End Class CallOperationActionActivation
-
 
 			// Begin Class ClauseActivation
 			//Class and Feature IDs 
@@ -379,7 +369,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ClauseActivation
 
-
 			// Begin Class ClearAssociationActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CLEARASSOCIATIONACTIONACTIVATION_CLASS = 1101563840;
@@ -395,7 +384,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class ClearAssociationActionActivation
-
 
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature IDs 
@@ -414,7 +402,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getClearStructuralFeatureActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ClearStructuralFeatureActionActivation
-
 
 			// Begin Class ConditionalNodeActivation
 			//Class and Feature IDs 
@@ -442,7 +429,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ConditionalNodeActivation
 
-
 			// Begin Class CreateLinkActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CREATELINKACTIONACTIVATION_CLASS = 1739762966;
@@ -458,7 +444,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class CreateLinkActionActivation
-
 
 			// Begin Class CreateObjectActionActivation
 			//Class and Feature IDs 
@@ -480,7 +465,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class CreateObjectActionActivation
 
-
 			// Begin Class DestroyLinkActionActivation
 			//Class and Feature IDs 
 			static const unsigned long DESTROYLINKACTIONACTIVATION_CLASS = 1694236360;
@@ -496,7 +480,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class DestroyLinkActionActivation
-
 
 			// Begin Class DestroyObjectActionActivation
 			//Class and Feature IDs 
@@ -522,7 +505,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class DestroyObjectActionActivation
 
-
 			// Begin Class InputPinActivation
 			//Class and Feature IDs 
 			static const unsigned long INPUTPINACTIVATION_CLASS = 241768265;
@@ -543,7 +525,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class InputPinActivation
 
-
 			// Begin Class InvocationActionActivation
 			//Class and Feature IDs 
 			static const unsigned long INVOCATIONACTIONACTIVATION_CLASS = 520674205;
@@ -559,7 +540,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class InvocationActionActivation
-
 
 			// Begin Class LinkActionActivation
 			//Class and Feature IDs 
@@ -582,7 +562,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData() const = 0;
 			
 			// End Class LinkActionActivation
-
 
 			// Begin Class LoopNodeActivation
 			//Class and Feature IDs 
@@ -610,7 +589,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class LoopNodeActivation
 
-
 			// Begin Class OutputPinActivation
 			//Class and Feature IDs 
 			static const unsigned long OUTPUTPINACTIVATION_CLASS = 1393072800;
@@ -626,7 +604,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class OutputPinActivation
-
 
 			// Begin Class PinActivation
 			//Class and Feature IDs 
@@ -652,7 +629,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class PinActivation
 
-
 			// Begin Class ReadExtentActionActivation
 			//Class and Feature IDs 
 			static const unsigned long READEXTENTACTIONACTIVATION_CLASS = 46156097;
@@ -668,7 +644,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class ReadExtentActionActivation
-
 
 			// Begin Class ReadIsClassifiedObjectActionActivation
 			//Class and Feature IDs 
@@ -688,7 +663,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ReadIsClassifiedObjectActionActivation
 
-
 			// Begin Class ReadLinkActionActivation
 			//Class and Feature IDs 
 			static const unsigned long READLINKACTIONACTIVATION_CLASS = 1707850812;
@@ -704,7 +678,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class ReadLinkActionActivation
-
 
 			// Begin Class ReadSelfActionActivation
 			//Class and Feature IDs 
@@ -726,7 +699,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ReadSelfActionActivation
 
-
 			// Begin Class ReadStructuralFeatureActionActivation
 			//Class and Feature IDs 
 			static const unsigned long READSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 990872664;
@@ -747,7 +719,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ReadStructuralFeatureActionActivation
 
-
 			// Begin Class ReclassifyObjectActionActivation
 			//Class and Feature IDs 
 			static const unsigned long RECLASSIFYOBJECTACTIONACTIVATION_CLASS = 686776741;
@@ -763,7 +734,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class ReclassifyObjectActionActivation
-
 
 			// Begin Class ReduceActionActivation
 			//Class and Feature IDs 
@@ -782,7 +752,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class ReduceActionActivation
-
 
 			// Begin Class RemoveStructuralFeatureValueActivation
 			//Class and Feature IDs 
@@ -804,7 +773,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class RemoveStructuralFeatureValueActivation
 
-
 			// Begin Class ReplyActionActivation
 			//Class and Feature IDs 
 			static const unsigned long REPLYACTIONACTIVATION_CLASS = 2090227056;
@@ -822,7 +790,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getReplyActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ReplyActionActivation
-
 
 			// Begin Class ReturnInformation
 			//Class and Feature IDs 
@@ -858,7 +825,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ReturnInformation
 
-
 			// Begin Class SendSignalActionActivation
 			//Class and Feature IDs 
 			static const unsigned long SENDSIGNALACTIONACTIVATION_CLASS = 2140099606;
@@ -876,7 +842,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getSendSignalActionActivation_Operation_doAction() const = 0;
 			
 			// End Class SendSignalActionActivation
-
 
 			// Begin Class StartClassifierBehaviorActionActivation
 			//Class and Feature IDs 
@@ -896,7 +861,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class StartClassifierBehaviorActionActivation
 
-
 			// Begin Class StartObjectBehaviorActionActivation
 			//Class and Feature IDs 
 			static const unsigned long STARTOBJECTBEHAVIORACTIONACTIVATION_CLASS = 610971708;
@@ -914,7 +878,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorActionActivation_Operation_doAction() const = 0;
 			
 			// End Class StartObjectBehaviorActionActivation
-
 
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature IDs 
@@ -939,7 +902,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const = 0;
 			
 			// End Class StructuralFeatureActionActivation
-
 
 			// Begin Class StructuredActivityNodeActivation
 			//Class and Feature IDs 
@@ -987,7 +949,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class StructuredActivityNodeActivation
 
-
 			// Begin Class TestIdentityActionActivation
 			//Class and Feature IDs 
 			static const unsigned long TESTIDENTITYACTIONACTIVATION_CLASS = 1246515863;
@@ -1003,7 +964,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class TestIdentityActionActivation
-
 
 			// Begin Class ValueSpecificationActionActivation
 			//Class and Feature IDs 
@@ -1023,7 +983,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class ValueSpecificationActionActivation
 
-
 			// Begin Class Values
 			//Class and Feature IDs 
 			static const unsigned long VALUES_CLASS = 1160776639;
@@ -1042,7 +1001,6 @@ namespace fUML::Semantics::Actions
 			
 			// End Class Values
 
-
 			// Begin Class WriteLinkActionActivation
 			//Class and Feature IDs 
 			static const unsigned long WRITELINKACTIONACTIVATION_CLASS = 1364819783;
@@ -1058,7 +1016,6 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class WriteLinkActionActivation
-
 
 			// Begin Class WriteStructuralFeatureActionActivation
 			//Class and Feature IDs 
@@ -1077,15 +1034,22 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureActionActivation_Operation_position_Value_EInt() const = 0;
 			
 			// End Class WriteStructuralFeatureActionActivation
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ActionsPluginImpl;
+			// Header only sinleton like implemenation for ActionsPackage eInstance()
+			private: 
+				static std::shared_ptr<ActionsPackage>* getActionsPackageStaticPtr()
+				{
+					static std::shared_ptr<ActionsPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ActionsPackage> _instance) {*(getActionsPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ActionsPackage> eInstance();
+				static std::shared_ptr<ActionsPackage> eInstance(){return *(getActionsPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONSPACKAGE_HPP */

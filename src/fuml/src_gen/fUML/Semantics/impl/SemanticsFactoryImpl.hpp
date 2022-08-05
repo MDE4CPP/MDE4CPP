@@ -27,7 +27,7 @@ namespace fUML::Semantics
 			SemanticsFactoryImpl& operator=(SemanticsFactoryImpl const&) = delete;
 
 		protected:
-			friend class SemanticsFactory;
+			friend class SemanticsPluginImpl;  
 			// Constructor
 			SemanticsFactoryImpl();
 

@@ -66,7 +66,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(PSCS_Semantics_Classification
+PRIVATE
 # Factories and packages
 	impl/ClassificationFactoryImpl.cpp
 	impl/ClassificationPackageImpl.cpp
@@ -116,8 +118,6 @@ Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSI
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE ecore::ecore
 	PRIVATE fUML::fUML

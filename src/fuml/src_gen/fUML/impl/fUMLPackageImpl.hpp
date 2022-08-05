@@ -22,6 +22,8 @@ namespace fUML
 	{
 		class SemanticsPackage;
 	}
+
+	class fUMLPluginImpl; 
 }
 
 namespace ecore
@@ -56,7 +58,7 @@ namespace fUML
 			
 			
 
-			friend class fUMLPackage;
+			friend class fUMLPluginImpl; 
 
 			static bool isInited;
 			static fUMLPackage* create();

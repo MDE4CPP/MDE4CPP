@@ -18,7 +18,10 @@
 
 
 
-
+namespace fUML::Semantics::Loci 
+{
+	class LociFactoryPluginImpl;
+}
 namespace fUML::Semantics::Loci 
 {
 	class FUML_API LociFactory : virtual public ecore::EFactory 
@@ -28,11 +31,20 @@ namespace fUML::Semantics::Loci
 			LociFactory& operator=(LociFactory const&) = delete;
 		protected:
 			LociFactory(){}
+		private:    	
+			friend class LociPluginImpl; 
+		// Header only sinleton like implemenation for LociFactory eInstance()
+		private: 
+			static std::shared_ptr<LociFactory>* getLociFactoryStaticPtr()
+			{
+				static std::shared_ptr<LociFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<LociFactory> _instance) {*(getLociFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<LociFactory> eInstance(){return *(getLociFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<LociFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

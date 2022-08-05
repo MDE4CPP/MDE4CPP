@@ -25,18 +25,7 @@
 
 using namespace uml;
 
-//Singleton implementation 
-std::shared_ptr<umlPackage> umlPackage::eInstance()
-{
-	static std::shared_ptr<umlPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(umlPackageImpl::create());
-		std::dynamic_pointer_cast<umlPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string umlPackage::eNAME ="uml";
 const std::string umlPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/UML";

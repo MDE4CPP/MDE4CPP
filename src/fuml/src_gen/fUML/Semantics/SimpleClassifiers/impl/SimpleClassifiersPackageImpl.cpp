@@ -24,18 +24,7 @@
 
 using namespace fUML::Semantics::SimpleClassifiers;
 
-//Singleton implementation 
-std::shared_ptr<SimpleClassifiersPackage> SimpleClassifiersPackage::eInstance()
-{
-	static std::shared_ptr<SimpleClassifiersPackage> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(SimpleClassifiersPackageImpl::create());
-		std::dynamic_pointer_cast<SimpleClassifiersPackageImpl>(instance)->init(instance);
-	}	
-	return instance;
-}
+
 //static initialisation
 const std::string SimpleClassifiersPackage::eNAME ="SimpleClassifiers";
 const std::string SimpleClassifiersPackage::eNS_URI ="http:///fUML_Semantics/Semantics/SimpleClassifiers.ecore";

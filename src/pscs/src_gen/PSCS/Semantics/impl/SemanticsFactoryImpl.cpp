@@ -9,16 +9,6 @@
 
 using namespace PSCS::Semantics;
 
-std::shared_ptr<SemanticsFactory> SemanticsFactory::eInstance()
-{
-	static std::shared_ptr<SemanticsFactory> instance;
-	if(!instance)
-	{
-		//create a new Factoryimplementation
-		instance.reset(SemanticsFactoryImpl::create());
-	}	
-	return instance;
-}
 
 //*********************************
 // Constructor / Destructor

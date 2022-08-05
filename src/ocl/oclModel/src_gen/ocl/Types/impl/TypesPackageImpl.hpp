@@ -29,7 +29,9 @@ namespace ocl::Types
 	class SetType;
 	class TemplateParameterType;
 	class TupleType;
-	class VoidType;}
+	class VoidType;
+	class TypesPluginImpl; 
+}
 
 namespace ecore
 {
@@ -179,7 +181,7 @@ namespace ocl::Types
 			std::shared_ptr<ecore::EReference> m_collectionType_Attribute_elementType = nullptr;std::shared_ptr<ecore::EReference> m_collectionType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_parts = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredSignal = nullptr;std::shared_ptr<ecore::EReference> m_nameTypeBinding_Attribute_type = nullptr;
 			std::shared_ptr<ecore::EOperation> m_collectionType_Operation_kindOf_CollectionType = nullptr;
 
-			friend class TypesPackage;
+			friend class TypesPluginImpl; 
 
 			static bool isInited;
 			static TypesPackage* create();

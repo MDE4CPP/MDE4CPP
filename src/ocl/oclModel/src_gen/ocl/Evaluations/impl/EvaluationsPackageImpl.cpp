@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
@@ -24,6 +24,12 @@
 #include "types/typesPackage.hpp"
 
 using namespace ocl::Evaluations;
+
+
+//static initialisation
+const std::string EvaluationsPackage::eNAME ="Evaluations";
+const std::string EvaluationsPackage::eNS_URI ="http://ocl4cpp/ocl/evaluations.ecore";
+const std::string EvaluationsPackage::eNS_PREFIX ="ocl.evaluations";
 
 bool EvaluationsPackageImpl::isInited = false;
 

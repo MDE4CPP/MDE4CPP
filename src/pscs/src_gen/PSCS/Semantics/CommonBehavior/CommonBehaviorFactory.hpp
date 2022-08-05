@@ -39,7 +39,10 @@ namespace fUML::Semantics::SimpleClassifiers
 }
 
 
-
+namespace PSCS::Semantics::CommonBehavior 
+{
+	class CommonBehaviorFactoryPluginImpl;
+}
 namespace PSCS::Semantics::CommonBehavior 
 {
 	class PSCS_API CommonBehaviorFactory : virtual public ecore::EFactory 
@@ -49,11 +52,20 @@ namespace PSCS::Semantics::CommonBehavior
 			CommonBehaviorFactory& operator=(CommonBehaviorFactory const&) = delete;
 		protected:
 			CommonBehaviorFactory(){}
+		private:    	
+			friend class CommonBehaviorPluginImpl; 
+		// Header only sinleton like implemenation for CommonBehaviorFactory eInstance()
+		private: 
+			static std::shared_ptr<CommonBehaviorFactory>* getCommonBehaviorFactoryStaticPtr()
+			{
+				static std::shared_ptr<CommonBehaviorFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<CommonBehaviorFactory> _instance) {*(getCommonBehaviorFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<CommonBehaviorFactory> eInstance(){return *(getCommonBehaviorFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<CommonBehaviorFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

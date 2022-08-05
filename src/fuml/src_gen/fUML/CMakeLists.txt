@@ -88,7 +88,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(fUML
+PRIVATE
 # Factories and packages
 	impl/fUMLFactoryImpl.cpp
 	impl/fUMLPackageImpl.cpp
@@ -111,31 +113,31 @@ endif(APPLE)
 #--------------------------------------------
 
 
+set(fUML_Semantics_Activities_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Activities")
+set(fUML_Semantics_CommonBehavior_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/CommonBehavior")
 set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(fUML_Semantics_SimpleClassifiers_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/SimpleClassifiers")
+set(fUML_Semantics_Actions_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Actions")
+set(fUML_Semantics_Values_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Values")
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(types_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
 set(types_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/types")
-find_package(fUML_Semantics_Activities CONFIG)
+set(fUML_Semantics_Loci_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Loci")
+set(fUML_Semantics_StructuredClassifiers_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/StructuredClassifiers")
 find_package(fUML_Semantics_Activities_Interface CONFIG)
-find_package(fUML_Semantics_CommonBehavior CONFIG)
 find_package(fUML_Semantics_CommonBehavior_Interface CONFIG)
 find_package(uml CONFIG)
 find_package(uml_Interface CONFIG)
-find_package(fUML_Semantics_SimpleClassifiers CONFIG)
 find_package(fUML_Semantics_SimpleClassifiers_Interface CONFIG)
-find_package(fUML_Semantics_Actions CONFIG)
 find_package(fUML_Semantics_Actions_Interface CONFIG)
-find_package(fUML_Semantics_Values CONFIG)
 find_package(fUML_Semantics_Values_Interface CONFIG)
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
 find_package(types CONFIG)
 find_package(types_Interface CONFIG)
-find_package(fUML_Semantics_Loci CONFIG)
 find_package(fUML_Semantics_Loci_Interface CONFIG)
-find_package(fUML_Semantics_StructuredClassifiers CONFIG)
 find_package(fUML_Semantics_StructuredClassifiers_Interface CONFIG)
 message("Dir_Name: ${fUML_Semantics_Activities_DIR}")
 message("Interface_Dir_Name: ${fUML_Semantics_Activities_Interface_DIR}") 
@@ -229,8 +231,6 @@ Librarry fUML_Semantics_StructuredClassifiers_Interface: ${fUML_Semantics_Struct
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE fUML_Semantics
 	PRIVATE uml::uml

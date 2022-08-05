@@ -38,7 +38,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			SimpleClassifiersFactoryImpl& operator=(SimpleClassifiersFactoryImpl const&) = delete;
 
 		protected:
-			friend class SimpleClassifiersFactory;
+			friend class SimpleClassifiersPluginImpl;  
 			// Constructor
 			SimpleClassifiersFactoryImpl();
 

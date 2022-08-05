@@ -18,7 +18,10 @@
 
 
 
-
+namespace PSCS::Semantics::Classification 
+{
+	class ClassificationFactoryPluginImpl;
+}
 namespace PSCS::Semantics::Classification 
 {
 	class PSCS_API ClassificationFactory : virtual public ecore::EFactory 
@@ -28,11 +31,20 @@ namespace PSCS::Semantics::Classification
 			ClassificationFactory& operator=(ClassificationFactory const&) = delete;
 		protected:
 			ClassificationFactory(){}
+		private:    	
+			friend class ClassificationPluginImpl; 
+		// Header only sinleton like implemenation for ClassificationFactory eInstance()
+		private: 
+			static std::shared_ptr<ClassificationFactory>* getClassificationFactoryStaticPtr()
+			{
+				static std::shared_ptr<ClassificationFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<ClassificationFactory> _instance) {*(getClassificationFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<ClassificationFactory> eInstance(){return *(getClassificationFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<ClassificationFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

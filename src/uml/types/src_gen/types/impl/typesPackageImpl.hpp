@@ -18,6 +18,8 @@
 
 namespace types 
 {
+
+	class typesPluginImpl; 
 }
 
 namespace ecore
@@ -57,7 +59,7 @@ namespace types
 			
 			
 
-			friend class typesPackage;
+			friend class typesPluginImpl; 
 
 			static bool isInited;
 			static typesPackage* create();

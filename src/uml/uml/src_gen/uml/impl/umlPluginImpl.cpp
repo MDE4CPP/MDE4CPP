@@ -2,6 +2,8 @@
 
 #include "uml/umlFactory.hpp"
 #include "uml/umlPackage.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 using namespace uml;
 
@@ -28,6 +30,21 @@ UML_API std::shared_ptr<MDE4CPPPlugin> start()
 //*********************************
 umlPluginImpl::umlPluginImpl()
 {
+// plugin create factory and package during start()
+	std::shared_ptr<umlPackage> eInstancePackagePtr=umlPackage::eInstance();
+	if(nullptr==eInstancePackagePtr) // create package only ones
+	{ 
+		std::shared_ptr<umlPackage> uniquePackagePtr;
+		uniquePackagePtr.reset(umlPackageImpl::create());//plugin is fried of package
+		umlPackage::seteInstance(uniquePackagePtr);
+	}
+	std::shared_ptr<umlPackage> eInstanceFactoryPtr=umlPackage::eInstance();
+	if(nullptr==eInstanceFactoryPtr) // create factory only ones
+	{ 
+		std::shared_ptr<umlFactory> uniqueFactroyPtr;
+		uniqueFactroyPtr.reset(umlFactoryImpl::create());//plugin is fried of package
+		umlFactory::seteInstance(uniqueFactroyPtr);
+	}
 }
 
 umlPluginImpl::~umlPluginImpl()

@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
 #include "ocl/Types/TupleType.hpp"

@@ -12,14 +12,18 @@
 
 #include "ecore/ecorePlugin.hpp"
 
+namespace ecore
+{
+			class ecorePackage;
+			class ecoreFactory;
+}
+
 namespace ecore 
 {
 	class ECORE_API ecorePluginImpl : virtual public ecorePlugin 
 	{
-		public:
-			ecorePluginImpl();
+		public:	
 			virtual ~ecorePluginImpl();
-		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
@@ -29,6 +33,16 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory();
 			virtual std::shared_ptr<ecore::EPackage> getEPackage();
+
+			virtual std::shared_ptr<ecore::ecorePackage> getecorePackage();
+			virtual std::shared_ptr<ecore::ecoreFactory> getecoreFactory();
+		protected:
+			ecorePluginImpl();
+			friend std::shared_ptr<ecorePlugin> ecorePlugin::eInstance();
+			friend std::shared_ptr<ecorePlugin> ecorePlugin::init();
+			std::shared_ptr<ecore::ecorePackage> m_ecorePackage = nullptr;
+			std::shared_ptr<ecore::ecoreFactory> m_ecoreFactory = nullptr;
+
 	};
 }
 #endif /* end of include guard: ECOREPLUGINIMPL_HPP */

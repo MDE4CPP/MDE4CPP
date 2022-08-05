@@ -63,7 +63,7 @@ namespace ocl::Expressions
 			ExpressionsFactoryImpl& operator=(ExpressionsFactoryImpl const&) = delete;
 
 		protected:
-			friend class ExpressionsFactory;
+			friend class ExpressionsPluginImpl;  
 			// Constructor
 			ExpressionsFactoryImpl();
 

@@ -22,7 +22,10 @@ namespace fUML::Semantics::Activities
 }
 
 
-
+namespace PSCS::Semantics::Actions 
+{
+	class ActionsFactoryPluginImpl;
+}
 namespace PSCS::Semantics::Actions 
 {
 	class PSCS_API ActionsFactory : virtual public ecore::EFactory 
@@ -32,11 +35,20 @@ namespace PSCS::Semantics::Actions
 			ActionsFactory& operator=(ActionsFactory const&) = delete;
 		protected:
 			ActionsFactory(){}
+		private:    	
+			friend class ActionsPluginImpl; 
+		// Header only sinleton like implemenation for ActionsFactory eInstance()
+		private: 
+			static std::shared_ptr<ActionsFactory>* getActionsFactoryStaticPtr()
+			{
+				static std::shared_ptr<ActionsFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<ActionsFactory> _instance) {*(getActionsFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<ActionsFactory> eInstance(){return *(getActionsFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<ActionsFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

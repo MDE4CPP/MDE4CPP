@@ -34,7 +34,10 @@ namespace fUML::Semantics::SimpleClassifiers
 }
 
 
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class StructuredClassifiersFactoryPluginImpl;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class PSCS_API StructuredClassifiersFactory : virtual public ecore::EFactory 
@@ -44,11 +47,20 @@ namespace PSCS::Semantics::StructuredClassifiers
 			StructuredClassifiersFactory& operator=(StructuredClassifiersFactory const&) = delete;
 		protected:
 			StructuredClassifiersFactory(){}
+		private:    	
+			friend class StructuredClassifiersPluginImpl; 
+		// Header only sinleton like implemenation for StructuredClassifiersFactory eInstance()
+		private: 
+			static std::shared_ptr<StructuredClassifiersFactory>* getStructuredClassifiersFactoryStaticPtr()
+			{
+				static std::shared_ptr<StructuredClassifiersFactory> local_instance; 
+				return &(local_instance);
+			}
+		    static void seteInstance(std::shared_ptr<StructuredClassifiersFactory> _instance) {*(getStructuredClassifiersFactoryStaticPtr())=_instance;}; 
+		public:
+			static std::shared_ptr<StructuredClassifiersFactory> eInstance(){return *(getStructuredClassifiersFactoryStaticPtr());}
 		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<StructuredClassifiersFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

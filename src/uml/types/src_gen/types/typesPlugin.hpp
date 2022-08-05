@@ -14,24 +14,30 @@
 
 namespace types
 {
+			class typesPackage;
+			class typesFactory;
+}
+namespace types
+{
 	class TYPES_API typesPlugin : virtual public EcoreModelPlugin
 	{
 		public:
-			static std::shared_ptr<MDE4CPPPlugin> eInstance();
+			virtual ~typesPlugin(){};
+			static std::shared_ptr<typesPlugin> eInstance();
 	
 			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
-			
+	 		
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory() = 0;
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
-	
+			virtual std::shared_ptr<types::typesPackage> gettypesPackage() = 0;
+			virtual std::shared_ptr<types::typesFactory> gettypesFactory() = 0;
 		protected:
 			typesPlugin(){};
-			virtual ~typesPlugin(){};
 	};
 }
 #endif /* end of include guard: TYPESPLUGIN_HPP */

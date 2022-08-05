@@ -53,8 +53,7 @@ namespace fUML::Semantics::Activities
 	class ObjectToken;
 	class Offer;
 	class Token;
-	class TokenSet;
-}
+	class TokenSet;}
  
 namespace fUML::Semantics::Activities 
 {
@@ -116,7 +115,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ActivityEdgeInstance
 
-
 			// Begin Class ActivityExecution
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
@@ -145,7 +143,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ActivityExecution
 
-
 			// Begin Class ActivityFinalNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYFINALNODEACTIVATION_CLASS = 1133474033;
@@ -163,7 +160,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getActivityFinalNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class ActivityFinalNodeActivation
-
 
 			// Begin Class ActivityNodeActivation
 			//Class and Feature IDs 
@@ -243,7 +239,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ActivityNodeActivation
 
-
 			// Begin Class ActivityNodeActivationGroup
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_CLASS = 447489606;
@@ -304,7 +299,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ActivityNodeActivationGroup
 
-
 			// Begin Class ActivityParameterNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_CLASS = 1310518118;
@@ -325,7 +319,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ActivityParameterNodeActivation
 
-
 			// Begin Class CentralBufferNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long CENTRALBUFFERNODEACTIVATION_CLASS = 2083734229;
@@ -344,7 +337,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class CentralBufferNodeActivation
 
-
 			// Begin Class ClassifierBehaviorExecutionActivity
 			//Class and Feature IDs 
 			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS = 1651964304;
@@ -361,7 +353,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ClassifierBehaviorExecutionActivity
 
-
 			// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			//Class and Feature IDs 
 			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS = 285113084;
@@ -377,7 +368,6 @@ namespace fUML::Semantics::Activities
 			
 			
 			// End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-
 
 			// Begin Class ControlNodeActivation
 			//Class and Feature IDs 
@@ -396,7 +386,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getControlNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class ControlNodeActivation
-
 
 			// Begin Class ControlToken
 			//Class and Feature IDs 
@@ -420,7 +409,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ControlToken
 
-
 			// Begin Class DataStoreNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long DATASTORENODEACTIVATION_CLASS = 602540034;
@@ -440,7 +428,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation_Operation_removeToken_Token() const = 0;
 			
 			// End Class DataStoreNodeActivation
-
 
 			// Begin Class DecisionNodeActivation
 			//Class and Feature IDs 
@@ -484,7 +471,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class DecisionNodeActivation
 
-
 			// Begin Class ExpansionActivationGroup
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONACTIVATIONGROUP_CLASS = 2118091381;
@@ -519,7 +505,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ExpansionActivationGroup
 
-
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 2051282899;
@@ -543,7 +528,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_receiveOffer() const = 0;
 			
 			// End Class ExpansionNodeActivation
-
 
 			// Begin Class ExpansionRegionActivation
 			//Class and Feature IDs 
@@ -597,7 +581,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ExpansionRegionActivation
 
-
 			// Begin Class FlowFinalNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long FLOWFINALNODEACTIVATION_CLASS = 1816371590;
@@ -613,7 +596,6 @@ namespace fUML::Semantics::Activities
 			
 			
 			// End Class FlowFinalNodeActivation
-
 
 			// Begin Class ForkNodeActivation
 			//Class and Feature IDs 
@@ -634,7 +616,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation_Operation_terminate() const = 0;
 			
 			// End Class ForkNodeActivation
-
 
 			// Begin Class ForkedToken
 			//Class and Feature IDs 
@@ -668,7 +649,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ForkedToken
 
-
 			// Begin Class InitialNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long INITIALNODEACTIVATION_CLASS = 176514932;
@@ -686,7 +666,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getInitialNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class InitialNodeActivation
-
 
 			// Begin Class JoinNodeActivation
 			//Class and Feature IDs 
@@ -708,7 +687,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class JoinNodeActivation
 
-
 			// Begin Class MergeNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long MERGENODEACTIVATION_CLASS = 1031931828;
@@ -724,7 +702,6 @@ namespace fUML::Semantics::Activities
 			
 			
 			// End Class MergeNodeActivation
-
 
 			// Begin Class ObjectNodeActivation
 			//Class and Feature IDs 
@@ -766,7 +743,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class ObjectNodeActivation
 
-
 			// Begin Class ObjectToken
 			//Class and Feature IDs 
 			static const unsigned long OBJECTTOKEN_CLASS = 85097778;
@@ -790,7 +766,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_isControl() const = 0;
 			
 			// End Class ObjectToken
-
 
 			// Begin Class Offer
 			//Class and Feature IDs 
@@ -819,7 +794,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_retrieveOfferedTokens() const = 0;
 			
 			// End Class Offer
-
 
 			// Begin Class Token
 			//Class and Feature IDs 
@@ -853,7 +827,6 @@ namespace fUML::Semantics::Activities
 			
 			// End Class Token
 
-
 			// Begin Class TokenSet
 			//Class and Feature IDs 
 			static const unsigned long TOKENSET_CLASS = 1781345229;
@@ -871,15 +844,22 @@ namespace fUML::Semantics::Activities
 			
 			
 			// End Class TokenSet
-
 			
 			
-
 			
-
-			//Singleton Getter
+		private:
+			friend class ActivitiesPluginImpl;
+			// Header only sinleton like implemenation for ActivitiesPackage eInstance()
+			private: 
+				static std::shared_ptr<ActivitiesPackage>* getActivitiesPackageStaticPtr()
+				{
+					static std::shared_ptr<ActivitiesPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<ActivitiesPackage> _instance) {*(getActivitiesPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<ActivitiesPackage> eInstance();
+				static std::shared_ptr<ActivitiesPackage> eInstance(){return *(getActivitiesPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIESPACKAGE_HPP */

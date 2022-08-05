@@ -15,7 +15,8 @@
 #include "ecore/ecoreFactory.hpp"
 
 namespace ecore 
-{	class EAnnotation;
+{
+	class EAnnotation;
 	class EAttribute;
 	class EClass;
 	class EClassifier;
@@ -36,7 +37,10 @@ namespace ecore
 	class EStringToStringMapEntry;
 	class EStructuralFeature;
 	class ETypeParameter;
-	class ETypedElement;
+	class ETypedElement;}
+namespace ecore 
+{
+	class ecorePluginImpl; 
 }
 
 namespace ecore 
@@ -48,7 +52,8 @@ namespace ecore
 			ecoreFactoryImpl& operator=(ecoreFactoryImpl const&) = delete;
 
 		protected:
-			friend class ecoreFactory;
+			friend class ecore::ecorePluginImpl;  
+
 			// Constructor
 			ecoreFactoryImpl();
 

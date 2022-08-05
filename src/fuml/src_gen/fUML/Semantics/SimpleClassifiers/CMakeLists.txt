@@ -78,7 +78,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources(fUML_Semantics_SimpleClassifiers
+PRIVATE
 # Factories and packages
 	impl/SimpleClassifiersFactoryImpl.cpp
 	impl/SimpleClassifiersPackageImpl.cpp
@@ -113,15 +115,15 @@ endif(APPLE)
 
 set(uml_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
 set(uml_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/uml")
+set(fUML_Semantics_Values_Interface_DIR "${CMAKE_BINARY_DIR}/Semantics/Values")
 set(ecore_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
 set(ecore_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/ecore")
+set(fUML_Interface_DIR "${CMAKE_BINARY_DIR}")
 find_package(uml CONFIG)
 find_package(uml_Interface CONFIG)
-find_package(fUML_Semantics_Values CONFIG)
 find_package(fUML_Semantics_Values_Interface CONFIG)
 find_package(ecore CONFIG)
 find_package(ecore_Interface CONFIG)
-find_package(fUML CONFIG)
 find_package(fUML_Interface CONFIG)
 message("Dir_Name: ${uml_DIR}")
 message("Interface_Dir_Name: ${uml_Interface_DIR}") 
@@ -161,8 +163,6 @@ Librarry fUML_Interface: ${fUML_Interface_FOUND} (Version ${fUML_Interface_VERSI
 ")
 
 
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PRIVATE uml::uml
 	PRIVATE fUML::Semantics::Values::fUML_Semantics_Values

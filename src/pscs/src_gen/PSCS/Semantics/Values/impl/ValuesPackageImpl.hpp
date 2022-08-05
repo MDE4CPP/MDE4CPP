@@ -18,7 +18,9 @@
 
 namespace PSCS::Semantics::Values 
 {
-	class CS_OpaqueExpressionEvaluation;}
+	class CS_OpaqueExpressionEvaluation;
+	class ValuesPluginImpl; 
+}
 
 namespace ecore
 {
@@ -61,7 +63,7 @@ namespace PSCS::Semantics::Values
 			
 			std::shared_ptr<ecore::EOperation> m_cS_OpaqueExpressionEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior = nullptr;
 
-			friend class ValuesPackage;
+			friend class ValuesPluginImpl; 
 
 			static bool isInited;
 			static ValuesPackage* create();

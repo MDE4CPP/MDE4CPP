@@ -27,7 +27,7 @@ namespace ocl
 			oclFactoryImpl& operator=(oclFactoryImpl const&) = delete;
 
 		protected:
-			friend class oclFactory;
+			friend class oclPluginImpl;  
 			// Constructor
 			oclFactoryImpl();
 

@@ -34,7 +34,6 @@ namespace PSCS
 	{
 		class SemanticsPackage;
 	}
-
 }
  
 namespace PSCS 
@@ -61,13 +60,21 @@ namespace PSCS
 
 			
 			
-
 			virtual std::shared_ptr<PSCS::Semantics::SemanticsPackage> getSemantics_Package() const = 0;
 			
-
-			//Singleton Getter
+		private:
+			friend class PSCSPluginImpl;
+			// Header only sinleton like implemenation for PSCSPackage eInstance()
+			private: 
+				static std::shared_ptr<PSCSPackage>* getPSCSPackageStaticPtr()
+				{
+					static std::shared_ptr<PSCSPackage> local_instance; 
+					return &(local_instance);
+				}
+			    static void seteInstance(std::shared_ptr<PSCSPackage> _instance) {*(getPSCSPackageStaticPtr())=_instance;}; 
 			public:
-				static std::shared_ptr<PSCSPackage> eInstance();
+				static std::shared_ptr<PSCSPackage> eInstance(){return *(getPSCSPackageStaticPtr());}
+			
 	};
 }
 #endif /* end of include guard: PSCSPACKAGE_HPP */

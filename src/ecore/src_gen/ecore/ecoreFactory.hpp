@@ -14,6 +14,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
+#include "ecore/ecorePlugin.hpp"
 #include "ecore/ecorePackage.hpp"
 
 namespace ecore 
@@ -22,7 +23,10 @@ namespace ecore
 }
 
 
-
+namespace ecore 
+{
+	class ecoreFactoryPluginImpl;
+}
 namespace ecore 
 {
 	class ECORE_API ecoreFactory : virtual public EFactory 
@@ -32,11 +36,15 @@ namespace ecore
 			ecoreFactory& operator=(ecoreFactory const&) = delete;
 		protected:
 			ecoreFactory(){}
-		
-			//Singleton Getter
-			public:
-				static std::shared_ptr<ecoreFactory> eInstance();
-		
+		private:    	
+			friend class ecorePluginImpl;
+ 		public:
+			static std::shared_ptr<ecoreFactory> eInstance()
+			{
+				std::shared_ptr<ecorePlugin> plugin=ecorePlugin::eInstance();
+				return plugin->getecoreFactory();
+			}
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;

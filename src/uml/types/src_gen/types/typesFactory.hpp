@@ -22,7 +22,10 @@ namespace types
 }
 
 
-
+namespace types 
+{
+	class typesFactoryPluginImpl;
+}
 namespace types 
 {
 	class TYPES_API typesFactory : virtual public ecore::EFactory 
@@ -32,11 +35,11 @@ namespace types
 			typesFactory& operator=(typesFactory const&) = delete;
 		protected:
 			typesFactory(){}
-		
-			//Singleton Getter
+		private:    	
+			friend class typesPluginImpl; 			
 			public:
 				static std::shared_ptr<typesFactory> eInstance();
-		
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
