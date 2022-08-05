@@ -35,6 +35,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
+#include "[anEPackage.getRootPackage().generateNamespacePath()/]/[anEPackage.getRootPackage().name.concat('Plugin')/].hpp"
 [if (not (anEPackage = anEPackage.getRootPackage()))]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [else]
@@ -43,7 +44,10 @@
 
 [comment  Generate Includes for the Factory/]
 [anEPackage.generateForwardDeclarations()/]
-
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+	class [packageName/]PluginImpl;
+}
 [comment namespace /]
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
@@ -54,10 +58,17 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[packageName/]& operator=([packageName/] const&) = delete;
 		protected:
 			[packageName/](){}
-		
-			//Singleton Getter
-			[generateSingletonDecl(packageName)/]
-		
+		private:    	
+			friend class [anEPackage.name/]PluginImpl;
+ 		public:
+			static std::shared_ptr<[anEPackage.name.concat('Factory')/]> eInstance()
+			{
+				std::shared_ptr<[anEPackage.getRootPackage().name/]Plugin> plugin=[anEPackage.getRootPackage().name/]Plugin::eInstance();
+				return plugin->get[anEPackage.getNamespace('_', false)/]Factory();
+			}
+		[comment][generateSingletonDecl(anEPackage.name.concat('Factory'))/][/comment]
+		[comment] [generateHeaderOnlySingletonDecl(packageName)/] [/comment] 
+		public:    		
 			//Creator functions
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;

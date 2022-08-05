@@ -19,84 +19,150 @@
 [import ecore4CPP::generator::main::validation::validation /]
 
 [template public generateEcorePluginImplSource(aPackage : EPackage) { 
-	packageName : String = aPackage.name.concat('PluginImpl'); 
-	fileName : String = aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp');
+	pluginImplName : String = aPackage.name.concat('PluginImpl');
+	fileName : String = aPackage.generateNamespacePath().concat('/impl/').concat(pluginImplName).concat('.cpp');
 }]
 [printInfo(fileGenerationMessage(fileName, 'plugin implementation source file'), 2)/]
 [file (fileName, false, 'UTF-8')]
-#include "[aPackage.name/]/impl/[packageName/].hpp"
+#include "[aPackage.name/]/impl/[pluginImplName/].hpp"
 
 #include "[aPackage.name/]/[aPackage.name/]Factory.hpp"
 #include "[aPackage.name/]/[aPackage.name/]Package.hpp"
+#include "[aPackage.name/]/impl/[aPackage.name/]FactoryImpl.hpp"
+#include "[aPackage.name/]/impl/[aPackage.name/]PackageImpl.hpp"
+
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+#include "[aSubPackage.getNamespace('/', false)/]/impl/[aSubPackage.name/]FactoryImpl.hpp"
+#include "[aSubPackage.getNamespace('/', false)/]/impl/[aSubPackage.name/]PackageImpl.hpp"
+		[/for] 
+	[/if]
+[/let]	
+
 
 using namespace [aPackage.name/];
 
 //static initialisation
-std::shared_ptr<MDE4CPPPlugin> [aPackage.name/]Plugin::eInstance()
+[comment] 
+std::shared_ptr<[aPackage.name/]Plugin> [aPackage.name/]Plugin::eInstance()
 {
-	static std::shared_ptr<MDE4CPPPlugin> instance;
+	static std::shared_ptr<[aPackage.name/]Plugin> instance;
 
 	if(instance==nullptr)
 	{
 		//create a new Singelton Instance
-		instance.reset(new [packageName/]());
+		instance.reset(new [pluginImplName/]());
 	}
 	return instance;
+}
+[/comment]
+std::shared_ptr<[aPackage.name/]Plugin> [aPackage.name/]Plugin::init()
+{
+	std::shared_ptr<[aPackage.name/]Plugin>* staticPtr= get[aPackage.name/]PluginStaticPtr();
+	if(staticPtr==nullptr)
+	{
+		//create a new Singelton Instance
+		seteInstance(new [pluginImplName/]());
+	}      
+	return *get[aPackage.name/]PluginStaticPtr();
 }
 
 [aPackage.getRootPackage().name.toUpper()/]_API std::shared_ptr<MDE4CPPPlugin> start()
 {
-	return [packageName/]::eInstance();
+	return [pluginImplName/]::eInstance();
 }
+
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Package> [pluginImplName/]::get[aSubPackage.getNamespace('_', false)/]Package()
+{
+	if(nullptr==m_[aSubPackage.getNamespace('_', false)/]Package) // create package only ones
+	{
+		m_[aSubPackage.getNamespace('_', false)/]Package.reset([aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]PackageImpl::create());//plugin is fried of package
+	}
+	return m_[aSubPackage.getNamespace('_', false)/]Package;
+}
+
+std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Factory> [pluginImplName/]::get[aSubPackage.getNamespace('_', false)/]Factory()
+{
+	if(nullptr==m_[aSubPackage.getNamespace('_', false)/]Factory) // create package only ones
+	{
+		m_[aSubPackage.getNamespace('_', false)/]Factory.reset([aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]FactoryImpl::create());//plugin is fried of Factory
+	}
+	return m_[aSubPackage.getNamespace('_', false)/]Factory;
+}
+		[/for] 
+	[/if]
+[/let]	
+
 
 //*********************************
 // Constructor / Destructor
 //*********************************
-[packageName/]::[packageName/]()
+[pluginImplName/]::[pluginImplName/]()
+{
+// plugin create factory and package during start()
+[comment]
+	std::shared_ptr<[aPackage.name.concat('Package')/]> eInstancePackagePtr=[aPackage.name.concat('Package')/]::eInstance();
+	if(nullptr==eInstancePackagePtr) // create package only ones
+	{ 
+		std::shared_ptr<[aPackage.name.concat('Package')/]> uniquePackagePtr;
+		uniquePackagePtr.reset([aPackage.name.concat('Package')/]Impl::create());//plugin is fried of package
+		[aPackage.name.concat('Package')/]::seteInstance(uniquePackagePtr);
+	}
+	std::shared_ptr<[aPackage.name.concat('Package')/]> eInstanceFactoryPtr=[aPackage.name.concat('Package')/]::eInstance();
+	if(nullptr==eInstanceFactoryPtr) // create factory only ones
+	{ 
+		std::shared_ptr<[aPackage.name.concat('Factory')/]> uniqueFactroyPtr;
+		uniqueFactroyPtr.reset([aPackage.name.concat('Factory')/]Impl::create());//plugin is fried of package
+		[aPackage.name.concat('Factory')/]::seteInstance(uniqueFactroyPtr);
+	} 
+[/comment] 
+}
+
+[pluginImplName/]::~[pluginImplName/]()
 {
 }
 
-[packageName/]::~[packageName/]()
-{
-}
 
-
-std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name) const
+std::shared_ptr<ecore::EObject> [pluginImplName/]::create(const std::string& name) const
 {
 	return [aPackage.name/]Factory::eInstance()->create(name);
 }
 
-std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+std::shared_ptr<ecore::EObject> [pluginImplName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
 {
 	return [aPackage.name/]Factory::eInstance()->create(name, container, referenceID);
 }
 
-std::shared_ptr<ecore::EFactory> [packageName/]::getEFactory()
+std::shared_ptr<ecore::EFactory> [pluginImplName/]::getEFactory()
 {
 	return [aPackage.name/]Factory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
+std::shared_ptr<ecore::EPackage> [pluginImplName/]::getEPackage()
 {
 	return [aPackage.name/]Package::eInstance();
 }
 
-std::string [packageName/]::eclipseURI()
+std::string [pluginImplName/]::eclipseURI()
 {
 	return "[getEclipseURI()/]";
 }
 
-std::string [packageName/]::eNAME()
+std::string [pluginImplName/]::eNAME()
 {
 	return "[aPackage.name/]";
 }
 
-std::string [packageName/]::eNS_URI()
+std::string [pluginImplName/]::eNS_URI()
 {
 	return "[aPackage.nsURI/]";
 }
 
-std::string [packageName/]::eNS_PREFIX()
+std::string [pluginImplName/]::eNS_PREFIX()
 {
 	return "[aPackage.nsPrefix/]";
 }

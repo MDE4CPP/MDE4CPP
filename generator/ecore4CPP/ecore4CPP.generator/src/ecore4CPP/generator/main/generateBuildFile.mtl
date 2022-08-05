@@ -140,7 +140,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-SET(SOURCE_FILES
+ADD_LIBRARY(${PROJECT_NAME} SHARED )
+target_sources([packageName/]
+PRIVATE
 # Factories and packages
 	[aPackage.generatePackageAndFactory()/]
 [comment only for root packeges a plugin manager will be generated/]
@@ -196,8 +198,6 @@ message("[pack.getNamespace( '_', true)/]_Interface_DIR ${[pack.getNamespace( '_
 [/let]
 
 [generateCMakeFindLibraryCommands('', 'lib')/]
-
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 [generateLibraryLinking(false)/]
 #create an alias lib for [aPackage.getNamespace('_',false)/]
 add_library([aPackage.getNamespace('::',false)/]::[aPackage.getNamespace('_',false)/] ALIAS [aPackage.getNamespace('_',false)/])
@@ -560,21 +560,21 @@ find_package([pack.getNamespace( '_', false).toUpperCase()/]_[libraryVariableNam
 find_package([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/])
 [/if]
 [/for]
-[/comment]
+[/comment] 
 
 [let dependentPackage : OrderedSet(EPackage) = (aPackage.metaModelLibraries()-aPackage.eSubpackages)->reject(doNotGenerateEPackage())->asOrderedSet()]
 	[if (not (dependentPackage->oclIsUndefined()) and dependentPackage->size()>0)]
 		[for (packIt : EPackage | dependentPackage) ? (not(packIt.name = aPackage.name))]
-			[if (packIt = aPackage)] [comment Config.cmake files of the same model are installed after compilation. Hence, the config files are located in the BINARY_DIR of the current model/]
-set([packIt.getNamespace( '_', false)/]_DIR "${CMAKE_BINARY_DIR}")
+			[if (packIt = aPackage)] [comment Config.cmake files of the same model are installed after compilation. Hence, the config files should be located in the BINARY_DIR of the current model/]
+[comment]#set([packIt.getNamespace( '_', false)/]_DIR "${CMAKE_BINARY_DIR}")[/comment]
 set([packIt.getNamespace( '_', false)/]_Interface_DIR "${CMAKE_BINARY_DIR}")
 			[else]
 				[if ((packIt.getRootPackage() = aPackage.getRootPackage()) or (packIt = aPackage))] [comment sub dirs cant have dependency to root package --> Ring dependency??/]
 [comment]
 Wird die Abhängigkeit trotzdem benötigt oder kennt das System durch subDir das Root-Package???
-set([packIt.getNamespace( '_', false)/]_DIR "${CMAKE_BINARY_DIR}[packIt.getNamespace( '/', true)/]")
-set([packIt.getNamespace( '_', false)/]_Interface_DIR "${CMAKE_BINARY_DIR}[packIt.getNamespace( '/', true)/]")
+#set([packIt.getNamespace( '_', false)/]_DIR "${CMAKE_BINARY_DIR}[packIt.getNamespace( '/', true)/]")
 [/comment]
+set([packIt.getNamespace( '_', false)/]_Interface_DIR "${CMAKE_BINARY_DIR}[packIt.getNamespace( '/', true)/]")
 				[else]
 set([packIt.getNamespace( '_', false)/]_DIR "${MDE4CPP_HOME}/application/lib/cmake/[packIt.getRootPackage().name/]")
 set([packIt.getNamespace( '_', false)/]_Interface_DIR "${MDE4CPP_HOME}/application/lib/cmake/[packIt.getRootPackage().name/]")
@@ -582,8 +582,16 @@ set([packIt.getNamespace( '_', false)/]_Interface_DIR "${MDE4CPP_HOME}/applicati
 			[/if]
 		[/for]
 		[for (pack : EPackage | dependentPackage) ? (not(pack.name = aPackage.name))]
+				[if ((pack.getRootPackage() = aPackage.getRootPackage()) or (pack = aPackage))] [comment sub dirs cant have dependency to root package --> Ring dependency??/]
+[comment]
+Wird die Abhängigkeit trotzdem benötigt oder kennt das System durch subDir das Root-Package???
+#find_package([pack.getNamespace( '_', false)/] CONFIG)
+[/comment] 
+find_package([pack.getNamespace( '_', false)/]_Interface CONFIG)
+				[else]
 find_package([pack.getNamespace( '_', false)/] CONFIG)
 find_package([pack.getNamespace( '_', false)/]_Interface CONFIG)
+				[/if]
 		[/for]
 		[for (libName : String | aPackage.eContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 			[if (not (libName.oclIsUndefined() or libName = ''))]

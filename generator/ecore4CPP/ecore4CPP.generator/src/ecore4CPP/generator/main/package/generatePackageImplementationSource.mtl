@@ -60,8 +60,17 @@
 
 using namespace [anEPackage.generateNamespaceDefinition()/];
 
-//Singleton implementation 
-[generateSingletonImpl(anEPackage.name.concat('Package'), true)/]
+[comment common static implementation changed to local static variable and static getOperation (HederOnly Implemenation)
+//Singleton implementation
+generateSingletonImpl(anEPackage.name.concat('Package'), true)/] 
+[comment] 
+std::shared_ptr<[anEPackage.name/]Package> [anEPackage.name/]Package::eInstance()
+{
+	std::shared_ptr<[anEPackage.getRootPackage().name/]Plugin> plugin=[anEPackage.getRootPackage().name/]Plugin::eInstance();
+	return plugin->get[anEPackage.getNamespace('_', false)/]Package();
+}
+[/comment]
+ 
 //static initialisation
 const std::string [anEPackage.name.concat('Package')/]::eNAME ="[anEPackage.name/]";
 const std::string [anEPackage.name.concat('Package')/]::eNS_URI ="[anEPackage.nsURI/]";

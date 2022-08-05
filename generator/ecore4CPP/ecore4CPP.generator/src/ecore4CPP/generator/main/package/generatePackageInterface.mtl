@@ -36,6 +36,7 @@
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"
 
 #include "ecore/EPackage.hpp"
+#include "[anEPackage.getRootPackage().generateNamespacePath()/]/[anEPackage.getRootPackage().name.concat('Plugin')/].hpp"
 
 namespace [anEPackage.eClass().ePackage.name/] 
 {
@@ -93,15 +94,20 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			// End Class [aClass.name.toUpperFirst()/]
-
 [/for]
 			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateStaticDatatypeID()/]
 			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
-
 			[anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name).generateSubPackageGetter(false)/]
-
-			//Singleton Getter
-			[generateSingletonDecl(packageName)/]
+		private:
+			friend class [anEPackage.name/]PluginImpl;		
+		public:
+			static std::shared_ptr<[anEPackage.name.concat('Package')/]> eInstance()
+			{
+				std::shared_ptr<[anEPackage.getRootPackage().name/]Plugin> plugin=[anEPackage.getRootPackage().name/]Plugin::eInstance();
+				return plugin->get[anEPackage.getNamespace('_', false)/]Package();
+			}
+			[comment][generateSingletonDecl(anEPackage.name.concat('Package'))/][/comment]
+			[comment][generateHeaderOnlySingletonDecl(packageName)/] [/comment]
 [if anEPackage.name.equalsIgnoreCase('ecore')]
 			//prevent from hiding functions
 			using EPackage::getEAnnotation;

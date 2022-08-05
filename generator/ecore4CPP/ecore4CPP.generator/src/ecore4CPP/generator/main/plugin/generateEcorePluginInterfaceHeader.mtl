@@ -16,6 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::validation::validation /]
+[import ecore4CPP::generator::main::generateSingleton /]
 
 [template public generateEcorePluginInterfaceHeader(aPackage : EPackage) {
 	packageName : String = aPackage.name.concat('Plugin');
@@ -30,26 +31,46 @@
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+namespace [aSubPackage.getNamespace('::', false)/]
+{
+			class [aSubPackage.name/]Package;
+			class [aSubPackage.name/]Factory;
+}
+		[/for] 
+	[/if]
+[/let]	
 namespace [aPackage.name/]
 {
 	class [aPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public EcoreModelPlugin
 	{
 		public:
-			static std::shared_ptr<MDE4CPPPlugin> eInstance();
+			virtual ~[packageName/](){};
+		[generateHeaderOnlySingletonDecl(aPackage.name.concat('Plugin'))/]
+			static std::shared_ptr<[aPackage.getRootPackage().name/]Plugin> init();
+			[comment]static std::shared_ptr<[aPackage.getRootPackage().name/]Plugin> eInstance();[/comment]
 	
 			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
-			
+	 		
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory() = 0;
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
-	
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+			virtual std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Package> get[aSubPackage.getNamespace('_', false)/]Package() = 0;
+			virtual std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Factory> get[aSubPackage.getNamespace('_', false)/]Factory() = 0;
+		[/for] 
+	[/if]
+[/let]	
 		protected:
 			[packageName/](){};
-			virtual ~[packageName/](){};
 	};
 }
 [endGuard(aPackage,'Plugin')/]

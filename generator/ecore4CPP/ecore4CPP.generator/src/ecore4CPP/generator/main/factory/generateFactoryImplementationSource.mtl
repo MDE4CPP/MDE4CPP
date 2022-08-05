@@ -37,12 +37,27 @@
 [if(anEPackage.name = 'uml')]
 #include "uml/impl/ElementImpl.hpp"
 [/if]
+#include "[anEPackage.getRootPackage().generateNamespacePath()/]/[anEPackage.getRootPackage().name.concat('Plugin')/].hpp"
 [generateFactoryImports()/]
 
 [comment namespace /]
 using namespace [anEPackage.generateNamespaceDefinition()/];
 
-[generateSingletonImpl(anEPackage.name.concat('Factory'), false)/]
+[comment [generateSingletonImpl(anEPackage.name.concat('Factory'), false) common static implementation changed to local static variable and static getOperation (HederOnly Implemenation)/]
+[comment] 
+std::shared_ptr<[anEPackage.name/]Factory> [anEPackage.name/]Factory::eInstance()
+{
+	std::shared_ptr<[anEPackage.getRootPackage().name/]Plugin/]> plugin=[anEPackage.getRootPackage().name/]Plugin::eInstance();
+	return plugin->get[anEPackage.name/]Factory();
+}
+[/comment]
+[comment]  
+std::shared_ptr<[anEPackage.name/]Factory> [anEPackage.name/]Factory::eInstance()
+{
+	std::shared_ptr<[anEPackage.getRootPackage().name/]Plugin> plugin=[anEPackage.getRootPackage().name/]Plugin::eInstance();
+	return plugin->get[anEPackage.getNamespace('_', false)/]Factory();
+}
+[/comment]
 
 //*********************************
 // Constructor / Destructor

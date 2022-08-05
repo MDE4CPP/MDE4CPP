@@ -29,14 +29,24 @@
 
 #include "[aPackage.name/]/[aPackage.name/]Plugin.hpp"
 
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+namespace [aSubPackage.getNamespace('::', false)/]
+{
+			class [aSubPackage.name/]Package;
+			class [aSubPackage.name/]Factory;
+}
+		[/for] 
+	[/if]
+[/let]	
+
 namespace [aPackage.name/] 
 {
 	class [aPackage.getRootPackage().name.toUpper()/]_API [aPackage.name.concat('PluginImpl')/] : virtual public [aPackage.name.concat('Plugin')/] 
 	{
-		public:
-			[aPackage.name/]PluginImpl();
+		public:	
 			virtual ~[aPackage.name/]PluginImpl();
-		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
@@ -46,6 +56,28 @@ namespace [aPackage.name/]
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory();
 			virtual std::shared_ptr<ecore::EPackage> getEPackage();
+
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->asSet()->including(aPackage)->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+			virtual std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Package> get[aSubPackage.getNamespace('_', false)/]Package();
+			virtual std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Factory> get[aSubPackage.getNamespace('_', false)/]Factory();
+		[/for] 
+	[/if]
+[/let]	
+		protected:
+			[aPackage.name/]PluginImpl();
+			friend std::shared_ptr<[aPackage.name.concat('Plugin')/]> [aPackage.name.concat('Plugin')/]::eInstance();
+			friend std::shared_ptr<[aPackage.name.concat('Plugin')/]> [aPackage.name.concat('Plugin')/]::init();
+[let subPackages : OrderedSet(EPackage) =  aPackage->closure(p|p.eSubpackages)->asSet()->including(aPackage)->reject(doNotGenerateEPackage())->including(aPackage)->asOrderedSet()->sortedBy(name)]
+	[if (subPackages->size()>0)]
+		[for (aSubPackage : EPackage| subPackages)]
+			std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Package> m_[aSubPackage.getNamespace('_', false)/]Package = nullptr;
+			std::shared_ptr<[aSubPackage.getNamespace('::', false)/]::[aSubPackage.name/]Factory> m_[aSubPackage.getNamespace('_', false)/]Factory = nullptr;
+		[/for] 
+	[/if]
+[/let]	
+
 	};
 }
 [endGuard(aPackage,'PluginImpl')/]

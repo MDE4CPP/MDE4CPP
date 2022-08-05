@@ -19,6 +19,20 @@ public:
 	static std::shared_ptr<[packageName/]> eInstance();
 [/template]
 
+[template public generateHeaderOnlySingletonDecl(packageName : String)]
+// Header only sinleton like implemenation for [packageName/] eInstance()
+private:
+	static std::shared_ptr<[packageName/]>* get[packageName/]StaticPtr()
+	{
+		static std::shared_ptr<[packageName/]> local_instance; [comment use local_instance to avoid .cpp instatiation of static variable./]
+		return &(local_instance);
+	}
+    static void seteInstance([packageName/]* _instance) {(*get[packageName/]StaticPtr()).reset(_instance);}; [comment set operation to enable set of static local variable using plugin class/]
+public:
+	static std::shared_ptr<[packageName/]> eInstance(){return *(get[packageName/]StaticPtr());}
+[/template]
+
+
 [template public generateSingletonImpl(packageName : String, callInit : Boolean)]
 std::shared_ptr<[packageName/]> [packageName/]::eInstance()
 {

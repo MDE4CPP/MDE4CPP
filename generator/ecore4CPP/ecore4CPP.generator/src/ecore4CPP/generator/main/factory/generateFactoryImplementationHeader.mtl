@@ -40,10 +40,14 @@
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.name/]Factory.hpp"
 [/if]
 
-namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name)) separator ('\n')]
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name)) separator ('\n')]
 	class [elements.name/];[/for]
-
+}
+namespace [anEPackage.getRootPackage().name/] 
+{
+	class [anEPackage.getRootPackage().name.concat('PluginImpl')/]; [comment Plugin-class create package/]
 }
 
 [comment namespace /]
@@ -56,7 +60,8 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[anEPackage.name.concat('FactoryImpl')/]& operator=([anEPackage.name.concat('FactoryImpl')/] const&) = delete;
 
 		protected:
-			friend class [anEPackage.name.concat('Factory')/];
+			friend class [anEPackage.getRootPackage().name/]::[anEPackage.getRootPackage().name.concat('PluginImpl')/];  [comment Plugin can create factory only./]
+
 			// Constructor
 			[anEPackage.name.concat('FactoryImpl')/]();
 

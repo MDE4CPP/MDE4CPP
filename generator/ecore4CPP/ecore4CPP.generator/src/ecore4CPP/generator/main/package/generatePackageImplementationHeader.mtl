@@ -52,6 +52,13 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 		class [aSubPackage.name/]Package;
 	}
 [/for]
+
+	class [anEPackage.name.concat('PluginImpl')/]; [comment Plugin-class create package/]
+}
+
+namespace [anEPackage.getRootPackage().name/] 
+{
+	class [anEPackage.getRootPackage().name.concat('PluginImpl')/]; [comment Plugin-class create package/]
 }
 
 namespace ecore
@@ -94,10 +101,10 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 
-			friend class [anEPackage.name.concat('Package')/];
+			friend class [anEPackage.getRootPackage().name/]::[anEPackage.getRootPackage().name.concat('PluginImpl')/];  [comment Plugin can create factory only./]
 
 			static bool isInited;
-			static [anEPackage.name.concat('Package')/]* create();
+			static [anEPackage.name.concat('Package')/]* create(); 
 			bool isInitialized = false;
  			bool isCreated = false;
 
