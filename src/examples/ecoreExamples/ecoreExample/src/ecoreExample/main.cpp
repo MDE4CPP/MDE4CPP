@@ -12,14 +12,23 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePlugin.hpp"
 
 
 using namespace ecore;
 
 int main()
 {
+
+  std::shared_ptr<MDE4CPPPlugin> p=ecorePlugin::eInstance();
+  if(nullptr!=p)
+  {
+	  std::cout << "super"<< std::endl;
+  }
+
   std::shared_ptr<ecorePackage> package = ecorePackage::eInstance();
   std::shared_ptr<ecoreFactory> factory = ecoreFactory::eInstance();
+
 
   // Create Instances of Ecore-Elemets
 
