@@ -54,13 +54,13 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int feat
 				[if (( (struct.oclAsType(EReference).isBackReference()) and (not struct.hasGetterName()) ))]
 		{
 			std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]().lock();
-			return eAnyObject(returnValue,[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eEcoreAny(returnValue,[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		}
 				[else]
 			return eAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/],false); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 				[/if]
 			[else]
-			return eAnyBag([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eEcoreContainerAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 			[/if]
 		[/if]
 	[/for]
