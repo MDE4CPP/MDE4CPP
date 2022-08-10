@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Union.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -259,7 +259,7 @@ std::shared_ptr<Any> EObjectContainerImpl::eGet(int featureID, bool resolve, boo
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
-			return eAnyBag(getContainer(),ecore::ecorePackage::EOBJECT_CLASS); //423
+			return eEcoreContainerAny(getContainer(),ecore::ecorePackage::EOBJECT_CLASS); //423
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -488,15 +488,15 @@ std::shared_ptr<Any> EPackageImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return eAnyBag(getEClassifiers(),ecore::ecorePackage::ECLASSIFIER_CLASS); //448
+			return eEcoreContainerAny(getEClassifiers(),ecore::ecorePackage::ECLASSIFIER_CLASS); //448
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
 			return eAny(getEFactoryInstance(),ecore::ecorePackage::EFACTORY_CLASS,false); //447
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return eAnyBag(getESubpackages(),ecore::ecorePackage::EPACKAGE_CLASS); //449
+			return eEcoreContainerAny(getESubpackages(),ecore::ecorePackage::EPACKAGE_CLASS); //449
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //4410
+			return eEcoreAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //4410
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 			return eAny(getNsPrefix(),ecore::ecorePackage::ESTRING_CLASS,false); //446
@@ -648,7 +648,7 @@ std::shared_ptr<Any> EPackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS);
+			result = eEcoreAny(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS);
 			break;
 		}
 

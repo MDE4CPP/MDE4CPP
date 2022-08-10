@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -544,16 +544,16 @@ std::shared_ptr<Any> EOperationImpl::eGet(int featureID, bool resolve, bool core
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::ECLASS_CLASS); //4314
+			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //4314
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return eAnyBag(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4317
+			return eEcoreContainerAny(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4317
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return eAnyBag(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4318
+			return eEcoreContainerAny(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4318
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return eAnyBag(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4316
+			return eEcoreContainerAny(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4316
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4315
+			return eEcoreContainerAny(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4315
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
 			return eAny(getOperationID(),ecore::ecorePackage::EINT_CLASS,false); //4313
 	}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -439,7 +439,7 @@ std::shared_ptr<Any> EGenericTypeImpl::eGet(int featureID, bool resolve, bool co
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 			return eAny(getERawType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //292
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
-			return eAnyBag(getETypeArguments(),ecore::ecorePackage::EGENERICTYPE_CLASS); //291
+			return eEcoreContainerAny(getETypeArguments(),ecore::ecorePackage::EGENERICTYPE_CLASS); //291
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return eAny(getETypeParameter(),ecore::ecorePackage::ETYPEPARAMETER_CLASS,false); //294
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:

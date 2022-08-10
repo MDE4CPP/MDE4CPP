@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -366,7 +366,7 @@ std::shared_ptr<Any> EEnumImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
-			return eAnyBag(getELiterals(),ecore::ecorePackage::EENUMLITERAL_CLASS); //2112
+			return eEcoreContainerAny(getELiterals(),ecore::ecorePackage::EENUMLITERAL_CLASS); //2112
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,7 +444,7 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
+			result = eEcoreAny(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 		// ecore::EEnum::getEEnumLiteral(int) : ecore::EEnumLiteral {const}: 2705850257
@@ -455,7 +455,7 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			int incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
-			result = eAnyObject(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
+			result = eEcoreAny(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 		// ecore::EEnum::getEEnumLiteralByLiteral(std::string) : ecore::EEnumLiteral {const}: 1911297172
@@ -466,7 +466,7 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			std::string incoming_param_literal;
 			Bag<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS);
+			result = eEcoreAny(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
 

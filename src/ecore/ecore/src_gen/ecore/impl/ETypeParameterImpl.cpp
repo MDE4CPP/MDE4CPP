@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -282,7 +282,7 @@ std::shared_ptr<Any> ETypeParameterImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return eAnyBag(getEBounds(),ecore::ecorePackage::EGENERICTYPE_CLASS); //555
+			return eEcoreContainerAny(getEBounds(),ecore::ecorePackage::EGENERICTYPE_CLASS); //555
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }

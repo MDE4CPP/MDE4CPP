@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -303,7 +303,7 @@ std::shared_ptr<Any> EModelElementImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
-			return eAnyBag(getEAnnotations(),ecore::ecorePackage::EANNOTATION_CLASS); //383
+			return eEcoreContainerAny(getEAnnotations(),ecore::ecorePackage::EANNOTATION_CLASS); //383
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -381,7 +381,7 @@ std::shared_ptr<Any> EModelElementImpl::eInvoke(int operationID, std::shared_ptr
 			std::string incoming_param_source;
 			Bag<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
+			result = eEcoreAny(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
 		}
 

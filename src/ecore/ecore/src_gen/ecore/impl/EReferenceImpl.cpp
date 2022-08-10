@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -419,7 +419,7 @@ std::shared_ptr<Any> EReferenceImpl::eGet(int featureID, bool resolve, bool core
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4622
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return eAnyBag(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4627
+			return eEcoreContainerAny(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4627
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4625
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:

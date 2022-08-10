@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -459,7 +459,7 @@ std::shared_ptr<Any> EStructuralFeatureImpl::eGet(int featureID, bool resolve, b
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::ECLASS_CLASS); //5321
+			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //5321
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID(),ecore::ecorePackage::EINT_CLASS,false); //5320

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -427,16 +427,16 @@ std::shared_ptr<Any> EAnnotationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
-			return eAnyBag(getContents(),ecore::ecorePackage::EOBJECT_CLASS); //26
+			return eEcoreContainerAny(getContents(),ecore::ecorePackage::EOBJECT_CLASS); //26
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 			return eAny(getDetails(),ecore::ecorePackage::EMAP_CLASS,false); //28
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEModelElement().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::EMODELELEMENT_CLASS); //25
+			return eEcoreAny(returnValue,ecore::ecorePackage::EMODELELEMENT_CLASS); //25
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
-			return eAnyBag(getReferences(),ecore::ecorePackage::EOBJECT_CLASS); //27
+			return eEcoreContainerAny(getReferences(),ecore::ecorePackage::EOBJECT_CLASS); //27
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return eAny(getSource(),ecore::ecorePackage::ESTRING_CLASS,false); //24
 	}

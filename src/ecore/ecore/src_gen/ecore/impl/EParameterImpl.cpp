@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -248,7 +248,7 @@ std::shared_ptr<Any> EParameterImpl::eGet(int featureID, bool resolve, bool core
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::EOPERATION_CLASS); //4513
+			return eEcoreAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS); //4513
 		}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);

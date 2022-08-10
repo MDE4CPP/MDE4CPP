@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -944,33 +944,33 @@ std::shared_ptr<Any> EClassImpl::eGet(int featureID, bool resolve, bool coreType
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 			return eAny(isAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1311
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
-			return eAnyBag(getEAllAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1315
+			return eEcoreContainerAny(getEAllAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1315
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
-			return eAnyBag(getEAllContainments(),ecore::ecorePackage::EREFERENCE_CLASS); //1319
+			return eEcoreContainerAny(getEAllContainments(),ecore::ecorePackage::EREFERENCE_CLASS); //1319
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
-			return eAnyBag(getEAllGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1326
+			return eEcoreContainerAny(getEAllGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1326
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
-			return eAnyBag(getEAllOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1320
+			return eEcoreContainerAny(getEAllOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1320
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
-			return eAnyBag(getEAllReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1316
+			return eEcoreContainerAny(getEAllReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1316
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
-			return eAnyBag(getEAllStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1321
+			return eEcoreContainerAny(getEAllStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1321
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
-			return eAnyBag(getEAllSuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1322
+			return eEcoreContainerAny(getEAllSuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1322
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
-			return eAnyBag(getEAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1318
+			return eEcoreContainerAny(getEAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1318
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
-			return eAnyBag(getEGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1325
+			return eEcoreContainerAny(getEGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1325
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
 			return eAny(getEIDAttribute(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //1323
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
-			return eAnyBag(getEOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1314
+			return eEcoreContainerAny(getEOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1314
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
-			return eAnyBag(getEReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1317
+			return eEcoreContainerAny(getEReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1317
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
-			return eAnyBag(getEStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1324
+			return eEcoreContainerAny(getEStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1324
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
-			return eAnyBag(getESuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1313
+			return eEcoreContainerAny(getESuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1313
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return eAny(isInterface(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1312
 	}
@@ -1287,7 +1287,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			int incoming_param_operationID;
 			Bag<Any>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operationID = (*incoming_param_operationID_arguments_citer)->get<int >();
-			result = eAnyObject(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
+			result = eEcoreAny(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(int) : ecore::EStructuralFeature {const}: 2814968520
@@ -1298,7 +1298,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			int incoming_param_featureID;
 			Bag<Any>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureID = (*incoming_param_featureID_arguments_citer)->get<int >();
-			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
+			result = eEcoreAny(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(std::string) : ecore::EStructuralFeature {const}: 4067797539
@@ -1309,7 +1309,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			std::string incoming_param_featureName;
 			Bag<Any>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureName = (*incoming_param_featureName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
+			result = eEcoreAny(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// ecore::EClass::getFeatureCount() : int {const}: 3596988599
@@ -1337,7 +1337,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAnyObject(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS);
+			result = eEcoreAny(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS);
 			break;
 		}
 		// ecore::EClass::getOperationCount() : int {const}: 116983988
@@ -1365,7 +1365,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
 			Bag<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
-			result = eAnyObject(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS);
+			result = eEcoreAny(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
 		}
 		// ecore::EClass::isSuperTypeOf(ecore::EClass) : bool {const}: 803543878

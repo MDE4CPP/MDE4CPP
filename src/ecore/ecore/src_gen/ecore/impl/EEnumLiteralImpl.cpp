@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -319,7 +319,7 @@ std::shared_ptr<Any> EEnumLiteralImpl::eGet(int featureID, bool resolve, bool co
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::EENUM_CLASS); //228
+			return eEcoreAny(returnValue,ecore::ecorePackage::EENUM_CLASS); //228
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance(),ecore::ecorePackage::EENUMERATOR_CLASS,false); //226

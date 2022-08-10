@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -392,10 +392,10 @@ std::shared_ptr<Any> EClassifierImpl::eGet(int featureID, bool resolve, bool cor
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
-			return eAnyObject(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //149
+			return eEcoreAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS); //149
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
-			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //1410
+			return eEcoreContainerAny(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //1410
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
 			return eAny(getInstanceClass(),ecore::ecorePackage::EJAVACLASS_CLASS,false); //146
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:

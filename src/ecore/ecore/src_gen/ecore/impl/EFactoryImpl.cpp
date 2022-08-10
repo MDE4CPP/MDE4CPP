@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -143,11 +143,11 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 						}
 						catch(...)
 						{
-							std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(instanceValue);
-							if(nullptr!=anyObjectBag)// AnyEobjectBag?
+							std::shared_ptr<ecore::EcoreContainerAny> anyObjectBag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(instanceValue);
+							if(nullptr!=anyObjectBag)// ecore::EcoreContainerAny?
 							{
-								eObjectBag=anyObjectBag->getBag();
-								returnStringStream << "<AnyEObjectBag<EObject>> size: " << eObjectBag->size() <<std::endl;
+								eObjectBag=anyObjectBag->getAsEObjectContainer();
+								returnStringStream << "<ecore::EcoreContainerAny<EObject>> size: " << eObjectBag->size() <<std::endl;
 							}
 							else
 							{
@@ -176,11 +176,11 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 					}
 					default:
 					{
-						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(instanceValue);
-						if(nullptr!=anyObjectBag)// AnyEObjectBag?
+						std::shared_ptr<ecore::EcoreContainerAny> anyObjectBag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(instanceValue);
+						if(nullptr!=anyObjectBag)// ecore::EcoreContainerAny?
 						{
-							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
-							returnStringStream << "<AnyEObjectBag> size: " << eObjectBag->size() <<std::endl;
+							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getAsEObjectContainer();
+							returnStringStream << "<ecore::EcoreContainerAny> size: " << eObjectBag->size() <<std::endl;
 							for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
 							{	// recursive Call of convertToString via new Any EObject Value
 								returnStringStream << "\t"<<convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false));
@@ -235,9 +235,9 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 						returnStringStream << "<EClass>:" << aValue->getName() << ":"<< aValue->getName()<<std::endl;
 
 						std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> attributes = aValue->getEAttributes();
-						returnStringStream << convertToString(nullptr, eAnyBag(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));
+						returnStringStream << convertToString(nullptr, eEcoreContainerAny(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));
 						std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> references = aValue->getEReferences();
-						returnStringStream << convertToString(nullptr, eAnyBag(references,ecore::ecorePackage::EREFERENCE_CLASS));
+						returnStringStream << convertToString(nullptr, eEcoreContainerAny(references,ecore::ecorePackage::EREFERENCE_CLASS));
 						handled = true; break;
 					}
 					case ecore::ecorePackage::EOBJECTANY_CLASS:
@@ -758,7 +758,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			result = eAnyObject(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
+			result = eEcoreAny(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 351752421
