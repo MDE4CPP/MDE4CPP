@@ -56,7 +56,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API ParameterableElement: virtual public Element
+	class UML_API ParameterableElement : virtual public Element
 	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}

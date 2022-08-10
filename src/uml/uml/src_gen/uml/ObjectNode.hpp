@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ObjectNode: virtual public ActivityNode, virtual public TypedElement
+	class UML_API ObjectNode : virtual public ActivityNode, virtual public TypedElement
 	{
 		public:
  			ObjectNode(const ObjectNode &) {}

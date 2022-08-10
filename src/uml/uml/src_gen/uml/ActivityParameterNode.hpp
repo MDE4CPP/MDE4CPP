@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityParameterNode: virtual public ObjectNode
+	class UML_API ActivityParameterNode : virtual public ObjectNode
 	{
 		public:
  			ActivityParameterNode(const ActivityParameterNode &) {}

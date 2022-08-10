@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -582,7 +582,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return eAnyBag(getConformance(),uml::umlPackage::PROTOCOLCONFORMANCE_CLASS); //18766
+			return eEcoreContainerAny(getConformance(),uml::umlPackage::PROTOCOLCONFORMANCE_CLASS); //18766
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }

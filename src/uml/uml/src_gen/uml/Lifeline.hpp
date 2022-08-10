@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API Lifeline: virtual public NamedElement
+	class UML_API Lifeline : virtual public NamedElement
 	{
 		public:
  			Lifeline(const Lifeline &) {}

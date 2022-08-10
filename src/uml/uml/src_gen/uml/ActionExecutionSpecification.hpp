@@ -67,7 +67,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ActionExecutionSpecification: virtual public ExecutionSpecification
+	class UML_API ActionExecutionSpecification : virtual public ExecutionSpecification
 	{
 		public:
  			ActionExecutionSpecification(const ActionExecutionSpecification &) {}

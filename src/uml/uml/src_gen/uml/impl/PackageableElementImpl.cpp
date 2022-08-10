@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -308,7 +308,7 @@ std::shared_ptr<Any> PackageableElementImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //17311
+			return eEcoreAny(returnValue,uml::umlPackage::PACKAGE_CLASS); //17311
 		}
 	}
 	std::shared_ptr<Any> result;

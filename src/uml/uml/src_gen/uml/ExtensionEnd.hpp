@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API ExtensionEnd: virtual public Property
+	class UML_API ExtensionEnd : virtual public Property
 	{
 		public:
  			ExtensionEnd(const ExtensionEnd &) {}

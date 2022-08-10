@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -511,11 +511,11 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eGet(int featureID, bool resolv
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //20327
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
-			return eAnyBag(getNewClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20328
+			return eEcoreContainerAny(getNewClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20328
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //20329
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
-			return eAnyBag(getOldClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20330
+			return eEcoreContainerAny(getOldClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20330
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

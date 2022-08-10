@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -441,7 +441,7 @@ std::shared_ptr<Any> SubstitutionImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //22919
+			return eEcoreAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //22919
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);

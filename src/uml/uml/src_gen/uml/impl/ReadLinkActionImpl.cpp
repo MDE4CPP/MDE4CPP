@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -531,7 +531,7 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
 			std::shared_ptr<Bag<uml::Property>> resultList = this->openEnd();
-			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1660612367

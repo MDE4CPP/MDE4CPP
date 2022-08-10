@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API InstanceValue: virtual public ValueSpecification
+	class UML_API InstanceValue : virtual public ValueSpecification
 	{
 		public:
  			InstanceValue(const InstanceValue &) {}

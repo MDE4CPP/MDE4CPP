@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API RemoveStructuralFeatureValueAction: virtual public WriteStructuralFeatureAction
+	class UML_API RemoveStructuralFeatureValueAction : virtual public WriteStructuralFeatureAction
 	{
 		public:
  			RemoveStructuralFeatureValueAction(const RemoveStructuralFeatureValueAction &) {}

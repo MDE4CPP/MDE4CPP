@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -425,7 +425,7 @@ std::shared_ptr<Any> GeneralizationSetImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
-			return eAnyBag(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //11015
+			return eEcoreContainerAny(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //11015
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 			return eAny(getIsCovering(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //11012
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:

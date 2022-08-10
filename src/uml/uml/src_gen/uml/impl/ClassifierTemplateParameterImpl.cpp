@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -353,7 +353,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eGet(int featureID, bool r
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return eAny(getAllowSubstitutable(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //378
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
-			return eAnyBag(getConstrainingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //379
+			return eEcoreContainerAny(getConstrainingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //379
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -505,9 +505,9 @@ std::shared_ptr<Any> LinkActionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-			return eAnyBag(getEndData(),uml::umlPackage::LINKENDDATA_CLASS); //13327
+			return eEcoreContainerAny(getEndData(),uml::umlPackage::LINKENDDATA_CLASS); //13327
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-			return eAnyBag(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //13328
+			return eEcoreContainerAny(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //13328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -619,7 +619,7 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::LinkAction::association() : uml::Association: 4091876769
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
-			result = eAnyObject(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
+			result = eEcoreAny(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// uml::LinkAction::not_static(Any, std::map) : bool: 4073421866

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -398,13 +398,13 @@ std::shared_ptr<Any> ConnectionPointReferenceImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-			return eAnyBag(getEntry(),uml::umlPackage::PSEUDOSTATE_CLASS); //5212
+			return eEcoreContainerAny(getEntry(),uml::umlPackage::PSEUDOSTATE_CLASS); //5212
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-			return eAnyBag(getExit(),uml::umlPackage::PSEUDOSTATE_CLASS); //5213
+			return eEcoreContainerAny(getExit(),uml::umlPackage::PSEUDOSTATE_CLASS); //5213
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //5214
+			return eEcoreAny(returnValue,uml::umlPackage::STATE_CLASS); //5214
 		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);

@@ -63,7 +63,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API CollaborationUse: virtual public NamedElement
+	class UML_API CollaborationUse : virtual public NamedElement
 	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}

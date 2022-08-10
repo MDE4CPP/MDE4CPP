@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -852,23 +852,23 @@ std::shared_ptr<Any> LoopNodeImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
-			return eAnyBag(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //14444
+			return eEcoreContainerAny(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //14444
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
-			return eAnyBag(getBodyPart(),uml::umlPackage::EXECUTABLENODE_CLASS); //14445
+			return eEcoreContainerAny(getBodyPart(),uml::umlPackage::EXECUTABLENODE_CLASS); //14445
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider(),uml::umlPackage::OUTPUTPIN_CLASS,false); //14446
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 			return eAny(getIsTestedFirst(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //14447
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
-			return eAnyBag(getLoopVariable(),uml::umlPackage::OUTPUTPIN_CLASS); //14448
+			return eEcoreContainerAny(getLoopVariable(),uml::umlPackage::OUTPUTPIN_CLASS); //14448
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
-			return eAnyBag(getLoopVariableInput(),uml::umlPackage::INPUTPIN_CLASS); //14449
+			return eEcoreContainerAny(getLoopVariableInput(),uml::umlPackage::INPUTPIN_CLASS); //14449
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //14450
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //14450
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
-			return eAnyBag(getSetupPart(),uml::umlPackage::EXECUTABLENODE_CLASS); //14451
+			return eEcoreContainerAny(getSetupPart(),uml::umlPackage::EXECUTABLENODE_CLASS); //14451
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
-			return eAnyBag(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //14452
+			return eEcoreContainerAny(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //14452
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

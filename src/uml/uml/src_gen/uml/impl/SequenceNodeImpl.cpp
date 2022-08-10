@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -518,7 +518,7 @@ std::shared_ptr<Any> SequenceNodeImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
-			return eAnyBag(getExecutableNode(),uml::umlPackage::EXECUTABLENODE_CLASS); //21444
+			return eEcoreContainerAny(getExecutableNode(),uml::umlPackage::EXECUTABLENODE_CLASS); //21444
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

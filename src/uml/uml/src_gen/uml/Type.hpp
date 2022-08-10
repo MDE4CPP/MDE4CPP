@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Type: virtual public PackageableElement
+	class UML_API Type : virtual public PackageableElement
 	{
 		public:
  			Type(const Type &) {}

@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API DestroyLinkAction: virtual public WriteLinkAction
+	class UML_API DestroyLinkAction : virtual public WriteLinkAction
 	{
 		public:
  			DestroyLinkAction(const DestroyLinkAction &) {}

@@ -67,7 +67,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API EnumerationLiteral: virtual public InstanceSpecification
+	class UML_API EnumerationLiteral : virtual public InstanceSpecification
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}

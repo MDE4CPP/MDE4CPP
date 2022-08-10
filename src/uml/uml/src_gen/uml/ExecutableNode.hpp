@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ExecutableNode: virtual public ActivityNode
+	class UML_API ExecutableNode : virtual public ActivityNode
 	{
 		public:
  			ExecutableNode(const ExecutableNode &) {}

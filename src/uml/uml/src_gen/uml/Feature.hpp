@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Feature: virtual public RedefinableElement
+	class UML_API Feature : virtual public RedefinableElement
 	{
 		public:
  			Feature(const Feature &) {}

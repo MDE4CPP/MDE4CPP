@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -453,7 +453,7 @@ std::shared_ptr<Any> InteractionOperandImpl::eGet(int featureID, bool resolve, b
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
-			return eAnyBag(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //12219
+			return eEcoreContainerAny(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //12219
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return eAny(getGuard(),uml::umlPackage::INTERACTIONCONSTRAINT_CLASS,false); //12220
 	}

@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityNode: virtual public RedefinableElement
+	class UML_API ActivityNode : virtual public RedefinableElement
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}

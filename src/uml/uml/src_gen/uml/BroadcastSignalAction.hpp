@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API BroadcastSignalAction: virtual public InvocationAction
+	class UML_API BroadcastSignalAction : virtual public InvocationAction
 	{
 		public:
  			BroadcastSignalAction(const BroadcastSignalAction &) {}

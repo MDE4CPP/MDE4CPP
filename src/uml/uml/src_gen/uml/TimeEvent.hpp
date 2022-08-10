@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API TimeEvent: virtual public Event
+	class UML_API TimeEvent : virtual public Event
 	{
 		public:
  			TimeEvent(const TimeEvent &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -695,11 +695,11 @@ std::shared_ptr<Any> PortImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
 			return eAny(getProtocol(),uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //18147
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
-			return eAnyBag(getProvided(),uml::umlPackage::INTERFACE_CLASS); //18148
+			return eEcoreContainerAny(getProvided(),uml::umlPackage::INTERFACE_CLASS); //18148
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-			return eAnyBag(getRedefinedPort(),uml::umlPackage::PORT_CLASS); //18149
+			return eEcoreContainerAny(getRedefinedPort(),uml::umlPackage::PORT_CLASS); //18149
 		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
-			return eAnyBag(getRequired(),uml::umlPackage::INTERFACE_CLASS); //18150
+			return eEcoreContainerAny(getRequired(),uml::umlPackage::INTERFACE_CLASS); //18150
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
@@ -814,14 +814,14 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->basicProvided();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::basicRequired() : uml::Interface[*]: 149776146
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->basicRequired();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::default_value(Any, std::map) : bool: 1564189360
@@ -860,14 +860,14 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getProvideds();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::getRequireds() : uml::Interface[*]: 2874458023
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getRequireds();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::port_aggregation(Any, std::map) : bool: 1332067907

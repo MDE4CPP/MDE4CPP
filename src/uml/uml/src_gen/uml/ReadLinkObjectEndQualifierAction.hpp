@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReadLinkObjectEndQualifierAction: virtual public Action
+	class UML_API ReadLinkObjectEndQualifierAction : virtual public Action
 	{
 		public:
  			ReadLinkObjectEndQualifierAction(const ReadLinkObjectEndQualifierAction &) {}

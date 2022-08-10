@@ -83,7 +83,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Classifier: virtual public Namespace, virtual public RedefinableElement, virtual public TemplateableElement, virtual public Type
+	class UML_API Classifier : virtual public Namespace, virtual public RedefinableElement, virtual public TemplateableElement, virtual public Type
 	{
 		public:
  			Classifier(const Classifier &) {}

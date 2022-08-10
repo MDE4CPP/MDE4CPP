@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -1120,25 +1120,25 @@ std::shared_ptr<Any> ActivityImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_EDGE:
-			return eAnyBag(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //763
+			return eEcoreContainerAny(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //763
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_GROUP:
-			return eAnyBag(getGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //766
+			return eEcoreContainerAny(getGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //766
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
 			return eAny(getIsReadOnly(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //768
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
 			return eAny(getIsSingleExecution(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //769
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
-			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //764
+			return eEcoreContainerAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //764
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
-			return eAnyBag(getOwnedGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //762
+			return eEcoreContainerAny(getOwnedGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //762
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
-			return eAnyBag(getOwnedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //767
+			return eEcoreContainerAny(getOwnedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //767
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
-			return eAnyBag(getPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //770
+			return eEcoreContainerAny(getPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //770
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
-			return eAnyBag(getStructuredNode(),uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //771
+			return eEcoreContainerAny(getStructuredNode(),uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //771
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
-			return eAnyBag(getVariable(),uml::umlPackage::VARIABLE_CLASS); //765
+			return eEcoreContainerAny(getVariable(),uml::umlPackage::VARIABLE_CLASS); //765
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }

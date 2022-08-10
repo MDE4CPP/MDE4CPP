@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Generalization: virtual public DirectedRelationship
+	class UML_API Generalization : virtual public DirectedRelationship
 	{
 		public:
  			Generalization(const Generalization &) {}

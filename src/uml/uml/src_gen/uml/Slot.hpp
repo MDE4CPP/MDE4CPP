@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Slot: virtual public Element
+	class UML_API Slot : virtual public Element
 	{
 		public:
  			Slot(const Slot &) {}

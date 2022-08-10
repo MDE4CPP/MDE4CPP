@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -229,7 +229,7 @@ std::shared_ptr<Any> RelationshipImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-			return eAnyBag(getRelatedElement(),uml::umlPackage::ELEMENT_CLASS); //2083
+			return eEcoreContainerAny(getRelatedElement(),uml::umlPackage::ELEMENT_CLASS); //2083
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

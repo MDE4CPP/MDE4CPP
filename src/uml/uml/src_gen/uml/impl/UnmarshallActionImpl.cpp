@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -550,7 +550,7 @@ std::shared_ptr<Any> UnmarshallActionImpl::eGet(int featureID, bool resolve, boo
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //24627
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //24628
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //24628
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 			return eAny(getUnmarshallType(),uml::umlPackage::CLASSIFIER_CLASS,false); //24629
 	}

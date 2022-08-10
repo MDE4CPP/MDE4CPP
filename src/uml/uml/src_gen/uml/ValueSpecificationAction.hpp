@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ValueSpecificationAction: virtual public Action
+	class UML_API ValueSpecificationAction : virtual public Action
 	{
 		public:
  			ValueSpecificationAction(const ValueSpecificationAction &) {}

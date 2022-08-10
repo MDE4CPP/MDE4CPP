@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ConditionalNode: virtual public StructuredActivityNode
+	class UML_API ConditionalNode : virtual public StructuredActivityNode
 	{
 		public:
  			ConditionalNode(const ConditionalNode &) {}

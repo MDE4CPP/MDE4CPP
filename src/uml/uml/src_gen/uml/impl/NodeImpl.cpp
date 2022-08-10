@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -550,7 +550,7 @@ std::shared_ptr<Any> NodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-			return eAnyBag(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
+			return eEcoreContainerAny(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
 	}
 	std::shared_ptr<Any> result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
@@ -699,14 +699,14 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			int incoming_param_end2Upper;
 			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
+			result = eEcoreAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
 		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 810632424
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
 			std::shared_ptr<Bag<uml::CommunicationPath>> resultList = this->getCommunicationPaths();
-			return eAnyBag(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
 		// uml::Node::internal_structure(Any, std::map) : bool: 1965611485

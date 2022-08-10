@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -499,13 +499,13 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Extension::getStereotype() : uml::Stereotype: 2020808468
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
 		{
-			result = eAnyObject(this->getStereotype(), uml::umlPackage::STEREOTYPE_CLASS);
+			result = eEcoreAny(this->getStereotype(), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Extension::getStereotypeEnd() : uml::Property: 2320579564
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
 		{
-			result = eAnyObject(this->getStereotypeEnd(), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->getStereotypeEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Extension::isRequired() : bool: 2180088823
@@ -533,7 +533,7 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Extension::metaclassEnd() : uml::Property: 2327939617
 		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
 		{
-			result = eAnyObject(this->metaclassEnd(), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->metaclassEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Extension::non_owned_end(Any, std::map) : bool: 8830304

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -409,13 +409,13 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eGet(int featureID, bool resolve, boo
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 			return eAny(getExceptionInput(),uml::umlPackage::OBJECTNODE_CLASS,false); //873
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
-			return eAnyBag(getExceptionType(),uml::umlPackage::CLASSIFIER_CLASS); //874
+			return eEcoreContainerAny(getExceptionType(),uml::umlPackage::CLASSIFIER_CLASS); //874
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 			return eAny(getHandlerBody(),uml::umlPackage::EXECUTABLENODE_CLASS,false); //875
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();
-			return eAnyObject(returnValue,uml::umlPackage::EXECUTABLENODE_CLASS); //876
+			return eEcoreAny(returnValue,uml::umlPackage::EXECUTABLENODE_CLASS); //876
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API NamedElement: virtual public Element
+	class UML_API NamedElement : virtual public Element
 	{
 		public:
  			NamedElement(const NamedElement &) {}

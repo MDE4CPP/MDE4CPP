@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API RemoveVariableValueAction: virtual public WriteVariableAction
+	class UML_API RemoveVariableValueAction : virtual public WriteVariableAction
 	{
 		public:
  			RemoveVariableValueAction(const RemoveVariableValueAction &) {}

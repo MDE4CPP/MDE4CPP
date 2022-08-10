@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -692,19 +692,19 @@ std::shared_ptr<Any> InformationFlowImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
-			return eAnyBag(getConveyed(),uml::umlPackage::CLASSIFIER_CLASS); //11315
+			return eEcoreContainerAny(getConveyed(),uml::umlPackage::CLASSIFIER_CLASS); //11315
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
-			return eAnyBag(getInformationSource(),uml::umlPackage::NAMEDELEMENT_CLASS); //11316
+			return eEcoreContainerAny(getInformationSource(),uml::umlPackage::NAMEDELEMENT_CLASS); //11316
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
-			return eAnyBag(getInformationTarget(),uml::umlPackage::NAMEDELEMENT_CLASS); //11317
+			return eEcoreContainerAny(getInformationTarget(),uml::umlPackage::NAMEDELEMENT_CLASS); //11317
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
-			return eAnyBag(getRealization(),uml::umlPackage::RELATIONSHIP_CLASS); //11318
+			return eEcoreContainerAny(getRealization(),uml::umlPackage::RELATIONSHIP_CLASS); //11318
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
-			return eAnyBag(getRealizingActivityEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //11319
+			return eEcoreContainerAny(getRealizingActivityEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //11319
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
-			return eAnyBag(getRealizingConnector(),uml::umlPackage::CONNECTOR_CLASS); //11320
+			return eEcoreContainerAny(getRealizingConnector(),uml::umlPackage::CONNECTOR_CLASS); //11320
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
-			return eAnyBag(getRealizingMessage(),uml::umlPackage::MESSAGE_CLASS); //11321
+			return eEcoreContainerAny(getRealizingMessage(),uml::umlPackage::MESSAGE_CLASS); //11321
 	}
 	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

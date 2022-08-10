@@ -55,7 +55,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API DirectedRelationship: virtual public Relationship
+	class UML_API DirectedRelationship : virtual public Relationship
 	{
 		public:
  			DirectedRelationship(const DirectedRelationship &) {}

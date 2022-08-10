@@ -87,7 +87,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API Node: virtual public Class, virtual public DeploymentTarget
+	class UML_API Node : virtual public Class, virtual public DeploymentTarget
 	{
 		public:
  			Node(const Node &) {}

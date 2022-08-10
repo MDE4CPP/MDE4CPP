@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -478,7 +478,7 @@ std::shared_ptr<Any> ElementImportImpl::eGet(int featureID, bool resolve, bool c
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //828
+			return eEcoreAny(returnValue,uml::umlPackage::NAMESPACE_CLASS); //828
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility(),uml::umlPackage::VISIBILITYKIND_CLASS,false); //829

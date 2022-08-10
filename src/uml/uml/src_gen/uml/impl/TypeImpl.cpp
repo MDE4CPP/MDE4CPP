@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -335,7 +335,7 @@ std::shared_ptr<Any> TypeImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //24412
+			return eEcoreAny(returnValue,uml::umlPackage::PACKAGE_CLASS); //24412
 		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -446,14 +446,14 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			int incoming_param_end2Upper;
 			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
+			result = eEcoreAny(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// uml::Type::getAssociations() : uml::Association[*]: 831147640
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
 			std::shared_ptr<Bag<uml::Association>> resultList = this->getAssociations();
-			return eAnyBag(resultList,uml::umlPackage::ASSOCIATION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 

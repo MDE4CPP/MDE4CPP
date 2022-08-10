@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API Signal: virtual public Classifier
+	class UML_API Signal : virtual public Classifier
 	{
 		public:
  			Signal(const Signal &) {}

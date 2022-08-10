@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API LiteralSpecification: virtual public ValueSpecification
+	class UML_API LiteralSpecification : virtual public ValueSpecification
 	{
 		public:
  			LiteralSpecification(const LiteralSpecification &) {}

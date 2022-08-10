@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API ExtensionPoint: virtual public RedefinableElement
+	class UML_API ExtensionPoint : virtual public RedefinableElement
 	{
 		public:
  			ExtensionPoint(const ExtensionPoint &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -496,7 +496,7 @@ std::shared_ptr<Any> SignalImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //21538
+			return eEcoreContainerAny(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //21538
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -589,7 +589,7 @@ std::shared_ptr<Any> SignalImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			int incoming_param_upper;
 			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -593,17 +593,17 @@ std::shared_ptr<Any> ConnectorImpl::eGet(int featureID, bool resolve, bool coreT
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-			return eAnyBag(getContract(),uml::umlPackage::BEHAVIOR_CLASS); //5314
+			return eEcoreContainerAny(getContract(),uml::umlPackage::BEHAVIOR_CLASS); //5314
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
-			return eAnyBag(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5315
+			return eEcoreContainerAny(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5315
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
 			return eAny(getKind(),uml::umlPackage::CONNECTORKIND_CLASS,false); //5316
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-			return eAnyBag(getRedefinedConnector(),uml::umlPackage::CONNECTOR_CLASS); //5317
+			return eEcoreContainerAny(getRedefinedConnector(),uml::umlPackage::CONNECTOR_CLASS); //5317
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS); //5319
+			return eEcoreAny(returnValue,uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS); //5319
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return eAny(getType(),uml::umlPackage::ASSOCIATION_CLASS,false); //5318

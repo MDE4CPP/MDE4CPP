@@ -56,7 +56,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API ProtocolConformance: virtual public DirectedRelationship
+	class UML_API ProtocolConformance : virtual public DirectedRelationship
 	{
 		public:
  			ProtocolConformance(const ProtocolConformance &) {}

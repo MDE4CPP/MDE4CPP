@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ClearAssociationAction: virtual public Action
+	class UML_API ClearAssociationAction : virtual public Action
 	{
 		public:
  			ClearAssociationAction(const ClearAssociationAction &) {}

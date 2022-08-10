@@ -72,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API InvocationAction: virtual public Action
+	class UML_API InvocationAction : virtual public Action
 	{
 		public:
  			InvocationAction(const InvocationAction &) {}

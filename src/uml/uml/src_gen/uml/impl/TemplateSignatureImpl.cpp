@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -407,13 +407,13 @@ std::shared_ptr<Any> TemplateSignatureImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return eAnyBag(getOwnedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2335
+			return eEcoreContainerAny(getOwnedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2335
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
-			return eAnyBag(getParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2333
+			return eEcoreContainerAny(getParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2333
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
-			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2334
+			return eEcoreAny(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2334
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

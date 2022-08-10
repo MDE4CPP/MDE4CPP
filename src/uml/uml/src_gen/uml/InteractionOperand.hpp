@@ -70,7 +70,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API InteractionOperand: virtual public InteractionFragment, virtual public Namespace
+	class UML_API InteractionOperand : virtual public InteractionFragment, virtual public Namespace
 	{
 		public:
  			InteractionOperand(const InteractionOperand &) {}

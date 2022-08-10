@@ -69,7 +69,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API TimeExpression: virtual public ValueSpecification
+	class UML_API TimeExpression : virtual public ValueSpecification
 	{
 		public:
  			TimeExpression(const TimeExpression &) {}

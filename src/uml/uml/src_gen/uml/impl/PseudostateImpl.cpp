@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -509,12 +509,12 @@ std::shared_ptr<Any> PseudostateImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //18912
+			return eEcoreAny(returnValue,uml::umlPackage::STATE_CLASS); //18912
 		}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //18914
+			return eEcoreAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //18914
 		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);

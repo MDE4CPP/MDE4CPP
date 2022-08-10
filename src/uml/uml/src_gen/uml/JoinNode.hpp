@@ -70,7 +70,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API JoinNode: virtual public ControlNode
+	class UML_API JoinNode : virtual public ControlNode
 	{
 		public:
  			JoinNode(const JoinNode &) {}

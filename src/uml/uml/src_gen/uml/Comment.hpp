@@ -51,7 +51,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Comment: virtual public Element
+	class UML_API Comment : virtual public Element
 	{
 		public:
  			Comment(const Comment &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -343,7 +343,7 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolv
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
-			return eAnyBag(getMessage(),uml::umlPackage::NAMEDELEMENT_CLASS); //5616
+			return eEcoreContainerAny(getMessage(),uml::umlPackage::NAMEDELEMENT_CLASS); //5616
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }

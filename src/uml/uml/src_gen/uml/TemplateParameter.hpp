@@ -59,7 +59,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateParameter: virtual public Element
+	class UML_API TemplateParameter : virtual public Element
 	{
 		public:
  			TemplateParameter(const TemplateParameter &) {}

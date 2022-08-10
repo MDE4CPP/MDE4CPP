@@ -82,7 +82,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Profile: virtual public Package
+	class UML_API Profile : virtual public Package
 	{
 		public:
  			Profile(const Profile &) {}

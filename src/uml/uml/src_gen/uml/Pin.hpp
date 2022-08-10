@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Pin: virtual public MultiplicityElement, virtual public ObjectNode
+	class UML_API Pin : virtual public MultiplicityElement, virtual public ObjectNode
 	{
 		public:
  			Pin(const Pin &) {}

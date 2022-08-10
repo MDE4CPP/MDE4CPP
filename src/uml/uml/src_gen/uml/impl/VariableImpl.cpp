@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -363,12 +363,12 @@ std::shared_ptr<Any> VariableImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //25219
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITY_CLASS); //25219
 		}
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //25220
+			return eEcoreAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //25220
 		}
 	}
 	std::shared_ptr<Any> result;

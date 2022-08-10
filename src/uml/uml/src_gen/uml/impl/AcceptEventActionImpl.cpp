@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -556,9 +556,9 @@ std::shared_ptr<Any> AcceptEventActionImpl::eGet(int featureID, bool resolve, bo
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //327
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //328
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //328
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
-			return eAnyBag(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //329
+			return eEcoreContainerAny(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

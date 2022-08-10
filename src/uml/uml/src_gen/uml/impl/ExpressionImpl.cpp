@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -431,7 +431,7 @@ std::shared_ptr<Any> ExpressionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return eAnyBag(getOperand(),uml::umlPackage::VALUESPECIFICATION_CLASS); //9515
+			return eEcoreContainerAny(getOperand(),uml::umlPackage::VALUESPECIFICATION_CLASS); //9515
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol(),ecore::ecorePackage::ESTRING_CLASS,false); //9516
 	}

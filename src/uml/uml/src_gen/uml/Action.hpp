@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Action: virtual public ExecutableNode
+	class UML_API Action : virtual public ExecutableNode
 	{
 		public:
  			Action(const Action &) {}

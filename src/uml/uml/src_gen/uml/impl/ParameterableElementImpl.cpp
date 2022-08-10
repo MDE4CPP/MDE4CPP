@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -315,7 +315,7 @@ std::shared_ptr<Any> ParameterableElementImpl::eGet(int featureID, bool resolve,
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
-			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS); //1783
+			return eEcoreAny(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS); //1783
 		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 			return eAny(getTemplateParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1784

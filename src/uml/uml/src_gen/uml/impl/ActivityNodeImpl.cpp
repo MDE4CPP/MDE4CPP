@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -652,25 +652,25 @@ std::shared_ptr<Any> ActivityNodeImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1112
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1112
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
-			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1113
+			return eEcoreContainerAny(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1113
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
-			return eAnyBag(getInInterruptibleRegion(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS); //1114
+			return eEcoreContainerAny(getInInterruptibleRegion(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS); //1114
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
-			return eAnyBag(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //1119
+			return eEcoreContainerAny(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //1119
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //1115
+			return eEcoreAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //1115
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
-			return eAnyBag(getIncoming(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1116
+			return eEcoreContainerAny(getIncoming(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1116
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
-			return eAnyBag(getOutgoing(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1117
+			return eEcoreContainerAny(getOutgoing(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1117
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
-			return eAnyBag(getRedefinedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1118
+			return eEcoreContainerAny(getRedefinedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1118
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -921,7 +921,7 @@ std::shared_ptr<Any> ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<
 		// uml::ActivityNode::containingActivity() : uml::Activity: 3068363550
 		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
+			result = eEcoreAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
 

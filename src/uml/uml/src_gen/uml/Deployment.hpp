@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API Deployment: virtual public Dependency
+	class UML_API Deployment : virtual public Dependency
 	{
 		public:
  			Deployment(const Deployment &) {}

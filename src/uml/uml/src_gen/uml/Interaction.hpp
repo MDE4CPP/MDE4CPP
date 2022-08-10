@@ -92,7 +92,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API Interaction: virtual public Behavior, virtual public InteractionFragment
+	class UML_API Interaction : virtual public Behavior, virtual public InteractionFragment
 	{
 		public:
  			Interaction(const Interaction &) {}

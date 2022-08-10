@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -484,9 +484,9 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
-			return eAnyBag(getClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //11714
+			return eEcoreContainerAny(getClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //11714
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
-			return eAnyBag(getSlot(),uml::umlPackage::SLOT_CLASS); //11715
+			return eEcoreContainerAny(getSlot(),uml::umlPackage::SLOT_CLASS); //11715
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //11716
 	}

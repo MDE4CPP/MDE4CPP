@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -335,12 +335,12 @@ std::shared_ptr<Any> VertexImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAnyObject(returnValue,uml::umlPackage::REGION_CLASS); //2549
+			return eEcoreAny(returnValue,uml::umlPackage::REGION_CLASS); //2549
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
-			return eAnyBag(getIncoming(),uml::umlPackage::TRANSITION_CLASS); //25410
+			return eEcoreContainerAny(getIncoming(),uml::umlPackage::TRANSITION_CLASS); //25410
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
-			return eAnyBag(getOutgoing(),uml::umlPackage::TRANSITION_CLASS); //25411
+			return eEcoreContainerAny(getOutgoing(),uml::umlPackage::TRANSITION_CLASS); //25411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -388,21 +388,21 @@ std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// uml::Vertex::containingStateMachine() : uml::StateMachine: 2007948051
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Vertex::getIncomings() : uml::Transition[*]: 124960789
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition>> resultList = this->getIncomings();
-			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
 		// uml::Vertex::getOutgoings() : uml::Transition[*]: 3840074001
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition>> resultList = this->getOutgoings();
-			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
 		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 1632706225

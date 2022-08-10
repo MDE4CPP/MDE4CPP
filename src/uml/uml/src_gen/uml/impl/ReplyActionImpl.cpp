@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -516,7 +516,7 @@ std::shared_ptr<Any> ReplyActionImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 			return eAny(getReplyToCall(),uml::umlPackage::TRIGGER_CLASS,false); //21127
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-			return eAnyBag(getReplyValue(),uml::umlPackage::INPUTPIN_CLASS); //21128
+			return eEcoreContainerAny(getReplyValue(),uml::umlPackage::INPUTPIN_CLASS); //21128
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(getReturnInformation(),uml::umlPackage::INPUTPIN_CLASS,false); //21129
 	}

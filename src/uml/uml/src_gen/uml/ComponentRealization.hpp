@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API ComponentRealization: virtual public Realization
+	class UML_API ComponentRealization : virtual public Realization
 	{
 		public:
  			ComponentRealization(const ComponentRealization &) {}

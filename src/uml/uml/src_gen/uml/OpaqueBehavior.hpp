@@ -82,7 +82,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API OpaqueBehavior: virtual public Behavior
+	class UML_API OpaqueBehavior : virtual public Behavior
 	{
 		public:
  			OpaqueBehavior(const OpaqueBehavior &) {}

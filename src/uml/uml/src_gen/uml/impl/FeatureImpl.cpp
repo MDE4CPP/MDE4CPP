@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -293,7 +293,7 @@ std::shared_ptr<Any> FeatureImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return eAnyBag(getFeaturingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //10112
+			return eEcoreContainerAny(getFeaturingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //10112
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //10113
 	}

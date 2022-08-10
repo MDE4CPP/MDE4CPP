@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -697,13 +697,13 @@ std::shared_ptr<Any> UseCaseImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
-			return eAnyBag(getExtend(),uml::umlPackage::EXTEND_CLASS); //24841
+			return eEcoreContainerAny(getExtend(),uml::umlPackage::EXTEND_CLASS); //24841
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
-			return eAnyBag(getExtensionPoint(),uml::umlPackage::EXTENSIONPOINT_CLASS); //24842
+			return eEcoreContainerAny(getExtensionPoint(),uml::umlPackage::EXTENSIONPOINT_CLASS); //24842
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
-			return eAnyBag(getInclude(),uml::umlPackage::INCLUDE_CLASS); //24843
+			return eEcoreContainerAny(getInclude(),uml::umlPackage::INCLUDE_CLASS); //24843
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
-			return eAnyBag(getSubject(),uml::umlPackage::CLASSIFIER_CLASS); //24844
+			return eEcoreContainerAny(getSubject(),uml::umlPackage::CLASSIFIER_CLASS); //24844
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -894,7 +894,7 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
 			std::shared_ptr<Bag<uml::UseCase>> resultList = this->allIncludedUseCases();
-			return eAnyBag(resultList,uml::umlPackage::USECASE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::USECASE_CLASS);
 			break;
 		}
 		// uml::UseCase::binary_associations(Any, std::map) : bool: 2884115735

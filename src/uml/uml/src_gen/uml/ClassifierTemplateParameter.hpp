@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API ClassifierTemplateParameter: virtual public TemplateParameter
+	class UML_API ClassifierTemplateParameter : virtual public TemplateParameter
 	{
 		public:
  			ClassifierTemplateParameter(const ClassifierTemplateParameter &) {}

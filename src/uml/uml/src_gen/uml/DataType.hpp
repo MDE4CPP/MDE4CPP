@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API DataType: virtual public Classifier
+	class UML_API DataType : virtual public Classifier
 	{
 		public:
  			DataType(const DataType &) {}

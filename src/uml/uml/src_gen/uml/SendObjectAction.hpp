@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API SendObjectAction: virtual public InvocationAction
+	class UML_API SendObjectAction : virtual public InvocationAction
 	{
 		public:
  			SendObjectAction(const SendObjectAction &) {}

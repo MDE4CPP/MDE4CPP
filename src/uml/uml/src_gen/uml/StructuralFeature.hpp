@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API StructuralFeature: virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
+	class UML_API StructuralFeature : virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
 	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}

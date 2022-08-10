@@ -59,7 +59,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateSignature: virtual public Element
+	class UML_API TemplateSignature : virtual public Element
 	{
 		public:
  			TemplateSignature(const TemplateSignature &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -442,7 +442,7 @@ std::shared_ptr<Any> InterfaceRealizationImpl::eGet(int featureID, bool resolve,
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //12619
+			return eEcoreAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //12619
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);

@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API ValueSpecification: virtual public PackageableElement, virtual public TypedElement
+	class UML_API ValueSpecification : virtual public PackageableElement, virtual public TypedElement
 	{
 		public:
  			ValueSpecification(const ValueSpecification &) {}

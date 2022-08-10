@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TypedElement: virtual public NamedElement
+	class UML_API TypedElement : virtual public NamedElement
 	{
 		public:
  			TypedElement(const TypedElement &) {}

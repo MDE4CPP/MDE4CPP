@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API AcceptCallAction: virtual public AcceptEventAction
+	class UML_API AcceptCallAction : virtual public AcceptEventAction
 	{
 		public:
  			AcceptCallAction(const AcceptCallAction &) {}

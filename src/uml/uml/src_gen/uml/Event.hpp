@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API Event: virtual public PackageableElement
+	class UML_API Event : virtual public PackageableElement
 	{
 		public:
  			Event(const Event &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -631,17 +631,17 @@ std::shared_ptr<Any> NamespaceImpl::eGet(int featureID, bool resolve, bool coreT
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-			return eAnyBag(getElementImport(),uml::umlPackage::ELEMENTIMPORT_CLASS); //15610
+			return eEcoreContainerAny(getElementImport(),uml::umlPackage::ELEMENTIMPORT_CLASS); //15610
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-			return eAnyBag(getImportedMember(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //15613
+			return eEcoreContainerAny(getImportedMember(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //15613
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-			return eAnyBag(getMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15614
+			return eEcoreContainerAny(getMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15614
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-			return eAnyBag(getOwnedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15612
+			return eEcoreContainerAny(getOwnedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15612
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-			return eAnyBag(getOwnedRule(),uml::umlPackage::CONSTRAINT_CLASS); //1569
+			return eEcoreContainerAny(getOwnedRule(),uml::umlPackage::CONSTRAINT_CLASS); //1569
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-			return eAnyBag(getPackageImport(),uml::umlPackage::PACKAGEIMPORT_CLASS); //15611
+			return eEcoreContainerAny(getPackageImport(),uml::umlPackage::PACKAGEIMPORT_CLASS); //15611
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -840,7 +840,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			uml::VisibilityKind incoming_param_visibility;
 			Bag<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind >();
-			result = eAnyObject(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
+			result = eEcoreAny(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
 			break;
 		}
 		// uml::Namespace::createPackageImport(uml::Package, uml::VisibilityKind) : uml::PackageImport: 3501829020
@@ -856,7 +856,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			uml::VisibilityKind incoming_param_visibility;
 			Bag<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind >();
-			result = eAnyObject(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
+			result = eEcoreAny(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
 			break;
 		}
 		// uml::Namespace::excludeCollisions(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2855843539
@@ -868,28 +868,28 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			Bag<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
 			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->excludeCollisions(incoming_param_imps);
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedElements() : uml::PackageableElement[*]: 2588792065
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->getImportedElements();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedMembers() : uml::PackageableElement[*]: 2627629447
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->getImportedMembers();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedPackages() : uml::Package[*]: 1496815389
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package>> resultList = this->getImportedPackages();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::Namespace::getNamesOfMember(uml::NamedElement) : std::string[*]: 3293858424
@@ -907,7 +907,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> resultList = this->getOwnedMembers();
-			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::importMembers(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2696590848
@@ -919,7 +919,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			Bag<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
 			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->importMembers(incoming_param_imps);
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::membersAreDistinguishable() : bool: 1431982872

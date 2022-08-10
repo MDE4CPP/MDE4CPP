@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -600,11 +600,11 @@ std::shared_ptr<Any> ExpansionRegionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-			return eAnyBag(getInputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9446
+			return eEcoreContainerAny(getInputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9446
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode(),uml::umlPackage::EXPANSIONKIND_CLASS,false); //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-			return eAnyBag(getOutputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9445
+			return eEcoreContainerAny(getOutputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9445
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

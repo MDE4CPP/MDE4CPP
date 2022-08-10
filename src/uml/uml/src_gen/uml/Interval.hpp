@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API Interval: virtual public ValueSpecification
+	class UML_API Interval : virtual public ValueSpecification
 	{
 		public:
  			Interval(const Interval &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -945,11 +945,11 @@ std::shared_ptr<Any> StateImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
-			return eAnyBag(getConnection(),uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS); //22021
+			return eEcoreContainerAny(getConnection(),uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS); //22021
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
-			return eAnyBag(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22022
+			return eEcoreContainerAny(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22022
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
-			return eAnyBag(getDeferrableTrigger(),uml::umlPackage::TRIGGER_CLASS); //22023
+			return eEcoreContainerAny(getDeferrableTrigger(),uml::umlPackage::TRIGGER_CLASS); //22023
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 			return eAny(getDoActivity(),uml::umlPackage::BEHAVIOR_CLASS,false); //22024
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
@@ -967,7 +967,7 @@ std::shared_ptr<Any> StateImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 			return eAny(getRedefinedState(),uml::umlPackage::STATE_CLASS,false); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
-			return eAnyBag(getRegion(),uml::umlPackage::REGION_CLASS); //22034
+			return eEcoreContainerAny(getRegion(),uml::umlPackage::REGION_CLASS); //22034
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 			return eAny(getStateInvariant(),uml::umlPackage::CONSTRAINT_CLASS,false); //22032
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
@@ -1337,7 +1337,7 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 		// uml::State::redefinitionContext() : uml::Classifier: 2354287234
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
+			result = eEcoreAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::State::submachine_or_regions(Any, std::map) : bool: 1422616656

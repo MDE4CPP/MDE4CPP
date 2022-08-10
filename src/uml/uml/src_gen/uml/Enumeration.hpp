@@ -77,7 +77,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API Enumeration: virtual public DataType
+	class UML_API Enumeration : virtual public DataType
 	{
 		public:
  			Enumeration(const Enumeration &) {}

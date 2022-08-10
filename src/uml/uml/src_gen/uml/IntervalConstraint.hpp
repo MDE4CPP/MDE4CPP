@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API IntervalConstraint: virtual public Constraint
+	class UML_API IntervalConstraint : virtual public Constraint
 	{
 		public:
  			IntervalConstraint(const IntervalConstraint &) {}

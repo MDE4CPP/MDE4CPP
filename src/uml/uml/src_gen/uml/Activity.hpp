@@ -92,7 +92,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API Activity: virtual public Behavior
+	class UML_API Activity : virtual public Behavior
 	{
 		public:
  			Activity(const Activity &) {}

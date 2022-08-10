@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -902,17 +902,17 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eGet(int featureID, bool resolv
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
-			return eAnyBag(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //22738
+			return eEcoreContainerAny(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //22738
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
 			return eAny(getMustIsolate(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22739
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
-			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //22743
+			return eEcoreContainerAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //22743
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
-			return eAnyBag(getStructuredNodeInput(),uml::umlPackage::INPUTPIN_CLASS); //22740
+			return eEcoreContainerAny(getStructuredNodeInput(),uml::umlPackage::INPUTPIN_CLASS); //22740
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
-			return eAnyBag(getStructuredNodeOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //22741
+			return eEcoreContainerAny(getStructuredNodeOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //22741
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
-			return eAnyBag(getVariable(),uml::umlPackage::VARIABLE_CLASS); //22742
+			return eEcoreContainerAny(getVariable(),uml::umlPackage::VARIABLE_CLASS); //22742
 	}
 	std::shared_ptr<Any> result;
 	result = ActionImpl::eGet(featureID, resolve, coreType);
@@ -1235,14 +1235,14 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> resultList = this->sourceNodes();
-			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 2207842792
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> resultList = this->targetNodes();
-			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 

@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API CombinedFragment: virtual public InteractionFragment
+	class UML_API CombinedFragment : virtual public InteractionFragment
 	{
 		public:
  			CombinedFragment(const CombinedFragment &) {}

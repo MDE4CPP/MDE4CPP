@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API StartObjectBehaviorAction: virtual public CallAction
+	class UML_API StartObjectBehaviorAction : virtual public CallAction
 	{
 		public:
  			StartObjectBehaviorAction(const StartObjectBehaviorAction &) {}

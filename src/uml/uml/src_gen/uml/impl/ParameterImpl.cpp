@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -686,7 +686,7 @@ std::shared_ptr<Any> ParameterImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior().lock();
-			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOR_CLASS); //17427
+			return eEcoreAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS); //17427
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //17419
@@ -703,10 +703,10 @@ std::shared_ptr<Any> ParameterImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOperation().lock();
-			return eAnyObject(returnValue,uml::umlPackage::OPERATION_CLASS); //17425
+			return eEcoreAny(returnValue,uml::umlPackage::OPERATION_CLASS); //17425
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-			return eAnyBag(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
+			return eEcoreContainerAny(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
 	}
 	std::shared_ptr<Any> result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);

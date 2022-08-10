@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -619,7 +619,7 @@ std::shared_ptr<Any> StereotypeImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-			return eAnyBag(getIcon(),uml::umlPackage::IMAGE_CLASS); //22353
+			return eEcoreContainerAny(getIcon(),uml::umlPackage::IMAGE_CLASS); //22353
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return eAny(getProfile(),uml::umlPackage::PROFILE_CLASS,false); //22354
 	}
@@ -776,7 +776,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::Stereotype::containingProfile() : uml::Profile: 3116027671
 		case umlPackage::STEREOTYPE_OPERATION_CONTAININGPROFILE:
 		{
-			result = eAnyObject(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
+			result = eEcoreAny(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
 		// uml::Stereotype::createExtension(uml::Class, bool) : uml::Extension: 2355039413
@@ -792,7 +792,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			bool incoming_param_isRequired;
 			Bag<Any>::const_iterator incoming_param_isRequired_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_isRequired = (*incoming_param_isRequired_arguments_citer)->get<bool >();
-			result = eAnyObject(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
+			result = eEcoreAny(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Stereotype::createIcon(std::string) : uml::Image: 4268768905
@@ -803,7 +803,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			std::string incoming_param_location;
 			Bag<Any>::const_iterator incoming_param_location_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_location = (*incoming_param_location_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
+			result = eEcoreAny(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
 		// uml::Stereotype::createIcon(std::string, std::string) : uml::Image: 1814185679
@@ -819,7 +819,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			std::string incoming_param_content;
 			Bag<Any>::const_iterator incoming_param_content_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_content = (*incoming_param_content_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
+			result = eEcoreAny(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
 		// uml::Stereotype::generalize(Any, std::map) : bool: 3688775516
@@ -842,20 +842,20 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		case umlPackage::STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class>> resultList = this->getAllExtendedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getDefinition() : ecore::EClass: 1669546995
 		case umlPackage::STEREOTYPE_OPERATION_GETDEFINITION:
 		{
-			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::ECLASS_CLASS);
+			result = eEcoreAny(this->getDefinition(), ecore::ecorePackage::ECLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getExtendedMetaclasses() : uml::Class[*]: 1491956517
 		case umlPackage::STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class>> resultList = this->getExtendedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getKeyword() : std::string: 263636712

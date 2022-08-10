@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ExpansionRegion: virtual public StructuredActivityNode
+	class UML_API ExpansionRegion : virtual public StructuredActivityNode
 	{
 		public:
  			ExpansionRegion(const ExpansionRegion &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -404,7 +404,7 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 		// uml::Gate::getOperand() : uml::InteractionOperand: 1268229058
 		case umlPackage::GATE_OPERATION_GETOPERAND:
 		{
-			result = eAnyObject(this->getOperand(), uml::umlPackage::INTERACTIONOPERAND_CLASS);
+			result = eEcoreAny(this->getOperand(), uml::umlPackage::INTERACTIONOPERAND_CLASS);
 			break;
 		}
 		// uml::Gate::inside_cf_gate_distinguishable(Any, std::map) : bool: 4282193421

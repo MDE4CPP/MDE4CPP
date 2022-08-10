@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ExecutionSpecification: virtual public InteractionFragment
+	class UML_API ExecutionSpecification : virtual public InteractionFragment
 	{
 		public:
  			ExecutionSpecification(const ExecutionSpecification &) {}

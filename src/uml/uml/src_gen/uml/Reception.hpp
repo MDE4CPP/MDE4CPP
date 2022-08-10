@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API Reception: virtual public BehavioralFeature
+	class UML_API Reception : virtual public BehavioralFeature
 	{
 		public:
  			Reception(const Reception &) {}

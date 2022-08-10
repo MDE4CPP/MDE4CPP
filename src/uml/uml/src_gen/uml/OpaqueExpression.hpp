@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API OpaqueExpression: virtual public ValueSpecification
+	class UML_API OpaqueExpression : virtual public ValueSpecification
 	{
 		public:
  			OpaqueExpression(const OpaqueExpression &) {}

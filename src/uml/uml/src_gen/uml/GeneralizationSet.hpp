@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API GeneralizationSet: virtual public PackageableElement
+	class UML_API GeneralizationSet : virtual public PackageableElement
 	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}

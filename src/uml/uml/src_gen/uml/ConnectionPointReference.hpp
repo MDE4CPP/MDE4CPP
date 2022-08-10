@@ -67,7 +67,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API ConnectionPointReference: virtual public Vertex
+	class UML_API ConnectionPointReference : virtual public Vertex
 	{
 		public:
  			ConnectionPointReference(const ConnectionPointReference &) {}

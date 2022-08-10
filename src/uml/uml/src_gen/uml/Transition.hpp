@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Transition: virtual public Namespace, virtual public RedefinableElement
+	class UML_API Transition : virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Transition(const Transition &) {}

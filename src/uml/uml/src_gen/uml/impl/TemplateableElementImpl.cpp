@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -342,7 +342,7 @@ std::shared_ptr<Any> TemplateableElementImpl::eGet(int featureID, bool resolve, 
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 			return eAny(getOwnedTemplateSignature(),uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2344
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-			return eAnyBag(getTemplateBinding(),uml::umlPackage::TEMPLATEBINDING_CLASS); //2343
+			return eEcoreContainerAny(getTemplateBinding(),uml::umlPackage::TEMPLATEBINDING_CLASS); //2343
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -432,7 +432,7 @@ std::shared_ptr<Any> TemplateableElementImpl::eInvoke(int operationID, std::shar
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::ParameterableElement>> resultList = this->parameterableElements();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
 			break;
 		}
 

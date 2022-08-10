@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -766,13 +766,13 @@ std::shared_ptr<Any> StateMachineImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return eAnyBag(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22262
+			return eEcoreContainerAny(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22262
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return eAnyBag(getExtendedStateMachine(),uml::umlPackage::STATEMACHINE_CLASS); //22265
+			return eEcoreContainerAny(getExtendedStateMachine(),uml::umlPackage::STATEMACHINE_CLASS); //22265
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return eAnyBag(getRegion(),uml::umlPackage::REGION_CLASS); //22264
+			return eEcoreContainerAny(getRegion(),uml::umlPackage::REGION_CLASS); //22264
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return eAnyBag(getSubmachineState(),uml::umlPackage::STATE_CLASS); //22263
+			return eEcoreContainerAny(getSubmachineState(),uml::umlPackage::STATE_CLASS); //22263
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -972,7 +972,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
 			Bag<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAnyObject(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
+			result = eEcoreAny(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
 			break;
 		}
 		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 3201604183
@@ -988,7 +988,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
 			Bag<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAnyObject(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
+			result = eEcoreAny(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
 			break;
 		}
 		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 2492087526

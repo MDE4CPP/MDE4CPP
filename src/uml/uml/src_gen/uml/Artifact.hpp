@@ -78,7 +78,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API Artifact: virtual public Classifier, virtual public DeployedArtifact
+	class UML_API Artifact : virtual public Classifier, virtual public DeployedArtifact
 	{
 		public:
  			Artifact(const Artifact &) {}

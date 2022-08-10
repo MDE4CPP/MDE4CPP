@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -469,13 +469,13 @@ std::shared_ptr<Any> LifelineImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
-			return eAnyBag(getCoveredBy(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //13213
+			return eEcoreContainerAny(getCoveredBy(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //13213
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 			return eAny(getDecomposedAs(),uml::umlPackage::PARTDECOMPOSITION_CLASS,false); //1329
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //13210
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTION_CLASS); //13210
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 			return eAny(getRepresents(),uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //13211

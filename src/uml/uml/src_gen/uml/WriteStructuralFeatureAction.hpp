@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API WriteStructuralFeatureAction: virtual public StructuralFeatureAction
+	class UML_API WriteStructuralFeatureAction : virtual public StructuralFeatureAction
 	{
 		public:
  			WriteStructuralFeatureAction(const WriteStructuralFeatureAction &) {}

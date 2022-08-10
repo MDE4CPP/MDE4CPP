@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Abstraction: virtual public Dependency
+	class UML_API Abstraction : virtual public Dependency
 	{
 		public:
  			Abstraction(const Abstraction &) {}

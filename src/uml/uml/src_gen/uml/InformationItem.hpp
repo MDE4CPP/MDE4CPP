@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class UML_API InformationItem: virtual public Classifier
+	class UML_API InformationItem : virtual public Classifier
 	{
 		public:
  			InformationItem(const InformationItem &) {}

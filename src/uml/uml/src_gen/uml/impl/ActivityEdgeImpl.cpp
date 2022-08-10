@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -694,23 +694,23 @@ std::shared_ptr<Any> ActivityEdgeImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //812
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITY_CLASS); //812
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 			return eAny(getGuard(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //813
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
-			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //821
+			return eEcoreContainerAny(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //821
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
-			return eAnyBag(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //814
+			return eEcoreContainerAny(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //814
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //816
+			return eEcoreAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //816
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 			return eAny(getInterrupts(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS,false); //815
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
-			return eAnyBag(getRedefinedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //819
+			return eEcoreContainerAny(getRedefinedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //819
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 			return eAny(getSource(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //818
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:

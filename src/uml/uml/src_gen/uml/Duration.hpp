@@ -69,7 +69,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API Duration: virtual public ValueSpecification
+	class UML_API Duration : virtual public ValueSpecification
 	{
 		public:
  			Duration(const Duration &) {}

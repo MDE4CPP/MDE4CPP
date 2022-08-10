@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -434,11 +434,11 @@ std::shared_ptr<Any> ConstraintImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-			return eAnyBag(getConstrainedElement(),uml::umlPackage::ELEMENT_CLASS); //5712
+			return eEcoreContainerAny(getConstrainedElement(),uml::umlPackage::ELEMENT_CLASS); //5712
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
-			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //5713
+			return eEcoreAny(returnValue,uml::umlPackage::NAMESPACE_CLASS); //5713
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //5714

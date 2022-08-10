@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API TimeObservation: virtual public Observation
+	class UML_API TimeObservation : virtual public Observation
 	{
 		public:
  			TimeObservation(const TimeObservation &) {}

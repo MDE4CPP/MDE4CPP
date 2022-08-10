@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ForkNode: virtual public ControlNode
+	class UML_API ForkNode : virtual public ControlNode
 	{
 		public:
  			ForkNode(const ForkNode &) {}

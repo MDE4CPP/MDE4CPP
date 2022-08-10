@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -371,9 +371,9 @@ std::shared_ptr<Any> OccurrenceSpecificationImpl::eGet(int featureID, bool resol
 	switch(featureID)
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
-			return eAnyBag(getToAfter(),uml::umlPackage::GENERALORDERING_CLASS); //16313
+			return eEcoreContainerAny(getToAfter(),uml::umlPackage::GENERALORDERING_CLASS); //16313
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
-			return eAnyBag(getToBefore(),uml::umlPackage::GENERALORDERING_CLASS); //16314
+			return eEcoreContainerAny(getToBefore(),uml::umlPackage::GENERALORDERING_CLASS); //16314
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

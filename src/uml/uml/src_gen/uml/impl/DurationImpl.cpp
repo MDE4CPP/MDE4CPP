@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -416,7 +416,7 @@ std::shared_ptr<Any> DurationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::DURATION_ATTRIBUTE_EXPR:
 			return eAny(getExpr(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //7715
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
-			return eAnyBag(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //7716
+			return eEcoreContainerAny(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //7716
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -377,7 +377,7 @@ std::shared_ptr<Any> ProtocolConformanceImpl::eGet(int featureID, bool resolve, 
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS); //1867
+			return eEcoreAny(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS); //1867
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

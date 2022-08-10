@@ -85,7 +85,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API Behavior: virtual public Class
+	class UML_API Behavior : virtual public Class
 	{
 		public:
  			Behavior(const Behavior &) {}

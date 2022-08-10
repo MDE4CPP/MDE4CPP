@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -574,9 +574,9 @@ std::shared_ptr<Any> DataTypeImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //6538
+			return eEcoreContainerAny(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //6538
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
-			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //6539
+			return eEcoreContainerAny(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //6539
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -708,7 +708,7 @@ std::shared_ptr<Any> DataTypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			int incoming_param_upper;
 			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::DataType::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 4057743014
@@ -734,7 +734,7 @@ std::shared_ptr<Any> DataTypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			std::shared_ptr<uml::Type> incoming_param_returnType;
 			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
+			result = eEcoreAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 

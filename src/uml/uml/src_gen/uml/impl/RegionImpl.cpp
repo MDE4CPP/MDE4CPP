@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -633,17 +633,17 @@ std::shared_ptr<Any> RegionImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //20719
+			return eEcoreAny(returnValue,uml::umlPackage::STATE_CLASS); //20719
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //20720
+			return eEcoreAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //20720
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
-			return eAnyBag(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
+			return eEcoreContainerAny(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
-			return eAnyBag(getTransition(),uml::umlPackage::TRANSITION_CLASS); //20721
+			return eEcoreContainerAny(getTransition(),uml::umlPackage::TRANSITION_CLASS); //20721
 	}
 	std::shared_ptr<Any> result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -812,7 +812,7 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// uml::Region::containingStateMachine() : uml::StateMachine: 3298185933
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Region::deep_history_vertex(Any, std::map) : bool: 2568391094
@@ -866,7 +866,7 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// uml::Region::redefinitionContext() : uml::Classifier: 2569630837
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
+			result = eEcoreAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 338218634

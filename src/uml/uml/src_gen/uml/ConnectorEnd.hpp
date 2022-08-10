@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API ConnectorEnd: virtual public MultiplicityElement
+	class UML_API ConnectorEnd : virtual public MultiplicityElement
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}

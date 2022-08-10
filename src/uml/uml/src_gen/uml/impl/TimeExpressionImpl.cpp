@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -416,7 +416,7 @@ std::shared_ptr<Any> TimeExpressionImpl::eGet(int featureID, bool resolve, bool 
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 			return eAny(getExpr(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //23815
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-			return eAnyBag(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //23816
+			return eEcoreContainerAny(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //23816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -297,7 +297,7 @@ std::shared_ptr<Any> ExtensionPointImpl::eGet(int featureID, bool resolve, bool 
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
-			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //9912
+			return eEcoreAny(returnValue,uml::umlPackage::USECASE_CLASS); //9912
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);

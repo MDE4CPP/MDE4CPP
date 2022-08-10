@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Usage: virtual public Dependency
+	class UML_API Usage : virtual public Dependency
 	{
 		public:
  			Usage(const Usage &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -626,13 +626,13 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eGet(int featureID, bool resolve, bo
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2521
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
-			return eAnyBag(getMethod(),uml::umlPackage::BEHAVIOR_CLASS); //2522
+			return eEcoreContainerAny(getMethod(),uml::umlPackage::BEHAVIOR_CLASS); //2522
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return eAnyBag(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2523
+			return eEcoreContainerAny(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2523
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
-			return eAnyBag(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2524
+			return eEcoreContainerAny(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2524
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
-			return eAnyBag(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
+			return eEcoreContainerAny(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
 	}
 	std::shared_ptr<Any> result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -887,21 +887,21 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 			std::shared_ptr<uml::Type> incoming_param_type;
 			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAnyObject(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
+			result = eEcoreAny(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 2494913883
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->inputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 3232178764
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->outputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 

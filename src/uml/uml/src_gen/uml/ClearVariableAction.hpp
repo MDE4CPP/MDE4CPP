@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ClearVariableAction: virtual public VariableAction
+	class UML_API ClearVariableAction : virtual public VariableAction
 	{
 		public:
  			ClearVariableAction(const ClearVariableAction &) {}

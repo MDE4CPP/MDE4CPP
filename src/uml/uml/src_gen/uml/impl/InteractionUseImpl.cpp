@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -582,9 +582,9 @@ std::shared_ptr<Any> InteractionUseImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
-			return eAnyBag(getActualGate(),uml::umlPackage::GATE_CLASS); //12413
+			return eEcoreContainerAny(getActualGate(),uml::umlPackage::GATE_CLASS); //12413
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //12414
+			return eEcoreContainerAny(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //12414
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return eAny(getRefersTo(),uml::umlPackage::INTERACTION_CLASS,false); //12415
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:

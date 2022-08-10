@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API DurationInterval: virtual public Interval
+	class UML_API DurationInterval : virtual public Interval
 	{
 		public:
  			DurationInterval(const DurationInterval &) {}

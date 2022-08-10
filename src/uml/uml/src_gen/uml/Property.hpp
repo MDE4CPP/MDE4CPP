@@ -78,7 +78,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Property: virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
+	class UML_API Property : virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
 	{
 		public:
  			Property(const Property &) {}

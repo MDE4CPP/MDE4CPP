@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API LinkEndData: virtual public Element
+	class UML_API LinkEndData : virtual public Element
 	{
 		public:
  			LinkEndData(const LinkEndData &) {}

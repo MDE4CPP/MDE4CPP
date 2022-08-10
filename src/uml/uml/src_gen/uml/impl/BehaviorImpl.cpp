@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -999,22 +999,22 @@ std::shared_ptr<Any> BehaviorImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavioredClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //2361
+			return eEcoreAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS); //2361
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
 			return eAny(getContext(),uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2354
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 			return eAny(getIsReentrant(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2355
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
-			return eAnyBag(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2356
+			return eEcoreContainerAny(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2356
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
-			return eAnyBag(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2357
+			return eEcoreContainerAny(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2357
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
-			return eAnyBag(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //2358
+			return eEcoreContainerAny(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //2358
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
-			return eAnyBag(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //2359
+			return eEcoreContainerAny(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //2359
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
-			return eAnyBag(getRedefinedBehavior(),uml::umlPackage::BEHAVIOR_CLASS); //2360
+			return eEcoreContainerAny(getRedefinedBehavior(),uml::umlPackage::BEHAVIOR_CLASS); //2360
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification(),uml::umlPackage::BEHAVIORALFEATURE_CLASS,false); //2353
 	}
@@ -1289,7 +1289,7 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			std::shared_ptr<uml::Element> incoming_param_from;
 			Bag<Any>::const_iterator incoming_param_from_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_from = (*incoming_param_from_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->behavioredClassifier(incoming_param_from), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS);
+			result = eEcoreAny(this->behavioredClassifier(incoming_param_from), uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Behavior::feature_of_context_classifier(Any, std::map) : bool: 1319475110
@@ -1312,7 +1312,7 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 		case umlPackage::BEHAVIOR_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->inputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Behavior::most_one_behavior(Any, std::map) : bool: 3335171525
@@ -1335,7 +1335,7 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 		case umlPackage::BEHAVIOR_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->outputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Behavior::parameters_match(Any, std::map) : bool: 573973654

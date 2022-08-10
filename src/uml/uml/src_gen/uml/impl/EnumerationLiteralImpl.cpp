@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -338,7 +338,7 @@ std::shared_ptr<Any> EnumerationLiteralImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ENUMERATION_CLASS); //8517
+			return eEcoreAny(returnValue,uml::umlPackage::ENUMERATION_CLASS); //8517
 		}
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -384,7 +384,7 @@ std::shared_ptr<Any> EnumerationLiteralImpl::eInvoke(int operationID, std::share
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getClassifiers();
-			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Region: virtual public Namespace, virtual public RedefinableElement
+	class UML_API Region : virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Region(const Region &) {}

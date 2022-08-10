@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -638,13 +638,13 @@ std::shared_ptr<Any> MessageImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //1479
+			return eEcoreContainerAny(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //1479
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return eAny(getConnector(),uml::umlPackage::CONNECTOR_CLASS,false); //14710
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //14711
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTION_CLASS); //14711
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind(),uml::umlPackage::MESSAGEKIND_CLASS,false); //14712

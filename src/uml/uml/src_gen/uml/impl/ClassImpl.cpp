@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -864,19 +864,19 @@ std::shared_ptr<Any> ClassImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
-			return eAnyBag(getExtension(),uml::umlPackage::EXTENSION_CLASS); //3547
+			return eEcoreContainerAny(getExtension(),uml::umlPackage::EXTENSION_CLASS); //3547
 		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 			return eAny(getIsActive(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3548
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
-			return eAnyBag(getNestedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3549
+			return eEcoreContainerAny(getNestedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3549
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getClass_OwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //3552
+			return eEcoreContainerAny(getClass_OwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //3552
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
-			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //3546
+			return eEcoreContainerAny(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //3546
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
-			return eAnyBag(getOwnedReception(),uml::umlPackage::RECEPTION_CLASS); //3550
+			return eEcoreContainerAny(getOwnedReception(),uml::umlPackage::RECEPTION_CLASS); //3550
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
-			return eAnyBag(getSuperClass(),uml::umlPackage::CLASS_CLASS); //3551
+			return eEcoreContainerAny(getSuperClass(),uml::umlPackage::CLASS_CLASS); //3551
 	}
 	std::shared_ptr<Any> result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -1157,28 +1157,28 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			std::shared_ptr<uml::Type> incoming_param_returnType;
 			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
+			result = eEcoreAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Class::getAllOperations() : uml::Operation[*]: 3178057285
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
 			std::shared_ptr<Bag<uml::Operation>> resultList = this->getAllOperations();
-			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Class::getExtensions() : uml::Extension[*]: 4033444456
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
 			std::shared_ptr<Bag<uml::Extension>> resultList = this->getExtensions();
-			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Class::getSuperClasses() : uml::Class[*]: 1013854710
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class>> resultList = this->getSuperClasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Class::isMetaclass() : bool: 3169682088

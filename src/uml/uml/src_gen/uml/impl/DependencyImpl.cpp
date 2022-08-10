@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -498,9 +498,9 @@ std::shared_ptr<Any> DependencyImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return eAnyBag(getClient(),uml::umlPackage::NAMEDELEMENT_CLASS); //6715
+			return eEcoreContainerAny(getClient(),uml::umlPackage::NAMEDELEMENT_CLASS); //6715
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return eAnyBag(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
+			return eEcoreContainerAny(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
 	}
 	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

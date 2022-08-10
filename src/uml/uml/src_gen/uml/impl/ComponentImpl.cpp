@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -708,13 +708,13 @@ std::shared_ptr<Any> ComponentImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 			return eAny(getIsIndirectlyInstantiated(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4753
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
-			return eAnyBag(getPackagedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //4754
+			return eEcoreContainerAny(getPackagedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //4754
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
-			return eAnyBag(getProvided(),uml::umlPackage::INTERFACE_CLASS); //4755
+			return eEcoreContainerAny(getProvided(),uml::umlPackage::INTERFACE_CLASS); //4755
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
-			return eAnyBag(getRealization(),uml::umlPackage::COMPONENTREALIZATION_CLASS); //4756
+			return eEcoreContainerAny(getRealization(),uml::umlPackage::COMPONENTREALIZATION_CLASS); //4756
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
-			return eAnyBag(getRequired(),uml::umlPackage::INTERFACE_CLASS); //4757
+			return eEcoreContainerAny(getRequired(),uml::umlPackage::INTERFACE_CLASS); //4757
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -849,7 +849,7 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			bool incoming_param_isAbstract;
 			Bag<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
-			result = eAnyObject(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
+			result = eEcoreAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Component::createOwnedEnumeration(std::string) : uml::Enumeration: 3554753543
@@ -860,7 +860,7 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
+			result = eEcoreAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
 		}
 		// uml::Component::createOwnedInterface(std::string) : uml::Interface: 2133826027
@@ -871,7 +871,7 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
+			result = eEcoreAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Component::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1105443607
@@ -882,21 +882,21 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
+			result = eEcoreAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
 		// uml::Component::getProvideds() : uml::Interface[*]: 1978665601
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getProvideds();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Component::getRequireds() : uml::Interface[*]: 1044914701
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getRequireds();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Component::no_nested_classifiers(Any, std::map) : bool: 3917555991

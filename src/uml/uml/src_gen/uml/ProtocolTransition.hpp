@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API ProtocolTransition: virtual public Transition
+	class UML_API ProtocolTransition : virtual public Transition
 	{
 		public:
  			ProtocolTransition(const ProtocolTransition &) {}

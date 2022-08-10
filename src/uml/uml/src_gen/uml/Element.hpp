@@ -69,7 +69,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Element: virtual public Object
+	class UML_API Element : virtual public Object
 	{
 		public:
  			Element(const Element &) {}

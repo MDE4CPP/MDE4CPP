@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -377,7 +377,7 @@ std::shared_ptr<Any> PackageMergeImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //1727
+			return eEcoreAny(returnValue,uml::umlPackage::PACKAGE_CLASS); //1727
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

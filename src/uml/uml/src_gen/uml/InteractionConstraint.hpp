@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API InteractionConstraint: virtual public Constraint
+	class UML_API InteractionConstraint : virtual public Constraint
 	{
 		public:
  			InteractionConstraint(const InteractionConstraint &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -454,10 +454,10 @@ std::shared_ptr<Any> StringExpressionImpl::eGet(int featureID, bool resolve, boo
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS); //22419
+			return eEcoreAny(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS); //22419
 		}
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-			return eAnyBag(getSubExpression(),uml::umlPackage::STRINGEXPRESSION_CLASS); //22420
+			return eEcoreContainerAny(getSubExpression(),uml::umlPackage::STRINGEXPRESSION_CLASS); //22420
 	}
 	std::shared_ptr<Any> result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);

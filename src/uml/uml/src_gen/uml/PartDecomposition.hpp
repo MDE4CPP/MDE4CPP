@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API PartDecomposition: virtual public InteractionUse
+	class UML_API PartDecomposition : virtual public InteractionUse
 	{
 		public:
  			PartDecomposition(const PartDecomposition &) {}

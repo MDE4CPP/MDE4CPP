@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API State: virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
+	class UML_API State : virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
 	{
 		public:
  			State(const State &) {}

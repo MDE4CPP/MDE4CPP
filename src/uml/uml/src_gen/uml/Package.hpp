@@ -85,7 +85,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Package: virtual public Namespace, virtual public PackageableElement, virtual public TemplateableElement
+	class UML_API Package : virtual public Namespace, virtual public PackageableElement, virtual public TemplateableElement
 	{
 		public:
  			Package(const Package &) {}

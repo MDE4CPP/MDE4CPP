@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -759,15 +759,15 @@ std::shared_ptr<Any> AssociationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-			return eAnyBag(getEndType(),uml::umlPackage::TYPE_CLASS); //2139
+			return eEcoreContainerAny(getEndType(),uml::umlPackage::TYPE_CLASS); //2139
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2140
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-			return eAnyBag(getMemberEnd(),uml::umlPackage::PROPERTY_CLASS); //2141
+			return eEcoreContainerAny(getMemberEnd(),uml::umlPackage::PROPERTY_CLASS); //2141
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-			return eAnyBag(getNavigableOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2143
+			return eEcoreContainerAny(getNavigableOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2143
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-			return eAnyBag(getOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2142
+			return eEcoreContainerAny(getOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2142
 	}
 	std::shared_ptr<Any> result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -999,7 +999,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
 			std::shared_ptr<Bag<uml::Type>> resultList = this->getEndTypes();
-			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
 		// uml::Association::isBinary() : bool: 1073463579

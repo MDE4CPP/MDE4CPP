@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -605,15 +605,15 @@ std::shared_ptr<Any> ActionImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
 			return eAny(getContext(),uml::umlPackage::CLASSIFIER_CLASS,false); //421
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
-			return eAnyBag(getInput(),uml::umlPackage::INPUTPIN_CLASS); //422
+			return eEcoreContainerAny(getInput(),uml::umlPackage::INPUTPIN_CLASS); //422
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return eAny(getIsLocallyReentrant(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //423
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
-			return eAnyBag(getLocalPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //424
+			return eEcoreContainerAny(getLocalPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //424
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
-			return eAnyBag(getLocalPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //425
+			return eEcoreContainerAny(getLocalPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //425
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
-			return eAnyBag(getOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //426
+			return eEcoreContainerAny(getOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //426
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -741,20 +741,20 @@ std::shared_ptr<Any> ActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
 			std::shared_ptr<Bag<uml::Action>> resultList = this->allActions();
-			return eAnyBag(resultList,uml::umlPackage::ACTION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ACTION_CLASS);
 			break;
 		}
 		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1529799585
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> resultList = this->allOwnedNodes();
-			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::Action::containingBehavior() : uml::Behavior: 3666051963
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
-			result = eAnyObject(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			result = eEcoreAny(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 

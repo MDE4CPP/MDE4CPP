@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API MultiplicityElement: virtual public Element
+	class UML_API MultiplicityElement : virtual public Element
 	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}

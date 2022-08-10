@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -349,7 +349,7 @@ std::shared_ptr<Any> MessageEndImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment>> resultList = this->enclosingFragment();
-			return eAnyBag(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 			break;
 		}
 		// uml::MessageEnd::isReceive() : bool: 3791628316
@@ -368,7 +368,7 @@ std::shared_ptr<Any> MessageEndImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
 			std::shared_ptr<Bag<uml::MessageEnd>> resultList = this->oppositeEnd();
-			return eAnyBag(resultList,uml::umlPackage::MESSAGEEND_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::MESSAGEEND_CLASS);
 			break;
 		}
 

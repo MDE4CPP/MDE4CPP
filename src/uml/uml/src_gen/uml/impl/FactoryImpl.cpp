@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -262,7 +262,7 @@ std::shared_ptr<Any> FactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::Class> incoming_param_metaClass;
 			Bag<Any>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
-			result = eAnyObject(this->create(incoming_param_metaClass), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->create(incoming_param_metaClass), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 

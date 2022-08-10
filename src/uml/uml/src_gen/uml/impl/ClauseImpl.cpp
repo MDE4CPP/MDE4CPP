@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -458,17 +458,17 @@ std::shared_ptr<Any> ClauseImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
-			return eAnyBag(getBody(),uml::umlPackage::EXECUTABLENODE_CLASS); //383
+			return eEcoreContainerAny(getBody(),uml::umlPackage::EXECUTABLENODE_CLASS); //383
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-			return eAnyBag(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //384
+			return eEcoreContainerAny(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //384
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider(),uml::umlPackage::OUTPUTPIN_CLASS,false); //385
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-			return eAnyBag(getPredecessorClause(),uml::umlPackage::CLAUSE_CLASS); //386
+			return eEcoreContainerAny(getPredecessorClause(),uml::umlPackage::CLAUSE_CLASS); //386
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-			return eAnyBag(getSuccessorClause(),uml::umlPackage::CLAUSE_CLASS); //387
+			return eEcoreContainerAny(getSuccessorClause(),uml::umlPackage::CLAUSE_CLASS); //387
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
-			return eAnyBag(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //388
+			return eEcoreContainerAny(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //388
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

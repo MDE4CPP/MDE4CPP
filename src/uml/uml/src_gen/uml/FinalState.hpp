@@ -72,7 +72,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API FinalState: virtual public State
+	class UML_API FinalState : virtual public State
 	{
 		public:
  			FinalState(const FinalState &) {}

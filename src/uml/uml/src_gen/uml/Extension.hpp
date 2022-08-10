@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Extension: virtual public Association
+	class UML_API Extension : virtual public Association
 	{
 		public:
  			Extension(const Extension &) {}

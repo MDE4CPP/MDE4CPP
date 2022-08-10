@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -333,7 +333,7 @@ std::shared_ptr<Any> TriggerImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
 			return eAny(getEvent(),uml::umlPackage::EVENT_CLASS,false); //2439
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
-			return eAnyBag(getPort(),uml::umlPackage::PORT_CLASS); //24310
+			return eEcoreContainerAny(getPort(),uml::umlPackage::PORT_CLASS); //24310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

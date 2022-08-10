@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateBinding: virtual public DirectedRelationship
+	class UML_API TemplateBinding : virtual public DirectedRelationship
 	{
 		public:
  			TemplateBinding(const TemplateBinding &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -452,7 +452,7 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 			return eAny(getPreCondition(),uml::umlPackage::CONSTRAINT_CLASS,false); //18827
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-			return eAnyBag(getReferred(),uml::umlPackage::OPERATION_CLASS); //18828
+			return eEcoreContainerAny(getReferred(),uml::umlPackage::OPERATION_CLASS); //18828
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
 }
@@ -541,7 +541,7 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
 			std::shared_ptr<Bag<uml::Operation>> resultList = this->getReferreds();
-			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 205735088

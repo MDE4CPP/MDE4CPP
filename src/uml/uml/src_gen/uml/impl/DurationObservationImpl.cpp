@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -384,7 +384,7 @@ std::shared_ptr<Any> DurationObservationImpl::eGet(int featureID, bool resolve, 
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return eAnyBag(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS); //8012
+			return eEcoreContainerAny(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS); //8012
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent(),ecore::ecorePackage::EBOOLEAN_CLASS,true); //8013
 	}

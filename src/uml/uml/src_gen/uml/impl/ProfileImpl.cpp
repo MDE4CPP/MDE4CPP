@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -564,9 +564,9 @@ std::shared_ptr<Any> ProfileImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-			return eAnyBag(getMetaclassReference(),uml::umlPackage::ELEMENTIMPORT_CLASS); //18328
+			return eEcoreContainerAny(getMetaclassReference(),uml::umlPackage::ELEMENTIMPORT_CLASS); //18328
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-			return eAnyBag(getMetamodelReference(),uml::umlPackage::PACKAGEIMPORT_CLASS); //18329
+			return eEcoreContainerAny(getMetamodelReference(),uml::umlPackage::PACKAGEIMPORT_CLASS); //18329
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -683,13 +683,13 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAnyObject(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
+			result = eEcoreAny(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Profile::define() : ecore::EPackage: 1369026160
 		case umlPackage::PROFILE_OPERATION_DEFINE:
 		{
-			result = eAnyObject(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1280241598
@@ -710,13 +710,13 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<std::unordered_map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::unordered_map < Any, Any>> >();
-			result = eAnyObject(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::getDefinition() : ecore::EPackage: 3919615722
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION:
 		{
-			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->getDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::getDefinition(uml::NamedElement) : ecore::ENamedElement: 230708030
@@ -727,7 +727,7 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
 			Bag<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
+			result = eEcoreAny(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Profile::getOwnedExtensions(bool) : uml::Extension[*]: 1345091052
@@ -739,21 +739,21 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			Bag<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get<bool >();
 			std::shared_ptr<Bag<uml::Extension>> resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
-			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 2481786676
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class>> resultList = this->getReferencedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 2762577013
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
 			std::shared_ptr<Bag<uml::Model>> resultList = this->getReferencedMetamodels();
-			return eAnyBag(resultList,uml::umlPackage::MODEL_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::MODEL_CLASS);
 			break;
 		}
 		// uml::Profile::isDefined() : bool: 2217318421

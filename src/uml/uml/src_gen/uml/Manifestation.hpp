@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API Manifestation: virtual public Abstraction
+	class UML_API Manifestation : virtual public Abstraction
 	{
 		public:
  			Manifestation(const Manifestation &) {}

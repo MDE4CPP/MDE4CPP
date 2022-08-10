@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReadStructuralFeatureAction: virtual public StructuralFeatureAction
+	class UML_API ReadStructuralFeatureAction : virtual public StructuralFeatureAction
 	{
 		public:
  			ReadStructuralFeatureAction(const ReadStructuralFeatureAction &) {}

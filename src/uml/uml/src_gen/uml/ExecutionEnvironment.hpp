@@ -81,7 +81,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API ExecutionEnvironment: virtual public Node
+	class UML_API ExecutionEnvironment : virtual public Node
 	{
 		public:
  			ExecutionEnvironment(const ExecutionEnvironment &) {}

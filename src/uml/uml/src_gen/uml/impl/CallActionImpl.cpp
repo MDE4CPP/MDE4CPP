@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -499,7 +499,7 @@ std::shared_ptr<Any> CallActionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return eAny(getIsSynchronous(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2829
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //2830
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //2830
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -598,14 +598,14 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->inputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::CallAction::outputParameters() : uml::Parameter[*]: 4183905689
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> resultList = this->outputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::CallAction::result_pins(Any, std::map) : bool: 123365832

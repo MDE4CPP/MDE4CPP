@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -385,7 +385,7 @@ std::shared_ptr<Any> CollaborationUseImpl::eGet(int featureID, bool resolve, boo
 	switch(featureID)
 	{
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
-			return eAnyBag(getRoleBinding(),uml::umlPackage::DEPENDENCY_CLASS); //439
+			return eEcoreContainerAny(getRoleBinding(),uml::umlPackage::DEPENDENCY_CLASS); //439
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 			return eAny(getType(),uml::umlPackage::COLLABORATION_CLASS,false); //4310
 	}

@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API InterruptibleActivityRegion: virtual public ActivityGroup
+	class UML_API InterruptibleActivityRegion : virtual public ActivityGroup
 	{
 		public:
  			InterruptibleActivityRegion(const InterruptibleActivityRegion &) {}

@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API FlowFinalNode: virtual public FinalNode
+	class UML_API FlowFinalNode : virtual public FinalNode
 	{
 		public:
  			FlowFinalNode(const FlowFinalNode &) {}

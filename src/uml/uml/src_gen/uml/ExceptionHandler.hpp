@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ExceptionHandler: virtual public Element
+	class UML_API ExceptionHandler : virtual public Element
 	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}

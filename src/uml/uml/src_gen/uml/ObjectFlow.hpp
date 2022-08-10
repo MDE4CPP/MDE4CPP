@@ -70,7 +70,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ObjectFlow: virtual public ActivityEdge
+	class UML_API ObjectFlow : virtual public ActivityEdge
 	{
 		public:
  			ObjectFlow(const ObjectFlow &) {}

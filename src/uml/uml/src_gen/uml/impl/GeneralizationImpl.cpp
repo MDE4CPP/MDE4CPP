@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -436,13 +436,13 @@ std::shared_ptr<Any> GeneralizationImpl::eGet(int featureID, bool resolve, bool 
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 			return eAny(getGeneral(),uml::umlPackage::CLASSIFIER_CLASS,false); //1096
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
-			return eAnyBag(getGeneralizationSet(),uml::umlPackage::GENERALIZATIONSET_CLASS); //1097
+			return eEcoreContainerAny(getGeneralizationSet(),uml::umlPackage::GENERALIZATIONSET_CLASS); //1097
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1098
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecific().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //1099
+			return eEcoreAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //1099
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

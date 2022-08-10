@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -531,7 +531,7 @@ std::shared_ptr<Any> DeploymentSpecificationImpl::eGet(int featureID, bool resol
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
-			return eAnyObject(returnValue,uml::umlPackage::DEPLOYMENT_CLASS); //7045
+			return eEcoreAny(returnValue,uml::umlPackage::DEPLOYMENT_CLASS); //7045
 		}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation(),ecore::ecorePackage::ESTRING_CLASS,false); //7043

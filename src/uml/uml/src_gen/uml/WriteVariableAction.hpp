@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API WriteVariableAction: virtual public VariableAction
+	class UML_API WriteVariableAction : virtual public VariableAction
 	{
 		public:
  			WriteVariableAction(const WriteVariableAction &) {}

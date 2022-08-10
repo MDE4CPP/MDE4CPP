@@ -63,7 +63,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API DeploymentTarget: virtual public NamedElement
+	class UML_API DeploymentTarget : virtual public NamedElement
 	{
 		public:
  			DeploymentTarget(const DeploymentTarget &) {}

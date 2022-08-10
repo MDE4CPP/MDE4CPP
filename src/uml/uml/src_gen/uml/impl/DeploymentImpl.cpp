@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -547,13 +547,13 @@ std::shared_ptr<Any> DeploymentImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return eAnyBag(getConfiguration(),uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS); //6917
+			return eEcoreContainerAny(getConfiguration(),uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS); //6917
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return eAnyBag(getDeployedArtifact(),uml::umlPackage::DEPLOYEDARTIFACT_CLASS); //6918
+			return eEcoreContainerAny(getDeployedArtifact(),uml::umlPackage::DEPLOYEDARTIFACT_CLASS); //6918
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
-			return eAnyObject(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS); //6919
+			return eEcoreAny(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS); //6919
 		}
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);

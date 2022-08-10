@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API StartClassifierBehaviorAction: virtual public Action
+	class UML_API StartClassifierBehaviorAction : virtual public Action
 	{
 		public:
  			StartClassifierBehaviorAction(const StartClassifierBehaviorAction &) {}

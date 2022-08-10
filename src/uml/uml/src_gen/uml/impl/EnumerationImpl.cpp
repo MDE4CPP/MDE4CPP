@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -500,7 +500,7 @@ std::shared_ptr<Any> EnumerationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-			return eAnyBag(getOwnedLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS); //8440
+			return eEcoreContainerAny(getOwnedLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS); //8440
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }

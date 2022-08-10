@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateableElement: virtual public Element
+	class UML_API TemplateableElement : virtual public Element
 	{
 		public:
  			TemplateableElement(const TemplateableElement &) {}

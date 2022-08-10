@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -371,7 +371,7 @@ std::shared_ptr<Any> ConnectorEndImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CONNECTOR_CLASS); //5412
+			return eEcoreAny(returnValue,uml::umlPackage::CONNECTOR_CLASS); //5412
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return eAny(getDefiningEnd(),uml::umlPackage::PROPERTY_CLASS,false); //549

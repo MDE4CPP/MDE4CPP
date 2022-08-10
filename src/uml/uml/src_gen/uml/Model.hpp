@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Model: virtual public Package
+	class UML_API Model : virtual public Package
 	{
 		public:
  			Model(const Model &) {}

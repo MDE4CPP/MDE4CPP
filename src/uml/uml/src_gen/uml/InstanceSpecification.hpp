@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API InstanceSpecification: virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
+	class UML_API InstanceSpecification : virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
 	{
 		public:
  			InstanceSpecification(const InstanceSpecification &) {}

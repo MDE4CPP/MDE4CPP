@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -978,17 +978,17 @@ std::shared_ptr<Any> OperationImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASS_CLASS); //16731
+			return eEcoreAny(returnValue,uml::umlPackage::CLASS_CLASS); //16731
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-			return eAnyObject(returnValue,uml::umlPackage::DATATYPE_CLASS); //16732
+			return eEcoreAny(returnValue,uml::umlPackage::DATATYPE_CLASS); //16732
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERFACE_CLASS); //16733
+			return eEcoreAny(returnValue,uml::umlPackage::INTERFACE_CLASS); //16733
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //16734
@@ -999,13 +999,13 @@ std::shared_ptr<Any> OperationImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
 			return eAny(getLower(),ecore::ecorePackage::EINT_CLASS,false); //16737
 		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
-			return eAnyBag(getProperty_OwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //16743
+			return eEcoreContainerAny(getProperty_OwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //16743
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-			return eAnyBag(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //16738
+			return eEcoreContainerAny(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //16738
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-			return eAnyBag(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //16739
+			return eEcoreContainerAny(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //16739
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-			return eAnyBag(getRedefinedOperation(),uml::umlPackage::OPERATION_CLASS); //16740
+			return eEcoreContainerAny(getRedefinedOperation(),uml::umlPackage::OPERATION_CLASS); //16740
 		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
 			return eAny(getType(),uml::umlPackage::TYPE_CLASS,false); //16741
 		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
@@ -1316,7 +1316,7 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Operation::getReturnResult() : uml::Parameter: 3209085960
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
-			result = eAnyObject(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS);
+			result = eEcoreAny(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Operation::getUpper() : int: 1198605197
@@ -1367,7 +1367,7 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Operation::returnResult() : uml::Parameter: 3088060264
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
-			result = eAnyObject(this->returnResult(), uml::umlPackage::PARAMETER_CLASS);
+			result = eEcoreAny(this->returnResult(), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::Operation::setIsOrdered(bool): 563533641

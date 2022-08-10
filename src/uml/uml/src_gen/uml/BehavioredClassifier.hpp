@@ -79,7 +79,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API BehavioredClassifier: virtual public Classifier
+	class UML_API BehavioredClassifier : virtual public Classifier
 	{
 		public:
  			BehavioredClassifier(const BehavioredClassifier &) {}

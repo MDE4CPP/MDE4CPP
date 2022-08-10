@@ -83,7 +83,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API AssociationClass: virtual public Association, virtual public Class
+	class UML_API AssociationClass : virtual public Association, virtual public Class
 	{
 		public:
  			AssociationClass(const AssociationClass &) {}

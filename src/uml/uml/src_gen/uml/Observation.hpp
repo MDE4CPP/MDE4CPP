@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API Observation: virtual public PackageableElement
+	class UML_API Observation : virtual public PackageableElement
 	{
 		public:
  			Observation(const Observation &) {}

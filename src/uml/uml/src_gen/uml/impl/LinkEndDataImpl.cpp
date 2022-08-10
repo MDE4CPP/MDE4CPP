@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -412,7 +412,7 @@ std::shared_ptr<Any> LinkEndDataImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 			return eAny(getEnd(),uml::umlPackage::PROPERTY_CLASS,false); //1353
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
-			return eAnyBag(getQualifier(),uml::umlPackage::QUALIFIERVALUE_CLASS); //1354
+			return eEcoreContainerAny(getQualifier(),uml::umlPackage::QUALIFIERVALUE_CLASS); //1354
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 			return eAny(getValue(),uml::umlPackage::INPUTPIN_CLASS,false); //1355
 	}
@@ -508,7 +508,7 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
 			std::shared_ptr<Bag<uml::InputPin>> resultList = this->allPins();
-			return eAnyBag(resultList,uml::umlPackage::INPUTPIN_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INPUTPIN_CLASS);
 			break;
 		}
 		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1499623387

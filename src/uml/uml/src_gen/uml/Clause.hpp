@@ -59,7 +59,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Clause: virtual public Element
+	class UML_API Clause : virtual public Element
 	{
 		public:
  			Clause(const Clause &) {}

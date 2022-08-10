@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -416,7 +416,7 @@ std::shared_ptr<Any> ProfileApplicationImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //1848
+			return eEcoreAny(returnValue,uml::umlPackage::PACKAGE_CLASS); //1848
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1847
@@ -482,7 +482,7 @@ std::shared_ptr<Any> ProfileApplicationImpl::eInvoke(int operationID, std::share
 		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1478312265
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
-			result = eAnyObject(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1076549117
@@ -493,7 +493,7 @@ std::shared_ptr<Any> ProfileApplicationImpl::eInvoke(int operationID, std::share
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
 			Bag<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
+			result = eEcoreAny(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
 

@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API QualifierValue: virtual public Element
+	class UML_API QualifierValue : virtual public Element
 	{
 		public:
  			QualifierValue(const QualifierValue &) {}

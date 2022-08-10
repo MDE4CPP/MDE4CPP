@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API DestructionOccurrenceSpecification: virtual public MessageOccurrenceSpecification
+	class UML_API DestructionOccurrenceSpecification : virtual public MessageOccurrenceSpecification
 	{
 		public:
  			DestructionOccurrenceSpecification(const DestructionOccurrenceSpecification &) {}

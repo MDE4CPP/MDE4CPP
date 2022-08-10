@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API InterfaceRealization: virtual public Realization
+	class UML_API InterfaceRealization : virtual public Realization
 	{
 		public:
  			InterfaceRealization(const InterfaceRealization &) {}

@@ -80,7 +80,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Operation: virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
+	class UML_API Operation : virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
 	{
 		public:
  			Operation(const Operation &) {}

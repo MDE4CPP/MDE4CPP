@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -448,19 +448,19 @@ std::shared_ptr<Any> InteractionFragmentImpl::eGet(int featureID, bool resolve, 
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
-			return eAnyBag(getCovered(),uml::umlPackage::LIFELINE_CLASS); //1219
+			return eEcoreContainerAny(getCovered(),uml::umlPackage::LIFELINE_CLASS); //1219
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //12111
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTION_CLASS); //12111
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS); //12110
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS); //12110
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-			return eAnyBag(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
+			return eEcoreContainerAny(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

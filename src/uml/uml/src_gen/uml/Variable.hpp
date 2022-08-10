@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API Variable: virtual public ConnectableElement, virtual public MultiplicityElement
+	class UML_API Variable : virtual public ConnectableElement, virtual public MultiplicityElement
 	{
 		public:
  			Variable(const Variable &) {}

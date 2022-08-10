@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -474,7 +474,7 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 		// uml::StartObjectBehaviorAction::behavior() : uml::Behavior: 3504813546
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR:
 		{
-			result = eAnyObject(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			result = eEcoreAny(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 		// uml::StartObjectBehaviorAction::multiplicity_of_object(Any, std::map) : bool: 3775718348

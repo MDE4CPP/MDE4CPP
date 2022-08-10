@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -467,10 +467,10 @@ std::shared_ptr<Any> TemplateBindingImpl::eGet(int featureID, bool resolve, bool
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBoundElement().lock();
-			return eAnyObject(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2308
+			return eEcoreAny(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS); //2308
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
-			return eAnyBag(getParameterSubstitution(),uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS); //2306
+			return eEcoreContainerAny(getParameterSubstitution(),uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS); //2306
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 			return eAny(getSignature(),uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2307
 	}

@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API DataStoreNode: virtual public CentralBufferNode
+	class UML_API DataStoreNode : virtual public CentralBufferNode
 	{
 		public:
  			DataStoreNode(const DataStoreNode &) {}

@@ -54,7 +54,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Image: virtual public Element
+	class UML_API Image : virtual public Element
 	{
 		public:
  			Image(const Image &) {}

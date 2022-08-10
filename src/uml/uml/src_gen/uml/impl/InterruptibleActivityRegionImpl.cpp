@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -412,9 +412,9 @@ std::shared_ptr<Any> InterruptibleActivityRegionImpl::eGet(int featureID, bool r
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-			return eAnyBag(getInterruptingEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //12714
+			return eEcoreContainerAny(getInterruptingEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //12714
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //12715
+			return eEcoreContainerAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //12715
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }

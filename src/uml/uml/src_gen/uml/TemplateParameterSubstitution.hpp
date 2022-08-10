@@ -60,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateParameterSubstitution: virtual public Element
+	class UML_API TemplateParameterSubstitution : virtual public Element
 	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}

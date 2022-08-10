@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -731,7 +731,7 @@ std::shared_ptr<Any> TransitionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAnyObject(returnValue,uml::umlPackage::REGION_CLASS); //24125
+			return eEcoreAny(returnValue,uml::umlPackage::REGION_CLASS); //24125
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 			return eAny(getEffect(),uml::umlPackage::BEHAVIOR_CLASS,false); //24118
@@ -746,7 +746,7 @@ std::shared_ptr<Any> TransitionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
 			return eAny(getTarget(),uml::umlPackage::VERTEX_CLASS,false); //24123
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
-			return eAnyBag(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //24124
+			return eEcoreContainerAny(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //24124
 	}
 	std::shared_ptr<Any> result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -909,7 +909,7 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::Transition::containingStateMachine() : uml::StateMachine: 3793766704
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 1015992162
@@ -1011,7 +1011,7 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::Transition::redefinitionContext() : uml::Classifier: 4168264280
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
+			result = eEcoreAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Transition::state_is_external(Any, std::map) : bool: 1017523375

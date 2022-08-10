@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -573,13 +573,13 @@ std::shared_ptr<Any> ElementImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return eAnyBag(getOwnedComment(),uml::umlPackage::COMMENT_CLASS); //810
+			return eEcoreContainerAny(getOwnedComment(),uml::umlPackage::COMMENT_CLASS); //810
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return eAnyBag(getOwnedElement(),uml::umlPackage::ELEMENT_CLASS); //811
+			return eEcoreContainerAny(getOwnedElement(),uml::umlPackage::ELEMENT_CLASS); //811
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ELEMENT_CLASS); //812
+			return eEcoreAny(returnValue,uml::umlPackage::ELEMENT_CLASS); //812
 		}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
@@ -669,7 +669,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		case umlPackage::ELEMENT_OPERATION_ALLOWNEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::Element>> resultList = this->allOwnedElements();
-			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// uml::Element::applyStereotype(uml::Stereotype) : ecore::EObject: 2648262877
@@ -680,13 +680,13 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
 			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->applyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			result = eEcoreAny(this->applyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::container() : uml::Element: 3193550054
 		case umlPackage::ELEMENT_OPERATION_CONTAINER:
 		{
-			result = eAnyObject(this->container(), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->container(), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// uml::Element::createEAnnotation(std::string) : ecore::EAnnotation: 516144683
@@ -697,7 +697,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::string incoming_param_source;
 			Bag<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
+			result = eEcoreAny(this->createEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
 		}
 		// uml::Element::destroy(): 2011566363
@@ -714,14 +714,14 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getApplicableStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			result = eEcoreAny(this->getApplicableStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getApplicableStereotypes() : uml::Stereotype[*]: 4106909555
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES:
 		{
 			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getApplicableStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedStereotype(std::string) : uml::Stereotype {const}: 87051473
@@ -732,14 +732,14 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getAppliedStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			result = eEcoreAny(this->getAppliedStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedStereotypes() : uml::Stereotype[*] {const}: 536733808
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES:
 		{
 			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getAppliedStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedSubstereotype(uml::Stereotype, std::string) : uml::Stereotype: 1806954958
@@ -755,7 +755,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			result = eEcoreAny(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedSubstereotypes(uml::Stereotype) : uml::Stereotype[*]: 2456228169
@@ -767,7 +767,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
 			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getAppliedSubstereotypes(incoming_param_stereotype);
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getKeywords() : std::string[*]: 98894063
@@ -779,26 +779,26 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// uml::Element::getMetaClass() : uml::Class {const}: 1459052667
 		case umlPackage::ELEMENT_OPERATION_GETMETACLASS:
 		{
-			result = eAnyObject(this->getMetaClass(), uml::umlPackage::CLASS_CLASS);
+			result = eEcoreAny(this->getMetaClass(), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Element::getModel() : uml::Model: 3573763623
 		case umlPackage::ELEMENT_OPERATION_GETMODEL:
 		{
-			result = eAnyObject(this->getModel(), uml::umlPackage::MODEL_CLASS);
+			result = eEcoreAny(this->getModel(), uml::umlPackage::MODEL_CLASS);
 			break;
 		}
 		// uml::Element::getNearestPackage() : uml::Package: 4263471119
 		case umlPackage::ELEMENT_OPERATION_GETNEARESTPACKAGE:
 		{
-			result = eAnyObject(this->getNearestPackage(), uml::umlPackage::PACKAGE_CLASS);
+			result = eEcoreAny(this->getNearestPackage(), uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::Element::getRelationships() : uml::Relationship[*]: 2213814646
 		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS:
 		{
 			std::shared_ptr<Bag<uml::Relationship>> resultList = this->getRelationships();
-			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getRelationships(ecore::EClass) : uml::Relationship[*]: 1674629135
@@ -810,7 +810,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
 			std::shared_ptr<Bag<uml::Relationship>> resultList = this->getRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getRequiredStereotype(std::string) : uml::Stereotype: 3654047872
@@ -821,21 +821,21 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getRequiredStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			result = eEcoreAny(this->getRequiredStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getRequiredStereotypes() : uml::Stereotype[*]: 1705085663
 		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES:
 		{
 			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getRequiredStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getSourceDirectedRelationships() : uml::DirectedRelationship[*]: 2795621331
 		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS:
 		{
 			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getSourceDirectedRelationships();
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getSourceDirectedRelationships(ecore::EClass) : uml::DirectedRelationship[*]: 3097970596
@@ -847,7 +847,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
 			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getSourceDirectedRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getStereotypeApplication(uml::Stereotype) : ecore::EObject: 2473257019
@@ -858,21 +858,21 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
 			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->getStereotypeApplication(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			result = eEcoreAny(this->getStereotypeApplication(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::getStereotypeApplications() : ecore::EObject[*]: 3677056906
 		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> resultList = this->getStereotypeApplications();
-			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
+			return eEcoreContainerAny(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::getTargetDirectedRelationships() : uml::DirectedRelationship[*]: 1070993753
 		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS:
 		{
 			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getTargetDirectedRelationships();
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getTargetDirectedRelationships(ecore::EClass) : uml::DirectedRelationship[*]: 1373343018
@@ -884,7 +884,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
 			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getTargetDirectedRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getValue(uml::Stereotype, std::string) : Any: 56841400
@@ -1041,7 +1041,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
 			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->unapplyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			result = eEcoreAny(this->unapplyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 

@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API Expression: virtual public ValueSpecification
+	class UML_API Expression : virtual public ValueSpecification
 	{
 		public:
  			Expression(const Expression &) {}

@@ -70,7 +70,7 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class UML_API InformationFlow: virtual public DirectedRelationship, virtual public PackageableElement
+	class UML_API InformationFlow : virtual public DirectedRelationship, virtual public PackageableElement
 	{
 		public:
  			InformationFlow(const InformationFlow &) {}

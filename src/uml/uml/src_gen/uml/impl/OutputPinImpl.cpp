@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -617,42 +617,42 @@ std::shared_ptr<Any> OutputPinImpl::eGet(int featureID, bool resolve, bool coreT
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTION_CLASS); //16934
+			return eEcoreAny(returnValue,uml::umlPackage::ACTION_CLASS); //16934
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CALLACTION_CLASS); //16933
+			return eEcoreAny(returnValue,uml::umlPackage::CALLACTION_CLASS); //16933
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS); //16938
+			return eEcoreAny(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS); //16938
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS); //16940
+			return eEcoreAny(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS); //16940
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::READSELFACTION_CLASS); //16939
+			return eEcoreAny(returnValue,uml::umlPackage::READSELFACTION_CLASS); //16939
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS); //16937
+			return eEcoreAny(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS); //16937
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //16935
+			return eEcoreAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //16935
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS); //16936
+			return eEcoreAny(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS); //16936
 		}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);

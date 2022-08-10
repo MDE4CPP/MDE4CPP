@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityPartition: virtual public ActivityGroup
+	class UML_API ActivityPartition : virtual public ActivityGroup
 	{
 		public:
  			ActivityPartition(const ActivityPartition &) {}

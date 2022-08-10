@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ExpansionNode: virtual public ObjectNode
+	class UML_API ExpansionNode : virtual public ObjectNode
 	{
 		public:
  			ExpansionNode(const ExpansionNode &) {}

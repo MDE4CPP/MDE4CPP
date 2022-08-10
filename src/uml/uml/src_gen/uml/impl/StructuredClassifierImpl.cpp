@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -623,13 +623,13 @@ std::shared_ptr<Any> StructuredClassifierImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //22838
+			return eEcoreContainerAny(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //22838
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
-			return eAnyBag(getOwnedConnector(),uml::umlPackage::CONNECTOR_CLASS); //22839
+			return eEcoreContainerAny(getOwnedConnector(),uml::umlPackage::CONNECTOR_CLASS); //22839
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
-			return eAnyBag(getPart(),uml::umlPackage::PROPERTY_CLASS); //22840
+			return eEcoreContainerAny(getPart(),uml::umlPackage::PROPERTY_CLASS); //22840
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
-			return eAnyBag(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //22841
+			return eEcoreContainerAny(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //22841
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -746,7 +746,7 @@ std::shared_ptr<Any> StructuredClassifierImpl::eInvoke(int operationID, std::sha
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
 		{
 			std::shared_ptr<Bag<uml::ConnectableElement>> resultList = this->allRoles();
-			return eAnyBag(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::StructuredClassifier::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2674132819
@@ -772,14 +772,14 @@ std::shared_ptr<Any> StructuredClassifierImpl::eInvoke(int operationID, std::sha
 			int incoming_param_upper;
 			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::StructuredClassifier::getParts() : uml::Property[*]: 2304451414
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
 		{
 			std::shared_ptr<Bag<uml::Property>> resultList = this->getParts();
-			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 

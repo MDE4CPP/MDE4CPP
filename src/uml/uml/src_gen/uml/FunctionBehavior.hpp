@@ -85,7 +85,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API FunctionBehavior: virtual public OpaqueBehavior
+	class UML_API FunctionBehavior : virtual public OpaqueBehavior
 	{
 		public:
  			FunctionBehavior(const FunctionBehavior &) {}

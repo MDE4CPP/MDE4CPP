@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -1120,17 +1120,17 @@ std::shared_ptr<Any> PropertyImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAssociationEnd().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PROPERTY_CLASS); //18531
+			return eEcoreAny(returnValue,uml::umlPackage::PROPERTY_CLASS); //18531
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASS_CLASS); //18533
+			return eEcoreAny(returnValue,uml::umlPackage::CLASS_CLASS); //18533
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-			return eAnyObject(returnValue,uml::umlPackage::DATATYPE_CLASS); //18527
+			return eEcoreAny(returnValue,uml::umlPackage::DATATYPE_CLASS); //18527
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //18529
@@ -1139,7 +1139,7 @@ std::shared_ptr<Any> PropertyImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERFACE_CLASS); //18528
+			return eEcoreAny(returnValue,uml::umlPackage::INTERFACE_CLASS); //18528
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //18535
@@ -1154,14 +1154,14 @@ std::shared_ptr<Any> PropertyImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningAssociation().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ASSOCIATION_CLASS); //18540
+			return eEcoreAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS); //18540
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
-			return eAnyBag(getQualifier(),uml::umlPackage::PROPERTY_CLASS); //18532
+			return eEcoreContainerAny(getQualifier(),uml::umlPackage::PROPERTY_CLASS); //18532
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
-			return eAnyBag(getRedefinedProperty(),uml::umlPackage::PROPERTY_CLASS); //18541
+			return eEcoreContainerAny(getRedefinedProperty(),uml::umlPackage::PROPERTY_CLASS); //18541
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
-			return eAnyBag(getSubsettedProperty(),uml::umlPackage::PROPERTY_CLASS); //18542
+			return eEcoreContainerAny(getSubsettedProperty(),uml::umlPackage::PROPERTY_CLASS); //18542
 	}
 	std::shared_ptr<Any> result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -1546,7 +1546,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 		// uml::Property::getOtherEnd() : uml::Property: 3759990426
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
-			result = eAnyObject(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS);
+			result = eEcoreAny(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Property::isAttribute() : bool: 2655051450
@@ -1713,7 +1713,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
 			std::shared_ptr<Bag<uml::Type>> resultList = this->subsettingContext();
-			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
 		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 2882708741

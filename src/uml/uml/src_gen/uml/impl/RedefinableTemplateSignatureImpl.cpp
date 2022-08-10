@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -497,12 +497,12 @@ std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eGet(int featureID, bool 
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //20517
+			return eEcoreAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //20517
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-			return eAnyBag(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
+			return eEcoreContainerAny(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-			return eAnyBag(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
+			return eEcoreContainerAny(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
 	}
 	std::shared_ptr<Any> result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -609,7 +609,7 @@ std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, 
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter>> resultList = this->getInheritedParameters();
-			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}
 		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 2810722782

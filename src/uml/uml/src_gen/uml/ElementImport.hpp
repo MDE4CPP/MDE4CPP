@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API ElementImport: virtual public DirectedRelationship
+	class UML_API ElementImport : virtual public DirectedRelationship
 	{
 		public:
  			ElementImport(const ElementImport &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -278,7 +278,7 @@ std::shared_ptr<Any> ConnectableElementImpl::eGet(int featureID, bool resolve, b
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return eAnyBag(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5012
+			return eEcoreContainerAny(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5012
 	}
 	std::shared_ptr<Any> result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
@@ -336,7 +336,7 @@ std::shared_ptr<Any> ConnectableElementImpl::eInvoke(int operationID, std::share
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
 			std::shared_ptr<Bag<uml::ConnectorEnd>> resultList = this->getEnds();
-			return eAnyBag(resultList,uml::umlPackage::CONNECTOREND_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::CONNECTOREND_CLASS);
 			break;
 		}
 

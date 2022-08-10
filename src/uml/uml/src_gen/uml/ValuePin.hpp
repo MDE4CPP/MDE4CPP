@@ -82,7 +82,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ValuePin: virtual public InputPin
+	class UML_API ValuePin : virtual public InputPin
 	{
 		public:
  			ValuePin(const ValuePin &) {}

@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Parameter: virtual public ConnectableElement, virtual public MultiplicityElement
+	class UML_API Parameter : virtual public ConnectableElement, virtual public MultiplicityElement
 	{
 		public:
  			Parameter(const Parameter &) {}

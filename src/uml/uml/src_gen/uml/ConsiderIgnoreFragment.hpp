@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ConsiderIgnoreFragment: virtual public CombinedFragment
+	class UML_API ConsiderIgnoreFragment : virtual public CombinedFragment
 	{
 		public:
  			ConsiderIgnoreFragment(const ConsiderIgnoreFragment &) {}

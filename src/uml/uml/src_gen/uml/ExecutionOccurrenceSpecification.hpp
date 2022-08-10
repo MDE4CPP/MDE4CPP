@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ExecutionOccurrenceSpecification: virtual public OccurrenceSpecification
+	class UML_API ExecutionOccurrenceSpecification : virtual public OccurrenceSpecification
 	{
 		public:
  			ExecutionOccurrenceSpecification(const ExecutionOccurrenceSpecification &) {}

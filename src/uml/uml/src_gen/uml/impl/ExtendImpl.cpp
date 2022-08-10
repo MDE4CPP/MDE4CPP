@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -493,10 +493,10 @@ std::shared_ptr<Any> ExtendImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
-			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //9615
+			return eEcoreAny(returnValue,uml::umlPackage::USECASE_CLASS); //9615
 		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-			return eAnyBag(getExtensionLocation(),uml::umlPackage::EXTENSIONPOINT_CLASS); //9614
+			return eEcoreContainerAny(getExtensionLocation(),uml::umlPackage::EXTENSIONPOINT_CLASS); //9614
 	}
 	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

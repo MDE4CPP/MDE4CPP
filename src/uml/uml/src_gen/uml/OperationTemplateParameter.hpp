@@ -58,7 +58,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API OperationTemplateParameter: virtual public TemplateParameter
+	class UML_API OperationTemplateParameter : virtual public TemplateParameter
 	{
 		public:
  			OperationTemplateParameter(const OperationTemplateParameter &) {}

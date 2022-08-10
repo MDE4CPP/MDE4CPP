@@ -63,7 +63,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API Gate: virtual public MessageEnd
+	class UML_API Gate : virtual public MessageEnd
 	{
 		public:
  			Gate(const Gate &) {}

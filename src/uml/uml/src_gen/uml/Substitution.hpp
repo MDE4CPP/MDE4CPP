@@ -63,7 +63,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Substitution: virtual public Realization
+	class UML_API Substitution : virtual public Realization
 	{
 		public:
  			Substitution(const Substitution &) {}

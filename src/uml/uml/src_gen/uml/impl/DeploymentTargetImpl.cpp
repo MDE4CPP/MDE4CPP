@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -334,9 +334,9 @@ std::shared_ptr<Any> DeploymentTargetImpl::eGet(int featureID, bool resolve, boo
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return eAnyBag(getDeployedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //719
+			return eEcoreContainerAny(getDeployedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //719
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return eAnyBag(getDeployment(),uml::umlPackage::DEPLOYMENT_CLASS); //7110
+			return eEcoreContainerAny(getDeployment(),uml::umlPackage::DEPLOYMENT_CLASS); //7110
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,7 +412,7 @@ std::shared_ptr<Any> DeploymentTargetImpl::eInvoke(int operationID, std::shared_
 		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->getDeployedElements();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 

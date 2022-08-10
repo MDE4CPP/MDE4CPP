@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Vertex: virtual public NamedElement
+	class UML_API Vertex : virtual public NamedElement
 	{
 		public:
  			Vertex(const Vertex &) {}

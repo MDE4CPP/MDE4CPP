@@ -81,7 +81,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API Device: virtual public Node
+	class UML_API Device : virtual public Node
 	{
 		public:
  			Device(const Device &) {}

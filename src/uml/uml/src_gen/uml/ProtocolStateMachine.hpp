@@ -89,7 +89,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API ProtocolStateMachine: virtual public StateMachine
+	class UML_API ProtocolStateMachine : virtual public StateMachine
 	{
 		public:
  			ProtocolStateMachine(const ProtocolStateMachine &) {}

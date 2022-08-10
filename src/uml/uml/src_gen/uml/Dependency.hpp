@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Dependency: virtual public DirectedRelationship, virtual public PackageableElement
+	class UML_API Dependency : virtual public DirectedRelationship, virtual public PackageableElement
 	{
 		public:
  			Dependency(const Dependency &) {}

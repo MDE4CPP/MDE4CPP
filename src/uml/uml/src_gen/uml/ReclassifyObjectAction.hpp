@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReclassifyObjectAction: virtual public Action
+	class UML_API ReclassifyObjectAction : virtual public Action
 	{
 		public:
  			ReclassifyObjectAction(const ReclassifyObjectAction &) {}

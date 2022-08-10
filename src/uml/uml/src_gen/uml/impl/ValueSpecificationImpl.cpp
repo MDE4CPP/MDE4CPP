@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -394,12 +394,12 @@ std::shared_ptr<Any> ValueSpecificationImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningSlot().lock();
-			return eAnyObject(returnValue,uml::umlPackage::SLOT_CLASS); //25013
+			return eEcoreAny(returnValue,uml::umlPackage::SLOT_CLASS); //25013
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //25014
+			return eEcoreAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //25014
 		}
 	}
 	std::shared_ptr<Any> result;

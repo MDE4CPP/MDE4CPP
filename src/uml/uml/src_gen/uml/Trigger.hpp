@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API Trigger: virtual public NamedElement
+	class UML_API Trigger : virtual public NamedElement
 	{
 		public:
  			Trigger(const Trigger &) {}

@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API WriteLinkAction: virtual public LinkAction
+	class UML_API WriteLinkAction : virtual public LinkAction
 	{
 		public:
  			WriteLinkAction(const WriteLinkAction &) {}

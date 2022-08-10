@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API RedefinableElement: virtual public NamedElement
+	class UML_API RedefinableElement : virtual public NamedElement
 	{
 		public:
  			RedefinableElement(const RedefinableElement &) {}

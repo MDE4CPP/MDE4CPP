@@ -67,7 +67,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Pseudostate: virtual public Vertex
+	class UML_API Pseudostate : virtual public Vertex
 	{
 		public:
  			Pseudostate(const Pseudostate &) {}

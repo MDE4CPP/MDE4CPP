@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API Include: virtual public DirectedRelationship, virtual public NamedElement
+	class UML_API Include : virtual public DirectedRelationship, virtual public NamedElement
 	{
 		public:
  			Include(const Include &) {}

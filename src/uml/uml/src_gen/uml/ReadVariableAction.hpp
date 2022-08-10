@@ -74,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReadVariableAction: virtual public VariableAction
+	class UML_API ReadVariableAction : virtual public VariableAction
 	{
 		public:
  			ReadVariableAction(const ReadVariableAction &) {}

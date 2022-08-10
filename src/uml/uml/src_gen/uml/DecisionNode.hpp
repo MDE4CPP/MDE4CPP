@@ -70,7 +70,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API DecisionNode: virtual public ControlNode
+	class UML_API DecisionNode : virtual public ControlNode
 	{
 		public:
  			DecisionNode(const DecisionNode &) {}

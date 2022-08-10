@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -401,20 +401,20 @@ std::shared_ptr<Any> ActivityGroupImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-			return eAnyBag(getContainedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //109
+			return eEcoreContainerAny(getContainedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //109
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-			return eAnyBag(getContainedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1010
+			return eEcoreContainerAny(getContainedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1010
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1011
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITY_CLASS); //1011
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-			return eAnyBag(getSubgroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1012
+			return eEcoreContainerAny(getSubgroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1012
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITYGROUP_CLASS); //1013
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITYGROUP_CLASS); //1013
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -467,7 +467,7 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 		// uml::ActivityGroup::containingActivity() : uml::Activity: 2017091657
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAnyObject(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
+			result = eEcoreAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS);
 			break;
 		}
 		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 2906877622

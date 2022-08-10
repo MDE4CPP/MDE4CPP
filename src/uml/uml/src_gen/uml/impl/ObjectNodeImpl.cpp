@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -539,7 +539,7 @@ std::shared_ptr<Any> ObjectNodeImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-			return eAnyBag(getInState(),uml::umlPackage::STATE_CLASS); //16021
+			return eEcoreContainerAny(getInState(),uml::umlPackage::STATE_CLASS); //16021
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //16022
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:

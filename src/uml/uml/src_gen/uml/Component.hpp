@@ -88,7 +88,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API Component: virtual public Class
+	class UML_API Component : virtual public Class
 	{
 		public:
  			Component(const Component &) {}

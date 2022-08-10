@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -336,9 +336,9 @@ std::shared_ptr<Any> RedefinableElementImpl::eGet(int featureID, bool resolve, b
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return eAny(getIsLeaf(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2049
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
-			return eAnyBag(getRedefinedElement(),uml::umlPackage::REDEFINABLEELEMENT_CLASS); //20410
+			return eEcoreContainerAny(getRedefinedElement(),uml::umlPackage::REDEFINABLEELEMENT_CLASS); //20410
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
-			return eAnyBag(getRedefinitionContext(),uml::umlPackage::CLASSIFIER_CLASS); //20411
+			return eEcoreContainerAny(getRedefinitionContext(),uml::umlPackage::CLASSIFIER_CLASS); //20411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

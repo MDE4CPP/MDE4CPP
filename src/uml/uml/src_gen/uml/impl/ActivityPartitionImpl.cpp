@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -704,21 +704,21 @@ std::shared_ptr<Any> ActivityPartitionImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-			return eAnyBag(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1320
+			return eEcoreContainerAny(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1320
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
 			return eAny(getIsDimension(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1314
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
 			return eAny(getIsExternal(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1315
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1316
+			return eEcoreContainerAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1316
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
 			return eAny(getRepresents(),uml::umlPackage::ELEMENT_CLASS,false); //1317
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-			return eAnyBag(getSubpartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //1318
+			return eEcoreContainerAny(getSubpartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //1318
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperPartition().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITYPARTITION_CLASS); //1319
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITYPARTITION_CLASS); //1319
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);

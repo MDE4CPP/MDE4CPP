@@ -63,7 +63,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API ProfileApplication: virtual public DirectedRelationship
+	class UML_API ProfileApplication : virtual public DirectedRelationship
 	{
 		public:
  			ProfileApplication(const ProfileApplication &) {}

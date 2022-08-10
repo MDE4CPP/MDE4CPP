@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -528,7 +528,7 @@ std::shared_ptr<Any> CollaborationImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-			return eAnyBag(getCollaborationRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //4245
+			return eEcoreContainerAny(getCollaborationRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //4245
 	}
 	std::shared_ptr<Any> result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);

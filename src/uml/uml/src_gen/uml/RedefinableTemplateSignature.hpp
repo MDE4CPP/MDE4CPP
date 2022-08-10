@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API RedefinableTemplateSignature: virtual public RedefinableElement, virtual public TemplateSignature
+	class UML_API RedefinableTemplateSignature : virtual public RedefinableElement, virtual public TemplateSignature
 	{
 		public:
  			RedefinableTemplateSignature(const RedefinableTemplateSignature &) {}

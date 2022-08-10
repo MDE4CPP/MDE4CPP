@@ -72,7 +72,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class UML_API CommunicationPath: virtual public Association
+	class UML_API CommunicationPath : virtual public Association
 	{
 		public:
  			CommunicationPath(const CommunicationPath &) {}

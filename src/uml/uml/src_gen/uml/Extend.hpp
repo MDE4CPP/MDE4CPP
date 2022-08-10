@@ -67,7 +67,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API Extend: virtual public DirectedRelationship, virtual public NamedElement
+	class UML_API Extend : virtual public DirectedRelationship, virtual public NamedElement
 	{
 		public:
  			Extend(const Extend &) {}

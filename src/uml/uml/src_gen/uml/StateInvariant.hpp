@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API StateInvariant: virtual public InteractionFragment
+	class UML_API StateInvariant : virtual public InteractionFragment
 	{
 		public:
  			StateInvariant(const StateInvariant &) {}

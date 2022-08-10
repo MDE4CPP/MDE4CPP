@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API Actor: virtual public BehavioredClassifier
+	class UML_API Actor : virtual public BehavioredClassifier
 	{
 		public:
  			Actor(const Actor &) {}

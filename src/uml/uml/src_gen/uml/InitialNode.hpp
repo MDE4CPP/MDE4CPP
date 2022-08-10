@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API InitialNode: virtual public ControlNode
+	class UML_API InitialNode : virtual public ControlNode
 	{
 		public:
  			InitialNode(const InitialNode &) {}

@@ -62,7 +62,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API GeneralOrdering: virtual public NamedElement
+	class UML_API GeneralOrdering : virtual public NamedElement
 	{
 		public:
  			GeneralOrdering(const GeneralOrdering &) {}

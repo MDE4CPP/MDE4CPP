@@ -77,7 +77,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API StructuredClassifier: virtual public Classifier
+	class UML_API StructuredClassifier : virtual public Classifier
 	{
 		public:
  			StructuredClassifier(const StructuredClassifier &) {}

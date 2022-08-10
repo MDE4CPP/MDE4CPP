@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API ConnectableElement: virtual public ParameterableElement, virtual public TypedElement
+	class UML_API ConnectableElement : virtual public ParameterableElement, virtual public TypedElement
 	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}

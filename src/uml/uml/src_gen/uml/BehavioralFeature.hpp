@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API BehavioralFeature: virtual public Feature, virtual public Namespace
+	class UML_API BehavioralFeature : virtual public Feature, virtual public Namespace
 	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}

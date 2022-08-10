@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API ParameterSet: virtual public NamedElement
+	class UML_API ParameterSet : virtual public NamedElement
 	{
 		public:
  			ParameterSet(const ParameterSet &) {}

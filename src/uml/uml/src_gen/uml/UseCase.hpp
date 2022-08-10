@@ -80,7 +80,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API UseCase: virtual public BehavioredClassifier
+	class UML_API UseCase : virtual public BehavioredClassifier
 	{
 		public:
  			UseCase(const UseCase &) {}

@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API OpaqueAction: virtual public Action
+	class UML_API OpaqueAction : virtual public Action
 	{
 		public:
  			OpaqueAction(const OpaqueAction &) {}

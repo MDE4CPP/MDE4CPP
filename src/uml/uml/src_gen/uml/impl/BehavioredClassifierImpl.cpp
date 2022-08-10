@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -608,9 +608,9 @@ std::shared_ptr<Any> BehavioredClassifierImpl::eGet(int featureID, bool resolve,
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 			return eAny(getClassifierBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //2638
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
-			return eAnyBag(getInterfaceRealization(),uml::umlPackage::INTERFACEREALIZATION_CLASS); //2639
+			return eEcoreContainerAny(getInterfaceRealization(),uml::umlPackage::INTERFACEREALIZATION_CLASS); //2639
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
-			return eAnyBag(getOwnedBehavior(),uml::umlPackage::BEHAVIOR_CLASS); //2640
+			return eEcoreContainerAny(getOwnedBehavior(),uml::umlPackage::BEHAVIOR_CLASS); //2640
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -749,14 +749,14 @@ std::shared_ptr<Any> BehavioredClassifierImpl::eInvoke(int operationID, std::sha
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getAllImplementedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 329551508
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface>> resultList = this->getImplementedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 

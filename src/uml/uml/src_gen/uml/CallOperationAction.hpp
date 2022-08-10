@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API CallOperationAction: virtual public CallAction
+	class UML_API CallOperationAction : virtual public CallAction
 	{
 		public:
  			CallOperationAction(const CallOperationAction &) {}

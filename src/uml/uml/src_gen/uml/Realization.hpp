@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Realization: virtual public Abstraction
+	class UML_API Realization : virtual public Abstraction
 	{
 		public:
  			Realization(const Realization &) {}

@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class UML_API PrimitiveType: virtual public DataType
+	class UML_API PrimitiveType : virtual public DataType
 	{
 		public:
  			PrimitiveType(const PrimitiveType &) {}

@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API StructuredActivityNode: virtual public Action, virtual public ActivityGroup, virtual public Namespace
+	class UML_API StructuredActivityNode : virtual public Action, virtual public ActivityGroup, virtual public Namespace
 	{
 		public:
  			StructuredActivityNode(const StructuredActivityNode &) {}

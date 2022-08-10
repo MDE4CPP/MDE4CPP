@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -396,10 +396,10 @@ std::shared_ptr<Any> SlotImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningInstance().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS); //2175
+			return eEcoreAny(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS); //2175
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
-			return eAnyBag(getValue(),uml::umlPackage::VALUESPECIFICATION_CLASS); //2174
+			return eEcoreContainerAny(getValue(),uml::umlPackage::VALUESPECIFICATION_CLASS); //2174
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -57,7 +57,7 @@ namespace uml
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 	*/
 	
-	class UML_API Factory: virtual public Element
+	class UML_API Factory : virtual public Element
 	{
 		public:
  			Factory(const Factory &) {}

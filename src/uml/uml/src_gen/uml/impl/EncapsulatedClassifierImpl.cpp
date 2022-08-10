@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -522,7 +522,7 @@ std::shared_ptr<Any> EncapsulatedClassifierImpl::eGet(int featureID, bool resolv
 	switch(featureID)
 	{
 		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
-			return eAnyBag(getOwnedPort(),uml::umlPackage::PORT_CLASS); //8342
+			return eEcoreContainerAny(getOwnedPort(),uml::umlPackage::PORT_CLASS); //8342
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -559,7 +559,7 @@ std::shared_ptr<Any> EncapsulatedClassifierImpl::eInvoke(int operationID, std::s
 		case umlPackage::ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS:
 		{
 			std::shared_ptr<Bag<uml::Port>> resultList = this->getOwnedPorts();
-			return eAnyBag(resultList,uml::umlPackage::PORT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PORT_CLASS);
 			break;
 		}
 

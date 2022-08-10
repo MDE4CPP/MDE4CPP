@@ -71,7 +71,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API RaiseExceptionAction: virtual public Action
+	class UML_API RaiseExceptionAction : virtual public Action
 	{
 		public:
  			RaiseExceptionAction(const RaiseExceptionAction &) {}

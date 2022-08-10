@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -404,7 +404,7 @@ std::shared_ptr<Any> IncludeImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();
-			return eAnyObject(returnValue,uml::umlPackage::USECASE_CLASS); //11213
+			return eEcoreAny(returnValue,uml::umlPackage::USECASE_CLASS); //11213
 		}
 	}
 	std::shared_ptr<Any> result;

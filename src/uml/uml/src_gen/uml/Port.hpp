@@ -76,7 +76,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API Port: virtual public Property
+	class UML_API Port : virtual public Property
 	{
 		public:
  			Port(const Port &) {}

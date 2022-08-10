@@ -66,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityGroup: virtual public NamedElement
+	class UML_API ActivityGroup : virtual public NamedElement
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}

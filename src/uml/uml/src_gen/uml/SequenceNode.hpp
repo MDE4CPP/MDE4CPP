@@ -72,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API SequenceNode: virtual public StructuredActivityNode
+	class UML_API SequenceNode : virtual public StructuredActivityNode
 	{
 		public:
  			SequenceNode(const SequenceNode &) {}

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -664,13 +664,13 @@ std::shared_ptr<Any> ConditionalNodeImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return eAnyBag(getClause(),uml::umlPackage::CLAUSE_CLASS); //4944
+			return eEcoreContainerAny(getClause(),uml::umlPackage::CLAUSE_CLASS); //4944
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4945
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 			return eAny(getIsDeterminate(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4946
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //4947
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //4947
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReadExtentAction: virtual public Action
+	class UML_API ReadExtentAction : virtual public Action
 	{
 		public:
  			ReadExtentAction(const ReadExtentAction &) {}

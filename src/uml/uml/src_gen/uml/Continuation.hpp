@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API Continuation: virtual public InteractionFragment
+	class UML_API Continuation : virtual public InteractionFragment
 	{
 		public:
  			Continuation(const Continuation &) {}

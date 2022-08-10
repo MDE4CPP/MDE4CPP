@@ -21,8 +21,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -389,9 +389,9 @@ std::shared_ptr<Any> ParameterSetImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-			return eAnyBag(getCondition(),uml::umlPackage::CONSTRAINT_CLASS); //1779
+			return eEcoreContainerAny(getCondition(),uml::umlPackage::CONSTRAINT_CLASS); //1779
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-			return eAnyBag(getParameter(),uml::umlPackage::PARAMETER_CLASS); //17710
+			return eEcoreContainerAny(getParameter(),uml::umlPackage::PARAMETER_CLASS); //17710
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

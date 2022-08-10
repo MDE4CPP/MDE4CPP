@@ -89,7 +89,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Stereotype: virtual public Class
+	class UML_API Stereotype : virtual public Class
 	{
 		public:
  			Stereotype(const Stereotype &) {}

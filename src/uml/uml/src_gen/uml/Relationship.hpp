@@ -54,7 +54,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Relationship: virtual public Element
+	class UML_API Relationship : virtual public Element
 	{
 		public:
  			Relationship(const Relationship &) {}

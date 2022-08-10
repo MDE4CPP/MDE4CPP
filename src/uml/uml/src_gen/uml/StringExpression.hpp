@@ -69,7 +69,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API StringExpression: virtual public Expression, virtual public TemplateableElement
+	class UML_API StringExpression : virtual public Expression, virtual public TemplateableElement
 	{
 		public:
  			StringExpression(const StringExpression &) {}

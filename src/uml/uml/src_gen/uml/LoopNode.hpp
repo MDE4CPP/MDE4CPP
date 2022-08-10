@@ -75,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API LoopNode: virtual public StructuredActivityNode
+	class UML_API LoopNode : virtual public StructuredActivityNode
 	{
 		public:
  			LoopNode(const LoopNode &) {}

@@ -56,7 +56,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API PackageMerge: virtual public DirectedRelationship
+	class UML_API PackageMerge : virtual public DirectedRelationship
 	{
 		public:
  			PackageMerge(const PackageMerge &) {}
