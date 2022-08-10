@@ -109,14 +109,16 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
-			[let anyBagRequired : Boolean = ((aProperty.upper <> 1) and not(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration)))]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
-			return [if(anyBagRequired)]eAnyBag[else]eAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(aProperty.upper = 1)]false[else]true[/if][/if]);
-			[/let]
+			[if(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
+			[else]
+			return [if(aProperty.upper = 1)]eUMLContainerAny[else]eUMLAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			[/if]
 		[/for]
 		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
-			return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/], false);
+			return eUMLAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/]);
 		[/for]
 	}
 
@@ -222,19 +224,39 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 			[aProperty.type.generateCppType(false)/] valueToAdd;
 			if(value->isContainer())
 			{
+				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
 				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
-				if(container)
+				if(container && !(container->empty()))
 				{
-					if(!(container->empty()))
-					{
 						// If a non-empty container is passed, the first value of the container will be added to the property
 						valueToAdd = [if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if];
+				}
+				[else]
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(firstElement);
 					}
 				}
+				[/if]
 			}
 			else
 			{
+				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
 				valueToAdd = value->get<[aProperty.type.generateCppType(false)/]>();
+				[else]
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(element);
+				}
+				[/if]
 			}
 
 			[if (aProperty.isUnique)]
