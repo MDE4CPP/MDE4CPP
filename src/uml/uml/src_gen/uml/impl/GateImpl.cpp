@@ -354,12 +354,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->actual_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -370,12 +390,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_gate_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_gate_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->actual_gate_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -386,12 +426,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'formal_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'formal_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->formal_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -414,12 +474,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'inside_cf_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'inside_cf_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->inside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -430,12 +510,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'inside_cf_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'inside_cf_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->inside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -470,7 +570,28 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<uml::Gate> incoming_param_gateToMatch;
 			Bag<Any>::const_iterator incoming_param_gateToMatch_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_gateToMatch = (*incoming_param_gateToMatch_arguments_citer)->get<std::shared_ptr<uml::Gate> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_gateToMatch_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_gateToMatch = std::dynamic_pointer_cast<uml::Gate>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'gateToMatch'. Failed to invoke operation 'matches'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'gateToMatch'. Failed to invoke operation 'matches'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->matches(incoming_param_gateToMatch),0,false);
 			break;
 		}
@@ -481,12 +602,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outside_cf_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outside_cf_gate_distinguishable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->outside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -497,12 +638,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outside_cf_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outside_cf_matched'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->outside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

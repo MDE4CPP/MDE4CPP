@@ -537,64 +537,141 @@ bool ExtendImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
 		{
-			// CAST Any to uml::Constraint
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _condition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setCondition(_condition); //9612
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-		{
-			// CAST Any to uml::UseCase
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _extendedCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtendedCase(_extendedCase); //9613
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-		{
-			// CAST Any to uml::UseCase
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _extension = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtension(_extension); //9615
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-		{
-			// CAST Any to Bag<uml::ExtensionPoint>
-			if((newValue->isContainer()) && (uml::umlPackage::EXTENSIONPOINT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocationList= newValue->get<std::shared_ptr<Bag<uml::ExtensionPoint>>>();
-					std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation=getExtensionLocation();
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *_extensionLocation)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Constraint> _condition = std::dynamic_pointer_cast<uml::Constraint>(eObject);
+					if(_condition)
 					{
-						if (extensionLocationList->find(indexExtensionLocation) == -1)
-						{
-							_extensionLocation->erase(indexExtensionLocation);
-						}
+						setCondition(_condition); //9612
 					}
-
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *extensionLocationList)
+					else
 					{
-						if (_extensionLocation->find(indexExtensionLocation) == -1)
-						{
-							_extensionLocation->add(indexExtensionLocation);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'condition'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'condition'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::UseCase> _extendedCase = std::dynamic_pointer_cast<uml::UseCase>(eObject);
+					if(_extendedCase)
+					{
+						setExtendedCase(_extendedCase); //9613
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'extendedCase'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'extendedCase'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::UseCase> _extension = std::dynamic_pointer_cast<uml::UseCase>(eObject);
+					if(_extension)
+					{
+						setExtension(_extension); //9615
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'extension'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'extension'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = getExtensionLocation();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::ExtensionPoint> valueToAdd = std::dynamic_pointer_cast<uml::ExtensionPoint>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extensionLocation->find(valueToAdd) == -1)
+								{
+									_extensionLocation->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extensionLocation'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'extensionLocation'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -624,12 +701,32 @@ std::shared_ptr<Any> ExtendImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'extension_points'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'extension_points'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->extension_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

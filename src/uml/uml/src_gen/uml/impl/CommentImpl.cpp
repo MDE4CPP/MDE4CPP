@@ -319,47 +319,62 @@ bool CommentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
-			// CAST Any to Bag<uml::Element>
-			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Element>> annotatedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
-					std::shared_ptr<Bag<uml::Element>> _annotatedElement=getAnnotatedElement();
-					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *_annotatedElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (annotatedElementList->find(indexAnnotatedElement) == -1)
+						std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_annotatedElement->erase(indexAnnotatedElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *annotatedElementList)
-					{
-						if (_annotatedElement->find(indexAnnotatedElement) == -1)
-						{
-							_annotatedElement->add(indexAnnotatedElement);
+							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_annotatedElement->find(valueToAdd) == -1)
+								{
+									_annotatedElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'annotatedElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'annotatedElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
 		{
-			// CAST Any to std::string
-			std::string _body = newValue->get<std::string>();
-			setBody(_body); //454
-			return true;
+			try
+			{
+				std::string _body = newValue->get<std::string>();
+				setBody(_body); //454
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'body'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

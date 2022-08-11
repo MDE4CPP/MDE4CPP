@@ -389,10 +389,17 @@ bool LiteralRealImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to double
-			double _value = newValue->get<double>();
-			setValue(_value); //14015
-			return true;
+			try
+			{
+				double _value = newValue->get<double>();
+				setValue(_value); //14015
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

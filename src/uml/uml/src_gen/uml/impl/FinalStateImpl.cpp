@@ -397,12 +397,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->cannot_reference_submachine(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -413,12 +433,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_entry_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -429,12 +469,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_exit_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -445,12 +505,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_outgoing_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -461,12 +541,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_regions'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_regions'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_regions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -477,12 +577,32 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_state_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

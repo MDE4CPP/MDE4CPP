@@ -629,84 +629,107 @@ bool ExpansionRegionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			// CAST Any to Bag<uml::ExpansionNode>
-			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
-					std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement=getInputElement();
-					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *_inputElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (inputElementList->find(indexInputElement) == -1)
+						std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_inputElement->erase(indexInputElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *inputElementList)
-					{
-						if (_inputElement->find(indexInputElement) == -1)
-						{
-							_inputElement->add(indexInputElement);
+							std::shared_ptr<uml::ExpansionNode> valueToAdd = std::dynamic_pointer_cast<uml::ExpansionNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_inputElement->find(valueToAdd) == -1)
+								{
+									_inputElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
-			// CAST Any to uml::ExpansionKind
-			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
-			setMode(_mode); //9444
-			return true;
+			try
+			{
+				uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
+				setMode(_mode); //9444
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'mode'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			// CAST Any to Bag<uml::ExpansionNode>
-			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
-					std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement=getOutputElement();
-					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *_outputElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (outputElementList->find(indexOutputElement) == -1)
+						std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_outputElement->erase(indexOutputElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *outputElementList)
-					{
-						if (_outputElement->find(indexOutputElement) == -1)
-						{
-							_outputElement->add(indexOutputElement);
+							std::shared_ptr<uml::ExpansionNode> valueToAdd = std::dynamic_pointer_cast<uml::ExpansionNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_outputElement->find(valueToAdd) == -1)
+								{
+									_outputElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outputElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'outputElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

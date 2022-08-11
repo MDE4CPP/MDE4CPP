@@ -636,89 +636,153 @@ bool OpaqueActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _body = getBody();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				{
+					if (valueToAdd)
+					{
+						if(_body->find(valueToAdd) == -1)
+						{
+							_body->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'body'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			// CAST Any to Bag<uml::InputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (inputValueList->find(indexInputValue) == -1)
+						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_inputValue->erase(indexInputValue);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
-					{
-						if (_inputValue->find(indexInputValue) == -1)
-						{
-							_inputValue->add(indexInputValue);
+							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_inputValue->find(valueToAdd) == -1)
+								{
+									_inputValue->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _language = getLanguage();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				{
+					if (valueToAdd)
+					{
+						if(_language->find(valueToAdd) == -1)
+						{
+							_language->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'language'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
-			// CAST Any to Bag<uml::OutputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::OutputPin>> outputValueList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _outputValue=getOutputValue();
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *_outputValue)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (outputValueList->find(indexOutputValue) == -1)
+						std::shared_ptr<Bag<uml::OutputPin>> _outputValue = getOutputValue();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_outputValue->erase(indexOutputValue);
-						}
-					}
-
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *outputValueList)
-					{
-						if (_outputValue->find(indexOutputValue) == -1)
-						{
-							_outputValue->add(indexOutputValue);
+							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_outputValue->find(valueToAdd) == -1)
+								{
+									_outputValue->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outputValue'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'outputValue'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -741,12 +805,32 @@ std::shared_ptr<Any> OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'language_body_size'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'language_body_size'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

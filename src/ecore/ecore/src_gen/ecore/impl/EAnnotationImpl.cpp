@@ -467,100 +467,152 @@ bool EAnnotationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
 		{
-			// CAST Any to Bag<ecore::EObject>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EObject>> contentsList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-					std::shared_ptr<Bag<ecore::EObject>> _contents=getContents();
-					for(const std::shared_ptr<ecore::EObject> indexContents: *_contents)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (contentsList->find(indexContents) == -1)
+						std::shared_ptr<Bag<ecore::EObject>> _contents = getContents();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_contents->erase(indexContents);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EObject> indexContents: *contentsList)
-					{
-						if (_contents->find(indexContents) == -1)
-						{
-							_contents->add(indexContents);
+							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_contents->find(valueToAdd) == -1)
+								{
+									_contents->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'contents'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'contents'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 		{
-			// CAST Any to std::map < std::string, std::string>
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<std::map < std::string, std::string>> _details = std::dynamic_pointer_cast<std::map < std::string, std::string>>(_temp);
-			setDetails(_details); //28			
-			return true;
+			try
+			{
+				std::shared_ptr<std::map < std::string, std::string>> _details = newValue->get<std::shared_ptr<std::map < std::string, std::string>>>();
+				setDetails(_details); //28
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'details'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
-			// CAST Any to ecore::EModelElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EModelElement> _eModelElement = std::dynamic_pointer_cast<ecore::EModelElement>(_temp);
-			setEModelElement(_eModelElement); //25
-			return true;
-		}
-		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
-		{
-			// CAST Any to Bag<ecore::EObject>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EObject>> referencesList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-					std::shared_ptr<Bag<ecore::EObject>> _references=getReferences();
-					for(const std::shared_ptr<ecore::EObject> indexReferences: *_references)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EModelElement> _eModelElement = std::dynamic_pointer_cast<ecore::EModelElement>(eObject);
+					if(_eModelElement)
 					{
-						if (referencesList->find(indexReferences) == -1)
-						{
-							_references->erase(indexReferences);
-						}
+						setEModelElement(_eModelElement); //25
 					}
-
-					for(const std::shared_ptr<ecore::EObject> indexReferences: *referencesList)
+					else
 					{
-						if (_references->find(indexReferences) == -1)
-						{
-							_references->add(indexReferences);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eModelElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eModelElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_references->find(valueToAdd) == -1)
+								{
+									_references->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'references'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'references'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 		{
-			// CAST Any to std::string
-			std::string _source = newValue->get<std::string>();
-			setSource(_source); //24
-			return true;
+			try
+			{
+				std::string _source = newValue->get<std::string>();
+				setSource(_source); //24
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'source'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

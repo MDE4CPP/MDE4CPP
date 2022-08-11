@@ -261,7 +261,28 @@ std::shared_ptr<Any> FactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_metaClass;
 			Bag<Any>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_metaClass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_metaClass = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'metaClass'. Failed to invoke operation 'create'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'metaClass'. Failed to invoke operation 'create'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->create(incoming_param_metaClass), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}

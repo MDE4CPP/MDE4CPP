@@ -563,40 +563,48 @@ bool CollaborationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			// CAST Any to Bag<uml::ConnectableElement>
-			if((newValue->isContainer()) && (uml::umlPackage::CONNECTABLEELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList= newValue->get<std::shared_ptr<Bag<uml::ConnectableElement>>>();
-					std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole=getCollaborationRole();
-					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *_collaborationRole)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (collaborationRoleList->find(indexCollaborationRole) == -1)
+						std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_collaborationRole->erase(indexCollaborationRole);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *collaborationRoleList)
-					{
-						if (_collaborationRole->find(indexCollaborationRole) == -1)
-						{
-							_collaborationRole->add(indexCollaborationRole);
+							std::shared_ptr<uml::ConnectableElement> valueToAdd = std::dynamic_pointer_cast<uml::ConnectableElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_collaborationRole->find(valueToAdd) == -1)
+								{
+									_collaborationRole->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'collaborationRole'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'collaborationRole'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

@@ -338,24 +338,45 @@ bool ImageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
-			// CAST Any to std::string
-			std::string _content = newValue->get<std::string>();
-			setContent(_content); //1113
-			return true;
+			try
+			{
+				std::string _content = newValue->get<std::string>();
+				setContent(_content); //1113
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'content'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
-			// CAST Any to std::string
-			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //1114
-			return true;
+			try
+			{
+				std::string _format = newValue->get<std::string>();
+				setFormat(_format); //1114
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'format'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
-			// CAST Any to std::string
-			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //1115
-			return true;
+			try
+			{
+				std::string _location = newValue->get<std::string>();
+				setLocation(_location); //1115
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'location'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

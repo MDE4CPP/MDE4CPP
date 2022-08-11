@@ -521,40 +521,48 @@ bool EnumerationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
-			// CAST Any to Bag<uml::EnumerationLiteral>
-			if((newValue->isContainer()) && (uml::umlPackage::ENUMERATIONLITERAL_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList= newValue->get<std::shared_ptr<Bag<uml::EnumerationLiteral>>>();
-					std::shared_ptr<Bag<uml::EnumerationLiteral>> _ownedLiteral=getOwnedLiteral();
-					for(const std::shared_ptr<uml::EnumerationLiteral> indexOwnedLiteral: *_ownedLiteral)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedLiteralList->find(indexOwnedLiteral) == -1)
+						std::shared_ptr<Bag<uml::EnumerationLiteral>> _ownedLiteral = getOwnedLiteral();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedLiteral->erase(indexOwnedLiteral);
-						}
-					}
-
-					for(const std::shared_ptr<uml::EnumerationLiteral> indexOwnedLiteral: *ownedLiteralList)
-					{
-						if (_ownedLiteral->find(indexOwnedLiteral) == -1)
-						{
-							_ownedLiteral->add(indexOwnedLiteral);
+							std::shared_ptr<uml::EnumerationLiteral> valueToAdd = std::dynamic_pointer_cast<uml::EnumerationLiteral>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedLiteral->find(valueToAdd) == -1)
+								{
+									_ownedLiteral->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedLiteral'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedLiteral'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -577,12 +585,32 @@ std::shared_ptr<Any> EnumerationImpl::eInvoke(int operationID, std::shared_ptr<B
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'immutable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'immutable'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->immutable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

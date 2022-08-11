@@ -757,91 +757,180 @@ bool ParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
-			// CAST Any to uml::Behavior
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //17427
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-		{
-			// CAST Any to std::string
-			std::string _default = newValue->get<std::string>();
-			setDefault(_default); //17419
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setDefaultValue(_defaultValue); //17420
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-		{
-			// CAST Any to uml::ParameterDirectionKind
-			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
-			setDirection(_direction); //17421
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-		{
-			// CAST Any to uml::ParameterEffectKind
-			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
-			setEffect(_effect); //17422
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-		{
-			// CAST Any to bool
-			bool _isException = newValue->get<bool>();
-			setIsException(_isException); //17423
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-		{
-			// CAST Any to bool
-			bool _isStream = newValue->get<bool>();
-			setIsStream(_isStream); //17424
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-		{
-			// CAST Any to Bag<uml::ParameterSet>
-			if((newValue->isContainer()) && (uml::umlPackage::PARAMETERSET_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ParameterSet>> parameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
-					std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet=getParameterSet();
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *_parameterSet)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(eObject);
+					if(_behavior)
 					{
-						if (parameterSetList->find(indexParameterSet) == -1)
-						{
-							_parameterSet->erase(indexParameterSet);
-						}
+						setBehavior(_behavior); //17427
 					}
-
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *parameterSetList)
+					else
 					{
-						if (_parameterSet->find(indexParameterSet) == -1)
-						{
-							_parameterSet->add(indexParameterSet);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'behavior'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'behavior'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
+		{
+			try
+			{
+				std::string _default = newValue->get<std::string>();
+				setDefault(_default); //17419
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'default'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_defaultValue)
+					{
+						setDefaultValue(_defaultValue); //17420
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
+		{
+			try
+			{
+				uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
+				setDirection(_direction); //17421
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'direction'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
+		{
+			try
+			{
+				uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
+				setEffect(_effect); //17422
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'effect'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
+		{
+			try
+			{
+				bool _isException = newValue->get<bool>();
+				setIsException(_isException); //17423
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isException'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
+		{
+			try
+			{
+				bool _isStream = newValue->get<bool>();
+				setIsStream(_isStream); //17424
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isStream'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_parameterSet->find(valueToAdd) == -1)
+								{
+									_parameterSet->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'parameterSet'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'parameterSet'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -871,12 +960,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'connector_end'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'connector_end'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -887,12 +996,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'in_and_out'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'in_and_out'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -909,12 +1038,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_exception'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_exception'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -925,12 +1074,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'object_effect'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'object_effect'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -941,12 +1110,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'reentrant_behaviors'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'reentrant_behaviors'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -957,7 +1146,17 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			bool incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
 		}
@@ -968,7 +1167,17 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			int incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
 		}
@@ -985,7 +1194,17 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			double incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<double >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			this->setRealDefaultValue(incoming_param_value);
 			break;
 		}
@@ -996,7 +1215,17 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::string incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			this->setStringDefaultValue(incoming_param_value);
 			break;
 		}
@@ -1007,7 +1236,17 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			int incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
 		}
@@ -1018,12 +1257,32 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'stream_and_exception'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'stream_and_exception'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

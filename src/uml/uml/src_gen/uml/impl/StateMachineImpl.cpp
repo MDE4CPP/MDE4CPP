@@ -799,151 +799,183 @@ bool StateMachineImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			// CAST Any to Bag<uml::Pseudostate>
-			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
-					std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint=getConnectionPoint();
-					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *_connectionPoint)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (connectionPointList->find(indexConnectionPoint) == -1)
+						std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint = getConnectionPoint();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_connectionPoint->erase(indexConnectionPoint);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *connectionPointList)
-					{
-						if (_connectionPoint->find(indexConnectionPoint) == -1)
-						{
-							_connectionPoint->add(indexConnectionPoint);
+							std::shared_ptr<uml::Pseudostate> valueToAdd = std::dynamic_pointer_cast<uml::Pseudostate>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_connectionPoint->find(valueToAdd) == -1)
+								{
+									_connectionPoint->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'connectionPoint'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'connectionPoint'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
-			// CAST Any to Bag<uml::StateMachine>
-			if((newValue->isContainer()) && (uml::umlPackage::STATEMACHINE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList= newValue->get<std::shared_ptr<Bag<uml::StateMachine>>>();
-					std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine=getExtendedStateMachine();
-					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *_extendedStateMachine)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (extendedStateMachineList->find(indexExtendedStateMachine) == -1)
+						std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = getExtendedStateMachine();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_extendedStateMachine->erase(indexExtendedStateMachine);
-						}
-					}
-
-					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *extendedStateMachineList)
-					{
-						if (_extendedStateMachine->find(indexExtendedStateMachine) == -1)
-						{
-							_extendedStateMachine->add(indexExtendedStateMachine);
+							std::shared_ptr<uml::StateMachine> valueToAdd = std::dynamic_pointer_cast<uml::StateMachine>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extendedStateMachine->find(valueToAdd) == -1)
+								{
+									_extendedStateMachine->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extendedStateMachine'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'extendedStateMachine'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
-			// CAST Any to Bag<uml::Region>
-			if((newValue->isContainer()) && (uml::umlPackage::REGION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
-					std::shared_ptr<Bag<uml::Region>> _region=getRegion();
-					for(const std::shared_ptr<uml::Region> indexRegion: *_region)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (regionList->find(indexRegion) == -1)
+						std::shared_ptr<Bag<uml::Region>> _region = getRegion();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_region->erase(indexRegion);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Region> indexRegion: *regionList)
-					{
-						if (_region->find(indexRegion) == -1)
-						{
-							_region->add(indexRegion);
+							std::shared_ptr<uml::Region> valueToAdd = std::dynamic_pointer_cast<uml::Region>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_region->find(valueToAdd) == -1)
+								{
+									_region->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'region'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'region'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
-			// CAST Any to Bag<uml::State>
-			if((newValue->isContainer()) && (uml::umlPackage::STATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::State>> submachineStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
-					std::shared_ptr<Bag<uml::State>> _submachineState=getSubmachineState();
-					for(const std::shared_ptr<uml::State> indexSubmachineState: *_submachineState)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (submachineStateList->find(indexSubmachineState) == -1)
+						std::shared_ptr<Bag<uml::State>> _submachineState = getSubmachineState();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_submachineState->erase(indexSubmachineState);
-						}
-					}
-
-					for(const std::shared_ptr<uml::State> indexSubmachineState: *submachineStateList)
-					{
-						if (_submachineState->find(indexSubmachineState) == -1)
-						{
-							_submachineState->add(indexSubmachineState);
+							std::shared_ptr<uml::State> valueToAdd = std::dynamic_pointer_cast<uml::State>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_submachineState->find(valueToAdd) == -1)
+								{
+									_submachineState->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'submachineState'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'submachineState'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -966,12 +998,54 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
 			Bag<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s1_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s1 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 's1'. Failed to invoke operation 'LCA'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's1'. Failed to invoke operation 'LCA'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
 			Bag<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s2_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s2 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 's2'. Failed to invoke operation 'LCA'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's2'. Failed to invoke operation 'LCA'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS);
 			break;
 		}
@@ -982,12 +1056,54 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_v1;
 			Bag<Any>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_v1_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_v1 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'v1'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'v1'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'v2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
 			Bag<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_v2_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_v2 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'v2'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'v2'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS);
 			break;
 		}
@@ -998,12 +1114,54 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
 			Bag<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s1_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s1 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 's1'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's1'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
 			Bag<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s2_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s2 = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 's2'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's2'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2),0,false);
 			break;
 		}
@@ -1014,12 +1172,32 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'classifier_context'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'classifier_context'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1030,12 +1208,32 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'connection_points'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'connection_points'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1046,12 +1244,32 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'context_classifier'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'context_classifier'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1062,12 +1280,32 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'method'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'method'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

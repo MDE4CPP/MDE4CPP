@@ -255,10 +255,17 @@ bool EObjectAnyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EOBJECTANY_ATTRIBUTE_ANY:
 		{
-			// CAST Any to Any
-			std::shared_ptr<Any> _any = newValue->get<std::shared_ptr<Any>>();
-			setAny(_any); //413
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _any = newValue->get<std::shared_ptr<Any>>();
+				setAny(_any); //413
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'any'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

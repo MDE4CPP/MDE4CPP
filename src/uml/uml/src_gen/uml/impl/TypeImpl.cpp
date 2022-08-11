@@ -357,11 +357,34 @@ bool TypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
-			// CAST Any to uml::Package
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setPackage(_package); //24412
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(eObject);
+					if(_package)
+					{
+						setPackage(_package); //24412
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'package'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'package'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -384,7 +407,28 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			std::shared_ptr<uml::Type> incoming_param_other;
 			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_other_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_other = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->conformsTo(incoming_param_other),0,false);
 			break;
 		}
@@ -395,57 +439,178 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
 			Bag<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
 			Bag<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
+			try
+			{
+				incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
 			Bag<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
 			Bag<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
 			Bag<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
-			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end1Type'
 			//parameter 5
 			std::shared_ptr<uml::Type> incoming_param_end1Type;
 			Bag<Any>::const_iterator incoming_param_end1Type_arguments_citer = std::next(arguments->begin(), 5);
-			incoming_param_end1Type = (*incoming_param_end1Type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end1Type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end1Type = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
 			Bag<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
-			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
 			Bag<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
-			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
+			try
+			{
+				incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
 			Bag<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
-			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
 			Bag<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
-			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
 			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
-			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}

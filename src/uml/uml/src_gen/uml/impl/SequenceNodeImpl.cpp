@@ -539,40 +539,48 @@ bool SequenceNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
-			// CAST Any to Bag<uml::ExecutableNode>
-			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode=getExecutableNode();
-					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *_executableNode)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (executableNodeList->find(indexExecutableNode) == -1)
+						std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode = getExecutableNode();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_executableNode->erase(indexExecutableNode);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *executableNodeList)
-					{
-						if (_executableNode->find(indexExecutableNode) == -1)
-						{
-							_executableNode->add(indexExecutableNode);
+							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_executableNode->find(valueToAdd) == -1)
+								{
+									_executableNode->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'executableNode'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'executableNode'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

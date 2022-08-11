@@ -389,10 +389,17 @@ bool LiteralIntegerImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to int
-			int _value = newValue->get<int>();
-			setValue(_value); //13815
-			return true;
+			try
+			{
+				int _value = newValue->get<int>();
+				setValue(_value); //13815
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

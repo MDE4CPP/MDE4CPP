@@ -432,61 +432,90 @@ bool EClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// CAST Any to Any
-			std::shared_ptr<Any> _defaultValue = newValue->get<std::shared_ptr<Any>>();
-			setDefaultValue(_defaultValue); //147
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _defaultValue = newValue->get<std::shared_ptr<Any>>();
+				setDefaultValue(_defaultValue); //147
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			// CAST Any to Bag<ecore::ETypeParameter>
-			if((newValue->isContainer()) && (ecore::ecorePackage::ETYPEPARAMETER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();
-					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eTypeParametersList->find(indexETypeParameters) == -1)
+						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eTypeParameters->erase(indexETypeParameters);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
-					{
-						if (_eTypeParameters->find(indexETypeParameters) == -1)
-						{
-							_eTypeParameters->add(indexETypeParameters);
+							std::shared_ptr<ecore::ETypeParameter> valueToAdd = std::dynamic_pointer_cast<ecore::ETypeParameter>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eTypeParameters->find(valueToAdd) == -1)
+								{
+									_eTypeParameters->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eTypeParameters'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eTypeParameters'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:
 		{
-			// CAST Any to std::string
-			std::string _instanceClassName = newValue->get<std::string>();
-			setInstanceClassName(_instanceClassName); //145
-			return true;
+			try
+			{
+				std::string _instanceClassName = newValue->get<std::string>();
+				setInstanceClassName(_instanceClassName); //145
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'instanceClassName'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME:
 		{
-			// CAST Any to std::string
-			std::string _instanceTypeName = newValue->get<std::string>();
-			setInstanceTypeName(_instanceTypeName); //148
-			return true;
+			try
+			{
+				std::string _instanceTypeName = newValue->get<std::string>();
+				setInstanceTypeName(_instanceTypeName); //148
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'instanceTypeName'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -515,7 +544,17 @@ std::shared_ptr<Any> EClassifierImpl::eInvoke(int operationID, std::shared_ptr<B
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_object;
 			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'object'. Failed to invoke operation 'isInstance'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->isInstance(incoming_param_object),0,false);
 			break;
 		}

@@ -480,54 +480,135 @@ bool ETypedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
 		{
-			// CAST Any to ecore::EGenericType
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EGenericType> _eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
-			setEGenericType(_eGenericType); //5612
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EGenericType> _eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(eObject);
+					if(_eGenericType)
+					{
+						setEGenericType(_eGenericType); //5612
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eGenericType'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eGenericType'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
-			// CAST Any to ecore::EClassifier
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _eType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setEType(_eType); //5611
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EClassifier> _eType = std::dynamic_pointer_cast<ecore::EClassifier>(eObject);
+					if(_eType)
+					{
+						setEType(_eType); //5611
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eType'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eType'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 		{
-			// CAST Any to int
-			int _lowerBound = newValue->get<int>();
-			setLowerBound(_lowerBound); //567
-			return true;
+			try
+			{
+				int _lowerBound = newValue->get<int>();
+				setLowerBound(_lowerBound); //567
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'lowerBound'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
 		{
-			// CAST Any to bool
-			bool _ordered = newValue->get<bool>();
-			setOrdered(_ordered); //565
-			return true;
+			try
+			{
+				bool _ordered = newValue->get<bool>();
+				setOrdered(_ordered); //565
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'ordered'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
 		{
-			// CAST Any to bool
-			bool _required = newValue->get<bool>();
-			setRequired(_required); //5610
-			return true;
+			try
+			{
+				bool _required = newValue->get<bool>();
+				setRequired(_required); //5610
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'required'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
 		{
-			// CAST Any to bool
-			bool _unique = newValue->get<bool>();
-			setUnique(_unique); //566
-			return true;
+			try
+			{
+				bool _unique = newValue->get<bool>();
+				setUnique(_unique); //566
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'unique'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
 		{
-			// CAST Any to int
-			int _upperBound = newValue->get<int>();
-			setUpperBound(_upperBound); //568
-			return true;
+			try
+			{
+				int _upperBound = newValue->get<int>();
+				setUpperBound(_upperBound); //568
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'upperBound'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

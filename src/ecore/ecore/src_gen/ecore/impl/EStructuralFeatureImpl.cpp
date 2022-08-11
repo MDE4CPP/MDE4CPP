@@ -505,52 +505,101 @@ bool EStructuralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 		{
-			// CAST Any to bool
-			bool _changeable = newValue->get<bool>();
-			setChangeable(_changeable); //5313
-			return true;
+			try
+			{
+				bool _changeable = newValue->get<bool>();
+				setChangeable(_changeable); //5313
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'changeable'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// CAST Any to Any
-			std::shared_ptr<Any> _defaultValue = newValue->get<std::shared_ptr<Any>>();
-			setDefaultValue(_defaultValue); //5317
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _defaultValue = newValue->get<std::shared_ptr<Any>>();
+				setDefaultValue(_defaultValue); //5317
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 		{
-			// CAST Any to std::string
-			std::string _defaultValueLiteral = newValue->get<std::string>();
-			setDefaultValueLiteral(_defaultValueLiteral); //5316
-			return true;
+			try
+			{
+				std::string _defaultValueLiteral = newValue->get<std::string>();
+				setDefaultValueLiteral(_defaultValueLiteral); //5316
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'defaultValueLiteral'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 		{
-			// CAST Any to bool
-			bool _derived = newValue->get<bool>();
-			setDerived(_derived); //5319
-			return true;
+			try
+			{
+				bool _derived = newValue->get<bool>();
+				setDerived(_derived); //5319
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'derived'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 		{
-			// CAST Any to bool
-			bool _transient = newValue->get<bool>();
-			setTransient(_transient); //5315
-			return true;
+			try
+			{
+				bool _transient = newValue->get<bool>();
+				setTransient(_transient); //5315
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'transient'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 		{
-			// CAST Any to bool
-			bool _unsettable = newValue->get<bool>();
-			setUnsettable(_unsettable); //5318
-			return true;
+			try
+			{
+				bool _unsettable = newValue->get<bool>();
+				setUnsettable(_unsettable); //5318
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'unsettable'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 		{
-			// CAST Any to bool
-			bool _volatile = newValue->get<bool>();
-			setVolatile(_volatile); //5314
-			return true;
+			try
+			{
+				bool _volatile = newValue->get<bool>();
+				setVolatile(_volatile); //5314
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'volatile'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

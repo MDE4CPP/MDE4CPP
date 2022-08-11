@@ -365,11 +365,34 @@ bool VertexImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
-			// CAST Any to uml::Region
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setContainer(_container); //2549
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(eObject);
+					if(_container)
+					{
+						setContainer(_container); //2549
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'container'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'container'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -412,7 +435,28 @@ std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			//parameter 0
 			std::shared_ptr<uml::Region> incoming_param_r;
 			Bag<Any>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_r = (*incoming_param_r_arguments_citer)->get<std::shared_ptr<uml::Region> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_r_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_r = std::dynamic_pointer_cast<uml::Region>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->isContainedInRegion(incoming_param_r),0,false);
 			break;
 		}
@@ -423,7 +467,28 @@ std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			//parameter 0
 			std::shared_ptr<uml::State> incoming_param_s;
 			Bag<Any>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s = (*incoming_param_s_arguments_citer)->get<std::shared_ptr<uml::State> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s = std::dynamic_pointer_cast<uml::State>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->isContainedInState(incoming_param_s),0,false);
 			break;
 		}

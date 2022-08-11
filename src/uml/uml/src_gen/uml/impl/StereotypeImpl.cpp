@@ -644,40 +644,48 @@ bool StereotypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
-			// CAST Any to Bag<uml::Image>
-			if((newValue->isContainer()) && (uml::umlPackage::IMAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Image>> iconList= newValue->get<std::shared_ptr<Bag<uml::Image>>>();
-					std::shared_ptr<Bag<uml::Image>> _icon=getIcon();
-					for(const std::shared_ptr<uml::Image> indexIcon: *_icon)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (iconList->find(indexIcon) == -1)
+						std::shared_ptr<Bag<uml::Image>> _icon = getIcon();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_icon->erase(indexIcon);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Image> indexIcon: *iconList)
-					{
-						if (_icon->find(indexIcon) == -1)
-						{
-							_icon->add(indexIcon);
+							std::shared_ptr<uml::Image> valueToAdd = std::dynamic_pointer_cast<uml::Image>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_icon->find(valueToAdd) == -1)
+								{
+									_icon->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'icon'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'icon'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -700,12 +708,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'associationEndOwnership'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'associationEndOwnership'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -716,12 +744,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_multiplicity_multiple_extension'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_multiplicity_multiple_extension'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -732,12 +780,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_multiplicity_single_extension'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_multiplicity_single_extension'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -748,12 +816,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_upper_bound'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_upper_bound'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -764,12 +852,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binaryAssociationsOnly'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binaryAssociationsOnly'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -786,12 +894,43 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_metaclass;
 			Bag<Any>::const_iterator incoming_param_metaclass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_metaclass = (*incoming_param_metaclass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_metaclass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_metaclass = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'isRequired'
 			//parameter 1
 			bool incoming_param_isRequired;
 			Bag<Any>::const_iterator incoming_param_isRequired_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isRequired = (*incoming_param_isRequired_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isRequired = (*incoming_param_isRequired_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isRequired'. Failed to invoke operation 'createExtension'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
@@ -802,7 +941,17 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::string incoming_param_location;
 			Bag<Any>::const_iterator incoming_param_location_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_location = (*incoming_param_location_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_location = (*incoming_param_location_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'location'. Failed to invoke operation 'createIcon'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
@@ -813,12 +962,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::string incoming_param_format;
 			Bag<Any>::const_iterator incoming_param_format_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_format = (*incoming_param_format_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_format = (*incoming_param_format_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'format'. Failed to invoke operation 'createIcon'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'content'
 			//parameter 1
 			std::string incoming_param_content;
 			Bag<Any>::const_iterator incoming_param_content_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_content = (*incoming_param_content_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_content = (*incoming_param_content_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'content'. Failed to invoke operation 'createIcon'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
@@ -829,12 +998,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'generalize'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'generalize'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -871,7 +1060,17 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			bool incoming_param_localize;
 			Bag<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getKeyword'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->getKeyword(incoming_param_localize),0,false);
 			break;
 		}
@@ -882,12 +1081,32 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'name_not_clash'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'name_not_clash'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->name_not_clash(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

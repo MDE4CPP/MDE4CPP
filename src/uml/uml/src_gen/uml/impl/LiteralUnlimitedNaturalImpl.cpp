@@ -389,10 +389,17 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 	{
 		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to int
-			int _value = newValue->get<int>();
-			setValue(_value); //14315
-			return true;
+			try
+			{
+				int _value = newValue->get<int>();
+				setValue(_value); //14315
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

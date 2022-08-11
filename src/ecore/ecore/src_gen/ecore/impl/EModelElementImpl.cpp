@@ -324,40 +324,48 @@ bool EModelElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			// CAST Any to Bag<ecore::EAnnotation>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EANNOTATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList= newValue->get<std::shared_ptr<Bag<ecore::EAnnotation>>>();
-					std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations=getEAnnotations();
-					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *_eAnnotations)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eAnnotationsList->find(indexEAnnotations) == -1)
+						std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations = getEAnnotations();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eAnnotations->erase(indexEAnnotations);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *eAnnotationsList)
-					{
-						if (_eAnnotations->find(indexEAnnotations) == -1)
-						{
-							_eAnnotations->add(indexEAnnotations);
+							std::shared_ptr<ecore::EAnnotation> valueToAdd = std::dynamic_pointer_cast<ecore::EAnnotation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eAnnotations->find(valueToAdd) == -1)
+								{
+									_eAnnotations->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eAnnotations'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eAnnotations'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -380,7 +388,17 @@ std::shared_ptr<Any> EModelElementImpl::eInvoke(int operationID, std::shared_ptr
 			//parameter 0
 			std::string incoming_param_source;
 			Bag<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'source'. Failed to invoke operation 'getEAnnotation'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
 		}

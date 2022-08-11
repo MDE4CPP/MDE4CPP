@@ -411,10 +411,17 @@ bool ModelImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
-			// CAST Any to std::string
-			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //15328
-			return true;
+			try
+			{
+				std::string _viewpoint = newValue->get<std::string>();
+				setViewpoint(_viewpoint); //15328
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'viewpoint'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

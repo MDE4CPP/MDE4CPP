@@ -743,84 +743,107 @@ bool ComponentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 		{
-			// CAST Any to bool
-			bool _isIndirectlyInstantiated = newValue->get<bool>();
-			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4753
-			return true;
+			try
+			{
+				bool _isIndirectlyInstantiated = newValue->get<bool>();
+				setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4753
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isIndirectlyInstantiated'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			// CAST Any to Bag<uml::PackageableElement>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEABLEELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
-					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (packagedElementList->find(indexPackagedElement) == -1)
+						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_packagedElement->erase(indexPackagedElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
-					{
-						if (_packagedElement->find(indexPackagedElement) == -1)
-						{
-							_packagedElement->add(indexPackagedElement);
+							std::shared_ptr<uml::PackageableElement> valueToAdd = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_packagedElement->find(valueToAdd) == -1)
+								{
+									_packagedElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
-			// CAST Any to Bag<uml::ComponentRealization>
-			if((newValue->isContainer()) && (uml::umlPackage::COMPONENTREALIZATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ComponentRealization>> realizationList= newValue->get<std::shared_ptr<Bag<uml::ComponentRealization>>>();
-					std::shared_ptr<Bag<uml::ComponentRealization>> _realization=getRealization();
-					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *_realization)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (realizationList->find(indexRealization) == -1)
+						std::shared_ptr<Bag<uml::ComponentRealization>> _realization = getRealization();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_realization->erase(indexRealization);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *realizationList)
-					{
-						if (_realization->find(indexRealization) == -1)
-						{
-							_realization->add(indexRealization);
+							std::shared_ptr<uml::ComponentRealization> valueToAdd = std::dynamic_pointer_cast<uml::ComponentRealization>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_realization->find(valueToAdd) == -1)
+								{
+									_realization->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'realization'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'realization'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -843,12 +866,32 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
 			bool incoming_param_isAbstract;
 			Bag<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
@@ -859,7 +902,17 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
 		}
@@ -870,7 +923,17 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
@@ -881,7 +944,17 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
@@ -906,12 +979,32 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_nested_classifiers'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_nested_classifiers'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_nested_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -922,12 +1015,32 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_packaged_elements'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_packaged_elements'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->no_packaged_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

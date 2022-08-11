@@ -553,25 +553,62 @@ bool NamedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 		{
-			// CAST Any to std::string
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //1554
-			return true;
+			try
+			{
+				std::string _name = newValue->get<std::string>();
+				setName(_name); //1554
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'name'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
-			// CAST Any to uml::StringExpression
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setNameExpression(_nameExpression); //1555
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(eObject);
+					if(_nameExpression)
+					{
+						setNameExpression(_nameExpression); //1555
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'nameExpression'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'nameExpression'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
-			// CAST Any to uml::VisibilityKind
-			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //1558
-			return true;
+			try
+			{
+				uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
+				setVisibility(_visibility); //1558
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'visibility'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -608,7 +645,28 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_supplier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_supplier = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
@@ -619,7 +677,28 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_supplier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_supplier = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
 			break;
 		}
@@ -643,7 +722,17 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			bool incoming_param_localize;
 			Bag<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getLabel'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->getLabel(incoming_param_localize),0,false);
 			break;
 		}
@@ -660,12 +749,32 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_no_qualified_name'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_no_qualified_name'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -676,12 +785,32 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_qualified_name'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_qualified_name'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -692,12 +821,54 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_n;
 			Bag<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_n_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_n = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'ns'
 			//parameter 1
 			std::shared_ptr<uml::Namespace> incoming_param_ns;
 			Bag<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_ns = (*incoming_param_ns_arguments_citer)->get<std::shared_ptr<uml::Namespace> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_ns_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_ns = std::dynamic_pointer_cast<uml::Namespace>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
 			break;
 		}
@@ -714,12 +885,32 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility_needs_ownership'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility_needs_ownership'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

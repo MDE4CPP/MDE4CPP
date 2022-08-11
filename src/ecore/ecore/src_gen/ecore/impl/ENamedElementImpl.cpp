@@ -271,10 +271,17 @@ bool ENamedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
-			// CAST Any to std::string
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //394
-			return true;
+			try
+			{
+				std::string _name = newValue->get<std::string>();
+				setName(_name); //394
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'name'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

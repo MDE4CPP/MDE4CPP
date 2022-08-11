@@ -579,85 +579,124 @@ bool DeploymentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
-			// CAST Any to Bag<uml::DeploymentSpecification>
-			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList= newValue->get<std::shared_ptr<Bag<uml::DeploymentSpecification>>>();
-					std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration=getConfiguration();
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *_configuration)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (configurationList->find(indexConfiguration) == -1)
+						std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration = getConfiguration();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_configuration->erase(indexConfiguration);
-						}
-					}
-
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *configurationList)
-					{
-						if (_configuration->find(indexConfiguration) == -1)
-						{
-							_configuration->add(indexConfiguration);
+							std::shared_ptr<uml::DeploymentSpecification> valueToAdd = std::dynamic_pointer_cast<uml::DeploymentSpecification>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_configuration->find(valueToAdd) == -1)
+								{
+									_configuration->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'configuration'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'configuration'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			// CAST Any to Bag<uml::DeployedArtifact>
-			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYEDARTIFACT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList= newValue->get<std::shared_ptr<Bag<uml::DeployedArtifact>>>();
-					std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact=getDeployedArtifact();
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *_deployedArtifact)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (deployedArtifactList->find(indexDeployedArtifact) == -1)
+						std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_deployedArtifact->erase(indexDeployedArtifact);
-						}
-					}
-
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *deployedArtifactList)
-					{
-						if (_deployedArtifact->find(indexDeployedArtifact) == -1)
-						{
-							_deployedArtifact->add(indexDeployedArtifact);
+							std::shared_ptr<uml::DeployedArtifact> valueToAdd = std::dynamic_pointer_cast<uml::DeployedArtifact>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_deployedArtifact->find(valueToAdd) == -1)
+								{
+									_deployedArtifact->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'deployedArtifact'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'deployedArtifact'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
-			// CAST Any to uml::DeploymentTarget
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //6919
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(eObject);
+					if(_location)
+					{
+						setLocation(_location); //6919
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'location'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'location'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

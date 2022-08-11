@@ -359,40 +359,48 @@ bool DeploymentTargetImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
-			// CAST Any to Bag<uml::Deployment>
-			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Deployment>> deploymentList= newValue->get<std::shared_ptr<Bag<uml::Deployment>>>();
-					std::shared_ptr<Bag<uml::Deployment>> _deployment=getDeployment();
-					for(const std::shared_ptr<uml::Deployment> indexDeployment: *_deployment)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (deploymentList->find(indexDeployment) == -1)
+						std::shared_ptr<Bag<uml::Deployment>> _deployment = getDeployment();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_deployment->erase(indexDeployment);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Deployment> indexDeployment: *deploymentList)
-					{
-						if (_deployment->find(indexDeployment) == -1)
-						{
-							_deployment->add(indexDeployment);
+							std::shared_ptr<uml::Deployment> valueToAdd = std::dynamic_pointer_cast<uml::Deployment>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_deployment->find(valueToAdd) == -1)
+								{
+									_deployment->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'deployment'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'deployment'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

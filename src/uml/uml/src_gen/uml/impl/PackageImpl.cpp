@@ -1063,203 +1063,273 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
 		{
-			// CAST Any to std::string
-			std::string _URI = newValue->get<std::string>();
-			setURI(_URI); //17020
-			return true;
+			try
+			{
+				std::string _URI = newValue->get<std::string>();
+				setURI(_URI); //17020
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'URI'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
-			// CAST Any to Bag<uml::Package>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Package>> nestedPackageList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
-					std::shared_ptr<Bag<uml::Package>> _nestedPackage=getNestedPackage();
-					for(const std::shared_ptr<uml::Package> indexNestedPackage: *_nestedPackage)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (nestedPackageList->find(indexNestedPackage) == -1)
+						std::shared_ptr<Bag<uml::Package>> _nestedPackage = getNestedPackage();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_nestedPackage->erase(indexNestedPackage);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Package> indexNestedPackage: *nestedPackageList)
-					{
-						if (_nestedPackage->find(indexNestedPackage) == -1)
-						{
-							_nestedPackage->add(indexNestedPackage);
+							std::shared_ptr<uml::Package> valueToAdd = std::dynamic_pointer_cast<uml::Package>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_nestedPackage->find(valueToAdd) == -1)
+								{
+									_nestedPackage->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		{
-			// CAST Any to uml::Package
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _nestingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setNestingPackage(_nestingPackage); //17022
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Package> _nestingPackage = std::dynamic_pointer_cast<uml::Package>(eObject);
+					if(_nestingPackage)
+					{
+						setNestingPackage(_nestingPackage); //17022
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
-			// CAST Any to Bag<uml::Type>
-			if((newValue->isContainer()) && (uml::umlPackage::TYPE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Type>> ownedTypeList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
-					std::shared_ptr<Bag<uml::Type>> _ownedType=getOwnedType();
-					for(const std::shared_ptr<uml::Type> indexOwnedType: *_ownedType)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedTypeList->find(indexOwnedType) == -1)
+						std::shared_ptr<Bag<uml::Type>> _ownedType = getOwnedType();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedType->erase(indexOwnedType);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Type> indexOwnedType: *ownedTypeList)
-					{
-						if (_ownedType->find(indexOwnedType) == -1)
-						{
-							_ownedType->add(indexOwnedType);
+							std::shared_ptr<uml::Type> valueToAdd = std::dynamic_pointer_cast<uml::Type>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedType->find(valueToAdd) == -1)
+								{
+									_ownedType->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
-			// CAST Any to Bag<uml::PackageMerge>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEMERGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PackageMerge>> packageMergeList= newValue->get<std::shared_ptr<Bag<uml::PackageMerge>>>();
-					std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge=getPackageMerge();
-					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *_packageMerge)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (packageMergeList->find(indexPackageMerge) == -1)
+						std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge = getPackageMerge();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_packageMerge->erase(indexPackageMerge);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *packageMergeList)
-					{
-						if (_packageMerge->find(indexPackageMerge) == -1)
-						{
-							_packageMerge->add(indexPackageMerge);
+							std::shared_ptr<uml::PackageMerge> valueToAdd = std::dynamic_pointer_cast<uml::PackageMerge>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_packageMerge->find(valueToAdd) == -1)
+								{
+									_packageMerge->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			// CAST Any to Bag<uml::PackageableElement>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEABLEELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
-					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (packagedElementList->find(indexPackagedElement) == -1)
+						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_packagedElement->erase(indexPackagedElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
-					{
-						if (_packagedElement->find(indexPackagedElement) == -1)
-						{
-							_packagedElement->add(indexPackagedElement);
+							std::shared_ptr<uml::PackageableElement> valueToAdd = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_packagedElement->find(valueToAdd) == -1)
+								{
+									_packagedElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
-			// CAST Any to Bag<uml::ProfileApplication>
-			if((newValue->isContainer()) && (uml::umlPackage::PROFILEAPPLICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ProfileApplication>> profileApplicationList= newValue->get<std::shared_ptr<Bag<uml::ProfileApplication>>>();
-					std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication=getProfileApplication();
-					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *_profileApplication)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (profileApplicationList->find(indexProfileApplication) == -1)
+						std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication = getProfileApplication();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_profileApplication->erase(indexProfileApplication);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *profileApplicationList)
-					{
-						if (_profileApplication->find(indexProfileApplication) == -1)
-						{
-							_profileApplication->add(indexProfileApplication);
+							std::shared_ptr<uml::ProfileApplication> valueToAdd = std::dynamic_pointer_cast<uml::ProfileApplication>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_profileApplication->find(valueToAdd) == -1)
+								{
+									_profileApplication->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -1301,7 +1371,28 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			Bag<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_profile_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_profile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			std::shared_ptr<Bag<ecore::EObject>> resultList = this->applyProfile(incoming_param_profile);
 			return eEcoreContainerAny(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
@@ -1319,12 +1410,32 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
 			bool incoming_param_isAbstract;
 			Bag<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
@@ -1335,7 +1446,17 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
 		}
@@ -1346,7 +1467,17 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
@@ -1357,7 +1488,17 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
@@ -1368,12 +1509,32 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
 			bool incoming_param_isAbstract;
 			Bag<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
@@ -1384,12 +1545,32 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -1414,7 +1595,17 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getAppliedProfile(incoming_param_qualifiedName), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
@@ -1425,12 +1616,32 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::string incoming_param_qualifiedName;
 			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'recurse'
 			//parameter 1
 			bool incoming_param_recurse;
 			Bag<Any>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
@@ -1469,7 +1680,28 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			Bag<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_profile_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_profile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->getProfileApplication(incoming_param_profile), uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
@@ -1480,12 +1712,43 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			Bag<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_profile_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_profile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'recurse'
 			//parameter 1
 			bool incoming_param_recurse;
 			Bag<Any>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getProfileApplication(incoming_param_profile,incoming_param_recurse), uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
@@ -1502,7 +1765,28 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			Bag<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_profile_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_profile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->isProfileApplied(incoming_param_profile),0,false);
 			break;
 		}
@@ -1513,7 +1797,28 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_el;
 			Bag<Any>::const_iterator incoming_param_el_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_el = (*incoming_param_el_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_el_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_el = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->makesVisible(incoming_param_el),0,false);
 			break;
 		}
@@ -1524,7 +1829,28 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			Bag<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_profile_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_profile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			std::shared_ptr<Bag<ecore::EObject>> resultList = this->unapplyProfile(incoming_param_profile);
 			return eEcoreContainerAny(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;

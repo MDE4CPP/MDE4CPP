@@ -610,84 +610,107 @@ bool CombinedFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
-			// CAST Any to Bag<uml::Gate>
-			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Gate>> cfragmentGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
-					std::shared_ptr<Bag<uml::Gate>> _cfragmentGate=getCfragmentGate();
-					for(const std::shared_ptr<uml::Gate> indexCfragmentGate: *_cfragmentGate)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (cfragmentGateList->find(indexCfragmentGate) == -1)
+						std::shared_ptr<Bag<uml::Gate>> _cfragmentGate = getCfragmentGate();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_cfragmentGate->erase(indexCfragmentGate);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Gate> indexCfragmentGate: *cfragmentGateList)
-					{
-						if (_cfragmentGate->find(indexCfragmentGate) == -1)
-						{
-							_cfragmentGate->add(indexCfragmentGate);
+							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_cfragmentGate->find(valueToAdd) == -1)
+								{
+									_cfragmentGate->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'cfragmentGate'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'cfragmentGate'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 		{
-			// CAST Any to uml::InteractionOperatorKind
-			uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
-			setInteractionOperator(_interactionOperator); //4414
-			return true;
+			try
+			{
+				uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
+				setInteractionOperator(_interactionOperator); //4414
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'interactionOperator'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
-			// CAST Any to Bag<uml::InteractionOperand>
-			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONOPERAND_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InteractionOperand>> operandList= newValue->get<std::shared_ptr<Bag<uml::InteractionOperand>>>();
-					std::shared_ptr<Bag<uml::InteractionOperand>> _operand=getOperand();
-					for(const std::shared_ptr<uml::InteractionOperand> indexOperand: *_operand)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (operandList->find(indexOperand) == -1)
+						std::shared_ptr<Bag<uml::InteractionOperand>> _operand = getOperand();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_operand->erase(indexOperand);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InteractionOperand> indexOperand: *operandList)
-					{
-						if (_operand->find(indexOperand) == -1)
-						{
-							_operand->add(indexOperand);
+							std::shared_ptr<uml::InteractionOperand> valueToAdd = std::dynamic_pointer_cast<uml::InteractionOperand>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_operand->find(valueToAdd) == -1)
+								{
+									_operand->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'operand'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'operand'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -710,12 +733,32 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'break_'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'break_'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -726,12 +769,32 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'consider_and_ignore'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'consider_and_ignore'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
@@ -742,12 +805,32 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'opt_loop_break_neg'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'opt_loop_break_neg'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

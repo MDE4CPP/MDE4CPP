@@ -389,10 +389,17 @@ bool LiteralStringImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to std::string
-			std::string _value = newValue->get<std::string>();
-			setValue(_value); //14215
-			return true;
+			try
+			{
+				std::string _value = newValue->get<std::string>();
+				setValue(_value); //14215
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

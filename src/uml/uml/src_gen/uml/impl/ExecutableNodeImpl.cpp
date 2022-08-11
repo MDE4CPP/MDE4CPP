@@ -405,40 +405,48 @@ bool ExecutableNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
-			// CAST Any to Bag<uml::ExceptionHandler>
-			if((newValue->isContainer()) && (uml::umlPackage::EXCEPTIONHANDLER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList= newValue->get<std::shared_ptr<Bag<uml::ExceptionHandler>>>();
-					std::shared_ptr<Bag<uml::ExceptionHandler>> _handler=getHandler();
-					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *_handler)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (handlerList->find(indexHandler) == -1)
+						std::shared_ptr<Bag<uml::ExceptionHandler>> _handler = getHandler();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_handler->erase(indexHandler);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *handlerList)
-					{
-						if (_handler->find(indexHandler) == -1)
-						{
-							_handler->add(indexHandler);
+							std::shared_ptr<uml::ExceptionHandler> valueToAdd = std::dynamic_pointer_cast<uml::ExceptionHandler>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_handler->find(valueToAdd) == -1)
+								{
+									_handler->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'handler'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'handler'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

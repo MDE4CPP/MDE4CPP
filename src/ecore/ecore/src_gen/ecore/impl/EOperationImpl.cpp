@@ -586,151 +586,183 @@ bool EOperationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			// CAST Any to Bag<ecore::EClassifier>
-			if((newValue->isContainer()) && (ecore::ecorePackage::ECLASSIFIER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EClassifier>> eExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EClassifier>>>();
-					std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions=getEExceptions();
-					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *_eExceptions)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eExceptionsList->find(indexEExceptions) == -1)
+						std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eExceptions->erase(indexEExceptions);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *eExceptionsList)
-					{
-						if (_eExceptions->find(indexEExceptions) == -1)
-						{
-							_eExceptions->add(indexEExceptions);
+							std::shared_ptr<ecore::EClassifier> valueToAdd = std::dynamic_pointer_cast<ecore::EClassifier>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eExceptions->find(valueToAdd) == -1)
+								{
+									_eExceptions->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eExceptions'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eExceptions'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
-			// CAST Any to Bag<ecore::EGenericType>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EGENERICTYPE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
-					std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions=getEGenericExceptions();
-					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *_eGenericExceptions)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eGenericExceptionsList->find(indexEGenericExceptions) == -1)
+						std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions = getEGenericExceptions();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eGenericExceptions->erase(indexEGenericExceptions);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *eGenericExceptionsList)
-					{
-						if (_eGenericExceptions->find(indexEGenericExceptions) == -1)
-						{
-							_eGenericExceptions->add(indexEGenericExceptions);
+							std::shared_ptr<ecore::EGenericType> valueToAdd = std::dynamic_pointer_cast<ecore::EGenericType>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eGenericExceptions->find(valueToAdd) == -1)
+								{
+									_eGenericExceptions->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eGenericExceptions'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eGenericExceptions'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
-			// CAST Any to Bag<ecore::EParameter>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EPARAMETER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EParameter>> eParametersList= newValue->get<std::shared_ptr<Bag<ecore::EParameter>>>();
-					std::shared_ptr<Bag<ecore::EParameter>> _eParameters=getEParameters();
-					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *_eParameters)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eParametersList->find(indexEParameters) == -1)
+						std::shared_ptr<Bag<ecore::EParameter>> _eParameters = getEParameters();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eParameters->erase(indexEParameters);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *eParametersList)
-					{
-						if (_eParameters->find(indexEParameters) == -1)
-						{
-							_eParameters->add(indexEParameters);
+							std::shared_ptr<ecore::EParameter> valueToAdd = std::dynamic_pointer_cast<ecore::EParameter>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eParameters->find(valueToAdd) == -1)
+								{
+									_eParameters->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eParameters'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eParameters'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			// CAST Any to Bag<ecore::ETypeParameter>
-			if((newValue->isContainer()) && (ecore::ecorePackage::ETYPEPARAMETER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();
-					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eTypeParametersList->find(indexETypeParameters) == -1)
+						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eTypeParameters->erase(indexETypeParameters);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
-					{
-						if (_eTypeParameters->find(indexETypeParameters) == -1)
-						{
-							_eTypeParameters->add(indexETypeParameters);
+							std::shared_ptr<ecore::ETypeParameter> valueToAdd = std::dynamic_pointer_cast<ecore::ETypeParameter>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eTypeParameters->find(valueToAdd) == -1)
+								{
+									_eTypeParameters->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eTypeParameters'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eTypeParameters'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -753,7 +785,28 @@ std::shared_ptr<Any> EOperationImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_someOperation;
 			Bag<Any>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_someOperation = (*incoming_param_someOperation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_someOperation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_someOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'someOperation'. Failed to invoke operation 'isOverrideOf'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'someOperation'. Failed to invoke operation 'isOverrideOf'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eAny(this->isOverrideOf(incoming_param_someOperation),0,false);
 			break;
 		}

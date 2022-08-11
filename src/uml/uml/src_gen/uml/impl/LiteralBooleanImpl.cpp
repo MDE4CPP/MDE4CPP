@@ -389,10 +389,17 @@ bool LiteralBooleanImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to bool
-			bool _value = newValue->get<bool>();
-			setValue(_value); //13715
-			return true;
+			try
+			{
+				bool _value = newValue->get<bool>();
+				setValue(_value); //13715
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

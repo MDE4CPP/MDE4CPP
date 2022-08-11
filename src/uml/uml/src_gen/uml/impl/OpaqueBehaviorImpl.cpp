@@ -594,15 +594,63 @@ bool OpaqueBehaviorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _body = getBody();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				{
+					if (valueToAdd)
+					{
+						if(_body->find(valueToAdd) == -1)
+						{
+							_body->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'body'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _language = getLanguage();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				{
+					if (valueToAdd)
+					{
+						if(_language->find(valueToAdd) == -1)
+						{
+							_language->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'language'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

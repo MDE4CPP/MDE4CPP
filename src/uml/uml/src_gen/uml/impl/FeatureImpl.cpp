@@ -318,10 +318,17 @@ bool FeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
-			// CAST Any to bool
-			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10113
-			return true;
+			try
+			{
+				bool _isStatic = newValue->get<bool>();
+				setIsStatic(_isStatic); //10113
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isStatic'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

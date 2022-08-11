@@ -945,188 +945,228 @@ bool InteractionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
 		{
-			// CAST Any to Bag<uml::Action>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Action>> actionList= newValue->get<std::shared_ptr<Bag<uml::Action>>>();
-					std::shared_ptr<Bag<uml::Action>> _action=getAction();
-					for(const std::shared_ptr<uml::Action> indexAction: *_action)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (actionList->find(indexAction) == -1)
+						std::shared_ptr<Bag<uml::Action>> _action = getAction();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_action->erase(indexAction);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Action> indexAction: *actionList)
-					{
-						if (_action->find(indexAction) == -1)
-						{
-							_action->add(indexAction);
+							std::shared_ptr<uml::Action> valueToAdd = std::dynamic_pointer_cast<uml::Action>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_action->find(valueToAdd) == -1)
+								{
+									_action->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'action'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'action'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
-			// CAST Any to Bag<uml::Gate>
-			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Gate>> formalGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
-					std::shared_ptr<Bag<uml::Gate>> _formalGate=getFormalGate();
-					for(const std::shared_ptr<uml::Gate> indexFormalGate: *_formalGate)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (formalGateList->find(indexFormalGate) == -1)
+						std::shared_ptr<Bag<uml::Gate>> _formalGate = getFormalGate();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_formalGate->erase(indexFormalGate);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Gate> indexFormalGate: *formalGateList)
-					{
-						if (_formalGate->find(indexFormalGate) == -1)
-						{
-							_formalGate->add(indexFormalGate);
+							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_formalGate->find(valueToAdd) == -1)
+								{
+									_formalGate->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'formalGate'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'formalGate'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
-			// CAST Any to Bag<uml::InteractionFragment>
-			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
-					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (fragmentList->find(indexFragment) == -1)
+						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_fragment->erase(indexFragment);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
-					{
-						if (_fragment->find(indexFragment) == -1)
-						{
-							_fragment->add(indexFragment);
+							std::shared_ptr<uml::InteractionFragment> valueToAdd = std::dynamic_pointer_cast<uml::InteractionFragment>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_fragment->find(valueToAdd) == -1)
+								{
+									_fragment->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'fragment'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'fragment'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
-			// CAST Any to Bag<uml::Lifeline>
-			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Lifeline>> lifelineList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
-					std::shared_ptr<Bag<uml::Lifeline>> _lifeline=getLifeline();
-					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *_lifeline)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (lifelineList->find(indexLifeline) == -1)
+						std::shared_ptr<Bag<uml::Lifeline>> _lifeline = getLifeline();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_lifeline->erase(indexLifeline);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *lifelineList)
-					{
-						if (_lifeline->find(indexLifeline) == -1)
-						{
-							_lifeline->add(indexLifeline);
+							std::shared_ptr<uml::Lifeline> valueToAdd = std::dynamic_pointer_cast<uml::Lifeline>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_lifeline->find(valueToAdd) == -1)
+								{
+									_lifeline->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'lifeline'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'lifeline'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
-			// CAST Any to Bag<uml::Message>
-			if((newValue->isContainer()) && (uml::umlPackage::MESSAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Message>> messageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();
-					std::shared_ptr<Bag<uml::Message>> _message=getMessage();
-					for(const std::shared_ptr<uml::Message> indexMessage: *_message)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (messageList->find(indexMessage) == -1)
+						std::shared_ptr<Bag<uml::Message>> _message = getMessage();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_message->erase(indexMessage);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Message> indexMessage: *messageList)
-					{
-						if (_message->find(indexMessage) == -1)
-						{
-							_message->add(indexMessage);
+							std::shared_ptr<uml::Message> valueToAdd = std::dynamic_pointer_cast<uml::Message>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_message->find(valueToAdd) == -1)
+								{
+									_message->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -1156,12 +1196,32 @@ std::shared_ptr<Any> InteractionImpl::eInvoke(int operationID, std::shared_ptr<B
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_diagnostics;
 			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_contained'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_contained'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}

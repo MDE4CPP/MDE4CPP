@@ -714,11 +714,34 @@ bool EFactoryImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
-			// CAST Any to ecore::EPackage
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>(_temp);
-			setEPackage(_ePackage); //244
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>(eObject);
+					if(_ePackage)
+					{
+						setEPackage(_ePackage); //244
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'ePackage'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'ePackage'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -741,12 +764,43 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
 			Bag<Any>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get<std::shared_ptr<ecore::EDataType> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eDataType_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eDataType = std::dynamic_pointer_cast<ecore::EDataType>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'eDataType'. Failed to invoke operation 'convertToString'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eDataType'. Failed to invoke operation 'convertToString'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'instanceValue'
 			//parameter 1
 			std::shared_ptr<Any> incoming_param_instanceValue;
 			Bag<Any>::const_iterator incoming_param_instanceValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'instanceValue'. Failed to invoke operation 'convertToString'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue),0,false);
 			break;
 		}
@@ -757,7 +811,28 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eClass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eClass = std::dynamic_pointer_cast<ecore::EClass>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'create'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eClass'. Failed to invoke operation 'create'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			result = eEcoreAny(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
@@ -768,12 +843,43 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
 			Bag<Any>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get<std::shared_ptr<ecore::EDataType> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eDataType_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eDataType = std::dynamic_pointer_cast<ecore::EDataType>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'eDataType'. Failed to invoke operation 'createFromString'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eDataType'. Failed to invoke operation 'createFromString'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'literalValue'
 			//parameter 1
 			std::string incoming_param_literalValue;
 			Bag<Any>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'literalValue'. Failed to invoke operation 'createFromString'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue),0,false);
 			break;
 		}

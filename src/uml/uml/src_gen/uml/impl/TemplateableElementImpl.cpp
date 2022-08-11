@@ -365,48 +365,79 @@ bool TemplateableElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 		{
-			// CAST Any to uml::TemplateSignature
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
-			setOwnedTemplateSignature(_ownedTemplateSignature); //2344
-			return true;
-		}
-		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-		{
-			// CAST Any to Bag<uml::TemplateBinding>
-			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEBINDING_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList= newValue->get<std::shared_ptr<Bag<uml::TemplateBinding>>>();
-					std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding=getTemplateBinding();
-					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *_templateBinding)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(eObject);
+					if(_ownedTemplateSignature)
 					{
-						if (templateBindingList->find(indexTemplateBinding) == -1)
-						{
-							_templateBinding->erase(indexTemplateBinding);
-						}
+						setOwnedTemplateSignature(_ownedTemplateSignature); //2344
 					}
-
-					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *templateBindingList)
+					else
 					{
-						if (_templateBinding->find(indexTemplateBinding) == -1)
-						{
-							_templateBinding->add(indexTemplateBinding);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'ownedTemplateSignature'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'ownedTemplateSignature'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding = getTemplateBinding();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::TemplateBinding> valueToAdd = std::dynamic_pointer_cast<uml::TemplateBinding>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_templateBinding->find(valueToAdd) == -1)
+								{
+									_templateBinding->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'templateBinding'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'templateBinding'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

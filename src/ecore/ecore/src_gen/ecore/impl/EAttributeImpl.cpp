@@ -311,10 +311,17 @@ bool EAttributeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 		{
-			// CAST Any to bool
-			bool _iD = newValue->get<bool>();
-			setID(_iD); //322
-			return true;
+			try
+			{
+				bool _iD = newValue->get<bool>();
+				setID(_iD); //322
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'iD'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

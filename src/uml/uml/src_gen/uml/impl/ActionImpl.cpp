@@ -644,84 +644,107 @@ bool ActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 		{
-			// CAST Any to bool
-			bool _isLocallyReentrant = newValue->get<bool>();
-			setIsLocallyReentrant(_isLocallyReentrant); //423
-			return true;
+			try
+			{
+				bool _isLocallyReentrant = newValue->get<bool>();
+				setIsLocallyReentrant(_isLocallyReentrant); //423
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isLocallyReentrant'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
-			// CAST Any to Bag<uml::Constraint>
-			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Constraint>> localPostconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _localPostcondition=getLocalPostcondition();
-					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *_localPostcondition)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (localPostconditionList->find(indexLocalPostcondition) == -1)
+						std::shared_ptr<Bag<uml::Constraint>> _localPostcondition = getLocalPostcondition();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_localPostcondition->erase(indexLocalPostcondition);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *localPostconditionList)
-					{
-						if (_localPostcondition->find(indexLocalPostcondition) == -1)
-						{
-							_localPostcondition->add(indexLocalPostcondition);
+							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_localPostcondition->find(valueToAdd) == -1)
+								{
+									_localPostcondition->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'localPostcondition'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'localPostcondition'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
-			// CAST Any to Bag<uml::Constraint>
-			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Constraint>> localPreconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _localPrecondition=getLocalPrecondition();
-					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *_localPrecondition)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (localPreconditionList->find(indexLocalPrecondition) == -1)
+						std::shared_ptr<Bag<uml::Constraint>> _localPrecondition = getLocalPrecondition();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_localPrecondition->erase(indexLocalPrecondition);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *localPreconditionList)
-					{
-						if (_localPrecondition->find(indexLocalPrecondition) == -1)
-						{
-							_localPrecondition->add(indexLocalPrecondition);
+							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_localPrecondition->find(valueToAdd) == -1)
+								{
+									_localPrecondition->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'localPrecondition'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'localPrecondition'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

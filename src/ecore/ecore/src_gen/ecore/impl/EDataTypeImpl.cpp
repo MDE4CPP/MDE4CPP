@@ -297,10 +297,17 @@ bool EDataTypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 		{
-			// CAST Any to bool
-			bool _serializable = newValue->get<bool>();
-			setSerializable(_serializable); //1511
-			return true;
+			try
+			{
+				bool _serializable = newValue->get<bool>();
+				setSerializable(_serializable); //1511
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'serializable'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

@@ -353,24 +353,45 @@ bool EEnumLiteralImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 		{
-			// CAST Any to Any
-			std::shared_ptr<Any> _instance = newValue->get<std::shared_ptr<Any>>();
-			setInstance(_instance); //226
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _instance = newValue->get<std::shared_ptr<Any>>();
+				setInstance(_instance); //226
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'instance'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 		{
-			// CAST Any to std::string
-			std::string _literal = newValue->get<std::string>();
-			setLiteral(_literal); //227
-			return true;
+			try
+			{
+				std::string _literal = newValue->get<std::string>();
+				setLiteral(_literal); //227
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'literal'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to int
-			int _value = newValue->get<int>();
-			setValue(_value); //225
-			return true;
+			try
+			{
+				int _value = newValue->get<int>();
+				setValue(_value); //225
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

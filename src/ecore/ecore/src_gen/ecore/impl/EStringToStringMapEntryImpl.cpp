@@ -275,17 +275,31 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 		{
-			// CAST Any to std::string
-			std::string _key = newValue->get<std::string>();
-			setKey(_key); //520
-			return true;
+			try
+			{
+				std::string _key = newValue->get<std::string>();
+				setKey(_key); //520
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'key'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to std::string
-			std::string _value = newValue->get<std::string>();
-			setValue(_value); //521
-			return true;
+			try
+			{
+				std::string _value = newValue->get<std::string>();
+				setValue(_value); //521
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

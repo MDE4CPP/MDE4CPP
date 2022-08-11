@@ -338,10 +338,17 @@ bool StructuralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
-			// CAST Any to bool
-			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22521
-			return true;
+			try
+			{
+				bool _isReadOnly = newValue->get<bool>();
+				setIsReadOnly(_isReadOnly); //22521
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isReadOnly'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

@@ -387,40 +387,48 @@ bool EEnumImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			// CAST Any to Bag<ecore::EEnumLiteral>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EENUMLITERAL_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EEnumLiteral>> eLiteralsList= newValue->get<std::shared_ptr<Bag<ecore::EEnumLiteral>>>();
-					std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals=getELiterals();
-					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *_eLiterals)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eLiteralsList->find(indexELiterals) == -1)
+						std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals = getELiterals();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eLiterals->erase(indexELiterals);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *eLiteralsList)
-					{
-						if (_eLiterals->find(indexELiterals) == -1)
-						{
-							_eLiterals->add(indexELiterals);
+							std::shared_ptr<ecore::EEnumLiteral> valueToAdd = std::dynamic_pointer_cast<ecore::EEnumLiteral>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eLiterals->find(valueToAdd) == -1)
+								{
+									_eLiterals->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eLiterals'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eLiterals'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -443,7 +451,17 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getEEnumLiteral'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
@@ -454,7 +472,17 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			int incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'getEEnumLiteral'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}
@@ -465,7 +493,17 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::string incoming_param_literal;
 			Bag<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
+			try
+			{
+				incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'literal'. Failed to invoke operation 'getEEnumLiteralByLiteral'!"<< std::endl;)
+				return nullptr;
+			}
+			
+		
 			result = eEcoreAny(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
 		}

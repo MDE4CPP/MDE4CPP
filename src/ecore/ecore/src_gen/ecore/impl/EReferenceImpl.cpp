@@ -456,70 +456,138 @@ bool EReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 		{
-			// CAST Any to bool
-			bool _containment = newValue->get<bool>();
-			setContainment(_containment); //4622
-			return true;
+			try
+			{
+				bool _containment = newValue->get<bool>();
+				setContainment(_containment); //4622
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'containment'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			// CAST Any to Bag<ecore::EAttribute>
-			if((newValue->isContainer()) && (ecore::ecorePackage::EATTRIBUTE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ecore::EAttribute>> eKeysList= newValue->get<std::shared_ptr<Bag<ecore::EAttribute>>>();
-					std::shared_ptr<Bag<ecore::EAttribute>> _eKeys=getEKeys();
-					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *_eKeys)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eKeysList->find(indexEKeys) == -1)
+						std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_eKeys->erase(indexEKeys);
-						}
-					}
-
-					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *eKeysList)
-					{
-						if (_eKeys->find(indexEKeys) == -1)
-						{
-							_eKeys->add(indexEKeys);
+							std::shared_ptr<ecore::EAttribute> valueToAdd = std::dynamic_pointer_cast<ecore::EAttribute>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_eKeys->find(valueToAdd) == -1)
+								{
+									_eKeys->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eKeys'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eKeys'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
-			// CAST Any to ecore::EReference
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(_temp);
-			setEOpposite(_eOpposite); //4625
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(eObject);
+					if(_eOpposite)
+					{
+						setEOpposite(_eOpposite); //4625
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eOpposite'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eOpposite'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
-			// CAST Any to ecore::EClass
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(_temp);
-			setEReferenceType(_eReferenceType); //4626
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(eObject);
+					if(_eReferenceType)
+					{
+						setEReferenceType(_eReferenceType); //4626
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eReferenceType'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eReferenceType'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
-			// CAST Any to bool
-			bool _resolveProxies = newValue->get<bool>();
-			setResolveProxies(_resolveProxies); //4624
-			return true;
+			try
+			{
+				bool _resolveProxies = newValue->get<bool>();
+				setResolveProxies(_resolveProxies); //4624
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'resolveProxies'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
