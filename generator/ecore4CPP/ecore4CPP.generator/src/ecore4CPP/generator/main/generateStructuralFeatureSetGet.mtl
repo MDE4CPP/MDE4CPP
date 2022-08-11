@@ -124,58 +124,129 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 {
 	switch(featureID)
 	{
-	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
-		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
+	[for (anEStructuralFeature : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
+		case [anEStructuralFeature.metamodelPackageNameForEstructuralFeture(aClass)/]::[anEStructuralFeature.getStaticAttributeIDName()/]:
 		{
-			// CAST Any to [struct.generateStructuralFeatureType(false)/]
-		[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
-			[struct.generateStructuralFeatureType(struct.isOfAnyType())/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(struct.isOfAnyType())/]>();
-			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-		[elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
-			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
-		[elseif (struct.eType.oclIsKindOf(EDataType))]
-			// nothing to do
-		[elseif (struct.upperBound = 1)]
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
-			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+		[comment anEParameter is typed by an EDataType /]
+		[if (anEStructuralFeature.eType.oclIsKindOf(EDataType))]
+			[comment anEParameter is a single-instanced value /]
+			[if (anEStructuralFeature.upperBound = 1)]
+			try
+			{
+				[anEStructuralFeature.generateStructuralFeatureType(true)/] _[anEStructuralFeature.name/] = newValue->get<[anEStructuralFeature.generateStructuralFeatureType(true)/]>();
+				[anEStructuralFeature.SetterName()/](_[anEStructuralFeature.name/]); //[aClass.getMyClassifierID()/][anEStructuralFeature.getFeatureID()/]
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+			[comment anEParameter is a bag value /]
+			[else]
+			try
+			{
+				[anEStructuralFeature.generateStructuralFeatureType(true)/] _[anEStructuralFeature.name/]List = newValue->get<[anEStructuralFeature.generateStructuralFeatureType(true)/]>();
+				[anEStructuralFeature.generateStructuralFeatureType(true)/] _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
+				
+				for(const std::shared_ptr<[anEStructuralFeature.eGenericType.generateCppType(false)/]> valueToAdd: *_[anEStructuralFeature.name/]List)
+				{
+					if (valueToAdd)
+					{
+						if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						{
+							_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+			[/if]
+		[comment anEParameter is typed by an EClass /]
 		[else]
-			if((newValue->isContainer()) && ([struct.eType.generateNamespaceDefinition().concat('::').concat(struct.eType.ePackage.name).concat('Package')/]::[struct.eType.getStaticAttributeIDName()/] ==newValue->getTypeId()))
-			{ 
+			[comment anEParameter is a single-instanced value /]
+			[if (anEStructuralFeature.upperBound = 1)]
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List= newValue->get<std::shared_ptr<[struct.generateStructuralFeatureType(false)/]>>();
-					std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name.toLowerFirst()/]=[struct.GetterName()/]();
-					for(const std::shared_ptr<[struct.eGenericType.generateCppType(false)/]> index[struct.name.toUpperFirst()/]: *_[struct.name.toLowerFirst()/])
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<[anEStructuralFeature.generateStructuralFeatureType(false)/]> _[anEStructuralFeature.name/] = std::dynamic_pointer_cast<[anEStructuralFeature.generateStructuralFeatureType(false)/]>(eObject);
+					if(_[anEStructuralFeature.name/])
 					{
-						if ([struct.name/]List->find(index[struct.name.toUpperFirst()/]) == -1)
-						{
-							_[struct.name.toLowerFirst()/]->erase(index[struct.name.toUpperFirst()/]);
-						}
+						[anEStructuralFeature.SetterName()/](_[anEStructuralFeature.name/]); //[aClass.getMyClassifierID()/][anEStructuralFeature.getFeatureID()/]
 					}
-
-					for(const std::shared_ptr<[struct.eGenericType.generateCppType(false)/]> index[struct.name.toUpperFirst()/]: *[struct.name/]List)
+					else
 					{
-						if (_[struct.name.toLowerFirst()/]->find(index[struct.name.toUpperFirst()/]) == -1)
-						{
-							_[struct.name.toLowerFirst()/]->add(index[struct.name.toUpperFirst()/]);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
+			[comment anEParameter is a bag value /]
+			[else]
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<[anEStructuralFeature.generateStructuralFeatureType(false)/]> _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<[anEStructuralFeature.eGenericType.generateCppType(false)/]> valueToAdd = std::dynamic_pointer_cast<[anEStructuralFeature.eGenericType.generateCppType(false)/]>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								{
+									_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+			[/if]
 		[/if]
-			return true;
+		return true;
 		}
 	[/for]
 	}

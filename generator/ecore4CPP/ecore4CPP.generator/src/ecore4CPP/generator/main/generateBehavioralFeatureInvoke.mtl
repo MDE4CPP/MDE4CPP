@@ -42,11 +42,80 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [/comment]
 
 [comment] Helper [/comment]
-[template private _generateIncomingParameter(aEParameter : EParameter, index : Integer)]
+[template private _generateIncomingParameter(anEParameter : EParameter, index : Integer)]
 	//parameter [index/]
-	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
-	Bag<Any>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
-	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get<[aEParameter.generateParameterType()/] >();
+	[anEParameter.generateParameterType()/] incoming_param_[anEParameter.name/];
+	Bag<Any>::const_iterator incoming_param_[anEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	[comment anEParameter is typed by an EDataType /]
+	[if (anEParameter.eType.oclIsKindOf(EDataType))]
+	try
+	{
+		incoming_param_[anEParameter.name/] = (*incoming_param_[anEParameter.name/]_arguments_citer)->get<[anEParameter.generateParameterType()/]>();
+	}
+	catch(...)
+	{
+		DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+		return nullptr;
+	}
+	[comment anEParameter is typed by an EClass /]
+	[else]
+		[comment anEParameter is a single-instanced value /]
+		[if (anEParameter.upperBound = 1)]
+	{
+		std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_[anEParameter.name/]_arguments_citer));
+		if(ecoreAny)
+		{
+			try
+			{
+				std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+				incoming_param_[anEParameter.name/] = std::dynamic_pointer_cast<[anEParameter.eType.generateType(false)/]>(_temp);
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+				return nullptr;
+			}
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			return nullptr;
+		}
+	}
+		[comment anEParameter is a bag value /]
+		[else]
+	{
+		std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_[anEParameter.name/]_arguments_citer));
+		if(ecoreContainerAny)
+		{
+			try
+			{
+				std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+		
+				if(eObjectList)
+				{
+					incoming_param_[anEParameter.name/].reset();
+					for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+					{
+						std::shared_ptr<[anEParameter.eType.generateType(false)/]> _temp = std::dynamic_pointer_cast<[anEParameter.eType.generateType(false)/]>(anEObject);
+						incoming_param_[anEParameter.name/]->add(_temp);
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+				return nullptr;
+			}
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			return nullptr;
+		}
+	}
+		[/if]
+	[/if]
 [/template]
 
 
