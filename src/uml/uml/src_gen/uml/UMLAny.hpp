@@ -27,12 +27,12 @@ namespace uml
 }
 
 template <typename T>
-uml::UMLAnyTemplate<T>::UMLAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
+inline uml::UMLAnyTemplate<T>::UMLAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
 {
 }
 
 template <typename T>
-std::shared_ptr<uml::Element> uml::UMLAnyTemplate<T>::getAsElement() const
+inline std::shared_ptr<uml::Element> uml::UMLAnyTemplate<T>::getAsElement() const
 {
 	std::shared_ptr<uml::Element> returnValue=nullptr;
 

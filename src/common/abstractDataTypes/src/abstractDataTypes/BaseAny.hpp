@@ -22,13 +22,14 @@ template <class T> class BaseAnyTemplate: virtual public BaseAny
 		BaseAnyTemplate() = default;
 };
 
+
 template <typename T>
-BaseAnyTemplate<T>::BaseAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
+inline BaseAnyTemplate<T>::BaseAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
 {
 }
 
 template <typename T>
-std::shared_ptr<BaseElement> BaseAnyTemplate<T>::getAsBaseElement() const
+inline std::shared_ptr<BaseElement> BaseAnyTemplate<T>::getAsBaseElement() const
 {
 	std::shared_ptr<BaseElement> returnValue = nullptr;
 

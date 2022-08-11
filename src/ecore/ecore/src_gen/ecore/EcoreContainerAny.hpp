@@ -27,12 +27,12 @@ namespace ecore
 }
 
 template <typename T>
-ecore::EcoreContainerAnyTemplate<T>::EcoreContainerAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
+inline ecore::EcoreContainerAnyTemplate<T>::EcoreContainerAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
 {
 }
 
 template <typename T>
-std::shared_ptr<Bag<ecore::EObject>> ecore::EcoreContainerAnyTemplate<T>::getAsEObjectContainer() const
+inline std::shared_ptr<Bag<ecore::EObject>> ecore::EcoreContainerAnyTemplate<T>::getAsEObjectContainer() const
 {
 	std::shared_ptr<Bag<ecore::EObject>> returnContainer = nullptr;
 

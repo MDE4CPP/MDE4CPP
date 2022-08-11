@@ -27,12 +27,12 @@ namespace uml
 }
 
 template <typename T>
-uml::UMLContainerAnyTemplate<T>::UMLContainerAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
+inline uml::UMLContainerAnyTemplate<T>::UMLContainerAnyTemplate(T value, unsigned long typeID, bool isContainer) : Any(value, typeID, isContainer) /* Must directly call constructor of Any due to virtual inheritance construction order */
 {
 }
 
 template <typename T>
-std::shared_ptr<Bag<uml::Element>> uml::UMLContainerAnyTemplate<T>::getAsElementContainer() const
+inline std::shared_ptr<Bag<uml::Element>> uml::UMLContainerAnyTemplate<T>::getAsElementContainer() const
 {
 	std::shared_ptr<Bag<uml::Element>> returnContainer = nullptr;
 

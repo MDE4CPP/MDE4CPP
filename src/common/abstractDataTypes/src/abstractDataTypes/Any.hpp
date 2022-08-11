@@ -38,7 +38,7 @@ class Any
 				virtual ~TypedObject() = default;
 
 				T get() const;
-				void set(T value);
+				void set(T);
 				std::string getTypeIDName() const final override;
 				
 			private:
@@ -53,12 +53,12 @@ class Any
 
 
 template <typename T>
-Any::Any(T value, unsigned long typeID, bool isContainer) : m_typeID(typeID), m_isContainer(isContainer)
+inline Any::Any(T value, unsigned long typeID, bool isContainer) : m_typeID(typeID), m_isContainer(isContainer)
 {
 	m_object = new TypedObject<T>(value);
 }
 
-Any::~Any()
+inline Any::~Any()
 {
 	if (m_object != nullptr)
 	{
@@ -67,7 +67,7 @@ Any::~Any()
 }
 
 template <typename T>
-T Any::get() const
+inline T Any::get() const
 {
 	TypedObject<T>* obj = dynamic_cast<TypedObject<T>*>(m_object);
 	if (obj)
@@ -77,22 +77,22 @@ T Any::get() const
 	throw std::runtime_error("Any::get() : Bad cast");
 }
 
-bool Any::isEmpty() const
+inline bool Any::isEmpty() const
 {
 	return (m_object == nullptr);
 }
 
-unsigned long Any::getTypeId() const
+inline unsigned long Any::getTypeId() const
 {
 	return m_typeID;
 }
 
-bool Any::isContainer() const
+inline bool Any::isContainer() const
 {
 	return m_isContainer;
 }
 
-std::string Any::toString() const
+inline std::string Any::toString() const
 {
 	if(this->isEmpty())
 	{
@@ -111,31 +111,31 @@ std::string Any::toString() const
 	return retString;
 }
 
-std::string Any::Object::getTypeIDName() const
+inline std::string Any::Object::getTypeIDName() const
 {
 	return "NULL";
 }
 
 template <typename T>
-Any::TypedObject<T>::TypedObject(T value)
+inline Any::TypedObject<T>::TypedObject(T value)
 {
 	m_value = value;
 }
 
 template <typename T>
-T Any::TypedObject<T>::get() const
+inline T Any::TypedObject<T>::get() const
 {
 	return m_value;
 }
 
 template <typename T>
-void Any::TypedObject<T>::set(T value)
+inline void Any::TypedObject<T>::set(T value)
 {
 	m_value=value;
 }
 
 template <typename T>
-std::string Any::TypedObject<T>::getTypeIDName() const
+inline std::string Any::TypedObject<T>::getTypeIDName() const
 {
 	return typeid(T).name();
 }
