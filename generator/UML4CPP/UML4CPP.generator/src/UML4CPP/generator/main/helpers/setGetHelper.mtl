@@ -111,9 +111,9 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 			[if(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
-			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
+			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
 			[else]
-			return [if(aProperty.upper = 1)]eUMLContainerAny[else]eUMLAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
 			[/if]
 		[/for]
 		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
@@ -163,35 +163,163 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(hasSetter()))]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
-			if(value->isContainer())
+		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
+		[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			[comment anEStructuralFeature is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			try
 			{
-				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
-				if(container)
+				[aProperty.type.generateCppType(false)/] _[aProperty.name/] = value->get<[aProperty.type.generateCppType(false)/]>();
+				[aProperty.setterName()/](_[aProperty.name/]);
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				return;
+			}
+			[else]
+			[comment aProperty is a bag value /]
+			try
+			{
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>();
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+				
+				for(const std::shared_ptr<[aProperty.type.generateCppType(true)/]> valueToAdd: *_[aProperty.name/]List)
 				{
-					if(!(container->empty()))
+					if (valueToAdd)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->[aProperty.setterName()/]([if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if]);
+						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						{
+							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
 					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				return;
+			}
+			[/if]	
+		[comment aProperty is typed by a Class or an Interface /]
+		[else]
+			[comment aProperty is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<[aProperty.type.generateCppType(true)/]> _[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(umlAny);
+					if(_[aProperty.name/])
+					{
+						[aProperty.setterName()/](_[aProperty.name/]);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->[aProperty.setterName()/](value->get<[aProperty.type.generateCppType(false)/]>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+			[comment aProperty is a bag value /]
+			[else]
+			std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+			if(umlContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
+	
+					if(elementList)
+					{
+						std::shared_ptr<[aProperty.type.generateCppType(true)/]> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+	
+						for(const std::shared_ptr<uml::Element> anElement: *elementList)
+						{
+							std::shared_ptr<[aProperty.type.generateCppType(true)/]> valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(anElement);
+	
+							if (valueToAdd)
+							{
+								if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								{
+									_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				return;
+			}
+			[/if]
+		[/if]
+		break;
 		}
 		[/for]
 		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
 		{
-			this->set[compositeOwnerClass.name.toUpperFirst()/](object->get<[compositeOwnerClass.generateCppType(false)/]>());
-			//TODO also set back reference?
-			return;
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/] = std::dynamic_pointer_cast<[compositeOwnerClass.generateCppType(true)/]>(umlAny);
+					if(_[compositeOwnerClass.name/])
+					{
+						this->set[compositeOwnerClass.name.toUpperFirst()/](_[compositeOwnerClass.name/]);
+						//TODO also set back reference?
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!"<< std::endl;)
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!"<< std::endl;)
+				return;
+			}
+			break;
 		}
 		[/for]
 	}
-
 [/if]
 [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call set() for base class [sClass.name/]
@@ -386,6 +514,8 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
 [if (not aClass.getOperationsForInvoke()->isEmpty())]
+	std::shared_ptr<Any> result;
+
 	switch(_uID)
 	{
 		[for (anOperation : Operation | aClass.getOperationsForInvoke())]
@@ -395,17 +525,94 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 			[for (anInputParameter : Parameter | inputParameterList) after('\n')]
 			//Retrieve input parameter '[anInputParameter.name/]'
 			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] = *(arguments->at([inputParameterList->indexOf(anInputParameter)-1/]).get());
-			[anInputParameter.generateCppType(false)/] [anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
+			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
+			[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
+				[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
+			try
+			{
+				[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+				return nullptr;
+			}
+				[comment anInputParameter is typed by a Class or Interface /]
+				[else]
+					[comment anInputParameter is a single-instanced value /]
+					[if (anInputParameter.upper = 1)]
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(any[anInputParameter.name.toUpperFirst()/]);
+					if(umlAny)
+					{
+						try
+						{
+							std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
+							[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.generateCppType(true)/]>(_temp);
+						}
+						catch(...)
+						{
+							DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+							return nullptr;
+						}
+					}
+					else
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+					[comment anInputParameter is a bag value /]
+					[else]
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(any[anInputParameter.name.toUpperFirst()/]);
+					if(umlContainerAny)
+					{
+						try
+						{
+							std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
+					
+							if(elementList)
+							{
+								[anInputParameter.name/].reset();
+								for(const std::shared_ptr<uml::Element> anElement: *elementList)
+								{
+									std::shared_ptr<[anInputParameter.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.generateCppType(true)/]>(anElement);
+									[anInputParameter.name/]->add(_temp);
+								}
+							}
+						}
+						catch(...)
+						{
+							DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+							return nullptr;
+						}
+					}
+					else
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+					[/if]
+				[/if]
 			[/for]
 			[/let]
 			[let returnParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+				[comment anOperation has a return parameter /]
 				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 				[let returnParameter : Parameter = returnParameterList->first()]
-				[let anyBagRequired : Boolean = ((returnParameter.upper <> 1) and not(returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration)))]
+			//return parameter
 			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
-			return [if(anyBagRequired)]eAnyBag[else]eAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(returnParameter.upper = 1)]false[else]true[/if][/if]);
+					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
+					[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
+			return eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
+					[comment returnParameter is typed by a Class or Interface /]
+					[else]
+			return [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+					[/if]
 				[/let]
-				[/let]
+				[comment anOperation has no return parameter /]
 				[else]
 			this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
 			return eAny(nullptr, -1, false);
