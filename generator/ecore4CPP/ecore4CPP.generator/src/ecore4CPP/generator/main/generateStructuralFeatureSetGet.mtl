@@ -127,9 +127,9 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 	[for (anEStructuralFeature : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [anEStructuralFeature.metamodelPackageNameForEstructuralFeture(aClass)/]::[anEStructuralFeature.getStaticAttributeIDName()/]:
 		{
-		[comment anEParameter is typed by an EDataType /]
+		[comment anEStructuralFeature is typed by an EDataType /]
 		[if (anEStructuralFeature.eType.oclIsKindOf(EDataType))]
-			[comment anEParameter is a single-instanced value /]
+			[comment anEStructuralFeature is a single-instanced value /]
 			[if (anEStructuralFeature.upperBound = 1)]
 			try
 			{
@@ -141,7 +141,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			[comment anEParameter is a bag value /]
+			[comment anEStructuralFeature is a bag value /]
 			[else]
 			try
 			{
@@ -170,9 +170,9 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 				return false;
 			}
 			[/if]
-		[comment anEParameter is typed by an EClass /]
+		[comment anEStructuralFeature is typed by an EClass /]
 		[else]
-			[comment anEParameter is a single-instanced value /]
+			[comment anEStructuralFeature is a single-instanced value /]
 			[if (anEStructuralFeature.upperBound = 1)]
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
 			if(ecoreAny)
@@ -201,7 +201,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			[comment anEParameter is a bag value /]
+			[comment anEStructuralFeature is a bag value /]
 			[else]
 			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
 			if(ecoreContainerAny)

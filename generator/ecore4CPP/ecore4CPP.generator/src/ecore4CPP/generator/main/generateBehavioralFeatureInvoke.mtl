@@ -78,7 +78,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 		}
 		else
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
 			return nullptr;
 		}
 	}
@@ -110,7 +110,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 		}
 		else
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
 			return nullptr;
 		}
 	}
@@ -147,32 +147,34 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int o
 		[inPar._generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
 			[/for]
 		[/let]
-			[comment Operation w/o return value /]
+		[comment anEOperation has no return parameter /]
 		[if (aOperation.eType.oclIsUndefined())]
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			break;
+		[comment anEOperation has a return parameter /]
  		[else]
-			[comment Operation w/ return value /]
-			[if (aOperation.eType.oclIsKindOf(EDataType))] [comment Primitive Returntype/]
-				[if (aOperation.upperBound = 1)]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
-				[else]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
-				[/if]
-			[elseif (aOperation.eType.oclIsKindOf(EClass))] [comment Returntype Class/]
+			[comment anEOperation is typed by an EDataType /]
+			[if (aOperation.eType.oclIsKindOf(EDataType))]
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0, [if (aOperation.upperBound = 1)]false[else]true[/if]);
+			[comment anEOperation is typed by an EClass /]
+			[elseif (aOperation.eType.oclIsKindOf(EClass))]
+				[comment anEOperation returns a single-instance value /]
 				[if ((aOperation.upperBound = 1))]
 					[if (aOperation.hasKey(aOperation.keyWeakptr()))]
 			result = eEcoreAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]).lock(), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 					[else]
 			result = eEcoreAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 					[/if]
-				[else] [comment Returntype Bag<EObject>/]
+				[comment anEOperation returns a a bag /]
+				[else]
 			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			return eEcoreContainerAny(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 				[/if]
+			[comment anEOperation is typed by Any /]
 			[elseif (aOperation.isOfAnyType())]
 			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-			[else] [comment Unknown should be an EClass or EDataType /]
+			[comment anEOperation is typed by an unknown type /]
+			[else]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);
 			[/if]
 			break;
