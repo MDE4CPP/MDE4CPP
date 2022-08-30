@@ -1448,7 +1448,6 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'composite_states'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1463,9 +1462,8 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'composite_states'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->composite_states(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->composite_states(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::State::destinations_or_sources_of_transitions(Any, std::map) : bool: 1353658856
@@ -1484,7 +1482,6 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'destinations_or_sources_of_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1499,9 +1496,8 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'destinations_or_sources_of_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->destinations_or_sources_of_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->destinations_or_sources_of_transitions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::State::entry_or_exit(Any, std::map) : bool: 4262428494
@@ -1520,7 +1516,6 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'entry_or_exit'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1535,33 +1530,32 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'entry_or_exit'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->entry_or_exit(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->entry_or_exit(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::State::isComposite() : bool: 3032748621
 		case umlPackage::STATE_OPERATION_ISCOMPOSITE:
 		{
-			result = eAny(this->isComposite(),0,false);
+			result = eAny(this->isComposite(), 0, false);
 			break;
 		}
 		// uml::State::isOrthogonal() : bool: 2196397295
 		case umlPackage::STATE_OPERATION_ISORTHOGONAL:
 		{
-			result = eAny(this->isOrthogonal(),0,false);
+			result = eAny(this->isOrthogonal(), 0, false);
 			break;
 		}
 		// uml::State::isSimple() : bool: 1376170544
 		case umlPackage::STATE_OPERATION_ISSIMPLE:
 		{
-			result = eAny(this->isSimple(),0,false);
+			result = eAny(this->isSimple(), 0, false);
 			break;
 		}
 		// uml::State::isSubmachineState() : bool: 3460868526
 		case umlPackage::STATE_OPERATION_ISSUBMACHINESTATE:
 		{
-			result = eAny(this->isSubmachineState(),0,false);
+			result = eAny(this->isSubmachineState(), 0, false);
 			break;
 		}
 		// uml::State::redefinitionContext() : uml::Classifier: 2354287234
@@ -1586,7 +1580,6 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'submachine_or_regions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1601,9 +1594,8 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'submachine_or_regions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->submachine_or_regions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->submachine_or_regions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::State::submachine_states(Any, std::map) : bool: 3284388305
@@ -1622,7 +1614,6 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'submachine_states'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1637,9 +1628,8 @@ std::shared_ptr<Any> StateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'submachine_states'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->submachine_states(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->submachine_states(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

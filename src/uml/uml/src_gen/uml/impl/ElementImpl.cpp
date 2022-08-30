@@ -678,9 +678,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'addKeyword'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->addKeyword(incoming_param_keyword),0,false);
+			result = eAny(this->addKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::allOwnedElements() : uml::Element[*]: 247654748
@@ -714,7 +713,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'applyStereotype'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'applyStereotype'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -744,7 +743,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'source'. Failed to invoke operation 'createEAnnotation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
@@ -771,7 +769,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getApplicableStereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getApplicableStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
@@ -799,7 +796,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedStereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getAppliedStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
@@ -835,7 +831,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotype'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotype'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -853,7 +849,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedSubstereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
@@ -882,7 +877,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotypes'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotypes'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -894,7 +889,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// uml::Element::getKeywords() : std::string[*]: 98894063
 		case umlPackage::ELEMENT_OPERATION_GETKEYWORDS:
 		{
-			result = eAny(this->getKeywords(),0,true);
+			result = eAny(this->getKeywords(), 0, true);
 			break;
 		}
 		// uml::Element::getMetaClass() : uml::Class {const}: 1459052667
@@ -946,7 +941,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eClass'. Failed to invoke operation 'getRelationships'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getRelationships'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -971,7 +966,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getRequiredStereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getRequiredStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
@@ -1014,7 +1008,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eClass'. Failed to invoke operation 'getSourceDirectedRelationships'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getSourceDirectedRelationships'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1047,7 +1041,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1093,7 +1087,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eClass'. Failed to invoke operation 'getTargetDirectedRelationships'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getTargetDirectedRelationships'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1126,7 +1120,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'getValue'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getValue'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1144,9 +1138,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'getValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->getValue(incoming_param_stereotype,incoming_param_propertyName),0,false);
+			result = eAny(this->getValue(incoming_param_stereotype,incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Element::hasKeyword(std::string) : bool: 1990850902
@@ -1165,9 +1158,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'hasKeyword'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->hasKeyword(incoming_param_keyword),0,false);
+			result = eAny(this->hasKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::hasValue(uml::Stereotype, std::string) : bool: 878246468
@@ -1194,7 +1186,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'hasValue'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'hasValue'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1212,9 +1204,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'hasValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName),0,false);
+			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Element::has_owner(Any, std::map) : bool: 2592501830
@@ -1233,7 +1224,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1248,9 +1238,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_owner(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_owner(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeApplicable(uml::Stereotype) : bool: 545376678
@@ -1277,12 +1266,12 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplicable'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplicable'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isStereotypeApplicable(incoming_param_stereotype),0,false);
+			result = eAny(this->isStereotypeApplicable(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeApplied(uml::Stereotype) : bool: 3830373488
@@ -1309,12 +1298,12 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplied'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplied'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isStereotypeApplied(incoming_param_stereotype),0,false);
+			result = eAny(this->isStereotypeApplied(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeRequired(uml::Stereotype) : bool: 1281257946
@@ -1341,18 +1330,18 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeRequired'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeRequired'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isStereotypeRequired(incoming_param_stereotype),0,false);
+			result = eAny(this->isStereotypeRequired(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::mustBeOwned() : bool: 3952176544
 		case umlPackage::ELEMENT_OPERATION_MUSTBEOWNED:
 		{
-			result = eAny(this->mustBeOwned(),0,false);
+			result = eAny(this->mustBeOwned(), 0, false);
 			break;
 		}
 		// uml::Element::not_own_self(Any, std::map) : bool: 2801577721
@@ -1371,7 +1360,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_own_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1386,9 +1374,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_own_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_own_self(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_own_self(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Element::removeKeyword(std::string) : bool: 1157618568
@@ -1407,9 +1394,8 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'removeKeyword'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->removeKeyword(incoming_param_keyword),0,false);
+			result = eAny(this->removeKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::setValue(uml::Stereotype, std::string, Any): 813757714
@@ -1436,7 +1422,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'setValue'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'setValue'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1454,7 +1440,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'setValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'newValue'
 			//parameter 2
@@ -1469,7 +1454,6 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newValue'. Failed to invoke operation 'setValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setValue(incoming_param_stereotype,incoming_param_propertyName,incoming_param_newValue);
 			break;
@@ -1498,7 +1482,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'stereotype'. Failed to invoke operation 'unapplyStereotype'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'unapplyStereotype'!"<< std::endl;)
 					return nullptr;
 				}
 			}

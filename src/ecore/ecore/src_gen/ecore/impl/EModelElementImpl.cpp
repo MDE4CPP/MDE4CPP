@@ -397,7 +397,6 @@ std::shared_ptr<Any> EModelElementImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'source'. Failed to invoke operation 'getEAnnotation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;

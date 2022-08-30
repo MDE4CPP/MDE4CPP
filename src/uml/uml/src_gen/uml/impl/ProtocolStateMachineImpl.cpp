@@ -676,7 +676,6 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deep_or_shallow_history'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -691,9 +690,8 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deep_or_shallow_history'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ProtocolStateMachine::entry_exit_do(Any, std::map) : bool: 2827711187
@@ -712,7 +710,6 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'entry_exit_do'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -727,9 +724,8 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'entry_exit_do'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ProtocolStateMachine::protocol_transitions(Any, std::map) : bool: 3134446549
@@ -748,7 +744,6 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'protocol_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -763,9 +758,8 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'protocol_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->protocol_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->protocol_transitions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

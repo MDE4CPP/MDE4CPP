@@ -451,7 +451,6 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -466,9 +465,8 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->associations(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->associations(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Actor::must_have_name(Any, std::map) : bool: 1170610443
@@ -487,7 +485,6 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -502,9 +499,8 @@ std::shared_ptr<Any> ActorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

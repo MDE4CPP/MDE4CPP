@@ -709,7 +709,6 @@ std::shared_ptr<Any> EPackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getEClassifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS);
 			break;

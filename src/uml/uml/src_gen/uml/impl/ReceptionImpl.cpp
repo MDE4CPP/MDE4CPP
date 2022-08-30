@@ -433,7 +433,6 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_name_as_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -448,9 +447,8 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_name_as_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_name_as_signal(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_name_as_signal(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Reception::same_structure_as_signal(Any, std::map) : bool: 1100427053
@@ -469,7 +467,6 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_structure_as_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -484,9 +481,8 @@ std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_structure_as_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_structure_as_signal(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_structure_as_signal(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

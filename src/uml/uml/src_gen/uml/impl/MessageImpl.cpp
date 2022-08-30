@@ -932,7 +932,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'arguments'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -947,9 +946,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'arguments'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::cannot_cross_boundaries(Any, std::map) : bool: 771684206
@@ -968,7 +966,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_cross_boundaries'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -983,15 +980,14 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_cross_boundaries'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::getMessageKind() : uml::MessageKind: 1342630738
 		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
 		{
-			result = eAny(this->getMessageKind(),0,false);
+			result = eAny(this->getMessageKind(), 0, false);
 			break;
 		}
 		// uml::Message::occurrence_specifications(Any, std::map) : bool: 3654259023
@@ -1010,7 +1006,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'occurrence_specifications'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1025,9 +1020,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'occurrence_specifications'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::sending_receiving_message_event(Any, std::map) : bool: 2667842979
@@ -1046,7 +1040,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'sending_receiving_message_event'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1061,9 +1054,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'sending_receiving_message_event'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::signature_is_operation_reply(Any, std::map) : bool: 3249613031
@@ -1082,7 +1074,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'signature_is_operation_reply'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1097,9 +1088,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'signature_is_operation_reply'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::signature_is_operation_request(Any, std::map) : bool: 1347631112
@@ -1118,7 +1108,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'signature_is_operation_request'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1133,9 +1122,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'signature_is_operation_request'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::signature_is_signal(Any, std::map) : bool: 1922116441
@@ -1154,7 +1142,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'signature_is_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1169,9 +1156,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'signature_is_signal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Message::signature_refer_to(Any, std::map) : bool: 2916908006
@@ -1190,7 +1176,6 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'signature_refer_to'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1205,9 +1190,8 @@ std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'signature_refer_to'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->signature_refer_to(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->signature_refer_to(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

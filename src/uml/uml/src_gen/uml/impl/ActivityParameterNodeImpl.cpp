@@ -471,7 +471,6 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -486,9 +485,8 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityParameterNode::no_edges(Any, std::map) : bool: 1392135778
@@ -507,7 +505,6 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -522,9 +519,8 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityParameterNode::no_incoming_edges(Any, std::map) : bool: 99476997
@@ -543,7 +539,6 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_incoming_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -558,9 +553,8 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_incoming_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_incoming_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_incoming_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityParameterNode::no_outgoing_edges(Any, std::map) : bool: 1460759441
@@ -579,7 +573,6 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_outgoing_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -594,9 +587,8 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_outgoing_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_outgoing_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_outgoing_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityParameterNode::same_type(Any, std::map) : bool: 1979271357
@@ -615,7 +607,6 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -630,9 +621,8 @@ std::shared_ptr<Any> ActivityParameterNodeImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

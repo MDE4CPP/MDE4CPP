@@ -455,7 +455,6 @@ std::shared_ptr<Any> ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'aggregation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -470,9 +469,8 @@ std::shared_ptr<Any> ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'aggregation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->aggregation(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->aggregation(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExtensionEnd::multiplicity(Any, std::map) : bool: 1193805419
@@ -491,7 +489,6 @@ std::shared_ptr<Any> ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -506,9 +503,8 @@ std::shared_ptr<Any> ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

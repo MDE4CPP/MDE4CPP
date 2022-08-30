@@ -410,7 +410,6 @@ std::shared_ptr<Any> PackageableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'namespace_needs_visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -425,9 +424,8 @@ std::shared_ptr<Any> PackageableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'namespace_needs_visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->namespace_needs_visibility(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->namespace_needs_visibility(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

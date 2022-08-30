@@ -638,12 +638,12 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->compatibleWith(incoming_param_other),0,false);
+			result = eAny(this->compatibleWith(incoming_param_other), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::includesMultiplicity(uml::MultiplicityElement) : bool: 935007317
@@ -670,12 +670,12 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->includesMultiplicity(incoming_param_M),0,false);
+			result = eAny(this->includesMultiplicity(incoming_param_M), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::is(int, int) : bool: 2447710154
@@ -694,7 +694,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'lowerbound'. Failed to invoke operation 'is'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'upperbound'
 			//parameter 1
@@ -709,21 +708,20 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'upperbound'. Failed to invoke operation 'is'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound),0,false);
+			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::isMultivalued() : bool: 2268498524
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED:
 		{
-			result = eAny(this->isMultivalued(),0,false);
+			result = eAny(this->isMultivalued(), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::lowerBound() : int: 4073704864
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWERBOUND:
 		{
-			result = eAny(this->lowerBound(),0,false);
+			result = eAny(this->lowerBound(), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::lower_ge_0(Any, std::map) : bool: 27225824
@@ -742,7 +740,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_ge_0'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -757,9 +754,8 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_ge_0'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::lower_is_integer(Any, std::map) : bool: 3479893910
@@ -778,7 +774,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_is_integer'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -793,15 +788,14 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_is_integer'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::upperBound() : int: 2210299255
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPERBOUND:
 		{
-			result = eAny(this->upperBound(),0,false);
+			result = eAny(this->upperBound(), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::upper_ge_lower(Any, std::map) : bool: 1007813900
@@ -820,7 +814,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_ge_lower'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -835,9 +828,8 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_ge_lower'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::upper_is_unlimitedNatural(Any, std::map) : bool: 2998336909
@@ -856,7 +848,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_is_unlimitedNatural'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -871,9 +862,8 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_is_unlimitedNatural'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::value_specification_constant(Any, std::map) : bool: 141713939
@@ -892,7 +882,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_constant'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -907,9 +896,8 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_constant'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::value_specification_no_side_effects(Any, std::map) : bool: 3115291509
@@ -928,7 +916,6 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_no_side_effects'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -943,9 +930,8 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_no_side_effects'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->value_specification_no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->value_specification_no_side_effects(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

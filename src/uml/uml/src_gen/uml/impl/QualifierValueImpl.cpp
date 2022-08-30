@@ -429,7 +429,6 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -444,9 +443,8 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::QualifierValue::qualifier_attribute(Any, std::map) : bool: 697235734
@@ -465,7 +463,6 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualifier_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -480,9 +477,8 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualifier_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::QualifierValue::type_of_qualifier(Any, std::map) : bool: 3071264124
@@ -501,7 +497,6 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -516,9 +511,8 @@ std::shared_ptr<Any> QualifierValueImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_qualifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

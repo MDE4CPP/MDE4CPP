@@ -613,7 +613,7 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 		// uml::ElementImport::getName() : std::string: 2948686225
 		case umlPackage::ELEMENTIMPORT_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName(),0,false);
+			result = eAny(this->getName(), 0, false);
 			break;
 		}
 		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 3938107701
@@ -632,7 +632,6 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'imported_element_is_public'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -647,9 +646,8 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'imported_element_is_public'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 3497731579
@@ -668,7 +666,6 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility_public_or_private'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -683,9 +680,8 @@ std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility_public_or_private'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

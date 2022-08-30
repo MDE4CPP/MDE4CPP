@@ -715,7 +715,6 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'conforming_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -730,9 +729,8 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'conforming_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->conforming_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->conforming_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptEventAction::no_input_pins(Any, std::map) : bool: 880552727
@@ -751,7 +749,6 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_input_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -766,9 +763,8 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_input_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptEventAction::no_output_pins(Any, std::map) : bool: 786063400
@@ -787,7 +783,6 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -802,9 +797,8 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptEventAction::one_output_pin(Any, std::map) : bool: 1998234410
@@ -823,7 +817,6 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_output_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -838,9 +831,8 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_output_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptEventAction::unmarshall_signal_events(Any, std::map) : bool: 1806469778
@@ -859,7 +851,6 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'unmarshall_signal_events'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -874,9 +865,8 @@ std::shared_ptr<Any> AcceptEventActionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'unmarshall_signal_events'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->unmarshall_signal_events(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->unmarshall_signal_events(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

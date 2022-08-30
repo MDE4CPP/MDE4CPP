@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -478,15 +478,15 @@ std::shared_ptr<Any> ExpansionActivationGroupImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
-			return eAnyBag(getGroupInputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //495
+			return eEcoreContainerAny(getGroupInputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //495
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
-			return eAnyBag(getGroupOutputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //496
+			return eEcoreContainerAny(getGroupOutputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //496
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 			return eAny(getIndex(),ecore::ecorePackage::EINT_CLASS,false); //497
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 			return eAny(getRegionActivation(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS,false); //498
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
-			return eAnyBag(getRegionInputs(),fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS); //499
+			return eEcoreContainerAny(getRegionInputs(),fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS); //499
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -515,129 +515,183 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> newV
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
-			// CAST Any to Bag<fUML::Semantics::Activities::ExpansionNodeActivation>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupInputsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupInputs=getGroupInputs();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupInputs: *_groupInputs)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (groupInputsList->find(indexGroupInputs) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupInputs = getGroupInputs();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_groupInputs->erase(indexGroupInputs);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupInputs: *groupInputsList)
-					{
-						if (_groupInputs->find(indexGroupInputs) == -1)
-						{
-							_groupInputs->add(indexGroupInputs);
+							std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionNodeActivation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_groupInputs->find(valueToAdd) == -1)
+								{
+									_groupInputs->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'groupInputs'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'groupInputs'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
-			// CAST Any to Bag<fUML::Semantics::Activities::ExpansionNodeActivation>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupOutputsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupOutputs=getGroupOutputs();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupOutputs: *_groupOutputs)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (groupOutputsList->find(indexGroupOutputs) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupOutputs = getGroupOutputs();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_groupOutputs->erase(indexGroupOutputs);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupOutputs: *groupOutputsList)
-					{
-						if (_groupOutputs->find(indexGroupOutputs) == -1)
-						{
-							_groupOutputs->add(indexGroupOutputs);
+							std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionNodeActivation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_groupOutputs->find(valueToAdd) == -1)
+								{
+									_groupOutputs->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'groupOutputs'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'groupOutputs'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 		{
-			// CAST Any to int
-			int _index = newValue->get<int>();
-			setIndex(_index); //497
-			return true;
+			try
+			{
+				int _index = newValue->get<int>();
+				setIndex(_index); //497
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'index'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
-			// CAST Any to fUML::Semantics::Activities::ExpansionRegionActivation
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(_temp);
-			setRegionActivation(_regionActivation); //498
-			return true;
-		}
-		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
-		{
-			// CAST Any to Bag<fUML::Semantics::Actions::OutputPinActivation>
-			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> regionInputsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs=getRegionInputs();
-					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexRegionInputs: *_regionInputs)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(eObject);
+					if(_regionActivation)
 					{
-						if (regionInputsList->find(indexRegionInputs) == -1)
-						{
-							_regionInputs->erase(indexRegionInputs);
-						}
+						setRegionActivation(_regionActivation); //498
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexRegionInputs: *regionInputsList)
+					else
 					{
-						if (_regionInputs->find(indexRegionInputs) == -1)
-						{
-							_regionInputs->add(indexRegionInputs);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'regionActivation'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'regionActivation'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_regionInputs->find(valueToAdd) == -1)
+								{
+									_regionInputs->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'regionInputs'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'regionInputs'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -656,7 +710,7 @@ std::shared_ptr<Any> ExpansionActivationGroupImpl::eInvoke(int operationID, std:
 		// fUML::Semantics::Activities::ExpansionActivationGroup::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution {const}: 3008748080
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION:
 		{
-			result = eAnyObject(this->getActivityExecution().lock(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
+			result = eEcoreAny(this->getActivityExecution().lock(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ExpansionActivationGroup::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 156883141
@@ -666,8 +720,29 @@ std::shared_ptr<Any> ExpansionActivationGroupImpl::eInvoke(int operationID, std:
 			//parameter 0
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
 			Bag<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
-			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_node_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_node = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ExpansionActivationGroup::resume(fUML::Semantics::Activities::ActivityNodeActivation): 4278059019
@@ -677,7 +752,28 @@ std::shared_ptr<Any> ExpansionActivationGroupImpl::eInvoke(int operationID, std:
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
 			Bag<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_activation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->resume(incoming_param_activation);
 			break;
 		}
@@ -688,7 +784,28 @@ std::shared_ptr<Any> ExpansionActivationGroupImpl::eInvoke(int operationID, std:
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
 			Bag<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_activation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->suspend(incoming_param_activation);
 			break;
 		}

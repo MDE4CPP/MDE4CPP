@@ -609,7 +609,6 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'argument_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -624,9 +623,8 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'argument_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->argument_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->argument_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CallAction::inputParameters() : uml::Parameter[*]: 105388692
@@ -659,7 +657,6 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -674,9 +671,8 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CallAction::synchronous_call(Any, std::map) : bool: 1601333858
@@ -695,7 +691,6 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'synchronous_call'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -710,9 +705,8 @@ std::shared_ptr<Any> CallActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'synchronous_call'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->synchronous_call(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->synchronous_call(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -564,7 +564,6 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -579,9 +578,8 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuralFeatureAction::not_static(Any, std::map) : bool: 2735452101
@@ -600,7 +598,6 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -615,9 +612,8 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuralFeatureAction::object_type(Any, std::map) : bool: 3530213701
@@ -636,7 +632,6 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'object_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -651,9 +646,8 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'object_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuralFeatureAction::one_featuring_classifier(Any, std::map) : bool: 2331798963
@@ -672,7 +666,6 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_featuring_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -687,9 +680,8 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_featuring_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_featuring_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_featuring_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuralFeatureAction::visibility(Any, std::map) : bool: 1315419741
@@ -708,7 +700,6 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -723,9 +714,8 @@ std::shared_ptr<Any> StructuralFeatureActionImpl::eInvoke(int operationID, std::
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

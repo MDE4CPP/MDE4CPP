@@ -51,7 +51,7 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ObjectToken: virtual public Token
+	class FUML_API ObjectToken : virtual public Token
 	{
 		public:
  			ObjectToken(const ObjectToken &) {}

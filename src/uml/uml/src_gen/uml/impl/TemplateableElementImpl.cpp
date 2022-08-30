@@ -456,7 +456,7 @@ std::shared_ptr<Any> TemplateableElementImpl::eInvoke(int operationID, std::shar
 		// uml::TemplateableElement::isTemplate() : bool: 2563687071
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
 		{
-			result = eAny(this->isTemplate(),0,false);
+			result = eAny(this->isTemplate(), 0, false);
 			break;
 		}
 		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 3445105528

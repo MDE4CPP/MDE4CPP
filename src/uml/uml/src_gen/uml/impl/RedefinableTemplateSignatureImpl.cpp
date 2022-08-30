@@ -659,7 +659,6 @@ std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefines_parents'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -674,9 +673,8 @@ std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefines_parents'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

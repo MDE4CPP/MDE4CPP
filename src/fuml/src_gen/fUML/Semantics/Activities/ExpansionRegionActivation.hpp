@@ -68,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ExpansionRegionActivation: virtual public fUML::Semantics::Actions::ActionActivation
+	class FUML_API ExpansionRegionActivation : virtual public fUML::Semantics::Actions::ActionActivation
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}

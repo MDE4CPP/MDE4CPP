@@ -1246,7 +1246,6 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1261,9 +1260,8 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1705277235
@@ -1282,7 +1280,6 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_pin_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1297,9 +1294,8 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_pin_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 3435203420
@@ -1318,7 +1314,6 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'output_pin_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1333,9 +1328,8 @@ std::shared_ptr<Any> StructuredActivityNodeImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'output_pin_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 3462902530

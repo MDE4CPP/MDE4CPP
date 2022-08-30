@@ -418,13 +418,13 @@ std::shared_ptr<Any> LiteralBooleanImpl::eInvoke(int operationID, std::shared_pt
 		// uml::LiteralBoolean::booleanValue() : bool: 1974710047
 		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
 		{
-			result = eAny(this->booleanValue(),0,false);
+			result = eAny(this->booleanValue(), 0, false);
 			break;
 		}
 		// uml::LiteralBoolean::isComputable() : bool: 243741030
 		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 

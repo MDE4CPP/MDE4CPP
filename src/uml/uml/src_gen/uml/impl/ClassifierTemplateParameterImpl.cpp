@@ -463,7 +463,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_is_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -478,9 +477,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_is_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->actual_is_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->actual_is_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_args(Any, std::map) : bool: 3871983478
@@ -499,7 +497,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_args'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -514,9 +511,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_args'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->constraining_classifiers_constrain_args(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->constraining_classifiers_constrain_args(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_parametered_element(Any, std::map) : bool: 2071195364
@@ -535,7 +531,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -550,9 +545,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->constraining_classifiers_constrain_parametered_element(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->constraining_classifiers_constrain_parametered_element(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClassifierTemplateParameter::has_constraining_classifier(Any, std::map) : bool: 2660850038
@@ -571,7 +565,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_constraining_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -586,9 +579,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_constraining_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_constraining_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_constraining_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClassifierTemplateParameter::matching_abstract(Any, std::map) : bool: 1998922742
@@ -607,7 +599,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -622,9 +613,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->matching_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->matching_abstract(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClassifierTemplateParameter::parametered_element_no_features(Any, std::map) : bool: 1560953665
@@ -643,7 +633,6 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parametered_element_no_features'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -658,9 +647,8 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parametered_element_no_features'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->parametered_element_no_features(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->parametered_element_no_features(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -701,7 +701,6 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'boolean_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -716,9 +715,8 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'boolean_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->boolean_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->boolean_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadIsClassifiedObjectAction::multiplicity_of_input(Any, std::map) : bool: 283873246
@@ -737,7 +735,6 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -752,9 +749,8 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_input(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_input(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadIsClassifiedObjectAction::multiplicity_of_output(Any, std::map) : bool: 1528670395
@@ -773,7 +769,6 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -788,9 +783,8 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_output(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_output(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadIsClassifiedObjectAction::no_type(Any, std::map) : bool: 3290549392
@@ -809,7 +803,6 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -824,9 +817,8 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

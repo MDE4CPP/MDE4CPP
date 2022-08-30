@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -295,7 +295,28 @@ std::shared_ptr<Any> DataStoreNodeActivationImpl::eInvoke(int operationID, std::
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addToken(incoming_param_token);
 			break;
 		}
@@ -306,8 +327,29 @@ std::shared_ptr<Any> DataStoreNodeActivationImpl::eInvoke(int operationID, std::
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->removeToken(incoming_param_token),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->removeToken(incoming_param_token), 0, false);
 			break;
 		}
 

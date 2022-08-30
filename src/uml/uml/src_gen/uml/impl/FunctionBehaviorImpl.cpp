@@ -553,12 +553,12 @@ std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'd'. Failed to invoke operation 'hasAllDataTypeAttributes'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'd'. Failed to invoke operation 'hasAllDataTypeAttributes'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d),0,false);
+			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d), 0, false);
 			break;
 		}
 		// uml::FunctionBehavior::one_output_parameter(Any, std::map) : bool: 22939982
@@ -577,7 +577,6 @@ std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -592,9 +591,8 @@ std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FunctionBehavior::types_of_parameters(Any, std::map) : bool: 166402892
@@ -613,7 +611,6 @@ std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'types_of_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -628,9 +625,8 @@ std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'types_of_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->types_of_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->types_of_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

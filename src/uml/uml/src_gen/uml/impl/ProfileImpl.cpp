@@ -715,7 +715,7 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'classifier'. Failed to invoke operation 'create'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'create'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -745,7 +745,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'options'. Failed to invoke operation 'define'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'diagnostics'
 			//parameter 1
@@ -760,7 +759,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'define'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 2
@@ -775,7 +773,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'define'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
@@ -810,7 +807,7 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'namedElement'. Failed to invoke operation 'getDefinition'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getDefinition'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -834,7 +831,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'requiredOnly'. Failed to invoke operation 'getOwnedExtensions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			std::shared_ptr<Bag<uml::Extension>> resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
 			return eEcoreContainerAny(resultList,uml::umlPackage::EXTENSION_CLASS);
@@ -857,7 +853,7 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// uml::Profile::isDefined() : bool: 2217318421
 		case umlPackage::PROFILE_OPERATION_ISDEFINED:
 		{
-			result = eAny(this->isDefined(),0,false);
+			result = eAny(this->isDefined(), 0, false);
 			break;
 		}
 		// uml::Profile::metaclass_reference_not_specialized(Any, std::map) : bool: 4152976330
@@ -876,7 +872,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'metaclass_reference_not_specialized'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -891,9 +886,8 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'metaclass_reference_not_specialized'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Profile::references_same_metamodel(Any, std::map) : bool: 2161741941
@@ -912,7 +906,6 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'references_same_metamodel'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -927,9 +920,8 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'references_same_metamodel'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->references_same_metamodel(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->references_same_metamodel(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -63,7 +63,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ActivityNodeActivation: virtual public fUML::Semantics::Loci::SemanticVisitor
+	class FUML_API ActivityNodeActivation : virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			ActivityNodeActivation(const ActivityNodeActivation &) {}

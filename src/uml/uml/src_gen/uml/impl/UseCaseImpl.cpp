@@ -945,7 +945,6 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -960,9 +959,8 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UseCase::cannot_include_self(Any, std::map) : bool: 929569410
@@ -981,7 +979,6 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_include_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -996,9 +993,8 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_include_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_include_self(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_include_self(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UseCase::must_have_name(Any, std::map) : bool: 295172503
@@ -1017,7 +1013,6 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1032,9 +1027,8 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UseCase::no_association_to_use_case(Any, std::map) : bool: 1524958393
@@ -1053,7 +1047,6 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_association_to_use_case'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1068,9 +1061,8 @@ std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_association_to_use_case'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_association_to_use_case(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_association_to_use_case(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

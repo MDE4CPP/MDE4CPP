@@ -1005,7 +1005,6 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'dimension_not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1020,9 +1019,8 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'dimension_not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->dimension_not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->dimension_not_contained(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityPartition::represents_classifier(Any, std::map) : bool: 1131267184
@@ -1041,7 +1039,6 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'represents_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1056,9 +1053,8 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'represents_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->represents_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->represents_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityPartition::represents_property(Any, std::map) : bool: 1297206016
@@ -1077,7 +1073,6 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'represents_property'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1092,9 +1087,8 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'represents_property'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->represents_property(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->represents_property(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityPartition::represents_property_and_is_contained(Any, std::map) : bool: 637234829
@@ -1113,7 +1107,6 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'represents_property_and_is_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1128,9 +1121,8 @@ std::shared_ptr<Any> ActivityPartitionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'represents_property_and_is_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->represents_property_and_is_contained(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->represents_property_and_is_contained(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

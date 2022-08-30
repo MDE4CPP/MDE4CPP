@@ -1043,7 +1043,6 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedAttribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'type'
 			//parameter 1
@@ -1066,7 +1065,7 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1084,7 +1083,6 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'lower'. Failed to invoke operation 'createOwnedAttribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'upper'
 			//parameter 3
@@ -1099,7 +1097,6 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'upper'. Failed to invoke operation 'createOwnedAttribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
@@ -1120,7 +1117,6 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
@@ -1135,7 +1131,6 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
@@ -1167,7 +1162,7 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1193,7 +1188,7 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}

@@ -534,7 +534,7 @@ std::shared_ptr<Any> EClassifierImpl::eInvoke(int operationID, std::shared_ptr<B
 		// ecore::EClassifier::getClassifierID() : int: 3270154772
 		case ecorePackage::ECLASSIFIER_OPERATION_GETCLASSIFIERID:
 		{
-			result = eAny(this->getClassifierID(),0,false);
+			result = eAny(this->getClassifierID(), 0, false);
 			break;
 		}
 		// ecore::EClassifier::isInstance(Any) : bool {const}: 202200991
@@ -553,9 +553,8 @@ std::shared_ptr<Any> EClassifierImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'object'. Failed to invoke operation 'isInstance'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->isInstance(incoming_param_object),0,false);
+			result = eAny(this->isInstance(incoming_param_object), 0, false);
 			break;
 		}
 

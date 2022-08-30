@@ -920,7 +920,6 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'abstract_no_method'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -935,9 +934,8 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'abstract_no_method'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::BehavioralFeature::createReturnResult(std::string, uml::Type) : uml::Parameter: 2358256606
@@ -956,7 +954,6 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createReturnResult'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'type'
 			//parameter 1
@@ -979,7 +976,7 @@ std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'type'. Failed to invoke operation 'createReturnResult'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createReturnResult'!"<< std::endl;)
 					return nullptr;
 				}
 			}

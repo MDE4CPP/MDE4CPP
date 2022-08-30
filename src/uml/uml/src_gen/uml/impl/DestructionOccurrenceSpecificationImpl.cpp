@@ -336,7 +336,6 @@ std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eInvoke(int operati
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_occurrence_specifications_below'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -351,9 +350,8 @@ std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eInvoke(int operati
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_occurrence_specifications_below'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_occurrence_specifications_below(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_occurrence_specifications_below(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

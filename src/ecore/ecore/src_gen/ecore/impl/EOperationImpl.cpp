@@ -802,12 +802,12 @@ std::shared_ptr<Any> EOperationImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'someOperation'. Failed to invoke operation 'isOverrideOf'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'someOperation'. Failed to invoke operation 'isOverrideOf'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isOverrideOf(incoming_param_someOperation),0,false);
+			result = eAny(this->isOverrideOf(incoming_param_someOperation), 0, false);
 			break;
 		}
 

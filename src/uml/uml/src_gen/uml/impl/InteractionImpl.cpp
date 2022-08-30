@@ -1205,7 +1205,6 @@ std::shared_ptr<Any> InteractionImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1220,9 +1219,8 @@ std::shared_ptr<Any> InteractionImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

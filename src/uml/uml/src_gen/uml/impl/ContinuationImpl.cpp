@@ -395,7 +395,6 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'first_or_last_interaction_fragment'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -410,9 +409,8 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'first_or_last_interaction_fragment'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->first_or_last_interaction_fragment(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->first_or_last_interaction_fragment(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Continuation::global(Any, std::map) : bool: 2866939866
@@ -431,7 +429,6 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'global'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -446,9 +443,8 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'global'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->global(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->global(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Continuation::same_name(Any, std::map) : bool: 4191439791
@@ -467,7 +463,6 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -482,9 +477,8 @@ std::shared_ptr<Any> ContinuationImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

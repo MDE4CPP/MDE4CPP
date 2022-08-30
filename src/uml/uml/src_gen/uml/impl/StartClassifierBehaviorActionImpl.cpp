@@ -474,7 +474,6 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -489,9 +488,8 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StartClassifierBehaviorAction::type_has_classifier(Any, std::map) : bool: 1313200504
@@ -510,7 +508,6 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_has_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -525,9 +522,8 @@ std::shared_ptr<Any> StartClassifierBehaviorActionImpl::eInvoke(int operationID,
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_has_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_has_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_has_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -57,7 +57,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ActivityParameterNodeActivation: virtual public ObjectNodeActivation
+	class FUML_API ActivityParameterNodeActivation : virtual public ObjectNodeActivation
 	{
 		public:
  			ActivityParameterNodeActivation(const ActivityParameterNodeActivation &) {}

@@ -20,8 +20,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -248,9 +248,33 @@ bool ValuesImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
-			// CAST Any to Bag<Any>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
+				std::shared_ptr<Bag<Any>> _values = getValues();
+				
+				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				{
+					if (valueToAdd)
+					{
+						if(_values->find(valueToAdd) == -1)
+						{
+							_values->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'values'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 

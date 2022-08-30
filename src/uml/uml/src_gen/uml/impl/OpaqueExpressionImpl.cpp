@@ -631,19 +631,19 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 		// uml::OpaqueExpression::isIntegral() : bool: 810802950
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
 		{
-			result = eAny(this->isIntegral(),0,false);
+			result = eAny(this->isIntegral(), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::isNonNegative() : bool: 2422740566
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE:
 		{
-			result = eAny(this->isNonNegative(),0,false);
+			result = eAny(this->isNonNegative(), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::isPositive() : bool: 157142355
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISPOSITIVE:
 		{
-			result = eAny(this->isPositive(),0,false);
+			result = eAny(this->isPositive(), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::language_body_size(Any, std::map) : bool: 2711343532
@@ -662,7 +662,6 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'language_body_size'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -677,9 +676,8 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'language_body_size'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::one_return_result_parameter(Any, std::map) : bool: 1464956848
@@ -698,7 +696,6 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_return_result_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -713,9 +710,8 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_return_result_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::only_return_result_parameters(Any, std::map) : bool: 2103615055
@@ -734,7 +730,6 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'only_return_result_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -749,15 +744,14 @@ std::shared_ptr<Any> OpaqueExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'only_return_result_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::OpaqueExpression::value() : int: 2181682856
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_VALUE:
 		{
-			result = eAny(this->value(),0,false);
+			result = eAny(this->value(), 0, false);
 			break;
 		}
 

@@ -440,7 +440,7 @@ std::shared_ptr<Any> ModelImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 		// uml::Model::isMetamodel() : bool: 1662104762
 		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
 		{
-			result = eAny(this->isMetamodel(),0,false);
+			result = eAny(this->isMetamodel(), 0, false);
 			break;
 		}
 

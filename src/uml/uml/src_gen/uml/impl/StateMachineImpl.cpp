@@ -1015,7 +1015,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's1'. Failed to invoke operation 'LCA'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 's1'. Failed to invoke operation 'LCA'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1041,7 +1041,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's2'. Failed to invoke operation 'LCA'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 's2'. Failed to invoke operation 'LCA'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1073,7 +1073,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'v1'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'v1'. Failed to invoke operation 'LCAState'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1099,7 +1099,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'v2'. Failed to invoke operation 'LCAState'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'v2'. Failed to invoke operation 'LCAState'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1131,7 +1131,7 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's1'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 's1'. Failed to invoke operation 'ancestor'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1157,12 +1157,12 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's2'. Failed to invoke operation 'ancestor'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 's2'. Failed to invoke operation 'ancestor'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2),0,false);
+			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2), 0, false);
 			break;
 		}
 		// uml::StateMachine::classifier_context(Any, std::map) : bool: 649285641
@@ -1181,7 +1181,6 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'classifier_context'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1196,9 +1195,8 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'classifier_context'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StateMachine::connection_points(Any, std::map) : bool: 2667881420
@@ -1217,7 +1215,6 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'connection_points'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1232,9 +1229,8 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'connection_points'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StateMachine::context_classifier(Any, std::map) : bool: 3859423129
@@ -1253,7 +1249,6 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'context_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1268,9 +1263,8 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'context_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StateMachine::method(Any, std::map) : bool: 292291073
@@ -1289,7 +1283,6 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'method'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1304,9 +1297,8 @@ std::shared_ptr<Any> StateMachineImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'method'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

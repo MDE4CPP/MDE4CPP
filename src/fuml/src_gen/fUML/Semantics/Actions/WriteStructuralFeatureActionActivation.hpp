@@ -65,7 +65,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API WriteStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
+	class FUML_API WriteStructuralFeatureActionActivation : virtual public StructuralFeatureActionActivation
 	{
 		public:
  			WriteStructuralFeatureActionActivation(const WriteStructuralFeatureActionActivation &) {}

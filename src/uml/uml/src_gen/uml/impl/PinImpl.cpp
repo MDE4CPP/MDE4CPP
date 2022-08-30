@@ -448,7 +448,6 @@ std::shared_ptr<Any> PinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'control_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -463,9 +462,8 @@ std::shared_ptr<Any> PinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'control_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->control_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->control_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pin::not_unique(Any, std::map) : bool: 3758597056
@@ -484,7 +482,6 @@ std::shared_ptr<Any> PinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_unique'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -499,9 +496,8 @@ std::shared_ptr<Any> PinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_unique'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_unique(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_unique(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

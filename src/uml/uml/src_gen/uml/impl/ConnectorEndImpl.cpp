@@ -526,7 +526,6 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -541,9 +540,8 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConnectorEnd::part_with_port_empty(Any, std::map) : bool: 1246926808
@@ -562,7 +560,6 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'part_with_port_empty'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -577,9 +574,8 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'part_with_port_empty'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->part_with_port_empty(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->part_with_port_empty(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConnectorEnd::role_and_part_with_port(Any, std::map) : bool: 1158537213
@@ -598,7 +594,6 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'role_and_part_with_port'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -613,9 +608,8 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'role_and_part_with_port'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->role_and_part_with_port(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->role_and_part_with_port(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConnectorEnd::self_part_with_port(Any, std::map) : bool: 1871016491
@@ -634,7 +628,6 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'self_part_with_port'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -649,9 +642,8 @@ std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'self_part_with_port'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->self_part_with_port(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->self_part_with_port(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

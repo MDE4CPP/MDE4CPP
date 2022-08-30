@@ -679,7 +679,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_of_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -694,9 +693,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_of_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->association_of_association(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->association_of_association(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::ends_of_association(Any, std::map) : bool: 3058832312
@@ -715,7 +713,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'ends_of_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -730,9 +727,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'ends_of_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->ends_of_association(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->ends_of_association(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::multiplicity_of_object(Any, std::map) : bool: 1064037221
@@ -751,7 +747,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -766,9 +761,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::multiplicity_of_qualifier(Any, std::map) : bool: 179367400
@@ -787,7 +781,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -802,9 +795,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_qualifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::multiplicity_of_result(Any, std::map) : bool: 839890593
@@ -823,7 +815,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -838,9 +829,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::qualifier_attribute(Any, std::map) : bool: 2559087319
@@ -859,7 +849,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualifier_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -874,9 +863,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualifier_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::same_type(Any, std::map) : bool: 3857349749
@@ -895,7 +883,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -910,9 +897,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkObjectEndQualifierAction::type_of_object(Any, std::map) : bool: 4054072362
@@ -931,7 +917,6 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -946,9 +931,8 @@ std::shared_ptr<Any> ReadLinkObjectEndQualifierActionImpl::eInvoke(int operation
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

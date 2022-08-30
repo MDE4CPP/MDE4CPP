@@ -1989,7 +1989,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
@@ -2004,7 +2003,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
@@ -2036,7 +2034,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -2060,7 +2058,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
@@ -2075,7 +2072,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
@@ -2107,7 +2103,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -2125,7 +2121,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'ignoreCase'. Failed to invoke operation 'getOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase), uml::umlPackage::OPERATION_CLASS);
 			break;
@@ -2153,9 +2148,8 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'getPropertyValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->getPropertyValue(incoming_param_propertyName),0,false);
+			result = eAny(this->getPropertyValue(incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Classifier::getUsedInterfaces() : uml::Interface[*]: 2875330752
@@ -2189,12 +2183,12 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'n'. Failed to invoke operation 'hasVisibilityOf'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'hasVisibilityOf'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->hasVisibilityOf(incoming_param_n),0,false);
+			result = eAny(this->hasVisibilityOf(incoming_param_n), 0, false);
 			break;
 		}
 		// uml::Classifier::inherit(uml::NamedElement[*]) : uml::NamedElement[*]: 1076598219
@@ -2230,7 +2224,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'inhs'. Failed to invoke operation 'inherit'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inhs'. Failed to invoke operation 'inherit'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -2263,7 +2257,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'c'. Failed to invoke operation 'inheritableMembers'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'inheritableMembers'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -2296,12 +2290,12 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'contract'. Failed to invoke operation 'isSubstitutableFor'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'contract'. Failed to invoke operation 'isSubstitutableFor'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isSubstitutableFor(incoming_param_contract),0,false);
+			result = eAny(this->isSubstitutableFor(incoming_param_contract), 0, false);
 			break;
 		}
 		// uml::Classifier::maps_to_generalization_set(Any, std::map) : bool: 2990336940
@@ -2320,7 +2314,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maps_to_generalization_set'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2335,9 +2328,8 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maps_to_generalization_set'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Classifier::maySpecializeType(uml::Classifier) : bool: 211370547
@@ -2364,12 +2356,12 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'c'. Failed to invoke operation 'maySpecializeType'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'maySpecializeType'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->maySpecializeType(incoming_param_c),0,false);
+			result = eAny(this->maySpecializeType(incoming_param_c), 0, false);
 			break;
 		}
 		// uml::Classifier::no_cycles_in_generalization(Any, std::map) : bool: 3444230139
@@ -2388,7 +2380,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_cycles_in_generalization'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2403,9 +2394,8 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_cycles_in_generalization'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Classifier::non_final_parents(Any, std::map) : bool: 3265360227
@@ -2424,7 +2414,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'non_final_parents'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2439,9 +2428,8 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'non_final_parents'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Classifier::parents() : uml::Classifier[*]: 3079307280
@@ -2467,7 +2455,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialize_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2482,9 +2469,8 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialize_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

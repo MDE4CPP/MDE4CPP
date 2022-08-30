@@ -69,7 +69,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ActivityExecution: virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API ActivityExecution : virtual public fUML::Semantics::CommonBehavior::Execution
 	{
 		public:
  			ActivityExecution(const ActivityExecution &) {}

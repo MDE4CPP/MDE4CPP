@@ -20,8 +20,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -39,8 +39,8 @@
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -328,17 +328,64 @@ bool ParameterValueImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
-			// CAST Any to uml::Parameter
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
-			setParameter(_parameter); //870
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(eObject);
+					if(_parameter)
+					{
+						setParameter(_parameter); //870
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'parameter'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'parameter'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
-			// CAST Any to Bag<Any>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
+				std::shared_ptr<Bag<Any>> _values = getValues();
+				
+				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				{
+					if (valueToAdd)
+					{
+						if(_values->find(valueToAdd) == -1)
+						{
+							_values->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'values'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -357,7 +404,7 @@ std::shared_ptr<Any> ParameterValueImpl::eInvoke(int operationID, std::shared_pt
 		// fUML::Semantics::CommonBehavior::ParameterValue::_copy() : fUML::Semantics::CommonBehavior::ParameterValue: 2742640749
 		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			result = eEcoreAny(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 

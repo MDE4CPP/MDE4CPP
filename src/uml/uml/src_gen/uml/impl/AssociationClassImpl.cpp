@@ -548,7 +548,6 @@ std::shared_ptr<Any> AssociationClassImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_be_defined'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -563,9 +562,8 @@ std::shared_ptr<Any> AssociationClassImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_be_defined'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_be_defined(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_be_defined(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AssociationClass::disjoint_attributes_ends(Any, std::map) : bool: 3687752876
@@ -584,7 +582,6 @@ std::shared_ptr<Any> AssociationClassImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'disjoint_attributes_ends'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -599,9 +596,8 @@ std::shared_ptr<Any> AssociationClassImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'disjoint_attributes_ends'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->disjoint_attributes_ends(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->disjoint_attributes_ends(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

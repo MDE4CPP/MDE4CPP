@@ -56,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API FlowFinalNodeActivation: virtual public ControlNodeActivation
+	class FUML_API FlowFinalNodeActivation : virtual public ControlNodeActivation
 	{
 		public:
  			FlowFinalNodeActivation(const FlowFinalNodeActivation &) {}

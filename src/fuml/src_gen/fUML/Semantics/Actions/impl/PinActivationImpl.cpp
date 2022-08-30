@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Union.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -38,8 +38,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -48,8 +48,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -364,7 +364,7 @@ std::shared_ptr<Any> PinActivationImpl::eGet(int featureID, bool resolve, bool c
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActionActivation().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //887
+			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //887
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
 			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //888
@@ -390,19 +390,65 @@ bool PinActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
-			// CAST Any to fUML::Semantics::Actions::ActionActivation
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(_temp);
-			setActionActivation(_actionActivation); //887
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(eObject);
+					if(_actionActivation)
+					{
+						setActionActivation(_actionActivation); //887
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'actionActivation'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'actionActivation'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
 		{
-			// CAST Any to uml::Pin
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_temp);
-			setPin(_pin); //888
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(eObject);
+					if(_pin)
+					{
+						setPin(_pin); //888
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'pin'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'pin'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -425,7 +471,37 @@ std::shared_ptr<Any> PinActivationImpl::eInvoke(int operationID, std::shared_ptr
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
 			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_incomingTokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_incomingTokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_incomingTokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
@@ -433,7 +509,7 @@ std::shared_ptr<Any> PinActivationImpl::eInvoke(int operationID, std::shared_ptr
 		case ActionsPackage::PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->takeOfferedTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 

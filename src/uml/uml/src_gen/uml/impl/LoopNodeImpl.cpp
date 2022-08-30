@@ -1293,7 +1293,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'body_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1308,9 +1307,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'body_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::executable_nodes(Any, std::map) : bool: 1236405140
@@ -1329,7 +1327,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1344,9 +1341,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::input_edges(Any, std::map) : bool: 1422262437
@@ -1365,7 +1361,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1380,9 +1375,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::loop_variable_outgoing(Any, std::map) : bool: 2617524372
@@ -1401,7 +1395,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'loop_variable_outgoing'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1416,9 +1409,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'loop_variable_outgoing'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->loop_variable_outgoing(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->loop_variable_outgoing(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::matching_loop_variables(Any, std::map) : bool: 3371755158
@@ -1437,7 +1429,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_loop_variables'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1452,9 +1443,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_loop_variables'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->matching_loop_variables(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->matching_loop_variables(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::matching_output_pins(Any, std::map) : bool: 2386670494
@@ -1473,7 +1463,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1488,9 +1477,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::matching_result_pins(Any, std::map) : bool: 1109391776
@@ -1509,7 +1497,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1524,9 +1511,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->matching_result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->matching_result_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::result_no_incoming(Any, std::map) : bool: 1882743452
@@ -1545,7 +1531,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'result_no_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1560,9 +1545,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'result_no_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LoopNode::setup_test_and_body(Any, std::map) : bool: 4028967581
@@ -1581,7 +1565,6 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'setup_test_and_body'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1596,9 +1579,8 @@ std::shared_ptr<Any> LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'setup_test_and_body'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->setup_test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->setup_test_and_body(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

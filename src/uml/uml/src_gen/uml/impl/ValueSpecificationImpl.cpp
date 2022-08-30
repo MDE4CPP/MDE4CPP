@@ -521,43 +521,43 @@ std::shared_ptr<Any> ValueSpecificationImpl::eInvoke(int operationID, std::share
 		// uml::ValueSpecification::booleanValue() : bool: 1350723800
 		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
 		{
-			result = eAny(this->booleanValue(),0,false);
+			result = eAny(this->booleanValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::integerValue() : int: 2449030041
 		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
 		{
-			result = eAny(this->integerValue(),0,false);
+			result = eAny(this->integerValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::isComputable() : bool: 3895370351
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::isNull() : bool: 1141016246
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
 		{
-			result = eAny(this->isNull(),0,false);
+			result = eAny(this->isNull(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::realValue() : double: 1448638351
 		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
 		{
-			result = eAny(this->realValue(),0,false);
+			result = eAny(this->realValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::stringValue() : std::string: 1518605845
 		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue(),0,false);
+			result = eAny(this->stringValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::unlimitedValue() : int: 1134102830
 		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
 		{
-			result = eAny(this->unlimitedValue(),0,false);
+			result = eAny(this->unlimitedValue(), 0, false);
 			break;
 		}
 

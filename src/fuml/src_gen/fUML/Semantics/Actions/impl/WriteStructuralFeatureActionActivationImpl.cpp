@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -287,18 +287,45 @@ std::shared_ptr<Any> WriteStructuralFeatureActionActivationImpl::eInvoke(int ope
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'position'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'list'
 			//parameter 1
 			std::shared_ptr<Bag<Any>> incoming_param_list;
 			Bag<Any>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_list = (*incoming_param_list_arguments_citer)->get<std::shared_ptr<Bag<Any>> >();
+			try
+			{
+				incoming_param_list = (*incoming_param_list_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'list'. Failed to invoke operation 'position'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'startAt'
 			//parameter 2
 			int incoming_param_startAt;
 			Bag<Any>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get<int >();
-			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt),0,false);
+			try
+			{
+				incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'startAt'. Failed to invoke operation 'position'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt), 0, false);
 			break;
 		}
 

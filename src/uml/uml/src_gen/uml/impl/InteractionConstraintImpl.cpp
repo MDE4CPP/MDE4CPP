@@ -530,7 +530,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'dynamic_variables'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -545,9 +544,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'dynamic_variables'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->dynamic_variables(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->dynamic_variables(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionConstraint::global_data(Any, std::map) : bool: 1271686561
@@ -566,7 +564,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'global_data'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -581,9 +578,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'global_data'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->global_data(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->global_data(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionConstraint::maxint_greater_equal_minint(Any, std::map) : bool: 1516750290
@@ -602,7 +598,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maxint_greater_equal_minint'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -617,9 +612,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maxint_greater_equal_minint'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maxint_greater_equal_minint(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maxint_greater_equal_minint(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionConstraint::maxint_positive(Any, std::map) : bool: 399579334
@@ -638,7 +632,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maxint_positive'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -653,9 +646,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maxint_positive'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maxint_positive(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maxint_positive(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionConstraint::minint_maxint(Any, std::map) : bool: 2113565290
@@ -674,7 +666,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'minint_maxint'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -689,9 +680,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'minint_maxint'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->minint_maxint(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->minint_maxint(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionConstraint::minint_non_negative(Any, std::map) : bool: 2482574670
@@ -710,7 +700,6 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'minint_non_negative'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -725,9 +714,8 @@ std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'minint_non_negative'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->minint_non_negative(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->minint_non_negative(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

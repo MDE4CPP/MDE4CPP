@@ -418,13 +418,13 @@ std::shared_ptr<Any> LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::
 		// uml::LiteralUnlimitedNatural::isComputable() : bool: 3321491888
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::LiteralUnlimitedNatural::unlimitedValue() : int: 2738594635
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE:
 		{
-			result = eAny(this->unlimitedValue(),0,false);
+			result = eAny(this->unlimitedValue(), 0, false);
 			break;
 		}
 

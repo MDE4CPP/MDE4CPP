@@ -20,8 +20,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,8 +35,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -238,8 +238,17 @@ std::shared_ptr<Any> FirstChoiceStrategyImpl::eInvoke(int operationID, std::shar
 			//parameter 0
 			int incoming_param_size;
 			Bag<Any>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_size = (*incoming_param_size_arguments_citer)->get<int >();
-			result = eAny(this->choose(incoming_param_size),0,false);
+			try
+			{
+				incoming_param_size = (*incoming_param_size_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'size'. Failed to invoke operation 'choose'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			result = eAny(this->choose(incoming_param_size), 0, false);
 			break;
 		}
 

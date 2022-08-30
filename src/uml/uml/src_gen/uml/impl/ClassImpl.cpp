@@ -1197,7 +1197,6 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
@@ -1212,7 +1211,6 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
@@ -1244,7 +1242,7 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1270,7 +1268,7 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1302,7 +1300,7 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 		// uml::Class::isMetaclass() : bool: 3169682088
 		case umlPackage::CLASS_OPERATION_ISMETACLASS:
 		{
-			result = eAny(this->isMetaclass(),0,false);
+			result = eAny(this->isMetaclass(), 0, false);
 			break;
 		}
 		// uml::Class::passive_class(Any, std::map) : bool: 3738386724
@@ -1321,7 +1319,6 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'passive_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1336,9 +1333,8 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'passive_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

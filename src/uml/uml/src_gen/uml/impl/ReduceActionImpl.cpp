@@ -697,7 +697,6 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_type_is_collection'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -712,9 +711,8 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_type_is_collection'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReduceAction::output_types_are_compatible(Any, std::map) : bool: 2690307739
@@ -733,7 +731,6 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'output_types_are_compatible'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -748,9 +745,8 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'output_types_are_compatible'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReduceAction::reducer_inputs_output(Any, std::map) : bool: 3526484648
@@ -769,7 +765,6 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'reducer_inputs_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -784,9 +779,8 @@ std::shared_ptr<Any> ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'reducer_inputs_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

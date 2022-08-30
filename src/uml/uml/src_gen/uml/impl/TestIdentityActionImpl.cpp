@@ -643,7 +643,6 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -658,9 +657,8 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::TestIdentityAction::no_type(Any, std::map) : bool: 1965487056
@@ -679,7 +677,6 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -694,9 +691,8 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::TestIdentityAction::result_is_boolean(Any, std::map) : bool: 3147734331
@@ -715,7 +711,6 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'result_is_boolean'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -730,9 +725,8 @@ std::shared_ptr<Any> TestIdentityActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'result_is_boolean'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->result_is_boolean(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->result_is_boolean(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

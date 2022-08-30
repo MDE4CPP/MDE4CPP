@@ -644,7 +644,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'choice_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -659,9 +658,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'choice_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->choice_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->choice_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::fork_vertex(Any, std::map) : bool: 70703214
@@ -680,7 +678,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'fork_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -695,9 +692,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'fork_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->fork_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->fork_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::history_vertices(Any, std::map) : bool: 1473780509
@@ -716,7 +712,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'history_vertices'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -731,9 +726,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'history_vertices'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->history_vertices(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->history_vertices(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::initial_vertex(Any, std::map) : bool: 1119478342
@@ -752,7 +746,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -767,9 +760,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::join_vertex(Any, std::map) : bool: 3336750216
@@ -788,7 +780,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'join_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -803,9 +794,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'join_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->join_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->join_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::junction_vertex(Any, std::map) : bool: 1046174546
@@ -824,7 +814,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'junction_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -839,9 +828,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'junction_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->junction_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->junction_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::outgoing_from_initial(Any, std::map) : bool: 56020895
@@ -860,7 +848,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outgoing_from_initial'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -875,9 +862,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outgoing_from_initial'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->outgoing_from_initial(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->outgoing_from_initial(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::transitions_incoming(Any, std::map) : bool: 1040583452
@@ -896,7 +882,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -911,9 +896,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->transitions_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->transitions_incoming(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Pseudostate::transitions_outgoing(Any, std::map) : bool: 1228342264
@@ -932,7 +916,6 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_outgoing'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -947,9 +930,8 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_outgoing'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->transitions_outgoing(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->transitions_outgoing(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

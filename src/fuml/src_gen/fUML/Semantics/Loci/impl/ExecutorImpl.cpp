@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -49,8 +49,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -350,7 +350,7 @@ std::shared_ptr<Any> ExecutorImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //480
+			return eEcoreAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //480
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -372,11 +372,34 @@ bool ExecutorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 		{
-			// CAST Any to fUML::Semantics::Loci::Locus
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //480
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
+					if(_locus)
+					{
+						setLocus(_locus); //480
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -399,8 +422,29 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<uml::ValueSpecification> incoming_param_specification;
 			Bag<Any>::const_iterator incoming_param_specification_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_specification = (*incoming_param_specification_arguments_citer)->get<std::shared_ptr<uml::ValueSpecification> >();
-			result = eAny(this->evaluate(incoming_param_specification),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_specification_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->evaluate(incoming_param_specification), 0, false);
 			break;
 		}
 		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, uml::Element, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3205044137
@@ -410,19 +454,91 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<uml::Behavior> incoming_param_behavior;
 			Bag<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_behavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'inputs'
 			//parameter 2
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
 			Bag<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputs_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputs.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputs->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->execute(incoming_param_behavior,incoming_param_context,incoming_param_inputs);
-			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::Executor::start(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]) : uml::Element: 2158458358
@@ -432,13 +548,64 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_type;
 			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'inputs'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
 			Bag<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			result = eAnyObject(this->start(incoming_param_type,incoming_param_inputs), uml::umlPackage::ELEMENT_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputs_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputs.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputs->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->start(incoming_param_type,incoming_param_inputs), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 

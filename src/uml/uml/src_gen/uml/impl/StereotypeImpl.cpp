@@ -717,7 +717,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'associationEndOwnership'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -732,9 +731,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'associationEndOwnership'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::base_property_multiplicity_multiple_extension(Any, std::map) : bool: 1355961636
@@ -753,7 +751,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_multiplicity_multiple_extension'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -768,9 +765,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_multiplicity_multiple_extension'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::base_property_multiplicity_single_extension(Any, std::map) : bool: 547814422
@@ -789,7 +785,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_multiplicity_single_extension'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -804,9 +799,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_multiplicity_single_extension'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::base_property_upper_bound(Any, std::map) : bool: 3083226999
@@ -825,7 +819,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'base_property_upper_bound'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -840,9 +833,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'base_property_upper_bound'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::binaryAssociationsOnly(Any, std::map) : bool: 1954710553
@@ -861,7 +853,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binaryAssociationsOnly'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -876,9 +867,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binaryAssociationsOnly'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::containingProfile() : uml::Profile: 3116027671
@@ -911,7 +901,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -929,7 +919,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isRequired'. Failed to invoke operation 'createExtension'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
 			break;
@@ -950,7 +939,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'location'. Failed to invoke operation 'createIcon'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
 			break;
@@ -971,7 +959,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'format'. Failed to invoke operation 'createIcon'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'content'
 			//parameter 1
@@ -986,7 +973,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'content'. Failed to invoke operation 'createIcon'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
@@ -1007,7 +993,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'generalize'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1022,9 +1007,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'generalize'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Stereotype::getAllExtendedMetaclasses() : uml::Class[*]: 912925586
@@ -1050,7 +1034,7 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::Stereotype::getKeyword() : std::string: 263636712
 		case umlPackage::STEREOTYPE_OPERATION_GETKEYWORD:
 		{
-			result = eAny(this->getKeyword(),0,false);
+			result = eAny(this->getKeyword(), 0, false);
 			break;
 		}
 		// uml::Stereotype::getKeyword(bool) : std::string: 3455502248
@@ -1069,9 +1053,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getKeyword'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->getKeyword(incoming_param_localize),0,false);
+			result = eAny(this->getKeyword(incoming_param_localize), 0, false);
 			break;
 		}
 		// uml::Stereotype::name_not_clash(Any, std::map) : bool: 344796417
@@ -1090,7 +1073,6 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'name_not_clash'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1105,9 +1087,8 @@ std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'name_not_clash'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->name_not_clash(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->name_not_clash(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

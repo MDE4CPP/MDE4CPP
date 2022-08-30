@@ -609,7 +609,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edge_source_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -624,9 +623,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edge_source_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExceptionHandler::exception_input_type(Any, std::map) : bool: 3735675314
@@ -645,7 +643,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'exception_input_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -660,9 +657,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'exception_input_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExceptionHandler::handler_body_edges(Any, std::map) : bool: 3689633901
@@ -681,7 +677,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'handler_body_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -696,9 +691,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'handler_body_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExceptionHandler::handler_body_owner(Any, std::map) : bool: 3173316564
@@ -717,7 +711,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'handler_body_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -732,9 +725,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'handler_body_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExceptionHandler::one_input(Any, std::map) : bool: 2531493072
@@ -753,7 +745,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -768,9 +759,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ExceptionHandler::output_pins(Any, std::map) : bool: 4230900057
@@ -789,7 +779,6 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -804,9 +793,8 @@ std::shared_ptr<Any> ExceptionHandlerImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

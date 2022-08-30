@@ -505,7 +505,6 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_object_flow'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -520,9 +519,8 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_object_flow'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::JoinNode::one_outgoing_edge(Any, std::map) : bool: 2181464453
@@ -541,7 +539,6 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_outgoing_edge'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -556,9 +553,8 @@ std::shared_ptr<Any> JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_outgoing_edge'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

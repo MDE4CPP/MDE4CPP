@@ -835,7 +835,6 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_import_ownedMembers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -850,9 +849,8 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_import_ownedMembers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Namespace::cannot_import_self(Any, std::map) : bool: 3009607981
@@ -871,7 +869,6 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_import_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -886,9 +883,8 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_import_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Namespace::createElementImport(uml::PackageableElement, uml::VisibilityKind) : uml::ElementImport: 3041688654
@@ -915,7 +911,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'element'. Failed to invoke operation 'createElementImport'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'createElementImport'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -933,7 +929,6 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'visibility'. Failed to invoke operation 'createElementImport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
 			break;
@@ -962,7 +957,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'package_'. Failed to invoke operation 'createPackageImport'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'package_'. Failed to invoke operation 'createPackageImport'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -980,7 +975,6 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'visibility'. Failed to invoke operation 'createPackageImport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
 			break;
@@ -1018,7 +1012,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'imps'. Failed to invoke operation 'excludeCollisions'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'excludeCollisions'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1072,12 +1066,12 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'element'. Failed to invoke operation 'getNamesOfMember'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'getNamesOfMember'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->getNamesOfMember(incoming_param_element),0,true);
+			result = eAny(this->getNamesOfMember(incoming_param_element), 0, true);
 			break;
 		}
 		// uml::Namespace::getOwnedMembers() : uml::NamedElement[*]: 353105181
@@ -1120,7 +1114,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'imps'. Failed to invoke operation 'importMembers'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'importMembers'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1132,7 +1126,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Namespace::membersAreDistinguishable() : bool: 1431982872
 		case umlPackage::NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE:
 		{
-			result = eAny(this->membersAreDistinguishable(),0,false);
+			result = eAny(this->membersAreDistinguishable(), 0, false);
 			break;
 		}
 		// uml::Namespace::members_distinguishable(Any, std::map) : bool: 1065132056
@@ -1151,7 +1145,6 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'members_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1166,9 +1159,8 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'members_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->members_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->members_distinguishable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

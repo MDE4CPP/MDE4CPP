@@ -566,7 +566,6 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'classifier_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -581,9 +580,8 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'classifier_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CreateObjectAction::classifier_not_association_class(Any, std::map) : bool: 1151840293
@@ -602,7 +600,6 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'classifier_not_association_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -617,9 +614,8 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'classifier_not_association_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->classifier_not_association_class(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->classifier_not_association_class(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CreateObjectAction::multiplicity(Any, std::map) : bool: 355912624
@@ -638,7 +634,6 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -653,9 +648,8 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CreateObjectAction::same_type(Any, std::map) : bool: 988938262
@@ -674,7 +668,6 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -689,9 +682,8 @@ std::shared_ptr<Any> CreateObjectActionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

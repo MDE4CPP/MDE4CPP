@@ -460,7 +460,6 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getEEnumLiteral'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEEnumLiteral(incoming_param_name), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
@@ -481,7 +480,6 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'getEEnumLiteral'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEEnumLiteral(incoming_param_value), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;
@@ -502,7 +500,6 @@ std::shared_ptr<Any> EEnumImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'literal'. Failed to invoke operation 'getEEnumLiteralByLiteral'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEEnumLiteralByLiteral(incoming_param_literal), ecore::ecorePackage::EENUMLITERAL_CLASS);
 			break;

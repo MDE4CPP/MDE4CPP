@@ -1421,7 +1421,7 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'from'. Failed to invoke operation 'behavioredClassifier'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'from'. Failed to invoke operation 'behavioredClassifier'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1445,7 +1445,6 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'feature_of_context_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1460,9 +1459,8 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'feature_of_context_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->feature_of_context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->feature_of_context_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Behavior::inputParameters() : uml::Parameter[*]: 2569274578
@@ -1488,7 +1486,6 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'most_one_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1503,9 +1500,8 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'most_one_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->most_one_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->most_one_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Behavior::outputParameters() : uml::Parameter[*]: 2790902847
@@ -1531,7 +1527,6 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameters_match'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1546,9 +1541,8 @@ std::shared_ptr<Any> BehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameters_match'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->parameters_match(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->parameters_match(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

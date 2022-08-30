@@ -705,7 +705,6 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'classifier_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -720,9 +719,8 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'classifier_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReclassifyObjectAction::input_pin(Any, std::map) : bool: 1732837234
@@ -741,7 +739,6 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -756,9 +753,8 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReclassifyObjectAction::multiplicity(Any, std::map) : bool: 1033085717
@@ -777,7 +773,6 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -792,9 +787,8 @@ std::shared_ptr<Any> ReclassifyObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

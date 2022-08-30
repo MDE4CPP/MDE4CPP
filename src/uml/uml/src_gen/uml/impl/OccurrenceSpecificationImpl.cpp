@@ -522,7 +522,7 @@ std::shared_ptr<Any> OccurrenceSpecificationImpl::eInvoke(int operationID, std::
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'value'. Failed to invoke operation 'setCovered'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'setCovered'!"<< std::endl;)
 					return nullptr;
 				}
 			}

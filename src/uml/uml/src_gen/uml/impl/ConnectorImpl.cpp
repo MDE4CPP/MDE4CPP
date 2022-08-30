@@ -849,7 +849,7 @@ std::shared_ptr<Any> ConnectorImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Connector::getKind() : uml::ConnectorKind: 401249273
 		case umlPackage::CONNECTOR_OPERATION_GETKIND:
 		{
-			result = eAny(this->getKind(),0,false);
+			result = eAny(this->getKind(), 0, false);
 			break;
 		}
 		// uml::Connector::roles(Any, std::map) : bool: 1319646034
@@ -868,7 +868,6 @@ std::shared_ptr<Any> ConnectorImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'roles'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -883,9 +882,8 @@ std::shared_ptr<Any> ConnectorImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'roles'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Connector::types(Any, std::map) : bool: 3612765002
@@ -904,7 +902,6 @@ std::shared_ptr<Any> ConnectorImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -919,9 +916,8 @@ std::shared_ptr<Any> ConnectorImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

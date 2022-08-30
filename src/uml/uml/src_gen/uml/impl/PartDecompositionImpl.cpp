@@ -345,7 +345,6 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'assume'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -360,9 +359,8 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'assume'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->assume(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->assume(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::PartDecomposition::commutativity_of_decomposition(Any, std::map) : bool: 2415887113
@@ -381,7 +379,6 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'commutativity_of_decomposition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -396,9 +393,8 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'commutativity_of_decomposition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->commutativity_of_decomposition(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->commutativity_of_decomposition(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::PartDecomposition::parts_of_internal_structures(Any, std::map) : bool: 4164163091
@@ -417,7 +413,6 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parts_of_internal_structures'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -432,9 +427,8 @@ std::shared_ptr<Any> PartDecompositionImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parts_of_internal_structures'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->parts_of_internal_structures(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->parts_of_internal_structures(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

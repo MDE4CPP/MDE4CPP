@@ -418,13 +418,13 @@ std::shared_ptr<Any> LiteralStringImpl::eInvoke(int operationID, std::shared_ptr
 		// uml::LiteralString::isComputable() : bool: 3555956385
 		case umlPackage::LITERALSTRING_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::LiteralString::stringValue() : std::string: 3894136783
 		case umlPackage::LITERALSTRING_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue(),0,false);
+			result = eAny(this->stringValue(), 0, false);
 			break;
 		}
 

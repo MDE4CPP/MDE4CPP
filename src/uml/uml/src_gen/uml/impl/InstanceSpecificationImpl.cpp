@@ -698,7 +698,6 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'defining_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -713,9 +712,8 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'defining_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InstanceSpecification::deployment_artifact(Any, std::map) : bool: 1340824250
@@ -734,7 +732,6 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deployment_artifact'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -749,9 +746,8 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deployment_artifact'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InstanceSpecification::deployment_target(Any, std::map) : bool: 705404039
@@ -770,7 +766,6 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -785,9 +780,8 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InstanceSpecification::structural_feature(Any, std::map) : bool: 432277844
@@ -806,7 +800,6 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'structural_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -821,9 +814,8 @@ std::shared_ptr<Any> InstanceSpecificationImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'structural_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -492,7 +492,6 @@ std::shared_ptr<Any> ReadStructuralFeatureActionImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_and_ordering'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -507,9 +506,8 @@ std::shared_ptr<Any> ReadStructuralFeatureActionImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_and_ordering'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

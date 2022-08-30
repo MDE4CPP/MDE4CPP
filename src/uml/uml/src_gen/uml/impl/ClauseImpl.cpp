@@ -783,7 +783,6 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'body_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -798,9 +797,8 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'body_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Clause::decider_output(Any, std::map) : bool: 1450067495
@@ -819,7 +817,6 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'decider_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -834,9 +831,8 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'decider_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Clause::test_and_body(Any, std::map) : bool: 4255472206
@@ -855,7 +851,6 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'test_and_body'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -870,9 +865,8 @@ std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'test_and_body'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

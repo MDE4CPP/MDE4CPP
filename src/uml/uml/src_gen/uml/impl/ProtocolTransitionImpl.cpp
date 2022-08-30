@@ -567,7 +567,6 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'associated_actions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -582,9 +581,8 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'associated_actions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ProtocolTransition::belongs_to_psm(Any, std::map) : bool: 277614638
@@ -603,7 +601,6 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'belongs_to_psm'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -618,9 +615,8 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'belongs_to_psm'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ProtocolTransition::getReferreds() : uml::Operation[*]: 37225025
@@ -646,7 +642,6 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'refers_to_operation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -661,9 +656,8 @@ std::shared_ptr<Any> ProtocolTransitionImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'refers_to_operation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

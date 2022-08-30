@@ -516,7 +516,6 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -531,9 +530,8 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StartObjectBehaviorAction::no_onport(Any, std::map) : bool: 49782203
@@ -552,7 +550,6 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_onport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -567,9 +564,8 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_onport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StartObjectBehaviorAction::type_of_object(Any, std::map) : bool: 2859096117
@@ -588,7 +584,6 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -603,9 +598,8 @@ std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -399,7 +399,6 @@ std::shared_ptr<Any> LinkEndCreationDataImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'insertAt_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -414,9 +413,8 @@ std::shared_ptr<Any> LinkEndCreationDataImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'insertAt_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

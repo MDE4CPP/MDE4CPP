@@ -532,7 +532,6 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -547,9 +546,8 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ParameterSet::same_parameterized_entity(Any, std::map) : bool: 1035426461
@@ -568,7 +566,6 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_parameterized_entity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -583,9 +580,8 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_parameterized_entity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ParameterSet::two_parameter_sets(Any, std::map) : bool: 3479021643
@@ -604,7 +600,6 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'two_parameter_sets'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -619,9 +614,8 @@ std::shared_ptr<Any> ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'two_parameter_sets'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->two_parameter_sets(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->two_parameter_sets(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

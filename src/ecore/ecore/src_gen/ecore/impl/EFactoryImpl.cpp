@@ -781,7 +781,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eDataType'. Failed to invoke operation 'convertToString'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eDataType'. Failed to invoke operation 'convertToString'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -799,9 +799,8 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'instanceValue'. Failed to invoke operation 'convertToString'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue),0,false);
+			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue), 0, false);
 			break;
 		}
 		// ecore::EFactory::create(ecore::EClass) : ecore::EObject {const}: 3809046360
@@ -828,7 +827,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eClass'. Failed to invoke operation 'create'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'create'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -860,7 +859,7 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'eDataType'. Failed to invoke operation 'createFromString'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'eDataType'. Failed to invoke operation 'createFromString'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -878,9 +877,8 @@ std::shared_ptr<Any> EFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'literalValue'. Failed to invoke operation 'createFromString'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue),0,false);
+			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue), 0, false);
 			break;
 		}
 

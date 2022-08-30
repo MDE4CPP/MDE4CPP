@@ -518,7 +518,6 @@ std::shared_ptr<Any> ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'region_as_input_or_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -533,9 +532,8 @@ std::shared_ptr<Any> ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'region_as_input_or_output'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

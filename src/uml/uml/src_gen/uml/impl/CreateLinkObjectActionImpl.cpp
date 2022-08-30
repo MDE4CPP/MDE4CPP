@@ -506,7 +506,6 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -521,9 +520,8 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_class'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->association_class(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->association_class(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CreateLinkObjectAction::multiplicity(Any, std::map) : bool: 2861417742
@@ -542,7 +540,6 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -557,9 +554,8 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CreateLinkObjectAction::type_of_result(Any, std::map) : bool: 3018502509
@@ -578,7 +574,6 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -593,9 +588,8 @@ std::shared_ptr<Any> CreateLinkObjectActionImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

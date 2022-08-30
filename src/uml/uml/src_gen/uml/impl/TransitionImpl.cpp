@@ -1081,7 +1081,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'fork_segment_guards'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1096,9 +1095,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'fork_segment_guards'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::fork_segment_state(Any, std::map) : bool: 2022274173
@@ -1117,7 +1115,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'fork_segment_state'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1132,9 +1129,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'fork_segment_state'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::initial_transition(Any, std::map) : bool: 2806356813
@@ -1153,7 +1149,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'initial_transition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1168,9 +1163,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'initial_transition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::join_segment_guards(Any, std::map) : bool: 429318740
@@ -1189,7 +1183,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'join_segment_guards'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1204,9 +1197,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'join_segment_guards'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::join_segment_state(Any, std::map) : bool: 1435600751
@@ -1225,7 +1217,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'join_segment_state'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1240,9 +1231,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'join_segment_state'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::outgoing_pseudostates(Any, std::map) : bool: 1876038156
@@ -1261,7 +1251,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outgoing_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1276,9 +1265,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outgoing_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::redefinitionContext() : uml::Classifier: 4168264280
@@ -1303,7 +1291,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'state_is_external'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1318,9 +1305,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'state_is_external'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::state_is_internal(Any, std::map) : bool: 3747710289
@@ -1339,7 +1325,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'state_is_internal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1354,9 +1339,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'state_is_internal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Transition::state_is_local(Any, std::map) : bool: 3031218091
@@ -1375,7 +1359,6 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'state_is_local'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1390,9 +1373,8 @@ std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'state_is_local'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->state_is_local(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->state_is_local(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

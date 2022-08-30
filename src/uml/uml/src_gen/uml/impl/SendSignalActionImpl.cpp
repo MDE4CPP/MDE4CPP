@@ -565,7 +565,6 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'number_order'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -580,9 +579,8 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'number_order'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->number_order(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->number_order(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::SendSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 4161898639
@@ -601,7 +599,6 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_ordering_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -616,9 +613,8 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_ordering_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::SendSignalAction::type_target_pin(Any, std::map) : bool: 2766757954
@@ -637,7 +633,6 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_target_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -652,9 +647,8 @@ std::shared_ptr<Any> SendSignalActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_target_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_target_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_target_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

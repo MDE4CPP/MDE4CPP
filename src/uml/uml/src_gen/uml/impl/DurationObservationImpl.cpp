@@ -512,7 +512,6 @@ std::shared_ptr<Any> DurationObservationImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'first_event_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -527,9 +526,8 @@ std::shared_ptr<Any> DurationObservationImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'first_event_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

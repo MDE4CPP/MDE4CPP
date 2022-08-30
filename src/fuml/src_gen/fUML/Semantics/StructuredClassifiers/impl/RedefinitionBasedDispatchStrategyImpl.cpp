@@ -20,8 +20,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -44,8 +44,8 @@
 #include "uml/Element.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -306,13 +306,55 @@ std::shared_ptr<Any> RedefinitionBasedDispatchStrategyImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
 			Bag<Any>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_ownedOperation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_ownedOperation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'ownedOperation'. Failed to invoke operation 'operationsMatch'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'ownedOperation'. Failed to invoke operation 'operationsMatch'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'baseOperation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
 			Bag<Any>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_baseOperation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_baseOperation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'baseOperation'. Failed to invoke operation 'operationsMatch'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'baseOperation'. Failed to invoke operation 'operationsMatch'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation), 0, false);
 			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(uml::Element, uml::Operation) : uml::Behavior: 4193381461
@@ -322,13 +364,55 @@ std::shared_ptr<Any> RedefinitionBasedDispatchStrategyImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_object;
 			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'retrieveMethod'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'retrieveMethod'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			Bag<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			result = eAnyObject(this->retrieveMethod(incoming_param_object,incoming_param_operation), uml::umlPackage::BEHAVIOR_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_operation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'retrieveMethod'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'retrieveMethod'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->retrieveMethod(incoming_param_object,incoming_param_operation), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 

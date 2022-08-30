@@ -605,7 +605,6 @@ std::shared_ptr<Any> StringExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'operands'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -620,9 +619,8 @@ std::shared_ptr<Any> StringExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'operands'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->operands(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->operands(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::StringExpression::subexpressions(Any, std::map) : bool: 1509422814
@@ -641,7 +639,6 @@ std::shared_ptr<Any> StringExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subexpressions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -656,9 +653,8 @@ std::shared_ptr<Any> StringExpressionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subexpressions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->subexpressions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->subexpressions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

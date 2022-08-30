@@ -511,12 +511,12 @@ std::shared_ptr<Any> VariableImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'a'. Failed to invoke operation 'isAccessibleBy'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'a'. Failed to invoke operation 'isAccessibleBy'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isAccessibleBy(incoming_param_a),0,false);
+			result = eAny(this->isAccessibleBy(incoming_param_a), 0, false);
 			break;
 		}
 

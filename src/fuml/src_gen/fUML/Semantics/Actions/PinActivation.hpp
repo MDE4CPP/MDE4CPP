@@ -62,7 +62,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API PinActivation: virtual public fUML::Semantics::Activities::ObjectNodeActivation
+	class FUML_API PinActivation : virtual public fUML::Semantics::Activities::ObjectNodeActivation
 	{
 		public:
  			PinActivation(const PinActivation &) {}

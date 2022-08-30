@@ -1101,7 +1101,6 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'convey_classifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1116,9 +1115,8 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'convey_classifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InformationFlow::must_conform(Any, std::map) : bool: 3956315628
@@ -1137,7 +1135,6 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'must_conform'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1152,9 +1149,8 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'must_conform'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InformationFlow::sources_and_targets_kind(Any, std::map) : bool: 238166996
@@ -1173,7 +1169,6 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'sources_and_targets_kind'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1188,9 +1183,8 @@ std::shared_ptr<Any> InformationFlowImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'sources_and_targets_kind'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->sources_and_targets_kind(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->sources_and_targets_kind(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

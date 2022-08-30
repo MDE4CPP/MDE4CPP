@@ -460,7 +460,6 @@ std::shared_ptr<Any> TriggerImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'trigger_with_ports'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -475,9 +474,8 @@ std::shared_ptr<Any> TriggerImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'trigger_with_ports'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->trigger_with_ports(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->trigger_with_ports(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

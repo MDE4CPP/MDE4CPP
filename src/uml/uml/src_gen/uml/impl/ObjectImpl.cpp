@@ -280,7 +280,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_property'. Failed to invoke operation 'add'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -298,7 +298,6 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'add'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->add(incoming_param__property,incoming_param_value);
 			break;
@@ -327,7 +326,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_property'. Failed to invoke operation 'add'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -345,7 +344,6 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'add'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'insertAt'
 			//parameter 2
@@ -360,7 +358,6 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'insertAt'. Failed to invoke operation 'add'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
 			break;
@@ -395,12 +392,12 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_property'. Failed to invoke operation 'get'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'get'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->get(incoming_param__property),0,false);
+			result = eAny(this->get(incoming_param__property), 0, false);
 			break;
 		}
 		// uml::Object::invoke(uml::Operation, Any[*]) : Any: 2657839141
@@ -427,7 +424,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_operation'. Failed to invoke operation 'invoke'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'invoke'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -445,9 +442,8 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'invoke'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments),0,false);
+			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments), 0, false);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 183386425
@@ -474,7 +470,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_property'. Failed to invoke operation 'set'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'set'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -492,7 +488,6 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'set'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->set(incoming_param__property,incoming_param_value);
 			break;
@@ -521,7 +516,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter '_property'. Failed to invoke operation 'unset'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'unset'!"<< std::endl;)
 					return nullptr;
 				}
 			}

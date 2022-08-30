@@ -56,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API DataStoreNodeActivation: virtual public CentralBufferNodeActivation
+	class FUML_API DataStoreNodeActivation : virtual public CentralBufferNodeActivation
 	{
 		public:
  			DataStoreNodeActivation(const DataStoreNodeActivation &) {}

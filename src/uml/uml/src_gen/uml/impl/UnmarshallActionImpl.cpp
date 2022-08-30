@@ -712,7 +712,6 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -727,9 +726,8 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_object'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UnmarshallAction::number_of_result(Any, std::map) : bool: 2179134906
@@ -748,7 +746,6 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'number_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -763,9 +760,8 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'number_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->number_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->number_of_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UnmarshallAction::object_type(Any, std::map) : bool: 4019536035
@@ -784,7 +780,6 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'object_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -799,9 +794,8 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'object_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->object_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UnmarshallAction::structural_feature(Any, std::map) : bool: 1053679643
@@ -820,7 +814,6 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'structural_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -835,9 +828,8 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'structural_feature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::UnmarshallAction::type_ordering_and_multiplicity(Any, std::map) : bool: 1424955868
@@ -856,7 +848,6 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_ordering_and_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -871,9 +862,8 @@ std::shared_ptr<Any> UnmarshallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_ordering_and_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_ordering_and_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_ordering_and_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

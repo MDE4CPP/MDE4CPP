@@ -363,7 +363,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -378,9 +377,8 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->actual_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->actual_gate_distinguishable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::actual_gate_matched(Any, std::map) : bool: 2743901694
@@ -399,7 +397,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_gate_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -414,9 +411,8 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_gate_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->actual_gate_matched(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->actual_gate_matched(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::formal_gate_distinguishable(Any, std::map) : bool: 2610197370
@@ -435,7 +431,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'formal_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -450,15 +445,14 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'formal_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->formal_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->formal_gate_distinguishable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::getName() : std::string {const}: 2596943572
 		case umlPackage::GATE_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName(),0,false);
+			result = eAny(this->getName(), 0, false);
 			break;
 		}
 		// uml::Gate::getOperand() : uml::InteractionOperand: 1268229058
@@ -483,7 +477,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'inside_cf_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -498,9 +491,8 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'inside_cf_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->inside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->inside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::inside_cf_matched(Any, std::map) : bool: 4127876568
@@ -519,7 +511,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'inside_cf_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -534,33 +525,32 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'inside_cf_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->inside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->inside_cf_matched(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::isActual() : bool: 3905407116
 		case umlPackage::GATE_OPERATION_ISACTUAL:
 		{
-			result = eAny(this->isActual(),0,false);
+			result = eAny(this->isActual(), 0, false);
 			break;
 		}
 		// uml::Gate::isFormal() : bool: 1119363663
 		case umlPackage::GATE_OPERATION_ISFORMAL:
 		{
-			result = eAny(this->isFormal(),0,false);
+			result = eAny(this->isFormal(), 0, false);
 			break;
 		}
 		// uml::Gate::isInsideCF() : bool: 1549572147
 		case umlPackage::GATE_OPERATION_ISINSIDECF:
 		{
-			result = eAny(this->isInsideCF(),0,false);
+			result = eAny(this->isInsideCF(), 0, false);
 			break;
 		}
 		// uml::Gate::isOutsideCF() : bool: 2940571944
 		case umlPackage::GATE_OPERATION_ISOUTSIDECF:
 		{
-			result = eAny(this->isOutsideCF(),0,false);
+			result = eAny(this->isOutsideCF(), 0, false);
 			break;
 		}
 		// uml::Gate::matches(uml::Gate) : bool: 2884710854
@@ -587,12 +577,12 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'gateToMatch'. Failed to invoke operation 'matches'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'gateToMatch'. Failed to invoke operation 'matches'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->matches(incoming_param_gateToMatch),0,false);
+			result = eAny(this->matches(incoming_param_gateToMatch), 0, false);
 			break;
 		}
 		// uml::Gate::outside_cf_gate_distinguishable(Any, std::map) : bool: 3965579538
@@ -611,7 +601,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outside_cf_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -626,9 +615,8 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outside_cf_gate_distinguishable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->outside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->outside_cf_gate_distinguishable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Gate::outside_cf_matched(Any, std::map) : bool: 81753625
@@ -647,7 +635,6 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outside_cf_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -662,9 +649,8 @@ std::shared_ptr<Any> GateImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outside_cf_matched'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->outside_cf_matched(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->outside_cf_matched(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

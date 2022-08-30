@@ -442,7 +442,6 @@ std::shared_ptr<Any> GeneralOrderingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'irreflexive_transitive_closure'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -457,9 +456,8 @@ std::shared_ptr<Any> GeneralOrderingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'irreflexive_transitive_closure'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

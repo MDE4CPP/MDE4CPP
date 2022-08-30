@@ -437,7 +437,6 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'consider_or_ignore'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -452,9 +451,8 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'consider_or_ignore'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConsiderIgnoreFragment::type(Any, std::map) : bool: 4270096363
@@ -473,7 +471,6 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -488,9 +485,8 @@ std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

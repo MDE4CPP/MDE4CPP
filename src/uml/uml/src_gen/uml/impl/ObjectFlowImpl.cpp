@@ -633,7 +633,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'compatible_types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -648,9 +647,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'compatible_types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->compatible_types(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->compatible_types(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::input_and_output_parameter(Any, std::map) : bool: 454017867
@@ -669,7 +667,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_and_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -684,9 +681,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_and_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_and_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_and_output_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::is_multicast_or_is_multireceive(Any, std::map) : bool: 1585471646
@@ -705,7 +701,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'is_multicast_or_is_multireceive'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -720,9 +715,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'is_multicast_or_is_multireceive'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->is_multicast_or_is_multireceive(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->is_multicast_or_is_multireceive(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::no_executable_nodes(Any, std::map) : bool: 1429127995
@@ -741,7 +735,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -756,9 +749,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_executable_nodes(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::same_upper_bounds(Any, std::map) : bool: 1180579764
@@ -777,7 +769,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_upper_bounds'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -792,9 +783,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_upper_bounds'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_upper_bounds(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_upper_bounds(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::selection_behavior(Any, std::map) : bool: 1575197034
@@ -813,7 +803,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'selection_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -828,9 +817,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'selection_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::target(Any, std::map) : bool: 818403920
@@ -849,7 +837,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -864,9 +851,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->target(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->target(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectFlow::transformation_behavior(Any, std::map) : bool: 3901325479
@@ -885,7 +871,6 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transformation_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -900,9 +885,8 @@ std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transformation_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->transformation_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->transformation_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

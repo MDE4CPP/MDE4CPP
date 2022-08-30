@@ -378,7 +378,6 @@ std::shared_ptr<Any> ExtensionPointImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -393,9 +392,8 @@ std::shared_ptr<Any> ExtensionPointImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'must_have_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

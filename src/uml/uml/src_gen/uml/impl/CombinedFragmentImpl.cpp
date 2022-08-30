@@ -742,7 +742,6 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'break_'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -757,9 +756,8 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'break_'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CombinedFragment::consider_and_ignore(Any, std::map) : bool: 161942571
@@ -778,7 +776,6 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'consider_and_ignore'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -793,9 +790,8 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'consider_and_ignore'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CombinedFragment::opt_loop_break_neg(Any, std::map) : bool: 1641284448
@@ -814,7 +810,6 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'opt_loop_break_neg'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -829,9 +824,8 @@ std::shared_ptr<Any> CombinedFragmentImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'opt_loop_break_neg'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

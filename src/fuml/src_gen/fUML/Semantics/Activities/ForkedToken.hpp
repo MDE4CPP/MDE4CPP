@@ -50,7 +50,7 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ForkedToken: virtual public Token
+	class FUML_API ForkedToken : virtual public Token
 	{
 		public:
  			ForkedToken(const ForkedToken &) {}

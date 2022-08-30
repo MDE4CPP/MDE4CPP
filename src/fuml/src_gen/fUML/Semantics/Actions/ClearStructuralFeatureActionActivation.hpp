@@ -64,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ClearStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
+	class FUML_API ClearStructuralFeatureActionActivation : virtual public StructuralFeatureActionActivation
 	{
 		public:
  			ClearStructuralFeatureActionActivation(const ClearStructuralFeatureActionActivation &) {}

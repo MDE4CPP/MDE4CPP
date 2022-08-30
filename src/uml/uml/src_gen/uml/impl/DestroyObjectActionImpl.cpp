@@ -573,7 +573,6 @@ std::shared_ptr<Any> DestroyObjectActionImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -588,9 +587,8 @@ std::shared_ptr<Any> DestroyObjectActionImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DestroyObjectAction::no_type(Any, std::map) : bool: 1214013215
@@ -609,7 +607,6 @@ std::shared_ptr<Any> DestroyObjectActionImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -624,9 +621,8 @@ std::shared_ptr<Any> DestroyObjectActionImpl::eInvoke(int operationID, std::shar
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

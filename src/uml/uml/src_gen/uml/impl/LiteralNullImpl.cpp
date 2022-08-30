@@ -363,13 +363,13 @@ std::shared_ptr<Any> LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<B
 		// uml::LiteralNull::isComputable() : bool: 1849010665
 		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::LiteralNull::isNull() : bool: 1191978620
 		case umlPackage::LITERALNULL_OPERATION_ISNULL:
 		{
-			result = eAny(this->isNull(),0,false);
+			result = eAny(this->isNull(), 0, false);
 			break;
 		}
 

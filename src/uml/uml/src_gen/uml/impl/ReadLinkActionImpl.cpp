@@ -518,7 +518,6 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'compatible_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -533,9 +532,8 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'compatible_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->compatible_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->compatible_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkAction::navigable_open_end(Any, std::map) : bool: 3877559242
@@ -554,7 +552,6 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'navigable_open_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -569,9 +566,8 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'navigable_open_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->navigable_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->navigable_open_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkAction::one_open_end(Any, std::map) : bool: 3737340267
@@ -590,7 +586,6 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_open_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -605,9 +600,8 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_open_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_open_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_open_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkAction::openEnd() : uml::Property[*]: 4152235483
@@ -633,7 +627,6 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_and_ordering'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -648,9 +641,8 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_and_ordering'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadLinkAction::visibility(Any, std::map) : bool: 138000618
@@ -669,7 +661,6 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -684,9 +675,8 @@ std::shared_ptr<Any> ReadLinkActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

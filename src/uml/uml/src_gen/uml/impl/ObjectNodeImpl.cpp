@@ -760,7 +760,6 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -775,9 +774,8 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_output_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectNode::object_flow_edges(Any, std::map) : bool: 4134283328
@@ -796,7 +794,6 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'object_flow_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -811,9 +808,8 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'object_flow_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ObjectNode::selection_behavior(Any, std::map) : bool: 3463618476
@@ -832,7 +828,6 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'selection_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -847,9 +842,8 @@ std::shared_ptr<Any> ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'selection_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

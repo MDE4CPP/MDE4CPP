@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -47,16 +47,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -466,7 +466,7 @@ std::shared_ptr<Any> LocusImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eAnyBag(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //772
+			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //772
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
 	}
@@ -493,56 +493,110 @@ bool LocusImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
-			// CAST Any to fUML::Semantics::Loci::Executor
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(_temp);
-			setExecutor(_executor); //770
-			return true;
-		}
-		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-		{
-			// CAST Any to Bag<uml::Element>
-			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Element>> extensionalValuesList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
-					std::shared_ptr<Bag<uml::Element>> _extensionalValues=getExtensionalValues();
-					for(const std::shared_ptr<uml::Element> indexExtensionalValues: *_extensionalValues)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(eObject);
+					if(_executor)
 					{
-						if (extensionalValuesList->find(indexExtensionalValues) == -1)
-						{
-							_extensionalValues->erase(indexExtensionalValues);
-						}
+						setExecutor(_executor); //770
 					}
-
-					for(const std::shared_ptr<uml::Element> indexExtensionalValues: *extensionalValuesList)
+					else
 					{
-						if (_extensionalValues->find(indexExtensionalValues) == -1)
-						{
-							_extensionalValues->add(indexExtensionalValues);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'executor'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'executor'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::Element>> _extensionalValues = getExtensionalValues();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extensionalValues->find(valueToAdd) == -1)
+								{
+									_extensionalValues->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extensionalValues'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'extensionalValues'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
-			// CAST Any to fUML::Semantics::Loci::ExecutionFactory
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(_temp);
-			setFactory(_factory); //771
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(eObject);
+					if(_factory)
+					{
+						setFactory(_factory); //771
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'factory'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'factory'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -565,7 +619,28 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_value = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'add'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'add'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->add(incoming_param_value);
 			break;
 		}
@@ -576,7 +651,28 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::Executor> incoming_param_executor;
 			Bag<Any>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_executor_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'executor'. Failed to invoke operation 'assignExecutor'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'executor'. Failed to invoke operation 'assignExecutor'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->assignExecutor(incoming_param_executor);
 			break;
 		}
@@ -587,7 +683,28 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> incoming_param_factory;
 			Bag<Any>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_factory_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'factory'. Failed to invoke operation 'assignFactory'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'factory'. Failed to invoke operation 'assignFactory'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->assignFactory(incoming_param_factory);
 			break;
 		}
@@ -598,13 +715,55 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_type;
 			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'conforms'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'conforms'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'classifier'
 			//parameter 1
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_classifier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'conforms'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'conforms'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier), 0, false);
 			break;
 		}
 		// fUML::Semantics::Loci::Locus::instantiate(uml::Class) : uml::Element: 928635219
@@ -614,8 +773,29 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_type;
 			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
-			result = eAnyObject(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::Locus::remove(uml::Element): 2186013543
@@ -625,7 +805,28 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_value = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'remove'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'remove'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->remove(incoming_param_value);
 			break;
 		}
@@ -636,9 +837,30 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_classifier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'retrieveExtent'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'retrieveExtent'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			std::shared_ptr<Bag<uml::Element>> resultList = this->retrieveExtent(incoming_param_classifier);
-			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 

@@ -1380,7 +1380,6 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'operationID'. Failed to invoke operation 'getEOperation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS);
 			break;
@@ -1401,7 +1400,6 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'featureID'. Failed to invoke operation 'getEStructuralFeature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
@@ -1422,7 +1420,6 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'featureName'. Failed to invoke operation 'getEStructuralFeature'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS);
 			break;
@@ -1430,7 +1427,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// ecore::EClass::getFeatureCount() : int {const}: 3596988599
 		case ecorePackage::ECLASS_OPERATION_GETFEATURECOUNT:
 		{
-			result = eAny(this->getFeatureCount(),0,false);
+			result = eAny(this->getFeatureCount(), 0, false);
 			break;
 		}
 		// ecore::EClass::getFeatureID(ecore::EStructuralFeature) : int {const}: 1817491227
@@ -1457,12 +1454,12 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'getFeatureID'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getFeatureID'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->getFeatureID(incoming_param_feature),0,false);
+			result = eAny(this->getFeatureID(incoming_param_feature), 0, false);
 			break;
 		}
 		// ecore::EClass::getFeatureType(ecore::EStructuralFeature) : ecore::EGenericType {const}: 3202363015
@@ -1489,7 +1486,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'getFeatureType'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getFeatureType'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1500,7 +1497,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// ecore::EClass::getOperationCount() : int {const}: 116983988
 		case ecorePackage::ECLASS_OPERATION_GETOPERATIONCOUNT:
 		{
-			result = eAny(this->getOperationCount(),0,false);
+			result = eAny(this->getOperationCount(), 0, false);
 			break;
 		}
 		// ecore::EClass::getOperationID(ecore::EOperation) : int {const}: 1486864904
@@ -1527,12 +1524,12 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'operation'. Failed to invoke operation 'getOperationID'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'getOperationID'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->getOperationID(incoming_param_operation),0,false);
+			result = eAny(this->getOperationID(incoming_param_operation), 0, false);
 			break;
 		}
 		// ecore::EClass::getOverride(ecore::EOperation) : ecore::EOperation {const}: 3447074303
@@ -1559,7 +1556,7 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'operation'. Failed to invoke operation 'getOverride'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'getOverride'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1591,12 +1588,12 @@ std::shared_ptr<Any> EClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'someClass'. Failed to invoke operation 'isSuperTypeOf'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'someClass'. Failed to invoke operation 'isSuperTypeOf'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isSuperTypeOf(incoming_param_someClass),0,false);
+			result = eAny(this->isSuperTypeOf(incoming_param_someClass), 0, false);
 			break;
 		}
 

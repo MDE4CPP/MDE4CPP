@@ -418,13 +418,13 @@ std::shared_ptr<Any> LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<B
 		// uml::LiteralReal::isComputable() : bool: 2284792698
 		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::LiteralReal::realValue() : double: 1756286746
 		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
 		{
-			result = eAny(this->realValue(),0,false);
+			result = eAny(this->realValue(), 0, false);
 			break;
 		}
 

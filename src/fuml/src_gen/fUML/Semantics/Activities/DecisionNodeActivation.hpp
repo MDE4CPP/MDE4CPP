@@ -64,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API DecisionNodeActivation: virtual public ControlNodeActivation
+	class FUML_API DecisionNodeActivation : virtual public ControlNodeActivation
 	{
 		public:
  			DecisionNodeActivation(const DecisionNodeActivation &) {}

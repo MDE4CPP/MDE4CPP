@@ -554,7 +554,6 @@ std::shared_ptr<Any> AddStructuralFeatureValueActionImpl::eInvoke(int operationI
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'insertAt_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -569,9 +568,8 @@ std::shared_ptr<Any> AddStructuralFeatureValueActionImpl::eInvoke(int operationI
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'insertAt_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AddStructuralFeatureValueAction::required_value(Any, std::map) : bool: 1874164180
@@ -590,7 +588,6 @@ std::shared_ptr<Any> AddStructuralFeatureValueActionImpl::eInvoke(int operationI
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'required_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -605,9 +602,8 @@ std::shared_ptr<Any> AddStructuralFeatureValueActionImpl::eInvoke(int operationI
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'required_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

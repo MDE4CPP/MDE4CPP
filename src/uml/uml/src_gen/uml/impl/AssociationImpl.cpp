@@ -994,7 +994,6 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_ends'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1009,9 +1008,8 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_ends'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Association::binary_associations(Any, std::map) : bool: 3742063439
@@ -1030,7 +1028,6 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1045,9 +1042,8 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 3676775068
@@ -1066,7 +1062,6 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'ends_must_be_typed'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1081,9 +1076,8 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'ends_must_be_typed'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Association::getEndTypes() : uml::Type[*]: 2690402644
@@ -1096,7 +1090,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 		// uml::Association::isBinary() : bool: 1073463579
 		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
 		{
-			result = eAny(this->isBinary(),0,false);
+			result = eAny(this->isBinary(), 0, false);
 			break;
 		}
 		// uml::Association::specialized_end_number(Any, std::map) : bool: 1286424394
@@ -1115,7 +1109,6 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_number'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1130,9 +1123,8 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_number'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Association::specialized_end_types(Any, std::map) : bool: 3385560362
@@ -1151,7 +1143,6 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1166,9 +1157,8 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_types'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

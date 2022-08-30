@@ -830,7 +830,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'all_lifelines'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -845,9 +844,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'all_lifelines'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionUse::arguments_are_constants(Any, std::map) : bool: 733280904
@@ -866,7 +864,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'arguments_are_constants'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -881,9 +878,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'arguments_are_constants'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionUse::arguments_correspond_to_parameters(Any, std::map) : bool: 3043306836
@@ -902,7 +898,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'arguments_correspond_to_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -917,9 +912,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'arguments_correspond_to_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionUse::gates_match(Any, std::map) : bool: 1724788051
@@ -938,7 +932,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'gates_match'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -953,9 +946,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'gates_match'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionUse::returnValueRecipient_coverage(Any, std::map) : bool: 1468221886
@@ -974,7 +966,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'returnValueRecipient_coverage'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -989,9 +980,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'returnValueRecipient_coverage'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionUse::returnValue_type_recipient_correspondence(Any, std::map) : bool: 31244600
@@ -1010,7 +1000,6 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'returnValue_type_recipient_correspondence'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1025,9 +1014,8 @@ std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'returnValue_type_recipient_correspondence'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->returnValue_type_recipient_correspondence(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->returnValue_type_recipient_correspondence(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

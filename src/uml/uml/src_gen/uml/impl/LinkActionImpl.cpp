@@ -654,7 +654,6 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -669,9 +668,8 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkAction::same_association(Any, std::map) : bool: 1009969332
@@ -690,7 +688,6 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -705,9 +702,8 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_association'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkAction::same_pins(Any, std::map) : bool: 3042884065
@@ -726,7 +722,6 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -741,9 +736,8 @@ std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -64,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ReadSelfActionActivation: virtual public ActionActivation
+	class FUML_API ReadSelfActionActivation : virtual public ActionActivation
 	{
 		public:
  			ReadSelfActionActivation(const ReadSelfActionActivation &) {}

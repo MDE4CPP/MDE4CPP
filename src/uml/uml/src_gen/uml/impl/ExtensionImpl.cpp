@@ -511,7 +511,7 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Extension::isRequired() : bool: 2180088823
 		case umlPackage::EXTENSION_OPERATION_ISREQUIRED:
 		{
-			result = eAny(this->isRequired(),0,false);
+			result = eAny(this->isRequired(), 0, false);
 			break;
 		}
 		// uml::Extension::is_binary(Any, std::map) : bool: 2411406819
@@ -530,7 +530,6 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'is_binary'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -545,9 +544,8 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'is_binary'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Extension::metaclassEnd() : uml::Property: 2327939617
@@ -572,7 +570,6 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'non_owned_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -587,9 +584,8 @@ std::shared_ptr<Any> ExtensionImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'non_owned_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

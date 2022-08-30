@@ -278,7 +278,7 @@ std::shared_ptr<Any> FactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'metaClass'. Failed to invoke operation 'create'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'metaClass'. Failed to invoke operation 'create'!"<< std::endl;)
 					return nullptr;
 				}
 			}

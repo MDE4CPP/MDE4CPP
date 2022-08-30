@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -241,7 +241,7 @@ std::shared_ptr<Any> TokenSetImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eAnyBag(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
+			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -262,40 +262,48 @@ bool TokenSetImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			// CAST Any to Bag<fUML::Semantics::Activities::Token>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens=getTokens();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *_tokens)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (tokensList->find(indexTokens) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_tokens->erase(indexTokens);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *tokensList)
-					{
-						if (_tokens->find(indexTokens) == -1)
-						{
-							_tokens->add(indexTokens);
+							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_tokens->find(valueToAdd) == -1)
+								{
+									_tokens->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'tokens'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'tokens'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 

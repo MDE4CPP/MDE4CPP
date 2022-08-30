@@ -290,19 +290,19 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'partition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> partitionList = obj.getPartition();
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> partitionList = obj.getPartition();
 	if(partitionList)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::ActivityPartition> partitionindexElem: *partitionList) 
@@ -544,20 +544,20 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not re
 }
 
 /* Getter & Setter for reference partition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> ActivityImpl::getPartition() const
+std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
 	}
@@ -996,7 +996,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> _partition = getPartition();
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -1593,7 +1593,6 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_one_parameter_node'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1608,9 +1607,8 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_one_parameter_node'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maximum_one_parameter_node(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maximum_one_parameter_node(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Activity::maximum_two_parameter_nodes(Any, std::map) : bool: 2025454442
@@ -1629,7 +1627,6 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_two_parameter_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1644,9 +1641,8 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_two_parameter_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maximum_two_parameter_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maximum_two_parameter_nodes(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

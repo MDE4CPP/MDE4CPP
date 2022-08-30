@@ -632,7 +632,6 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_parameter_substitution'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -647,9 +646,8 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_parameter_substitution'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::TemplateBinding::parameter_substitution_formal(Any, std::map) : bool: 97895006
@@ -668,7 +666,6 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameter_substitution_formal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -683,9 +680,8 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameter_substitution_formal'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->parameter_substitution_formal(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->parameter_substitution_formal(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

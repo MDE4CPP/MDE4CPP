@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -865,16 +865,16 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eGet(int featureID, bool resolv
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS); //93
+			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS); //93
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
-			return eAnyBag(getHeldTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //92
+			return eEcoreContainerAny(getHeldTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //92
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
-			return eAnyBag(getIncomingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //91
+			return eEcoreContainerAny(getIncomingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //91
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 			return eAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //94
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
-			return eAnyBag(getOutgoingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //90
+			return eEcoreContainerAny(getOutgoingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //90
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //95
 	}
@@ -907,137 +907,214 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
-			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivationGroup
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
-			setGroup(_group); //93
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(eObject);
+					if(_group)
+					{
+						setGroup(_group); //93
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
-			// CAST Any to Bag<fUML::Semantics::Activities::Token>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens=getHeldTokens();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *_heldTokens)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (heldTokensList->find(indexHeldTokens) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens = getHeldTokens();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_heldTokens->erase(indexHeldTokens);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *heldTokensList)
-					{
-						if (_heldTokens->find(indexHeldTokens) == -1)
-						{
-							_heldTokens->add(indexHeldTokens);
+							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_heldTokens->find(valueToAdd) == -1)
+								{
+									_heldTokens->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
-			// CAST Any to Bag<fUML::Semantics::Activities::ActivityEdgeInstance>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdgesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges=getIncomingEdges();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *_incomingEdges)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (incomingEdgesList->find(indexIncomingEdges) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_incomingEdges->erase(indexIncomingEdges);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *incomingEdgesList)
-					{
-						if (_incomingEdges->find(indexIncomingEdges) == -1)
-						{
-							_incomingEdges->add(indexIncomingEdges);
+							std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_incomingEdges->find(valueToAdd) == -1)
+								{
+									_incomingEdges->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 		{
-			// CAST Any to uml::ActivityNode
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
-			setNode(_node); //94
-			return true;
-		}
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
-		{
-			// CAST Any to Bag<fUML::Semantics::Activities::ActivityEdgeInstance>
-			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdgesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges=getOutgoingEdges();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *_outgoingEdges)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>(eObject);
+					if(_node)
 					{
-						if (outgoingEdgesList->find(indexOutgoingEdges) == -1)
-						{
-							_outgoingEdges->erase(indexOutgoingEdges);
-						}
+						setNode(_node); //94
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *outgoingEdgesList)
+					else
 					{
-						if (_outgoingEdges->find(indexOutgoingEdges) == -1)
-						{
-							_outgoingEdges->add(indexOutgoingEdges);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'node'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'node'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_outgoingEdges->find(valueToAdd) == -1)
+								{
+									_outgoingEdges->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 		{
-			// CAST Any to bool
-			bool _running = newValue->get<bool>();
-			setRunning(_running); //95
-			return true;
+			try
+			{
+				bool _running = newValue->get<bool>();
+				setRunning(_running); //95
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'running'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -1060,7 +1137,28 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edge;
 			Bag<Any>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_edge_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_edge = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addIncomingEdge(incoming_param_edge);
 			break;
 		}
@@ -1071,7 +1169,28 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edge;
 			Bag<Any>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_edge_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_edge = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addOutgoingEdge(incoming_param_edge);
 			break;
 		}
@@ -1082,7 +1201,28 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addToken(incoming_param_token);
 			break;
 		}
@@ -1093,7 +1233,37 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
 			Bag<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_tokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_tokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_tokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addTokens(incoming_param_tokens);
 			break;
 		}
@@ -1122,26 +1292,56 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
 			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_incomingTokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_incomingTokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_incomingTokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getActivityExecution() : fUML::Semantics::Activities::ActivityExecution: 415943298
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION:
 		{
-			result = eAnyObject(this->getActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
+			result = eEcoreAny(this->getActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : uml::Element: 3574975649
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
-			result = eAnyObject(this->getExecutionContext(), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->getExecutionContext(), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionLocus() : fUML::Semantics::Loci::Locus: 4097970094
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS:
 		{
-			result = eAnyObject(this->getExecutionLocus(), fUML::Semantics::Loci::LociPackage::LOCUS_CLASS);
+			result = eEcoreAny(this->getExecutionLocus(), fUML::Semantics::Loci::LociPackage::LOCUS_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 4201354494
@@ -1151,27 +1351,48 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
 			Bag<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
-			result = eAnyObject(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_node_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_node = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getRunning() : bool: 254630437
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING:
 		{
-			result = eAny(this->getRunning(),0,false);
+			result = eAny(this->getRunning(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getTokens() : fUML::Semantics::Activities::Token[*]: 3137100059
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->getTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::isReady() : bool: 2594491909
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISREADY:
 		{
-			result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 2410514251
@@ -1181,8 +1402,29 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstances;
 			Bag<Any>::const_iterator incoming_param_edgeInstances_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edgeInstances = (*incoming_param_edgeInstances_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
-			result = eAny(this->isSourceFor(incoming_param_edgeInstances),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_edgeInstances_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_edgeInstances = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isSourceFor(incoming_param_edgeInstances), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::receiveOffer(): 4022154831
@@ -1198,8 +1440,29 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->removeToken(incoming_param_token),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->removeToken(incoming_param_token), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::resume(): 1522436987
@@ -1221,7 +1484,37 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
 			Bag<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_tokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_tokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_tokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->sendOffers(incoming_param_tokens);
 			break;
 		}
@@ -1235,14 +1528,14 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->takeOfferedTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::takeTokens() : fUML::Semantics::Activities::Token[*]: 1423548432
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->takeTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::terminate(): 1536647187

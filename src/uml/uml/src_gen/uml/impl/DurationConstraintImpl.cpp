@@ -439,7 +439,6 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'first_event_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -454,9 +453,8 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'first_event_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DurationConstraint::has_one_or_two_constrainedElements(Any, std::map) : bool: 4186177077
@@ -475,7 +473,6 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_one_or_two_constrainedElements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -490,9 +487,8 @@ std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_one_or_two_constrainedElements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

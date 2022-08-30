@@ -549,7 +549,6 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_no'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -564,9 +563,8 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_no'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InformationItem::not_instantiable(Any, std::map) : bool: 1262924613
@@ -585,7 +583,6 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_instantiable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -600,9 +597,8 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_instantiable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InformationItem::sources_and_targets(Any, std::map) : bool: 3123170382
@@ -621,7 +617,6 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'sources_and_targets'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -636,9 +631,8 @@ std::shared_ptr<Any> InformationItemImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'sources_and_targets'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->sources_and_targets(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->sources_and_targets(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -369,7 +369,6 @@ std::shared_ptr<Any> ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -384,9 +383,8 @@ std::shared_ptr<Any> ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ForkNode::one_incoming_edge(Any, std::map) : bool: 1554773991
@@ -405,7 +403,6 @@ std::shared_ptr<Any> ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_incoming_edge'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -420,9 +417,8 @@ std::shared_ptr<Any> ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_incoming_edge'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_incoming_edge(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_incoming_edge(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -395,7 +395,6 @@ std::shared_ptr<Any> CreateLinkActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -410,9 +409,8 @@ std::shared_ptr<Any> CreateLinkActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_not_abstract'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->association_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->association_not_abstract(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

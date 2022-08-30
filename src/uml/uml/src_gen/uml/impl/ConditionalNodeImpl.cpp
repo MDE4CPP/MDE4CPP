@@ -843,7 +843,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'clause_no_predecessor'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -858,9 +857,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'clause_no_predecessor'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConditionalNode::executable_nodes(Any, std::map) : bool: 3475178446
@@ -879,7 +877,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -894,9 +891,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'executable_nodes'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConditionalNode::matching_output_pins(Any, std::map) : bool: 3565877168
@@ -915,7 +911,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -930,9 +925,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_output_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConditionalNode::no_input_pins(Any, std::map) : bool: 3507258893
@@ -951,7 +945,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_input_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -966,9 +959,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_input_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConditionalNode::one_clause_with_executable_node(Any, std::map) : bool: 34142531
@@ -987,7 +979,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_clause_with_executable_node'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1002,9 +993,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_clause_with_executable_node'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConditionalNode::result_no_incoming(Any, std::map) : bool: 1196289718
@@ -1023,7 +1013,6 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'result_no_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1038,9 +1027,8 @@ std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_p
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'result_no_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -702,9 +702,8 @@ std::shared_ptr<Any> EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'object'. Failed to invoke operation 'isInstance'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->isInstance(incoming_param_object),0,false);
+			result = eAny(this->isInstance(incoming_param_object), 0, false);
 			break;
 		}
 

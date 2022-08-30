@@ -969,7 +969,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'connector_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -984,9 +983,8 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'connector_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::in_and_out(Any, std::map) : bool: 3334031447
@@ -1005,7 +1003,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'in_and_out'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1020,15 +1017,14 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'in_and_out'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::isSetDefault() : bool: 1989057623
 		case umlPackage::PARAMETER_OPERATION_ISSETDEFAULT:
 		{
-			result = eAny(this->isSetDefault(),0,false);
+			result = eAny(this->isSetDefault(), 0, false);
 			break;
 		}
 		// uml::Parameter::not_exception(Any, std::map) : bool: 2813272446
@@ -1047,7 +1043,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_exception'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1062,9 +1057,8 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_exception'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::object_effect(Any, std::map) : bool: 493477054
@@ -1083,7 +1077,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'object_effect'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1098,9 +1091,8 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'object_effect'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::reentrant_behaviors(Any, std::map) : bool: 3622294264
@@ -1119,7 +1111,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'reentrant_behaviors'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1134,9 +1125,8 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'reentrant_behaviors'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::setBooleanDefaultValue(bool): 126976962
@@ -1155,7 +1145,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
@@ -1176,7 +1165,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
@@ -1203,7 +1191,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setRealDefaultValue(incoming_param_value);
 			break;
@@ -1224,7 +1211,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setStringDefaultValue(incoming_param_value);
 			break;
@@ -1245,7 +1231,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
@@ -1266,7 +1251,6 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'stream_and_exception'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1281,9 +1265,8 @@ std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'stream_and_exception'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Parameter::unsetDefault(): 190690520

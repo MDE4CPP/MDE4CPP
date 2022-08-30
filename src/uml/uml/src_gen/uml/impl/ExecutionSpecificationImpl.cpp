@@ -471,7 +471,6 @@ std::shared_ptr<Any> ExecutionSpecificationImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_lifeline'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -486,9 +485,8 @@ std::shared_ptr<Any> ExecutionSpecificationImpl::eInvoke(int operationID, std::s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_lifeline'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_lifeline(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_lifeline(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

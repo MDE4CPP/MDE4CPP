@@ -67,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class FUML_API Execution: virtual public uml::Element, virtual public fUML::Semantics::Loci::SemanticVisitor
+	class FUML_API Execution : virtual public uml::Element, virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Execution(const Execution &) {}

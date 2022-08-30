@@ -67,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API StructuredActivityNodeActivation: virtual public ActionActivation
+	class FUML_API StructuredActivityNodeActivation : virtual public ActionActivation
 	{
 		public:
  			StructuredActivityNodeActivation(const StructuredActivityNodeActivation &) {}

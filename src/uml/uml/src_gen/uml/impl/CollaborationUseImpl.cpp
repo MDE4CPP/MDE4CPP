@@ -514,7 +514,6 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'client_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -529,9 +528,8 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'client_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CollaborationUse::connectors(Any, std::map) : bool: 730508454
@@ -550,7 +548,6 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'connectors'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -565,9 +562,8 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'connectors'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::CollaborationUse::every_role(Any, std::map) : bool: 2785303016
@@ -586,7 +582,6 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'every_role'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -601,9 +596,8 @@ std::shared_ptr<Any> CollaborationUseImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'every_role'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->every_role(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->every_role(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

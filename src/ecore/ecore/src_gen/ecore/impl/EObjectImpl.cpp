@@ -601,7 +601,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// ecore::EObject::eAllContents() : Any {const}: 3701410932
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
-			result = eAny(this->eAllContents(),0,false);
+			result = eAny(this->eAllContents(), 0, false);
 			break;
 		}
 		// ecore::EObject::eClass() : ecore::EClass {const}: 3378392784
@@ -638,7 +638,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// ecore::EObject::eCrossReferences() : std::list {const}: 4256013160
 		case ecorePackage::EOBJECT_OPERATION_ECROSSREFERENCES:
 		{
-			result = eAny(this->eCrossReferences(),0,false);
+			result = eAny(this->eCrossReferences(), 0, false);
 			break;
 		}
 		// ecore::EObject::eGet(ecore::EStructuralFeature) : Any {const}: 2925960689
@@ -665,12 +665,12 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->eGet(incoming_param_feature),0,false);
+			result = eAny(this->eGet(incoming_param_feature), 0, false);
 			break;
 		}
 		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 1046173981
@@ -697,7 +697,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -715,9 +715,8 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'resolve'. Failed to invoke operation 'eGet'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve),0,false);
+			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve), 0, false);
 			break;
 		}
 		// ecore::EObject::eInvoke(ecore::EOperation, Any[*]) : Any: 637541304
@@ -744,7 +743,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -762,15 +761,14 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments),0,false);
+			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments), 0, false);
 			break;
 		}
 		// ecore::EObject::eIsProxy() : bool {const}: 3785601175
 		case ecorePackage::EOBJECT_OPERATION_EISPROXY:
 		{
-			result = eAny(this->eIsProxy(),0,false);
+			result = eAny(this->eIsProxy(), 0, false);
 			break;
 		}
 		// ecore::EObject::eIsSet(ecore::EStructuralFeature) : bool {const}: 3154058889
@@ -797,18 +795,18 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->eIsSet(incoming_param_feature),0,false);
+			result = eAny(this->eIsSet(incoming_param_feature), 0, false);
 			break;
 		}
 		// ecore::EObject::eResource() : int {const}: 1807854576
 		case ecorePackage::EOBJECT_OPERATION_ERESOURCE:
 		{
-			result = eAny(this->eResource(),0,false);
+			result = eAny(this->eResource(), 0, false);
 			break;
 		}
 		// ecore::EObject::eSet(ecore::EStructuralFeature, Any): 955320472
@@ -835,7 +833,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -853,7 +851,6 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newValue'. Failed to invoke operation 'eSet'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->eSet(incoming_param_feature,incoming_param_newValue);
 			break;
@@ -882,7 +879,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!"<< std::endl;)
 					return nullptr;
 				}
 			}

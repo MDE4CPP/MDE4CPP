@@ -452,12 +452,12 @@ std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isContainedInRegion(incoming_param_r),0,false);
+			result = eAny(this->isContainedInRegion(incoming_param_r), 0, false);
 			break;
 		}
 		// uml::Vertex::isContainedInState(uml::State) : bool: 3997919607
@@ -484,12 +484,12 @@ std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isContainedInState(incoming_param_s),0,false);
+			result = eAny(this->isContainedInState(incoming_param_s), 0, false);
 			break;
 		}
 

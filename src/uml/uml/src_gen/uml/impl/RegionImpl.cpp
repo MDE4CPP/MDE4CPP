@@ -891,7 +891,7 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 		// uml::Region::belongsToPSM() : bool: 1481257058
 		case umlPackage::REGION_OPERATION_BELONGSTOPSM:
 		{
-			result = eAny(this->belongsToPSM(),0,false);
+			result = eAny(this->belongsToPSM(), 0, false);
 			break;
 		}
 		// uml::Region::containingStateMachine() : uml::StateMachine: 3298185933
@@ -916,7 +916,6 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deep_history_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -931,9 +930,8 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deep_history_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Region::initial_vertex(Any, std::map) : bool: 3908107437
@@ -952,7 +950,6 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -967,9 +964,8 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Region::owned(Any, std::map) : bool: 2693807543
@@ -988,7 +984,6 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'owned'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1003,9 +998,8 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'owned'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Region::redefinitionContext() : uml::Classifier: 2569630837
@@ -1030,7 +1024,6 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'shallow_history_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1045,9 +1038,8 @@ std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'shallow_history_vertex'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

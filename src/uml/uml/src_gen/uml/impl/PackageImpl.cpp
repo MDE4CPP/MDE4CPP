@@ -1388,7 +1388,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1419,7 +1419,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
@@ -1434,7 +1433,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
@@ -1455,7 +1453,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
@@ -1476,7 +1473,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
@@ -1497,7 +1493,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
@@ -1518,7 +1513,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
@@ -1533,7 +1527,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
@@ -1554,7 +1547,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1569,9 +1561,8 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Package::getAllAppliedProfiles() : uml::Profile[*]: 1897955286
@@ -1604,7 +1595,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getAppliedProfile(incoming_param_qualifiedName), uml::umlPackage::PROFILE_CLASS);
 			break;
@@ -1625,7 +1615,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'recurse'
 			//parameter 1
@@ -1640,7 +1629,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse), uml::umlPackage::PROFILE_CLASS);
 			break;
@@ -1697,7 +1685,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1729,7 +1717,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1747,7 +1735,6 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->getProfileApplication(incoming_param_profile,incoming_param_recurse), uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
@@ -1755,7 +1742,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 		// uml::Package::isModelLibrary() : bool: 1153574071
 		case umlPackage::PACKAGE_OPERATION_ISMODELLIBRARY:
 		{
-			result = eAny(this->isModelLibrary(),0,false);
+			result = eAny(this->isModelLibrary(), 0, false);
 			break;
 		}
 		// uml::Package::isProfileApplied(uml::Profile) : bool: 1902112608
@@ -1782,12 +1769,12 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isProfileApplied(incoming_param_profile),0,false);
+			result = eAny(this->isProfileApplied(incoming_param_profile), 0, false);
 			break;
 		}
 		// uml::Package::makesVisible(uml::NamedElement) : bool: 4229111501
@@ -1814,12 +1801,12 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->makesVisible(incoming_param_el),0,false);
+			result = eAny(this->makesVisible(incoming_param_el), 0, false);
 			break;
 		}
 		// uml::Package::unapplyProfile(uml::Profile) : ecore::EObject[*]: 2851150210
@@ -1846,7 +1833,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
 					return nullptr;
 				}
 			}

@@ -66,7 +66,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API DestroyObjectActionActivation: virtual public ActionActivation
+	class FUML_API DestroyObjectActionActivation : virtual public ActionActivation
 	{
 		public:
  			DestroyObjectActionActivation(const DestroyObjectActionActivation &) {}

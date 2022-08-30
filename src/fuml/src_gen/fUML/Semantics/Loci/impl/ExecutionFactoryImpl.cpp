@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -149,9 +149,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -162,8 +162,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -824,14 +824,14 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eGet(int featureID, bool resolve, boo
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
-			return eAnyBag(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
+			return eEcoreContainerAny(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //470
+			return eEcoreAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //470
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-			return eAnyBag(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
+			return eEcoreContainerAny(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -856,85 +856,124 @@ bool ExecutionFactoryImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			// CAST Any to Bag<uml::PrimitiveType>
-			if((newValue->isContainer()) && (uml::umlPackage::PRIMITIVETYPE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypesList= newValue->get<std::shared_ptr<Bag<uml::PrimitiveType>>>();
-					std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes=getBuiltInTypes();
-					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *_builtInTypes)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (builtInTypesList->find(indexBuiltInTypes) == -1)
+						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_builtInTypes->erase(indexBuiltInTypes);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *builtInTypesList)
-					{
-						if (_builtInTypes->find(indexBuiltInTypes) == -1)
-						{
-							_builtInTypes->add(indexBuiltInTypes);
+							std::shared_ptr<uml::PrimitiveType> valueToAdd = std::dynamic_pointer_cast<uml::PrimitiveType>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_builtInTypes->find(valueToAdd) == -1)
+								{
+									_builtInTypes->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'builtInTypes'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'builtInTypes'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
-			// CAST Any to fUML::Semantics::Loci::Locus
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //470
-			return true;
-		}
-		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-		{
-			// CAST Any to Bag<fUML::Semantics::Loci::SemanticStrategy>
-			if((newValue->isContainer()) && (fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> strategiesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies=getStrategies();
-					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *_strategies)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
+					if(_locus)
 					{
-						if (strategiesList->find(indexStrategies) == -1)
-						{
-							_strategies->erase(indexStrategies);
-						}
+						setLocus(_locus); //470
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *strategiesList)
+					else
 					{
-						if (_strategies->find(indexStrategies) == -1)
-						{
-							_strategies->add(indexStrategies);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_strategies->find(valueToAdd) == -1)
+								{
+									_strategies->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'strategies'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'strategies'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -957,7 +996,28 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<uml::PrimitiveType> incoming_param_type;
 			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::PrimitiveType> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'addBuiltInType'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'addBuiltInType'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->addBuiltInType(incoming_param_type);
 			break;
 		}
@@ -968,7 +1028,28 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> incoming_param_strategy;
 			Bag<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_strategy = (*incoming_param_strategy_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_strategy_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'strategy'. Failed to invoke operation 'assignStrategy'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'strategy'. Failed to invoke operation 'assignStrategy'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			this->assignStrategy(incoming_param_strategy);
 			break;
 		}
@@ -979,13 +1060,55 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<uml::Behavior> incoming_param_behavior;
 			Bag<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_behavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'createExecution'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'createExecution'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'createExecution'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'createExecution'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getBuiltInType(std::string) : uml::PrimitiveType: 3934172273
@@ -995,8 +1118,17 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getBuiltInType'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getStrategy(std::string) : fUML::Semantics::Loci::SemanticStrategy: 4148006243
@@ -1006,8 +1138,17 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getStrategy'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getStrategyIndex(std::string) : int: 353629829
@@ -1017,8 +1158,17 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::string incoming_param_name;
 			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getStrategyIndex(incoming_param_name),0,false);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getStrategyIndex'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			result = eAny(this->getStrategyIndex(incoming_param_name), 0, false);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 442268567
@@ -1028,8 +1178,29 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_element;
 			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
 			break;
 		}
 

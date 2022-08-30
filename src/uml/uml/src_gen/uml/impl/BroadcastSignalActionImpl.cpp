@@ -485,7 +485,6 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_onport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -500,9 +499,8 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_onport'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::BroadcastSignalAction::number_of_arguments(Any, std::map) : bool: 1154776483
@@ -521,7 +519,6 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'number_of_arguments'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -536,9 +533,8 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'number_of_arguments'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->number_of_arguments(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->number_of_arguments(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::BroadcastSignalAction::type_ordering_multiplicity(Any, std::map) : bool: 12726760
@@ -557,7 +553,6 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_ordering_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -572,9 +567,8 @@ std::shared_ptr<Any> BroadcastSignalActionImpl::eInvoke(int operationID, std::sh
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_ordering_multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

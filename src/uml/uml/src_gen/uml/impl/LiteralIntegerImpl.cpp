@@ -418,13 +418,13 @@ std::shared_ptr<Any> LiteralIntegerImpl::eInvoke(int operationID, std::shared_pt
 		// uml::LiteralInteger::integerValue() : int: 3507556350
 		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
 		{
-			result = eAny(this->integerValue(),0,false);
+			result = eAny(this->integerValue(), 0, false);
 			break;
 		}
 		// uml::LiteralInteger::isComputable() : bool: 780783796
 		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 

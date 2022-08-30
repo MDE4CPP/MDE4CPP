@@ -46,7 +46,7 @@ namespace fUML
 namespace fUML::Semantics::Loci 
 {
 	
-	class FUML_API ChoiceStrategy: virtual public SemanticStrategy
+	class FUML_API ChoiceStrategy : virtual public SemanticStrategy
 	{
 		public:
  			ChoiceStrategy(const ChoiceStrategy &) {}

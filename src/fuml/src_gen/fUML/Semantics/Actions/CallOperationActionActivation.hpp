@@ -72,7 +72,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API CallOperationActionActivation: virtual public CallActionActivation
+	class FUML_API CallOperationActionActivation : virtual public CallActionActivation
 	{
 		public:
  			CallOperationActionActivation(const CallOperationActionActivation &) {}

@@ -1438,7 +1438,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'at_most_one_return'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1453,15 +1452,14 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'at_most_one_return'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Operation::getLower() : int: 2432712746
 		case umlPackage::OPERATION_OPERATION_GETLOWER:
 		{
-			result = eAny(this->getLower(),0,false);
+			result = eAny(this->getLower(), 0, false);
 			break;
 		}
 		// uml::Operation::getReturnResult() : uml::Parameter: 3209085960
@@ -1473,19 +1471,19 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 		// uml::Operation::getUpper() : int: 1198605197
 		case umlPackage::OPERATION_OPERATION_GETUPPER:
 		{
-			result = eAny(this->getUpper(),0,false);
+			result = eAny(this->getUpper(), 0, false);
 			break;
 		}
 		// uml::Operation::isOrdered() : bool: 2709191195
 		case umlPackage::OPERATION_OPERATION_ISORDERED:
 		{
-			result = eAny(this->isOrdered(),0,false);
+			result = eAny(this->isOrdered(), 0, false);
 			break;
 		}
 		// uml::Operation::isUnique() : bool: 4020565657
 		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
 		{
-			result = eAny(this->isUnique(),0,false);
+			result = eAny(this->isUnique(), 0, false);
 			break;
 		}
 		// uml::Operation::matches(uml::Operation) : bool: 1582514854
@@ -1512,12 +1510,12 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'comparedOperation'. Failed to invoke operation 'matches'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'comparedOperation'. Failed to invoke operation 'matches'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->matches(incoming_param_comparedOperation),0,false);
+			result = eAny(this->matches(incoming_param_comparedOperation), 0, false);
 			break;
 		}
 		// uml::Operation::only_body_for_query(Any, std::map) : bool: 2418925081
@@ -1536,7 +1534,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'only_body_for_query'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1551,9 +1548,8 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'only_body_for_query'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Operation::returnResult() : uml::Parameter: 3088060264
@@ -1578,7 +1574,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newIsOrdered'. Failed to invoke operation 'setIsOrdered'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setIsOrdered(incoming_param_newIsOrdered);
 			break;
@@ -1599,7 +1594,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newIsUnique'. Failed to invoke operation 'setIsUnique'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setIsUnique(incoming_param_newIsUnique);
 			break;
@@ -1620,7 +1614,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newLower'. Failed to invoke operation 'setLower'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setLower(incoming_param_newLower);
 			break;
@@ -1649,7 +1642,7 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'newType'. Failed to invoke operation 'setType'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'newType'. Failed to invoke operation 'setType'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -1673,7 +1666,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newUpper'. Failed to invoke operation 'setUpper'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setUpper(incoming_param_newUpper);
 			break;

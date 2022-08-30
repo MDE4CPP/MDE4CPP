@@ -581,7 +581,6 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'end_object_input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -596,9 +595,8 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'end_object_input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->end_object_input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->end_object_input_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkEndData::multiplicity(Any, std::map) : bool: 1418649966
@@ -617,7 +615,6 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -632,9 +629,8 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkEndData::property_is_association_end(Any, std::map) : bool: 1912245967
@@ -653,7 +649,6 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'property_is_association_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -668,9 +663,8 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'property_is_association_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->property_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->property_is_association_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkEndData::qualifiers(Any, std::map) : bool: 3617554078
@@ -689,7 +683,6 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -704,9 +697,8 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->qualifiers(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->qualifiers(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::LinkEndData::same_type(Any, std::map) : bool: 2876739916
@@ -725,7 +717,6 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -740,9 +731,8 @@ std::shared_ptr<Any> LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<B
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

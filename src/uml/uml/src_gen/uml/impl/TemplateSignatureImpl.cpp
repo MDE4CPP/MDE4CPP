@@ -588,7 +588,6 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'own_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -603,9 +602,8 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'own_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::TemplateSignature::unique_parameters(Any, std::map) : bool: 1309689182
@@ -624,7 +622,6 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'unique_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -639,9 +636,8 @@ std::shared_ptr<Any> TemplateSignatureImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'unique_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->unique_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->unique_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

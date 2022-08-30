@@ -875,7 +875,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
@@ -890,7 +889,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS);
 			break;
@@ -911,7 +909,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS);
 			break;
@@ -932,7 +929,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS);
 			break;
@@ -953,7 +949,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			result = eEcoreAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
@@ -988,7 +983,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_nested_classifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1003,9 +997,8 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_nested_classifiers'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_nested_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_nested_classifiers(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Component::no_packaged_elements(Any, std::map) : bool: 4216292457
@@ -1024,7 +1017,6 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_packaged_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1039,9 +1031,8 @@ std::shared_ptr<Any> ComponentImpl::eInvoke(int operationID, std::shared_ptr<Bag
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_packaged_elements'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_packaged_elements(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_packaged_elements(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -706,7 +706,6 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'interaction_uses_share_lifeline'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -721,9 +720,8 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'interaction_uses_share_lifeline'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Lifeline::same_classifier(Any, std::map) : bool: 3995889812
@@ -742,7 +740,6 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'same_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -757,9 +754,8 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'same_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Lifeline::selector_int_or_string(Any, std::map) : bool: 3739382587
@@ -778,7 +774,6 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'selector_int_or_string'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -793,9 +788,8 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'selector_int_or_string'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Lifeline::selector_specified(Any, std::map) : bool: 288066678
@@ -814,7 +808,6 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'selector_specified'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -829,9 +822,8 @@ std::shared_ptr<Any> LifelineImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'selector_specified'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->selector_specified(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->selector_specified(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

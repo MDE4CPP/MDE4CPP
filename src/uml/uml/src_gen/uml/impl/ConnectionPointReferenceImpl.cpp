@@ -579,7 +579,6 @@ std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, std:
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'entry_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -594,9 +593,8 @@ std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, std:
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'entry_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->entry_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->entry_pseudostates(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ConnectionPointReference::exit_pseudostates(Any, std::map) : bool: 3610740388
@@ -615,7 +613,6 @@ std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, std:
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'exit_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -630,9 +627,8 @@ std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, std:
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'exit_pseudostates'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->exit_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->exit_pseudostates(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -20,8 +20,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -39,8 +39,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -205,7 +205,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@37303f12 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@7a2b1eb4 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
@@ -288,10 +288,17 @@ bool ObjectTokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to Any
-			std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
-			setValue(_value); //832
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
+				setValue(_value); //832
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'value'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -310,7 +317,7 @@ std::shared_ptr<Any> ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<B
 		// fUML::Semantics::Activities::ObjectToken::_copy() : fUML::Semantics::Activities::Token: 2325156054
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			result = eEcoreAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectToken::equals(fUML::Semantics::Activities::Token) : bool: 1120332551
@@ -320,14 +327,35 @@ std::shared_ptr<Any> ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<B
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
 			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_other_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_other = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->equals(incoming_param_other), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectToken::isControl() : bool: 3725482608
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(), 0, false);
 			break;
 		}
 

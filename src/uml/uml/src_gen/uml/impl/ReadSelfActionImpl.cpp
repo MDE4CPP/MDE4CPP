@@ -484,7 +484,6 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -499,9 +498,8 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->contained(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->contained(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadSelfAction::multiplicity(Any, std::map) : bool: 1954322947
@@ -520,7 +518,6 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -535,9 +532,8 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadSelfAction::not_static(Any, std::map) : bool: 2987315762
@@ -556,7 +552,6 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -571,9 +566,8 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_static'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ReadSelfAction::type(Any, std::map) : bool: 503695280
@@ -592,7 +586,6 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -607,9 +600,8 @@ std::shared_ptr<Any> ReadSelfActionImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

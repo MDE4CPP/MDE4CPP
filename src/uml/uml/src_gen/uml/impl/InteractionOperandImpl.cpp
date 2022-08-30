@@ -603,7 +603,6 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'guard_contain_references'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -618,9 +617,8 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'guard_contain_references'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->guard_contain_references(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->guard_contain_references(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::InteractionOperand::guard_directly_prior(Any, std::map) : bool: 3795687392
@@ -639,7 +637,6 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'guard_directly_prior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -654,9 +651,8 @@ std::shared_ptr<Any> InteractionOperandImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'guard_directly_prior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->guard_directly_prior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->guard_directly_prior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

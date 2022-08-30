@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -468,11 +468,34 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, std::shared_ptr<Any>
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
-			// CAST Any to uml::DestroyObjectAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
-			setDestroyObjectAction(_destroyObjectAction); //3911
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(eObject);
+					if(_destroyObjectAction)
+					{
+						setDestroyObjectAction(_destroyObjectAction); //3911
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -495,17 +518,44 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 			//parameter 0
 			std::shared_ptr<Any> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'isDestroyLinks'
 			//parameter 1
 			bool incoming_param_isDestroyLinks;
 			Bag<Any>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isDestroyLinks'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'isDestroyOwnedObjects'
 			//parameter 2
 			bool incoming_param_isDestroyOwnedObjects;
 			Bag<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool >();
+			try
+			{
+				incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isDestroyOwnedObjects'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
 			break;
 		}
@@ -522,13 +572,55 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_reference;
 			Bag<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_reference_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_reference = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'link'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_link;
 			Bag<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_link_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_link = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link), 0, false);
 			break;
 		}
 

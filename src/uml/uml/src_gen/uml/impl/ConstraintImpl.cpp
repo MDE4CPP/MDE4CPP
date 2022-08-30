@@ -601,7 +601,6 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'boolean_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -616,9 +615,8 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'boolean_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Constraint::no_side_effects(Any, std::map) : bool: 2403847167
@@ -637,7 +635,6 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_side_effects'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -652,9 +649,8 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_side_effects'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Constraint::not_apply_to_self(Any, std::map) : bool: 2965731128
@@ -673,7 +669,6 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_apply_to_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -688,9 +683,8 @@ std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_apply_to_self'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -55,8 +55,8 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -368,8 +368,29 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAnyObject(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getAssociation'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getAssociation'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, Any) : uml::Element[*]: 2765304632
@@ -379,19 +400,70 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
 			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_association_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_association = std::dynamic_pointer_cast<uml::Association>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getMatchingLinks'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getMatchingLinks'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
 			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getMatchingLinks'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getMatchingLinks'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
 			std::shared_ptr<Any> incoming_param_oppositeValue;
 			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinks'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
-			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, Any, Any) : uml::Element[*]: 2298435547
@@ -401,24 +473,84 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
 			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_association_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_association = std::dynamic_pointer_cast<uml::Association>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
 			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
 			std::shared_ptr<Any> incoming_param_oppositeValue;
 			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'endValue'
 			//parameter 3
 			std::shared_ptr<Any> incoming_param_endValue;
 			Bag<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<Any> >();
+			try
+			{
+				incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'endValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!"<< std::endl;)
+				return nullptr;
+			}
+		
 			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
-			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
+			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1289289959
@@ -428,13 +560,55 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
 			Bag<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_association_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_association = std::dynamic_pointer_cast<uml::Association>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getOppositeEnd'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'association'. Failed to invoke operation 'getOppositeEnd'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
 			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAnyObject(this->getOppositeEnd(incoming_param_association,incoming_param_end), uml::umlPackage::PROPERTY_CLASS);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getOppositeEnd'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getOppositeEnd'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getOppositeEnd(incoming_param_association,incoming_param_end), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 

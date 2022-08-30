@@ -439,18 +439,18 @@ std::shared_ptr<Any> ParameterableElementImpl::eInvoke(int operationID, std::sha
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'p'. Failed to invoke operation 'isCompatibleWith'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'p'. Failed to invoke operation 'isCompatibleWith'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isCompatibleWith(incoming_param_p),0,false);
+			result = eAny(this->isCompatibleWith(incoming_param_p), 0, false);
 			break;
 		}
 		// uml::ParameterableElement::isTemplateParameter() : bool: 2453023377
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
 		{
-			result = eAny(this->isTemplateParameter(),0,false);
+			result = eAny(this->isTemplateParameter(), 0, false);
 			break;
 		}
 

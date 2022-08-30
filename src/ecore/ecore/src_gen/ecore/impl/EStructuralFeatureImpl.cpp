@@ -618,7 +618,7 @@ std::shared_ptr<Any> EStructuralFeatureImpl::eInvoke(int operationID, std::share
 		// ecore::EStructuralFeature::getContainerClass() : void *: 1364523476
 		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS:
 		{
-			result = eAny(this->getContainerClass(),0,false);
+			result = eAny(this->getContainerClass(), 0, false);
 			break;
 		}
 

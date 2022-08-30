@@ -406,7 +406,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -421,9 +420,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->cannot_reference_submachine(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->cannot_reference_submachine(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FinalState::no_entry_behavior(Any, std::map) : bool: 4265979006
@@ -442,7 +440,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -457,9 +454,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_entry_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_entry_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FinalState::no_exit_behavior(Any, std::map) : bool: 2460932850
@@ -478,7 +474,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -493,9 +488,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_exit_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_exit_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FinalState::no_outgoing_transitions(Any, std::map) : bool: 435711094
@@ -514,7 +508,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -529,9 +522,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_outgoing_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_outgoing_transitions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FinalState::no_regions(Any, std::map) : bool: 1865421932
@@ -550,7 +542,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_regions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -565,9 +556,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_regions'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_regions(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_regions(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::FinalState::no_state_behavior(Any, std::map) : bool: 893127205
@@ -586,7 +576,6 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -601,9 +590,8 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_state_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_state_behavior(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

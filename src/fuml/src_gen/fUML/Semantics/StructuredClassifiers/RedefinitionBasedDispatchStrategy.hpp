@@ -52,7 +52,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class FUML_API RedefinitionBasedDispatchStrategy: virtual public DispatchStrategy
+	class FUML_API RedefinitionBasedDispatchStrategy : virtual public DispatchStrategy
 	{
 		public:
  			RedefinitionBasedDispatchStrategy(const RedefinitionBasedDispatchStrategy &) {}

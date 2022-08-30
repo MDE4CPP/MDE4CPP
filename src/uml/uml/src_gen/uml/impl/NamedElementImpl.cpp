@@ -662,7 +662,7 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -694,7 +694,7 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -712,7 +712,7 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 		// uml::NamedElement::getLabel() : std::string: 2648850226
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL:
 		{
-			result = eAny(this->getLabel(),0,false);
+			result = eAny(this->getLabel(), 0, false);
 			break;
 		}
 		// uml::NamedElement::getLabel(bool) : std::string: 1545748466
@@ -731,15 +731,14 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getLabel'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->getLabel(incoming_param_localize),0,false);
+			result = eAny(this->getLabel(incoming_param_localize), 0, false);
 			break;
 		}
 		// uml::NamedElement::getQualifiedName() : std::string {const}: 679696374
 		case umlPackage::NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME:
 		{
-			result = eAny(this->getQualifiedName(),0,false);
+			result = eAny(this->getQualifiedName(), 0, false);
 			break;
 		}
 		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 539959656
@@ -758,7 +757,6 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_no_qualified_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -773,9 +771,8 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_no_qualified_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2208944440
@@ -794,7 +791,6 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_qualified_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -809,9 +805,8 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_qualified_name'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 3034150359
@@ -838,7 +833,7 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
 					return nullptr;
 				}
 			}
@@ -864,18 +859,18 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
+			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns), 0, false);
 			break;
 		}
 		// uml::NamedElement::separator() : std::string {const}: 2764162934
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
-			result = eAny(this->separator(),0,false);
+			result = eAny(this->separator(), 0, false);
 			break;
 		}
 		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 3453868149
@@ -894,7 +889,6 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility_needs_ownership'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -909,9 +903,8 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility_needs_ownership'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

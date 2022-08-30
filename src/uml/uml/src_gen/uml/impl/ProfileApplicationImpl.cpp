@@ -562,7 +562,7 @@ std::shared_ptr<Any> ProfileApplicationImpl::eInvoke(int operationID, std::share
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'namedElement'. Failed to invoke operation 'getAppliedDefinition'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getAppliedDefinition'!"<< std::endl;)
 					return nullptr;
 				}
 			}

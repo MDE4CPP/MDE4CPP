@@ -378,13 +378,13 @@ std::shared_ptr<Any> MessageEndImpl::eInvoke(int operationID, std::shared_ptr<Ba
 		// uml::MessageEnd::isReceive() : bool: 3791628316
 		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
 		{
-			result = eAny(this->isReceive(),0,false);
+			result = eAny(this->isReceive(), 0, false);
 			break;
 		}
 		// uml::MessageEnd::isSend() : bool: 2112067343
 		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
 		{
-			result = eAny(this->isSend(),0,false);
+			result = eAny(this->isSend(), 0, false);
 			break;
 		}
 		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 2418148191

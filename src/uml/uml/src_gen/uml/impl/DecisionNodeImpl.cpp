@@ -549,7 +549,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'decision_input_flow_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -564,9 +563,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'decision_input_flow_incoming'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->decision_input_flow_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->decision_input_flow_incoming(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::edges(Any, std::map) : bool: 754495230
@@ -585,7 +583,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -600,9 +597,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::incoming_control_one_input_parameter(Any, std::map) : bool: 1428414222
@@ -621,7 +617,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_control_one_input_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -636,9 +631,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_control_one_input_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->incoming_control_one_input_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->incoming_control_one_input_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::incoming_object_one_input_parameter(Any, std::map) : bool: 1630246256
@@ -657,7 +651,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_object_one_input_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -672,9 +665,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_object_one_input_parameter'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->incoming_object_one_input_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->incoming_object_one_input_parameter(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::incoming_outgoing_edges(Any, std::map) : bool: 1662300060
@@ -693,7 +685,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_outgoing_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -708,9 +699,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_outgoing_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->incoming_outgoing_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->incoming_outgoing_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::parameters(Any, std::map) : bool: 2591877330
@@ -729,7 +719,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -744,9 +733,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::two_input_parameters(Any, std::map) : bool: 1517660354
@@ -765,7 +753,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'two_input_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -780,9 +767,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'two_input_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->two_input_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->two_input_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::DecisionNode::zero_input_parameters(Any, std::map) : bool: 418702236
@@ -801,7 +787,6 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'zero_input_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -816,9 +801,8 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'zero_input_parameters'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->zero_input_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->zero_input_parameters(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

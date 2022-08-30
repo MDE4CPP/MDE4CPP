@@ -497,7 +497,6 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -512,9 +511,8 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ClearStructuralFeatureAction::type_of_result(Any, std::map) : bool: 361464888
@@ -533,7 +531,6 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -548,9 +545,8 @@ std::shared_ptr<Any> ClearStructuralFeatureActionImpl::eInvoke(int operationID, 
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_result'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

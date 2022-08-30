@@ -555,7 +555,6 @@ std::shared_ptr<Any> InterruptibleActivityRegionImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'interrupting_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -570,9 +569,8 @@ std::shared_ptr<Any> InterruptibleActivityRegionImpl::eInvoke(int operationID, s
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'interrupting_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->interrupting_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->interrupting_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

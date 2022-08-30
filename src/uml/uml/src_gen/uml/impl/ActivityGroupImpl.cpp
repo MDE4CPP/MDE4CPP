@@ -509,7 +509,6 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'nodes_and_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -524,9 +523,8 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'nodes_and_edges'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActivityGroup::not_contained(Any, std::map) : bool: 2941117457
@@ -545,7 +543,6 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -560,9 +557,8 @@ std::shared_ptr<Any> ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'not_contained'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

@@ -590,7 +590,6 @@ std::shared_ptr<Any> GeneralizationSetImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'generalization_same_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -605,9 +604,8 @@ std::shared_ptr<Any> GeneralizationSetImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'generalization_same_classifier'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->generalization_same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->generalization_same_classifier(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::GeneralizationSet::maps_to_generalization_set(Any, std::map) : bool: 3958412351
@@ -626,7 +624,6 @@ std::shared_ptr<Any> GeneralizationSetImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maps_to_generalization_set'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -641,9 +638,8 @@ std::shared_ptr<Any> GeneralizationSetImpl::eInvoke(int operationID, std::shared
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maps_to_generalization_set'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

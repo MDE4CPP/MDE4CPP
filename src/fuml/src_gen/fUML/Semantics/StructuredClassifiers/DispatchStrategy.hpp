@@ -56,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class FUML_API DispatchStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
+	class FUML_API DispatchStrategy : virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			DispatchStrategy(const DispatchStrategy &) {}

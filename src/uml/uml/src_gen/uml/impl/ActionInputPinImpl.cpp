@@ -576,7 +576,6 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -591,9 +590,8 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'input_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActionInputPin::no_control_or_object_flow(Any, std::map) : bool: 2585890729
@@ -612,7 +610,6 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_control_or_object_flow'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -627,9 +624,8 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_control_or_object_flow'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->no_control_or_object_flow(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->no_control_or_object_flow(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::ActionInputPin::one_output_pin(Any, std::map) : bool: 3182098911
@@ -648,7 +644,6 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_output_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -663,9 +658,8 @@ std::shared_ptr<Any> ActionInputPinImpl::eInvoke(int operationID, std::shared_pt
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_output_pin'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

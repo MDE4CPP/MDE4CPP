@@ -413,12 +413,12 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'redefiningElement'. Failed to invoke operation 'isConsistentWith'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'redefiningElement'. Failed to invoke operation 'isConsistentWith'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isConsistentWith(incoming_param_redefiningElement),0,false);
+			result = eAny(this->isConsistentWith(incoming_param_redefiningElement), 0, false);
 			break;
 		}
 		// uml::RedefinableElement::isRedefinitionContextValid(uml::RedefinableElement) : bool: 3034109494
@@ -445,12 +445,12 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for parameter 'redefinedElement'. Failed to invoke operation 'isRedefinitionContextValid'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'redefinedElement'. Failed to invoke operation 'isRedefinitionContextValid'!"<< std::endl;)
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement),0,false);
+			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement), 0, false);
 			break;
 		}
 		// uml::RedefinableElement::non_leaf_redefinition(Any, std::map) : bool: 1672313130
@@ -469,7 +469,6 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'non_leaf_redefinition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -484,9 +483,8 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'non_leaf_redefinition'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::RedefinableElement::redefinition_consistent(Any, std::map) : bool: 566994478
@@ -505,7 +503,6 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefinition_consistent'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -520,9 +517,8 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefinition_consistent'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::RedefinableElement::redefinition_context_valid(Any, std::map) : bool: 1062628144
@@ -541,7 +537,6 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefinition_context_valid'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -556,9 +551,8 @@ std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::share
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefinition_context_valid'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->redefinition_context_valid(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->redefinition_context_valid(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

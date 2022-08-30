@@ -20,8 +20,8 @@
 #include <stdexcept>
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -217,7 +217,7 @@ std::shared_ptr<Any> SemanticStrategyImpl::eInvoke(int operationID, std::shared_
 		// fUML::Semantics::Loci::SemanticStrategy::getName() : std::string: 3310607623
 		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName(),0,false);
+			result = eAny(this->getName(), 0, false);
 			break;
 		}
 

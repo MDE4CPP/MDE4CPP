@@ -370,7 +370,7 @@ std::shared_ptr<Any> EObjectContainerImpl::eInvoke(int operationID, std::shared_
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for parameter 'container'. Failed to invoke operation 'setContainer'!"<< std::endl;)
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'container'. Failed to invoke operation 'setContainer'!"<< std::endl;)
 					return nullptr;
 				}
 			}

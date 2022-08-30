@@ -892,7 +892,6 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'default_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -907,9 +906,8 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'default_value'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Port::encapsulated_owner(Any, std::map) : bool: 2364621826
@@ -928,7 +926,6 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'encapsulated_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -943,9 +940,8 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'encapsulated_owner'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Port::getProvideds() : uml::Interface[*]: 4122866187
@@ -978,7 +974,6 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'port_aggregation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -993,9 +988,8 @@ std::shared_ptr<Any> PortImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'port_aggregation'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->port_aggregation(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->port_aggregation(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

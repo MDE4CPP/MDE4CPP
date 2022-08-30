@@ -1745,7 +1745,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binding_to_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1760,9 +1759,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binding_to_attribute'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::deployment_target(Any, std::map) : bool: 3702053202
@@ -1781,7 +1779,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1796,9 +1793,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::derived_union_is_derived(Any, std::map) : bool: 2814245107
@@ -1817,7 +1813,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_derived'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1832,9 +1827,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_derived'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::derived_union_is_read_only(Any, std::map) : bool: 3192319857
@@ -1853,7 +1847,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_read_only'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1868,9 +1861,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_read_only'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::getOtherEnd() : uml::Property: 3759990426
@@ -1882,25 +1874,25 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 		// uml::Property::isAttribute() : bool: 2655051450
 		case umlPackage::PROPERTY_OPERATION_ISATTRIBUTE:
 		{
-			result = eAny(this->isAttribute(),0,false);
+			result = eAny(this->isAttribute(), 0, false);
 			break;
 		}
 		// uml::Property::isComposite() : bool: 656738949
 		case umlPackage::PROPERTY_OPERATION_ISCOMPOSITE:
 		{
-			result = eAny(this->isComposite(),0,false);
+			result = eAny(this->isComposite(), 0, false);
 			break;
 		}
 		// uml::Property::isNavigable() : bool: 2533598543
 		case umlPackage::PROPERTY_OPERATION_ISNAVIGABLE:
 		{
-			result = eAny(this->isNavigable(),0,false);
+			result = eAny(this->isNavigable(), 0, false);
 			break;
 		}
 		// uml::Property::isSetDefault() : bool: 3535385199
 		case umlPackage::PROPERTY_OPERATION_ISSETDEFAULT:
 		{
-			result = eAny(this->isSetDefault(),0,false);
+			result = eAny(this->isSetDefault(), 0, false);
 			break;
 		}
 		// uml::Property::multiplicity_of_composite(Any, std::map) : bool: 3608563570
@@ -1919,7 +1911,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_composite'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1934,9 +1925,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_composite'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::qualified_is_association_end(Any, std::map) : bool: 179080540
@@ -1955,7 +1945,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualified_is_association_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -1970,9 +1959,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualified_is_association_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::redefined_property_inherited(Any, std::map) : bool: 2738896892
@@ -1991,7 +1979,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefined_property_inherited'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2006,9 +1993,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefined_property_inherited'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::setBooleanDefaultValue(bool): 3743362958
@@ -2027,7 +2013,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
@@ -2048,7 +2033,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
@@ -2069,7 +2053,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isNavigable'. Failed to invoke operation 'setIsNavigable'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setIsNavigable(incoming_param_isNavigable);
 			break;
@@ -2096,7 +2079,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setRealDefaultValue(incoming_param_value);
 			break;
@@ -2117,7 +2099,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setStringDefaultValue(incoming_param_value);
 			break;
@@ -2138,7 +2119,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
 			break;
@@ -2159,7 +2139,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetted_property_names'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2174,9 +2153,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetted_property_names'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::subsettingContext() : uml::Type[*]: 2305810549
@@ -2202,7 +2180,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_context_conforms'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2217,9 +2194,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_context_conforms'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::subsetting_rules(Any, std::map) : bool: 4221533565
@@ -2238,7 +2214,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_rules'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2253,9 +2228,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_rules'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::type_of_opposite_end(Any, std::map) : bool: 1991290293
@@ -2274,7 +2248,6 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_opposite_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -2289,9 +2262,8 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_opposite_end'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Property::unsetDefault(): 1637600012

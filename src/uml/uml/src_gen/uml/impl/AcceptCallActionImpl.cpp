@@ -482,7 +482,6 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -497,9 +496,8 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'result_pins'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptCallAction::trigger_call_event(Any, std::map) : bool: 1188633728
@@ -518,7 +516,6 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'trigger_call_event'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -533,9 +530,8 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'trigger_call_event'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->trigger_call_event(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->trigger_call_event(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::AcceptCallAction::unmarshall(Any, std::map) : bool: 3758873039
@@ -554,7 +550,6 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'unmarshall'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
@@ -569,9 +564,8 @@ std::shared_ptr<Any> AcceptCallActionImpl::eInvoke(int operationID, std::shared_
 				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'unmarshall'!"<< std::endl;)
 				return nullptr;
 			}
-			
 		
-			result = eAny(this->unmarshall(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->unmarshall(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

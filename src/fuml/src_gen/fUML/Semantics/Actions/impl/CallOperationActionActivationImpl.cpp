@@ -21,8 +21,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -47,8 +47,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -65,8 +65,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -145,7 +145,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
+	/*std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
 		std::shared_ptr<uml::Operation> operation = action->getOperation();
@@ -163,10 +163,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 		}
 		
 		std::shared_ptr<uml::Element> context = nullptr;
-		std::string targetPinName = targetPin->getName();
+		std::string targetPinName = targetPin->getName();*/
 
 		/* MDE4CPP specific implementation for handling "self"-Pin */
-		if(targetPinName.empty() || targetPinName.find("self") == 0)
+		/*if(targetPinName.empty() || targetPinName.find("self") == 0)
 		{
 			context = this->getExecutionContext();
 			if(targetPinName.find("self.") == 0)
@@ -175,7 +175,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				/*std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -195,7 +195,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 						}
 						attributeIter++;
 					}
-				}*/
+				}
 
 				if(nullptr == attribute)
 				{
@@ -207,7 +207,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 
 				if (context != nullptr)
 				{
-					/*std::shared_ptr<Bag<Any>> attributeValues = context->get(attribute);
+					std::shared_ptr<Bag<Any>> attributeValues = context->get(attribute);
 					if (attributeValues->size() > 0)
 					{
 						context = attributeValues->front()->get<uml::Element>();
@@ -217,13 +217,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 								std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
 							}
 						)
-					}*/
+					}
 				}
 			}
-		}
+		}*/
 		/*--------------------------------------------------------*/
 
-		else
+		/*else
 		{
 			std::shared_ptr<fUML::Semantics::Actions::PinActivation> targetPinActivation = this->retrievePinActivation(targetPin);
 			if(targetPinActivation == nullptr)
@@ -315,7 +315,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			
 			return outputParameterValues;
 		}
-	}
+	}*/
 	return nullptr;
 	//end of body
 }
@@ -562,11 +562,34 @@ bool CallOperationActionActivationImpl::eSet(int featureID, std::shared_ptr<Any>
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION:
 		{
-			// CAST Any to uml::CallOperationAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCallOperationAction(_callOperationAction); //1913
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(eObject);
+					if(_callOperationAction)
+					{
+						setCallOperationAction(_callOperationAction); //1913
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!"<< std::endl;)
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!"<< std::endl;)
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -589,15 +612,45 @@ std::shared_ptr<Any> CallOperationActionActivationImpl::eInvoke(int operationID,
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameterValues;
 			Bag<Any>::const_iterator incoming_param_inputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_inputParameterValues = (*incoming_param_inputParameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputParameterValues_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputParameterValues.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputParameterValues->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->doCall(incoming_param_inputParameterValues);
-			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::CallOperationActionActivation::retrieveBehavior() : uml::Behavior {const}: 3335726203
 		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR:
 		{
-			result = eAnyObject(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			result = eEcoreAny(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
 			break;
 		}
 
