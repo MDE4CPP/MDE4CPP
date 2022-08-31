@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> SystemModelImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SYSTEMMODEL_ATTRIBUTE_BASE_MODEL:
-			return eAny(this->getBase_Model(), uml::umlPackage::MODEL_CLASS, false);
+			return eUMLAny(this->getBase_Model().lock(), uml::umlPackage::MODEL_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void SystemModelImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::SYSTEMMODEL_ATTRIBUTE_BASE_MODEL:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Model>> container = value->get<std::shared_ptr<Bag<uml::Model>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Model> _base_Model = std::dynamic_pointer_cast<uml::Model>(umlAny);
+					if(_base_Model)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Model(container->at(0));
-					}
+						setBase_Model(_base_Model);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Model'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Model(value->get<std::shared_ptr<uml::Model>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Model'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add

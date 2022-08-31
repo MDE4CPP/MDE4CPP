@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -169,7 +169,7 @@ std::shared_ptr<Any> SetterNameImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
-			return eAny(this->getBase_Property(), uml::umlPackage::PROPERTY_CLASS, false);
+			return eUMLAny(this->getBase_Property().lock(), uml::umlPackage::PROPERTY_CLASS);
 		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
 			return eAny(this->getSetterName(), types::typesPackage::STRING_CLASS, false);
 	}
@@ -196,46 +196,50 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Property>> container = value->get<std::shared_ptr<Bag<uml::Property>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Property> _base_Property = std::dynamic_pointer_cast<uml::Property>(umlAny);
+					if(_base_Property)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Property(container->at(0));
-					}
+						setBase_Property(_base_Property);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Property'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Property(value->get<std::shared_ptr<uml::Property>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Property'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
 		{
-			if(value->isContainer())
+			try
 			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container)
-				{
-					if(!(container->empty()))
-					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setSetterName(*(container->at(0)));
-					}
-				}
+				std::string _setterName = value->get<std::string>();
+				setSetterName(_setterName);
 			}
-			else
+			catch(...)
 			{
-				this->setSetterName(value->get<std::string>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property 'setterName'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add
@@ -287,6 +291,9 @@ void SetterNameImpl::unset(unsigned long _uID)
 //Invoke
 std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -295,6 +302,7 @@ std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _ope
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)

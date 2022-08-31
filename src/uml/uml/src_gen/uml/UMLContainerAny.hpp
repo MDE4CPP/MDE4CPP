@@ -67,7 +67,7 @@ inline std::shared_ptr<Bag<uml::Element>> uml::UMLContainerAnyTemplate<T>::getAs
 
 template <typename T> static std::shared_ptr<Any> eUMLContainerAny(T value, unsigned long typeID)
 {
-	std::shared_ptr<Any> any(new UMLContainerAnyTemplate<T>(value, typeID, true));
+	std::shared_ptr<Any> any(new uml::UMLContainerAnyTemplate<T>(value, typeID, true));
 	return any;
 }
 #endif

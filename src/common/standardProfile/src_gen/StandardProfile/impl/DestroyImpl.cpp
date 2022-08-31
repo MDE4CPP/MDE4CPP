@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> DestroyImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::DESTROY_ATTRIBUTE_BASE_BEHAVIORALFEATURE:
-			return eAny(this->getBase_BehavioralFeature(), uml::umlPackage::BEHAVIORALFEATURE_CLASS, false);
+			return eUMLAny(this->getBase_BehavioralFeature().lock(), uml::umlPackage::BEHAVIORALFEATURE_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void DestroyImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::DESTROY_ATTRIBUTE_BASE_BEHAVIORALFEATURE:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::BehavioralFeature>> container = value->get<std::shared_ptr<Bag<uml::BehavioralFeature>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::BehavioralFeature> _base_BehavioralFeature = std::dynamic_pointer_cast<uml::BehavioralFeature>(umlAny);
+					if(_base_BehavioralFeature)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_BehavioralFeature(container->at(0));
-					}
+						setBase_BehavioralFeature(_base_BehavioralFeature);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_BehavioralFeature'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_BehavioralFeature(value->get<std::shared_ptr<uml::BehavioralFeature>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_BehavioralFeature'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add

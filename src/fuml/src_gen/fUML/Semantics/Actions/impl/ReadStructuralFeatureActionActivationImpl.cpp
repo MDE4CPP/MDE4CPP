@@ -36,6 +36,7 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/ReadStructuralFeatureAction.hpp"
 #include "uml/Property.hpp"
@@ -58,8 +59,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -154,7 +155,7 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 		//value is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 	
-		value = eAny(context, context->getMetaElementID(), false);
+		value = eUMLAny(context, context->getMetaElementID());
 	}
 	else{
 		value = this->takeTokens(action->getObject())->at(0);
@@ -165,7 +166,9 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 
 	try
 	{
-		structuredValue = value->get<std::shared_ptr<uml::Element>>();
+		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+
+		structuredValue = umlAny->getAsElement();
 
 		if (structuredValue)
 		{

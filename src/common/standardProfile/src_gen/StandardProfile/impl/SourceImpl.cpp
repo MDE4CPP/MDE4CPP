@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -155,7 +155,7 @@ std::shared_ptr<Any> SourceImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SOURCE_ATTRIBUTE_BASE_ARTIFACT:
-			return eAny(this->getBase_Artifact(), uml::umlPackage::ARTIFACT_CLASS, false);
+			return eUMLAny(this->getBase_Artifact().lock(), uml::umlPackage::ARTIFACT_CLASS);
 	}
 
 	std::shared_ptr<Any> result;
@@ -187,26 +187,36 @@ void SourceImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::SOURCE_ATTRIBUTE_BASE_ARTIFACT:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Artifact>> container = value->get<std::shared_ptr<Bag<uml::Artifact>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Artifact> _base_Artifact = std::dynamic_pointer_cast<uml::Artifact>(umlAny);
+					if(_base_Artifact)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Artifact(container->at(0));
-					}
+						setBase_Artifact(_base_Artifact);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Artifact'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Artifact(value->get<std::shared_ptr<uml::Artifact>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Artifact'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 	//Call set() for base class File
 	StandardProfile::FileImpl::set(_uID, value);
 }

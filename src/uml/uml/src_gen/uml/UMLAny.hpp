@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "ecore/EcoreAny.hpp"
 #include "uml/Element.hpp"
+#include "uml/umlPackage.hpp"
 
 namespace uml
 {
@@ -60,7 +61,7 @@ inline std::shared_ptr<uml::Element> uml::UMLAnyTemplate<T>::getAsElement() cons
 
 template <typename T> static std::shared_ptr<Any> eUMLAny(T value, unsigned long typeID)
 {
-	std::shared_ptr<Any> any(new UMLAnyTemplate<T>(value, typeID, false));
+	std::shared_ptr<Any> any(new uml::UMLAnyTemplate<T>(value, typeID, false));
 	return any;
 }
 #endif

@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> ProcessImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::PROCESS_ATTRIBUTE_BASE_COMPONENT:
-			return eAny(this->getBase_Component(), uml::umlPackage::COMPONENT_CLASS, false);
+			return eUMLAny(this->getBase_Component().lock(), uml::umlPackage::COMPONENT_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void ProcessImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::PROCESS_ATTRIBUTE_BASE_COMPONENT:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Component>> container = value->get<std::shared_ptr<Bag<uml::Component>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Component> _base_Component = std::dynamic_pointer_cast<uml::Component>(umlAny);
+					if(_base_Component)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Component(container->at(0));
-					}
+						setBase_Component(_base_Component);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Component'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Component(value->get<std::shared_ptr<uml::Component>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Component'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add

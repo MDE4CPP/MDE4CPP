@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> SpecificationImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER:
-			return eAny(this->getBase_Classifier(), uml::umlPackage::CLASSIFIER_CLASS, false);
+			return eUMLAny(this->getBase_Classifier().lock(), uml::umlPackage::CLASSIFIER_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void SpecificationImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Classifier>> container = value->get<std::shared_ptr<Bag<uml::Classifier>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Classifier> _base_Classifier = std::dynamic_pointer_cast<uml::Classifier>(umlAny);
+					if(_base_Classifier)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Classifier(container->at(0));
-					}
+						setBase_Classifier(_base_Classifier);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Classifier'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Classifier(value->get<std::shared_ptr<uml::Classifier>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Classifier'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add

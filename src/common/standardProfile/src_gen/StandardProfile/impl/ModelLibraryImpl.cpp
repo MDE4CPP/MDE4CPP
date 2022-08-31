@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> ModelLibraryImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::MODELLIBRARY_ATTRIBUTE_BASE_PACKAGE:
-			return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);
+			return eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void ModelLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case StandardProfile::StandardProfilePackage::MODELLIBRARY_ATTRIBUTE_BASE_PACKAGE:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Package>> container = value->get<std::shared_ptr<Bag<uml::Package>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Package> _base_Package = std::dynamic_pointer_cast<uml::Package>(umlAny);
+					if(_base_Package)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Package(container->at(0));
-					}
+						setBase_Package(_base_Package);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Package'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Package(value->get<std::shared_ptr<uml::Package>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Package'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add

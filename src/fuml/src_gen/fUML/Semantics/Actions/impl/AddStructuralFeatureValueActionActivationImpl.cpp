@@ -34,6 +34,7 @@
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Property.hpp"
 #include "uml/InputPin.hpp"
@@ -56,8 +57,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -161,7 +162,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 		//value is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		value = eAny(context, context->getMetaElementID(), false);
+		value = eUMLAny(context, context->getMetaElementID());
 	}
 	else{
 		value = this->takeTokens(action->getObject())->at(0);
@@ -231,9 +232,11 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	{
 		std::shared_ptr<uml::Element> structuredValue = nullptr;
 
+		std::shared_ptr<uml::UMLAny> umlValue = std::dynamic_pointer_cast<uml::UMLAny>(value);
+
 		try
 		{
-			structuredValue = value->get<std::shared_ptr<uml::Element>>();
+			structuredValue = umlValue->getAsElement();
 		
 			if (structuredValue)
 			{
@@ -253,14 +256,18 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 				{
 					//If upperOfFeature <> 1, then feature is a container
 					std::shared_ptr<Any> featureValue = structuredValue->get(property);
+
 					if(featureValue && featureValue->isContainer())
 					{
-						int sizeOfFeatureValue = 0; //(std::dynamic_pointer_cast<AnyEObjectBag>(featureValue))->getBag()->size();
+						/* 
+						 * Currently not supported
+						int sizeOfFeatureValue = (std::dynamic_pointer_cast<AnyEObjectBag>(featureValue))->getBag()->size();
 
 						if(sizeOfFeatureValue > 0 && insertAt == 0)
 						{
 							insertAt = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getExecutionLocus()->getFactory()->getStrategy("choice")))->choose(sizeOfFeatureValue);
 						}
+						*/ 
 
 						//Note: uniqueness of feature is handled by the add() method of structuredValue
 

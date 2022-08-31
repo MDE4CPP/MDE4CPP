@@ -31,6 +31,7 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
 #include "uml/Property.hpp"
@@ -53,8 +54,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -149,7 +150,7 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 		//objectValue is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		objectValue = eAny(context, context->getMetaElementID(), false);
+		objectValue = eUMLAny(context, context->getMetaElementID());
 	}
 	else{
 		objectValue = this->takeTokens(action->getObject())->at(0);
@@ -160,7 +161,9 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 
 	try
 	{
-		structuredValue = objectValue->get<std::shared_ptr<uml::Element>>();
+		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
+
+		structuredValue = umlAny->getAsElement();
 
 		if (structuredValue)
 		{

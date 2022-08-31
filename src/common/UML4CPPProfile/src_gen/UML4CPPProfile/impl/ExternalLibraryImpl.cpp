@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -197,7 +197,7 @@ std::shared_ptr<Any> ExternalLibraryImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE:
-			return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);
+			return eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH:
 			return eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME:
@@ -228,86 +228,78 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Package>> container = value->get<std::shared_ptr<Bag<uml::Package>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Package> _base_Package = std::dynamic_pointer_cast<uml::Package>(umlAny);
+					if(_base_Package)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Package(container->at(0));
-					}
+						setBase_Package(_base_Package);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Package'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Package(value->get<std::shared_ptr<uml::Package>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Package'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH:
 		{
-			if(value->isContainer())
+			try
 			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container)
-				{
-					if(!(container->empty()))
-					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setIncludePath(*(container->at(0)));
-					}
-				}
+				std::string _includePath = value->get<std::string>();
+				setIncludePath(_includePath);
 			}
-			else
+			catch(...)
 			{
-				this->setIncludePath(value->get<std::string>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property 'includePath'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME:
 		{
-			if(value->isContainer())
+			try
 			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container)
-				{
-					if(!(container->empty()))
-					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setLibraryName(*(container->at(0)));
-					}
-				}
+				std::string _libraryName = value->get<std::string>();
+				setLibraryName(_libraryName);
 			}
-			else
+			catch(...)
 			{
-				this->setLibraryName(value->get<std::string>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property 'libraryName'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH:
 		{
-			if(value->isContainer())
+			try
 			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container)
-				{
-					if(!(container->empty()))
-					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setLibraryPath(*(container->at(0)));
-					}
-				}
+				std::string _libraryPath = value->get<std::string>();
+				setLibraryPath(_libraryPath);
 			}
-			else
+			catch(...)
 			{
-				this->setLibraryPath(value->get<std::string>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property 'libraryPath'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add
@@ -359,6 +351,9 @@ void ExternalLibraryImpl::unset(unsigned long _uID)
 //Invoke
 std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -367,6 +362,7 @@ std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::shared_ptr<uml::Operation>
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)

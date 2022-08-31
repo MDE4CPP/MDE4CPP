@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> DoNotGenerateImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_ATTRIBUTE_BASE_ELEMENT:
-			return eAny(this->getBase_Element(), uml::umlPackage::ELEMENT_CLASS, false);
+			return eUMLAny(this->getBase_Element(), uml::umlPackage::ELEMENT_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void DoNotGenerateImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_ATTRIBUTE_BASE_ELEMENT:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Element>> container = value->get<std::shared_ptr<Bag<uml::Element>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Element> _base_Element = std::dynamic_pointer_cast<uml::Element>(umlAny);
+					if(_base_Element)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Element(container->at(0));
-					}
+						setBase_Element(_base_Element);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Element'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Element(value->get<std::shared_ptr<uml::Element>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Element'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add
@@ -250,6 +260,9 @@ void DoNotGenerateImpl::unset(unsigned long _uID)
 //Invoke
 std::shared_ptr<Any> DoNotGenerateImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -258,6 +271,7 @@ std::shared_ptr<Any> DoNotGenerateImpl::invoke(std::shared_ptr<uml::Operation> _
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> DoNotGenerateImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)

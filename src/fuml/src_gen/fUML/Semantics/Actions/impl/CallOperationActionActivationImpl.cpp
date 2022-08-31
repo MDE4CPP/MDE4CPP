@@ -33,6 +33,8 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/CallOperationAction.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/InputPin.hpp"
@@ -47,8 +49,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -65,8 +67,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -145,7 +147,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
+	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
 		std::shared_ptr<uml::Operation> operation = action->getOperation();
@@ -163,10 +165,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 		}
 		
 		std::shared_ptr<uml::Element> context = nullptr;
-		std::string targetPinName = targetPin->getName();*/
+		std::string targetPinName = targetPin->getName();
 
 		/* MDE4CPP specific implementation for handling "self"-Pin */
-		/*if(targetPinName.empty() || targetPinName.find("self") == 0)
+		if(targetPinName.empty() || targetPinName.find("self") == 0)
 		{
 			context = this->getExecutionContext();
 			if(targetPinName.find("self.") == 0)
@@ -175,7 +177,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes; /* Currently not supported. TODO: implement something like getTypes */ //= context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -207,23 +209,58 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 
 				if (context != nullptr)
 				{
-					std::shared_ptr<Bag<Any>> attributeValues = context->get(attribute);
-					if (attributeValues->size() > 0)
+					std::shared_ptr<Any> attributeValue = context->get(attribute);
+
+					if(attributeValue->isContainer())
 					{
-						context = attributeValues->front()->get<uml::Element>();
-						DEBUG_MESSAGE(
-							if (context != nullptr)
+						try
+						{
+							std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(attributeValue);
+							std::shared_ptr<Bag<uml::Element>> elements = umlContainerAny->getAsElementContainer();
+
+							if(elements->size() > 0)
 							{
-								std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
+								context = elements->front();
+								DEBUG_MESSAGE
+								(
+									/*if (context != nullptr)
+									{
+										std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
+									}*/ //getTypes currently not supported
+								)
 							}
-						)
+						}
+						catch(...)
+						{
+							DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+						}
 					}
+					else
+					{
+						try
+						{
+							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
+							context = umlAny->getAsElement();
+
+							DEBUG_MESSAGE
+							(
+								/*if (context != nullptr)
+								{
+									std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
+								}*/ //getTypes currently not supported
+							)
+						}
+						catch(...)
+						{
+							DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+						}
+					}				
 				}
 			}
-		}*/
+		}
 		/*--------------------------------------------------------*/
 
-		/*else
+		else
 		{
 			std::shared_ptr<fUML::Semantics::Actions::PinActivation> targetPinActivation = this->retrievePinActivation(targetPin);
 			if(targetPinActivation == nullptr)
@@ -252,7 +289,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			{
 				try
 				{
-					context = target->get<std::shared_ptr<uml::Element>>();
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(target);
+					context = umlAny->getAsElement();
 				}
 				catch(...)
 				{
@@ -315,7 +353,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			
 			return outputParameterValues;
 		}
-	}*/
+	}
 	return nullptr;
 	//end of body
 }

@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> SingletonImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_ATTRIBUTE_BASE_CLASS:
-			return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);
+			return eUMLAny(this->getBase_Class().lock(), uml::umlPackage::CLASS_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void SingletonImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_ATTRIBUTE_BASE_CLASS:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Class>> container = value->get<std::shared_ptr<Bag<uml::Class>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Class> _base_Class = std::dynamic_pointer_cast<uml::Class>(umlAny);
+					if(_base_Class)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Class(container->at(0));
-					}
+						setBase_Class(_base_Class);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Class'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Class(value->get<std::shared_ptr<uml::Class>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Class'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add
@@ -250,6 +260,9 @@ void SingletonImpl::unset(unsigned long _uID)
 //Invoke
 std::shared_ptr<Any> SingletonImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -258,6 +271,7 @@ std::shared_ptr<Any> SingletonImpl::invoke(std::shared_ptr<uml::Operation> _oper
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> SingletonImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)

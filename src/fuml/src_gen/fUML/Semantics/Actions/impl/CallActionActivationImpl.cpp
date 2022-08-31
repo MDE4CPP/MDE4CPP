@@ -38,6 +38,7 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallAction.hpp"
 #include "uml/InputPin.hpp"
@@ -67,8 +68,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -139,7 +140,7 @@ void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
+	std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
 	std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
 	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList = this->getInputPinActivation();
 
@@ -179,7 +180,7 @@ void CallActionActivationImpl::doAction()
 				std::shared_ptr<uml::Element> context = this->getExecutionContext();
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes; /* Currently not supported. TODO: implement something like getTypes */ // = context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -219,7 +220,7 @@ void CallActionActivationImpl::doAction()
 			else if (pinName.find("self") == 0)
 			{
 				std::shared_ptr<uml::Element> context = getExecutionContext();
-				std::shared_ptr<Any> contextValue = eAny(context, context->getMetaElementID(), false);
+				std::shared_ptr<Any> contextValue = eUMLAny(context, context->getMetaElementID());
 				
 				parameterValue->getValues()->add(contextValue);
 			}
@@ -281,7 +282,7 @@ void CallActionActivationImpl::doAction()
 	else
 	{
 		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL outputParameterValues"<<std::endl;)
-	}*/
+	}
 	//end of body
 }
 

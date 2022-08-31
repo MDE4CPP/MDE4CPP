@@ -36,6 +36,7 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/Property.hpp"
@@ -58,8 +59,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -154,7 +155,7 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 		//objectValue is set to the context of the current activity execution
 		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
 			
-		objectValue = eAny(context, context->getMetaElementID(), false);;
+		objectValue = eUMLAny(context, context->getMetaElementID());
 	}
 	else{
 		objectValue = this->takeTokens(action->getObject())->at(0);
@@ -165,7 +166,9 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 
 	try
 	{
-		std::shared_ptr<uml::Element> structuredValue = objectValue->get<std::shared_ptr<uml::Element>>();
+		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
+
+		std::shared_ptr<uml::Element> structuredValue = umlAny->getAsElement();
 
 		if(structuredValue)
 		{

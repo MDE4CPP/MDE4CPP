@@ -9,10 +9,10 @@
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Any> MainBehaviorImpl::get(unsigned long _uID) const
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR:
-			return eAny(this->getBase_Behavior(), uml::umlPackage::BEHAVIOR_CLASS, false);
+			return eUMLAny(this->getBase_Behavior().lock(), uml::umlPackage::BEHAVIOR_CLASS);
 	}
 
 	return eAny(nullptr, -1, false);
@@ -179,26 +179,36 @@ void MainBehaviorImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR:
 		{
-			if(value->isContainer())
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
 			{
-				std::shared_ptr<Bag<uml::Behavior>> container = value->get<std::shared_ptr<Bag<uml::Behavior>>>();
-				if(container)
+				try
 				{
-					if(!(container->empty()))
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Behavior> _base_Behavior = std::dynamic_pointer_cast<uml::Behavior>(umlAny);
+					if(_base_Behavior)
 					{
-						// If a non-empty container is passed, the property will be set to the first value of the container
-						this->setBase_Behavior(container->at(0));
-					}
+						setBase_Behavior(_base_Behavior);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Behavior'. Failed to set property!"<< std::endl;)
+					return;
 				}
 			}
 			else
 			{
-				this->setBase_Behavior(value->get<std::shared_ptr<uml::Behavior>>());
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Behavior'. Failed to set property!"<< std::endl;)
+				return;
 			}
-			return;
+		break;
 		}
 	}
-
 }
 
 //Add
@@ -250,6 +260,9 @@ void MainBehaviorImpl::unset(unsigned long _uID)
 //Invoke
 std::shared_ptr<Any> MainBehaviorImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -258,6 +271,7 @@ std::shared_ptr<Any> MainBehaviorImpl::invoke(std::shared_ptr<uml::Operation> _o
 	}
 
 	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
 std::shared_ptr<Any> MainBehaviorImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
