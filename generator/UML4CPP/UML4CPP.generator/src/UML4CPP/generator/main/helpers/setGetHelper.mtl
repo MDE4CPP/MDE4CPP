@@ -113,12 +113,12 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 			[if(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
 			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
 			[else]
-			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if], [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
 			[/if]
 		[/for]
 		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
 		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
-			return eUMLAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/]);
+			return eUMLAny(this->get[compositeOwnerClass.name.toUpperFirst()/]().lock(), [compositeOwnerClass.generateStaticClassifierIDAccess()/]);
 		[/for]
 	}
 
