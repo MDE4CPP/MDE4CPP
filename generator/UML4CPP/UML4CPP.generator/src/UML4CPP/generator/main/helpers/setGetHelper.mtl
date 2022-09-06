@@ -58,6 +58,10 @@ virtual void add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt = 
 virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
+//Remove
+virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
+virtual void remove(std::string _qualifiedName, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
+virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -88,6 +92,9 @@ virtual std::shared_ptr<Any> invoke(unsigned long _uID, std::shared_ptr<Bag<Any>
 
 //Unset
 [aClass.generateUnSetImplementation()/]
+
+//Remove
+[aClass.generateRemoveImplementation()/]
 [/template]
 
 [template private generateGetImplementation(aClass : Class)]
@@ -405,7 +412,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 [/if]
 [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call set() for base class [sClass.name/]
-	[sClass.generateNamespaceName(true)/]Impl::add(_uID, value);
+	[sClass.generateNamespaceName(true)/]Impl::add(_uID, value, insertAt);
 [/for]
 }
 [/template]
@@ -454,6 +461,81 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 	//Call unset() for base class [sClass.name/]
 	[sClass.generateNamespaceName(true)/]Impl::unset(_uID);
 	[/for]
+}
+[/template]
+
+[template public generateRemoveImplementation(aClass : Class)]
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
+[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+			[aProperty.type.generateCppType(false)/] valueToRemove;
+			if(value->isContainer())
+			{
+				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = [if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if];
+				}
+				[else]
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(firstElement);
+					}
+				}
+				[/if]
+			}
+			else
+			{
+				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				valueToRemove = value->get<[aProperty.type.generateCppType(false)/]>();
+				[else]
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(element);
+				}
+				[/if]
+			}
+
+
+			this->[aProperty.getterName()/]()->erase(valueToRemove);
+
+			return;
+		}
+		[/for]
+	}
+
+[/if]
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [sClass.name/]
+	[sClass.generateNamespaceName(true)/]Impl::remove(_uID, value);
+[/for]
 }
 [/template]
 
@@ -524,7 +606,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 			[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))]
 			[for (anInputParameter : Parameter | inputParameterList) after('\n')]
 			//Retrieve input parameter '[anInputParameter.name/]'
-			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] = *(arguments->at([inputParameterList->indexOf(anInputParameter)-1/]).get());
+			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] = _arguments->at([inputParameterList->indexOf(anInputParameter)-1/]);
 			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
 			[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
 				[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
@@ -574,10 +656,10 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 					
 							if(elementList)
 							{
-								[anInputParameter.name/].reset();
+								[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppType(true)/]>>();
 								for(const std::shared_ptr<uml::Element> anElement: *elementList)
 								{
-									std::shared_ptr<[anInputParameter.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.generateCppType(true)/]>(anElement);
+									std::shared_ptr<[anInputParameter.type.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(anElement);
 									[anInputParameter.name/]->add(_temp);
 								}
 							}
@@ -609,7 +691,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 			return eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
 					[comment returnParameter is typed by a Class or Interface /]
 					[else]
-			return [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			return [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
 					[/if]
 				[/let]
 				[comment anOperation has no return parameter /]
