@@ -129,6 +129,11 @@ std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operati
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
+void ObjectImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
 void ObjectImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
@@ -444,6 +449,52 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			}
 		
 			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments), 0, false);
+			break;
+		}
+		// uml::Object::remove(uml::Property, Any): 1546275363
+		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'remove'!"<< std::endl;)
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'remove'!"<< std::endl;)
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'value'
+			//parameter 1
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'remove'!"<< std::endl;)
+				return nullptr;
+			}
+		
+			this->remove(incoming_param__property,incoming_param_value);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 183386425

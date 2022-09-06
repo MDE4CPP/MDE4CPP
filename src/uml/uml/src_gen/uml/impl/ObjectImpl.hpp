@@ -75,6 +75,11 @@ virtual public Object
 			 
 			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments) ;
 			/*!
+			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
+			*/
+			 
+			virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter.
 			*/

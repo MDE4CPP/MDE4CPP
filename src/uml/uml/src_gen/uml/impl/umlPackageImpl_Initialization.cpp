@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -18915,6 +18915,38 @@ void umlPackageImpl::initializeObjectContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
 		parameter->setName("arguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_object_Operation_remove_Property_EJavaObject->setName("remove");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_object_Operation_remove_Property_EJavaObject->setEType(unknownClass);
+	}
+	m_object_Operation_remove_Property_EJavaObject->setLowerBound(0);
+	m_object_Operation_remove_Property_EJavaObject->setUpperBound(1);
+	m_object_Operation_remove_Property_EJavaObject->setUnique(true);
+	m_object_Operation_remove_Property_EJavaObject->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject);
+		parameter->setName("_property");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject);
+		parameter->setName("value");
+		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
