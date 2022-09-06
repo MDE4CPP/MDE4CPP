@@ -48,7 +48,7 @@ inline std::shared_ptr<Bag<uml::Element>> uml::UMLContainerAnyTemplate<T>::getAs
 	{
 		T anyValue=this->get<T>();
 		
-		returnContainer.reset();
+		returnContainer = std::make_shared<Bag<uml::Element>>();
 		for(auto anyElement : *anyValue)
 		{
 			std::shared_ptr<uml::Element> element = std::dynamic_pointer_cast<uml::Element>(anyElement);

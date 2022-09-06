@@ -46,7 +46,7 @@ inline std::shared_ptr<Bag<BaseElement>> BaseContainerAnyTemplate<T>::getAsBaseE
 	{
 		T anyValue=this->get<T>();
 		
-		returnContainer.reset();
+		returnContainer = std::make_shared<Bag<BaseElement>>();
 		
 		for(auto anyElement : *anyValue)
 		{

@@ -48,7 +48,7 @@ inline std::shared_ptr<Bag<ecore::EObject>> ecore::EcoreContainerAnyTemplate<T>:
 	{
 		T anyValue=this->get<T>();
 
-		returnContainer.reset();
+		returnContainer = std::make_shared<Bag<ecore::EObject>>();
 		for(auto anyElement : *anyValue)
 		{
 			std::shared_ptr<ecore::EObject> eObject = std::dynamic_pointer_cast<ecore::EObject>(anyElement);
