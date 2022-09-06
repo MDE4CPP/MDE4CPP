@@ -332,13 +332,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->add(qualifiedName, value);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	this->add(uID, value);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
