@@ -65,12 +65,12 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
-		DEBUG_MESSAGE(std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;)
+		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 
 		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 		if (executionPlugin)
 		{
-			DEBUG_MESSAGE(std::cout << "fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
+			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
 			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
 		[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
@@ -88,12 +88,12 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 		}
 		else
 		{
-			std::cout << "plugin " << plugin->eNAME() << " is not a fuml based plugin" << std::endl;
+			std::cout << "Plugin '" << plugin->eNAME() << "' is not an execution plugin!" << std::endl;
 		}
 	}
 	else
 	{ 
-		std::cout << "plugin" << pluginName << " not found" << std::endl;
+		std::cout << "Plugin '" << pluginName << "' not found!" << std::endl;
 	}
 	[elseif(aOperation.method->filter(OpaqueBehavior)->notEmpty())]
 	[let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]

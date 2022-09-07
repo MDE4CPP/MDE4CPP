@@ -75,12 +75,11 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 
 void [behaviorName/]::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters)
 {
-    DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
-    DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
+    DEBUG_INFO("Printing from '[behaviorName/]'")
 
 	[anOperation.generateBody(aPackage)/]
 
-	DEBUG_MESSAGE(std::cout<< "^^^^^ [behaviorName/] ends ^^^^^" << std::endl;)
+	DEBUG_INFO("[behaviorName/] ends.")
 }
 
 void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr)
@@ -107,21 +106,20 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [let type : Classifier = anOperation.owner.oclAsType(Classifier)]
 std::shared_ptr<[type.getNearestPackage().generateNamespace(false)/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.getNearestPackage().generateNamespace(false)/]::[type.name.toUpperFirst()/]Object>(this->getContext())->[type.UMLValueGetterName()/]();
 [/let]
-DEBUG_MESSAGE(
-	if (context == nullptr)
-	{
-		std::cerr << "context of CallOperationAction '[anOperation.name/]'is not set" << std::endl;
-	    throw "error";
-	}
-)
+
+if (context == nullptr)
+{
+	DEBUG_ERROR("Context of CallOperationAction '[anOperation.name/]' is null!")
+	throw "context is null";
+}
+
 std::shared_ptr<[anOperation.owner.oclAsType(NamedElement).getNearestPackage().generateNamespace(false)/]::[anOperation.owner.oclAsType(NamedElement).name.toUpperFirst()/]> target = context;
-DEBUG_MESSAGE(
-	if (target == nullptr)
-	{
-		std::cerr << "target of CallOperationAction '[anOperation.name/]'is null" << std::endl;
-		throw "target is null";
-	}
-)
+
+if (target == nullptr)
+{
+	DEBUG_ERROR("Target of CallOperationAction '[anOperation.name/]' is null!")
+	throw "target is null";
+}
 
 [let parameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 [for (inPar : Parameter | parameterList)]

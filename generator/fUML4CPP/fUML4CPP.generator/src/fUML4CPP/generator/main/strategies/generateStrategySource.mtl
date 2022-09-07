@@ -86,13 +86,13 @@
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
+	DEBUG_INFO("Instance of '[aClass.name.toUpperFirst()/]' is created.")
 	//***********************************
 }
 
 [aClass.name.toUpperFirst()/]::~[aClass.name.toUpperFirst()/]()
 {
-	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of '[aClass.name.toUpperFirst()/]' is destroyed.")
 }
 
 std::shared_ptr<ecore::EObject> [aClass.name/]::copy() const

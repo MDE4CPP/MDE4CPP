@@ -383,7 +383,7 @@ return eAnyBag(returnList, [par.type.oclAsType(Classifier).generateStaticClassif
 [/if]
 [/let]
 [else]
-DEBUG_MESSAGE(std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;)
+DEBUG_INFO("Activity [anActivity.myQualifiedName()/] does not have any return parameter.")
 return nullptr;
 [/if]
 [/template]

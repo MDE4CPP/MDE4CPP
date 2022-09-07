@@ -76,12 +76,11 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 
 void [behaviorName/]::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters)
 {
-    DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
-    DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
+    DEBUG_INFO("Printing from [behaviorName/].")
 
 	[anOpaqueBehavior.generateBody(aPackage)/]
 
-	DEBUG_MESSAGE(std::cout<< "^^^^^ [behaviorName/] ends ^^^^^" << std::endl;)
+	DEBUG_INFO("[behaviorName/] ends.")
 }
 
 void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr)
@@ -128,12 +127,10 @@ if(this->getContext()){
 	}
 }
 
-DEBUG_MESSAGE(
 	if (context == nullptr)
 	{
-		std::cerr << "WARNING: execution for OpaqueBehavior '[anOpaqueBehavior.name/]' does not have a context and may behave unexpected." << std::endl;
+		DEBUG_WARNING("Execution of OpaqueBehavior '[anOpaqueBehavior.name/]' does not have a context and may behave unexpected!")
 	}
-)
 [/if]
 
 [let parameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
@@ -157,13 +154,12 @@ DEBUG_MESSAGE(
 Utilities::Ocl ocl;
 std::string query = "[anOpaqueBehavior.getEntryForLanguage(keyOCL())/]";
 [retPar.name/] = ocl.validate(query, context);
-DEBUG_MESSAGE(
-	if(ocl.getErrors().size() > 0) {
-		std::cout << ocl.getError() << std::endl;
-	} else {
-		std::cout << "return: " << ocl.getResult() << std::endl;
-	}
-)
+if(ocl.getErrors().size() > 0) {
+	DEBUG_ERROR(ocl.getError())
+} else {
+	DEBUG_INFO("Return: " << ocl.getResult() << ".")
+}
+
 	[else]
 ['An OpaqueBehavior with OCL must return a boolean value '.registerError()/]
 	[/if]

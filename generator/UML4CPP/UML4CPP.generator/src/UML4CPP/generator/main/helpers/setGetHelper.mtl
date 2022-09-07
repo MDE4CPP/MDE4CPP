@@ -181,7 +181,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
 				return;
 			}
 			[else]
@@ -209,7 +209,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
 				return;
 			}
 			[/if]	
@@ -235,13 +235,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
 				return;
 			}
 			[comment aProperty is a bag value /]
@@ -278,13 +278,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
 				return;
 			}
 			[/if]
@@ -314,13 +314,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!")
 				return;
 			}
 			break;
@@ -616,7 +616,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 				return nullptr;
 			}
 				[comment anInputParameter is typed by a Class or Interface /]
@@ -634,13 +634,13 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 						}
 						catch(...)
 						{
-							DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+							DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 							return nullptr;
 						}
 					}
 					else
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+						DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 						return nullptr;
 					}
 				}
@@ -666,13 +666,13 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 						}
 						catch(...)
 						{
-							DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+							DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 							return nullptr;
 						}
 					}
 					else
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!"<< std::endl;)
+						DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 						return nullptr;
 					}
 				}

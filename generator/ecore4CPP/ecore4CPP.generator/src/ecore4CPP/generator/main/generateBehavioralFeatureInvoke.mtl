@@ -54,7 +54,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 	}
 	catch(...)
 	{
-		DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+		DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
 		return nullptr;
 	}
 	[comment anEParameter is typed by an EClass /]
@@ -72,13 +72,13 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
 				return nullptr;
 			}
 		}
 		else
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
 			return nullptr;
 		}
 	}
@@ -104,13 +104,13 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
 				return nullptr;
 			}
 		}
 		else
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!"<< std::endl;)
+			DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
 			return nullptr;
 		}
 	}

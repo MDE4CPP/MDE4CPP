@@ -192,13 +192,13 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+				DEBUG_WARNING("nullptr in container [att.name/].")
 			}
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [att.name/].")
 	}
 			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]List = obj.[att.GetterName()/]();
@@ -212,7 +212,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [att.name/].")
 	}
 			[/if]
 	[comment]Handling of Templates:
@@ -242,13 +242,13 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+				DEBUG_WARNING("nullptr in container [att.name/].")
 			}
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [att.name/].")
 	}
 			[else] [comment invalid Generic for instance: EJavanEClass<T> --> generated as void* /]
 	m_[att.name/] = obj.[att.GetterName()/]();
@@ -291,7 +291,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [ref.name/].")
 	}
 		[/if]
 	[comment]Handling of Templates:
@@ -321,13 +321,13 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+				DEBUG_WARNING("nullptr in container [ref.name/].")
 			}
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [ref.name/].")
 	}
 			[/if]
 		[else]
@@ -352,7 +352,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [ref.name/].")
 	}
 		[else] [comment EEList/]
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
@@ -366,13 +366,13 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+				DEBUG_WARNING("nullptr in container [ref.name/].")
 			}
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for [ref.name/].")
 	}
 		[/if]
 	[elseif (not(ref.lowerBound = 0))] [comment copy simple attribute ptr/]

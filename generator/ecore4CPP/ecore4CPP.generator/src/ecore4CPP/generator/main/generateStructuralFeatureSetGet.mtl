@@ -138,7 +138,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 				return false;
 			}
 			[comment anEStructuralFeature is a bag value /]
@@ -166,7 +166,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 				return false;
 			}
 			[/if]
@@ -192,13 +192,13 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 				return false;
 			}
 			[comment anEStructuralFeature is a bag value /]
@@ -235,13 +235,13 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::shar
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 				return false;
 			}
 			[/if]
