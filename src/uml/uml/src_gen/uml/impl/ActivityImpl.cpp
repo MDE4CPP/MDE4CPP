@@ -1,9 +1,13 @@
 
 #include "uml/impl/ActivityImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -205,7 +209,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edge."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for edge.")
 	}
 
 	//clone reference 'node'
@@ -232,7 +236,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr node."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for node.")
 	}
 
 	//clone reference 'ownedGroup'
@@ -259,7 +263,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedGroup."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedGroup.")
 	}
 
 	//clone reference 'ownedNode'
@@ -286,7 +290,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedNode."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedNode.")
 	}
 
 	//clone reference 'partition'
@@ -313,7 +317,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr partition."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for partition.")
 	}
 
 	//clone reference 'structuredNode'
@@ -340,7 +344,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr structuredNode."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for structuredNode.")
 	}
 
 	//clone reference 'variable'
@@ -367,7 +371,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr variable."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for variable.")
 	}
 	/*Subset*/
 	getEdge()->initSubset(getOwnedElement());
@@ -1209,13 +1213,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'edge'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'edge'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'edge'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'edge'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1254,13 +1258,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'group'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'group'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1274,7 +1278,7 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isReadOnly'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isReadOnly'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1288,7 +1292,7 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isSingleExecution'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isSingleExecution'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1327,13 +1331,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1372,13 +1376,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedGroup'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedGroup'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedGroup'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedGroup'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1417,13 +1421,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedNode'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedNode'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedNode'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1462,13 +1466,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'partition'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'partition'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'partition'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'partition'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1507,13 +1511,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'structuredNode'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'structuredNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'structuredNode'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'structuredNode'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1552,13 +1556,13 @@ bool ActivityImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'variable'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'variable'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'variable'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'variable'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1590,7 +1594,7 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_one_parameter_node'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_one_parameter_node'!")
 				return nullptr;
 			}
 		
@@ -1604,7 +1608,7 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_one_parameter_node'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_one_parameter_node'!")
 				return nullptr;
 			}
 		
@@ -1624,7 +1628,7 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_two_parameter_nodes'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maximum_two_parameter_nodes'!")
 				return nullptr;
 			}
 		
@@ -1638,7 +1642,7 @@ std::shared_ptr<Any> ActivityImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_two_parameter_nodes'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maximum_two_parameter_nodes'!")
 				return nullptr;
 			}
 		

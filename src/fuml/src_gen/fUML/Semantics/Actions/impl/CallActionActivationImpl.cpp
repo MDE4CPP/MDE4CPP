@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -50,8 +54,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
@@ -149,7 +153,7 @@ void CallActionActivationImpl::doAction()
 	
 	if(!behavior)
 	{
-		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL behavior."<<std::endl;)
+		DEBUG_ERROR("Behavior is nullptr! Failed to perform call!")
 		return;
 	}
 	
@@ -175,7 +179,7 @@ void CallActionActivationImpl::doAction()
 			if (pinName.find("self.") == 0)
 			{
 				std::string attributeName = pinName.substr (5, std::string::npos);
-				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
+				DEBUG_INFO("Changing execution context to self." << attributeName << ".")
 
 				std::shared_ptr<uml::Element> context = this->getExecutionContext();
 
@@ -204,11 +208,11 @@ void CallActionActivationImpl::doAction()
 
 				if(attribute == nullptr)
 				{
-					std::cerr << "Could not find the attribute in the current context for the input pin " << pinName << std::endl;
+					std::cerr << "Could not find the attribute in the current context for input pin '" << pinName << "'." << std::endl;
 					exit(EXIT_FAILURE);
 				}
 
-				DEBUG_MESSAGE(std::cout << "Self attribute found for target pin" <<std::endl;)
+				DEBUG_INFO("Found context attribute self."<< attributeName << " for target pin.")
 
 				if (context != nullptr)
 				{
@@ -233,7 +237,7 @@ void CallActionActivationImpl::doAction()
 					std::shared_ptr<Any> value = token->getValue();
 					if(value != nullptr)
 					{
-						DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
+						DEBUG_INFO("Target: "<<value->toString() << ".")
 						parameterValue->getValues()->add(value);
 					}
 				}
@@ -264,7 +268,7 @@ void CallActionActivationImpl::doAction()
 
 						for (std::shared_ptr<Any> value : *values)
 						{
-							DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
+							DEBUG_INFO("Creating outgoing ObjectToken for CallAction '" << callAction ->getName() << "'.")
 
 							std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
 							token->setValue(value);
@@ -281,7 +285,7 @@ void CallActionActivationImpl::doAction()
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL outputParameterValues"<<std::endl;)
+		DEBUG_ERROR("Output parameter values were NULL for CallAction '" << callAction ->getName() << "'.")
 	}
 	//end of body
 }
@@ -550,13 +554,13 @@ bool CallActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -608,13 +612,13 @@ std::shared_ptr<Any> CallActionActivationImpl::eInvoke(int operationID, std::sha
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
 					return nullptr;
 				}
 			}

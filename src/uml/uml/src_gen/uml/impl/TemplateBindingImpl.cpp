@@ -1,9 +1,13 @@
 
 #include "uml/impl/TemplateBindingImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -131,7 +135,7 @@ TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & 
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr parameterSubstitution."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for parameterSubstitution.")
 	}
 
 	//clone reference 'signature'
@@ -515,13 +519,13 @@ bool TemplateBindingImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'boundElement'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'boundElement'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'boundElement'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'boundElement'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -560,13 +564,13 @@ bool TemplateBindingImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'parameterSubstitution'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'parameterSubstitution'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'parameterSubstitution'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'parameterSubstitution'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -591,13 +595,13 @@ bool TemplateBindingImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -629,7 +633,7 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_parameter_substitution'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'one_parameter_substitution'!")
 				return nullptr;
 			}
 		
@@ -643,7 +647,7 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_parameter_substitution'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'one_parameter_substitution'!")
 				return nullptr;
 			}
 		
@@ -663,7 +667,7 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameter_substitution_formal'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameter_substitution_formal'!")
 				return nullptr;
 			}
 		
@@ -677,7 +681,7 @@ std::shared_ptr<Any> TemplateBindingImpl::eInvoke(int operationID, std::shared_p
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameter_substitution_formal'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameter_substitution_formal'!")
 				return nullptr;
 			}
 		

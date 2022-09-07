@@ -91,6 +91,10 @@ namespace UML4CPPProfile
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 			virtual void unset(std::string _qualifiedName) ;
 			virtual void unset(unsigned long _uID) ;
+			//Remove
+			virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			virtual void remove(std::string _qualifiedName, std::shared_ptr<Any> value) ;
+			virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) ;
 		
 			//*********************************
 			// Operation Invocation

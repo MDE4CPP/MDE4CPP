@@ -9,9 +9,13 @@
 #define ABSTRACTDATATPYES_BAG_HPP
 
 #ifdef NDEBUG
-# define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-# define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <memory>
@@ -55,7 +59,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-			//		DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+					//	DEBUG_WARNING("Element " << *i << " already present.")
 				}
 			}
 #endif
@@ -70,7 +74,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-			//			DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+					//	DEBUG_WARNING("Element " << *i << " already present.")
 				}
 			}
 #endif
@@ -85,7 +89,7 @@ class Bag
 
 			if (i > -1)
 			{
-			//		DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
+				//	DEBUG_WARNING("Element " << *i << " already present.")
 			}
 #endif
 			m_bag.insert(a, b);
@@ -145,7 +149,7 @@ class Bag
 			// The debug version check if an inserted element is already present in the collection.
 			if (find(el) > -1)
 			{
-			//		DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
+				//	DEBUG_WARNING("Element " << el << " already present.")
 			}
 #endif
 			m_bag.push_back(el);

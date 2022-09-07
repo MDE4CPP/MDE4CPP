@@ -1,9 +1,13 @@
 #include "UML4CPPProfile/impl/SetterNameImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
@@ -48,14 +52,14 @@ SetterNameImpl::SetterNameImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"SetterName is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'SetterName' is created.")
 	//***********************************
 }
 
 
 SetterNameImpl::~SetterNameImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"SetterName is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'SetterName' is destroyed.")
 }
 
 SetterNameImpl::SetterNameImpl(const SetterNameImpl & obj):SetterNameImpl()
@@ -214,13 +218,13 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Property'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Property'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Property'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Property'. Failed to set property!")
 				return;
 			}
 		break;
@@ -234,7 +238,7 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for property 'setterName'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for property 'setterName'. Failed to set property!")
 				return;
 			}
 		break;
@@ -246,13 +250,13 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 void SetterNameImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->add(qualifiedName, value);
 }
 
 void SetterNameImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	this->add(uID, value);
 }
 
 void SetterNameImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -283,6 +287,23 @@ void SetterNameImpl::unset(unsigned long _uID)
 		}
 	}
 
+}
+
+//Remove
+void SetterNameImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void SetterNameImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void SetterNameImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
 }
 
 //*********************************

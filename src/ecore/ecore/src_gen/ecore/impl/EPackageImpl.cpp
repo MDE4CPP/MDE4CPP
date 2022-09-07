@@ -1,9 +1,13 @@
 
 #include "ecore/impl/EPackageImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -133,7 +137,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eClassifiers."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for eClassifiers.")
 	}
 
 	//clone reference 'eSubpackages'
@@ -151,7 +155,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eSubpackages."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for eSubpackages.")
 	}
 	/*Subset*/
 	getEClassifiers()->initSubset(getEContentUnion());
@@ -564,13 +568,13 @@ bool EPackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eClassifiers'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eClassifiers'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eClassifiers'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'eClassifiers'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -595,13 +599,13 @@ bool EPackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eFactoryInstance'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'eFactoryInstance'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eFactoryInstance'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'eFactoryInstance'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -640,13 +644,13 @@ bool EPackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eSubpackages'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eSubpackages'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eSubpackages'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'eSubpackages'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -660,7 +664,7 @@ bool EPackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'nsPrefix'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'nsPrefix'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -674,7 +678,7 @@ bool EPackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'nsURI'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'nsURI'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -706,7 +710,7 @@ std::shared_ptr<Any> EPackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getEClassifier'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getEClassifier'!")
 				return nullptr;
 			}
 		

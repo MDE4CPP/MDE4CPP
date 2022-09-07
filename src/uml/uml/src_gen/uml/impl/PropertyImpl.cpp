@@ -1,9 +1,13 @@
 
 #include "uml/impl/PropertyImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -217,7 +221,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr qualifier."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for qualifier.")
 	}
 
 	//clone reference 'redefinedProperty'
@@ -244,7 +248,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedProperty."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for redefinedProperty.")
 	}
 	
 	/*Subset*/
@@ -1245,7 +1249,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'aggregation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'aggregation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1270,13 +1274,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'association'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'association'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'association'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'association'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1301,13 +1305,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'associationEnd'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'associationEnd'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'associationEnd'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'associationEnd'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1332,13 +1336,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'class'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'class'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'class'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'class'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1363,13 +1367,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'datatype'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'datatype'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'datatype'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'datatype'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1383,7 +1387,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'default'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'default'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1408,13 +1412,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1439,13 +1443,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'interface'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'interface'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'interface'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'interface'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1459,7 +1463,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isComposite'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isComposite'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1473,7 +1477,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isDerived'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isDerived'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1487,7 +1491,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isDerivedUnion'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isDerivedUnion'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1501,7 +1505,7 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isID'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isID'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1526,13 +1530,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'opposite'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'opposite'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'opposite'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'opposite'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1557,13 +1561,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'owningAssociation'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'owningAssociation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'owningAssociation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'owningAssociation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1602,13 +1606,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1647,13 +1651,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'redefinedProperty'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'redefinedProperty'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'redefinedProperty'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'redefinedProperty'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1692,13 +1696,13 @@ bool PropertyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'subsettedProperty'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'subsettedProperty'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'subsettedProperty'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'subsettedProperty'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1742,7 +1746,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binding_to_attribute'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binding_to_attribute'!")
 				return nullptr;
 			}
 		
@@ -1756,7 +1760,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binding_to_attribute'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binding_to_attribute'!")
 				return nullptr;
 			}
 		
@@ -1776,7 +1780,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deployment_target'!")
 				return nullptr;
 			}
 		
@@ -1790,7 +1794,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deployment_target'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deployment_target'!")
 				return nullptr;
 			}
 		
@@ -1810,7 +1814,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_derived'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_derived'!")
 				return nullptr;
 			}
 		
@@ -1824,7 +1828,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_derived'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_derived'!")
 				return nullptr;
 			}
 		
@@ -1844,7 +1848,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_read_only'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'derived_union_is_read_only'!")
 				return nullptr;
 			}
 		
@@ -1858,7 +1862,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_read_only'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'derived_union_is_read_only'!")
 				return nullptr;
 			}
 		
@@ -1908,7 +1912,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_composite'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'multiplicity_of_composite'!")
 				return nullptr;
 			}
 		
@@ -1922,7 +1926,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_composite'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'multiplicity_of_composite'!")
 				return nullptr;
 			}
 		
@@ -1942,7 +1946,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualified_is_association_end'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'qualified_is_association_end'!")
 				return nullptr;
 			}
 		
@@ -1956,7 +1960,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualified_is_association_end'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'qualified_is_association_end'!")
 				return nullptr;
 			}
 		
@@ -1976,7 +1980,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefined_property_inherited'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'redefined_property_inherited'!")
 				return nullptr;
 			}
 		
@@ -1990,7 +1994,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefined_property_inherited'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'redefined_property_inherited'!")
 				return nullptr;
 			}
 		
@@ -2010,7 +2014,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!")
 				return nullptr;
 			}
 		
@@ -2030,7 +2034,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!")
 				return nullptr;
 			}
 		
@@ -2050,7 +2054,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isNavigable'. Failed to invoke operation 'setIsNavigable'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isNavigable'. Failed to invoke operation 'setIsNavigable'!")
 				return nullptr;
 			}
 		
@@ -2076,7 +2080,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!")
 				return nullptr;
 			}
 		
@@ -2096,7 +2100,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!")
 				return nullptr;
 			}
 		
@@ -2116,7 +2120,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!")
 				return nullptr;
 			}
 		
@@ -2136,7 +2140,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetted_property_names'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetted_property_names'!")
 				return nullptr;
 			}
 		
@@ -2150,7 +2154,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetted_property_names'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetted_property_names'!")
 				return nullptr;
 			}
 		
@@ -2177,7 +2181,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_context_conforms'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_context_conforms'!")
 				return nullptr;
 			}
 		
@@ -2191,7 +2195,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_context_conforms'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_context_conforms'!")
 				return nullptr;
 			}
 		
@@ -2211,7 +2215,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_rules'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'subsetting_rules'!")
 				return nullptr;
 			}
 		
@@ -2225,7 +2229,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_rules'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'subsetting_rules'!")
 				return nullptr;
 			}
 		
@@ -2245,7 +2249,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_opposite_end'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'type_of_opposite_end'!")
 				return nullptr;
 			}
 		
@@ -2259,7 +2263,7 @@ std::shared_ptr<Any> PropertyImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_opposite_end'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'type_of_opposite_end'!")
 				return nullptr;
 			}
 		

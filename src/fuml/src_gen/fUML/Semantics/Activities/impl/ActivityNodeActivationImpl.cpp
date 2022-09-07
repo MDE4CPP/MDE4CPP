@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -132,7 +136,7 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr heldTokens."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for heldTokens.")
 	}
 	
 	return *this;
@@ -169,24 +173,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(
-if (this->getNode()== nullptr)
-{
-	std::cout<<"[addToken] ..."<<std::endl;
-}
-else
-{
-	std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
-            
-            std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
-				ACT_DEBUG(std::cout << "SET_TOKEN;NODE:" << (owner != nullptr ? owner->getName() : "[NO_OWNER]") << "::"
-									<< this->getNode()->getName() << ";TOKEN:" << token->getValue()
-									<< ";CURRENT_TOKENS:" << (this->getHeldTokens()->size() + 1) << ";DIRECTION:add"
-									<< std::endl;)
-		}
-	)
-
-if (!token->isWithdrawn())
+	if (!token->isWithdrawn())
 {
 	token->withdraw();
 	//token = token->_copy();
@@ -200,7 +187,7 @@ if (!token->isWithdrawn())
 token->setHolder(getThisActivityNodeActivationPtr());
 token->setWithdrawn(false);
 
-DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = "<<token->getValue()<<std::endl;)
+DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node " : ("Node '" + this->getNode()->getName() + "' ")) << " : Adding token with value : "<<token->getValue()->toString())
 
 this->getHeldTokens()->push_back(token);
 	//end of body
@@ -343,34 +330,27 @@ void ActivityNodeActivationImpl::receiveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[receiveOffer] "
- << (this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<std::endl;)
+	DEBUG_INFO("Receiving offer for " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))
 
     _beginIsolation();
 
     bool ready = this->isReady();
 
     std::shared_ptr<Bag<Token> > tokens;
-    if (ready) 
-    {
-        DEBUG_MESSAGE(std::cout<<"[receiveOffer] Firing."<<std::endl;)
-        tokens = this->takeOfferedTokens();
-    }
-		else{
-		//NEWDEBUG
-		DEBUG_MESSAGE(std::cout<<"ActivityNodeActivation::[receiveOffer] NOT taking offered tokens because not ready"<<std::endl;)
+   	 if (ready) 
+    	{
+       		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " is ready for execution. Taking offered tokens.")
+        	tokens = this->takeOfferedTokens();
+   	}
+	else{
+		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " is not ready for execution yet.")
 	}
 
     _endIsolation();
 
     if (ready) 
     {
-        DEBUG_MESSAGE(std::cout<< "Firing "<<tokens->size()<<" token(s)"<<std::endl;)
         this->fire(tokens);
-    }
-    else
-    {
-        DEBUG_MESSAGE(std::cout<< "Node"<<(this->getNode() == nullptr ? "..." : "node = " + this->getNode()->getName())<<" is not ready to execute."<<std::endl;)
     }
 	//end of body
 }
@@ -389,26 +369,8 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Act
 		i++;
 		if (*iter == token)
 		{
-			DEBUG_MESSAGE(
-				if (this->getNode() == nullptr)
-				{
-					std::cout<<"[removeToken] ..."<<std::endl;
-				} else
-				{
-					std::cout<<"[removeToken] node = " + this->getNode()->getName()<<std::endl;
-				}
-			)
+			DEBUG_INFO("Removing token from " << ((this->getNode() == nullptr) ? "anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " with value : " << token->getValue()->toString() << ".")
 
-			ACT_DEBUG(
-				if (this->getNode() == nullptr)
-				{
-					std::cout<<"SET_TOKEN;NODE:[ANONYMOUS_ACTIVATION]"<<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
-				} else
-				{
-                    std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
-			std::cout<<"SET_TOKEN;NODE:" << (owner != nullptr? owner->getName() : "[NO_OWNER]") << "::" << this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
-				}
-			)
 			this->getHeldTokens()->erase(iter);
 			return i;
 		}
@@ -431,7 +393,7 @@ void ActivityNodeActivationImpl::resume()
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout<<"empty group"<<std::endl;)
+		DEBUG_WARNING("Activity node activation group is empty!")
 	}
 
 	//end of body
@@ -441,11 +403,7 @@ void ActivityNodeActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    if (this->getNode() != nullptr) {
-        DEBUG_MESSAGE(std::cout<<"[run] node = " << this->getNode()->getName()<<std::endl;)
-    } else {
-        DEBUG_MESSAGE(std::cout<<"[run] Anonymous activation of type "<<std::endl;)
-    }
+	DEBUG_INFO("Running " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))
 
     this->setRunning(true);
 	//end of body
@@ -455,48 +413,30 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"[sendOffers] "<< (this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<std::endl;)		
-if (tokens->size() > 0) 
+	if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
 		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
         for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
         {
-			DEBUG_MESSAGE(
-				auto target=outgoingEdge->getTarget().lock();
-				if(!target){
-					std::cerr << "[sendOffers] Target is NULL for edge: " << outgoingEdge->getEdge()->getName() << std::endl;
-				}
-				else
-				{
-					if(! (target->getNode()))
-					{
-						std::cerr << "[sendOffers] Node is NULL for target on edge: " <<  outgoingEdge->getEdge()->getName() << std::endl;
-					}
-					else
-					{
-						std::cout << "[sendOffers] Sending offer to " << target->getNode()->getName() << "."
-							  << std::endl;
-						//NEWDEBUG
-						DEBUG_MESSAGE(std::cout << "[sendOffers] Sending offer to " << target->getNode()->getName() << " with "<<tokens->size()<<" tokens."<< std::endl;)
-					}
-				}
-			)
+		auto target=outgoingEdge->getTarget().lock();
+		if(!target){
+			DEBUG_WARNING("Target activation is nullptr for " << ((outgoingEdge->getEdge()->getName() == "") ? "anonymous edge!" : ("Edge '" + outgoingEdge->getEdge()->getName() + "'!")))
+		}
+		else
+		{
+			if(! (target->getNode()))
+			{
+				DEBUG_WARNING("Node for target activation is nullptr for " << ((outgoingEdge->getEdge()->getName() == "") ? "anonymous edge!" : ("Edge '" + outgoingEdge->getEdge()->getName() + "'!")))
+			}
+			else
+			{
+				DEBUG_INFO("Sending offer to Node" << target->getNode()->getName() << " with "<<tokens->size()<<" tokens.")
+			}
+		}
             outgoingEdge->sendOffer(tokens);
         }
     }
-
-//NEWDEBUG alles hier drunter
-	if (this->getNode() == nullptr) 
-	{
-        DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : node = anonymous fork\n";)
-    } 
-	else 
-	{
-		DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : node = "<<this->getNode()->getName()<<std::endl;)
-    }
-		DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : ENDE!!!!!!!!!\n";)
 	//end of body
 }
 
@@ -511,7 +451,7 @@ void ActivityNodeActivationImpl::suspend()
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout<<"empty group"<<std::endl;)
+		DEBUG_WARNING("Activity node activation group is empty!")
 	}
 	//end of body
 }
@@ -523,8 +463,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
 
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdgeList->size()<<std::endl;)
+	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
 
 	for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
 	{
@@ -532,8 +471,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
 	}
 
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" for node '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #allTokens = "<<allTokens->size()<<std::endl;)
+	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " retrieved a total number of " << allTokens->size() << " offered tokens from incoming edges.")
 
 	return allTokens;
 	//end of body
@@ -555,11 +493,7 @@ void ActivityNodeActivationImpl::terminate()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	/*    if (this->isRunning()) {
-        if (this->getNode() != nullptr) {
-            DEBUG_MESSAGE(std::cout<<"[terminate] node = " << this->getNode()->getName()<<std::endl;)
-        } else {
-            DEBUG_MESSAGE(std::cout<<"[terminate] Anonymous activation of type " << this->eClass()->getName()<<std::endl;)
-        }
+     	DEBUG_INFO("Terminating " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))  
     }
 */
 this->setRunning(false);
@@ -925,13 +859,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'group'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'group'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -970,13 +904,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'heldTokens'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1015,13 +949,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'incomingEdges'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1046,13 +980,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'node'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'node'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'node'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'node'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1091,13 +1025,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'outgoingEdges'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1111,7 +1045,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'running'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'running'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1148,13 +1082,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addIncomingEdge'!")
 					return nullptr;
 				}
 			}
@@ -1180,13 +1114,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!")
 					return nullptr;
 				}
 			}
@@ -1212,13 +1146,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!")
 					return nullptr;
 				}
 			}
@@ -1253,13 +1187,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'addTokens'!")
 					return nullptr;
 				}
 			}
@@ -1312,13 +1246,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}
@@ -1362,13 +1296,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!")
 					return nullptr;
 				}
 			}
@@ -1413,13 +1347,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstances'. Failed to invoke operation 'isSourceFor'!")
 					return nullptr;
 				}
 			}
@@ -1451,13 +1385,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!")
 					return nullptr;
 				}
 			}
@@ -1504,13 +1438,13 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!")
 					return nullptr;
 				}
 			}

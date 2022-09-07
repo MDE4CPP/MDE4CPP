@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -41,8 +45,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -187,7 +191,7 @@ void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<Any> value
 	}
 	catch(...)
 	{
-		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided object is not an instance of uml::Element."<<std::endl;)
+		DEBUG_ERROR("Provided object is not an instance of uml::Element! Failed to destroy object!")
 	}
 	//end of body
 }
@@ -486,13 +490,13 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, std::shared_ptr<Any>
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -524,7 +528,7 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'destroyObject'!")
 				return nullptr;
 			}
 		
@@ -538,7 +542,7 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isDestroyLinks'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyLinks'. Failed to invoke operation 'destroyObject'!")
 				return nullptr;
 			}
 		
@@ -552,7 +556,7 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isDestroyOwnedObjects'. Failed to invoke operation 'destroyObject'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyOwnedObjects'. Failed to invoke operation 'destroyObject'!")
 				return nullptr;
 			}
 		
@@ -583,13 +587,13 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
 					return nullptr;
 				}
 			}
@@ -609,13 +613,13 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
 					return nullptr;
 				}
 			}

@@ -1,9 +1,13 @@
 
 #include "uml/impl/PackageImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -183,7 +187,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedPackage."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for nestedPackage.")
 	}
 
 	//clone reference 'ownedStereotype'
@@ -210,7 +214,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedStereotype."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedStereotype.")
 	}
 
 	//clone reference 'ownedType'
@@ -237,7 +241,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedType."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedType.")
 	}
 
 	//clone reference 'packageMerge'
@@ -264,7 +268,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packageMerge."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for packageMerge.")
 	}
 
 	//clone reference 'packagedElement'
@@ -291,7 +295,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packagedElement."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for packagedElement.")
 	}
 
 	//clone reference 'profileApplication'
@@ -318,7 +322,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr profileApplication."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for profileApplication.")
 	}
 	/*Subset*/
 	getNestedPackage()->initSubset(getPackagedElement());
@@ -1070,7 +1074,7 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'URI'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'URI'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1109,13 +1113,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedPackage'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1140,13 +1144,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'nestingPackage'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1185,13 +1189,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedType'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1230,13 +1234,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'packageMerge'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1275,13 +1279,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'packagedElement'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1320,13 +1324,13 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'profileApplication'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1382,13 +1386,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'applyProfile'!")
 					return nullptr;
 				}
 			}
@@ -1416,7 +1420,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedClass'!")
 				return nullptr;
 			}
 		
@@ -1430,7 +1434,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedClass'!")
 				return nullptr;
 			}
 		
@@ -1450,7 +1454,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedEnumeration'!")
 				return nullptr;
 			}
 		
@@ -1470,7 +1474,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedInterface'!")
 				return nullptr;
 			}
 		
@@ -1490,7 +1494,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedPrimitiveType'!")
 				return nullptr;
 			}
 		
@@ -1510,7 +1514,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedStereotype'!")
 				return nullptr;
 			}
 		
@@ -1524,7 +1528,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedStereotype'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isAbstract'. Failed to invoke operation 'createOwnedStereotype'!")
 				return nullptr;
 			}
 		
@@ -1544,7 +1548,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'elements_public_or_private'!")
 				return nullptr;
 			}
 		
@@ -1558,7 +1562,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'elements_public_or_private'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'elements_public_or_private'!")
 				return nullptr;
 			}
 		
@@ -1592,7 +1596,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!")
 				return nullptr;
 			}
 		
@@ -1612,7 +1616,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedProfile'!")
 				return nullptr;
 			}
 		
@@ -1626,7 +1630,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getAppliedProfile'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getAppliedProfile'!")
 				return nullptr;
 			}
 		
@@ -1679,13 +1683,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!")
 					return nullptr;
 				}
 			}
@@ -1711,13 +1715,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'getProfileApplication'!")
 					return nullptr;
 				}
 			}
@@ -1732,7 +1736,7 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getProfileApplication'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'recurse'. Failed to invoke operation 'getProfileApplication'!")
 				return nullptr;
 			}
 		
@@ -1763,13 +1767,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'isProfileApplied'!")
 					return nullptr;
 				}
 			}
@@ -1795,13 +1799,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'el'. Failed to invoke operation 'makesVisible'!")
 					return nullptr;
 				}
 			}
@@ -1827,13 +1831,13 @@ std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'profile'. Failed to invoke operation 'unapplyProfile'!")
 					return nullptr;
 				}
 			}

@@ -1,9 +1,13 @@
 
 #include "uml/impl/TypeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -375,13 +379,13 @@ bool TypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'package'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'package'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'package'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'package'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -418,13 +422,13 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'conformsTo'!")
 					return nullptr;
 				}
 			}
@@ -445,7 +449,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -459,7 +463,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -473,7 +477,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -487,7 +491,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -501,7 +505,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -520,13 +524,13 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end1Type'. Failed to invoke operation 'createAssociation'!")
 					return nullptr;
 				}
 			}
@@ -541,7 +545,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -555,7 +559,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -569,7 +573,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -583,7 +587,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		
@@ -597,7 +601,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createAssociation'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createAssociation'!")
 				return nullptr;
 			}
 		

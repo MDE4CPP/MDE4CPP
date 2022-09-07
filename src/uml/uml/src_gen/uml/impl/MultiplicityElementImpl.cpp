@@ -1,9 +1,13 @@
 
 #include "uml/impl/MultiplicityElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -491,7 +495,7 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isOrdered'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isOrdered'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -505,7 +509,7 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isUnique'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isUnique'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -519,7 +523,7 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'lower'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'lower'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -544,13 +548,13 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -564,7 +568,7 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'upper'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'upper'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -589,13 +593,13 @@ bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -632,13 +636,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!")
 					return nullptr;
 				}
 			}
@@ -664,13 +668,13 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!")
 					return nullptr;
 				}
 			}
@@ -691,7 +695,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'lowerbound'. Failed to invoke operation 'is'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'lowerbound'. Failed to invoke operation 'is'!")
 				return nullptr;
 			}
 		
@@ -705,7 +709,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'upperbound'. Failed to invoke operation 'is'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'upperbound'. Failed to invoke operation 'is'!")
 				return nullptr;
 			}
 		
@@ -737,7 +741,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_ge_0'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_ge_0'!")
 				return nullptr;
 			}
 		
@@ -751,7 +755,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_ge_0'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_ge_0'!")
 				return nullptr;
 			}
 		
@@ -771,7 +775,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_is_integer'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'lower_is_integer'!")
 				return nullptr;
 			}
 		
@@ -785,7 +789,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_is_integer'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'lower_is_integer'!")
 				return nullptr;
 			}
 		
@@ -811,7 +815,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_ge_lower'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_ge_lower'!")
 				return nullptr;
 			}
 		
@@ -825,7 +829,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_ge_lower'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_ge_lower'!")
 				return nullptr;
 			}
 		
@@ -845,7 +849,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_is_unlimitedNatural'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'upper_is_unlimitedNatural'!")
 				return nullptr;
 			}
 		
@@ -859,7 +863,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_is_unlimitedNatural'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'upper_is_unlimitedNatural'!")
 				return nullptr;
 			}
 		
@@ -879,7 +883,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_constant'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_constant'!")
 				return nullptr;
 			}
 		
@@ -893,7 +897,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_constant'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_constant'!")
 				return nullptr;
 			}
 		
@@ -913,7 +917,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_no_side_effects'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'value_specification_no_side_effects'!")
 				return nullptr;
 			}
 		
@@ -927,7 +931,7 @@ std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shar
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_no_side_effects'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'value_specification_no_side_effects'!")
 				return nullptr;
 			}
 		

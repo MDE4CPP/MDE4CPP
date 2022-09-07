@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityEdgeInstanceImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -179,26 +183,22 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : created new offer with "<<tokens->size()<<" tokens"<<std::endl;)
-    offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
-    this->getOffers()->push_back(offer);
-    auto target = this->getTarget().lock();
+    	offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
+    	this->getOffers()->push_back(offer);
 
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers before receive = "<<this->getOffers()->size()<<std::endl;)
+	DEBUG_INFO("ActivityEdge '" <<((this->getEdge()->getName() == "") ? "anonymous edge" : this->getEdge()->getName()) << "' created a new offer containing "<<tokens->size()<<" tokens.")
+
+    	auto target = this->getTarget().lock();
 
     if(nullptr == target )
     {
-        std::cout << "[sendOffer] The edge does not have a target" << std::endl;
+        //NEWDEBUG
+	DEBUG_ERROR("Target is nullptr! Failed to send offer!")
     }
     else
     {
     	target->receiveOffer();
     }
-
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : current #offers after receive = "<<this->getOffers()->size()<<std::endl;)
 	//end of body
 }
 
@@ -210,17 +210,21 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
 	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers = "<<this->getOffers()->size()<<std::endl;)
-	    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
-    {
-    	auto vec = offer->retrieveOfferedTokens();
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : retrieved "<<vec->size()<<" tokens from offer"<<std::endl;)
-        tokens->insert(tokens->end(), vec->begin(), vec->end());
-    }
-    this->getOffers()->clear();
+	DEBUG_INFO("ActivityEdge '" << ((this->getEdge()->getName() == "") ? "anonymous edge" : this->getEdge()->getName()) << "' has " << this->getOffers()->size() << " offers.")
 
-    return tokens;
+	for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
+    	{
+    		auto vec = offer->retrieveOfferedTokens();
+		//NEWDEBUG
+		DEBUG_INFO("Retrieved "<<vec->size()<<" tokens from offer.")
+       		tokens->insert(tokens->end(), vec->begin(), vec->end());
+  	}
+
+	DEBUG_INFO("Retrieved a total number of " << tokens->size() << " tokens.")
+
+    	this->getOffers()->clear();
+
+    	return tokens;
 	//end of body
 }
 
@@ -561,13 +565,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'edge'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'edge'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'edge'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'edge'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -592,13 +596,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'group'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'group'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'group'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -637,13 +641,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'offers'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'offers'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'offers'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'offers'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -668,13 +672,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'source'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'source'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -699,13 +703,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -770,13 +774,13 @@ std::shared_ptr<Any> ActivityEdgeInstanceImpl::eInvoke(int operationID, std::sha
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffer'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffer'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffer'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffer'!")
 					return nullptr;
 				}
 			}
@@ -804,7 +808,7 @@ std::shared_ptr<Any> ActivityEdgeInstanceImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'maxCount'. Failed to invoke operation 'takeOfferedTokens'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'maxCount'. Failed to invoke operation 'takeOfferedTokens'!")
 				return nullptr;
 			}
 		

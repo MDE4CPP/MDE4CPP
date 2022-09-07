@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ExpansionRegionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -42,8 +46,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -176,8 +180,8 @@ void ExpansionRegionActivationImpl::doOutput()
 				std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> activation = getExpansionNodeActivation(outputElement);
 				if (activation == nullptr)
 				{
-			        DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown activation" << std::endl;)
-					throw "unknown group";
+			        	DEBUG_ERROR("Expansion node activation is nullptr! Failed to output tokens!")
+					throw "unknown activation";
 				}
 				activation->addTokens(groupOutput->takeTokens());
 			}
@@ -312,8 +316,8 @@ int ExpansionRegionActivationImpl::numberOfValues()
 		std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> activation = getExpansionNodeActivation(*iter);
 		if (activation == nullptr)
 		{
-	        DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown activation" << std::endl;)
-			throw "unknown group";
+	       		DEBUG_ERROR("Expansion node activation is nullptr! Failed to count number of values!")
+			throw "unknown activation";
 		}
 		int count = activation->countOfferedValues();
 		if (count > n)
@@ -424,8 +428,8 @@ void ExpansionRegionActivationImpl::sendOffers()
 		std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> activation = getExpansionNodeActivation(*iter);
 		if (activation == nullptr)
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown activation" << std::endl;)
-			throw "unknown group";
+			DEBUG_ERROR("Expansion node activation is nullptr! Failed to send offers!")
+			throw "unknown activation";
 		}
 		activation->sendUnofferedTokens();
 		iter++;
@@ -457,8 +461,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ExpansionRegionActivati
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = getNodeActivation(inputPin);
 		if (activation == nullptr)
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown activation" << std::endl;)
-			throw "unknown group";
+			DEBUG_ERROR("Expansion node activation is nullptr! Failed to take offered tokens!")
+			throw "unknown activation";
 		}
 		tokenSet->getTokens()->insert(*(activation->takeTokens()));
 		m_inputTokens->push_back(tokenSet);
@@ -477,8 +481,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ExpansionRegionActivati
 		std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> expansionNodeActivation = getExpansionNodeActivation(inputElement);
 		if (expansionNodeActivation == nullptr)
 		{
-			DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown activation" << std::endl;)
-			throw "unknown group";
+			DEBUG_ERROR("Expansion node activation is nullptr! Failed to take offered tokens!")
+			throw "unknown activation";
 		}
 		expansionNodeActivation->fire(expansionNodeActivation->takeOfferedTokens());
 		std::shared_ptr<Bag<Token>> tokens = expansionNodeActivation->takeTokens();
@@ -870,13 +874,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> new
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'activationGroups'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'activationGroups'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'activationGroups'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'activationGroups'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -915,13 +919,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> new
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputExpansionTokens'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputExpansionTokens'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputExpansionTokens'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputExpansionTokens'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -960,13 +964,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> new
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputTokens'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputTokens'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputTokens'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputTokens'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -980,7 +984,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> new
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'next'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'next'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1035,13 +1039,13 @@ std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, std
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getExpansionNodeActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getExpansionNodeActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getExpansionNodeActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getExpansionNodeActivation'!")
 					return nullptr;
 				}
 			}
@@ -1079,13 +1083,13 @@ std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, std
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'resume'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'resume'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'resume'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'resume'!")
 					return nullptr;
 				}
 			}
@@ -1111,13 +1115,13 @@ std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, std
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'runGroup'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'runGroup'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'runGroup'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'runGroup'!")
 					return nullptr;
 				}
 			}
@@ -1174,13 +1178,13 @@ std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, std
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'terminateGroup'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'terminateGroup'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'terminateGroup'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activationGroup'. Failed to invoke operation 'terminateGroup'!")
 					return nullptr;
 				}
 			}

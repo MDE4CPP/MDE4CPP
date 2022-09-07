@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/DecisionNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -54,8 +58,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -219,7 +223,7 @@ void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activ
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
+	DEBUG_INFO("Firing DecisionNode '" << this->getNode()->getName() << "'.")
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
 	std::shared_ptr<Bag<Any>> decisionValues = this->getDecisionValues(incomingTokens);
@@ -314,21 +318,21 @@ std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(std::sha
         decisionValues->push_back(value);
     }
 
-    DEBUG_MESSAGE(
-		for (unsigned int i = 0; i < decisionValues->size(); i++)
+#ifndef NDEBUG
+	std::string decisionValuesDebugInfoMessage;
+	for (unsigned int i = 0; i < decisionValues->size(); i++)
+	{
+		std::shared_ptr<Any> decisionValue = decisionValues->at(i);
+		if (decisionValue)
 		{
-			std::shared_ptr<Any> decisionValue = decisionValues->at(i);
-			if (decisionValue)
-			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = "
-				   << decisionValue->toString()<<std::endl;
-			}
-			else
-			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr" << std::endl;
-			}
+			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = " + decisionValue->toString() + " ; ";
 		}
-    )
+		else
+		{
+			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = nullptr ; ";
+		}
+	}
+#endif
 
     return decisionValues;
 	//end of body
@@ -358,12 +362,12 @@ bool DecisionNodeActivationImpl::isReady()
 	//generated from body annotation
 	unsigned int i = 0;
     bool ready = true;
-    DEBUG_MESSAGE(std::cout<< "INCOMING EDGE SIZE:"<< this->getIncomingEdges()->size()<<std::endl;)
+    DEBUG_INFO("DecisionNode '" << this->getNode()->getName() << "' has " << this->getIncomingEdges()->size() << "incoming edges.")
     while (ready && (i < this->getIncomingEdges()->size())) {
         ready = this->getIncomingEdges()->at(i)->hasOffer();
         i = i + 1;
     }
-    DEBUG_MESSAGE(std::cout<< "READY:"<< ready<<std::endl;)
+    DEBUG_INFO("DecisionNode '" << this->getNode()->getName() << "' " << ((ready) ? "is ready to execute." : "is not ready to execute yet."))
     return ready;
 	//end of body
 }
@@ -692,13 +696,13 @@ bool DecisionNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInputExecution'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInputExecution'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'decisionInputExecution'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decisionInputExecution'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -723,13 +727,13 @@ bool DecisionNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -761,7 +765,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'inputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!")
 				return nullptr;
 			}
 		
@@ -775,7 +779,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'decisionInputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'decisionInputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!")
 				return nullptr;
 			}
 		
@@ -809,13 +813,13 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}
@@ -862,13 +866,13 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!")
 					return nullptr;
 				}
 			}
@@ -915,13 +919,13 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!")
 					return nullptr;
 				}
 			}
@@ -961,13 +965,13 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'gaurd'. Failed to invoke operation 'test'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'gaurd'. Failed to invoke operation 'test'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'gaurd'. Failed to invoke operation 'test'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'gaurd'. Failed to invoke operation 'test'!")
 					return nullptr;
 				}
 			}
@@ -982,7 +986,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'test'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'test'!")
 				return nullptr;
 			}
 		

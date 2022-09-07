@@ -1,9 +1,13 @@
 
 #include "ecore/impl/EObjectImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -513,13 +517,13 @@ bool EObjectImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'eContainer'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'eContainer'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'eContainer'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'eContainer'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -558,13 +562,13 @@ bool EObjectImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eContentUnion'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'eContentUnion'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'eContentUnion'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'eContentUnion'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -578,7 +582,7 @@ bool EObjectImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'metaElementID'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'metaElementID'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -659,13 +663,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!")
 					return nullptr;
 				}
 			}
@@ -691,13 +695,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eGet'!")
 					return nullptr;
 				}
 			}
@@ -712,7 +716,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'resolve'. Failed to invoke operation 'eGet'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'resolve'. Failed to invoke operation 'eGet'!")
 				return nullptr;
 			}
 		
@@ -737,13 +741,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'eInvoke'!")
 					return nullptr;
 				}
 			}
@@ -758,7 +762,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'eInvoke'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'eInvoke'!")
 				return nullptr;
 			}
 		
@@ -789,13 +793,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eIsSet'!")
 					return nullptr;
 				}
 			}
@@ -827,13 +831,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eSet'!")
 					return nullptr;
 				}
 			}
@@ -848,7 +852,7 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'newValue'. Failed to invoke operation 'eSet'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'newValue'. Failed to invoke operation 'eSet'!")
 				return nullptr;
 			}
 		
@@ -873,13 +877,13 @@ std::shared_ptr<Any> EObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<A
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'eUnset'!")
 					return nullptr;
 				}
 			}

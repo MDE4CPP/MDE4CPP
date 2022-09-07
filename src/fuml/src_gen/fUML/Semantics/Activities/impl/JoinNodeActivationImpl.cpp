@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/JoinNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -122,12 +126,10 @@ void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		DEBUG_MESSAGE(
-		if (this->getNode() != nullptr)
-		{
-			std::cout<<"[fire] Control node " << this->getNode()->getName() << "..."<<std::endl;
-		}
-	)
+	if (this->getNode() != nullptr)
+	{
+		DEBUG_INFO("Firing JoinNode '" << this->getNode()->getName() << "'.")
+	}
 
 	int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
@@ -143,7 +145,7 @@ void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 		tokenIter++;
 	}
 
-	DEBUG_MESSAGE(std::cout << "found " << std::to_string(controlTokenList->size()) << " control tokens inside list with " << std::to_string(incomingTokens->size()) << std::endl;)
+	DEBUG_INFO(std::to_string(controlTokenList->size()) << " control tokens contained within all " << std::to_string(incomingTokens->size()) << " incoming tokens.")
 	if (controlTokenList->size() == incomingTokens->size()) // all incoming tokens are ControlToken -> only one token should be offered
 	{
 		incomingTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
@@ -334,13 +336,13 @@ std::shared_ptr<Any> JoinNodeActivationImpl::eInvoke(int operationID, std::share
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}

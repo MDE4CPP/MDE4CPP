@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ForkNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -125,16 +129,12 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 	//generated from body annotation
 	if (this->getNode() == nullptr) 
 	{
-        	DEBUG_MESSAGE(std::cout<<"[fire] Anonymous fork node."<<std::endl;
-		//NEWDEBUG
-		std::cout<<"-- printing from Anonymous fork : #incomingTokens = "<<incomingTokens->size()<<std::endl;)
-    } 
+        	DEBUG_INFO("Firing anonymous ForkNode. Number of incoming tokens is "<< incomingTokens->size() << ".")
+    	} 
 	else 
 	{
-       		DEBUG_MESSAGE(std::cout<<"[fire] Fork node " << this->getNode()->getName() << "..."<<std::endl;
-		//NEWDEBUG
-		std::cout<<"-- printing from "<<this->getNode()->getName()<<" : #incomingTokens = "<<incomingTokens->size()<<std::endl;)
-    }
+       		DEBUG_INFO("Firing ForkNode '" << this->getNode()->getName() << "'. Number of incoming tokens is: " << incomingTokens->size() << ".")
+	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
     int outgoingEdgeCount = outgoingEdges->size();
@@ -154,11 +154,11 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 	if (this->getNode() == nullptr) 
 	{
 		//NEWDEBUG
-        DEBUG_MESSAGE(std::cout<<"-- printing from Anonymous fork : #forkedTokens = "<<forkedTokens->size()<<std::endl;)
+        	DEBUG_INFO("Number of forked tokens of anonymous ForkNode '" << this->getNode()->getName( )<< "' is: " << forkedTokens->size() << ".")
     	} 
 	else 
 	{	//NEWDEBUG
-		DEBUG_MESSAGE(std::cout<<"-- printing from "<<this->getNode()->getName()<<" : #forkedTokens = "<<forkedTokens->size()<<std::endl;)
+		DEBUG_INFO("Number of forked tokens of ForkNode '" << this->getNode()->getName( )<< "' is: " << forkedTokens->size() << ".")
     }
 
     this->addTokens(forkedTokens);
@@ -330,13 +330,13 @@ std::shared_ptr<Any> ForkNodeActivationImpl::eInvoke(int operationID, std::share
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}

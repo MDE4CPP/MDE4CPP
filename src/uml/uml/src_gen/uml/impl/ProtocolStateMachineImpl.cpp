@@ -1,9 +1,13 @@
 
 #include "uml/impl/ProtocolStateMachineImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -202,7 +206,7 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr conformance."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for conformance.")
 	}
 	/*Subset*/
 	getConformance()->initSubset(getOwnedElement());
@@ -635,13 +639,13 @@ bool ProtocolStateMachineImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'conformance'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'conformance'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'conformance'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'conformance'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -673,7 +677,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deep_or_shallow_history'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'deep_or_shallow_history'!")
 				return nullptr;
 			}
 		
@@ -687,7 +691,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deep_or_shallow_history'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'deep_or_shallow_history'!")
 				return nullptr;
 			}
 		
@@ -707,7 +711,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'entry_exit_do'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'entry_exit_do'!")
 				return nullptr;
 			}
 		
@@ -721,7 +725,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'entry_exit_do'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'entry_exit_do'!")
 				return nullptr;
 			}
 		
@@ -741,7 +745,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'protocol_transitions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'protocol_transitions'!")
 				return nullptr;
 			}
 		
@@ -755,7 +759,7 @@ std::shared_ptr<Any> ProtocolStateMachineImpl::eInvoke(int operationID, std::sha
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'protocol_transitions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'protocol_transitions'!")
 				return nullptr;
 			}
 		

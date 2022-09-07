@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -43,8 +47,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -282,18 +286,18 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 					}
 					else
 					{
-						DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Retrieved feature value does not match it's feature's multiplicity."<<std::endl;)
+						DEBUG_ERROR("Retrieved feature value does not match it's feature's multiplicity! Failed to add feature value!")
 					}
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL context."<<std::endl;)
+				DEBUG_ERROR("Context is nullptr! Failed to add feature value!")
 			}
 		}
 		catch(...)
 		{
-			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+			DEBUG_ERROR("Provided context is not an instance of uml::Element! Failed to add feature value!")
 		}
 	}
 
@@ -538,13 +542,13 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, std::sha
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'addStructuralFeatureValueAction'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'addStructuralFeatureValueAction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'addStructuralFeatureValueAction'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'addStructuralFeatureValueAction'. Failed to set feature!")
 				return false;
 			}
 		return true;

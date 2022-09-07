@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityParameterNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -139,13 +143,13 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 	//generated from body annotation
 	if (this->getNode()->getIncoming()->size() == 0) 
 	{
-		DEBUG_MESSAGE(std::cout<< "[fire] Input activity parameter node " << this->getNode()->getName() << "..."<<std::endl;)
+		DEBUG_INFO("Fireing input ActivityParameterNode '" << this->getNode()->getName() << "'.")
 		std::shared_ptr<uml::Parameter> parameter = (std::dynamic_pointer_cast<uml::ActivityParameterNode>(this->getNode()))->getParameter();
 		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = this->getActivityExecution()->getParameterValue(parameter);
 
 		if (parameterValue != nullptr) 
 		{
-			DEBUG_MESSAGE(std::cout<< "[fire] Parameter has "<< parameterValue->getValues()->size() << " value(s)."<<std::endl;)
+			DEBUG_INFO("Parameter contains "<< parameterValue->getValues()->size() << " value(s).")
 			Bag<Any>* valueList = parameterValue->getValues().get();
 			auto factory = fUML::Semantics::Activities::ActivitiesFactory::eInstance();
             		const auto size = valueList->size();
@@ -164,8 +168,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 
 	else 
 	{
-		DEBUG_MESSAGE(std::cout<< "[fire] Output activity parameter node "
-				<< this->getNode()->getName() + "..."<<std::endl;)
+		DEBUG_INFO("Fireing output ActivityParameterNode '" << this->getNode()->getName() + "'.")
 		this->addTokens(incomingTokens);
 		if (incomingTokens->at(0)->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS) 
 		{
@@ -336,13 +339,13 @@ std::shared_ptr<Any> ActivityParameterNodeActivationImpl::eInvoke(int operationI
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}

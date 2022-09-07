@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -59,8 +63,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -163,7 +167,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputPinActivation."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inputPinActivation.")
 	}
 
 	//clone reference 'outputPinActivation'
@@ -190,7 +194,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr outputPinActivation."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for outputPinActivation.")
 	}
 	return *this;
 }
@@ -215,17 +219,11 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Acti
 
 		forkNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkNodeActivation());
 		// copy from ActivityNodeActivationGroupImpl::createNodeActivation
-		if(forkNodeActivation!=nullptr)
-		{
-			// activation->setNode(node); anonymous Fork doesn't has a Node
-			forkNodeActivation->setRunning(false);
-			this->getGroup().lock()->addNodeActivation(forkNodeActivation);
-			forkNodeActivation->createNodeActivations();
-		}
-		else
-		{
-			DEBUG_MESSAGE(std::cout<<"Null activation"<<std::endl;)
-		}
+
+		// activation->setNode(node); anonymous Fork doesn't has a Node
+		forkNodeActivation->setRunning(false);
+		this->getGroup().lock()->addNodeActivation(forkNodeActivation);
+		forkNodeActivation->createNodeActivations();
 
 		std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> newEdge(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance());
 		fUML::Semantics::Activities::ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
@@ -275,7 +273,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::c
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[fire] Checking if " << this->getNode()->getName() << " should fire again..."<<std::endl;)
+	DEBUG_INFO("Checking if Action '" << this->getNode()->getName() << "' can fire again.")
 
     _beginIsolation();
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
@@ -301,7 +299,7 @@ void ActionActivationImpl::createNodeActivations()
 	std::shared_ptr<Bag<uml::ActivityNode> > inputPinNodes(new Bag<uml::ActivityNode>());
     if(action)
     {
-    	DEBUG_MESSAGE(std::cout<<"Found"<<action->getInput()->size()<<"input pin(s)."<<std::endl;)
+    	DEBUG_INFO("Action '" << action->getName() <<"' has " <<action->getInput()->size()<<"input pin(s).")
 		std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
     	for(std::shared_ptr<uml::InputPin> pin : *inputPins)
     	{
@@ -311,7 +309,7 @@ void ActionActivationImpl::createNodeActivations()
     		}
     		else
     		{
-    			DEBUG_MESSAGE(std::cout<<"Warning! Found null Input pin"<<std::endl;)
+    			DEBUG_WARNING("An input pin was nullptr!")
     		}
     	}
     }
@@ -320,8 +318,8 @@ void ActionActivationImpl::createNodeActivations()
     std::shared_ptr<Bag<uml::ActivityNode> > outputPinNodes(new Bag<uml::ActivityNode>());
     if(action)
     {
-    	DEBUG_MESSAGE(std::cout<<"Found"<<action->getOutput()->size()<<"output pin(s)."<<std::endl;)
-		std::shared_ptr<Bag<uml::OutputPin> > outputPins = action->getOutput();
+    	DEBUG_INFO("Action '" << action->getName() <<"' has " << action->getOutput()->size()<<"output pin(s).")
+	std::shared_ptr<Bag<uml::OutputPin> > outputPins = action->getOutput();
     	for(std::shared_ptr<uml::OutputPin> pin : *outputPins)
     	{
     		if(pin!=nullptr)
@@ -330,7 +328,7 @@ void ActionActivationImpl::createNodeActivations()
             }
     		else
     		{
-    			DEBUG_MESSAGE(std::cout<<"Warning! Found null Output pin"<<std::endl;)
+    			DEBUG_WARNING("An output pin was nullptr!")
     		}
     	}
     }
@@ -366,8 +364,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities:
 	//generated from body annotation
 	    do {
 
-        DEBUG_MESSAGE(std::cout<<"[fire] Action "  << this->getNode()->getName()  << "..."<<std::endl;)
-        DEBUG_MESSAGE(std::cout<<"[event] Fire activity=" << this->getActivityExecution()->getBehavior()->getName() << " action="  << this->getNode()->getName()<<std::endl;)
+        DEBUG_INFO("Firing Action '"  << this->getNode()->getName()  << "'.")
 
         this->doAction();
         this->sendOffers();
@@ -381,7 +378,7 @@ std::shared_ptr<Bag<Any>> ActionActivationImpl::getTokens(std::shared_ptr<uml::I
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[getTokens] node = "  << this->getNode()->getName()  << ", pin = "  << pin->getName()<<std::endl;)
+	DEBUG_INFO("Action '" << this->getNode()->getName()  << "' retrieving tokens from input pin '" << pin->getName()<<"'.")
 
 	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation(this->retrievePinActivation(pin));
 	std::shared_ptr<Bag<Any>> values(new Bag<Any>());
@@ -486,9 +483,6 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin, std::sh
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
-
-
 	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
     token->setValue(value);
 
@@ -502,10 +496,12 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin, std::s
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	DEBUG_INFO("Action '" << this->getNode()->getName() << "' putting " << values->size() << "tokens to output pin '" << pin->getName() << "'.")
+
 	for (std::shared_ptr<Any> value : *values)
-    {
-        this->putToken(pin,value);
-    }
+	{
+       		this->putToken(pin,value);
+   	}
 	//end of body
 }
 
@@ -586,8 +582,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
 	Bag<fUML::Semantics::Activities::Token>* offeredTokensPtr = offeredTokens.get();
 	Bag<fUML::Semantics::Activities::Token>* tokenListPtr = nullptr;
     std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdgeList->size()<<std::endl;)
 	
     for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
     {
@@ -606,26 +600,23 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
     {
 		Bag<fUML::Semantics::Activities::Token>* tokensPtr = nullptr;
     	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation > > inputPinActivations = this->getInputPinActivation();
-		//NEWDEBUG
-		DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("action = " + this->getNode()->getName()))<<"' : #inputPinActivation = "<<inputPinActivations->size()<<std::endl;)
         for (std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> pinActivation : *inputPinActivations)
         {
             if(pinActivation!=nullptr)
-			{
+	{
             	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = pinActivation->takeOfferedTokens();
-				tokensPtr = tokens.get();
+		tokensPtr = tokens.get();
             	pinActivation->fire(tokens);
             	offeredTokensPtr->insert(offeredTokensPtr->end(), tokensPtr->begin(), tokensPtr->end());
             }
             else
             {
-                DEBUG_MESSAGE(std::cout<<"Warning! Firing: A Pin was null!"<<std::endl;)
+                DEBUG_WARNING("A Pin was nullptr!")
             }
         }
     }
-	//NEWDEBUG
-	DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("action = " + this->getNode()->getName()))<<"' : #offeredTokens = "<<offeredTokens->size()<<std::endl;)
-    return offeredTokens;
+	DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved " << offeredTokens->size() << " tokens from it's input pins and incoming edges.")
+   	return offeredTokens;
 	//end of body
 }
 
@@ -633,21 +624,23 @@ std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(std::shared_ptr<uml::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[takeTokens] node = "  << this->getNode()->getName()  << ", pin = "  << pin->getName()<<std::endl;)
-
-	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = this->retrievePinActivation(pin);
+		std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = this->retrievePinActivation(pin);
 	std::shared_ptr<Bag<Any>> values(new Bag<Any>());
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = pinActivation->takeUnofferedTokens();
+
+	DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved "<< tokenList->size() << " tokens from pin '" << pin->getName() << "'.")
+
 	for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
-    		{
-    			std::shared_ptr<Any> value = token->getValue();
-        			if(value != nullptr)
-        			{
-        				DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
-            			values->push_back(value);
-        			}
-    		}
+    	{
+		unsigned int tokenNumber = 0;
+    		std::shared_ptr<Any> value = token->getValue();
+        	if(value != nullptr)
+        	{
+        		DEBUG_INFO("Value in token[" << tokenNumber <<"] : " << value->toString() << ".")
+            		values->push_back(value);
+        	}
+    	}
     return values;
 	//end of body
 }
@@ -1054,13 +1047,13 @@ bool ActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'action'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'action'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'action'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'action'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1074,7 +1067,7 @@ bool ActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'firing'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'firing'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1113,13 +1106,13 @@ bool ActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputPinActivation'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputPinActivation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputPinActivation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputPinActivation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1158,13 +1151,13 @@ bool ActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outputPinActivation'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outputPinActivation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'outputPinActivation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'outputPinActivation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1203,13 +1196,13 @@ bool ActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'pinActivation'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'pinActivation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'pinActivation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'pinActivation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1246,13 +1239,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edge'. Failed to invoke operation 'addOutgoingEdge'!")
 					return nullptr;
 				}
 			}
@@ -1278,13 +1271,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pinActivation'. Failed to invoke operation 'addPinActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pinActivation'. Failed to invoke operation 'addPinActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pinActivation'. Failed to invoke operation 'addPinActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pinActivation'. Failed to invoke operation 'addPinActivation'!")
 					return nullptr;
 				}
 			}
@@ -1338,13 +1331,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
 					return nullptr;
 				}
 			}
@@ -1370,13 +1363,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'getTokens'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'getTokens'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'getTokens'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'getTokens'!")
 					return nullptr;
 				}
 			}
@@ -1414,13 +1407,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'isSourceFor'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'isSourceFor'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'isSourceFor'!")
 					return nullptr;
 				}
 			}
@@ -1446,13 +1439,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putToken'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putToken'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putToken'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putToken'!")
 					return nullptr;
 				}
 			}
@@ -1467,7 +1460,7 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'putToken'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'putToken'!")
 				return nullptr;
 			}
 		
@@ -1492,13 +1485,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putTokens'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putTokens'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putTokens'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'putTokens'!")
 					return nullptr;
 				}
 			}
@@ -1513,7 +1506,7 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'values'. Failed to invoke operation 'putTokens'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'values'. Failed to invoke operation 'putTokens'!")
 				return nullptr;
 			}
 		
@@ -1538,13 +1531,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'retrievePinActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'retrievePinActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'retrievePinActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'retrievePinActivation'!")
 					return nullptr;
 				}
 			}
@@ -1589,13 +1582,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'takeTokens'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'takeTokens'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'takeTokens'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'pin'. Failed to invoke operation 'takeTokens'!")
 					return nullptr;
 				}
 			}
@@ -1622,7 +1615,7 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'valueParticipatesInLink'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'valueParticipatesInLink'!")
 				return nullptr;
 			}
 		
@@ -1641,13 +1634,13 @@ std::shared_ptr<Any> ActionActivationImpl::eInvoke(int operationID, std::shared_
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'valueParticipatesInLink'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'valueParticipatesInLink'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'valueParticipatesInLink'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'valueParticipatesInLink'!")
 					return nullptr;
 				}
 			}

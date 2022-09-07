@@ -1,9 +1,13 @@
 
 #include "uml/impl/DecisionNodeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -477,13 +481,13 @@ bool DecisionNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInput'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInput'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'decisionInput'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decisionInput'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -508,13 +512,13 @@ bool DecisionNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInputFlow'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decisionInputFlow'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'decisionInputFlow'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decisionInputFlow'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -546,7 +550,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'decision_input_flow_incoming'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'decision_input_flow_incoming'!")
 				return nullptr;
 			}
 		
@@ -560,7 +564,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'decision_input_flow_incoming'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'decision_input_flow_incoming'!")
 				return nullptr;
 			}
 		
@@ -580,7 +584,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edges'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'edges'!")
 				return nullptr;
 			}
 		
@@ -594,7 +598,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edges'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'edges'!")
 				return nullptr;
 			}
 		
@@ -614,7 +618,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_control_one_input_parameter'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_control_one_input_parameter'!")
 				return nullptr;
 			}
 		
@@ -628,7 +632,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_control_one_input_parameter'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_control_one_input_parameter'!")
 				return nullptr;
 			}
 		
@@ -648,7 +652,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_object_one_input_parameter'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_object_one_input_parameter'!")
 				return nullptr;
 			}
 		
@@ -662,7 +666,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_object_one_input_parameter'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_object_one_input_parameter'!")
 				return nullptr;
 			}
 		
@@ -682,7 +686,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_outgoing_edges'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'incoming_outgoing_edges'!")
 				return nullptr;
 			}
 		
@@ -696,7 +700,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_outgoing_edges'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'incoming_outgoing_edges'!")
 				return nullptr;
 			}
 		
@@ -716,7 +720,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parameters'!")
 				return nullptr;
 			}
 		
@@ -730,7 +734,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parameters'!")
 				return nullptr;
 			}
 		
@@ -750,7 +754,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'two_input_parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'two_input_parameters'!")
 				return nullptr;
 			}
 		
@@ -764,7 +768,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'two_input_parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'two_input_parameters'!")
 				return nullptr;
 			}
 		
@@ -784,7 +788,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'zero_input_parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'zero_input_parameters'!")
 				return nullptr;
 			}
 		
@@ -798,7 +802,7 @@ std::shared_ptr<Any> DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'zero_input_parameters'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'zero_input_parameters'!")
 				return nullptr;
 			}
 		

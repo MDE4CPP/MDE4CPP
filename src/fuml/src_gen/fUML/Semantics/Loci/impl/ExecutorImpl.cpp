@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -149,7 +153,7 @@ std::shared_ptr<Any> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecificat
 				}
 				case uml::umlPackage::INSTANCEVALUE_CLASS:
 				{
-					DEBUG_MESSAGE(std::cout<<"fUML::Semantics::Loci::Executor::evaluate()	:	uml::ValueSpecification of type uml::InstanceValue currently not supported!\nNOTE: specifications of type uml::EnumerationLiteral are handled by auto-generated, model-specific Executor class."<<std::endl;)
+					DEBUG_WARNING("uml::ValueSpecification of type uml::InstanceValue is currently not supported! NOTE: specifications of type uml::EnumerationLiteral are handled by auto-generated, model-specific Executor class.")
 					return nullptr;
 				}
 				case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
@@ -166,7 +170,7 @@ std::shared_ptr<Any> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecificat
 				}
 				default:
 				{
-					DEBUG_MESSAGE(std::cout<<"fUML::Semantics::Loci::Executor::evaluate()	:	Unsupported instance of uml::ValueSpecification!"<<std::endl;)
+					DEBUG_ERROR("Unsupported instance of uml::ValueSpecification!")
 					return nullptr;
 				}
 			}
@@ -211,13 +215,13 @@ std::shared_ptr<uml::Element> ExecutorImpl::start(std::shared_ptr<uml::Class> ty
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[start] Starting " << typeid(type).name() <<"..."<<std::endl;)
+	DEBUG_INFO("Starting instance of active class '" << type->getName() << "'.")
 
 	if (auto locus = this->getLocus().lock())
 	{
 		std::shared_ptr<uml::Element> object = locus->instantiate(type);
 
-		DEBUG_MESSAGE(std::cout<<"[start] Object = " << object<<std::endl;)
+		DEBUG_INFO("Instance of active class = " << object)
 
 		/* Currently not supported
 		object->startBehavior(type,inputs);
@@ -390,13 +394,13 @@ bool ExecutorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -433,13 +437,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'specification'. Failed to invoke operation 'evaluate'!")
 					return nullptr;
 				}
 			}
@@ -465,13 +469,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'execute'!")
 					return nullptr;
 				}
 			}
@@ -491,13 +495,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'execute'!")
 					return nullptr;
 				}
 			}
@@ -526,13 +530,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'execute'!")
 					return nullptr;
 				}
 			}
@@ -559,13 +563,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'start'!")
 					return nullptr;
 				}
 			}
@@ -594,13 +598,13 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, std::shared_ptr<Bag<
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'start'!")
 					return nullptr;
 				}
 			}

@@ -1,9 +1,13 @@
 
 #include "uml/impl/FinalStateImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -403,7 +407,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'cannot_reference_submachine'!")
 				return nullptr;
 			}
 		
@@ -417,7 +421,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_reference_submachine'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'cannot_reference_submachine'!")
 				return nullptr;
 			}
 		
@@ -437,7 +441,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_entry_behavior'!")
 				return nullptr;
 			}
 		
@@ -451,7 +455,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_entry_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_entry_behavior'!")
 				return nullptr;
 			}
 		
@@ -471,7 +475,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_exit_behavior'!")
 				return nullptr;
 			}
 		
@@ -485,7 +489,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_exit_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_exit_behavior'!")
 				return nullptr;
 			}
 		
@@ -505,7 +509,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_outgoing_transitions'!")
 				return nullptr;
 			}
 		
@@ -519,7 +523,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_outgoing_transitions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_outgoing_transitions'!")
 				return nullptr;
 			}
 		
@@ -539,7 +543,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_regions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_regions'!")
 				return nullptr;
 			}
 		
@@ -553,7 +557,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_regions'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_regions'!")
 				return nullptr;
 			}
 		
@@ -573,7 +577,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_state_behavior'!")
 				return nullptr;
 			}
 		
@@ -587,7 +591,7 @@ std::shared_ptr<Any> FinalStateImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_state_behavior'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_state_behavior'!")
 				return nullptr;
 			}
 		

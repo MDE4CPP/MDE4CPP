@@ -1,9 +1,13 @@
 #include "UML4CPPProfile/impl/NonExecutableImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
@@ -47,14 +51,14 @@ NonExecutableImpl::NonExecutableImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"NonExecutable is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'NonExecutable' is created.")
 	//***********************************
 }
 
 
 NonExecutableImpl::~NonExecutableImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"NonExecutable is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'NonExecutable' is destroyed.")
 }
 
 NonExecutableImpl::NonExecutableImpl(const NonExecutableImpl & obj):NonExecutableImpl()
@@ -197,13 +201,13 @@ void NonExecutableImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_NamedElement'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_NamedElement'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_NamedElement'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_NamedElement'. Failed to set property!")
 				return;
 			}
 		break;
@@ -215,13 +219,13 @@ void NonExecutableImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 void NonExecutableImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->add(qualifiedName, value);
 }
 
 void NonExecutableImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	this->add(uID, value);
 }
 
 void NonExecutableImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -252,6 +256,23 @@ void NonExecutableImpl::unset(unsigned long _uID)
 		}
 	}
 
+}
+
+//Remove
+void NonExecutableImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void NonExecutableImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void NonExecutableImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
 }
 
 //*********************************

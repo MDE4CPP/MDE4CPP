@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/CallOperationActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -48,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
@@ -153,14 +157,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 		std::shared_ptr<uml::Operation> operation = action->getOperation();
 		if(!operation)
 		{
-			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL operation."<<std::endl;)
+			DEBUG_ERROR("Operation is nullptr! Failed to call operation!")
 			return nullptr;
 		}
 		
 		std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
 		if(!targetPin)
 		{
-			std::cerr << "[getCallExecution] Target is null" << std::endl;
+			DEBUG_ERROR("Target is nullptr! Failed to call operation!")
 			return nullptr;
 		}
 		
@@ -174,7 +178,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			if(targetPinName.find("self.") == 0)
 			{
 				std::string attributeName = targetPinName.substr (5, std::string::npos);
-				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
+				DEBUG_INFO("Changing execution context to self." << attributeName << ".")
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
 				std::shared_ptr<Bag<uml::Classifier>> contextTypes; /* Currently not supported. TODO: implement something like getTypes */ //= context->getTypes();
@@ -201,11 +205,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 
 				if(nullptr == attribute)
 				{
-					std::cerr << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
+					std::cerr << "Could not find the attribute in the current context for input pin '" << targetPinName << "'." << std::endl;
 					exit(EXIT_FAILURE);
 				}
 
-				DEBUG_MESSAGE(std::cout << "Self attribute found for target pin" <<std::endl;)
+				DEBUG_INFO("Found context attribute self."<< attributeName << " for target pin.")
 
 				if (context != nullptr)
 				{
@@ -221,18 +225,18 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 							if(elements->size() > 0)
 							{
 								context = elements->front();
-								DEBUG_MESSAGE
+								/*DEBUG_INFO
 								(
-									/*if (context != nullptr)
+									if (context != nullptr)
 									{
 										std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
-									}*/ //getTypes currently not supported
-								)
+									} //getTypes currently not supported
+								)*/
 							}
 						}
 						catch(...)
 						{
-							DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
 						}
 					}
 					else
@@ -242,17 +246,17 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
 							context = umlAny->getAsElement();
 
-							DEBUG_MESSAGE
+							/*DEBUG_INFO
 							(
-								/*if (context != nullptr)
+								if (context != nullptr)
 								{
 									std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
-								}*/ //getTypes currently not supported
-							)
+								}//getTypes currently not supported
+							)*/
 						}
 						catch(...)
 						{
-							DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
 						}
 					}				
 				}
@@ -265,21 +269,21 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			std::shared_ptr<fUML::Semantics::Actions::PinActivation> targetPinActivation = this->retrievePinActivation(targetPin);
 			if(targetPinActivation == nullptr)
 			{
-				std::cerr << "[getCallExecution] PinActivation is null" << std::endl;
+				DEBUG_ERROR("PinActivation for target is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 			
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > unofferedTokens = targetPinActivation->getUnofferedTokens();
 			if(unofferedTokens == nullptr)
 			{
-				std::cerr << "[getCallExecution] UnofferedTokens are null" << std::endl;
+				DEBUG_ERROR("Unoffered tokens is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
 			std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->at(unofferedTokens->size()-1);
 			if(firstToken == nullptr)
 			{
-				std::cerr << "[getCallExecution] FirstToken is null" << std::endl;
+				DEBUG_ERROR("First token is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
@@ -294,14 +298,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : Provided context is not an instance of uml::Element."<<std::endl;)
+					DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
 				}
 			}
 		}
 		
 		if(!context)
 		{
-			DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<" : NULL context"<<std::endl;)
+			DEBUG_ERROR("Context is nullptr! Failed to call operation!")
 		}
 		else
 		{
@@ -618,13 +622,13 @@ bool CallOperationActionActivationImpl::eSet(int featureID, std::shared_ptr<Any>
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'callOperationAction'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -670,13 +674,13 @@ std::shared_ptr<Any> CallOperationActionActivationImpl::eInvoke(int operationID,
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
 					return nullptr;
 				}
 			}

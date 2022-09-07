@@ -1,9 +1,13 @@
 #include "util/stereotypestorage.hpp"
 
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
@@ -51,13 +55,15 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 				//check type of the property
 				if (element->eClass()->getName() == prop->getType()->getName())
 				{
-					DEBUG_MESSAGE(std::cout << "Set Base Property " << prop->getQualifiedName() << std::endl;)
+					DEBUG_INFO(std::cout << "Set base property '" << prop->getQualifiedName() << "'.")
 					//set Base
 					stereotype->set(prop, eAny(this,0,false));
 				}
 			}
 		}
 	}
+
+	DEBUG_INFO(std::cout << "Applying stereotype '" << stereotype->getMetaClass()->getQualifiedName() << "'.")
 
 	std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
 	if (list == nullptr)
@@ -70,8 +76,6 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 	{
 		list->push_back(stereotype);
 	}
-
-	DEBUG_MESSAGE(std::cout << "Stereotype applied :" << stereotype->getMetaClass()->getQualifiedName() << std::endl;)
 }
 
 std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName) const
@@ -150,7 +154,7 @@ void StereotypeStorage::unapplyStereotype(std::shared_ptr<uml::Element> element,
 
 	if (isStereotypeApplied(element, stereotype))
 	{
-		DEBUG_MESSAGE(std::cout << "Stereotype unapplyed :" << stereotype->getMetaClass()->getQualifiedName() << std::endl;)
+		DEBUG_INFO(std::cout << "Unapplying Stereotype '" << stereotype->getMetaClass()->getQualifiedName() << "'.")
 		std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
 		for (std::shared_ptr<uml::Stereotype> s : *list)
 		{

@@ -1,9 +1,13 @@
 
 #include "uml/impl/PseudostateImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -547,7 +551,7 @@ bool PseudostateImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'kind'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'kind'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -572,13 +576,13 @@ bool PseudostateImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'state'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'state'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'state'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'state'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -603,13 +607,13 @@ bool PseudostateImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -641,7 +645,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'choice_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'choice_vertex'!")
 				return nullptr;
 			}
 		
@@ -655,7 +659,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'choice_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'choice_vertex'!")
 				return nullptr;
 			}
 		
@@ -675,7 +679,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'fork_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'fork_vertex'!")
 				return nullptr;
 			}
 		
@@ -689,7 +693,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'fork_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'fork_vertex'!")
 				return nullptr;
 			}
 		
@@ -709,7 +713,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'history_vertices'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'history_vertices'!")
 				return nullptr;
 			}
 		
@@ -723,7 +727,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'history_vertices'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'history_vertices'!")
 				return nullptr;
 			}
 		
@@ -743,7 +747,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'initial_vertex'!")
 				return nullptr;
 			}
 		
@@ -757,7 +761,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'initial_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'initial_vertex'!")
 				return nullptr;
 			}
 		
@@ -777,7 +781,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'join_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'join_vertex'!")
 				return nullptr;
 			}
 		
@@ -791,7 +795,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'join_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'join_vertex'!")
 				return nullptr;
 			}
 		
@@ -811,7 +815,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'junction_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'junction_vertex'!")
 				return nullptr;
 			}
 		
@@ -825,7 +829,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'junction_vertex'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'junction_vertex'!")
 				return nullptr;
 			}
 		
@@ -845,7 +849,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outgoing_from_initial'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'outgoing_from_initial'!")
 				return nullptr;
 			}
 		
@@ -859,7 +863,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outgoing_from_initial'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'outgoing_from_initial'!")
 				return nullptr;
 			}
 		
@@ -879,7 +883,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_incoming'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_incoming'!")
 				return nullptr;
 			}
 		
@@ -893,7 +897,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_incoming'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_incoming'!")
 				return nullptr;
 			}
 		
@@ -913,7 +917,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_outgoing'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'transitions_outgoing'!")
 				return nullptr;
 			}
 		
@@ -927,7 +931,7 @@ std::shared_ptr<Any> PseudostateImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_outgoing'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'transitions_outgoing'!")
 				return nullptr;
 			}
 		

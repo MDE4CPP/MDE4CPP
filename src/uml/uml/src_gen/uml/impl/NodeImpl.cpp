@@ -1,9 +1,13 @@
 
 #include "uml/impl/NodeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -190,7 +194,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedNode."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for nestedNode.")
 	}
 	/*Subset*/
 	getNestedNode()->initSubset(getOwnedMember());
@@ -617,13 +621,13 @@ bool NodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -662,7 +666,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -676,7 +680,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -690,7 +694,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -704,7 +708,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -718,7 +722,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -737,13 +741,13 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!")
 					return nullptr;
 				}
 			}
@@ -758,7 +762,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -772,7 +776,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -786,7 +790,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -800,7 +804,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -814,7 +818,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createCommunicationPath'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createCommunicationPath'!")
 				return nullptr;
 			}
 		
@@ -841,7 +845,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'internal_structure'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'internal_structure'!")
 				return nullptr;
 			}
 		
@@ -855,7 +859,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'internal_structure'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'internal_structure'!")
 				return nullptr;
 			}
 		

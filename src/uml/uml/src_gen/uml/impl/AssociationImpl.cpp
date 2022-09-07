@@ -1,9 +1,13 @@
 
 #include "uml/impl/AssociationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -180,7 +184,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr endType."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for endType.")
 	}
 
 	//clone reference 'memberEnd'
@@ -207,7 +211,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr memberEnd."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for memberEnd.")
 	}
 
 	//clone reference 'navigableOwnedEnd'
@@ -234,7 +238,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr navigableOwnedEnd."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for navigableOwnedEnd.")
 	}
 
 	//clone reference 'ownedEnd'
@@ -261,7 +265,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedEnd."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedEnd.")
 	}
 	/*SubsetUnion*/
 	getOwnedEnd()->initSubsetUnion(getFeature(), getOwnedMember(), getMemberEnd());
@@ -817,7 +821,7 @@ bool AssociationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'isDerived'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isDerived'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -856,13 +860,13 @@ bool AssociationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'memberEnd'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'memberEnd'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'memberEnd'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'memberEnd'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -901,13 +905,13 @@ bool AssociationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'navigableOwnedEnd'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'navigableOwnedEnd'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'navigableOwnedEnd'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'navigableOwnedEnd'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -946,13 +950,13 @@ bool AssociationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedEnd'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedEnd'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedEnd'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedEnd'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -991,7 +995,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_ends'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'association_ends'!")
 				return nullptr;
 			}
 		
@@ -1005,7 +1009,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_ends'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'association_ends'!")
 				return nullptr;
 			}
 		
@@ -1025,7 +1029,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'binary_associations'!")
 				return nullptr;
 			}
 		
@@ -1039,7 +1043,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binary_associations'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'binary_associations'!")
 				return nullptr;
 			}
 		
@@ -1059,7 +1063,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'ends_must_be_typed'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'ends_must_be_typed'!")
 				return nullptr;
 			}
 		
@@ -1073,7 +1077,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'ends_must_be_typed'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'ends_must_be_typed'!")
 				return nullptr;
 			}
 		
@@ -1106,7 +1110,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_number'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_number'!")
 				return nullptr;
 			}
 		
@@ -1120,7 +1124,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_number'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_number'!")
 				return nullptr;
 			}
 		
@@ -1140,7 +1144,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_types'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialized_end_types'!")
 				return nullptr;
 			}
 		
@@ -1154,7 +1158,7 @@ std::shared_ptr<Any> AssociationImpl::eInvoke(int operationID, std::shared_ptr<B
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_types'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialized_end_types'!")
 				return nullptr;
 			}
 		

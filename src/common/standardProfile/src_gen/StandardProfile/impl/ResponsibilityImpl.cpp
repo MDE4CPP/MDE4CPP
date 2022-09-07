@@ -1,9 +1,13 @@
 #include "StandardProfile/impl/ResponsibilityImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
@@ -47,14 +51,14 @@ ResponsibilityImpl::ResponsibilityImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"Responsibility is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Responsibility' is created.")
 	//***********************************
 }
 
 
 ResponsibilityImpl::~ResponsibilityImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"Responsibility is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Responsibility' is destroyed.")
 }
 
 ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):ResponsibilityImpl()
@@ -197,13 +201,13 @@ void ResponsibilityImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'uml::UMLAny' for property 'base_Usage'. Failed to set property!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Usage'. Failed to set property!")
 					return;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'uml::UMLAny' for property 'base_Usage'. Failed to set property!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Usage'. Failed to set property!")
 				return;
 			}
 		break;
@@ -215,13 +219,13 @@ void ResponsibilityImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 void ResponsibilityImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->add(qualifiedName, value);
 }
 
 void ResponsibilityImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	this->add(uID, value);
 }
 
 void ResponsibilityImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -252,6 +256,23 @@ void ResponsibilityImpl::unset(unsigned long _uID)
 		}
 	}
 
+}
+
+//Remove
+void ResponsibilityImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void ResponsibilityImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void ResponsibilityImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
 }
 
 //*********************************

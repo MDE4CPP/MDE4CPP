@@ -1,9 +1,13 @@
 
 #include "uml/impl/ClassifierTemplateParameterImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -383,7 +387,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> n
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'allowSubstitutable'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'allowSubstitutable'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -422,13 +426,13 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -460,7 +464,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_is_classifier'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'actual_is_classifier'!")
 				return nullptr;
 			}
 		
@@ -474,7 +478,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_is_classifier'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'actual_is_classifier'!")
 				return nullptr;
 			}
 		
@@ -494,7 +498,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_args'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_args'!")
 				return nullptr;
 			}
 		
@@ -508,7 +512,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_args'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_args'!")
 				return nullptr;
 			}
 		
@@ -528,7 +532,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!")
 				return nullptr;
 			}
 		
@@ -542,7 +546,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'constraining_classifiers_constrain_parametered_element'!")
 				return nullptr;
 			}
 		
@@ -562,7 +566,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_constraining_classifier'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_constraining_classifier'!")
 				return nullptr;
 			}
 		
@@ -576,7 +580,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_constraining_classifier'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_constraining_classifier'!")
 				return nullptr;
 			}
 		
@@ -596,7 +600,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_abstract'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'matching_abstract'!")
 				return nullptr;
 			}
 		
@@ -610,7 +614,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_abstract'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'matching_abstract'!")
 				return nullptr;
 			}
 		
@@ -630,7 +634,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parametered_element_no_features'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'parametered_element_no_features'!")
 				return nullptr;
 			}
 		
@@ -644,7 +648,7 @@ std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, s
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parametered_element_no_features'!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'parametered_element_no_features'!")
 				return nullptr;
 			}
 		

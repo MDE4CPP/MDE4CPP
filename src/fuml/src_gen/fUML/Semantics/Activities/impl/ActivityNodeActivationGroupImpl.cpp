@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ActivityNodeActivationGroupImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -52,8 +56,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -147,7 +151,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edgeInstances."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for edgeInstances.")
 	}
 
 	//clone reference 'nodeActivations'
@@ -165,7 +169,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nodeActivations."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for nodeActivations.")
 	}
 	
 	
@@ -242,19 +246,19 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml
 	for (unsigned int i = 0; i < edges->size(); i++) 
 	{
         std::shared_ptr<uml::ActivityEdge> edge = edges->at(i);
-        //DEBUG_MESSAGE(std::cout<<"EDGE:" << edge << edge->getName()<<std::endl;)
-        DEBUG_MESSAGE(std::cout<<"[createEdgeInstances] Creating an edge instance from "
-                   << edge->getSource()->getName()
-                   << " to "
-                   << edge->getTarget()->getName()
-                   << "."<<std::endl;)
+
+	DEBUG_INFO("Creating edge " 
+		<< ((edge->getName() != "") ? ("'" + edge->getName() + "' ") : "")
+		<< "from "
+		<< edge->getSource()->getName()
+                << " to "
+                << edge->getTarget()->getName()
+                 << ".")
 
         std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance();
         edgeInstance->setEdge(edge);
 
         this->addEdgeInstance(edgeInstance);
-        //DEBUG_MESSAGE(std::cout<<"SOURCE:"<<edge->getSource()<<std::endl;)
-        //DEBUG_MESSAGE(std::cout<<"TARGET:"<<edge->getTarget()<<std::endl;)
         this->getNodeActivation(edge->getSource())->addOutgoingEdge(edgeInstance);
         this->getNodeActivation(edge->getTarget())->addIncomingEdge(edgeInstance);
     }
@@ -272,6 +276,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation> (this->retrieveActivityExecution()->getLocus()->getFactory()->instantiateVisitor(node));
+
     if(activation!=nullptr)
     {
     	activation->setNode(node);
@@ -281,7 +286,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
     }
     else
     {
-        DEBUG_MESSAGE(std::cout<<"Null activation"<<std::endl;)
+        DEBUG_ERROR("Activation is nullptr! Failed to create node!")
     }
     return activation;
 	//end of body
@@ -296,13 +301,12 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<
 		std::shared_ptr<uml::ActivityNode> node = nodes->at(i);
         if(node != nullptr)
         {
-        	DEBUG_MESSAGE(std::cout<<"[createNodeActivations] Creating a node activation for "
-                   << node->getName() << "..."<<std::endl;)
+        	DEBUG_INFO("Creating node '" << node->getName() << "'.")
         	this->createNodeActivation(node);
         }
         else
         {
-            DEBUG_MESSAGE(std::cout<<"Warning! A node was null!"<<std::endl;)
+            DEBUG_WARNING("A node was null!")
         }
     }
 	//end of body
@@ -392,7 +396,7 @@ void ActivityNodeActivationGroupImpl::resume(std::shared_ptr<fUML::Semantics::Ac
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		DEBUG_MESSAGE(std::cout<<"[resume] node=" << (activation->getNode() == nullptr ? "null" : activation->getNode()->getName())<<std::endl;)
+	DEBUG_INFO("Resuming " << ((activation->getNode() == nullptr) ? "anonymous node." : ("'" + activation->getNode()->getName() + "'.")))
 
     bool found = false;
     unsigned int i = 0;
@@ -431,13 +435,13 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActi
     		}
     		else
     		{
-                		DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<std::endl;)
+                		DEBUG_ERROR("Group is nullptr! Failed to retrieve activity execution!")
                 		throw "invalid group";
     		}
     	}
 	else
 	{
-            	DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<std::endl;)
+            	DEBUG_ERROR("Activation is nullptr! Failed to retrieve activity execution!")
             	throw "invalid activation";
 	}
     }
@@ -458,7 +462,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 		}
 	}
 
-    DEBUG_MESSAGE(std::cout<<"[run] Checking for enabled nodes..."<<std::endl;)
+    DEBUG_INFO("Checking for enabled nodes.")
 
     std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > enabledActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
     {
@@ -467,14 +471,6 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = (*it);
 
-			if(activation->getNode())
-			{
-				DEBUG_MESSAGE(std::cout<<"[run] Checking node " << activation->getNode()->getName()<< "..."<<std::endl;)
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout<<"[run] Checking node anonymous Node (e.g. anonymous Fork) ..."<<std::endl;)
-			}
 			const int class_id = activation->eClass()->getClassifierID();
 			if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ||  class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS || class_id ==fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS))
 			{
@@ -505,18 +501,17 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 
 					if(activation->getNode())
 					{
-						DEBUG_MESSAGE(std::cout<<"[run] Node " << activation->getNode()->getName()<< " is enabled."<<std::endl;)
+						DEBUG_INFO("Node '" << activation->getNode()->getName()<< "' is enabled.")
 					}
 					else
 					{
-						DEBUG_MESSAGE(std::cout<<"[run] Node anonymous Node (eg. anonymous Fork) is enabled."<<std::endl;)
+						DEBUG_INFO("Anonymous node is enabled.")
 					}
 					enabledActivations->push_back(activation);
 				}
 			}
 		}
     }
-    DEBUG_MESSAGE(std::cout<<"[run] " << enabledActivations->size() << " node(s) is/are enabled."<<std::endl;)
 
     // *** Send offers to all enabled nodes concurrently. ***
     {
@@ -526,11 +521,11 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation> (*it);
 			if(activation->getNode())
 			{
-				DEBUG_MESSAGE(std::cout<<"[run] Sending offer to node " << activation->getNode()->getName()<<std::endl;)
+				DEBUG_INFO("Sending offer to node '" << activation->getNode()->getName() << "'.")
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout<<"[run] Sending offer to anonymous Node (e.g anonymous Fork)"<<std::endl;)
+				DEBUG_INFO("Sending offer to anonymous node")
 			}
 			activation->receiveOffer();
 		}
@@ -562,7 +557,7 @@ void ActivityNodeActivationGroupImpl::suspend(std::shared_ptr<fUML::Semantics::A
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[suspend] node=" << (activation->getNode() == nullptr ? "null" : activation->getNode()->getName())<<std::endl;)
+	DEBUG_INFO("Suspending " << ((activation->getNode() == nullptr) ? "anonymous node." : ("'" + activation->getNode()->getName() + "'.")))
 
     if (!this->isSuspended()) 
     {
@@ -580,8 +575,6 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//DEBUG_MESSAGE(//TODO fix std::cout<<"[terminateAll] Terminating activation group for "<< (this->getActivityExecution() != nullptr ? "activity " + this->getActivityExecution()->getTypes()->at(0)->getName() : this->getContainingNodeActivation() != nullptr ? "node " << this->getContainingNodeActivation()->getNode()->getName() : "expansion region") << ".");)
-
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++) 
     {
@@ -915,13 +908,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'activityExecution'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'activityExecution'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'activityExecution'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'activityExecution'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -946,13 +939,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'containingNodeActivation'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'containingNodeActivation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'containingNodeActivation'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'containingNodeActivation'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -991,13 +984,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'edgeInstances'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'edgeInstances'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'edgeInstances'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'edgeInstances'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1036,13 +1029,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nodeActivations'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nodeActivations'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'nodeActivations'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'nodeActivations'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1081,13 +1074,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreContainerAny' for feature 'suspendedActivations'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'suspendedActivations'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreContainerAny' for feature 'suspendedActivations'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'suspendedActivations'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -1133,13 +1126,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'activate'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'activate'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'activate'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'activate'!")
 					return nullptr;
 				}
 			}
@@ -1168,13 +1161,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'activate'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'activate'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'activate'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'activate'!")
 					return nullptr;
 				}
 			}
@@ -1200,13 +1193,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'instance'. Failed to invoke operation 'addEdgeInstance'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'instance'. Failed to invoke operation 'addEdgeInstance'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'instance'. Failed to invoke operation 'addEdgeInstance'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'instance'. Failed to invoke operation 'addEdgeInstance'!")
 					return nullptr;
 				}
 			}
@@ -1232,13 +1225,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'addNodeActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'addNodeActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'addNodeActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'addNodeActivation'!")
 					return nullptr;
 				}
 			}
@@ -1273,13 +1266,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingEdges'. Failed to invoke operation 'checkIncomingEdges'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingEdges'. Failed to invoke operation 'checkIncomingEdges'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingEdges'. Failed to invoke operation 'checkIncomingEdges'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingEdges'. Failed to invoke operation 'checkIncomingEdges'!")
 					return nullptr;
 				}
 			}
@@ -1308,13 +1301,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'checkIncomingEdges'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'checkIncomingEdges'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'checkIncomingEdges'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'checkIncomingEdges'!")
 					return nullptr;
 				}
 			}
@@ -1349,13 +1342,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'createEdgeInstance'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'createEdgeInstance'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'createEdgeInstance'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'edges'. Failed to invoke operation 'createEdgeInstance'!")
 					return nullptr;
 				}
 			}
@@ -1381,13 +1374,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'createNodeActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'createNodeActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'createNodeActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'createNodeActivation'!")
 					return nullptr;
 				}
 			}
@@ -1422,13 +1415,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'createNodeActivations'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'createNodeActivations'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'createNodeActivations'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'createNodeActivations'!")
 					return nullptr;
 				}
 			}
@@ -1454,13 +1447,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'node'. Failed to invoke operation 'getNodeActivation'!")
 					return nullptr;
 				}
 			}
@@ -1493,13 +1486,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'hasSourceFor'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'hasSourceFor'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'hasSourceFor'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'edgeInstance'. Failed to invoke operation 'hasSourceFor'!")
 					return nullptr;
 				}
 			}
@@ -1531,13 +1524,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'resume'!")
 					return nullptr;
 				}
 			}
@@ -1578,13 +1571,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'run'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'run'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'run'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'activations'. Failed to invoke operation 'run'!")
 					return nullptr;
 				}
 			}
@@ -1619,13 +1612,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'runNodes'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'runNodes'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'runNodes'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'nodes'. Failed to invoke operation 'runNodes'!")
 					return nullptr;
 				}
 			}
@@ -1651,13 +1644,13 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, s
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'activation'. Failed to invoke operation 'suspend'!")
 					return nullptr;
 				}
 			}

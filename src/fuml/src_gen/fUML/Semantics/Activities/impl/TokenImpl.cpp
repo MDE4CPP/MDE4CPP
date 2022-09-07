@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -162,14 +166,12 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();
-		//NEWDEBUG
-		DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : !isWithdrawn"<<std::endl;)
 		this->setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>(nullptr));
 		this->setWithdrawn(true);
 		if (holder)
 		{	
 			//NEWDEBUG
-			DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : withdrawing token..."<<std::endl;)
+			DEBUG_INFO("Withdrawing token. Holder of this token = " << (holder->getNode() == nullptr ? "nullptr" : ("'" + holder->getNode()->getName() + "'")))
 			holder->removeToken(getThisTokenPtr());
 		}
     }
@@ -374,13 +376,13 @@ bool TokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!"<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -394,7 +396,7 @@ bool TokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'Any' for feature 'withdrawn'. Failed to set feature!"<< std::endl;)
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'withdrawn'. Failed to set feature!")
 				return false;
 			}
 		return true;
@@ -437,13 +439,13 @@ std::shared_ptr<Any> TokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
 					return nullptr;
 				}
 			}
@@ -481,13 +483,13 @@ std::shared_ptr<Any> TokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 					}
 					catch(...)
 					{
-						DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid type stored in 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!"<< std::endl;)
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << " : Invalid instance of 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!"<< std::endl;)
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!")
 					return nullptr;
 				}
 			}
