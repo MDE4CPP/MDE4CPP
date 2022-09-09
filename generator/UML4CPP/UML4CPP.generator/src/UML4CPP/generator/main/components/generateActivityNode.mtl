@@ -390,6 +390,7 @@
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
 [action.memberName()/]->setIsDestroyOwnedObjects([action.isDestroyOwnedObjects/]);
 [action.memberName()/]->setIsDestroyLinks([action.isDestroyLinks/]);
+[action.input.initializePin(true)/]
 [action.output.initializePin()/]
 [/let]
 [/template]
