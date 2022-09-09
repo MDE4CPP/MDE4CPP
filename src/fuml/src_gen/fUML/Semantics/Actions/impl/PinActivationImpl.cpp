@@ -124,7 +124,7 @@ void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::To
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_INFO("Firing Pin '" << this->getNode()->getName() + "'.")
+	DEBUG_INFO("Firing " << this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() + "'.")
 	this->addTokens(incomingTokens);
 	//end of body
 }
@@ -142,14 +142,14 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::take
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	//NEWDEBUG
-	DEBUG_INFO("Pin " << this->getNode()->getName() << "' has " << count << " unoffered tokens on it's incoming edges.")
+	DEBUG_INFO(this->getNode()->eClass()->getName() << " " << this->getNode()->getName() << "' has " << count << " unoffered tokens on it's incoming edges.")
 
 	if (upper < 0 || count < upper) 
 	{
 		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
 
 		//NEWDEBUG
-		DEBUG_INFO("Pin '" << this->getNode()->getName() << "' has " << incomingEdges->size() << " incoming edges.")
+		DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << incomingEdges->size() << " incoming edges.")
 
 		for (unsigned int i = 0; i < incomingEdges->size(); i++) 
 		{
@@ -175,7 +175,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::take
 	}
 	
 	//NEWDEBUG
-	DEBUG_INFO("Pin " << this->getNode()->getName() << "'  took " << tokens->size() << " tokens from it's incmoning edges.")
+	DEBUG_INFO(this->getNode()->eClass()->getName() << " " << this->getNode()->getName() << "'  took " << tokens->size() << " tokens from it's incmoning edges.")
 	return tokens;
 	//end of body
 }

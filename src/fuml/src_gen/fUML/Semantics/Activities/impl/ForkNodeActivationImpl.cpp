@@ -127,6 +127,10 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
+    int outgoingEdgeCount = outgoingEdges->size();
+
+#ifndef NDEBUG
 	if (this->getNode() == nullptr) 
 	{
         	DEBUG_INFO("Firing anonymous ForkNode. Number of incoming tokens is "<< incomingTokens->size() << ".")
@@ -135,9 +139,7 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 	{
        		DEBUG_INFO("Firing ForkNode '" << this->getNode()->getName() << "'. Number of incoming tokens is: " << incomingTokens->size() << ".")
 	}
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
-    int outgoingEdgeCount = outgoingEdges->size();
+#endif
 
     std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > forkedTokens(new Bag<fUML::Semantics::Activities::Token>());
     for (unsigned int i = 0; i < incomingTokens->size(); i++) 
@@ -150,16 +152,16 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
         forkedTokens->push_back(forkedToken);
     }
 
-
+#ifndef NDEBUG
 	if (this->getNode() == nullptr) 
 	{
-		//NEWDEBUG
-        	DEBUG_INFO("Number of forked tokens of anonymous ForkNode '" << this->getNode()->getName( )<< "' is: " << forkedTokens->size() << ".")
+        	DEBUG_INFO("Number of forked tokens of anonymous ForkNode is: " << forkedTokens->size() << ".")
     	} 
 	else 
-	{	//NEWDEBUG
+	{
 		DEBUG_INFO("Number of forked tokens of ForkNode '" << this->getNode()->getName( )<< "' is: " << forkedTokens->size() << ".")
-    }
+    	}
+#endif
 
     this->addTokens(forkedTokens);
     this->sendOffers(forkedTokens);

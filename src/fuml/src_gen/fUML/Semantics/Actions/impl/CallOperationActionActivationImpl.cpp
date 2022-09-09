@@ -352,6 +352,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 					std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 					returnParameterValue->setParameter(returnParameter);
 					returnParameterValue->getValues()->add(returnValue);
+					outputParameterValues->add(returnParameterValue);
 				}
 			}
 			

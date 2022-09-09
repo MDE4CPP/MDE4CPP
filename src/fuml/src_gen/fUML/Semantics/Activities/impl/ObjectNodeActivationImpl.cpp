@@ -175,8 +175,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
   int offeredTokenCount=this->getOfferedTokenCount(); 
 
 //NEWDEBUG
-  DEBUG_INFO("ObjectNode '" << this->getNode()->getName() << "' has " << numberUnofferedTokens << " unoffered tokens.")
-  DEBUG_INFO("ObjectNode '" << this->getNode()->getName() << "' has " << offeredTokenCount << " offered tokens on incoming edges.")
+  DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << numberUnofferedTokens << " unoffered tokens.")
+  DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << offeredTokenCount << " offered tokens on incoming edges.")
  
   Bag<fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); 
   Bag<fUML::Semantics::Activities::Token>* tokensPtr = tokens.get();

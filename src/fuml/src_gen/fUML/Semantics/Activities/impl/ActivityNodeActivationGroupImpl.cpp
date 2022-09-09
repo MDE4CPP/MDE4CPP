@@ -301,7 +301,7 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<
 		std::shared_ptr<uml::ActivityNode> node = nodes->at(i);
         if(node != nullptr)
         {
-        	DEBUG_INFO("Creating node '" << node->getName() << "'.")
+        	DEBUG_INFO("Creating " << node->eClass()->getName() << " '" << node->getName() << "'.")
         	this->createNodeActivation(node);
         }
         else
@@ -501,7 +501,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 
 					if(activation->getNode())
 					{
-						DEBUG_INFO("Node '" << activation->getNode()->getName()<< "' is enabled.")
+						DEBUG_INFO(activation->getNode()->eClass()->getName() << " '" << activation->getNode()->getName()<< "' is enabled.")
 					}
 					else
 					{
@@ -521,7 +521,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation> (*it);
 			if(activation->getNode())
 			{
-				DEBUG_INFO("Sending offer to node '" << activation->getNode()->getName() << "'.")
+				DEBUG_INFO("Sending offer to " << activation->getNode()->eClass()->getName() << " '" << activation->getNode()->getName() << "'.")
 			}
 			else
 			{

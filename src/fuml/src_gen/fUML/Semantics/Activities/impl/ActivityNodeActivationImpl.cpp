@@ -187,7 +187,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 token->setHolder(getThisActivityNodeActivationPtr());
 token->setWithdrawn(false);
 
-DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node " : ("Node '" + this->getNode()->getName() + "' ")) << " : Adding token with value : "<<token->getValue()->toString())
+DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node " : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "' ")) << " : Adding token" << ((token->getValue() == nullptr) ? " with no value" :  (" with value : " + token->getValue()->toString())) << ".")
 
 this->getHeldTokens()->push_back(token);
 	//end of body
@@ -330,7 +330,7 @@ void ActivityNodeActivationImpl::receiveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_INFO("Receiving offer for " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))
+	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " received an offer.")
 
     _beginIsolation();
 
@@ -339,11 +339,11 @@ void ActivityNodeActivationImpl::receiveOffer()
     std::shared_ptr<Bag<Token> > tokens;
    	 if (ready) 
     	{
-       		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " is ready for execution. Taking offered tokens.")
+       		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")) << " is ready for execution. Taking offered tokens.")
         	tokens = this->takeOfferedTokens();
    	}
 	else{
-		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " is not ready for execution yet.")
+		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")) << " is not ready for execution yet. Not taking offered tokens.")
 	}
 
     _endIsolation();
@@ -369,7 +369,7 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Act
 		i++;
 		if (*iter == token)
 		{
-			DEBUG_INFO("Removing token from " << ((this->getNode() == nullptr) ? "anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " with value : " << token->getValue()->toString() << ".")
+			DEBUG_INFO("Removing token from " << ((this->getNode() == nullptr) ? "anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")) << ((token->getValue() == nullptr) ? " with no value" : (" with value : " + token->getValue()->toString())) << ".")
 
 			this->getHeldTokens()->erase(iter);
 			return i;
@@ -403,7 +403,7 @@ void ActivityNodeActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_INFO("Running " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))
+	DEBUG_INFO("Running " << ((this->getNode() == nullptr) ? "anonymous node." : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")))
 
     this->setRunning(true);
 	//end of body
@@ -421,17 +421,17 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics:
         {
 		auto target=outgoingEdge->getTarget().lock();
 		if(!target){
-			DEBUG_WARNING("Target activation is nullptr for " << ((outgoingEdge->getEdge()->getName() == "") ? "anonymous edge!" : ("Edge '" + outgoingEdge->getEdge()->getName() + "'!")))
+			DEBUG_WARNING("Target activation is nullptr for " << (((outgoingEdge->getEdge() == nullptr) || (outgoingEdge->getEdge()->getName() == "")) ? "anonymous edge!" : (outgoingEdge->getEdge()->eClass()->getName() + " '" + outgoingEdge->getEdge()->getName() + "'!")))
 		}
 		else
 		{
 			if(! (target->getNode()))
 			{
-				DEBUG_WARNING("Node for target activation is nullptr for " << ((outgoingEdge->getEdge()->getName() == "") ? "anonymous edge!" : ("Edge '" + outgoingEdge->getEdge()->getName() + "'!")))
+				DEBUG_WARNING("Node for target activation is nullptr for " << (((outgoingEdge->getEdge() == nullptr) || (outgoingEdge->getEdge()->getName() == "")) ? "anonymous edge!" : (outgoingEdge->getEdge()->eClass()->getName() + " '" + outgoingEdge->getEdge()->getName() + "'!")))
 			}
 			else
 			{
-				DEBUG_INFO("Sending offer to Node" << target->getNode()->getName() << " with "<<tokens->size()<<" tokens.")
+				DEBUG_INFO("Sending offer to " << target->getNode()->eClass()->getName() << " '" << target->getNode()->getName() << "' with "<<tokens->size()<<" token(s).")
 			}
 		}
             outgoingEdge->sendOffer(tokens);
@@ -463,7 +463,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
 
-	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
+	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
 
 	for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
 	{
@@ -471,7 +471,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
 	}
 
-	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : ("Node '" + this->getNode()->getName() + "'")) << " retrieved a total number of " << allTokens->size() << " offered tokens from incoming edges.")
+	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " retrieved a total number of " << allTokens->size() << " offered tokens from incoming edges.")
 
 	return allTokens;
 	//end of body
@@ -492,11 +492,15 @@ void ActivityNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*    if (this->isRunning()) {
-     	DEBUG_INFO("Terminating " << ((this->getNode() == nullptr) ? "anonymous node." : ("Node '" + this->getNode()->getName() + "'.")))  
-    }
-*/
-this->setRunning(false);
+	this->setRunning(false);
+
+#ifndef NDEBUG
+	if (this->isRunning())
+	{
+     		DEBUG_INFO("Terminating " << ((this->getNode() == nullptr) ? "anonymous node." : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")))  
+	}
+#endif
+
 	//end of body
 }
 

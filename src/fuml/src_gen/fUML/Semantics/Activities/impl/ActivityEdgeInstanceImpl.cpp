@@ -186,7 +186,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
     	offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     	this->getOffers()->push_back(offer);
 
-	DEBUG_INFO("ActivityEdge '" <<((this->getEdge()->getName() == "") ? "anonymous edge" : this->getEdge()->getName()) << "' created a new offer containing "<<tokens->size()<<" tokens.")
+	DEBUG_INFO((((this ->getEdge() == nullptr) || (this->getEdge()->getName() == "")) ? "Anonymous edge" : (this->getEdge()->eClass()->getName() + " '" + this->getEdge()->getName() + "'")) << " created a new offer containing "<<tokens->size()<<" token(s).")
 
     	auto target = this->getTarget().lock();
 
@@ -210,17 +210,17 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
 	//NEWDEBUG
-	DEBUG_INFO("ActivityEdge '" << ((this->getEdge()->getName() == "") ? "anonymous edge" : this->getEdge()->getName()) << "' has " << this->getOffers()->size() << " offers.")
+	DEBUG_INFO((((this->getEdge() == nullptr) || (this->getEdge()->getName() == "")) ? "Anonymous edge" : (this->getEdge()->eClass()->getName() + " '" + this->getEdge()->getName() + "'")) << " has " << this->getOffers()->size() << " offer(s).")
 
 	for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
     	{
     		auto vec = offer->retrieveOfferedTokens();
 		//NEWDEBUG
-		DEBUG_INFO("Retrieved "<<vec->size()<<" tokens from offer.")
+		DEBUG_INFO("Retrieved "<<vec->size()<<" token(s) from offer.")
        		tokens->insert(tokens->end(), vec->begin(), vec->end());
   	}
 
-	DEBUG_INFO("Retrieved a total number of " << tokens->size() << " tokens.")
+	DEBUG_INFO("Retrieved a total number of " << tokens->size() << " token(s).")
 
     	this->getOffers()->clear();
 

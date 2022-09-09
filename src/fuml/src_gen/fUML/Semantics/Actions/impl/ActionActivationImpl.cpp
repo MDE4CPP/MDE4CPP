@@ -299,7 +299,7 @@ void ActionActivationImpl::createNodeActivations()
 	std::shared_ptr<Bag<uml::ActivityNode> > inputPinNodes(new Bag<uml::ActivityNode>());
     if(action)
     {
-    	DEBUG_INFO("Action '" << action->getName() <<"' has " <<action->getInput()->size()<<"input pin(s).")
+    	DEBUG_INFO("Action '" << action->getName() <<"' has " <<action->getInput()->size()<<" input pin(s).")
 		std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
     	for(std::shared_ptr<uml::InputPin> pin : *inputPins)
     	{
@@ -318,7 +318,7 @@ void ActionActivationImpl::createNodeActivations()
     std::shared_ptr<Bag<uml::ActivityNode> > outputPinNodes(new Bag<uml::ActivityNode>());
     if(action)
     {
-    	DEBUG_INFO("Action '" << action->getName() <<"' has " << action->getOutput()->size()<<"output pin(s).")
+    	DEBUG_INFO("Action '" << action->getName() <<"' has " << action->getOutput()->size()<<" output pin(s).")
 	std::shared_ptr<Bag<uml::OutputPin> > outputPins = action->getOutput();
     	for(std::shared_ptr<uml::OutputPin> pin : *outputPins)
     	{
@@ -615,7 +615,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
             }
         }
     }
-	DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved " << offeredTokens->size() << " tokens from it's input pins and incoming edges.")
+	DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved " << offeredTokens->size() << " token(s) from it's input pins and incoming edges.")
    	return offeredTokens;
 	//end of body
 }
@@ -633,7 +633,9 @@ std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(std::shared_ptr<uml::
 
 	for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
     	{
+#ifndef NDEBUG
 		unsigned int tokenNumber = 0;
+#endif
     		std::shared_ptr<Any> value = token->getValue();
         	if(value != nullptr)
         	{

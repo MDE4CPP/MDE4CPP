@@ -171,7 +171,7 @@ void TokenImpl::withdraw()
 		if (holder)
 		{	
 			//NEWDEBUG
-			DEBUG_INFO("Withdrawing token. Holder of this token = " << (holder->getNode() == nullptr ? "nullptr" : ("'" + holder->getNode()->getName() + "'")))
+			DEBUG_INFO("Withdrawing " << this->eClass()->getName() << " from it's old holder: " << (holder->getNode() == nullptr ? "anonymous node" : ("'" + holder->getNode()->getName() + "'")) << ".")
 			holder->removeToken(getThisTokenPtr());
 		}
     }
