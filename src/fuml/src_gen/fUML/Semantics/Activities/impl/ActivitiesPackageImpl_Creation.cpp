@@ -96,6 +96,7 @@ void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore
 	
 	m_activityExecution_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION__COPY);
 	m_activityExecution_Operation_execute = factory->createEOperation_as_eOperations_in_EClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_EXECUTE);
+	m_activityExecution_Operation_execute_new = factory->createEOperation_as_eOperations_in_EClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_EXECUTE_NEW);
 	m_activityExecution_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_NEW_);
 	m_activityExecution_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_TERMINATE);
 	

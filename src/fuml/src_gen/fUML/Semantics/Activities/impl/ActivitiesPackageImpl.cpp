@@ -138,6 +138,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 {
 	return m_activityExecution_Operation_execute;
 }
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityExecution_Operation_execute_new() const
+{
+	return m_activityExecution_Operation_execute_new;
+}
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityExecution_Operation_new_() const
 {
 	return m_activityExecution_Operation_new_;

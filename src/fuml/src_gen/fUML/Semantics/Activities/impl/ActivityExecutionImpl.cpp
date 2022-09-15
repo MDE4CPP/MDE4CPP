@@ -53,9 +53,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Activity.hpp"
@@ -216,6 +216,74 @@ void ActivityExecutionImpl::execute()
 					parameterValue->getValues()->push_back(value);
 
 					DEBUG_INFO("Parameter '" << parameterValue->getParameter()->getName() << "' has value: " << value->toString() << ".")
+					}
+				}
+			this->setParameterValue(parameterValue);
+			}
+		}
+        	DEBUG_INFO("Completed execution of Activity '" << activity->getName() << "'.")
+        	//TODO: which elements connected to the activity can be safely cleaned up here?
+	}
+
+	//end of body
+}
+
+void ActivityExecutionImpl::execute_new()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<uml::Activity> activity = this->getActivity();
+
+	if(activity != nullptr)
+   	{
+		DEBUG_INFO("Executing Activity '" << activity->getName() << "'.")
+	
+		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> activityNodeActivationGroup = this->getActivationGroup();
+
+		activityNodeActivationGroup->run(activityNodeActivationGroup->getNodeActivations());
+
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > outputActivationList = activityNodeActivationGroup->getOutputParameterNodeActivations();
+
+		DEBUG_INFO("Activity '" << activity->getName() << "' has " << outputActivationList->size() << " output ParameterNodes.")
+
+		for(std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> outputActivation : *outputActivationList)
+		{
+            		if(outputActivation->getNode()->getMetaElementID() == uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS)
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
+				std::shared_ptr<uml::ActivityParameterNode> activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode> (outputActivation->getNode());
+				parameterValue->setParameter(activityParameterNode->getParameter());
+				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = outputActivation->getTokens();
+
+				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+				{
+					std::shared_ptr<Any> value;
+					value = token->getValue();
+					
+#ifndef NDEBUG						
+				/*if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_CLASS)
+				{
+					std::cout<<"Getting the value of a object token"<<std::endl;
+				}
+				else
+				{
+					if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)
+					{
+						std::cout<<"Getting the value of a forked token"<<std::endl;
+					}
+					else
+					{
+						std::cerr<<"Unsupported token type."<<std::endl;
+						exit(EXIT_FAILURE);
+					}
+				}*/
+#endif
+
+					if (value != nullptr) 
+					{
+						parameterValue->getValues()->push_back(value);
+
+						DEBUG_INFO("Parameter '" << parameterValue->getParameter()->getName() << "' has value: " << value->toString() << ".")
 					}
 				}
 			this->setParameterValue(parameterValue);
@@ -573,6 +641,12 @@ std::shared_ptr<Any> ActivityExecutionImpl::eInvoke(int operationID, std::shared
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
+			break;
+		}
+		// fUML::Semantics::Activities::ActivityExecution::execute_new(): 1013829974
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE_NEW:
+		{
+			this->execute_new();
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::new_() : Any: 357511021
