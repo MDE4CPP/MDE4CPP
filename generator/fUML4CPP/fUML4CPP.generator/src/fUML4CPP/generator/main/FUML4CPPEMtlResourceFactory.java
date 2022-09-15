@@ -28,7 +28,6 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	private void initalizeGeneralEmtls(String resourcePathPrefix)
 	{		
 		String[] moduleNames = {
-								"generateExecution",
 								"generateExecutionBuildFile",
 								"generateModelExecutorHeader",
 								"generateModelExecutorSource",

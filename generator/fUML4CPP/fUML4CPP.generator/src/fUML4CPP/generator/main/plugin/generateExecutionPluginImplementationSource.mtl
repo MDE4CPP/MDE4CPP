@@ -31,12 +31,9 @@
 
 [defineDebugMacro()/]
 
-#include <cassert>
 #include <iostream>
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
-#include "uml/Activity.hpp"
-#include "uml/Element.hpp"
 
 [if (aPackage.getUsedActivities()->size() > 0)]
 [generateMainIncludes()/]
@@ -96,7 +93,7 @@ void [packageName/]::initialize()
 	m_IsInitialized = true;
 }
 
-std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
+std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
 	if(!m_IsInitialized)
 	{
@@ -105,9 +102,7 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 [for (act : Activity | aPackage.getUsedActivities()->sortedBy(myQualifiedName()))]
 	if (activity == [act.generatePackageGetterCall()/])
 	{
-		[act.generateGetInputParameter()/]
-		[act.generateActivityExecution()/]   
-		[act.generateReturnParameter()/]
+		[act.generateActivityExecution()/]
 	}
 [/for]
 	return nullptr;
@@ -117,12 +112,9 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 [/template]
 
 [template public generateMainIncludes(aPackage : Package)]
-//Metamodel includes
-#include "abstractDataTypes/SubsetUnion.hpp"
+//fUML includes
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
@@ -159,64 +151,27 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 #include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
 [/if]
 [/comment]
+
 //UML includes
+#include "uml/Element.hpp"
 #include "uml/Activity.hpp"
-#include "uml/Enumeration.hpp"
-#include "uml/OpaqueBehavior.hpp"
-#include "uml/FunctionBehavior.hpp"
-#include "uml/Interface.hpp"
-#include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/umlFactory.hpp"
 
-
-//Includes of Model locus, package and factory
-#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Factory.hpp"
+//Includes of model-specific Locus, Executor and model package
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 #include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
 #include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutorImpl.hpp"
-
-//Includes from owner Classes of executed Activities
-[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class))->reject(isDoNotGenerateElement()))]
-//#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
-#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-[/for]
-
-//Includes of packages from parameter types of Activities
-[for (pack : Package | aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(name))]
-[if (not (pack.name='StandardProfile'))]
-#include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package')/].hpp"
-[/if]
-[/for]
-
-//Includes from parameter types of Activities
-[if (aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->filter(PrimitiveType)->size() > 0)]
-#include "types/typesPackage.hpp"
-[/if]
-[for ( type : Type | aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
-[type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
-[/for]
-
-[for ( type : Type | aPackage.getActivitiesOwnedByPackage().ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
-[type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
-[/for]
 [/template]
 
-[template public generateGetInputParameter(anActivity : Activity)]
-[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-//retrieving value for input parameter [anActivity.name/]::[par.name/]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]List[/if] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
-[/for]
-[/template]
+
 
 [template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace(false).sanitize() + 'Locus' ; executorName : String = aPackage.generateNamespace(false).sanitize() + 'Executor' ;}]
-//initialize Locus
+//Initialize Locus
 std::shared_ptr<[locusName/]Impl> locusImpl(new [locusName/]Impl());
 locusImpl->setThisLocusPtr(locusImpl);
 m_locus = locusImpl;
 
-//initialize Executor
+//Initialize Executor
 std::shared_ptr<[executorName/]Impl> executorImpl(new [executorName/]Impl());
 executorImpl->setThisExecutorPtr(executorImpl);
 m_executor = executorImpl;
@@ -224,13 +179,13 @@ m_executor = executorImpl;
 m_locus->setExecutor(m_executor);
 m_executor->setLocus(m_locus);
 
-//initialize ExecutionFactory
+//Initialize ExecutionFactory
 std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory = fUML::Semantics::Loci::LociFactory::eInstance()->createExecutionFactory_as_factory_in_Locus(m_locus);
 
 [if (aPackage.hasChoiceStrategy())]
 [aPackage.getChoiceStrategy().generateStrategyAssignment()/]
 [else]
-//assign FirstChoiceStrategy to execution factory
+//Assign FirstChoiceStrategy to execution factory
 m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
 [/if]
 [comment] TODO: later
@@ -276,100 +231,32 @@ m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
 
 [template public generateActivityExecution(anActivity : Activity)]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-//creating input parameter [anActivity.name/]::[par.name/] 
-std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-[par.name/]P->setParameter([par.generatePackageGetterCall()/]);
-[if (par.upper = 1)]
-[par.generateValue()/]
-[else]
-Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]List->begin();
-Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]List->end();
-while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
-{
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if] = *[par.name.toLowerFirst()/]Iter;
-	[par.generateValue()/]
-	[par.name.toLowerFirst()/]Iter++;
-}
-[/if]
-pList->push_back([par.name/]P);
-
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+//Creating ParameterValue for input parameter [anActivity.name/]::[par.name/]
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]_parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+[par.name/]_parameterValue->setParameter([par.generatePackageGetterCall()/]); 
+[par.name/]_parameterValue->getValues()->add(parameterList->at([par.listNumber(anActivity)/]));
 [/for]
-//executing activity [anActivity.name/]
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
 
-[/template]
+//Executing Activity [anActivity.name/]
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
 
-[template private generateValue(aParameter : Parameter)]
-[aParameter.generateOutputParameter()/]
-[if(aParameter.type.supportedTypes())]
-[aParameter.name/]OutValue->setValue([aParameter.name.toLowerFirst()/]);
-[else]
-[aParameter.name/]OutUmlLinker->setLocus(m_locus);
-[aParameter.name/]OutValue->setReferent([aParameter.name/]OutUmlLinker);
-[/if]
-[aParameter.name/]P->getValues()->push_back([aParameter.name/]OutValue);
-[/template]
-
-[template public generateReturnParameter(anActivity : Activity)]
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
-[let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
-[if(par.type.supportedTypes())] [comment Means: Primitive/]
-[if (par.upper = 1)]
-assert(resultPList->front());
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value>(resultPList->front()->getValues()->front());
-assert(ret != nullptr);
-return eAny(ret->getValue(), [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
-[else]
-std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> [par.name/](new Bag<[par.type.generateCppType(true)/]>());
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = resultPList->front()->getValues();
-Bag<fUML::Semantics::Values::Value>::iterator returnValuesIter = returnValues->begin();
-Bag<fUML::Semantics::Values::Value>::iterator returnValuesEnd = returnValues->end();
-while (returnValuesIter != returnValuesEnd)
+[let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+std::shared_ptr<Any> returnValue;
+std::shared_ptr<uml::Parameter> returnParameter = [par.generatePackageGetterCall()/];
+
+for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *outputParameterValues)
 {
-	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*returnValuesIter);
-	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
-	[par.name/]->push_back(value);
-	returnValuesIter++;
+	if(returnParameter == parameterValue->getParameter())
+	{
+		returnValue = parameterValue->getValues()->at(0);
+		break;
+	}
 }
-return eAny([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], true);
-[/if]
-[elseif (par.type.oclIsKindOf(Enumeration))]
-assert(resultPList->front());
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> ret = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(resultPList->front()->getValues()->front());
-assert(ret != nullptr);
-std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = ret->getLiteral();
-[for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
-if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
-{
-	return eAny([literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
-}
-[/for]
-std::cerr << "unknown literal of [par.type.name/]" << std::endl;
-throw "error";
-[else]
-[if (par.upper = 1)]
-assert(resultPList->front());
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(resultPList->front()->getValues()->front());
-std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
-return eAny([par.name/]UmlLinker->[par.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (par.upper = 1))]s[/if](), [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
-[else]
-std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameter = resultPList->front();
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = returnParameter->getValues();
-Bag<fUML::Semantics::Values::Value>::iterator valueIter = returnValues->begin();
-Bag<fUML::Semantics::Values::Value>::iterator valueEnd = returnValues->end();
-std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> returnList(new Bag<[par.type.generateCppType(true)/]>());
-while (valueIter != valueEnd)
-{
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> returnValue = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*valueIter);
-	std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
-	returnList->push_back(returnObject->[par.type.oclAsType(Classifier).UMLValueGetterName()/]());
-	valueIter++;
-}
-return eAnyBag(returnList, [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
-[/if]
-[/if]
+
+return returnValue;
 [/let]
 [else]
 DEBUG_INFO("Activity [anActivity.myQualifiedName()/] does not have any return parameter.")

@@ -66,9 +66,7 @@ using namespace [aPackage.generateNamespace(false)/];
 
 [packageName/]ExecutorImpl::~[packageName/]ExecutorImpl()
 {
-#ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [packageName/]Executor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
-#endif
+	m_activityExecutionPrototypes->clear();
 }
 
 std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
@@ -141,8 +139,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			}
 
 			m_activityExecutionPrototypes->add(activityExecution);
-			activityExecution->setContext(context);
 		}
+
+		activityExecution->getParameterValues()->clear();
+		activityExecution->setContext(context);
 
 		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
 	    {
@@ -151,6 +151,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 
 		activityExecution->execute_new();
 		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
+		activityExecution->getActivationGroup()->terminateAll();
 		
 		return outputParameterValues;
 	}
@@ -163,17 +164,19 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [packageName/]Ex
 	[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
 	if(activity == [anActivity.generatePackageGetterCall()/])
 	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecutionPrototype = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
-		activityExecutionPrototype->getTypes()->push_back(activity);
+		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [anActivity.name/]_activityExecutionPrototype = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
+		[anActivity.name/]_activityExecutionPrototype->getTypes()->push_back(activity);
 
-		this->getLocus().lock()->add(activityExecutionPrototype);
-		activityExecutionPrototype->setLocus(this->getLocus().lock());
+		this->getLocus().lock()->add([anActivity.name/]_activityExecutionPrototype);
+		[anActivity.name/]_activityExecutionPrototype->setLocus(this->getLocus().lock());
 
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(activityExecutionPrototype);
+		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution([anActivity.name/]_activityExecutionPrototype);
 		
 		//Create NodeActivations
 		newActivationGroup->createNodeActivations(activity->getNode());
 		newActivationGroup->createEdgeInstance(activity->getEdge());
+
+		return [anActivity.name/]_activityExecutionPrototype;
 	}
 	[/for]
 	
