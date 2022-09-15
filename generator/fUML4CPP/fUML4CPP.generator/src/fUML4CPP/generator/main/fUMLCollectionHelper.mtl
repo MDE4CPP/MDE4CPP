@@ -17,22 +17,10 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateConnector /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 
 [comment]COLLECT REALIZING CLASSES FOR CERTAIN INTERFACE --------------- [/comment]
 [query public collectRealizingClasses(anInterface : Interface) : OrderedSet(Class) = 
 	anInterface._package.allOwnedElements()->filter(InterfaceRealization)->select(ir : InterfaceRealization | ir.contract = anInterface).owner.oclAsType(Class)->asOrderedSet()->sortedBy(myQualifiedName())/]
-
-[comment]COLLECT ALL OPERATIONS THAT COULD BE CALLED WITH RESPECT TO PSCS COMMUNICATION SEMANTICS --------------- [/comment]
-[comment collects all operations with the sme name as 'anOperation' in provided package/]
-[query private collectOperationsWithSameNameAs(anOperation : Operation, aPackage : Package) : OrderedSet(Operation) =
-	aPackage.getPackageOperations()->select(op : Operation | op.name = anOperation.name)->asOrderedSet()/]
-[comment collects all operations with the same names as operations that are being called by CallOperationActions in the provided package /]
-[comment]
-[query public collectAllPossiblyCalledOperations(aPackage : Package) : Set(Operation) =
-OrderedSet{aPackage.getCallOperationActions().operation->reject(oclIsUndefined()).collectOperationsWithSameNameAs(aPackage)}->flatten()/]
-[/comment]
-
 
 [comment]COLLECT OTHER ENDS FOR CONNECTOR ENDS OF CERTAIN TYPE --------------- [/comment]
 [comment checks if 'anEnd' is typed by 'aType', i.e. if 'partWithPort' is defined, it must be typed by 'aType' ; if only 'partWithPort' is undefined, 'role' must be typed by 'aType' /]
@@ -51,19 +39,6 @@ OrderedSet{aPackage.getCallOperationActions().operation->reject(oclIsUndefined()
 
 [query public collectOppositeConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) =
 	OrderedSet{aPackage.collectExternalOppositeConnectorEndsForType(aType), aPackage.collectInternalOppositeConnectorEndsOfType(aType)}->flatten()->asOrderedSet() /]
-
-
-
-[comment]COLLECT ALL OPAQUEBEHAVIORS OF THE MODEL THAT ARE EXECUTED EITHER BY CALLBEHAVIORACTION OR DECISIONNODE --------------- [/comment]
-[comment collect all CallBehaviorActions in the model that have a defined Opaque behavior /]
-[query private collectOpaqueBehaviorsCalledByCBA(aPackage : Package) : Set(OpaqueBehavior) = 
-	aPackage.allOwnedElements()->filter(CallBehaviorAction)->select((not behavior.oclIsUndefined()) and (behavior.oclIsKindOf(OpaqueBehavior))).behavior->asSet() /]
-[comment collect all DecisionNodes that have an OpaqueBehavior defined as their decision input /]
-[query private collectOpaqueBehaviorsCalledByDN(aPackage : Package) : Set(OpaqueBehavior) = 
-	aPackage.allOwnedElements()->filter(DecisionNode)->select((not decisionInput.oclIsUndefined()) and (decisionInput.oclIsKindOf(OpaqueBehavior))).decisionInput->asSet() /]
-[comment collect all OpaqueBehaviors that are executed in the model either by CallBehaviorAction or by DecisionNode /]
-[query public collectAllExecutedOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsCalledByCBA()->addAll(aPackage.collectOpaqueBehaviorsCalledByDN())->asOrderedSet() /]
-
 
 [comment]COLLECT BASE CLASSES AND REALIZED INTERFACES FOR CERTAIN CLASS --------------- [/comment]
 [query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(
