@@ -56,8 +56,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -66,8 +66,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -575,14 +575,19 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
-    for (unsigned int i = 0; i < nodeActivations->size(); i++) 
-    {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation = nodeActivations->at(i);
-        nodeActivation->terminate();
-    }
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations = this->getNodeActivations();
+for (std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation : *nodeActivations) 
+{
+          nodeActivation->terminate();
+}
 
-    this->getSuspendedActivations()->clear();
+this->getSuspendedActivations()->clear();
+
+std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstances = this->getEdgeInstances();
+for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance : *edgeInstances)
+{
+	edgeInstance->getOffers()->clear();
+}
 	//end of body
 }
 

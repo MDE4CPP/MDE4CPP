@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -492,14 +492,17 @@ void ActivityNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->setRunning(false);
-
-#ifndef NDEBUG
+	#ifndef NDEBUG
 	if (this->isRunning())
 	{
      		DEBUG_INFO("Terminating " << ((this->getNode() == nullptr) ? "anonymous node." : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")))  
 	}
 #endif
+
+this->setRunning(false);
+this->getHeldTokens()->clear();
+
+
 
 	//end of body
 }
