@@ -14,8 +14,6 @@
  */]
 [module generateExecutionBuildFile('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -70,6 +68,8 @@ SET(SOURCE_FILES
 	[if (not packageOnly)]
 	# Model Execution Locus
 	impl/[aPackage.name/]LocusImpl.cpp
+	# Model Executor
+	impl/[aPackage.name/]ExecutorImpl.cpp
 	[/if]
 	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
@@ -343,7 +343,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).interfaceRealization.supplier.getNearestPackage(), 
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).generalization.general.getNearestPackage(), 
-																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
 																		    aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.packageImport->reject(isDoNotGenerateElement()).importedPackage
@@ -355,10 +354,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten()->addAll(aPackage.addOclParser()) endif/]
 [/comment]
 [query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml'} endif/]
+[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'} else OrderedSet{'ecore', 'uml'} endif/]
 [query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
 [query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
 [query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
 [query public getBinaryTypeFolder(buildLibrary : Boolean) : String = if (buildLibrary) then 'libs' else 'exe' endif/]
 [query public getBuildTask(buildLibrary : Boolean) : String = if (buildLibrary) then 'NativeLibrarySpec' else 'NativeExecutableSpec' endif/]
-[query public addOclParser(aPackage : Package) : Set(String) = if (aPackage.getPackageOpaqueBehaviors().language->includes(keyOCL())->size() > 0) then Set{'oclParser'} else Set{} endif/]

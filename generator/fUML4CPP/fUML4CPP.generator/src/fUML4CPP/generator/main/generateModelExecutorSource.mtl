@@ -36,18 +36,23 @@ originalName : String = aPackage.generateNamespacePath(false);
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/umlPackage.hpp"
+#include "uml/Activity.hpp"
 #include "uml/EnumerationLiteral.hpp"
-
-[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction())]
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
+[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction()) before('\n')]
 #include "[enumerationPackage.generateNamespacePath(true)/]/[enumerationPackage.myNamespaceName()/]Package.hpp"
-[if (enumerationPackage.isReflectionModel())]
+	[if (enumerationPackage.isReflectionModel())]
 #include "[enumerationPackage.generateNamespacePath(false)/]/[enumerationPackage.name/]Package.hpp"
-[/if]
-[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(isGeneratable())->sortedBy(myQualifiedName()))]
+	[/if]
+	[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(isGeneratable())->sortedBy(myQualifiedName()))]
 #include "[anEnumeration.getNearestPackage().generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+	[/for]
 [/for]
-[/for]
-
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -56,6 +61,7 @@ using namespace [aPackage.generateNamespace(false)/];
 //*********************************
 [packageName/]ExecutorImpl::[packageName/]ExecutorImpl()
 {
+	m_activityExecutionPrototypes = std::make_shared<Bag<fUML::Semantics::Activities::ActivityExecution>>();
 }
 
 [packageName/]ExecutorImpl::~[packageName/]ExecutorImpl()
@@ -105,6 +111,73 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 	[/if]
 	[/let]
+}
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+{
+	int behaviorMetaElementID = behavior->getMetaElementID();
+	if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
+	{
+		std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity>(behavior);
+		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = nullptr;
+		
+		for(std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> existingActivityExecution : *m_activityExecutionPrototypes)
+		{
+			if(existingActivityExecution->getActivity() == activity)
+			{
+				activityExecution = existingActivityExecution;
+				break;
+			}
+		}
+
+		if(!activityExecution)
+		{
+			activityExecution = this->createActivityExecutionPrototype(activity);
+			
+			if(nullptr == activityExecution)
+			{
+			    std::cerr << "['['/]createExecution[']'/] Execution is null" << std::endl;
+			    return nullptr;
+			}
+
+			m_activityExecutionPrototypes->add(activityExecution);
+			activityExecution->setContext(context);
+		}
+
+		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
+	    {
+	        activityExecution->setParameterValue(inputParameterValue);
+	    }
+
+		activityExecution->execute_new();
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
+		
+		return outputParameterValues;
+	}
+
+	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
+}
+
+std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [packageName/]ExecutorImpl::createActivityExecutionPrototype(std::shared_ptr<uml::Activity> activity)
+{
+	[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
+	if(activity == [anActivity.generatePackageGetterCall()/])
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecutionPrototype = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
+		activityExecutionPrototype->getTypes()->push_back(activity);
+
+		this->getLocus().lock()->add(activityExecutionPrototype);
+		activityExecutionPrototype->setLocus(this->getLocus().lock());
+
+		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(activityExecutionPrototype);
+		
+		//Create NodeActivations
+		newActivationGroup->createNodeActivations(activity->getNode());
+		newActivationGroup->createEdgeInstance(activity->getEdge());
+	}
+	[/for]
+	
+	return nullptr;
 }
 [/file]
 [/template]

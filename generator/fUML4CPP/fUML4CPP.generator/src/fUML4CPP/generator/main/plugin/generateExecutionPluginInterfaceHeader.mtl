@@ -18,7 +18,6 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
@@ -47,7 +46,8 @@ namespace fUML::Semantics::Loci
 
 namespace [aPackage.generateNamespace(false).sanitize()/]
 {
-	class [aPackage.generateNamespace(false).sanitize() + 'Locus'/];
+	class [aPackage.generateNamespace(false).sanitize()/]Locus;
+	class [aPackage.generateNamespace(false).sanitize()/]Executor;
 }
 
 
@@ -78,7 +78,7 @@ namespace [aPackage.generateNamespace(false)/]
 		protected:
 			//Execution Environment
 			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
-			std::shared_ptr<fUML::Semantics::Loci::Executor> m_executor;
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Executor'/]> m_executor;
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory;
 [/if]		
 	};

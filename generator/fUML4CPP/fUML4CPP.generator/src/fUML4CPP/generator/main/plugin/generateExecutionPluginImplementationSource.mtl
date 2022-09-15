@@ -14,8 +14,6 @@
  */]
 [module generateExecutionPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
@@ -174,10 +172,10 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 
 
 //Includes of Model locus, package and factory
-#include "[aPackage.generateNamespacePath(false)/]Exec/[aPackage.getPackageName()/]Locus.hpp"
-#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Factory.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutorImpl.hpp"
 
 //Includes from owner Classes of executed Activities
 [for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class))->reject(isDoNotGenerateElement()))]
@@ -185,33 +183,18 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 #include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
-//Includes for packages of executed OpaqueBehaviors
-[for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions()->reject(isDoNotGenerateElement()))]
-#include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
-[/for] 
-
-//Includes for packages of executed Operations
-[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement()).getNearestPackage()->asSet())]
-#include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
-[/for] 
-
-//Includes of packages from parameter types of executed Operations and Activities
-[for (pack : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet())->sortedBy(name))]
+//Includes of packages from parameter types of Activities
+[for (pack : Package | aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package')/].hpp"
 [/if]
 [/for]
-[for (typePackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
-#include "[typePackage.generateNamespacePath(false)/]/[typePackage.getPackageName()/]Package.hpp"
-[/for]
 
-//Includes from parameter types of executed Operations and Activities
-[if (aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
-	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->reject(isDoNotGenerateElement())->filter(PrimitiveType)->size() > 0)]
+//Includes from parameter types of Activities
+[if (aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->filter(PrimitiveType)->size() > 0)]
 #include "types/typesPackage.hpp"
 [/if]
-[for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
-	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
+[for ( type : Type | aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 
@@ -227,14 +210,20 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 [/for]
 [/template]
 
-[template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace(false).sanitize() + 'Locus' ;}]
-//initialize execution Locus
-std::shared_ptr<[locusName/]Impl> locusImpl(new [locusName/]Impl);
+[template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace(false).sanitize() + 'Locus' ; executorName : String = aPackage.generateNamespace(false).sanitize() + 'Executor' ;}]
+//initialize Locus
+std::shared_ptr<[locusName/]Impl> locusImpl(new [locusName/]Impl());
 locusImpl->setThisLocusPtr(locusImpl);
 m_locus = locusImpl;
 
 //initialize Executor
-std::shared_ptr<fUML::Semantics::Loci::Executor> m_executor = fUML::Semantics::Loci::LociFactory::eInstance()->createExecutor_as_executor_in_Locus(m_locus);
+std::shared_ptr<[executorName/]Impl> executorImpl(new [executorName/]Impl());
+executorImpl->setThisExecutorPtr(executorImpl);
+m_executor = executorImpl;
+
+m_locus->setExecutor(m_executor);
+m_executor->setLocus(m_locus);
+
 //initialize ExecutionFactory
 std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory = fUML::Semantics::Loci::LociFactory::eInstance()->createExecutionFactory_as_factory_in_Locus(m_locus);
 
@@ -389,11 +378,6 @@ return nullptr;
 [/template]
 
 [template public generateExecutionPluginDeinitialization(aPackage : Package)]
-/*clearing opaque behaviors from operations*/
-[for (anOperation : Operation | aPackage.getOperationExecutionsPackage())]
-[anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
-[/for]
-
 //uninitialize execution factory
 m_factory->getPrimitiveBehaviorPrototypes()->clear();
 m_factory->setLocus(nullptr);
@@ -405,17 +389,6 @@ m_executor->setLocus(nullptr);
 m_locus->setExecutor(nullptr);
 m_locus->setFactory(nullptr);
 [/template]
-
-[query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = 
-	OrderedSet(Package){
-		aPackage.getCallBehaviorActionsWithOB().behavior->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
-		aPackage.getOperationExecutionsAll().method->reject(isDoNotGenerateElement())->filter(OpaqueBehavior)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
-		aPackage.getDecisionNodesWithOB().decisionInput->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage()
-	}->flatten()->sortedBy(name) /]
-
-
-[query private getOperationExecutionName(anOperation : Operation) : String = 
-	anOperation.owner.oclAsType(NamedElement).name.concat('_').concat(anOperation.name.sanitize()).concat(('Execution')) /]
 
 [query private getActivitiesUsedByCallBehaviorAction(aPackage : Package) : Set(Activity) = 
 	aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
@@ -437,14 +410,5 @@ m_locus->setFactory(nullptr);
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
-	
-[query public getOperationExecutionsAll(aPackage : Package) : OrderedSet(Operation) = 
-	getOperationExecutionsPackage()->addAll(getOperationExecutionsCOA())->asSet()->sortedBy(qualifiedName) /]
-
-[query public getOperationExecutionsPackage(aPackage : Package) : OrderedSet(Operation) = 
-	getPackageOperations()->sortedBy(qualifiedName) /]
-
-[query public getOperationExecutionsCOA(aPackage : Package) : OrderedSet(Operation) = 
-	aPackage.allOwnedElements()->filter(CallOperationAction).operation->asOrderedSet()->sortedBy(qualifiedName) /]
 
 [query private rejectClassOperationWithoutMethod(anOperation : Operation) : Boolean = (not owner.oclIsKindOf(Interface)) and (method->isEmpty()) and (not isAbstract)/]

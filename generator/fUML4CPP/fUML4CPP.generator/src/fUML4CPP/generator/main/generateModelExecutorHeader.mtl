@@ -40,6 +40,7 @@ namespace [aPackage.generateNamespace(false)/]
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
 	};
 }
 [endGuard(aPackage,'Executor')/]
@@ -52,6 +53,17 @@ namespace [aPackage.generateNamespace(false)/]
 #include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
 //#include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 
+//Forward Declaration for used types
+namespace uml
+{
+	class Activity;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityExecution;
+}
+
 namespace [aPackage.generateNamespace(false)/] 
 {
 	class [upperName/]ExecutorImpl :virtual public /*PSCS::Semantics::Loci::CS_ExecutorImpl*/ fUML::Semantics::Loci::ExecutorImpl, virtual public [upperName/]Executor
@@ -61,15 +73,19 @@ namespace [aPackage.generateNamespace(false)/]
 
 		public:
 			[upperName/]ExecutorImpl();
-
-		public:
-			//destructor
 			virtual ~[upperName/]ExecutorImpl();
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification);
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs);
 			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr){/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);};
+	
+		protected:
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecutionPrototype(std::shared_ptr<uml::Activity> activity);
+
+		protected:
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityExecution>> m_activityExecutionPrototypes;
 	};
 }
 [endGuard(aPackage,'ExecutorImpl')/]
