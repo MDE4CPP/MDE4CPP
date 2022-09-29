@@ -432,24 +432,24 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class ReadStructuralFeatureActionActivation
 
-// Begin Class RemoveStructuralFeatureValueActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Class() const
+// Begin Class RemoveStructuralFeatureValueActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActionActivation_Class() const
 {
-	return m_removeStructuralFeatureValueActivation_Class;
+	return m_removeStructuralFeatureValueActionActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction() const
 {
-	return m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction;
+	return m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Operation_doAction() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getRemoveStructuralFeatureValueActionActivation_Operation_doAction() const
 {
-	return m_removeStructuralFeatureValueActivation_Operation_doAction;
+	return m_removeStructuralFeatureValueActionActivation_Operation_doAction;
 }
 
-// End Class RemoveStructuralFeatureValueActivation
+// End Class RemoveStructuralFeatureValueActionActivation
 
 // Begin Class StructuralFeatureActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Class() const

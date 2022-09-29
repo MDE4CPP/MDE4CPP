@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIVATIONIMPL_HPP
-#define FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIVATIONIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,7 +14,7 @@
 #include "fUML/fUML.hpp" 
 
 // model includes
-#include "../RemoveStructuralFeatureValueActivation.hpp"
+#include "../RemoveStructuralFeatureValueActionActivation.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.hpp"
@@ -22,25 +22,25 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class FUML_API RemoveStructuralFeatureValueActivationImpl : virtual public WriteStructuralFeatureActionActivationImpl, virtual public RemoveStructuralFeatureValueActivation 
+	class FUML_API RemoveStructuralFeatureValueActionActivationImpl : virtual public WriteStructuralFeatureActionActivationImpl, virtual public RemoveStructuralFeatureValueActionActivation 
 	{
 		public: 
-			RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj);
+			RemoveStructuralFeatureValueActionActivationImpl(const RemoveStructuralFeatureValueActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			RemoveStructuralFeatureValueActivationImpl& operator=(RemoveStructuralFeatureValueActivationImpl const&); 
+			RemoveStructuralFeatureValueActionActivationImpl& operator=(RemoveStructuralFeatureValueActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
-			RemoveStructuralFeatureValueActivationImpl();
-			virtual std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr() const;
-			virtual void setThisRemoveStructuralFeatureValueActivationPtr(std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> thisRemoveStructuralFeatureValueActivationPtr);
+			RemoveStructuralFeatureValueActionActivationImpl();
+			virtual std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> getThisRemoveStructuralFeatureValueActionActivationPtr() const;
+			virtual void setThisRemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> thisRemoveStructuralFeatureValueActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			RemoveStructuralFeatureValueActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
+			RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~RemoveStructuralFeatureValueActivationImpl();
+			virtual ~RemoveStructuralFeatureValueActionActivationImpl();
 			
 			//*********************************
 			// Operations
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> m_thisRemoveStructuralFeatureValueActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> m_thisRemoveStructuralFeatureValueActionActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIVATIONIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONIMPL_HPP */

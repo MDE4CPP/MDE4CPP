@@ -18,7 +18,7 @@
 #include "fUML/Semantics/Actions/impl/PinActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadSelfActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.hpp"
-#include "fUML/Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/RemoveStructuralFeatureValueActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuredActivityNodeActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ValueSpecificationActionActivationImpl.hpp"
@@ -47,7 +47,7 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::OutputPinActivation", ActionsPackage::OUTPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadSelfActionActivation", ActionsPackage::READSELFACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadStructuralFeatureActionActivation", ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
-	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation", ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation", ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::StructuredActivityNodeActivation", ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ValueSpecificationActionActivation", ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::Values", ActionsPackage::VALUES_CLASS));
@@ -238,17 +238,17 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 			}
 			break;
 		}
-		case ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS:
+		case ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createRemoveStructuralFeatureValueActivation(metaElementID);
+				return this->createRemoveStructuralFeatureValueActionActivation(metaElementID);
 			}
 			else
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+				return std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation>(this->createRemoveStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -540,23 +540,23 @@ std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation>
 	return element;
 	
 }
-std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActivation(const int metaElementID/*=-1*/) const
+std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl> element(new fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl());
+	std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivationImpl> element(new fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivationImpl());
 	element->setMetaElementID(metaElementID);
-	element->setThisRemoveStructuralFeatureValueActivationPtr(element);
+	element->setThisRemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
-	std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl> element(new fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl(par_ActivityNodeActivationGroup));
+	std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivationImpl> element(new fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
 	
-	element->setThisRemoveStructuralFeatureValueActivationPtr(element);
+	element->setThisRemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 	
 }

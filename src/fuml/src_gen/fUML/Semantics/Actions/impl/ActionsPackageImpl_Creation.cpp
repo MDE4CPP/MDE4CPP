@@ -49,7 +49,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createPinActivationContent(package, factory);
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
-	createRemoveStructuralFeatureValueActivationContent(package, factory);
+	createRemoveStructuralFeatureValueActionActivationContent(package, factory);
 	createStructuralFeatureActionActivationContent(package, factory);
 	createStructuredActivityNodeActivationContent(package, factory);
 	createValueSpecificationActionActivationContent(package, factory);
@@ -227,13 +227,13 @@ void ActionsPackageImpl::createReadStructuralFeatureActionActivationContent(std:
 	
 }
 
-void ActionsPackageImpl::createRemoveStructuralFeatureValueActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+void ActionsPackageImpl::createRemoveStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_removeStructuralFeatureValueActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS);
+	m_removeStructuralFeatureValueActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction = factory->createEReference_as_eReferences_in_EClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction = factory->createEReference_as_eReferences_in_EClass(m_removeStructuralFeatureValueActionActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
 	
-	m_removeStructuralFeatureValueActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION);
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_removeStructuralFeatureValueActionActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

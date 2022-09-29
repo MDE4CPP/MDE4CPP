@@ -148,7 +148,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
-	Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.cpp
+	Semantics/Actions/impl/RemoveStructuralFeatureValueActionActivationImpl.cpp
 	Semantics/Loci/impl/SemanticStrategyImpl.cpp
 	Semantics/Loci/impl/SemanticVisitorImpl.cpp
 	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp

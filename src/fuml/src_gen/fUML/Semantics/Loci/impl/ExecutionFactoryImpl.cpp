@@ -92,7 +92,7 @@
 //#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadStructuralFeatureActionActivation.hpp"
-#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
+#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActionActivation.hpp"
 //#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
 //#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
 #include "fUML/Semantics/Actions/ValueSpecificationActionActivation.hpp"
@@ -531,7 +531,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActionActivation();
 			break;
 		}
 		case uml::umlPackage::READLINKACTION_CLASS:

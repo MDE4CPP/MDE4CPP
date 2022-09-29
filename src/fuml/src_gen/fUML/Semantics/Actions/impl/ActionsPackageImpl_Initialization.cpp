@@ -57,7 +57,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
-	m_removeStructuralFeatureValueActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
+	m_removeStructuralFeatureValueActionActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
 	m_structuralFeatureActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_structuredActivityNodeActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_valueSpecificationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
@@ -79,7 +79,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializePinActivationContent();
 	initializeReadSelfActionActivationContent();
 	initializeReadStructuralFeatureActionActivationContent();
-	initializeRemoveStructuralFeatureValueActivationContent();
+	initializeRemoveStructuralFeatureValueActionActivationContent();
 	initializeStructuralFeatureActionActivationContent();
 	initializeStructuredActivityNodeActivationContent();
 	initializeValueSpecificationActionActivationContent();
@@ -1203,48 +1203,48 @@ void ActionsPackageImpl::initializeReadStructuralFeatureActionActivationContent(
 	
 }
 
-void ActionsPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
+void ActionsPackageImpl::initializeRemoveStructuralFeatureValueActionActivationContent()
 {
-	m_removeStructuralFeatureValueActivation_Class->setName("RemoveStructuralFeatureValueActivation");
-	m_removeStructuralFeatureValueActivation_Class->setAbstract(false);
-	m_removeStructuralFeatureValueActivation_Class->setInterface(false);
+	m_removeStructuralFeatureValueActionActivation_Class->setName("RemoveStructuralFeatureValueActionActivation");
+	m_removeStructuralFeatureValueActionActivation_Class->setAbstract(false);
+	m_removeStructuralFeatureValueActionActivation_Class->setInterface(false);
 	
 	
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setName("removeStructuralFeatureValueAction");
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setEType(uml::umlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class());
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setLowerBound(1);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUpperBound(1);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setTransient(false);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setVolatile(false);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setChangeable(true);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnsettable(false);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnique(true);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDerived(false);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setContainment(false);
-	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setName("removeStructuralFeatureValueAction");
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setEType(uml::umlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class());
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setLowerBound(1);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setTransient(false);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setVolatile(false);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setChangeable(true);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setUnsettable(false);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setUnique(true);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setDerived(false);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setContainment(false);
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+			m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_removeStructuralFeatureValueActivation_Operation_doAction->setName("doAction");
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction->setName("doAction");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_removeStructuralFeatureValueActivation_Operation_doAction->setEType(unknownClass);
+		m_removeStructuralFeatureValueActionActivation_Operation_doAction->setEType(unknownClass);
 	}
-	m_removeStructuralFeatureValueActivation_Operation_doAction->setLowerBound(0);
-	m_removeStructuralFeatureValueActivation_Operation_doAction->setUpperBound(1);
-	m_removeStructuralFeatureValueActivation_Operation_doAction->setUnique(true);
-	m_removeStructuralFeatureValueActivation_Operation_doAction->setOrdered(true);
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction->setLowerBound(0);
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction->setUnique(true);
+	m_removeStructuralFeatureValueActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 }

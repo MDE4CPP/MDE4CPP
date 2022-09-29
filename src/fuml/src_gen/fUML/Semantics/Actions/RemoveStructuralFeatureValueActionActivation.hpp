@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATION_HPP
-#define FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATION_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
+#define FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 
 
 #include <memory>
@@ -64,19 +64,19 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API RemoveStructuralFeatureValueActivation : virtual public WriteStructuralFeatureActionActivation
+	class FUML_API RemoveStructuralFeatureValueActionActivation : virtual public WriteStructuralFeatureActionActivation
 	{
 		public:
- 			RemoveStructuralFeatureValueActivation(const RemoveStructuralFeatureValueActivation &) {}
+ 			RemoveStructuralFeatureValueActionActivation(const RemoveStructuralFeatureValueActionActivation &) {}
 
 		protected:
-			RemoveStructuralFeatureValueActivation(){}
+			RemoveStructuralFeatureValueActionActivation(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~RemoveStructuralFeatureValueActivation() {}
+			virtual ~RemoveStructuralFeatureValueActionActivation() {}
 
 			//*********************************
 			// Operations
@@ -125,4 +125,4 @@ namespace fUML::Semantics::Actions
 			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> m_removeStructuralFeatureValueAction;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATION_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP */

@@ -41,7 +41,7 @@ namespace fUML::Semantics::Actions
 	class PinActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
-	class RemoveStructuralFeatureValueActivation;
+	class RemoveStructuralFeatureValueActionActivation;
 	class StructuralFeatureActionActivation;
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
@@ -419,25 +419,25 @@ namespace fUML::Semantics::Actions
 			// End Class ReadStructuralFeatureActionActivation
 
 
-			// Begin Class RemoveStructuralFeatureValueActivation
+			// Begin Class RemoveStructuralFeatureValueActionActivation
 			//Class and Feature IDs 
-			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS = 903259366;
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_OPERATION_COUNT = 52;
+			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 730007269;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
-			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION = 1824140801;
+			static const unsigned long REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION = 204338767;
 			
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION = 1011652404;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 3575480050;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation_Class() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActionActivation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActivation_Operation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
 			
-			// End Class RemoveStructuralFeatureValueActivation
+			// End Class RemoveStructuralFeatureValueActionActivation
 
 
 			// Begin Class StructuralFeatureActionActivation
