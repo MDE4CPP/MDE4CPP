@@ -72,7 +72,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 		{
 			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
-			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
+			std::shared_ptr<Bag<Any>> parameterList(new Bag<Any>());
 		[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 		[let anyBagRequired : Boolean = ((par.upper <> 1) and not(par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration)))]
 			parameterList->push_back([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
