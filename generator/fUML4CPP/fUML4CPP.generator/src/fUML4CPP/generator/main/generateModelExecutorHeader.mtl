@@ -80,12 +80,6 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification);
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs);
 			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr){/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);};
-	
-		protected:
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecutionPrototype(std::shared_ptr<uml::Activity> activity);
-
-		protected:
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityExecution>> m_activityExecutionPrototypes;
 	};
 }
 [endGuard(aPackage,'ExecutorImpl')/]

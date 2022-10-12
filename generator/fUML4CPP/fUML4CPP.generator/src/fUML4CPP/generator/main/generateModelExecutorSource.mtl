@@ -17,6 +17,8 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import fUML4CPP::generator::main::fUMLCollectionHelper /]
 
 
 [query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
@@ -54,6 +56,10 @@ originalName : String = aPackage.generateNamespacePath(false);
 	[/for]
 [/for]
 
+[for (anActivityPackage : Package | aPackage.collectPossiblyUsedActivities().getRootPackage()->asSet())]
+#include "[aPackage.generateNamespace(false)/]Exec/[aPackage.generateNamespace(false)/]ExecPlugin.hpp"
+[/for]
+
 using namespace [aPackage.generateNamespace(false)/];
 
 //*********************************
@@ -61,12 +67,10 @@ using namespace [aPackage.generateNamespace(false)/];
 //*********************************
 [packageName/]ExecutorImpl::[packageName/]ExecutorImpl()
 {
-	m_activityExecutionPrototypes = std::make_shared<Bag<fUML::Semantics::Activities::ActivityExecution>>();
 }
 
 [packageName/]ExecutorImpl::~[packageName/]ExecutorImpl()
 {
-	m_activityExecutionPrototypes->clear();
 }
 
 std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
@@ -118,27 +122,18 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	{
 		std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity>(behavior);
 		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = nullptr;
-		
-		for(std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> existingActivityExecution : *m_activityExecutionPrototypes)
+
+		[for (anActivity : Activity | aPackage.collectPossiblyUsedActivities())]
+		if(activity == [anActivity.generatePackageGetterCall()/])
 		{
-			if(existingActivityExecution->getActivity() == activity)
-			{
-				activityExecution = existingActivityExecution;
-				break;
-			}
+			activityExecution = (std::dynamic_pointer_cast<[anActivity.getRootPackage().name/]::[anActivity.getRootPackage().name/]ExecPlugin>([anActivity.getRootPackage().name/]::[anActivity.getRootPackage().name/]ExecPlugin::eInstance()))->get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
 		}
+		[/for]
 
 		if(!activityExecution)
 		{
-			activityExecution = this->createActivityExecutionPrototype(activity);
-			
-			if(nullptr == activityExecution)
-			{
-			    std::cerr << "['['/]createExecution[']'/] Execution is null" << std::endl;
-			    return nullptr;
-			}
-
-			m_activityExecutionPrototypes->add(activityExecution);
+		    std::cerr << "['['/][packageName/]ExecutorImpl::execute[']'/] Execution is null" << std::endl;
+		    return nullptr;
 		}
 
 		activityExecution->getParameterValues()->clear();
@@ -157,30 +152,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	}
 
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
-}
-
-std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [packageName/]ExecutorImpl::createActivityExecutionPrototype(std::shared_ptr<uml::Activity> activity)
-{
-	[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
-	if(activity == [anActivity.generatePackageGetterCall()/])
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [anActivity.name/]_activityExecutionPrototype = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
-		[anActivity.name/]_activityExecutionPrototype->getTypes()->push_back(activity);
-
-		this->getLocus().lock()->add([anActivity.name/]_activityExecutionPrototype);
-		[anActivity.name/]_activityExecutionPrototype->setLocus(this->getLocus().lock());
-
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution([anActivity.name/]_activityExecutionPrototype);
-		
-		//Create NodeActivations
-		newActivationGroup->createNodeActivations(activity->getNode());
-		newActivationGroup->createEdgeInstance(activity->getEdge());
-
-		return [anActivity.name/]_activityExecutionPrototype;
-	}
-	[/for]
-	
-	return nullptr;
 }
 [/file]
 [/template]

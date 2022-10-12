@@ -44,6 +44,11 @@ namespace fUML::Semantics::Loci
 	class ExecutionFactory;
 }
 
+namespace fUML::Semantics::Activities
+{
+	class ActivityExecution;
+}
+
 namespace [aPackage.generateNamespace(false).sanitize()/]
 {
 	class [aPackage.generateNamespace(false).sanitize()/]Locus;
@@ -67,20 +72,16 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
 
+			[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype() = 0;
+			[/for]
+			
 		protected:
 			[packageName/](){};
 			virtual ~[packageName/](){};
 	
 		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
-[if (not aPackage.isReflectionModel())]
-
-		protected:
-			//Execution Environment
-			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
-			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Executor'/]> m_executor;
-			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory;
-[/if]		
+			static std::shared_ptr<MDE4CPPPlugin> instance;		
 	};
 }
 [endGuard(aPackage,'ExecPlugin')/]

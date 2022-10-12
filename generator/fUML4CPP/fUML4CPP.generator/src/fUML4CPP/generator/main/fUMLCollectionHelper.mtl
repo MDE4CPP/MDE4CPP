@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateConnector /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import fUML4CPP::generator::main::parameterHelper /]
 
 [comment]COLLECT REALIZING CLASSES FOR CERTAIN INTERFACE --------------- [/comment]
@@ -41,11 +42,33 @@
 	OrderedSet{aPackage.collectExternalOppositeConnectorEndsForType(aType), aPackage.collectInternalOppositeConnectorEndsOfType(aType)}->flatten()->asOrderedSet() /]
 
 [comment]COLLECT BASE CLASSES AND REALIZED INTERFACES FOR CERTAIN CLASS --------------- [/comment]
-[query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(
-																																												oclIsUndefined() or 
-																																												name.oclIsUndefined() or 
-																																												_package.name = 'Ecore'  or 
-																																												_package.name = 'ecore' )->sortedBy(myQualifiedName())/]
+[query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = 
+	OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(
+		oclIsUndefined() or 
+		name.oclIsUndefined() or 
+		_package.name = 'Ecore'  or 
+		_package.name = 'ecore' )->sortedBy(myQualifiedName())/]
 [query private collectSuperClasses(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.parents()->sortedBy(name)/]
 [query private collectRealizedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.directlyRealizedInterfaces()->sortedBy(name)/]
 [query private collectRedefinedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Interface)) then aClassifier.oclAsType(Interface).redefinedInterface->sortedBy(name) else OrderedSet{} endif/]
+
+[comment]COLLECT ACTIVITIES THAT MAY BE EXECUTED DURING A SPECIFIC MODEL EXECUTION --------------- [/comment]
+[query public collectPossiblyUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
+	Set{
+		aPackage.collectActivitiesUsedByCallBehaviorActions(), 
+		aPackage.collectActivitiesUsedByDecisionNodes(), 
+		aPackage.collectActivitiesOwnedByPackage(), 
+		aPackage.getMainActivityAsSet()}
+	->reject(oclIsUndefined())->flatten()->sortedBy(name)/]
+
+[query public collectActivitiesOwnedByPackage(aPackage : Package) : Set(Activity) = 
+	aPackage.getRootPackage().allOwnedElements()->filter(Activity)->asSet()/]
+
+[query private collectActivitiesUsedByCallBehaviorActions(aPackage : Package) : Set(Activity) = 
+	aPackage.getRootPackage().allOwnedElements()->filter(CallBehaviorAction).behavior->filter(Activity)->asSet()/]
+
+[query private collectActivitiesUsedByDecisionNodes(aPackage : Package) : Set(Activity) = 
+	aPackage.getRootPackage().allOwnedElements()->filter(DecisionNode).decisionInput->filter(Activity)->asSet()/]
+
+[comment Helper query, returns a Set containing the main activity of the model if there is one, or else an empty Set /]
+[query private getMainActivityAsSet(aPackage : Package) : Set(Activity) = if(aPackage.hasMainActivity()) then Set{aPackage.getMainActivity()} else Set{} endif /]
