@@ -268,7 +268,7 @@
 */]
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
-[anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
+[anActivityNode.memberName()/]->setName("[anActivityNode.metamodelElementName()/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 [anActivityNode.generateStereotypeApplication()/]
 [/template]
@@ -512,7 +512,7 @@
 [pin.initializePin(false)/]
 [/template]
 [template private initializePin(pin : Pin, isTarget : Boolean)]
-[pin.memberName()/]->setName("[pin.name/]");
+[pin.memberName()/]->setName("[pin.metamodelElementName()/]");
 [pin.memberName()/]->setLower([pin.lower/]);
 [pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
 [pin.generateStereotypeApplication()/]

@@ -33,7 +33,7 @@
 */]
 [template public generateConstraintCreation(aConstraint : Constraint)]
 con = factory->createConstraint_as_ownedRule_in_Namespace([aConstraint.owner.oclAsType(Class).memberName()/]);
-con->setName("[aConstraint.name/]");
+con->setName("[aConstraint.metamodelElementName()/]");
 [for (elem : NamedElement | aConstraint.constrainedElement->filter(NamedElement)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 con->getConstrainedElement()->push_back([elem.memberName()/]);[/for]
 

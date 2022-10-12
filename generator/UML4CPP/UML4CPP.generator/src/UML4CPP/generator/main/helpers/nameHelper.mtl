@@ -215,6 +215,14 @@
 */]
 [query public memberName(anElement : NamedElement) : String = anElement.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
 [query public memberName(aConnectorEnd : ConnectorEnd) : String = aConnectorEnd.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
+
+[**
+ * Generate name for metamodel element in package (for NamedElement::name)
+ * If aNamedElement has a name defined in the model, return name.
+ * Else return aNamedElement.memberName()
+*/]
+[query public metamodelElementName(aNamedElement : NamedElement) : String = if(aNamedElement.name = '' or aNamedElement.name.oclIsUndefined()) then aNamedElement.memberName() else aNamedElement.name endif/]
+
 [** 
  *  create error for an undefined element (in special for elements, which are valid but have invalid name
 */]

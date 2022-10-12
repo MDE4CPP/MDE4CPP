@@ -44,7 +44,7 @@
  * - set supplier elements
 */]
 [template public generateInterfaceRealizationInitialization(anInterfaceRealization : InterfaceRealization)]
-[memberName(anInterfaceRealization)/]->setName("[anInterfaceRealization.name/]");
+[memberName(anInterfaceRealization)/]->setName("[anInterfaceRealization.metamodelElementName()/]");
 [for (aClient : NamedElement | anInterfaceRealization.client)]
 [memberName(anInterfaceRealization)/]->getClient()->push_back([memberName(aClient)/]);
 [/for]

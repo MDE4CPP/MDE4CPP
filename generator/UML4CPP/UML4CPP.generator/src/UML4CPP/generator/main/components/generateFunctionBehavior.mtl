@@ -49,7 +49,7 @@
  * - initialization of function behavior parameter
 */]
 [template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
-[aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
+[aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.metamodelElementName()/]");
 [if (not aOpaqueBehavior._context.oclIsUndefined())]
 [aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
 [/if]
@@ -67,7 +67,7 @@
  * - initialization of function behavior parameter
 */]
 [template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
+[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.metamodelElementName()/]");
 [aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]

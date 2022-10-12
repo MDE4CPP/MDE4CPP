@@ -30,5 +30,5 @@
 */]
 [template public generatePrimitiveTypeCreation(aPrimitiveType : PrimitiveType)]
 [aPrimitiveType.memberName()/] = factory->createPrimitiveType_as_ownedType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
-[aPrimitiveType.memberName()/]->setName("[aPrimitiveType.name/]");
+[aPrimitiveType.memberName()/]->setName("[aPrimitiveType.metamodelElementName()/]");
 [/template]

@@ -143,7 +143,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
  * - initialize operation parameter
 */]
 [template public initalizeOperation(aOperation : Operation)]
-[memberName(aOperation)/]->setName("[aOperation.name/]");
+[memberName(aOperation)/]->setName("[aOperation.metamodelElementName()/]");
 [if(not aOperation.type.oclIsUndefined())]
 [memberName(aOperation)/]->setType([aOperation.type.generatePackageGetterCall(aOperation)/]);
 [/if]

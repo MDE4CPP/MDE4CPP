@@ -45,7 +45,7 @@
  * - set guard specification 
 */]
 [template public initializeEdge(anActivityEdge : ActivityEdge)]
-[anActivityEdge.memberName()/]->setName("[anActivityEdge.name/]");
+[anActivityEdge.memberName()/]->setName("[anActivityEdge.metamodelElementName()/]");
 [anActivityEdge.memberName()/]->setSource([anActivityEdge.source.memberName()/]);
 [anActivityEdge.source.memberName()/]->getOutgoing()->push_back([anActivityEdge.memberName()/]);
 [anActivityEdge.memberName()/]->setTarget([anActivityEdge.target.memberName()/]);

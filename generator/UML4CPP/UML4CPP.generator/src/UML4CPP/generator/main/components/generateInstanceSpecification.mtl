@@ -40,7 +40,7 @@
  * - create and initialize slots
 */]
 [template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
-[anInstSpec.memberName()/]->setName("[anInstSpec.name/]");
+[anInstSpec.memberName()/]->setName("[anInstSpec.metamodelElementName()/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
 [anInstSpec.memberName()/]->getClassifier()->push_back([aClassifer.generatePackageGetterCall(anInstSpec)/]);
 

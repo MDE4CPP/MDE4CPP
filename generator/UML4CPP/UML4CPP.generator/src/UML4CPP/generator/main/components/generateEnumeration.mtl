@@ -29,7 +29,7 @@
 */]
 [template public generateEnumerationCreation(anEnum : Enumeration)]
 [anEnum.memberName()/] = factory->createEnumeration_as_ownedMember_in_Namespace([anEnum.owner.oclAsType(Namespace).memberName()/]); // TODO Package, Owner
-[anEnum.memberName()/]->setName("[anEnum.name/]");
+[anEnum.memberName()/]->setName("[anEnum.metamodelElementName()/]");
 
 [for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) ]
 [lit.memberName()/] = factory->createEnumerationLiteral_as_ownedLiteral_in_Enumeration([anEnum.memberName()/]);

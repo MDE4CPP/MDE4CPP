@@ -52,7 +52,7 @@
  * - set isAbstract flag
 */]
 [template public generateInterfaceInitialization(anInterface : Interface)]
-[anInterface.memberName()/]->setName("[anInterface.name/]");
+[anInterface.memberName()/]->setName("[anInterface.metamodelElementName()/]");
 [anInterface.memberName()/]->setIsAbstract([anInterface.isAbstract/]);
 [anInterface.generateStereotypeApplication()/]
 [/template]

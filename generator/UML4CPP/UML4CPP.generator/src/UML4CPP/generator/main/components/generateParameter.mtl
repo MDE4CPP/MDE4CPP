@@ -46,7 +46,7 @@
 */]
 [template public generateParameterInitialization(aParameter : Parameter)]
 // parameter [aParameter.name/]
-[memberName(aParameter)/]->setName("[aParameter.name/]");
+[memberName(aParameter)/]->setName("[aParameter.metamodelElementName()/]");
 [memberName(aParameter)/]->setType([aParameter.type.generatePackageGetterCall(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
