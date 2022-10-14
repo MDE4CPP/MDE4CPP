@@ -92,12 +92,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
 			//*********************************
 			// Container Getter

@@ -224,32 +224,6 @@ void ValueSpecificationImpl::setValueSpecificationAction(std::weak_ptr<uml::Valu
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ValueSpecificationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ValueSpecificationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ValueSpecificationImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter

@@ -159,20 +159,6 @@ void ImageImpl::setLocation(std::string _location)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ImageImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter

@@ -104,25 +104,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

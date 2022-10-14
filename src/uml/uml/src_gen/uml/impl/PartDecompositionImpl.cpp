@@ -173,30 +173,6 @@ bool PartDecompositionImpl::parts_of_internal_structures(std::shared_ptr<Any> di
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> PartDecompositionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> PartDecompositionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> PartDecompositionImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter

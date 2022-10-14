@@ -218,40 +218,6 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActiv
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityNode>> InterruptibleActivityRegionImpl::getContainedNode() const
-{
-	if(m_containedNode == nullptr)
-	{
-		/*Union*/
-		m_containedNode.reset(new Union<uml::ActivityNode>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_containedNode;
-}
-
-std::shared_ptr<Union<uml::Element>> InterruptibleActivityRegionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> InterruptibleActivityRegionImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter

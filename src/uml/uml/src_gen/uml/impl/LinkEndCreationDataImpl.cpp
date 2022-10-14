@@ -154,20 +154,6 @@ void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insert
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter

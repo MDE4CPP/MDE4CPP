@@ -120,36 +120,6 @@ DirectedRelationshipImpl& DirectedRelationshipImpl::operator=(const DirectedRela
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> DirectedRelationshipImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<Union<uml::Element>> DirectedRelationshipImpl::getRelatedElement() const
-{
-	if(m_relatedElement == nullptr)
-	{
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_relatedElement;
-}
-
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DirectedRelationshipImpl::getSource() const
 {
 	if(m_source == nullptr)

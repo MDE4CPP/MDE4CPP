@@ -168,60 +168,6 @@ void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement>> ReceptionImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::shared_ptr<Union<uml::Element>> ReceptionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ReceptionImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> ReceptionImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter

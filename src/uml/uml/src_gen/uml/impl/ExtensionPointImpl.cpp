@@ -161,30 +161,6 @@ void ExtensionPointImpl::setUseCase(std::weak_ptr<uml::UseCase> _useCase)
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ExtensionPointImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ExtensionPointImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ExtensionPointImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter

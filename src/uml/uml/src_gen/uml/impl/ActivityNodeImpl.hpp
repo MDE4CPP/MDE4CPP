@@ -132,24 +132,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
 			//*********************************
 			// Container Getter

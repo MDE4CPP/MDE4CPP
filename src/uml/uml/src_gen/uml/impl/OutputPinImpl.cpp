@@ -331,55 +331,6 @@ void OutputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStru
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup>> OutputPinImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<Union<uml::Element>> OutputPinImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> OutputPinImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> OutputPinImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter

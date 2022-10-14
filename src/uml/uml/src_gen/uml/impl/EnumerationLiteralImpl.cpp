@@ -185,32 +185,6 @@ void EnumerationLiteralImpl::setEnumeration(std::weak_ptr<uml::Enumeration> _enu
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> EnumerationLiteralImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> EnumerationLiteralImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> EnumerationLiteralImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter

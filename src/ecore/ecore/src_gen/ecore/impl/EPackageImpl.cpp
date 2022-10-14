@@ -275,20 +275,6 @@ std::weak_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EPackageImpl::getEContentUnion() const
-{
-	if(m_eContentUnion == nullptr)
-	{
-		/*Union*/
-		m_eContentUnion.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContentUnion;
-}
 
 //*********************************
 // Container Getter

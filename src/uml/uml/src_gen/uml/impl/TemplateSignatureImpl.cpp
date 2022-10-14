@@ -210,26 +210,6 @@ void TemplateSignatureImpl::setTemplate(std::weak_ptr<uml::TemplateableElement> 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> TemplateSignatureImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> TemplateSignatureImpl::getOwner() const
-{
-	return m_owner;
-}
-
 std::shared_ptr<Union<uml::TemplateParameter>> TemplateSignatureImpl::getParameter() const
 {
 	if(m_parameter == nullptr)

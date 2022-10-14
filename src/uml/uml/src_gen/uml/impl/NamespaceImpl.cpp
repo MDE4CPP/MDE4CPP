@@ -425,21 +425,6 @@ std::shared_ptr<Union<uml::NamedElement>> NamespaceImpl::getMember() const
 	return m_member;
 }
 
-std::shared_ptr<Union<uml::Element>> NamespaceImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> NamespaceImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
@@ -458,11 +443,6 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>>
 		
 	}
 	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> NamespaceImpl::getOwner() const
-{
-	return m_owner;
 }
 
 //*********************************

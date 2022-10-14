@@ -87,7 +87,6 @@ namespace ecore
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContentUnion() const ;
 			virtual std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> getEStructuralFeatures() const ;
 			
 			//*********************************

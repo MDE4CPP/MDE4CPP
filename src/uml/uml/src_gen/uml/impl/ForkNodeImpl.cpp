@@ -170,55 +170,6 @@ bool ForkNodeImpl::one_incoming_edge(std::shared_ptr<Any> diagnostics, std::shar
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup>> ForkNodeImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<Union<uml::Element>> ForkNodeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ForkNodeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ForkNodeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter

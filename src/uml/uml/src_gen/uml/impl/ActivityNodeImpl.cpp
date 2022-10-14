@@ -366,41 +366,6 @@ std::shared_ptr<Union<uml::ActivityGroup>> ActivityNodeImpl::getInGroup() const
 	return m_inGroup;
 }
 
-std::shared_ptr<Union<uml::Element>> ActivityNodeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ActivityNodeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ActivityNodeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
 //*********************************
 // Container Getter
 //*********************************

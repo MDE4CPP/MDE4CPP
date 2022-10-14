@@ -158,27 +158,6 @@ void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::Templat
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ParameterableElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ParameterableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter

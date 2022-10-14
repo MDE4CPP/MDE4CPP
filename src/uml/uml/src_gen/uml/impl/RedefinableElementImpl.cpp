@@ -170,26 +170,6 @@ void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> RedefinableElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> RedefinableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-
 std::shared_ptr<Union<uml::RedefinableElement>> RedefinableElementImpl::getRedefinedElement() const
 {
 	if(m_redefinedElement == nullptr)
