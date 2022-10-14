@@ -707,6 +707,9 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The query allParents() gives all of the direct and indirect ancestors of a generalized Classifier.&#xA;result = (parents()->union(parents()->collect(allParents())->asSet()))&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier>> allParents(new Bag&lt;uml::Classifier>());&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier>> parents = this->parents();&#xA;&#x9;&#xA;allParents->insert(allParents->begin(), parents->begin(), parents->end());&#xA;&#x9;&#xA;for(std::shared_ptr&lt;Classifier> parent : *parents)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> allParentsOfParent = parent->allParents();&#xA;&#x9;allParents->insert(allParents->end(), allParentsOfParent->begin(), allParentsOfParent->end());&#xA;}&#xA;&#xA;return allParents;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getGenerals" ordered="false" upperBound="-1" eType="#//Classifier">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
