@@ -235,8 +235,22 @@
 
 
 [query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
+[comment/]
+[query public getUnionsReference(aClass : EClass) : Set(EReference) = aClass.eReferences->select(isUnion())->sortedBy(name) /]
+[comment/]
 
-[query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet{aClass.getSubsetedUnionsReference(),aClass.eReferences->select(isUnion())}->flatten()->sortedBy(name) /]
+[**
+Why is this: "aClass.getSubsetedUnionsReference()" done? Shouldn't Union Getters only be generated in classes where the union property is defined?
+This leads to overwriting union getters in all subclasses of classes where a union property is defined.
+
+[query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet
+{
+	aClass.getSubsetedUnionsReference(),
+	aClass.eReferences->select(isUnion())
+}->flatten()->sortedBy(name) /]
+[comment/]
+
+
 
 [query public getSubsetedUnionsReference(aClass : EClass): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not e.oclAsType(EModelElement).isUnion()) else false endif ).Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 [query public getSubsetsForUnion(aClass : EClass,union : EReference): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not (e.oclAsType(EReference) = union)) else false endif ).oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
