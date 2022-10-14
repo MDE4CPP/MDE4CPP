@@ -41,13 +41,6 @@
 //#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -325,103 +318,6 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::eContainer() 
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void DestroyObjectActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void DestroyObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("destroyObjectAction");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("destroyObjectAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void DestroyObjectActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	ActionActivationImpl::loadNode(nodeName, loadHandler);
-}
-
-void DestroyObjectActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>( references.front() );
-				setDestroyObjectAction(_destroyObjectAction);
-			}
-			
-			return;
-		}
-	}
-	ActionActivationImpl::resolveReferences(featureID, references);
-}
-
-void DestroyObjectActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getDestroyObjectAction(), "destroyObjectAction", getDestroyObjectAction()->eClass() != uml::umlPackage::eInstance()->getDestroyObjectAction_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const

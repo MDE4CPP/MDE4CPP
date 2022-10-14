@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
 #include "uml/Comment.hpp"
@@ -227,103 +222,6 @@ std::shared_ptr<ecore::EObject> VariableImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void VariableImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void VariableImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ConnectableElementImpl::loadAttributes(loadHandler, attr_list);
-	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void VariableImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	ConnectableElementImpl::loadNode(nodeName, loadHandler);
-	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
-}
-
-void VariableImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>( references.front() );
-				setActivityScope(_activityScope);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>( references.front() );
-				setScope(_scope);
-			}
-			
-			return;
-		}
-	}
-	ConnectableElementImpl::resolveReferences(featureID, references);
-	MultiplicityElementImpl::resolveReferences(featureID, references);
-}
-
-void VariableImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ConnectableElementImpl::saveContent(saveHandler);
-	MultiplicityElementImpl::saveContent(saveHandler);
-	
-	ParameterableElementImpl::saveContent(saveHandler);
-	TypedElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const

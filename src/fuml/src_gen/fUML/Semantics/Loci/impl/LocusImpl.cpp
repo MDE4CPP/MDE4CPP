@@ -47,12 +47,6 @@
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -336,123 +330,6 @@ void LocusImpl::setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFacto
 std::shared_ptr<ecore::EObject> LocusImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void LocusImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void LocusImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("executor") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Executor";
-			}
-			loadHandler->handleChild(this->getExecutor()); 
-
-			return; 
-		}
-
-		if ( nodeName.compare("extensionalValues") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<uml::Element>(this->getExtensionalValues());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("factory") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "ExecutionFactory";
-			}
-			loadHandler->handleChild(this->getFactory()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-}
-
-void LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ecore::EObjectImpl::resolveReferences(featureID, references);
-}
-
-void LocusImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'executor'
-
-		saveHandler->addReference(this->getExecutor(), "executor", getExecutor()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class());
-
-		// Save 'extensionalValues'
-
-		saveHandler->addReferences<uml::Element>("extensionalValues", this->getExtensionalValues());
-
-		// Save 'factory'
-
-		saveHandler->addReference(this->getFactory(), "factory", getFactory()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const

@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -180,75 +175,6 @@ std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void AnyReceiveEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void AnyReceiveEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	MessageEventImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void AnyReceiveEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	MessageEventImpl::loadNode(nodeName, loadHandler);
-}
-
-void AnyReceiveEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	MessageEventImpl::resolveReferences(featureID, references);
-}
-
-void AnyReceiveEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	MessageEventImpl::saveContent(saveHandler);
-	
-	EventImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const

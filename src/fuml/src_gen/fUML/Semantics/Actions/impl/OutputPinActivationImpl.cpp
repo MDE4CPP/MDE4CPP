@@ -34,13 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -146,70 +139,6 @@ std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void OutputPinActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void OutputPinActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	PinActivationImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void OutputPinActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	PinActivationImpl::loadNode(nodeName, loadHandler);
-}
-
-void OutputPinActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	PinActivationImpl::resolveReferences(featureID, references);
-}
-
-void OutputPinActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	PinActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ObjectNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void OutputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const

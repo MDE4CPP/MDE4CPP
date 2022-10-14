@@ -33,10 +33,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -131,66 +127,6 @@ int FirstChoiceStrategyImpl::choose(int size)
 std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void FirstChoiceStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void FirstChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ChoiceStrategyImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void FirstChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	ChoiceStrategyImpl::loadNode(nodeName, loadHandler);
-}
-
-void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ChoiceStrategyImpl::resolveReferences(featureID, references);
-}
-
-void FirstChoiceStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ChoiceStrategyImpl::saveContent(saveHandler);
-	
-	SemanticStrategyImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const

@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
 //Factories and Package includes
@@ -170,120 +165,6 @@ std::shared_ptr<ecore::EObject> ImageImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void ImageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ImageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("content");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'std::string'
-			std::string value;
-			value = iter->second;
-			this->setContent(value);
-		}
-
-		iter = attr_list.find("format");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'std::string'
-			std::string value;
-			value = iter->second;
-			this->setFormat(value);
-		}
-
-		iter = attr_list.find("location");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'std::string'
-			std::string value;
-			value = iter->second;
-			this->setLocation(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ImageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	ElementImpl::loadNode(nodeName, loadHandler);
-}
-
-void ImageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ElementImpl::resolveReferences(featureID, references);
-}
-
-void ImageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getImage_Attribute_content()) )
-		{
-			saveHandler->addAttribute("content", this->getContent());
-		}
-
-		if ( this->eIsSet(package->getImage_Attribute_format()) )
-		{
-			saveHandler->addAttribute("format", this->getFormat());
-		}
-
-		if ( this->eIsSet(package->getImage_Attribute_location()) )
-		{
-			saveHandler->addAttribute("location", this->getLocation());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const

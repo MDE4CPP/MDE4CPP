@@ -34,14 +34,10 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EObjectContainer.hpp"
 #include "ecore/EObjectAny.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EObject.hpp"
 #include "ecore/EOperation.hpp"
@@ -331,128 +327,6 @@ std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("metaElementID");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'long long'
-			long long value;
-			std::istringstream(iter->second) >> value;
-			this->setMetaElementID(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-}
-
-void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("eContentUnion") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EObject";
-			}
-			loadHandler->handleChildContainer<ecore::EObject>(this->getEContentUnion());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-}
-
-void EObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>( references.front() );
-				setEContainer(_eContainer);
-			}
-			
-			return;
-		}
-	}
-}
-
-void EObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
-		{
-			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
-		}
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'eContentUnion'
-
-		saveHandler->addReferences<ecore::EObject>("eContentUnion", this->getEContentUnion());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const

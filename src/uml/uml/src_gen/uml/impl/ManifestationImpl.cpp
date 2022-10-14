@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Abstraction.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -198,112 +193,6 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void ManifestationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("utilizedElement");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("utilizedElement")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	AbstractionImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	AbstractionImpl::loadNode(nodeName, loadHandler);
-}
-
-void ManifestationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>( references.front() );
-				setUtilizedElement(_utilizedElement);
-			}
-			
-			return;
-		}
-	}
-	AbstractionImpl::resolveReferences(featureID, references);
-}
-
-void ManifestationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	AbstractionImpl::saveContent(saveHandler);
-	
-	DependencyImpl::saveContent(saveHandler);
-	
-	DirectedRelationshipImpl::saveContent(saveHandler);
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	RelationshipImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getUtilizedElement(), "utilizedElement", getUtilizedElement()->eClass() != uml::umlPackage::eInstance()->getPackageableElement_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const

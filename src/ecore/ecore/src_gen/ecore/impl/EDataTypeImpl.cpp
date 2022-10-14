@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EObject.hpp"
@@ -161,96 +156,6 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void EDataTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("serializable");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setSerializable(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	EClassifierImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	EClassifierImpl::loadNode(nodeName, loadHandler);
-}
-
-void EDataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	EClassifierImpl::resolveReferences(featureID, references);
-}
-
-void EDataTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	EClassifierImpl::saveContent(saveHandler);
-	
-	ENamedElementImpl::saveContent(saveHandler);
-	
-	EModelElementImpl::saveContent(saveHandler);
-	
-	EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
-		{
-			saveHandler->addAttribute("serializable", this->isSerializable());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const

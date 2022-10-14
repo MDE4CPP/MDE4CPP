@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ecore/EObject.hpp"
 //Factories and Package includes
 #include "ecore/ecorePackage.hpp"
@@ -145,84 +140,6 @@ std::shared_ptr<ecore::EObject> EObjectAnyImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void EObjectAnyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EObjectAnyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("any");
-		if ( iter != attr_list.end() )
-		{
-			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@7df60067 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
-			std::shared_ptr<Any> value; 			this->setAny(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	EObjectImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void EObjectAnyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	EObjectImpl::loadNode(nodeName, loadHandler);
-}
-
-void EObjectAnyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	EObjectImpl::resolveReferences(featureID, references);
-}
-
-void EObjectAnyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void EObjectAnyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<EClass> EObjectAnyImpl::eStaticClass() const

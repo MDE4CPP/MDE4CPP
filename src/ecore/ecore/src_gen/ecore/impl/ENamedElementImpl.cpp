@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EModelElement.hpp"
 #include "ecore/EObject.hpp"
@@ -139,92 +134,6 @@ std::shared_ptr<ecore::EObject> ENamedElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void ENamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ENamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("name");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'std::string'
-			std::string value;
-			value = iter->second;
-			this->setName(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	EModelElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	EModelElementImpl::loadNode(nodeName, loadHandler);
-}
-
-void ENamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	EModelElementImpl::resolveReferences(featureID, references);
-}
-
-void ENamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	EModelElementImpl::saveContent(saveHandler);
-	
-	EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
-		{
-			saveHandler->addAttribute("name", this->getName());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const

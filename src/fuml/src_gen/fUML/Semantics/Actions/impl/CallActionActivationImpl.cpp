@@ -50,14 +50,6 @@
 #include "uml/Parameter.hpp"
 #include "uml/Property.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -184,7 +176,11 @@ void CallActionActivationImpl::doAction()
 				std::shared_ptr<uml::Element> context = this->getExecutionContext();
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes; /* Currently not supported. TODO: implement something like getTypes */ // = context->getTypes();
+								
+				std::shared_ptr<uml::Classifier> contextImmediateType = context->getMetaClass();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes = contextImmediateType->allParents();
+				contextTypes->insert(contextTypes->begin(), contextImmediateType);
+
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -387,105 +383,6 @@ std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("callAction");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("callAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	InvocationActionActivationImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
-}
-
-void CallActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>( references.front() );
-				setCallAction(_callAction);
-			}
-			
-			return;
-		}
-	}
-	InvocationActionActivationImpl::resolveReferences(featureID, references);
-}
-
-void CallActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	InvocationActionActivationImpl::saveContent(saveHandler);
-	
-	ActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getCallAction(), "callAction", getCallAction()->eClass() != uml::umlPackage::eInstance()->getCallAction_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
