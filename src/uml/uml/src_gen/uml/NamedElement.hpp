@@ -7,7 +7,6 @@
 #ifndef UML_NAMEDELEMENT_HPP
 #define UML_NAMEDELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -16,25 +15,9 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -159,19 +142,6 @@ namespace uml
 			 
 			virtual std::string getQualifiedName() const = 0;
 			/*!
-			If there is no name, or one of the containing Namespaces has no name, there is no qualifiedName.
-			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null
-			*/
-			 
-			virtual bool has_no_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
-			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
-			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))
-			*/
-			 
-			virtual bool has_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
 			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
 			    ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
@@ -187,12 +157,6 @@ namespace uml
 			*/
 			 
 			virtual std::string separator() const = 0;
-			/*!
-			If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides mustBeOwned()) may have a visibility.
-			(namespace = null and owner <> null) implies visibility = null
-			*/
-			 
-			virtual bool visibility_needs_ownership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -260,13 +224,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

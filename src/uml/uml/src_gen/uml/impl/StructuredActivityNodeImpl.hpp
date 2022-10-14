@@ -56,25 +56,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			The edges of a StructuredActivityNode are all the ActivityEdges with source and target ActivityNodes contained directly or indirectly within the StructuredActivityNode and at least one of the source or target not contained in any more deeply nested StructuredActivityNode.
-			edge=self.sourceNodes().outgoing->intersection(self.allOwnedNodes().incoming)->
-				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
-			*/
-			 
-			virtual bool edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
-			input.incoming.source->excludesAll(allOwnedNodes()-output)
-			*/
-			 
-			virtual bool input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
-			output.outgoing.target->excludesAll(allOwnedNodes()-input)
-			*/
-			 
-			virtual bool output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
 			  union(node->select(oclIsKindOf(Action)).oclAsType(Action).output)->asSet())
@@ -149,16 +130,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

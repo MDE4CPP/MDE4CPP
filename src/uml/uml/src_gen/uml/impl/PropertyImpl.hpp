@@ -60,34 +60,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A binding of a PropertyTemplateParameter representing an attribute must be to an attribute.
-			(self.isAttribute()
-			and (templateParameterSubstitution->notEmpty())
-			implies (templateParameterSubstitution->forAll(ts |
-			    ts.formal.oclIsKindOf(Property)
-			    and ts.formal.oclAsType(Property).isAttribute())))
-			*/
-			 
-			virtual bool binding_to_attribute(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
-			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))
-			*/
-			 
-			virtual bool deployment_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A derived union is derived.
-			isDerivedUnion implies isDerived
-			*/
-			 
-			virtual bool derived_union_is_derived(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A derived union is read only.
-			isDerivedUnion implies isReadOnly
-			*/
-			 
-			virtual bool derived_union_is_read_only(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			/*!
 			Retrieves the other end of the (binary) association in which this property is a member end.
@@ -116,28 +88,6 @@ namespace uml
 			 
 			virtual bool isNavigable() ;
 			virtual bool isSetDefault() ;
-			/*!
-			A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.
-			isComposite and association <> null implies opposite.upperBound() <= 1
-			*/
-			 
-			virtual bool multiplicity_of_composite(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			All qualified Properties must be Association ends
-			qualifier->notEmpty() implies association->notEmpty()
-			*/
-			 
-			virtual bool qualified_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A redefined Property must be inherited from a more general Classifier.
-			(redefinedProperty->notEmpty()) implies
-			  (redefinitionContext->notEmpty() and
-			      redefinedProperty->forAll(rp|
-			        ((redefinitionContext->collect(fc|
-			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))
-			*/
-			 
-			virtual bool redefined_property_inherited(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this property to the specified Boolean value.
 			*/
@@ -174,12 +124,6 @@ namespace uml
 			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) ;
 			/*!
-			A Property may not subset a Property with the same name.
-			subsettedProperty->forAll(sp | sp.name <> name)
-			*/
-			 
-			virtual bool subsetted_property_names(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
 			result = (if association <> null
 			then association.memberEnd->excluding(self)->collect(type)->asSet()
@@ -193,30 +137,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Type>> subsettingContext() ;
-			/*!
-			Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.
-			subsettedProperty->notEmpty() implies
-			  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
-			    subsettedProperty->forAll(sp |
-			      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
-			*/
-			 
-			virtual bool subsetting_context_conforms(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
-			subsettedProperty->forAll(sp |
-			  self.type.conformsTo(sp.type) and
-			    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
-			      self.upperBound() <= sp.upperBound() ))
-			*/
-			 
-			virtual bool subsetting_rules(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
-			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type
-			*/
-			 
-			virtual bool type_of_opposite_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
@@ -411,16 +331,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

@@ -51,17 +51,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			The number of argument InputPins must be the same as the number of input (in and inout) ownedParameters of the called Behavior or Operation. The type, ordering and multiplicity of each argument InputPin must be consistent with the corresponding input Parameter.
-			let parameter: OrderedSet(Parameter) = self.inputParameters() in
-			argument->size() = parameter->size() and
-			Sequence{1..argument->size()}->forAll(i | 
-				argument->at(i).type.conformsTo(parameter->at(i).type) and 
-				argument->at(i).isOrdered = parameter->at(i).isOrdered and
-				argument->at(i).compatibleWith(parameter->at(i)))
-			*/
-			 
-			virtual bool argument_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
 			*/
@@ -73,23 +62,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
-			/*!
-			The number of result OutputPins must be the same as the number of output (inout, out and return) ownedParameters of the called Behavior or Operation. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
-			let parameter: OrderedSet(Parameter) = self.outputParameters() in
-			result->size() = parameter->size() and
-			Sequence{1..result->size()}->forAll(i | 
-				parameter->at(i).type.conformsTo(result->at(i).type) and 
-				parameter->at(i).isOrdered = result->at(i).isOrdered and
-				parameter->at(i).compatibleWith(result->at(i)))
-			*/
-			 
-			virtual bool result_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Only synchronous CallActions can have result OutputPins.
-			result->notEmpty() implies isSynchronous
-			*/
-			 
-			virtual bool synchronous_call(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -125,16 +97,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

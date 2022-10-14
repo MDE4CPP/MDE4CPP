@@ -76,26 +76,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;
 			/*!
-			A Region can have at most one deep history Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			   select(kind = PseudostateKind::deepHistory)->size() <= 1
-			*/
-			 
-			virtual bool deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Region can have at most one initial Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::initial)->size() <= 1
-			*/
-			 
-			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
-			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
-			*/
-			 
-			virtual bool owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -107,13 +87,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() ;
-			/*!
-			A Region can have at most one shallow history Vertex.
-			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
-			*/
-			 
-			virtual bool shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -179,16 +152,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

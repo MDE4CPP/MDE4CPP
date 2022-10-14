@@ -62,20 +62,6 @@ namespace uml
 			*/
 			 
 			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType> d) ;
-			/*!
-			A FunctionBehavior has at least one output Parameter.
-			self.ownedParameter->
-			  select(p | p.direction = ParameterDirectionKind::out or p.direction= ParameterDirectionKind::inout or p.direction= ParameterDirectionKind::return)->size() >= 1
-			*/
-			 
-			virtual bool one_output_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The types of the ownedParameters are all DataTypes, which may not nest anything but other DataTypes.
-			ownedParameter->forAll(p | p.type <> null and
-			  p.type.oclIsTypeOf(DataType) and hasAllDataTypeAttributes(p.type.oclAsType(DataType)))
-			*/
-			 
-			virtual bool types_of_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -93,16 +79,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

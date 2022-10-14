@@ -40,11 +40,6 @@
 #include "uml/Usage.hpp"
 #include "uml/Class.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
 #include "uml/Comment.hpp"
@@ -384,7 +379,21 @@ std::shared_ptr<Bag<uml::Feature>> ClassifierImpl::allFeatures()
 
 std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::allParents()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Classifier>> allParents(new Bag<uml::Classifier>());
+std::shared_ptr<Bag<uml::Classifier>> parents = this->parents();
+	
+allParents->insert(allParents->begin(), parents->begin(), parents->end());
+	
+for(std::shared_ptr<Classifier> parent : *parents)
+{
+	std::shared_ptr<Bag<uml::Classifier>> allParentsOfParent = parent->allParents();
+	allParents->insert(allParents->end(), allParentsOfParent->begin(), allParentsOfParent->end());
+}
+
+return allParents;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allRealizedInterfaces()
@@ -609,22 +618,7 @@ bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier> contrac
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier> c)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierImpl::no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierImpl::non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -642,11 +636,6 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 
 	return returnList;
 	//end of body
-}
-
-bool ClassifierImpl::specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
@@ -927,318 +916,6 @@ std::shared_ptr<ecore::EObject> ClassifierImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void ClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ClassifierImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isAbstract");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsAbstract(value);
-		}
-
-		iter = attr_list.find("isFinalSpecialization");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsFinalSpecialization(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("general");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("general")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("powertypeExtent");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("powertypeExtent")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("redefinedClassifier");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedClassifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("representation");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("representation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("useCase");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("useCase")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	NamespaceImpl::loadAttributes(loadHandler, attr_list);
-	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
-	TemplateableElementImpl::loadAttributes(loadHandler, attr_list);
-	TypeImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("collaborationUse") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "CollaborationUse";
-			}
-			loadHandler->handleChildContainer<uml::CollaborationUse>(this->getCollaborationUse());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("generalization") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Generalization";
-			}
-			loadHandler->handleChildContainer<uml::Generalization>(this->getGeneralization());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("ownedUseCase") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "UseCase";
-			}
-			loadHandler->handleChildContainer<uml::UseCase>(this->getOwnedUseCase());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("substitution") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Substitution";
-			}
-			loadHandler->handleChildContainer<uml::Substitution>(this->getSubstitution());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	NamespaceImpl::loadNode(nodeName, loadHandler);
-	RedefinableElementImpl::loadNode(nodeName, loadHandler);
-	TemplateableElementImpl::loadNode(nodeName, loadHandler);
-	TypeImpl::loadNode(nodeName, loadHandler);
-}
-
-void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
-		{
-			std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
-				if (_r != nullptr)
-				{
-					_general->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
-		{
-			std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
-				if (_r != nullptr)
-				{
-					_powertypeExtent->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
-		{
-			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> _redefinedClassifier = getRedefinedClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
-				if (_r != nullptr)
-				{
-					_redefinedClassifier->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::CollaborationUse> _representation = std::dynamic_pointer_cast<uml::CollaborationUse>( references.front() );
-				setRepresentation(_representation);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
-		{
-			std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::UseCase>  _r = std::dynamic_pointer_cast<uml::UseCase>(ref);
-				if (_r != nullptr)
-				{
-					_useCase->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	NamespaceImpl::resolveReferences(featureID, references);
-	RedefinableElementImpl::resolveReferences(featureID, references);
-	TemplateableElementImpl::resolveReferences(featureID, references);
-	TypeImpl::resolveReferences(featureID, references);
-}
-
-void ClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'generalization'
-		for (std::shared_ptr<uml::Generalization> generalization : *this->getGeneralization()) 
-		{
-			saveHandler->addReference(generalization, "generalization", generalization->eClass() != package->getGeneralization_Class());
-		}
-
-		// Save 'ownedUseCase'
-		for (std::shared_ptr<uml::UseCase> ownedUseCase : *this->getOwnedUseCase()) 
-		{
-			saveHandler->addReference(ownedUseCase, "ownedUseCase", ownedUseCase->eClass() != package->getUseCase_Class());
-		}
-
-		// Save 'substitution'
-		for (std::shared_ptr<uml::Substitution> substitution : *this->getSubstitution()) 
-		{
-			saveHandler->addReference(substitution, "substitution", substitution->eClass() != package->getSubstitution_Class());
-		}
-		// Add attributes
-		if ( this->eIsSet(package->getClassifier_Attribute_isAbstract()) )
-		{
-			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
-		}
-
-		if ( this->eIsSet(package->getClassifier_Attribute_isFinalSpecialization()) )
-		{
-			saveHandler->addAttribute("isFinalSpecialization", this->getIsFinalSpecialization());
-		}
-	// Add references
-		saveHandler->addReferences<uml::Classifier>("general", this->getGeneral());
-		saveHandler->addReferences<uml::GeneralizationSet>("powertypeExtent", this->getPowertypeExtent());
-		saveHandler->addReferences<uml::Classifier>("redefinedClassifier", this->getRedefinedClassifier());
-		saveHandler->addReference(this->getRepresentation(), "representation", getRepresentation()->eClass() != uml::umlPackage::eInstance()->getCollaborationUse_Class()); 
-		saveHandler->addReferences<uml::UseCase>("useCase", this->getUseCase());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'collaborationUse'
-
-		saveHandler->addReferences<uml::CollaborationUse>("collaborationUse", this->getCollaborationUse());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const
@@ -2225,40 +1902,6 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAny(this->isSubstitutableFor(incoming_param_contract), 0, false);
 			break;
 		}
-		// uml::Classifier::maps_to_generalization_set(Any, std::map) : bool: 2990336940
-		case umlPackage::CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'maps_to_generalization_set'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'maps_to_generalization_set'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
 		// uml::Classifier::maySpecializeType(uml::Classifier) : bool: 211370547
 		case umlPackage::CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER:
 		{
@@ -2291,113 +1934,11 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Ba
 			result = eAny(this->maySpecializeType(incoming_param_c), 0, false);
 			break;
 		}
-		// uml::Classifier::no_cycles_in_generalization(Any, std::map) : bool: 3444230139
-		case umlPackage::CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'no_cycles_in_generalization'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'no_cycles_in_generalization'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
-		// uml::Classifier::non_final_parents(Any, std::map) : bool: 3265360227
-		case umlPackage::CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'non_final_parents'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'non_final_parents'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
 		// uml::Classifier::parents() : uml::Classifier[*]: 3079307280
 		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> resultList = this->parents();
 			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
-			break;
-		}
-		// uml::Classifier::specialize_type(Any, std::map) : bool: 1700667753
-		case umlPackage::CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'specialize_type'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'specialize_type'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

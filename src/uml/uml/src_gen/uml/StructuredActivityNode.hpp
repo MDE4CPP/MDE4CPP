@@ -7,32 +7,15 @@
 #ifndef UML_STRUCTUREDACTIVITYNODE_HPP
 #define UML_STRUCTUREDACTIVITYNODE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -93,25 +76,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The edges of a StructuredActivityNode are all the ActivityEdges with source and target ActivityNodes contained directly or indirectly within the StructuredActivityNode and at least one of the source or target not contained in any more deeply nested StructuredActivityNode.
-			edge=self.sourceNodes().outgoing->intersection(self.allOwnedNodes().incoming)->
-				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
-			*/
-			 
-			virtual bool edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
-			input.incoming.source->excludesAll(allOwnedNodes()-output)
-			*/
-			 
-			virtual bool input_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
-			output.outgoing.target->excludesAll(allOwnedNodes()-input)
-			*/
-			 
-			virtual bool output_pin_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
@@ -187,13 +151,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

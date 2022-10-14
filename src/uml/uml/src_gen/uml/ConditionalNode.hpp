@@ -7,7 +7,6 @@
 #ifndef UML_CONDITIONALNODE_HPP
 #define UML_CONDITIONALNODE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -93,49 +76,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			No two clauses within a ConditionalNode may be predecessorClauses of each other, either directly or indirectly.
-			clause->closure(predecessorClause)->intersection(clause)->isEmpty()
-			*/
-			 
-			virtual bool clause_no_predecessor(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The union of the ExecutableNodes in the test and body parts of all clauses must be the same as the subset of nodes contained in the ConditionalNode (considered as a StructuredActivityNode) that are ExecutableNodes.
-			clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)
-			*/
-			 
-			virtual bool executable_nodes(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Each clause of a ConditionalNode must have the same number of bodyOutput pins as the ConditionalNode has result OutputPins, and each clause bodyOutput Pin must be compatible with the corresponding result OutputPin (by positional order) in type, multiplicity, ordering, and uniqueness.
-			clause->forAll(
-				bodyOutput->size()=self.result->size() and
-				Sequence{1..self.result->size()}->forAll(i |
-					bodyOutput->at(i).type.conformsTo(result->at(i).type) and
-					bodyOutput->at(i).isOrdered = result->at(i).isOrdered and
-					bodyOutput->at(i).isUnique = result->at(i).isUnique and
-					bodyOutput->at(i).compatibleWith(result->at(i))))
-			*/
-			 
-			virtual bool matching_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A ConditionalNode has no InputPins.
-			input->isEmpty()
-			*/
-			 
-			virtual bool no_input_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			No ExecutableNode in the ConditionNode may appear in the test or body part of more than one clause of a ConditionalNode.
-			node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->forAll(n | 
-				self.clause->select(test->union(_'body')->includes(n))->size()=1)
-			*/
-			 
-			virtual bool one_clause_with_executable_node(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The result OutputPins have no incoming edges.
-			result.incoming->isEmpty()
-			*/
-			 
-			virtual bool result_no_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -189,13 +129,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

@@ -7,7 +7,6 @@
 #ifndef UML_ACTIVITYGROUP_HPP
 #define UML_ACTIVITYGROUP_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 template<class T> class Union;
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -103,22 +86,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
-			/*!
-			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
-			containedNode->forAll(activity = self.containingActivity()) and 
-			containedEdge->forAll(activity = self.containingActivity())
-			*/
-			 
-			virtual bool nodes_and_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
-			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
-			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
-			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
-			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
-			*/
-			 
-			virtual bool not_contained(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -176,13 +143,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

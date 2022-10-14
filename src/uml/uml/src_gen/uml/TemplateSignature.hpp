@@ -7,32 +7,15 @@
 #ifndef UML_TEMPLATESIGNATURE_HPP
 #define UML_TEMPLATESIGNATURE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T> class Union;
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -81,19 +64,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Parameters must own the ParameterableElements they parameter or those ParameterableElements must be owned by the TemplateableElement being templated.
-			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
-			*/
-			 
-			virtual bool own_elements(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The names of the parameters of a TemplateSignature are unique.
-			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
-			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
-			*/
-			 
-			virtual bool unique_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -136,13 +106,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

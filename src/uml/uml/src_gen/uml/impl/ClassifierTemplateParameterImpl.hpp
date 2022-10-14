@@ -46,50 +46,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The argument to a ClassifierTemplateParameter is a Classifier.
-			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))
-			*/
-			 
-			virtual bool actual_is_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
-			templateParameterSubstitution.actual->forAll( a |
-			  let arg : Classifier = a.oclAsType(Classifier) in
-			    constrainingClassifier->forAll(
-			      cc |  
-			         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))
-			      )
-			)
-			*/
-			 
-			virtual bool constraining_classifiers_constrain_args(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
-			constrainingClassifier->forAll(
-			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
-			)
-			*/
-			 
-			virtual bool constraining_classifiers_constrain_parametered_element(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If allowSubstitutable is true, then there must be a constrainingClassifier.
-			allowSubstitutable implies constrainingClassifier->notEmpty()
-			*/
-			 
-			virtual bool has_constraining_classifier(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
-			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract)
-			*/
-			 
-			virtual bool matching_abstract(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
-			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())
-			*/
-			 
-			virtual bool parametered_element_no_features(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -125,16 +81,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

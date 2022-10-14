@@ -96,25 +96,6 @@ namespace uml
 			*/
 			 
 			virtual bool isDefined() ;
-			/*!
-			An element imported as a metaclassReference is not specialized or generalized in a Profile.
-			metaclassReference.importedElement->
-				select(c | c.oclIsKindOf(Classifier) and
-					(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()
-			and 
-			packagedElement->
-			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
-			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()
-			*/
-			 
-			virtual bool metaclass_reference_not_specialized(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
-			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
-			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
-			*/
-			 
-			virtual bool references_same_metamodel(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -144,16 +125,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

@@ -57,12 +57,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
-			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
-			*/
-			 
-			virtual bool at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
 			<p>From package UML::Classification.</p>
@@ -97,12 +91,6 @@ namespace uml
 			 
 			virtual bool isUnique() ;
 			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) ;
-			/*!
-			A bodyCondition can only be specified for a query Operation.
-			bodyCondition <> null implies isQuery
-			*/
-			 
-			virtual bool only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -241,16 +229,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

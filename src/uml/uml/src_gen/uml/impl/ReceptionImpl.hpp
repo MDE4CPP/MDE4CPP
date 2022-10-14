@@ -46,25 +46,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Reception has the same name as its signal
-			name = signal.name
-			*/
-			 
-			virtual bool same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
-			signal.ownedAttribute->size() = ownedParameter->size() and
-			Sequence{1..signal.ownedAttribute->size()}->forAll( i | 
-			    ownedParameter->at(i).direction = ParameterDirectionKind::_'in' and 
-			    ownedParameter->at(i).name = signal.ownedAttribute->at(i).name and
-			    ownedParameter->at(i).type = signal.ownedAttribute->at(i).type and
-			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
-			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
-			)
-			*/
-			 
-			virtual bool same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,16 +75,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

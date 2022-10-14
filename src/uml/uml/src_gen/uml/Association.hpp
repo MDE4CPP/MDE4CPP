@@ -7,7 +7,6 @@
 #ifndef UML_ASSOCIATION_HPP
 #define UML_ASSOCIATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -95,23 +78,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			Ends of Associations with more than two ends must be owned by the Association itself.
-			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
-			*/
-			 
-			virtual bool association_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only binary Associations can be aggregations.
-			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
-			*/
-			 
-			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			memberEnd->forAll(type->notEmpty())
-			*/
-			 
-			virtual bool ends_must_be_typed(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
@@ -123,20 +89,6 @@ namespace uml
 			*/
 			 
 			virtual bool isBinary() = 0;
-			/*!
-			An Association specializing another Association has the same number of ends as the other Association.
-			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
-			*/
-			 
-			virtual bool specialized_end_number(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
-			Sequence{1..memberEnd->size()}->
-				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
-					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
-			*/
-			 
-			virtual bool specialized_end_types(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -190,13 +142,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

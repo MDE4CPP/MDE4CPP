@@ -7,32 +7,15 @@
 #ifndef UML_STEREOTYPE_HPP
 #define UML_STEREOTYPE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace ecore 
@@ -107,35 +90,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			Where a stereotype’s property is an association end for an association other than a kind of extension, and the other end is not a stereotype, the other end must be owned by the association itself.
-			ownedAttribute
-			->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))
-			->forAll(opposite.owner = association)
-			*/
-			 
-			virtual bool associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
-			*/
-			 
-			virtual bool base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
-			*/
-			 
-			virtual bool base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The upper bound of base-properties is exactly 1.
-			*/
-			 
-			virtual bool base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Stereotypes may only participate in binary associations.
-			ownedAttribute.association->forAll(memberEnd->size()=2)
-			*/
-			 
-			virtual bool binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
 			result = (self.namespace.oclAsType(Package).containingProfile())
 			<p>From package UML::Packages.</p>
@@ -157,13 +111,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Image> createIcon(std::string format, std::string content) = 0;
-			/*!
-			A Stereotype may only generalize or specialize another Stereotype.
-			allParents()->forAll(oclIsKindOf(Stereotype)) 
-			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
-			*/
-			 
-			virtual bool generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
 			*/
@@ -190,11 +137,6 @@ namespace uml
 			 
 			virtual std::string getKeyword(bool localize) = 0;
 			
-			/*!
-			Stereotype names should not clash with keyword names for the extended model element.
-			*/
-			 
-			virtual bool name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -224,13 +166,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

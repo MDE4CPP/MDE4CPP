@@ -7,32 +7,15 @@
 #ifndef UML_MULTIPLICITYELEMENT_HPP
 #define UML_MULTIPLICITYELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -113,46 +96,12 @@ namespace uml
 			 
 			virtual int lowerBound() = 0;
 			/*!
-			The lower bound must be a non-negative integer literal.
-			lowerBound() >= 0
-			*/
-			 
-			virtual bool lower_ge_0(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If it is not empty, then lowerValue must have an Integer value.
-			lowerValue <> null implies lowerValue.integerValue() <> null
-			*/
-			 
-			virtual bool lower_is_integer(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual int upperBound() = 0;
-			/*!
-			The upper bound must be greater than or equal to the lower bound.
-			upperBound() >= lowerBound()
-			*/
-			 
-			virtual bool upper_ge_lower(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If it is not empty, then upperValue must have an UnlimitedNatural value.
-			upperValue <> null implies upperValue.unlimitedValue() <> null
-			*/
-			 
-			virtual bool upper_is_unlimitedNatural(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
-			*/
-			 
-			virtual bool value_specification_constant(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
-			*/
-			 
-			virtual bool value_specification_no_side_effects(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -242,13 +191,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

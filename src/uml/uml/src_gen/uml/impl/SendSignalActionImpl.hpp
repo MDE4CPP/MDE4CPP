@@ -50,28 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The number and order of argument InputPins must be the same as the number and order of attributes of the signal.
-			argument->size()=signal.allAttributes()->size()
-			*/
-			 
-			virtual bool number_order(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
-			let attribute: OrderedSet(Property) = signal.allAttributes() in
-			Sequence{1..argument->size()}->forAll(i | 
-				argument->at(i).type.conformsTo(attribute->at(i).type) and 
-				argument->at(i).isOrdered = attribute->at(i).isOrdered and
-				argument->at(i).compatibleWith(attribute->at(i)))
-			*/
-			 
-			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
-			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
-			*/
-			 
-			virtual bool type_target_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -113,16 +91,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

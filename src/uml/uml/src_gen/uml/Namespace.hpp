@@ -7,7 +7,6 @@
 #ifndef UML_NAMESPACE_HPP
 #define UML_NAMESPACE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -16,25 +15,9 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 template<class T> class Union;
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -85,18 +68,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Namespace cannot have an ElementImport to one of its ownedMembers.
-			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
-			*/
-			 
-			virtual bool cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Namespace cannot have a PackageImport to itself.
-			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
-			*/
-			 
-			virtual bool cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
@@ -164,12 +135,6 @@ namespace uml
 			*/
 			 
 			virtual bool membersAreDistinguishable() = 0;
-			/*!
-			All the members of a Namespace are distinguishable within it.
-			membersAreDistinguishable()
-			*/
-			 
-			virtual bool members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -225,13 +190,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

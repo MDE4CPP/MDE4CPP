@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
 #include "uml/Class.hpp"
@@ -274,11 +269,6 @@ std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 int OperationImpl::getLower()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
@@ -333,11 +323,6 @@ equals = true;
 return equals;
 
 	//end of body
-}
-
-bool OperationImpl::only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<uml::Parameter> OperationImpl::returnResult()
@@ -600,263 +585,6 @@ std::shared_ptr<ecore::EObject> OperationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void OperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void OperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isQuery");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsQuery(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("bodyCondition");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyCondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("postcondition");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("postcondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("precondition");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("precondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("redefinedOperation");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedOperation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	BehavioralFeatureImpl::loadAttributes(loadHandler, attr_list);
-	ParameterableElementImpl::loadAttributes(loadHandler, attr_list);
-	TemplateableElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void OperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("ownedParameter") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Parameter";
-			}
-			loadHandler->handleChildContainer<uml::Parameter>(this->getProperty_OwnedParameter());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
-	ParameterableElementImpl::loadNode(nodeName, loadHandler);
-	TemplateableElementImpl::loadNode(nodeName, loadHandler);
-}
-
-void OperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>( references.front() );
-				setBodyCondition(_bodyCondition);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>( references.front() );
-				setClass(_class);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>( references.front() );
-				setDatatype(_datatype);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>( references.front() );
-				setInterface(_interface);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
-				if (_r != nullptr)
-				{
-					_postcondition->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
-				if (_r != nullptr)
-				{
-					_precondition->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-		{
-			std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> _redefinedOperation = getRedefinedOperation();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Operation>  _r = std::dynamic_pointer_cast<uml::Operation>(ref);
-				if (_r != nullptr)
-				{
-					_redefinedOperation->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	BehavioralFeatureImpl::resolveReferences(featureID, references);
-	ParameterableElementImpl::resolveReferences(featureID, references);
-	TemplateableElementImpl::resolveReferences(featureID, references);
-}
-
-void OperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	BehavioralFeatureImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	
-	FeatureImpl::saveContent(saveHandler);
-	NamespaceImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getOperation_Attribute_isQuery()) )
-		{
-			saveHandler->addAttribute("isQuery", this->getIsQuery());
-		}
-	// Add references
-		saveHandler->addReference(this->getBodyCondition(), "bodyCondition", getBodyCondition()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
-		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
-		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
-		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'ownedParameter'
-
-		saveHandler->addReferences<uml::Parameter>("ownedParameter", this->getProperty_OwnedParameter());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
@@ -1320,40 +1048,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
  
   	switch(operationID)
 	{
-		// uml::Operation::at_most_one_return(Any, std::map) : bool: 1796067314
-		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'at_most_one_return'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'at_most_one_return'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
 		// uml::Operation::getLower() : int: 2432712746
 		case umlPackage::OPERATION_OPERATION_GETLOWER:
 		{
@@ -1414,40 +1108,6 @@ std::shared_ptr<Any> OperationImpl::eInvoke(int operationID, std::shared_ptr<Bag
 			}
 		
 			result = eAny(this->matches(incoming_param_comparedOperation), 0, false);
-			break;
-		}
-		// uml::Operation::only_body_for_query(Any, std::map) : bool: 2418925081
-		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'only_body_for_query'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'only_body_for_query'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 		// uml::Operation::returnResult() : uml::Parameter: 3088060264

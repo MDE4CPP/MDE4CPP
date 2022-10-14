@@ -7,32 +7,15 @@
 #ifndef UML_ACCEPTEVENTACTION_HPP
 #define UML_ACCEPTEVENTACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -91,53 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If isUnmarshall=false and all the triggers are for SignalEvents, then the type of the single result OutputPin must either be null or all the signals must conform to it.
-			not isUnmarshall implies 
-				result->isEmpty() or
-				let type: Type = result->first().type in
-				type=null or 
-					(trigger->forAll(event.oclIsKindOf(SignalEvent)) and 
-					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
-			*/
-			 
-			virtual bool conforming_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			AcceptEventActions may have no input pins.
-			input->size() = 0
-			*/
-			 
-			virtual bool no_input_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
-			(self.oclIsTypeOf(AcceptEventAction) and
-			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
-			                             event.oclIsKindOf(CallEvent))))
-			implies output->size() = 0
-			*/
-			 
-			virtual bool no_output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
-			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
-				output->size() = 1 and output->first().is(1,1)
-			*/
-			 
-			virtual bool one_output_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
-			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
-				trigger->size()=1 and
-				trigger->asSequence()->first().event.oclIsKindOf(SignalEvent) and
-				let attribute: OrderedSet(Property) = trigger->asSequence()->first().event.oclAsType(SignalEvent).signal.allAttributes() in
-				attribute->size()>0 and result->size() = attribute->size() and
-				Sequence{1..result->size()}->forAll(i | 
-					result->at(i).type = attribute->at(i).type and 
-					result->at(i).isOrdered = attribute->at(i).isOrdered and
-					result->at(i).includesMultiplicity(attribute->at(i)))
-			*/
-			 
-			virtual bool unmarshall_signal_events(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -179,13 +115,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

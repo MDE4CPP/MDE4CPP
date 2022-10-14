@@ -36,11 +36,6 @@
 //Includes from codegen annotation
 #include <algorithm>
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -211,16 +206,6 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool NamedElementImpl::has_qualified_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
@@ -232,11 +217,6 @@ std::string NamedElementImpl::separator() const
 	//generated from body annotation
 	return "::";
 	//end of body
-}
-
-bool NamedElementImpl::visibility_needs_ownership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
@@ -317,167 +297,6 @@ std::shared_ptr<ecore::EObject> NamedElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void NamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("name");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'std::string'
-			std::string value;
-			value = iter->second;
-			this->setName(value);
-		}
-
-		iter = attr_list.find("visibility");
-		if ( iter != attr_list.end() )
-		{
-			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
-			std::string literal = iter->second;
-						if (literal == "public")
-			{
-				value = uml::VisibilityKind::PUBLIC;
-			}
-			else 			if (literal == "private")
-			{
-				value = uml::VisibilityKind::PRIVATE;
-			}
-			else 			if (literal == "protected")
-			{
-				value = uml::VisibilityKind::PROTECTED;
-			}
-			else 			if (literal == "package")
-			{
-				value = uml::VisibilityKind::PACKAGE;
-			}
-			this->setVisibility(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("nameExpression") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "StringExpression";
-			}
-			loadHandler->handleChild(this->getNameExpression()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ElementImpl::loadNode(nodeName, loadHandler);
-}
-
-void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ElementImpl::resolveReferences(featureID, references);
-}
-
-void NamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'nameExpression'
-		std::shared_ptr<uml::StringExpression> nameExpression = this->getNameExpression();
-		if (nameExpression != nullptr)
-		{
-			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
-		}
-		// Add attributes
-		if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
-		{
-			saveHandler->addAttribute("name", this->getName());
-		}
-
-		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
-		{
-			uml::VisibilityKind value = this->getVisibility();
-			std::string literal = "";
-			if (value == uml::VisibilityKind::PUBLIC)
-			{
-				literal = "public";
-			}
-			else if (value == uml::VisibilityKind::PRIVATE)
-			{
-				literal = "private";
-			}
-			else if (value == uml::VisibilityKind::PROTECTED)
-			{
-				literal = "protected";
-			}
-			else if (value == uml::VisibilityKind::PACKAGE)
-			{
-				literal = "package";
-			}
-			saveHandler->addAttribute("visibility", literal);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
@@ -725,74 +544,6 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 			result = eAny(this->getQualifiedName(), 0, false);
 			break;
 		}
-		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 539959656
-		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_no_qualified_name'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_no_qualified_name'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
-		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2208944440
-		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'has_qualified_name'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'has_qualified_name'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
 		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 3034150359
 		case umlPackage::NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE:
 		{
@@ -855,40 +606,6 @@ std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
 			result = eAny(this->separator(), 0, false);
-			break;
-		}
-		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 3453868149
-		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'visibility_needs_ownership'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'visibility_needs_ownership'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

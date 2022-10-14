@@ -205,15 +205,6 @@ namespace uml
 			 
 			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier> contract) ;
 			/*!
-			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances also be its subclasses.
-			powertypeExtent->forAll( gs | 
-			  gs.generalization->forAll( gen | 
-			    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) 
-			  ))
-			*/
-			 
-			virtual bool maps_to_generalization_set(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
 			result = (self.oclIsKindOf(c.oclType()))
 			<p>From package UML::Classification.</p>
@@ -221,30 +212,12 @@ namespace uml
 			 
 			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier> c) ;
 			/*!
-			Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
-			not allParents()->includes(self)
-			*/
-			 
-			virtual bool no_cycles_in_generalization(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The parents of a Classifier must be non-final.
-			parents()->forAll(not isFinalSpecialization)
-			*/
-			 
-			virtual bool non_final_parents(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query parents() gives all of the immediate ancestors of a generalized Classifier.
 			result = (generalization.general->asSet())
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Classifier>> parents() ;
-			/*!
-			A Classifier may only specialize Classifiers of a valid type.
-			parents()->forAll(c | self.maySpecializeType(c))
-			*/
-			 
-			virtual bool specialize_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -366,16 +339,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

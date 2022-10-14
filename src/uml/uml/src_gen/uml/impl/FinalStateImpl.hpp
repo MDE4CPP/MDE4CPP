@@ -48,42 +48,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A FinalState cannot reference a submachine.
-			submachine->isEmpty()
-			*/
-			 
-			virtual bool cannot_reference_submachine(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A FinalState has no entry Behavior.
-			entry->isEmpty()
-			*/
-			 
-			virtual bool no_entry_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A FinalState has no exit Behavior.
-			exit->isEmpty()
-			*/
-			 
-			virtual bool no_exit_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A FinalState cannot have any outgoing Transitions.
-			outgoing->size() = 0
-			*/
-			 
-			virtual bool no_outgoing_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A FinalState cannot have Regions.
-			region->size() = 0
-			*/
-			 
-			virtual bool no_regions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A FinalState has no state (doActivity) Behavior.
-			doActivity->isEmpty()
-			*/
-			 
-			virtual bool no_state_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,16 +65,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

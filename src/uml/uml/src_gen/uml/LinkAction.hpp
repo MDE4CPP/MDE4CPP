@@ -7,32 +7,15 @@
 #ifndef UML_LINKACTION_HPP
 #define UML_LINKACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -99,24 +82,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Association> association() = 0;
-			/*!
-			The ends of the endData must not be static.
-			endData->forAll(not end.isStatic)
-			*/
-			 
-			virtual bool not_static(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
-			endData.end = self.association().memberEnd->asBag()
-			*/
-			 
-			virtual bool same_association(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
-			inputValue->asBag()=endData.allPins()
-			*/
-			 
-			virtual bool same_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -146,13 +111,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

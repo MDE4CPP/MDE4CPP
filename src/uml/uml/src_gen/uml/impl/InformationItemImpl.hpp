@@ -51,28 +51,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An informationItem has no feature, no generalization, and no associations.
-			self.generalization->isEmpty() and self.feature->isEmpty()
-			*/
-			 
-			virtual bool has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			It is not instantiable.
-			isAbstract
-			*/
-			 
-			virtual bool not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
-			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
-			  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and
-			    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and
-			      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or
-			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
-			*/
-			 
-			virtual bool sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -96,16 +74,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

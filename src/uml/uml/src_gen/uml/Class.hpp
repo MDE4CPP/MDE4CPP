@@ -7,7 +7,6 @@
 #ifndef UML_CLASS_HPP
 #define UML_CLASS_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -102,11 +85,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class.
-			*/
-			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType) = 0;
 			virtual std::shared_ptr<Bag<uml::Operation>> getAllOperations() = 0;
 			/*!
 			Derivation for Class::/extension : Extension
@@ -129,12 +107,6 @@ namespace uml
 			*/
 			 
 			virtual bool isMetaclass() = 0;
-			/*!
-			Only an active Class may own Receptions and have a classifierBehavior.
-			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null)
-			*/
-			 
-			virtual bool passive_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -195,13 +167,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

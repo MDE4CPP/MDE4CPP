@@ -79,25 +79,6 @@ namespace uml
 			 
 			virtual bool isPositive() ;
 			/*!
-			If the language attribute is not empty, then the size of the body and language arrays must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size())
-			*/
-			 
-			virtual bool language_body_size(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The behavior must have exactly one return result parameter.
-			behavior <> null implies
-			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
-			*/
-			 
-			virtual bool one_return_result_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The behavior may only have return result parameters.
-			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
-			*/
-			 
-			virtual bool only_return_result_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
 			result = (0)
@@ -152,16 +133,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

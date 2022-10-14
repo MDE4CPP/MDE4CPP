@@ -7,32 +7,15 @@
 #ifndef UML_REPLYACTION_HPP
 #define UML_REPLYACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -91,23 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The event of the replyToCall Trigger must be a CallEvent.
-			replyToCall.event.oclIsKindOf(CallEvent)
-			*/
-			 
-			virtual bool event_on_reply_to_call_trigger(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
-			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
-			replyValue->size()=parameter->size() and
-			Sequence{1..replyValue->size()}->forAll(i |
-				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
-				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
-				replyValue->at(i).compatibleWith(parameter->at(i)))
-			*/
-			 
-			virtual bool pins_match_parameter(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -155,13 +121,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

@@ -7,7 +7,6 @@
 #ifndef UML_ELEMENT_HPP
 #define UML_ELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -18,21 +17,6 @@ class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace ecore 
@@ -240,12 +224,6 @@ namespace uml
 			 
 			virtual bool hasValue(std::shared_ptr<uml::Stereotype> stereotype, std::string propertyName) = 0;
 			/*!
-			Elements that must be owned must have an owner.
-			mustBeOwned() implies owner->notEmpty()
-			*/
-			 
-			virtual bool has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			Determines whether the specified stereotype is applicable to this element.
 			*/
 			 
@@ -267,12 +245,6 @@ namespace uml
 			*/
 			 
 			virtual bool mustBeOwned() = 0;
-			/*!
-			An element may not directly or indirectly own itself.
-			not allOwnedElements()->includes(self)
-			*/
-			 
-			virtual bool not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Removes the specified keyword from this element.
 			*/
@@ -325,13 +297,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

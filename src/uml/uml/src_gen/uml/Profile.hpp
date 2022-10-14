@@ -7,7 +7,6 @@
 #ifndef UML_PROFILE_HPP
 #define UML_PROFILE_HPP
 
-#include <map>
 #include <unordered_map>
 
 #include <memory>
@@ -19,21 +18,6 @@ class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace ecore 
@@ -144,25 +128,6 @@ namespace uml
 			*/
 			 
 			virtual bool isDefined() = 0;
-			/*!
-			An element imported as a metaclassReference is not specialized or generalized in a Profile.
-			metaclassReference.importedElement->
-				select(c | c.oclIsKindOf(Classifier) and
-					(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()
-			and 
-			packagedElement->
-			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
-			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()
-			*/
-			 
-			virtual bool metaclass_reference_not_specialized(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
-			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
-			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
-			*/
-			 
-			virtual bool references_same_metamodel(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -192,13 +157,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

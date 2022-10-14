@@ -7,32 +7,15 @@
 #ifndef UML_INFORMATIONITEM_HPP
 #define UML_INFORMATIONITEM_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -92,28 +75,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An informationItem has no feature, no generalization, and no associations.
-			self.generalization->isEmpty() and self.feature->isEmpty()
-			*/
-			 
-			virtual bool has_no(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			It is not instantiable.
-			isAbstract
-			*/
-			 
-			virtual bool not_instantiable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
-			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
-			  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and
-			    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and
-			      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or
-			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
-			*/
-			 
-			virtual bool sources_and_targets(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -137,13 +98,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

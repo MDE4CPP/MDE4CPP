@@ -53,39 +53,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty()
-			*/
-			 
-			virtual bool connector_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
-			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
-			and
-			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
-			*/
-			 
-			virtual bool in_and_out(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual bool isSetDefault() ;
-			/*!
-			An input Parameter cannot be an exception.
-			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
-			*/
-			 
-			virtual bool not_exception(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Parameters typed by DataTypes cannot have an effect.
-			(type.oclIsKindOf(DataType)) implies (effect = null)
-			*/
-			 
-			virtual bool object_effect(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant
-			*/
-			 
-			virtual bool reentrant_behaviors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this parameter to the specified Boolean value.
 			*/
@@ -116,12 +84,6 @@ namespace uml
 			*/
 			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) ;
-			/*!
-			A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream)
-			*/
-			 
-			virtual bool stream_and_exception(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
@@ -226,16 +188,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

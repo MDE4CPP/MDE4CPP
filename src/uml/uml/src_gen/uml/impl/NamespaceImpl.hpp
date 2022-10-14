@@ -47,18 +47,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			A Namespace cannot have an ElementImport to one of its ownedMembers.
-			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
-			*/
-			 
-			virtual bool cannot_import_ownedMembers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Namespace cannot have a PackageImport to itself.
-			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
-			*/
-			 
-			virtual bool cannot_import_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
 			 
@@ -125,12 +113,6 @@ namespace uml
 			*/
 			 
 			virtual bool membersAreDistinguishable() ;
-			/*!
-			All the members of a Namespace are distinguishable within it.
-			membersAreDistinguishable()
-			*/
-			 
-			virtual bool members_distinguishable(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -186,16 +168,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

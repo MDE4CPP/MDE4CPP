@@ -58,35 +58,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::UseCase>> allIncludedUseCases() ;
-			/*!
-			UseCases can only be involved in binary Associations.
-			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
-			*/
-			 
-			virtual bool binary_associations(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A UseCase cannot include UseCases that directly or indirectly include it.
-			not allIncludedUseCases()->includes(self)
-			*/
-			 
-			virtual bool cannot_include_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A UseCase must have a name.
-			name -> notEmpty ()
-			*/
-			 
-			virtual bool must_have_name(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			UseCases cannot have Associations to UseCases specifying the same subject.
-			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
-			   (
-			   let usecases: Set(UseCase) = a.memberEnd.type->select(oclIsKindOf(UseCase))->collect(oclAsType(UseCase))->asSet() in
-			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
-			   )
-			)
-			*/
-			 
-			virtual bool no_association_to_use_case(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,16 +99,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

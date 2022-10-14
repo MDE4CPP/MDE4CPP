@@ -7,32 +7,15 @@
 #ifndef UML_READLINKOBJECTENDACTION_HPP
 #define UML_READLINKOBJECTENDACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -91,48 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The association of the end must be an AssociationClass.
-			end.association.oclIsKindOf(AssociationClass)
-			*/
-			 
-			virtual bool association_of_association(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The ends of the association must not be static.
-			end.association.memberEnd->forAll(e | not e.isStatic)
-			*/
-			 
-			virtual bool ends_of_association(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The multiplicity of the object InputPin is 1..1.
-			object.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The multiplicity of the result OutputPin is 1..1.
-			result.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The end Property must be an Association memberEnd.
-			end.association <> null
-			*/
-			 
-			virtual bool property(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of the object InputPin is the AssociationClass that owns the end Property.
-			object.type = end.association
-			*/
-			 
-			virtual bool type_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of the result OutputPin is the same as the type of the end Property.
-			result.type = end.type
-			*/
-			 
-			virtual bool type_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -186,13 +127,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

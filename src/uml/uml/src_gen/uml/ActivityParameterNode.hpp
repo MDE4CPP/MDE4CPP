@@ -7,31 +7,14 @@
 #ifndef UML_ACTIVITYPARAMETERNODE_HPP
 #define UML_ACTIVITYPARAMETERNODE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -91,41 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The parameter of an ActivityParameterNode must be from the containing Activity.
-			activity.ownedParameter->includes(parameter)
-			*/
-			 
-			virtual bool has_parameters(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
-			incoming->isEmpty() or outgoing->isEmpty()
-			*/
-			 
-			virtual bool no_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
-			(outgoing->notEmpty() and incoming->isEmpty()) implies 
-				(parameter.direction = ParameterDirectionKind::_'in' or 
-				 parameter.direction = ParameterDirectionKind::inout)
-			*/
-			 
-			virtual bool no_incoming_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An ActivityParameterNode with no outgoing ActivityEdges and one or more incoming ActivityEdges must have a parameter with direction out, inout, or return.
-			(incoming->notEmpty() and outgoing->isEmpty()) implies 
-				(parameter.direction = ParameterDirectionKind::out or 
-				 parameter.direction = ParameterDirectionKind::inout or 
-				 parameter.direction = ParameterDirectionKind::return)
-			*/
-			 
-			virtual bool no_outgoing_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of an ActivityParameterNode is the same as the type of its parameter.
-			type = parameter.type
-			*/
-			 
-			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -155,13 +103,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

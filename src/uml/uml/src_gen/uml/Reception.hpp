@@ -7,31 +7,14 @@
 #ifndef UML_RECEPTION_HPP
 #define UML_RECEPTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -88,25 +71,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Reception has the same name as its signal
-			name = signal.name
-			*/
-			 
-			virtual bool same_name_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
-			signal.ownedAttribute->size() = ownedParameter->size() and
-			Sequence{1..signal.ownedAttribute->size()}->forAll( i | 
-			    ownedParameter->at(i).direction = ParameterDirectionKind::_'in' and 
-			    ownedParameter->at(i).name = signal.ownedAttribute->at(i).name and
-			    ownedParameter->at(i).type = signal.ownedAttribute->at(i).type and
-			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
-			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
-			)
-			*/
-			 
-			virtual bool same_structure_as_signal(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -136,13 +100,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

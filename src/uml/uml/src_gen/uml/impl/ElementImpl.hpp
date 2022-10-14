@@ -196,12 +196,6 @@ namespace uml
 			 
 			virtual bool hasValue(std::shared_ptr<uml::Stereotype> stereotype, std::string propertyName) ;
 			/*!
-			Elements that must be owned must have an owner.
-			mustBeOwned() implies owner->notEmpty()
-			*/
-			 
-			virtual bool has_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			Determines whether the specified stereotype is applicable to this element.
 			*/
 			 
@@ -223,12 +217,6 @@ namespace uml
 			*/
 			 
 			virtual bool mustBeOwned() ;
-			/*!
-			An element may not directly or indirectly own itself.
-			not allOwnedElements()->includes(self)
-			*/
-			 
-			virtual bool not_own_self(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Removes the specified keyword from this element.
 			*/
@@ -281,16 +269,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

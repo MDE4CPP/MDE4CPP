@@ -7,32 +7,15 @@
 #ifndef UML_UNMARSHALLACTION_HPP
 #define UML_UNMARSHALLACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -90,40 +73,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of the object InputPin is 1..1
-			object.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
-			unmarshallType.allAttributes()->size() = result->size()
-			*/
-			 
-			virtual bool number_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of the object InputPin conform to the unmarshallType.
-			object.type.conformsTo(unmarshallType)
-			*/
-			 
-			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The unmarshallType must have at least one StructuralFeature.
-			unmarshallType.allAttributes()->size() >= 1
-			*/
-			 
-			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
-			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
-			Sequence{1..result->size()}->forAll(i | 
-				attribute->at(i).type.conformsTo(result->at(i).type) and
-				attribute->at(i).isOrdered=result->at(i).isOrdered and
-				attribute->at(i).compatibleWith(result->at(i)))
-			*/
-			 
-			virtual bool type_ordering_and_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -171,13 +120,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

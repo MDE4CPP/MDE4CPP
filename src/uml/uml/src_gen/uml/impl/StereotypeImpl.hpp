@@ -52,35 +52,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			Where a stereotype’s property is an association end for an association other than a kind of extension, and the other end is not a stereotype, the other end must be owned by the association itself.
-			ownedAttribute
-			->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))
-			->forAll(opposite.owner = association)
-			*/
-			 
-			virtual bool associationEndOwnership(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
-			*/
-			 
-			virtual bool base_property_multiplicity_multiple_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
-			*/
-			 
-			virtual bool base_property_multiplicity_single_extension(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The upper bound of base-properties is exactly 1.
-			*/
-			 
-			virtual bool base_property_upper_bound(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Stereotypes may only participate in binary associations.
-			ownedAttribute.association->forAll(memberEnd->size()=2)
-			*/
-			 
-			virtual bool binaryAssociationsOnly(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
 			result = (self.namespace.oclAsType(Package).containingProfile())
 			<p>From package UML::Packages.</p>
@@ -102,13 +73,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Image> createIcon(std::string format, std::string content) ;
-			/*!
-			A Stereotype may only generalize or specialize another Stereotype.
-			allParents()->forAll(oclIsKindOf(Stereotype)) 
-			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
-			*/
-			 
-			virtual bool generalize(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
 			*/
@@ -135,11 +99,6 @@ namespace uml
 			 
 			virtual std::string getKeyword(bool localize) ;
 			
-			/*!
-			Stereotype names should not clash with keyword names for the extended model element.
-			*/
-			 
-			virtual bool name_not_clash(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -169,16 +128,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

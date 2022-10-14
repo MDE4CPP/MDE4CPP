@@ -7,7 +7,6 @@
 #ifndef UML_PORT_HPP
 #define UML_PORT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -111,18 +94,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::Interface>> basicRequired() = 0;
 			/*!
-			A defaultValue for port cannot be specified when the type of the Port is an Interface.
-			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
-			*/
-			 
-			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All Ports are owned by an EncapsulatedClassifier.
-			owner = encapsulatedClassifier
-			*/
-			 
-			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
 			<p>From package UML::StructuredClassifiers.</p>
@@ -136,12 +107,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() = 0;
-			/*!
-			Port.aggregation must be composite.
-			aggregation = AggregationKind::composite
-			*/
-			 
-			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -225,13 +190,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

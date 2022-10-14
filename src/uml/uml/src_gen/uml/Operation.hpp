@@ -7,7 +7,6 @@
 #ifndef UML_OPERATION_HPP
 #define UML_OPERATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -115,12 +98,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
-			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
-			*/
-			 
-			virtual bool at_most_one_return(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
 			<p>From package UML::Classification.</p>
@@ -155,12 +132,6 @@ namespace uml
 			 
 			virtual bool isUnique() = 0;
 			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) = 0;
-			/*!
-			A bodyCondition can only be specified for a query Operation.
-			bodyCondition <> null implies isQuery
-			*/
-			 
-			virtual bool only_body_for_query(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -299,13 +270,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

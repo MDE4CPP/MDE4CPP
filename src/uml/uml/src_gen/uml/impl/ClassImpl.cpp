@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/BehavioredClassifier.hpp"
 #include "uml/Class.hpp"
@@ -72,7 +67,6 @@
 #include "uml/TemplateBinding.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "uml/TemplateSignature.hpp"
-#include "uml/Type.hpp"
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
@@ -289,11 +283,6 @@ std::shared_ptr<ecore::EObject> ClassImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 std::shared_ptr<Bag<uml::Operation>> ClassImpl::getAllOperations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -340,11 +329,6 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClasses()
 }
 
 bool ClassImpl::isMetaclass()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassImpl::passive_class(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -504,219 +488,6 @@ std::shared_ptr<ecore::EObject> ClassImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void ClassImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ClassImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isActive");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsActive(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("superClass");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("superClass")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
-	EncapsulatedClassifierImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	try
-	{
-		if ( nodeName.compare("nestedClassifier") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<uml::Classifier>(this->getNestedClassifier());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("ownedAttribute") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Property";
-			}
-			loadHandler->handleChildContainer<uml::Property>(this->getClass_OwnedAttribute());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("ownedOperation") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Operation";
-			}
-			loadHandler->handleChildContainer<uml::Operation>(this->getOwnedOperation());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("ownedReception") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Reception";
-			}
-			loadHandler->handleChildContainer<uml::Reception>(this->getOwnedReception());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
-	EncapsulatedClassifierImpl::loadNode(nodeName, loadHandler);
-}
-
-void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
-		{
-			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Class>  _r = std::dynamic_pointer_cast<uml::Class>(ref);
-				if (_r != nullptr)
-				{
-					_superClass->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	BehavioredClassifierImpl::resolveReferences(featureID, references);
-	EncapsulatedClassifierImpl::resolveReferences(featureID, references);
-}
-
-void ClassImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	BehavioredClassifierImpl::saveContent(saveHandler);
-	EncapsulatedClassifierImpl::saveContent(saveHandler);
-	
-	StructuredClassifierImpl::saveContent(saveHandler);
-	
-	ClassifierImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'nestedClassifier'
-		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
-		{
-			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
-		}
-
-		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getClass_OwnedAttribute()) 
-		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
-		}
-
-		// Save 'ownedOperation'
-		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
-		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
-		}
-
-		// Save 'ownedReception'
-		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
-		{
-			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
-		}
-		// Add attributes
-		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
-		{
-			saveHandler->addAttribute("isActive", this->getIsActive());
-		}
-	// Add references
-		saveHandler->addReferences<uml::Class>("superClass", this->getSuperClass());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
@@ -1049,101 +820,6 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
  
   	switch(operationID)
 	{
-		// uml::Class::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 2458539796
-		case umlPackage::CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
-		{
-			//Retrieve input parameter 'name'
-			//parameter 0
-			std::string incoming_param_name;
-			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedOperation'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'parameterNames'
-			//parameter 1
-			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'createOwnedOperation'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'parameterTypes'
-			//parameter 2
-			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			{
-				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_parameterTypes_arguments_citer));
-				if(ecoreContainerAny)
-				{
-					try
-					{
-						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
-				
-						if(eObjectList)
-						{
-							incoming_param_parameterTypes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
-							{
-								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
-								incoming_param_parameterTypes->add(_temp);
-							}
-						}
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!")
-					return nullptr;
-				}
-			}
-		
-			//Retrieve input parameter 'returnType'
-			//parameter 3
-			std::shared_ptr<uml::Type> incoming_param_returnType;
-			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
-			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_returnType_arguments_citer));
-				if(ecoreAny)
-				{
-					try
-					{
-						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_returnType = std::dynamic_pointer_cast<uml::Type>(_temp);
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!")
-					return nullptr;
-				}
-			}
-		
-			result = eEcoreAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
-			break;
-		}
 		// uml::Class::getAllOperations() : uml::Operation[*]: 3178057285
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
@@ -1169,40 +845,6 @@ std::shared_ptr<Any> ClassImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
 		case umlPackage::CLASS_OPERATION_ISMETACLASS:
 		{
 			result = eAny(this->isMetaclass(), 0, false);
-			break;
-		}
-		// uml::Class::passive_class(Any, std::map) : bool: 3738386724
-		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'passive_class'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'passive_class'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context), 0, false);
 			break;
 		}
 

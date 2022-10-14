@@ -7,31 +7,14 @@
 #ifndef UML_FINALSTATE_HPP
 #define UML_FINALSTATE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -89,42 +72,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A FinalState cannot reference a submachine.
-			submachine->isEmpty()
-			*/
-			 
-			virtual bool cannot_reference_submachine(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A FinalState has no entry Behavior.
-			entry->isEmpty()
-			*/
-			 
-			virtual bool no_entry_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A FinalState has no exit Behavior.
-			exit->isEmpty()
-			*/
-			 
-			virtual bool no_exit_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A FinalState cannot have any outgoing Transitions.
-			outgoing->size() = 0
-			*/
-			 
-			virtual bool no_outgoing_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A FinalState cannot have Regions.
-			region->size() = 0
-			*/
-			 
-			virtual bool no_regions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A FinalState has no state (doActivity) Behavior.
-			doActivity->isEmpty()
-			*/
-			 
-			virtual bool no_state_behavior(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -142,13 +89,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

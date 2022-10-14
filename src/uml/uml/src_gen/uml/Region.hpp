@@ -7,32 +7,15 @@
 #ifndef UML_REGION_HPP
 #define UML_REGION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -124,26 +107,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			/*!
-			A Region can have at most one deep history Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			   select(kind = PseudostateKind::deepHistory)->size() <= 1
-			*/
-			 
-			virtual bool deep_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Region can have at most one initial Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::initial)->size() <= 1
-			*/
-			 
-			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
-			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
-			*/
-			 
-			virtual bool owned(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -155,13 +118,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
-			/*!
-			A Region can have at most one shallow history Vertex.
-			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
-			*/
-			 
-			virtual bool shallow_history_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -227,13 +183,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

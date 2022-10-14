@@ -76,18 +76,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::Interface>> basicRequired() ;
 			/*!
-			A defaultValue for port cannot be specified when the type of the Port is an Interface.
-			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
-			*/
-			 
-			virtual bool default_value(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			All Ports are owned by an EncapsulatedClassifier.
-			owner = encapsulatedClassifier
-			*/
-			 
-			virtual bool encapsulated_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
 			<p>From package UML::StructuredClassifiers.</p>
@@ -101,12 +89,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() ;
-			/*!
-			Port.aggregation must be composite.
-			aggregation = AggregationKind::composite
-			*/
-			 
-			virtual bool port_aggregation(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -190,16 +172,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

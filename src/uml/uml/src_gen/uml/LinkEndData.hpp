@@ -7,32 +7,15 @@
 #ifndef UML_LINKENDDATA_HPP
 #define UML_LINKENDDATA_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -84,36 +67,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::InputPin>> allPins() = 0;
-			/*!
-			The value InputPin is not also the qualifier value InputPin.
-			value->excludesAll(qualifier.value)
-			*/
-			 
-			virtual bool end_object_input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The multiplicity of the value InputPin must be 1..1.
-			value<>null implies value.is(1,1)
-			*/
-			 
-			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The Property must be an Association memberEnd.
-			end.association <> null
-			*/
-			 
-			virtual bool property_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The qualifiers must be qualifiers of the Association end.
-			end.qualifier->includesAll(qualifier.qualifier)
-			*/
-			 
-			virtual bool qualifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of the value InputPin conforms to the type of the Association end.
-			value<>null implies value.type.conformsTo(end.type)
-			*/
-			 
-			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -161,13 +114,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

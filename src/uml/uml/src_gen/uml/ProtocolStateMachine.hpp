@@ -7,32 +7,15 @@
 #ifndef UML_PROTOCOLSTATEMACHINE_HPP
 #define UML_PROTOCOLSTATEMACHINE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -106,26 +89,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			ProtocolStateMachines cannot have deep or shallow history Pseudostates.
-			region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies
-			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
-			*/
-			 
-			virtual bool deep_or_shallow_history(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
-			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
-			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
-			*/
-			 
-			virtual bool entry_exit_do(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
-			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
-			*/
-			 
-			virtual bool protocol_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -149,13 +112,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

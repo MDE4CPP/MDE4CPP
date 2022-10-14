@@ -51,36 +51,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::InputPin>> allPins() ;
-			/*!
-			The value InputPin is not also the qualifier value InputPin.
-			value->excludesAll(qualifier.value)
-			*/
-			 
-			virtual bool end_object_input_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The multiplicity of the value InputPin must be 1..1.
-			value<>null implies value.is(1,1)
-			*/
-			 
-			virtual bool multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The Property must be an Association memberEnd.
-			end.association <> null
-			*/
-			 
-			virtual bool property_is_association_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The qualifiers must be qualifiers of the Association end.
-			end.qualifier->includesAll(qualifier.qualifier)
-			*/
-			 
-			virtual bool qualifiers(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the value InputPin conforms to the type of the Association end.
-			value<>null implies value.type.conformsTo(end.type)
-			*/
-			 
-			virtual bool same_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,16 +98,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

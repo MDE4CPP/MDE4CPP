@@ -50,40 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of the object InputPin is 1..1
-			object.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_object(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
-			unmarshallType.allAttributes()->size() = result->size()
-			*/
-			 
-			virtual bool number_of_result(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the object InputPin conform to the unmarshallType.
-			object.type.conformsTo(unmarshallType)
-			*/
-			 
-			virtual bool object_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The unmarshallType must have at least one StructuralFeature.
-			unmarshallType.allAttributes()->size() >= 1
-			*/
-			 
-			virtual bool structural_feature(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
-			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
-			Sequence{1..result->size()}->forAll(i | 
-				attribute->at(i).type.conformsTo(result->at(i).type) and
-				attribute->at(i).isOrdered=result->at(i).isOrdered and
-				attribute->at(i).compatibleWith(result->at(i)))
-			*/
-			 
-			virtual bool type_ordering_and_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -131,16 +97,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

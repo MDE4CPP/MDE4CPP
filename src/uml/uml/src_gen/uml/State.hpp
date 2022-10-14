@@ -7,32 +7,15 @@
 #ifndef UML_STATE_HPP
 #define UML_STATE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -93,26 +76,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			Only composite States can have entry or exit Pseudostates defined.
-			connectionPoint->notEmpty() implies isComposite
-			*/
-			 
-			virtual bool composite_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
-			self.isSubmachineState implies (self.connection->forAll (cp |
-			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
-			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
-			*/
-			 
-			virtual bool destinations_or_sources_of_transitions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only entry or exit Pseudostates can serve as connection points.
-			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
-			*/
-			 
-			virtual bool entry_or_exit(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			A composite State is a State with at least one Region.
 			result = (region->notEmpty())
 			<p>From package UML::StateMachines.</p>
@@ -152,18 +115,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
-			/*!
-			A State is not allowed to have both a submachine and Regions.
-			isComposite implies not isSubmachineState
-			*/
-			 
-			virtual bool submachine_or_regions(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only submachine States can have connection point references.
-			isSubmachineState implies connection->notEmpty( )
-			*/
-			 
-			virtual bool submachine_states(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -301,13 +252,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

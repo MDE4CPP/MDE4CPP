@@ -46,57 +46,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
-			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
-			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source))
-			*/
-			 
-			virtual bool edge_source_target(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
-			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
-			*/
-			 
-			virtual bool exception_input_type(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
-			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
-			*/
-			 
-			virtual bool handler_body_edges(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner
-			*/
-			 
-			virtual bool handler_body_owner(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
-			handlerBody.oclIsKindOf(Action) and
-			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput
-			*/
-			 
-			virtual bool one_input(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
-			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
-			(
-			  handlerBody.oclIsKindOf(Action) and 
-			  let protectedNodeOutput : OrderedSet(OutputPin) = protectedNode.oclAsType(Action).output,
-			        handlerBodyOutput : OrderedSet(OutputPin) =  handlerBody.oclAsType(Action).output in
-			    protectedNodeOutput->size() = handlerBodyOutput->size() and
-			    Sequence{1..protectedNodeOutput->size()}->forAll(i |
-			    	handlerBodyOutput->at(i).type.conformsTo(protectedNodeOutput->at(i).type) and
-			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
-			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
-			)
-			*/
-			 
-			virtual bool output_pins(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -156,16 +105,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

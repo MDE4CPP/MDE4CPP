@@ -7,31 +7,14 @@
 #ifndef UML_ASSOCIATIONCLASS_HPP
 #define UML_ASSOCIATIONCLASS_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -100,18 +83,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An AssociationClass cannot be defined between itself and something else.
-			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self)
-			*/
-			 
-			virtual bool cannot_be_defined(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The owned attributes and owned ends of an AssociationClass are disjoint.
-			ownedAttribute->intersection(ownedEnd)->isEmpty()
-			*/
-			 
-			virtual bool disjoint_attributes_ends(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -129,13 +100,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

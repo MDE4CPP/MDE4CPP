@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
@@ -34,11 +34,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
-#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-
-#include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
 #include "uml/Element.hpp"
@@ -130,10 +125,6 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -193,164 +184,6 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Persistence Functions
-//*********************************
-void PackageImportImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("visibility");
-		if ( iter != attr_list.end() )
-		{
-			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
-			std::string literal = iter->second;
-						if (literal == "public")
-			{
-				value = uml::VisibilityKind::PUBLIC;
-			}
-			else 			if (literal == "private")
-			{
-				value = uml::VisibilityKind::PRIVATE;
-			}
-			else 			if (literal == "protected")
-			{
-				value = uml::VisibilityKind::PROTECTED;
-			}
-			else 			if (literal == "package")
-			{
-				value = uml::VisibilityKind::PACKAGE;
-			}
-			this->setVisibility(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("importedPackage");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("importedPackage")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
-	//load BasePackage Nodes
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
-}
-
-void PackageImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Package> _importedPackage = std::dynamic_pointer_cast<uml::Package>( references.front() );
-				setImportedPackage(_importedPackage);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>( references.front() );
-				setImportingNamespace(_importingNamespace);
-			}
-			
-			return;
-		}
-	}
-	DirectedRelationshipImpl::resolveReferences(featureID, references);
-}
-
-void PackageImportImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	DirectedRelationshipImpl::saveContent(saveHandler);
-	
-	RelationshipImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-}
-
-void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
-		{
-			uml::VisibilityKind value = this->getVisibility();
-			std::string literal = "";
-			if (value == uml::VisibilityKind::PUBLIC)
-			{
-				literal = "public";
-			}
-			else if (value == uml::VisibilityKind::PRIVATE)
-			{
-				literal = "private";
-			}
-			else if (value == uml::VisibilityKind::PROTECTED)
-			{
-				literal = "protected";
-			}
-			else if (value == uml::VisibilityKind::PACKAGE)
-			{
-				literal = "package";
-			}
-			saveHandler->addAttribute("visibility", literal);
-		}
-	// Add references
-		saveHandler->addReference(this->getImportedPackage(), "importedPackage", getImportedPackage()->eClass() != uml::umlPackage::eInstance()->getPackage_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
 }
 
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
@@ -486,40 +319,6 @@ std::shared_ptr<Any> PackageImportImpl::eInvoke(int operationID, std::shared_ptr
  
   	switch(operationID)
 	{
-		// uml::PackageImport::public_or_private(Any, std::map) : bool: 421704902
-		case umlPackage::PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_diagnostics;
-			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'public_or_private'!")
-				return nullptr;
-			}
-		
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			try
-			{
-				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'public_or_private'!")
-				return nullptr;
-			}
-		
-			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context), 0, false);
-			break;
-		}
 
 		default:
 		{

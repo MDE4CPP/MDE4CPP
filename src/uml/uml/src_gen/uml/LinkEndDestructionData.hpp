@@ -7,31 +7,14 @@
 #ifndef UML_LINKENDDESTRUCTIONDATA_HPP
 #define UML_LINKENDDESTRUCTIONDATA_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -76,17 +59,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			LinkEndDestructionData for ordered, nonunique Association ends must have a single destroyAt InputPin if isDestroyDuplicates is false, which must be of type UnlimitedNatural and have a multiplicity of 1..1. Otherwise, the action has no destroyAt input pin.
-			if  not end.isOrdered or end.isUnique or isDestroyDuplicates
-			then destroyAt = null
-			else
-				destroyAt <> null and 
-				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
-			endif
-			*/
-			 
-			virtual bool destroyAt_pin(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,13 +100,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

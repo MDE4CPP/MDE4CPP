@@ -7,32 +7,15 @@
 #ifndef UML_PSEUDOSTATE_HPP
 #define UML_PSEUDOSTATE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -98,74 +81,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			In a complete statemachine, a choice Vertex must have at least one incoming and one outgoing Transition.
-			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)
-			*/
-			 
-			virtual bool choice_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
-			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2)
-			*/
-			 
-			virtual bool fork_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			History Vertices can have at most one outgoing Transition.
-			((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)
-			*/
-			 
-			virtual bool history_vertices(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An initial Vertex can have at most one outgoing Transition.
-			(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)
-			*/
-			 
-			virtual bool initial_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
-			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)
-			*/
-			 
-			virtual bool join_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
-			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)
-			*/
-			 
-			virtual bool junction_vertex(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
-			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())
-			*/
-			 
-			virtual bool outgoing_from_initial(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
-			(kind = PseudostateKind::join) implies
-			
-			-- for any pair of incoming transitions there exists an orthogonal state which contains the source vetices of these transitions 
-			-- such that these source vertices belong to different regions of that orthogonal state 
-			
-			incoming->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.source, t2.source) in
-				((contState <> null) and (contState.region
-					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))
-			*/
-			 
-			virtual bool transitions_incoming(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
-			(kind = PseudostateKind::fork) implies
-			
-			-- for any pair of outgoing transitions there exists an orthogonal state which contains the targets of these transitions 
-			-- such that these targets belong to different regions of that orthogonal state 
-			
-			outgoing->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.target, t2.target) in
-				((contState <> null) and (contState.region
-					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2)))))
-			*/
-			 
-			virtual bool transitions_outgoing(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -219,13 +134,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

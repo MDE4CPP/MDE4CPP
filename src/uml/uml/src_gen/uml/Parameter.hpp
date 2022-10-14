@@ -7,7 +7,6 @@
 #ifndef UML_PARAMETER_HPP
 #define UML_PARAMETER_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,25 +14,9 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class Any;
 
 //*********************************
 // generated Includes
-#include <map> // used for Persistence
-#include <vector> // used for Persistence
-namespace persistence
-{
-	namespace interfaces
-	{
-		class XLoadHandler; // used for Persistence
-		class XSaveHandler; // used for Persistence
-	}
-}
-
-namespace uml
-{
-	class umlFactory;
-}
 
 //Forward Declaration for used types 
 namespace uml 
@@ -104,39 +87,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty()
-			*/
-			 
-			virtual bool connector_end(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
-			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
-			and
-			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
-			*/
-			 
-			virtual bool in_and_out(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			virtual bool isSetDefault() = 0;
-			/*!
-			An input Parameter cannot be an exception.
-			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
-			*/
-			 
-			virtual bool not_exception(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Parameters typed by DataTypes cannot have an effect.
-			(type.oclIsKindOf(DataType)) implies (effect = null)
-			*/
-			 
-			virtual bool object_effect(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant
-			*/
-			 
-			virtual bool reentrant_behaviors(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Sets the default value for this parameter to the specified Boolean value.
 			*/
@@ -167,12 +118,6 @@ namespace uml
 			*/
 			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
-			/*!
-			A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream)
-			*/
-			 
-			virtual bool stream_and_exception(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			virtual void unsetDefault() = 0;
 
 			//*********************************
@@ -277,13 +222,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************

@@ -50,28 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A BroadcaseSignalAction may not specify onPort.
-			onPort=null
-			*/
-			 
-			virtual bool no_onport(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The number of argument InputPins must be the same as the number of attributes in the signal.
-			argument->size() = signal.allAttributes()->size()
-			*/
-			 
-			virtual bool number_of_arguments(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
-			let attribute: OrderedSet(Property) = signal.allAttributes() in
-			Sequence{1..argument->size()}->forAll(i | 
-				argument->at(i).type.conformsTo(attribute->at(i).type) and 
-				argument->at(i).isOrdered = attribute->at(i).isOrdered and
-				argument->at(i).compatibleWith(attribute->at(i)))
-			*/
-			 
-			virtual bool type_ordering_multiplicity(std::shared_ptr<Any> diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,16 +79,6 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
-			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
-			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
