@@ -74,7 +74,6 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
 			//*********************************
 			// Container Getter
