@@ -325,7 +325,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EObject">
     <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-      <details key="implIncludes" value="#include &quot;ecore/EObjectContainer.hpp&quot;&#xA;#include &quot;ecore/EObjectAny.hpp&quot;"/>
+      <details key="implIncludes" value="#include &quot;ecore/ecoreFactory.hpp&quot;&#xA;#include &quot;ecore/EObjectContainer.hpp&quot;&#xA;#include &quot;ecore/EObjectAny.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="eClass" eType="#//EClass">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
