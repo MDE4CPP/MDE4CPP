@@ -1,0 +1,79 @@
+[comment encoding = UTF-8 /]
+[module generatePackageGlobalFunctionsSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
+[import UML4CPP::generator::main::helpers::keywords /]
+
+[template public generatePackageGlobalFunctionsSource(aPackage : Package)]
+[file (aPackage.generateNamespacePath(false) + '/_GlobalFunctions.cpp', false, 'UTF-8')]
+#include "_GlobalFunctions.hpp"
+#include <iostream>
+
+[aPackage.generatePackageGlobalFunctionsIncludeStatements()/]
+
+[let opaqueBehaviorsForGlobalFunctions : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
+[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctions.namespace->asSet()->sortedBy(name)) separator('\n') after('\n')]
+	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctions->select(oB : OpaqueBehavior | oB.namespace = aNamespace))]
+[anOpaqueBehavior.generateCppType()/] [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][passedParameter.generateCppType(true)/] [passedParameter.name/][/for])
+{
+		[if (anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+		[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	[anOpaqueBehavior.generateCppType()/] [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if][if (returnParameter.upper <> 1)](new Bag<[returnParameter.type.generateCppType(true)/]>())[/if][if(returnParameter.type.isPrimitive())] = [returnParameter.genDefault()/][/if];
+		[/let]
+		[/if]
+
+	[anOpaqueBehavior.generateMethodImplementationFromOpaqueBehavior()/]
+
+		[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+		[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	return [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if];
+		[/let]
+		[/if]
+}
+	[/for]
+[/for]
+[/let]
+
+[/file]
+[/template]
+
+[template private generatePackageGlobalFunctionsIncludeStatements(aPackage : Package) post(trim())]
+[let opaqueBehaviorsForGlobalFunctionsOfPackage : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
+[let includeStatements : Bag(String) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage().collectOpaqueBehaviorIncludeStrings()->flatten()]
+[comment Output all include statements /]
+[if (opaqueBehaviorsForGlobalFunctionsOfPackage.ownedParameter.type
+	->select(t : Type | t.name = 'EEnumerator' or t.name = 'EDiagnosticChain' or t.name = 'EJavaObject')
+	->size() > 0)]
+[collectAbstractDataTypes_Any_IncludeString()/]
+[/if]
+[if (opaqueBehaviorsForGlobalFunctionsOfPackage.ownedParameter
+	->select(p : Parameter | p.upper <> 1)
+	->size() > 0)]
+[collectAbstractDataTypes_Bag_IncludeString()/]
+[/if]
+[for (includeStatement : String | includeStatements->asOrderedSet())]
+[includeStatement/]
+[/for]
+[/let]
+[/let]
+[/template]
+
+[query private requiresAbstractDataTypes_Any_Include(anOpaqueBehavior : OpaqueBehavior) : Boolean = 
+	anOpaqueBehavior.ownedParameter.type
+	->select(t : Type | t.name = 'EEnumerator' or t.name = 'EDiagnosticChain' or t.name = 'EJavaObject')
+	->size() > 0
+ /]
+
+[query private requiresAbstractDataTypes_Bag_Include(anOpaqueBehavior : OpaqueBehavior) : Boolean = 
+	anOpaqueBehavior.ownedParameter
+	->select(p : Parameter | p.upper <> 1)
+	->size() > 0
+ /]
+
+[query private collectAbstractDataTypes_Any_IncludeString(arg : OclAny) : String = '#include "abstractDataTypes/Any.hpp"' /]
+[query private collectAbstractDataTypes_Bag_IncludeString(arg : OclAny) : String = '#include "abstractDataTypes/Bag.hpp"' /]

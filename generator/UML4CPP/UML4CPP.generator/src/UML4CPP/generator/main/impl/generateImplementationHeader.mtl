@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -104,8 +105,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.ownedOperation.generateOperationDecl(true)/]
-			
+			[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
+			[anOperation.generateOperationDecl(true)/]
+			[/for]
+			[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
+			(i.e. they do not define the method for any Operation) are treated as normal C++ methods/]
+			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
+			[anOpaqueBehavior.generateMethodDeclaration(true)/]
+			[/for]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

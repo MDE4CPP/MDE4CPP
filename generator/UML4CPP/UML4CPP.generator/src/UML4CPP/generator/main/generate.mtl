@@ -31,6 +31,8 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::model_package::global_functions::generatePackageGlobalFunctions /]
 
 [template public generateUML(aPackage : Package)]
 [comment @main/]
@@ -62,6 +64,9 @@
 	[aPackage.allOwnedElements()->filter(Class)->select(isGeneratable()).generateElement()/]
 	[aPackage.allOwnedElements()->filter(Interface).generateInterfaceHeaderFile()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationFile()/]
+	[if (aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0)]
+	[aPackage.generatePackageGlobalFunctions()/]
+	[/if]
 	[comment Configuration files and Plugin files should only be generated for the root package/]
 	[if (aPackage.isRootPackage())]
 		[aPackage.generateConfigurationFiles(false)/]

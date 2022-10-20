@@ -84,3 +84,9 @@
 [/if]
 [/for]
 [/template]
+
+[query public collectParameterIncludeStrings(aParameter : Parameter) : Set(String) = Set(String)
+{
+	aParameter.type.collectTypeIncludeStrings()
+}->flatten()
+ /]

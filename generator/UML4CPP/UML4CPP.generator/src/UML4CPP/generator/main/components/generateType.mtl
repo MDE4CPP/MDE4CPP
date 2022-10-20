@@ -108,6 +108,30 @@ std::shared_ptr<[aOperation.type.transformType()/]>
 [/template]
 
 [**
+ * generate the C++ representation of a type for an OpaqueBehavior
+ * 
+ * - pointer for types, which are not primitive or enumeration:
+ * - upper <> 1 -> Bag used  
+ * - error message, if OpaqueBehavior type is undefined or Operation type name is undefined
+*/]
+[template public generateCppType(anOpaqueBehavior : OpaqueBehavior) post (trim())]
+[if (not anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::return)->isEmpty())]
+[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::return)->first()]
+	[let returnType : Type = returnParameter.type]
+	[if (returnParameter.upper <> 1)]
+std::shared_ptr<Bag<[returnType.transformType()/]>>
+		[elseif (not (returnType.isPrimitive() or returnType.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[returnType.transformType()/]>
+		[else]
+[returnType.transformType()/][/if]
+	[/let]
+[/let]
+[else]
+[transformType(null)/]
+[/if]
+[/template]
+
+[**
  * generate the C++ representation of a type for a Parameter
  * 
  * - shared pointer for types, which are not primitive or enumeration
@@ -199,3 +223,9 @@ std::string
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
 [if (aType.name.oclIsUndefined())]undefinedType[else][if (not aType.isIgnoreNamespace())][aType.namespace.oclAsType(Package).generateNamespace(true)/]::[/if][aType.name.toUpperFirst()/][/if]
 [/template]
+
+[query public collectTypeIncludeStrings(aType : Type) : Set(String) = Set(String)
+{
+	'#include "' + aType.getNearestPackage().generateNamespacePath(true) + '/' + aType.name.toUpperFirst() + '.hpp"'
+}->flatten()
+/]

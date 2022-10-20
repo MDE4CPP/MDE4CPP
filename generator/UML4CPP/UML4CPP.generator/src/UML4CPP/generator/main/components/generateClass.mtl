@@ -33,7 +33,7 @@
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 [** 
- * get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
+ * Get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
 */]
 [query public getCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Set(Property) = owningClass.getAllAttributes()->select(type = compositeType and isComposite and association.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private hasCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Boolean = getCompositePropertiesOfType(compositeType)->size() > 0 /]
@@ -43,12 +43,19 @@
 [query public getOwnerProperties(aClass : Classifier, ownerClass : Class) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
 
 [** 
- * get all associations where aClass is memberType
+ * Get all associations where aClass is memberType
 */]
 [query private getAssociationsToClass(aClass : Class) : Set(Association) = aClass.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
 [query private isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
 [query public getCompositeProperty(anAssociation : Association, aClass : Class) : Property = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->first() /]
 [query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
+
+[** 
+ * Get all OpaqueBehaviors where aClass is the context but they do not have a specification (i.e. do not implement any Operation)
+ * These are treated as normal C++ methods
+*/]
+[query public collectOpaqueBehaviorsContexedByClass(aClass : Class) : Set(OpaqueBehavior) = aClass.allOwnedElements()->filter(OpaqueBehavior)->reject(isDoNotGenerateElement())->select(_context = aClass)->select(specification.oclIsUndefined()) /]
+
 
 [**
  * template to generate create function declarations

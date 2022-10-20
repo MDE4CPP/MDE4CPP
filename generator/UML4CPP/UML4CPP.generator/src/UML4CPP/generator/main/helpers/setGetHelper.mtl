@@ -630,7 +630,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 						try
 						{
 							std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
-							[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.generateCppType(true)/]>(_temp);
+							[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(_temp);
 						}
 						catch(...)
 						{

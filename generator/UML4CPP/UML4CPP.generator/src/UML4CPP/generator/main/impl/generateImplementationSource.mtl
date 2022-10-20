@@ -35,7 +35,16 @@
 [import UML4CPP::generator::main::pscs::generateDestruction/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getImplicitCompositeOwners()}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet
+{
+	aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, 
+	aClass.ownedOperation.ownedParameter.type,
+	aClass.collectOpaqueBehaviorsContexedByClass().ownedParameter.type,
+	aClass.getAllAttributes().type, 
+	aClass.importedMember, 
+	aClass.getImplicitCompositeOwners()
+}->flatten() /]
+
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
 
 [query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
@@ -47,11 +56,10 @@
 
 [defineDebugMacro()/]
 
+//General includes
 #include <iostream>
 [if (aClass.ownedOperation->select(method->isEmpty())->notEmpty())]
-#include <stdexcept>
-[/if]
-
+#include <stdexcept>[/if]
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -66,15 +74,18 @@
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 #include "uml/EnumerationLiteral.hpp"
 [/if]
-
-//Types included from attributes, operation parameters, imports and composite owner classes
+[comment Package for used PrimitiveTypes /]
 [if (aClass.includes()->filter(PrimitiveType)->size() > 0)]
+
+//Package for used PrimitiveTypes
 #include "types/typesPackage.hpp"
 [/if]
-[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))]
+[comment Packages for used (non-primitive) Types /]
+[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n') after('\n')]
 #include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
 [/for]
-[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
+[comment Used Types /]
+[for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Used Types\n') after('\n')]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [elseif (cl.getNearestPackage().hasIncludePath())]
@@ -83,25 +94,24 @@
 #include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
-
-//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
-[for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName()))]
+[comment PackgeImpl and Factories included from types of attributes, operation parameters, imports and composite owner classes /]
+[for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName())) before('\n//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes\n') after('\n')]
 #include "[typePackage.generateNamespacePath(true)/]/[typePackage.myNamespaceName().concat('Factory')/].hpp"
 #include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
 [/for]
-
-//Packages of included Enumerations
-[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
+[comment Packages of included Enumerations /]
+[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n') after('\n')]
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
-
+[comment Plugin Framework /]
 [if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
-//Includes of PluginFramework
+
+//Includes for PluginFramework
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 [/if][/if]
-
-[for (aOperation : Operation | aClass.ownedOperation->select(method->filter(OpaqueBehavior)->notEmpty())->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of OpaqueBevaiors') after('\n')]
+[comment Includes of OpaqueBehavior methods of Operations/]
+[for (aOperation : Operation | aClass.ownedOperation->select(method->filter(OpaqueBehavior)->notEmpty())->asOrderedSet()->sortedBy(myQualifiedName())) before('\n//Includes of Operations') after('\n')]
 [let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]
 	[if (anOpaqueBehavior.hasLanguage(keyInclude()))]
 //Included from operation "[aOperation.name/]"
@@ -109,8 +119,12 @@
 	[/if]
 [/let]
 [/for]
-//Includes from InstanceValues (if required)
-[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
+[comment Included from OpaqueBehaviors without an Operation/]
+[for (includeStatement : String | aClass.collectOpaqueBehaviorsContexedByClass().collectOpaqueBehaviorIncludeStrings()->asOrderedSet()) before('\n//Includes from OpaqueBehaviors\n') after('\n')]
+[includeStatement/]
+[/for]
+[comment Includes from InstanceValues /]
+[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Includes from InstanceValues\n') after('\n')]
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
@@ -118,20 +132,16 @@
 #include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
 [/if]
 [/for]
-
-//Includes from Ports typed by interfaces (if required)
-[for (aPort : Port | aClass.ownedAttribute->filter(Port))]
-[if (aPort.type.oclIsTypeOf(Interface))]
-[for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
-[let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
+[comment Includes from Ports typed by Interfaces /]
+[for (aPort : Port | aClass.ownedAttribute->filter(Port)->select(p : Port | p.type.oclIsTypeOf(Interface))) before('\n//Includes from Ports typed by Interfaces\n') after('\n')]
+	[for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
+	[let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
 #include "[realizingClass._package.generateNamespacePath(true)/]/[realizingClass.name/].hpp"
-[/let]
+	[/let]
+	[/for]
 [/for]
-[/if]
-[/for]
-
-//Includes from roles of ConnectorEnds (if required)
-[for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
+[comment Includes from roles of ConnectorEnds /]
+[for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\nIncludes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
 #include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
 
@@ -345,10 +355,14 @@ void [className/]::destroy()
 //*********************************
 // Operations
 //*********************************
-[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n') after('\n')]
 [aOperation.generateOperationImplementation()/]
 [/for]
-
+[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
+(i.e. they do not define the method for any Operation) are treated as normal C++ methods/]
+[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
+[anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
+[/for]
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
