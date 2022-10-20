@@ -31,7 +31,7 @@ plugins {
 
 description '3rdparty: xerces-c'
 
-def xercesVersion = "3.2.3"
+def xercesVersion = "3.2.4"
 
 task deliverPersistenceInterface(type: Copy) {
 	group 'Persistence'
