@@ -173,8 +173,10 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 # Factory of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]FactoryImpl.cpp
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Factory.cpp
+[if (aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0)]
 # Global functions of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]_GlobalFunctions.cpp
+[/if]
 # Contents of [aPackage.generateNamespace(false)/]
 [aPackage.generatePackageContents(isRoot)/]
 [/if]
