@@ -34,8 +34,8 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
-//#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-//#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallBehaviorAction.hpp"
@@ -146,25 +146,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallBehavi
 			context = this->getExecutionContext();
 		}
 		
-		std::shared_ptr<Bag<Any>> arguments(new Bag<Any>());
-		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputParameterValues)
-		{
-			//Only first value as lists are handled by a single instance of Any
-			std::shared_ptr<Any> argument = inputParameterValue->getValues()->at(0);
-			arguments->add(argument);
-		}
-		
-		if(context)
-		{
-			/*Currently not supported. TODO: implement invoke() for Behaviors
-			return context->invoke(behavior, arguments);
-			*/
-		}
-		else
-		{
-			/*Currently not supported. TODO: implement behavior call for Behaviors without context i.e. that do not belong to a classifier
-			*/
-		}
+		return this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);
 	}
 	return nullptr;
 
