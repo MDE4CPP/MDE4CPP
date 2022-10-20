@@ -18,8 +18,11 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
+[template public generateModelLocusHeader(aPackage : Package)
+{
+upperName : String = aPackage.getPackageName().sanitize();
+originalName : String = aPackage.generateNamespacePath(false);
+}]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 

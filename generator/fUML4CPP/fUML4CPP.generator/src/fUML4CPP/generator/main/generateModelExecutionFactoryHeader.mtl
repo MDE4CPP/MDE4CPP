@@ -1,0 +1,79 @@
+[comment encoding = UTF-8 /]
+[module generateModelExecutionFactoryHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import fUML4CPP::generator::main::fUMLCollectionHelper /]
+
+
+[template public generateModelExecutionFactoryHeader(aPackage : Package) 
+{
+upperName : String = aPackage.getPackageName().sanitize(); 
+originalName : String = aPackage.generateNamespacePath(false);
+}]
+[file (originalName.concat('Exec/') + upperName.concat('ExecutionFactory.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'ExecutionFactory')/]
+
+//#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+
+namespace [aPackage.generateNamespace(false)/] 
+{
+	class [upperName/]ExecutionFactory: virtual public /*PSCS::Semantics::Loci::CS_ExecutionFactory*/ fUML::Semantics::Loci::ExecutionFactory
+	{
+		public: 
+			[upperName/]ExecutionFactory (){};
+		public:
+			//destructor
+			virtual ~[upperName/]ExecutionFactory(){};
+			
+			//*********************************
+			// Operations
+			//*********************************
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context) = 0;
+	};
+}
+[endGuard(aPackage,'ExecutionFactory')/]
+[/file]
+
+[file (originalName.concat('Exec/impl/') + upperName.concat('ExecutionFactoryImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'ExecutionFactoryImpl')/]
+
+#include "../[upperName/]ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
+//#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityExecution;
+}
+
+namespace [aPackage.generateNamespace(false)/] 
+{
+	class [upperName/]ExecutionFactoryImpl : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl*/ fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public [upperName/]ExecutionFactory
+	{
+		private:    
+			[upperName/]ExecutionFactoryImpl& operator=([upperName/]ExecutionFactoryImpl const&) = delete;
+			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()) before('\t\t\t//Methods to create ActivityExecution Prototypes\n')]
+			void create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
+			[comment]std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();[/comment]
+			[/for]
+
+		public:
+			[upperName/]ExecutionFactoryImpl();
+			virtual ~[upperName/]ExecutionFactoryImpl();
+			
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context);
+			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr){/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr)*/ fUML::Semantics::Loci::ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr);};
+	
+		private:
+			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()) before('\t\t\t//ActivityExecution Prototypes\n')]
+			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_[anActivity.memberName()/]ExecutionPrototype;
+			[/for]
+	};
+}
+[endGuard(aPackage,'ExecutionFactoryImpl')/]
+[/file]
+[/template]

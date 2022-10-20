@@ -70,6 +70,8 @@ SET(SOURCE_FILES
 	impl/[aPackage.name/]LocusImpl.cpp
 	# Model Executor
 	impl/[aPackage.name/]ExecutorImpl.cpp
+	# Model ExecutionFactory
+	impl/[aPackage.name/]ExecutionFactoryImpl.cpp
 	[/if]
 	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )

@@ -23,6 +23,14 @@
 
 #include "[aPackage.generateNamespacePath(false)/]Exec/[aPackage.name/]ExecPlugin.hpp"
 
+namespace [aPackage.generateNamespace(false).sanitize()/]
+{
+	class [aPackage.generateNamespace(false).sanitize()/]Locus;
+	class [aPackage.generateNamespace(false).sanitize()/]Executor;
+	class [aPackage.generateNamespace(false).sanitize()/]ExecutionFactory;
+}
+
+
 namespace [aPackage.generateNamespace(false)/] 
 {
 	class [aPackage.name.concat('ExecPluginImpl')/] : virtual public [aPackage.name.concat('ExecPlugin')/] 
@@ -40,30 +48,17 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element);
 
-			[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
-			[/for]
-
 		private:
 			virtual void initialize();
-			[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
-			void create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
-			[/for]
-
 [if (not aPackage.isReflectionModel())]
 
 		protected:
 			//Execution Environment
 			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
 			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Executor'/]> m_executor;
-			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory;
-
-			//ActivityExecution Prototypes
-			[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
-			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_[anActivity.memberName()/]ExecutionPrototype;
-			[/for]
-
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'ExecutionFactory'/]> m_factory;
 [/if]
+
 		private:
 			bool m_IsInitialized = false;
 	};

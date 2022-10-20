@@ -35,7 +35,6 @@
 packageName : String = aPackage.getPackageName().sanitize(); 
 originalName : String = aPackage.generateNamespacePath(false);
 }]
-
 [file (originalName.concat('Exec/impl/') + packageName.concat('LocusImpl.cpp'), false, 'UTF-8')]
 #include "[packageName/]LocusImpl.hpp"
 #include <iostream>

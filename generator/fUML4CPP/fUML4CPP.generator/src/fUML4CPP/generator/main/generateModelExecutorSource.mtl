@@ -45,6 +45,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
 [for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction()) before('\n')]
 #include "[enumerationPackage.generateNamespacePath(true)/]/[enumerationPackage.myNamespaceName()/]Package.hpp"
@@ -120,15 +121,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	int behaviorMetaElementID = behavior->getMetaElementID();
 	if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 	{
-		std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity>(behavior);
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = nullptr;
-
-		[for (anActivity : Activity | aPackage.collectPossiblyUsedActivities())]
-		if(activity == [anActivity.generatePackageGetterCall()/])
-		{
-			activityExecution = (std::dynamic_pointer_cast<[anActivity.getRootPackage().name/]::[anActivity.getRootPackage().name/]ExecPlugin>([anActivity.getRootPackage().name/]::[anActivity.getRootPackage().name/]ExecPlugin::eInstance()))->get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
-		}
-		[/for]
+		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = 
+			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
 
 		if(!activityExecution)
 		{

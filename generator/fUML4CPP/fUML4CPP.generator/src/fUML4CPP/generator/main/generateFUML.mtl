@@ -27,6 +27,9 @@
 [comment imports for executor generation /]
 [import fUML4CPP::generator::main::generateModelExecutorHeader /]
 [import fUML4CPP::generator::main::generateModelExecutorSource /]
+[comment imports for execution factory generation /]
+[import fUML4CPP::generator::main::generateModelExecutionFactoryHeader /]
+[import fUML4CPP::generator::main::generateModelExecutionFactorySource /]
 [comment import for execution plugin generation /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [comment import for build files generation /]
@@ -98,6 +101,10 @@
 //generate model Executor
 [aPackage.generateModelExecutorHeader()/]
 [aPackage.generateModelExecutorSource()/]
+
+//generate model ExecutionFactory
+[aPackage.generateModelExecutionFactoryHeader()/]
+[aPackage.generateModelExecutionFactorySource()/]
 
 //generate project files
 [aPackage.generateExecutionBuildFiles(false)/]

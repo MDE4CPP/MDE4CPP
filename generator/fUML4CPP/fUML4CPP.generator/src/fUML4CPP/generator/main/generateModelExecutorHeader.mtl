@@ -18,8 +18,11 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateModelExecutorHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
+[template public generateModelExecutorHeader(aPackage : Package)
+{
+upperName : String = aPackage.getPackageName().sanitize(); 
+originalName : String = aPackage.generateNamespacePath(false);
+}]
 [file (originalName.concat('Exec/') + upperName.concat('Executor.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Executor')/]
 

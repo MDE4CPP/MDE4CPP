@@ -30,29 +30,9 @@
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-[if(aPackage.allOwnedElements()->filter(Operation)->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0 or 
-aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0)]
-namespace uml
-{
-	class OpaqueBehavior;
-}
-[/if]
-
-namespace fUML::Semantics::Loci
-{
-	class Executor;
-	class ExecutionFactory;
-}
-
 namespace fUML::Semantics::Activities
 {
 	class ActivityExecution;
-}
-
-namespace [aPackage.generateNamespace(false).sanitize()/]
-{
-	class [aPackage.generateNamespace(false).sanitize()/]Locus;
-	class [aPackage.generateNamespace(false).sanitize()/]Executor;
 }
 
 
@@ -71,10 +51,6 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
-
-			[for (anActivity : Activity | aPackage.getRootPackage().allOwnedElements()->filter(Activity))]
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype() = 0;
-			[/for]
 			
 		protected:
 			[packageName/](){};
