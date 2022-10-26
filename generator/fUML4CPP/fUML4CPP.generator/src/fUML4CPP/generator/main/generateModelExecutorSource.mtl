@@ -18,6 +18,10 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 
 
@@ -40,13 +44,26 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "uml/umlPackage.hpp"
 #include "uml/Activity.hpp"
 #include "uml/EnumerationLiteral.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/OpaqueBehavior.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
+[for (anIncludeString : String | 	
+	aPackage.allOwnedElements()
+	->filter(OpaqueBehavior)
+	->reject(oB : OpaqueBehavior | (not oB._context.oclIsUndefined()) and oB._context.oclIsTypeOf(Class))
+	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
+	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement())
+	->select(oB : OpaqueBehavior | oB.specification.oclIsUndefined())
+	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
+[anIncludeString/]
+[/for]
 [for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction()) before('\n')]
 #include "[enumerationPackage.generateNamespacePath(true)/]/[enumerationPackage.myNamespaceName()/]Package.hpp"
 	[if (enumerationPackage.isReflectionModel())]
@@ -121,7 +138,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-		std::cout<<"Now, a Behavior would be invoked!"<<std::endl;
+		std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
+		return this->invokeOpaqueBehavior(opaqueBehavior, context, inputs);
     }
 	else if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 	{
@@ -155,5 +173,90 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
 }
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+{
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+
+	std::shared_ptr<Bag<Any>> inputParameters(new Bag<Any>());
+	std::shared_ptr<Any> result;
+
+	for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs)
+	{
+		inputParameters->add(parameterValue->getValues()->at(0));
+	}
+
+	[for (anOpaqueBehavior : OpaqueBehavior | 	aPackage.allOwnedElements()
+	->filter(OpaqueBehavior)
+	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
+	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))]
+	if(opaqueBehavior == [anOpaqueBehavior.generatePackageGetterCall()/])
+	{	
+		[comment 
+			If the OpaqueBehavior has a specification (i.e. it implements an Operation),
+			then invoke this Operation on the corresponding context object
+		/]
+		[if (not anOpaqueBehavior.specification.oclIsUndefined())]
+			[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
+			[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
+		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+		if(!context)
+		{
+			DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+			return outputs;
+		}
+		result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputParameters);
+				[if (specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+				[let returnParameter : Parameter = specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+				[/let]
+				[/if]
+			[/let]
+			[/if]
+		[comment 
+			Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
+			but it has a defined context and this context is a class,
+			then execute this Behavior on the corresponding context object
+		/]
+		[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
+		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
+		if(!context)
+		{
+			DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+			return outputs;
+		}
+		result = context->invoke(opaqueBehavior, inputParameters);
+			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+			[/let]
+			[/if]
+		[comment 
+			Else execute the global model function corresponding to this Behavior
+		/]
+		[else]
+		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
+		// and is therefore realized as a global function
+		result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputParameters);
+			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+			[/let]
+			[/if]
+		[/if]
+	}
+	[/for]
+
+	if(result)
+	{
+		returnParameterValue->getValues()->add(result);
+		outputs->add(returnParameterValue);
+	}
+
+	return outputs;
+}
 [/file]
 [/template]
+
+[query private collectPackageGlobalFunctions_IncludeString(aPackage : Package) : String = '#include "' + aPackage.generateNamespacePath(true) + '/_GlobalFunctions.hpp"' /]

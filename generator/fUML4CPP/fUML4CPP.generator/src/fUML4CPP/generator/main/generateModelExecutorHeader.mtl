@@ -60,6 +60,7 @@ namespace [aPackage.generateNamespace(false)/]
 namespace uml
 {
 	class Activity;
+	class OpaqueBehavior;
 }
 
 namespace fUML::Semantics::Activities 
@@ -73,6 +74,7 @@ namespace [aPackage.generateNamespace(false)/]
 	{
 		private:    
 			[upperName/]ExecutorImpl& operator=([upperName/]ExecutorImpl const&) = delete;
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs);
 
 		public:
 			[upperName/]ExecutorImpl();
