@@ -54,6 +54,7 @@ namespace uml
 {
 	class Property;
 	class Operation;
+	class OpaqueBehavior;
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 	class EnumerationLiteral;
 [/if]
@@ -133,14 +134,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			virtual void destroy();
 
 		public:
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			//**************************************
+			// StructuralFeature Getter & Setter
+			//**************************************
 			[aClass.generateeGetSetDel(true)/]
 		
-			//*********************************
-			// Operation Invocation
-			//*********************************
+			//**************************************
+			// Operation & OpaqueBehavior Invocation
+			//**************************************
 			[aClass.generateInvoke(true)/]
 
 		private:

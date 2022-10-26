@@ -67,6 +67,8 @@
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
@@ -363,14 +365,14 @@ void [className/]::destroy()
 [for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
 [anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
 [/for]
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
 [aClass.generateeGetSetImpl()/]
 
-//*********************************
-// Operation Invoction
-//*********************************
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
 [aClass.generateInvokeImpl()/]
 
 [aClass.generateGetThisPtrCPP()/]

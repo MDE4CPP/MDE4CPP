@@ -15,17 +15,14 @@
 
 #include <memory>
 
-[let opaqueBehaviorsForGlobalFunctionsOfPackage : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
-[if (opaqueBehaviorsForGlobalFunctionsOfPackage.ownedParameter.type
-	->select(t : Type | t.name = 'EEnumerator' or t.name = 'EDiagnosticChain' or t.name = 'EJavaObject')
-	->size() > 0)]
 class Any;
-[/if]
-[if (opaqueBehaviorsForGlobalFunctionsOfPackage.ownedParameter
-	->select(p : Parameter | p.upper <> 1)
-	->size() > 0)]
 template<class T> class Bag;
-[/if]
+
+namespace uml
+{
+	class OpaqueBehavior;
+}
+[let opaqueBehaviorsForGlobalFunctionsOfPackage : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
 [let classifiersForForwardDeclaration : Set(Classifier) = Set
 {
 	opaqueBehaviorsForGlobalFunctionsOfPackage->includes()->filter(Class),
@@ -51,6 +48,11 @@ class [aClassifier.name.toUpperFirst()/];
 [for (anEnumeration : Enumeration | opaqueBehaviorsForGlobalFunctionsOfPackage->includes()->filter(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) before('\n') after('\n')]
 #include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name.toUpperFirst().concat('.hpp')/]"
 [/for]
+
+namespace [aPackage.generateNamespace(true)/]
+{
+	std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior>, std::shared_ptr<Bag<Any>>);
+}
 
 [for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctionsOfPackage.namespace->asSet()->sortedBy(name)) separator('\n') after('\n')]
 namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/][elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/][else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/[/if]
