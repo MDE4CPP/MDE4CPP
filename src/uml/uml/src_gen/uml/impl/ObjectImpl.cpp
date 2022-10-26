@@ -34,6 +34,7 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "uml/OpaqueBehavior.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Property.hpp"
 //Factories and Package includes
@@ -125,6 +126,11 @@ std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) c
 }
 
 std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> arguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -394,6 +400,52 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			}
 		
 			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments), 0, false);
+			break;
+		}
+		// uml::Object::invoke(uml::OpaqueBehavior, Any[*]) : Any: 4152766635
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_opaqueBehavior'
+			//parameter 0
+			std::shared_ptr<uml::OpaqueBehavior> incoming_param__opaqueBehavior;
+			Bag<Any>::const_iterator incoming_param__opaqueBehavior_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__opaqueBehavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_opaqueBehavior'. Failed to invoke operation 'invoke'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_opaqueBehavior'. Failed to invoke operation 'invoke'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'arguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_arguments;
+			Bag<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_arguments), 0, false);
 			break;
 		}
 		// uml::Object::remove(uml::Property, Any): 1546275363

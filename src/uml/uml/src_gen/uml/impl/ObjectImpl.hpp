@@ -75,6 +75,13 @@ virtual public Object
 			 
 			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments) ;
 			/*!
+			Calls the Operation corresponding to the supplied OpaqueBehavior on the object, passing the supplied Arguments and returning the result.
+			The OpaqueBehavior must be zin the context of the Class of the Object, and the arguments must refer to Parameters of the OpaqueBehavior.
+			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
+			*/
+			 
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> arguments) ;
+			/*!
 			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
 			*/
 			 
