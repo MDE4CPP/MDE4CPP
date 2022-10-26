@@ -165,6 +165,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallBehavi
 			// ->at(0) as we only consider the first return parameter
 			outputParameterValues->add(returnParameterValues->at(0));
 		}
+
+		return outputParameterValues;
 	}
 	return nullptr;
 
