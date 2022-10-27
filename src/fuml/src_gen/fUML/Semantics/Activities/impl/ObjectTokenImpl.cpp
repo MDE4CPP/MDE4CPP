@@ -38,8 +38,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -188,7 +188,7 @@ std::shared_ptr<Any> ObjectTokenImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //832
+			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //822
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -198,7 +198,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //832
+			return getValue() != nullptr; //822
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -212,7 +212,7 @@ bool ObjectTokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			try
 			{
 				std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
-				setValue(_value); //832
+				setValue(_value); //822
 			}
 			catch(...)
 			{

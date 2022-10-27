@@ -22,8 +22,6 @@ namespace Activities
 	class ActivityNodeActivationGroup;
 	class ActivityParameterNodeActivation;
 	class CentralBufferNodeActivation;
-	class ClassifierBehaviorExecutionActivity;
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1;
 	class ControlNodeActivation;
 	class ControlToken;
 	class DataStoreNodeActivation;
@@ -69,7 +67,6 @@ namespace fUML::Semantics::Activities
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> createActivityEdgeInstance_as_edgeInstances_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution(const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const ;
 			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_decisionInputExecution_in_DecisionNodeActivation(std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> par_DecisionNodeActivation, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation(const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const ;
 			 //Add as contained object
@@ -84,8 +81,6 @@ namespace fUML::Semantics::Activities
 			 virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> createCentralBufferNodeActivation(const int metaElementID = ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> createCentralBufferNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> createClassifierBehaviorExecutionActivity(const int metaElementID = ActivitiesPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const int metaElementID = ActivitiesPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ControlToken> createControlToken(const int metaElementID = ActivitiesPackage::CONTROLTOKEN_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ControlToken> createControlToken_as_heldTokens_in_ActivityNodeActivation(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_ActivityNodeActivation, const int metaElementID = ActivitiesPackage::CONTROLTOKEN_CLASS) const ;

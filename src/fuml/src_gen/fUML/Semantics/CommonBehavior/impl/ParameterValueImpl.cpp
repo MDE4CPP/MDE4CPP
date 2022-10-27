@@ -38,8 +38,8 @@
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -196,9 +196,9 @@ std::shared_ptr<Any> ParameterValueImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //870
+			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //860
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //871
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //861
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -208,9 +208,9 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //870
+			return getParameter() != nullptr; //860
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //871
+			return getValues() != nullptr; //861
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -230,7 +230,7 @@ bool ParameterValueImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(eObject);
 					if(_parameter)
 					{
-						setParameter(_parameter); //870
+						setParameter(_parameter); //860
 					}
 					else
 					{

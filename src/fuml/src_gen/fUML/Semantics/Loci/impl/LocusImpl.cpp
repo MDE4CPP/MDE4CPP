@@ -53,8 +53,8 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -345,11 +345,11 @@ std::shared_ptr<Any> LocusImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
+			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //760
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //772
+			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //762
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
+			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //761
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,11 +359,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return getExecutor() != nullptr; //770
+			return getExecutor() != nullptr; //760
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //772
+			return getExtensionalValues() != nullptr; //762
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return getFactory() != nullptr; //771
+			return getFactory() != nullptr; //761
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -383,7 +383,7 @@ bool LocusImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(eObject);
 					if(_executor)
 					{
-						setExecutor(_executor); //770
+						setExecutor(_executor); //760
 					}
 					else
 					{
@@ -459,7 +459,7 @@ bool LocusImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(eObject);
 					if(_factory)
 					{
-						setFactory(_factory); //771
+						setFactory(_factory); //761
 					}
 					else
 					{

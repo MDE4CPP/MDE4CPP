@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -436,28 +436,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 
 // End Class CentralBufferNodeActivation
 
-// Begin Class ClassifierBehaviorExecutionActivity
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getClassifierBehaviorExecutionActivity_Class() const
-{
-	return m_classifierBehaviorExecutionActivity_Class;
-}
-
-
-
-
-// End Class ClassifierBehaviorExecutionActivity
-
-// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class() const
-{
-	return m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class;
-}
-
-
-
-
-// End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-
 // Begin Class ControlNodeActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getControlNodeActivation_Class() const
 {
@@ -522,10 +500,6 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImp
 }
 
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionInputExecution() const
-{
-	return m_decisionNodeActivation_Attribute_decisionInputExecution;
-}
 std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionNode() const
 {
 	return m_decisionNodeActivation_Attribute_decisionNode;
@@ -566,10 +540,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_takeOfferedTokens() const
 {
 	return m_decisionNodeActivation_Operation_takeOfferedTokens;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_terminate() const
-{
-	return m_decisionNodeActivation_Operation_terminate;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const
 {

@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -301,7 +301,7 @@ std::shared_ptr<Any> ObjectNodeActivationImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return eAny(getOfferedTokenCount(),ecore::ecorePackage::EINT_CLASS,false); //826
+			return eAny(getOfferedTokenCount(),ecore::ecorePackage::EINT_CLASS,false); //816
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -311,7 +311,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount() != 0; //826
+			return getOfferedTokenCount() != 0; //816
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -325,7 +325,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 			try
 			{
 				int _offeredTokenCount = newValue->get<int>();
-				setOfferedTokenCount(_offeredTokenCount); //826
+				setOfferedTokenCount(_offeredTokenCount); //816
 			}
 			catch(...)
 			{

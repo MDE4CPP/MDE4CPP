@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -74,8 +74,6 @@ void ActivitiesPackageImpl::initializePackageContents()
 	initializeActivityNodeActivationGroupContent();
 	initializeActivityParameterNodeActivationContent();
 	initializeCentralBufferNodeActivationContent();
-	initializeClassifierBehaviorExecutionActivityContent();
-	initializeClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content();
 	initializeControlNodeActivationContent();
 	initializeControlTokenContent();
 	initializeDataStoreNodeActivationContent();
@@ -1460,28 +1458,6 @@ void ActivitiesPackageImpl::initializeCentralBufferNodeActivationContent()
 	
 }
 
-void ActivitiesPackageImpl::initializeClassifierBehaviorExecutionActivityContent()
-{
-	m_classifierBehaviorExecutionActivity_Class->setName("ClassifierBehaviorExecutionActivity");
-	m_classifierBehaviorExecutionActivity_Class->setAbstract(false);
-	m_classifierBehaviorExecutionActivity_Class->setInterface(false);
-	
-	
-	
-	
-}
-
-void ActivitiesPackageImpl::initializeClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content()
-{
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setName("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1");
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setAbstract(false);
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setInterface(false);
-	
-	
-	
-	
-}
-
 void ActivitiesPackageImpl::initializeControlNodeActivationContent()
 {
 	m_controlNodeActivation_Class->setName("ControlNodeActivation");
@@ -1612,28 +1588,6 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Class->setInterface(false);
 	
 	
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setName("decisionInputExecution");
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setLowerBound(1);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUpperBound(1);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setTransient(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setVolatile(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setChangeable(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUnsettable(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUnique(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setDerived(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setOrdered(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setContainment(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_decisionNodeActivation_Attribute_decisionInputExecution->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
 	m_decisionNodeActivation_Attribute_decisionNode->setName("decisionNode");
 	m_decisionNodeActivation_Attribute_decisionNode->setEType(uml::umlPackage::eInstance()->getDecisionNode_Class());
 	m_decisionNodeActivation_Attribute_decisionNode->setLowerBound(1);
@@ -1772,19 +1726,6 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_takeOfferedTokens->setUnique(true);
 	m_decisionNodeActivation_Operation_takeOfferedTokens->setOrdered(false);
 	
-	m_decisionNodeActivation_Operation_terminate->setName("terminate");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_decisionNodeActivation_Operation_terminate->setEType(unknownClass);
-	}
-	m_decisionNodeActivation_Operation_terminate->setLowerBound(1);
-	m_decisionNodeActivation_Operation_terminate->setUpperBound(1);
-	m_decisionNodeActivation_Operation_terminate->setUnique(true);
-	m_decisionNodeActivation_Operation_terminate->setOrdered(false);
-	
 	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setName("test");
 	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setLowerBound(1);
@@ -1793,7 +1734,7 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setOrdered(false);
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject);
-		parameter->setName("gaurd");
+		parameter->setName("guard");
 		parameter->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);

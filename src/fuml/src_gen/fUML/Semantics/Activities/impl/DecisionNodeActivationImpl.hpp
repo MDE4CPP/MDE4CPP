@@ -54,8 +54,8 @@ namespace fUML::Semantics::Activities
 			virtual bool isReady() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
-			virtual void terminate() ;
-			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd, std::shared_ptr<Any> value) ;
+			
+			virtual bool test(std::shared_ptr<uml::ValueSpecification> guard, std::shared_ptr<Any> value) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -64,8 +64,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getDecisionInputExecution() const ;
-			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
+			
 			virtual std::shared_ptr<uml::DecisionNode> getDecisionNode() const ;
 			virtual void setDecisionNode(std::shared_ptr<uml::DecisionNode>) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'decisionNode'*/

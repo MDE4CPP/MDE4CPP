@@ -4,12 +4,9 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/EventDispatchLoopImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 
-#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/umlPackage.hpp"
@@ -24,7 +21,6 @@ using namespace fUML::Semantics::CommonBehavior;
 
 CommonBehaviorFactoryImpl::CommonBehaviorFactoryImpl()
 {
-	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventDispatchLoop", CommonBehaviorPackage::EVENTDISPATCHLOOP_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ParameterValue", CommonBehaviorPackage::PARAMETERVALUE_CLASS));
 }
 
@@ -45,12 +41,6 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 {
 	switch(metaElementID)
 	{
-		case CommonBehaviorPackage::EVENTDISPATCHLOOP_CLASS:
-		{
-				return this->createEventDispatchLoop(metaElementID);
-			
-			break;
-		}
 		case CommonBehaviorPackage::PARAMETERVALUE_CLASS:
 		{
 			if (nullptr == container)
@@ -93,13 +83,6 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(std::string _c
     return nullptr;
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> CommonBehaviorFactoryImpl::createEventDispatchLoop(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoopImpl> element(new fUML::Semantics::CommonBehavior::EventDispatchLoopImpl());
-	element->setMetaElementID(metaElementID);
-	element->setThisEventDispatchLoopPtr(element);
-	return element;
-}
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorFactoryImpl::createParameterValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValueImpl> element(new fUML::Semantics::CommonBehavior::ParameterValueImpl());

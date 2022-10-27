@@ -48,8 +48,8 @@
 #include "uml/ReadSelfAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -231,7 +231,7 @@ std::shared_ptr<Any> ReadSelfActionActivationImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
-			return eAny(getReadSelfAction(),uml::umlPackage::READSELFACTION_CLASS,false); //9311
+			return eAny(getReadSelfAction(),uml::umlPackage::READSELFACTION_CLASS,false); //9211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -241,7 +241,7 @@ bool ReadSelfActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
-			return getReadSelfAction() != nullptr; //9311
+			return getReadSelfAction() != nullptr; //9211
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -261,7 +261,7 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newV
 					std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(eObject);
 					if(_readSelfAction)
 					{
-						setReadSelfAction(_readSelfAction); //9311
+						setReadSelfAction(_readSelfAction); //9211
 					}
 					else
 					{

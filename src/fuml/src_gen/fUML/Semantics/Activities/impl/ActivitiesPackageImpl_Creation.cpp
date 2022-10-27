@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -43,8 +43,6 @@ void ActivitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackag
 	createActivityNodeActivationGroupContent(package, factory);
 	createActivityParameterNodeActivationContent(package, factory);
 	createCentralBufferNodeActivationContent(package, factory);
-	createClassifierBehaviorExecutionActivityContent(package, factory);
-	createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(package, factory);
 	createControlNodeActivationContent(package, factory);
 	createControlTokenContent(package, factory);
 	createDataStoreNodeActivationContent(package, factory);
@@ -199,22 +197,6 @@ void ActivitiesPackageImpl::createCentralBufferNodeActivationContent(std::shared
 	
 }
 
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivityContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_classifierBehaviorExecutionActivity_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS);
-	
-	
-	
-}
-
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS);
-	
-	
-	
-}
-
 void ActivitiesPackageImpl::createControlNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_controlNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CONTROLNODEACTIVATION_CLASS);
@@ -249,7 +231,6 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 {
 	m_decisionNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, DECISIONNODEACTIVATION_CLASS);
 	
-	m_decisionNodeActivation_Attribute_decisionInputExecution = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION);
 	m_decisionNodeActivation_Attribute_decisionNode = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
 	
 	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
@@ -261,7 +242,6 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	m_decisionNodeActivation_Operation_isReady = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_ISREADY);
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN);
 	m_decisionNodeActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
-	m_decisionNodeActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TERMINATE);
 	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT);
 	
 }

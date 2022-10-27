@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::Activities 
@@ -34,8 +34,6 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class ActivityParameterNodeActivation;
 	class CentralBufferNodeActivation;
-	class ClassifierBehaviorExecutionActivity;
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1;
 	class ControlNodeActivation;
 	class ControlToken;
 	class DataStoreNodeActivation;
@@ -347,40 +345,6 @@ namespace fUML::Semantics::Activities
 			// End Class CentralBufferNodeActivation
 
 
-			// Begin Class ClassifierBehaviorExecutionActivity
-			//Class and Feature IDs 
-			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS = 1651964304;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_OPERATION_COUNT = 0;
-			
-			
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_Class() const = 0;
-			
-			
-			
-			
-			// End Class ClassifierBehaviorExecutionActivity
-
-
-			// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-			//Class and Feature IDs 
-			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS = 285113084;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_OPERATION_COUNT = 0;
-			
-			
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class() const = 0;
-			
-			
-			
-			
-			// End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-
-
 			// Begin Class ControlNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long CONTROLNODEACTIVATION_CLASS = 1062574970;
@@ -447,10 +411,9 @@ namespace fUML::Semantics::Activities
 			// Begin Class DecisionNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long DECISIONNODEACTIVATION_CLASS = 52454155;
-			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 38;
 			
-			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION = 1327941012;
 			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE = 1894640136;
 			
 			static const unsigned int DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT = 3052258302;
@@ -462,14 +425,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned int DECISIONNODEACTIVATION_OPERATION_ISREADY = 2829031806;
 			static const unsigned int DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 1559509247;
 			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 121080352;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TERMINATE = 1771187084;
 			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT = 2379610281;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_Attribute_decisionInputExecution() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_Attribute_decisionNode() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const = 0;
@@ -481,7 +442,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_isReady() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_removeJoinedControlTokens_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_terminate() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const = 0;
 			
 			// End Class DecisionNodeActivation

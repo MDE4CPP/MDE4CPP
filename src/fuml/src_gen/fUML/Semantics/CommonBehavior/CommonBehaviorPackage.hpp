@@ -14,20 +14,19 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventDispatchLoop;
 	class Execution;
 	class ParameterValue;
 }
@@ -53,23 +52,6 @@ namespace fUML::Semantics::CommonBehavior
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
-
-			// Begin Class EventDispatchLoop
-			//Class and Feature IDs 
-			static const unsigned long EVENTDISPATCHLOOP_CLASS = 1354650361;
-			static const unsigned int EVENTDISPATCHLOOP_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int EVENTDISPATCHLOOP_CLASS_OPERATION_COUNT = 0;
-			
-			
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventDispatchLoop_Class() const = 0;
-			
-			
-			
-			
-			// End Class EventDispatchLoop
-
 
 			// Begin Class Execution
 			//Class and Feature IDs 

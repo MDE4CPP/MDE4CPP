@@ -18,7 +18,6 @@
 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventDispatchLoop;
 	class Execution;
 	class ParameterValue;}
 
@@ -40,15 +39,6 @@ namespace fUML::Semantics::CommonBehavior
 
 		public:
 			virtual ~CommonBehaviorPackageImpl();
-
-			// Begin Class EventDispatchLoop
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventDispatchLoop_Class() const ;
-			
-			
-			
-			
-			// End Class EventDispatchLoop
 
 			// Begin Class Execution
 			//Class and Feature Getter
@@ -89,7 +79,7 @@ namespace fUML::Semantics::CommonBehavior
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_eventDispatchLoop_Class = nullptr;std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_parameterValue_Attribute_values = nullptr;
 			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;
@@ -109,12 +99,10 @@ namespace fUML::Semantics::CommonBehavior
 			void initializePackageContents();
 
 		private:
-			void createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
-			void initializeEventDispatchLoopContent();
 			void initializeExecutionContent();
 			void initializeParameterValueContent();
 			void initializePackageEDataTypes();

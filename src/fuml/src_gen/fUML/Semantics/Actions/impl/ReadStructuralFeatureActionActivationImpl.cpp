@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -267,7 +267,7 @@ std::shared_ptr<Any> ReadStructuralFeatureActionActivationImpl::eGet(int feature
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9411
+			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9311
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,7 +277,7 @@ bool ReadStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return getReadStructuralFeatureAction() != nullptr; //9411
+			return getReadStructuralFeatureAction() != nullptr; //9311
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -297,7 +297,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_
 					std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(eObject);
 					if(_readStructuralFeatureAction)
 					{
-						setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
+						setReadStructuralFeatureAction(_readStructuralFeatureAction); //9311
 					}
 					else
 					{

@@ -45,8 +45,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -250,10 +250,10 @@ std::shared_ptr<Any> PinActivationImpl::eGet(int featureID, bool resolve, bool c
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActionActivation().lock();
-			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //887
+			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //877
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //888
+			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //878
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -263,9 +263,9 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return getActionActivation().lock() != nullptr; //887
+			return getActionActivation().lock() != nullptr; //877
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return getPin() != nullptr; //888
+			return getPin() != nullptr; //878
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -285,7 +285,7 @@ bool PinActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(eObject);
 					if(_actionActivation)
 					{
-						setActionActivation(_actionActivation); //887
+						setActionActivation(_actionActivation); //877
 					}
 					else
 					{
@@ -316,7 +316,7 @@ bool PinActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(eObject);
 					if(_pin)
 					{
-						setPin(_pin); //888
+						setPin(_pin); //878
 					}
 					else
 					{

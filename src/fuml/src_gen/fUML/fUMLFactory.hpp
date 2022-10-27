@@ -38,10 +38,6 @@ namespace fUML::Semantics::Loci
 
 
 
-namespace fUML::Semantics::Activities
-{
-	class DecisionNodeActivation;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;

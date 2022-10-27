@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -268,7 +268,7 @@ std::shared_ptr<Any> RemoveStructuralFeatureValueActionActivationImpl::eGet(int 
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10011
+			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //9911
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -278,7 +278,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int featur
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return getRemoveStructuralFeatureValueAction() != nullptr; //10011
+			return getRemoveStructuralFeatureValueAction() != nullptr; //9911
 	}
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -298,7 +298,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, std::
 					std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(eObject);
 					if(_removeStructuralFeatureValueAction)
 					{
-						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10011
+						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //9911
 					}
 					else
 					{

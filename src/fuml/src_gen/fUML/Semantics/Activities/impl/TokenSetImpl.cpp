@@ -36,8 +36,8 @@
 //Forward declaration includes
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -148,7 +148,7 @@ std::shared_ptr<Any> TokenSetImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
+			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1150
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -158,7 +158,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1160
+			return getTokens() != nullptr; //1150
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

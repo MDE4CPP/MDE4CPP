@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -58,17 +58,6 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 }
 
 
-
-// Begin Class EventDispatchLoop
-std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventDispatchLoop_Class() const
-{
-	return m_eventDispatchLoop_Class;
-}
-
-
-
-
-// End Class EventDispatchLoop
 
 // Begin Class Execution
 std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -47,23 +47,11 @@ void CommonBehaviorPackageImpl::initializePackageContents()
 	
 
  	// Initialize classes and features; add operations and parameters
-	initializeEventDispatchLoopContent();
 	initializeExecutionContent();
 	initializeParameterValueContent();
 
 	initializePackageEDataTypes();
 
-}
-
-void CommonBehaviorPackageImpl::initializeEventDispatchLoopContent()
-{
-	m_eventDispatchLoop_Class->setName("EventDispatchLoop");
-	m_eventDispatchLoop_Class->setAbstract(false);
-	m_eventDispatchLoop_Class->setInterface(false);
-	
-	
-	
-	
 }
 
 void CommonBehaviorPackageImpl::initializeExecutionContent()
