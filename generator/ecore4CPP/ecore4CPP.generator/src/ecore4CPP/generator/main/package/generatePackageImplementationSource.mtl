@@ -91,7 +91,7 @@ void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetterImpl(anEPackage)/]
+[anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name).generateSubPackageGetterImpl(anEPackage)/]
 
 [for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 // Begin Class [aClass.name.toUpperFirst()/]
