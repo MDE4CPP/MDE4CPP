@@ -22,7 +22,7 @@
         <language>CPP</language>
         <body>this->setDivider (this->getDivider() + 2);</body>
       </ownedBehavior>
-      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_3KBg8IxxEeazCdUXohZ79Q" name="fbPrintIsPrime" specification="_8Vt_MIxwEeazCdUXohZ79Q">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_3KBg8IxxEeazCdUXohZ79Q" name="fbPrintIsPrime">
         <language>CPP</language>
         <language>INCLUDE</language>
         <body>std::cout&lt;&lt;&quot;Number is prime&quot;&lt;&lt;std::endl;</body>
@@ -36,7 +36,7 @@
         <language>CPP</language>
         <body>isOdd = this->getNumber() % 2 != 0;</body>
       </ownedBehavior>
-      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4BcRIIxxEeazCdUXohZ79Q" name="fbPrintNotPrime" specification="_8etjIIxwEeazCdUXohZ79Q">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4BcRIIxxEeazCdUXohZ79Q" name="fbPrintNotPrime">
         <language>CPP</language>
         <language>INCLUDE</language>
         <body>std::cout&lt;&lt;&quot;Number is not prime&quot;;</body>
@@ -154,8 +154,6 @@ std::cin >> this->m_number;</body>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_UtQZgIxrEeazCdUXohZ79Q" name="next" method="_3E-o4IxxEeazCdUXohZ79Q"/>
-      <ownedOperation xmi:id="_8Vt_MIxwEeazCdUXohZ79Q" name="printIsPrime" method="_3KBg8IxxEeazCdUXohZ79Q"/>
-      <ownedOperation xmi:id="_8etjIIxwEeazCdUXohZ79Q" name="printNotPrime" method="_4BcRIIxxEeazCdUXohZ79Q"/>
       <ownedOperation xmi:id="_QBniEIxxEeazCdUXohZ79Q" name="isOdd" method="_37xG8IxxEeazCdUXohZ79Q">
         <ownedParameter xmi:id="__gLYwI7QEeaDf9S-W91Htg" name="isOdd" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
@@ -168,7 +166,6 @@ std::cin >> this->m_number;</body>
       </ownedOperation>
       <ownedOperation xmi:id="_jMpkwFGWEeqeyKUsnKD-hQ" name="enterNumber" method="_zg094FGWEeqeyKUsnKD-hQ"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:ChangeEvent" xmi:id="_ez5VsN_vEeexC-rsnTgvBg" name="ChangeEvent1"/>
     <profileApplication xmi:id="_tG7ncOMJEeur7cjoMTUC9A">
       <eAnnotations xmi:id="_tG8OgOMJEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
@@ -177,9 +174,4 @@ std::cin >> this->m_number;</body>
     </profileApplication>
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_uw9gUOMJEeur7cjoMTUC9A" base_Behavior="_196CMIxoEeazCdUXohZ79Q"/>
-  <UML4CPPProfile:NonExecutable xmi:id="_xJHDcOMJEeur7cjoMTUC9A" base_NamedElement="_19O9sIxxEeazCdUXohZ79Q"/>
-  <UML4CPPProfile:NonExecutable xmi:id="_y4LNUOMJEeur7cjoMTUC9A" base_NamedElement="_3E-o4IxxEeazCdUXohZ79Q"/>
-  <UML4CPPProfile:NonExecutable xmi:id="_0fzScOMJEeur7cjoMTUC9A" base_NamedElement="_37xG8IxxEeazCdUXohZ79Q"/>
-  <UML4CPPProfile:NonExecutable xmi:id="_2JlTsOMJEeur7cjoMTUC9A" base_NamedElement="_MhsMoIxzEeazCdUXohZ79Q"/>
-  <UML4CPPProfile:NonExecutable xmi:id="_4INjkOMJEeur7cjoMTUC9A" base_NamedElement="_zg094FGWEeqeyKUsnKD-hQ"/>
 </xmi:XMI>
