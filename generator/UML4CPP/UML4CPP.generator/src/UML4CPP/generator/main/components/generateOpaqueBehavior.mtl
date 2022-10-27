@@ -28,8 +28,12 @@
 [**
  * Generate method declaration from OpaqueBehavior
  */]
-[template public generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior, isImpl: Boolean)]
-virtual [anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for])[if (anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] const[/if] [abstractSuffix(isImpl)/];
+[template public generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior, isImpl: Boolean)
+	{
+		isFunctionBehavior : Boolean = anOpaqueBehavior.oclIsKindOf(FunctionBehavior);
+	}
+]
+virtual [anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for])[if (isFunctionBehavior)] const[/if] [abstractSuffix(isImpl)/];
 [/template]
 
 [template public generateOpaqueBehaviorImplementation(anOpaqueBehavior : OpaqueBehavior)]

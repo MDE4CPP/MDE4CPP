@@ -67,8 +67,12 @@ namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classif
 [/file]
 [/template]
 
-[template private generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior)]
-[anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for]);
+[template private generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior)
+	{
+		isFunctionBehavior : Boolean = anOpaqueBehavior.oclIsKindOf(FunctionBehavior);
+	}
+]
+[anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for]);
 [/template]
 
 [query private includes(opaqueBehaviorsList : Set(OpaqueBehavior)) : Set(Type) =
