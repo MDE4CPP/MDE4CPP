@@ -125,12 +125,11 @@ virtual public [ClassWithNamespace(anEClass, sClass)/]Impl[/for][if (anEClass.eS
 			// Container Getter
 			//*********************************
 			[anEClass.generateEContainerOperation(true)/] 
-[comment]
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
 			[anEClass.generatePersistenceFunctionsDeclarations(true)/]
-[/comment]
 
 		protected:
 			virtual std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> eStaticClass() const;

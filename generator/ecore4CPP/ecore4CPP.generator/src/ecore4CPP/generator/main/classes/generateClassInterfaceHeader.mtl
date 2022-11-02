@@ -74,7 +74,7 @@ class Any;
 
 //*********************************
 // generated Includes
-[comment][generatePersistenceForwardDeclarations()/][/comment]
+[generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types 
 [let includeClasses:Set(EClass) = anEClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->reject(doNotGenerateEClassifier())->select(c:EClass| (not (c = anEClass)) and (not (anEClass.eAllSuperTypes)->includes(c)))]
@@ -186,13 +186,11 @@ namespace [anEClass.generateNamespaceDefinition()/]
 			// Container Getter
 			//*********************************
 			[anEClass.generateEContainerOperation(false)/] 
-[comment]
 
 			//*********************************
 			// Persistence Functions
 			//*********************************
 			[anEClass.generatePersistenceFunctionsDeclarations(false)/]
-[/comment]
 
 		protected:
 			//*********************************

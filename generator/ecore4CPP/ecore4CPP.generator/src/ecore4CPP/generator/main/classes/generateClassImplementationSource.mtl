@@ -61,7 +61,7 @@
 [anEClass.valueKey(keyImplIncludes())/]
 [/if]
 //Forward declaration includes
-[comment][anEClass.generatePersitsenceInclude()/][/comment]
+[anEClass.generatePersitsenceInclude()/]
 [for (element : EClassifier| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
@@ -431,12 +431,11 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 // Container Getter
 //*********************************
 [anEClass.generateEContainerOperationImplementation()/]
-[comment]
+
 //*********************************
 // Persistence Functions
 //*********************************
 [anEClass.generatePersistenceFunctionsImplementations()/]
-[/comment]
 
 std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
