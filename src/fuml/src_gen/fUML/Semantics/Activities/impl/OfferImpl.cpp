@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -225,6 +230,98 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTo
 std::shared_ptr<ecore::EObject> OfferImpl::eContainer() const
 {
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OfferImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void OfferImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("offeredTokens");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("offeredTokens")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OfferImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+}
+
+void OfferImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::Token>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
+				if (_r != nullptr)
+				{
+					_offeredTokens->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void OfferImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Activities::Token>("offeredTokens", this->getOfferedTokens());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const

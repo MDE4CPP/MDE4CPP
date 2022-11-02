@@ -37,6 +37,12 @@
 #include <algorithm> 
 #include "fUML/fUMLFactory.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -332,6 +338,154 @@ std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityEdgeInstanceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ActivityEdgeInstanceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("edge");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("edge")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("offers");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("offers")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityEdgeInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+}
+
+void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ActivityEdge> _edge = std::dynamic_pointer_cast<uml::ActivityEdge>( references.front() );
+				setEdge(_edge);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>( references.front() );
+				setGroup(_group);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers = getOffers();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::Offer>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Offer>(ref);
+				if (_r != nullptr)
+				{
+					_offers->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>( references.front() );
+				setSource(_source);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>( references.front() );
+				setTarget(_target);
+			}
+			
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ActivityEdgeInstanceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getEdge(), "edge", getEdge()->eClass() != uml::umlPackage::eInstance()->getActivityEdge_Class()); 
+		saveHandler->addReferences<fUML::Semantics::Activities::Offer>("offers", this->getOffers());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const

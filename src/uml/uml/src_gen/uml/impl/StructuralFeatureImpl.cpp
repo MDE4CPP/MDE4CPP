@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -158,6 +163,106 @@ std::shared_ptr<ecore::EObject> StructuralFeatureImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void StructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isReadOnly");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsReadOnly(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	FeatureImpl::loadAttributes(loadHandler, attr_list);
+	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
+	TypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	FeatureImpl::loadNode(nodeName, loadHandler);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
+	TypedElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void StructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	FeatureImpl::resolveReferences(featureID, references);
+	MultiplicityElementImpl::resolveReferences(featureID, references);
+	TypedElementImpl::resolveReferences(featureID, references);
+}
+
+void StructuralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	FeatureImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
+		{
+			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const

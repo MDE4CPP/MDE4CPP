@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -268,6 +273,157 @@ std::shared_ptr<ecore::EObject> UnmarshallActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void UnmarshallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("unmarshallType");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("unmarshallType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("object") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			loadHandler->handleChild(this->getObject()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+}
+
+void UnmarshallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _unmarshallType = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setUnmarshallType(_unmarshallType);
+			}
+			
+			return;
+		}
+	}
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'object'
+		std::shared_ptr<uml::InputPin> object = this->getObject();
+		if (object != nullptr)
+		{
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
+		}
+
+		// Save 'result'
+		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
+		}
+	// Add references
+		saveHandler->addReference(this->getUnmarshallType(), "unmarshallType", getUnmarshallType()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const

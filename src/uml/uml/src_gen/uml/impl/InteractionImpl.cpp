@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -537,6 +542,192 @@ std::shared_ptr<ecore::EObject> InteractionImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InteractionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InteractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	BehaviorImpl::loadAttributes(loadHandler, attr_list);
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("action") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::Action>(this->getAction());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("formalGate") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Gate";
+			}
+			loadHandler->handleChildContainer<uml::Gate>(this->getFormalGate());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("fragment") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::InteractionFragment>(this->getFragment());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("lifeline") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Lifeline";
+			}
+			loadHandler->handleChildContainer<uml::Lifeline>(this->getLifeline());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("message") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Message";
+			}
+			loadHandler->handleChildContainer<uml::Message>(this->getMessage());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	BehaviorImpl::loadNode(nodeName, loadHandler);
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+}
+
+void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	BehaviorImpl::resolveReferences(featureID, references);
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	BehaviorImpl::saveContent(saveHandler);
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'action'
+		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
+		{
+			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
+		}
+
+		// Save 'formalGate'
+		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
+		{
+			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
+		}
+
+		// Save 'fragment'
+		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		{
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
+		}
+
+		// Save 'lifeline'
+		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
+		{
+			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
+		}
+
+		// Save 'message'
+		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
+		{
+			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const

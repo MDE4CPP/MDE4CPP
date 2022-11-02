@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityGroup.hpp"
@@ -235,6 +240,129 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::eContainer() co
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InterruptibleActivityRegionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InterruptibleActivityRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("interruptingEdge");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("interruptingEdge")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("node");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("node")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityGroupImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InterruptibleActivityRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ActivityGroupImpl::loadNode(nodeName, loadHandler);
+}
+
+void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_interruptingEdge->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
+		{
+			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> _node = getNode();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
+				if (_r != nullptr)
+				{
+					_node->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ActivityGroupImpl::resolveReferences(featureID, references);
+}
+
+void InterruptibleActivityRegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityGroupImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::ActivityEdge>("interruptingEdge", this->getInterruptingEdge());
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const

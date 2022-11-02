@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -542,6 +547,294 @@ std::shared_ptr<ecore::EObject> StateImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void StateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("redefinedState");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedState")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("stateInvariant");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("stateInvariant")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("submachine");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("submachine")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
+	VertexImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("connection") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ConnectionPointReference";
+			}
+			loadHandler->handleChildContainer<uml::ConnectionPointReference>(this->getConnection());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("connectionPoint") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Pseudostate";
+			}
+			loadHandler->handleChildContainer<uml::Pseudostate>(this->getConnectionPoint());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("deferrableTrigger") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Trigger";
+			}
+			loadHandler->handleChildContainer<uml::Trigger>(this->getDeferrableTrigger());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("doActivity") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getDoActivity()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("entry") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getEntry()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("exit") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getExit()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("region") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Region";
+			}
+			loadHandler->handleChildContainer<uml::Region>(this->getRegion());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
+	VertexImpl::loadNode(nodeName, loadHandler);
+}
+
+void StateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::State> _redefinedState = std::dynamic_pointer_cast<uml::State>( references.front() );
+				setRedefinedState(_redefinedState);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Constraint> _stateInvariant = std::dynamic_pointer_cast<uml::Constraint>( references.front() );
+				setStateInvariant(_stateInvariant);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StateMachine> _submachine = std::dynamic_pointer_cast<uml::StateMachine>( references.front() );
+				setSubmachine(_submachine);
+			}
+			
+			return;
+		}
+	}
+	NamespaceImpl::resolveReferences(featureID, references);
+	RedefinableElementImpl::resolveReferences(featureID, references);
+	VertexImpl::resolveReferences(featureID, references);
+}
+
+void StateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'connection'
+		for (std::shared_ptr<uml::ConnectionPointReference> connection : *this->getConnection()) 
+		{
+			saveHandler->addReference(connection, "connection", connection->eClass() != package->getConnectionPointReference_Class());
+		}
+
+		// Save 'connectionPoint'
+		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
+		{
+			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_Class());
+		}
+
+		// Save 'deferrableTrigger'
+		for (std::shared_ptr<uml::Trigger> deferrableTrigger : *this->getDeferrableTrigger()) 
+		{
+			saveHandler->addReference(deferrableTrigger, "deferrableTrigger", deferrableTrigger->eClass() != package->getTrigger_Class());
+		}
+
+		// Save 'doActivity'
+		std::shared_ptr<uml::Behavior> doActivity = this->getDoActivity();
+		if (doActivity != nullptr)
+		{
+			saveHandler->addReference(doActivity, "doActivity", doActivity->eClass() != package->getBehavior_Class());
+		}
+
+		// Save 'entry'
+		std::shared_ptr<uml::Behavior> entry = this->getEntry();
+		if (entry != nullptr)
+		{
+			saveHandler->addReference(entry, "entry", entry->eClass() != package->getBehavior_Class());
+		}
+
+		// Save 'exit'
+		std::shared_ptr<uml::Behavior> exit = this->getExit();
+		if (exit != nullptr)
+		{
+			saveHandler->addReference(exit, "exit", exit->eClass() != package->getBehavior_Class());
+		}
+
+		// Save 'region'
+		for (std::shared_ptr<uml::Region> region : *this->getRegion()) 
+		{
+			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
+		}
+	// Add references
+		saveHandler->addReference(this->getRedefinedState(), "redefinedState", getRedefinedState()->eClass() != uml::umlPackage::eInstance()->getState_Class()); 
+		saveHandler->addReference(this->getStateInvariant(), "stateInvariant", getStateInvariant()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+		saveHandler->addReference(this->getSubmachine(), "submachine", getSubmachine()->eClass() != uml::umlPackage::eInstance()->getStateMachine_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const

@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -290,6 +295,151 @@ std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("behavior");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("behavior")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	try
+	{
+		if (nodeName.compare("body") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
+			list_body->push_back(value);
+			return;
+		}
+
+		if (nodeName.compare("language") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
+			list_language->push_back(value);
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	//load BasePackage Nodes
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
+}
+
+void OpaqueExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setBehavior(_behavior);
+			}
+			
+			return;
+		}
+	}
+	ValueSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ValueSpecificationImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_body)
+			{
+				saveHandler->addAttributeAsNode("body", *value);
+			}
+		}
+
+		if ( this->eIsSet(package->getOpaqueExpression_Attribute_language()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_language)
+			{
+				saveHandler->addAttributeAsNode("language", *value);
+			}
+		}
+	// Add references
+		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const

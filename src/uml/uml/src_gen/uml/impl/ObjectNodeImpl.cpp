@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityGroup.hpp"
@@ -243,6 +248,223 @@ std::shared_ptr<ecore::EObject> ObjectNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ObjectNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isControlType");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsControlType(value);
+		}
+
+		iter = attr_list.find("ordering");
+		if ( iter != attr_list.end() )
+		{
+			uml::ObjectNodeOrderingKind value = uml::ObjectNodeOrderingKind::FIFO;
+			std::string literal = iter->second;
+						if (literal == "unordered")
+			{
+				value = uml::ObjectNodeOrderingKind::UNORDERED;
+			}
+			else 			if (literal == "ordered")
+			{
+				value = uml::ObjectNodeOrderingKind::ORDERED;
+			}
+			else 			if (literal == "LIFO")
+			{
+				value = uml::ObjectNodeOrderingKind::LIFO;
+			}
+			else 			if (literal == "FIFO")
+			{
+				value = uml::ObjectNodeOrderingKind::FIFO;
+			}
+			this->setOrdering(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("inState");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inState")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("selection");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("selection")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityNodeImpl::loadAttributes(loadHandler, attr_list);
+	TypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("upperBound") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getUpperBound()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActivityNodeImpl::loadNode(nodeName, loadHandler);
+	TypedElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void ObjectNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		{
+			std::shared_ptr<Bag<uml::State>> _inState = getInState();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::State>  _r = std::dynamic_pointer_cast<uml::State>(ref);
+				if (_r != nullptr)
+				{
+					_inState->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setSelection(_selection);
+			}
+			
+			return;
+		}
+	}
+	ActivityNodeImpl::resolveReferences(featureID, references);
+	TypedElementImpl::resolveReferences(featureID, references);
+}
+
+void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityNodeImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'upperBound'
+		std::shared_ptr<uml::ValueSpecification> upperBound = this->getUpperBound();
+		if (upperBound != nullptr)
+		{
+			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getObjectNode_Attribute_isControlType()) )
+		{
+			saveHandler->addAttribute("isControlType", this->getIsControlType());
+		}
+
+		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
+		{
+			uml::ObjectNodeOrderingKind value = this->getOrdering();
+			std::string literal = "";
+			if (value == uml::ObjectNodeOrderingKind::UNORDERED)
+			{
+				literal = "unordered";
+			}
+			else if (value == uml::ObjectNodeOrderingKind::ORDERED)
+			{
+				literal = "ordered";
+			}
+			else if (value == uml::ObjectNodeOrderingKind::LIFO)
+			{
+				literal = "LIFO";
+			}
+			else if (value == uml::ObjectNodeOrderingKind::FIFO)
+			{
+				literal = "FIFO";
+			}
+			saveHandler->addAttribute("ordering", literal);
+		}
+	// Add references
+		saveHandler->addReferences<uml::State>("inState", this->getInState());
+		saveHandler->addReference(this->getSelection(), "selection", getSelection()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const

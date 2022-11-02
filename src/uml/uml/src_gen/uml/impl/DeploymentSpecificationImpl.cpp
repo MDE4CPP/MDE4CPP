@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Artifact.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -259,6 +264,135 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DeploymentSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void DeploymentSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("deploymentLocation");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setDeploymentLocation(value);
+		}
+
+		iter = attr_list.find("executionLocation");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setExecutionLocation(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ArtifactImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DeploymentSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ArtifactImpl::loadNode(nodeName, loadHandler);
+}
+
+void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>( references.front() );
+				setDeployment(_deployment);
+			}
+			
+			return;
+		}
+	}
+	ArtifactImpl::resolveReferences(featureID, references);
+}
+
+void DeploymentSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ArtifactImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	DeployedArtifactImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_deploymentLocation()) )
+		{
+			saveHandler->addAttribute("deploymentLocation", this->getDeploymentLocation());
+		}
+
+		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_executionLocation()) )
+		{
+			saveHandler->addAttribute("executionLocation", this->getExecutionLocation());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const

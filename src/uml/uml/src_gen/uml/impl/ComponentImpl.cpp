@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -393,6 +398,157 @@ std::shared_ptr<ecore::EObject> ComponentImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ComponentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ComponentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isIndirectlyInstantiated");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsIndirectlyInstantiated(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("packagedElement") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::PackageableElement>(this->getPackagedElement());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("realization") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ComponentRealization";
+			}
+			loadHandler->handleChildContainer<uml::ComponentRealization>(this->getRealization());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ClassImpl::loadNode(nodeName, loadHandler);
+}
+
+void ComponentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ClassImpl::resolveReferences(featureID, references);
+}
+
+void ComponentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'packagedElement'
+		for (std::shared_ptr<uml::PackageableElement> packagedElement : *this->getPackagedElement()) 
+		{
+			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() != package->getPackageableElement_Class());
+		}
+
+		// Save 'realization'
+		for (std::shared_ptr<uml::ComponentRealization> realization : *this->getRealization()) 
+		{
+			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getComponent_Attribute_isIndirectlyInstantiated()) )
+		{
+			saveHandler->addAttribute("isIndirectlyInstantiated", this->getIsIndirectlyInstantiated());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const

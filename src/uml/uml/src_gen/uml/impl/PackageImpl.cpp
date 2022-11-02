@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -672,6 +677,239 @@ std::shared_ptr<ecore::EObject> PackageImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PackageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void PackageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("URI");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setURI(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
+	TemplateableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("nestedPackage") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Package";
+			}
+			loadHandler->handleChildContainer<uml::Package>(this->getNestedPackage());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedStereotype") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Stereotype";
+			}
+			loadHandler->handleChildContainer<uml::Stereotype>(this->getOwnedStereotype());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedType") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::Type>(this->getOwnedType());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("packageMerge") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "PackageMerge";
+			}
+			loadHandler->handleChildContainer<uml::PackageMerge>(this->getPackageMerge());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("packagedElement") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::PackageableElement>(this->getPackagedElement());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("profileApplication") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ProfileApplication";
+			}
+			loadHandler->handleChildContainer<uml::ProfileApplication>(this->getProfileApplication());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
+	TemplateableElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void PackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Package> _nestingPackage = std::dynamic_pointer_cast<uml::Package>( references.front() );
+				setNestingPackage(_nestingPackage);
+			}
+			
+			return;
+		}
+	}
+	NamespaceImpl::resolveReferences(featureID, references);
+	PackageableElementImpl::resolveReferences(featureID, references);
+	TemplateableElementImpl::resolveReferences(featureID, references);
+}
+
+void PackageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamespaceImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'nestedPackage'
+		for (std::shared_ptr<uml::Package> nestedPackage : *this->getNestedPackage()) 
+		{
+			saveHandler->addReference(nestedPackage, "nestedPackage", nestedPackage->eClass() != package->getPackage_Class());
+		}
+
+		// Save 'ownedStereotype'
+		for (std::shared_ptr<uml::Stereotype> ownedStereotype : *this->getOwnedStereotype()) 
+		{
+			saveHandler->addReference(ownedStereotype, "ownedStereotype", ownedStereotype->eClass() != package->getStereotype_Class());
+		}
+
+		// Save 'ownedType'
+		for (std::shared_ptr<uml::Type> ownedType : *this->getOwnedType()) 
+		{
+			saveHandler->addReference(ownedType, "ownedType", ownedType->eClass() != package->getType_Class());
+		}
+
+		// Save 'packageMerge'
+		for (std::shared_ptr<uml::PackageMerge> packageMerge : *this->getPackageMerge()) 
+		{
+			saveHandler->addReference(packageMerge, "packageMerge", packageMerge->eClass() != package->getPackageMerge_Class());
+		}
+
+		// Save 'profileApplication'
+		for (std::shared_ptr<uml::ProfileApplication> profileApplication : *this->getProfileApplication()) 
+		{
+			saveHandler->addReference(profileApplication, "profileApplication", profileApplication->eClass() != package->getProfileApplication_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getPackage_Attribute_uRI()) )
+		{
+			saveHandler->addAttribute("URI", this->getURI());
+		}
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'packagedElement'
+
+		saveHandler->addReferences<uml::PackageableElement>("packagedElement", this->getPackagedElement());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const

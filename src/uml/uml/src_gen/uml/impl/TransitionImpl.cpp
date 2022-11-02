@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -333,6 +338,267 @@ std::shared_ptr<ecore::EObject> TransitionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TransitionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("kind");
+		if ( iter != attr_list.end() )
+		{
+			uml::TransitionKind value = uml::TransitionKind::EXTERNAL;
+			std::string literal = iter->second;
+						if (literal == "internal")
+			{
+				value = uml::TransitionKind::INTERNAL;
+			}
+			else 			if (literal == "local")
+			{
+				value = uml::TransitionKind::LOCAL;
+			}
+			else 			if (literal == "external")
+			{
+				value = uml::TransitionKind::EXTERNAL;
+			}
+			this->setKind(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("guard");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("guard")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("redefinedTransition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedTransition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("source");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("source")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("target");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("target")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TransitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("effect") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getEffect()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("trigger") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Trigger";
+			}
+			loadHandler->handleChildContainer<uml::Trigger>(this->getTrigger());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void TransitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>( references.front() );
+				setContainer(_container);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Constraint> _guard = std::dynamic_pointer_cast<uml::Constraint>( references.front() );
+				setGuard(_guard);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Transition> _redefinedTransition = std::dynamic_pointer_cast<uml::Transition>( references.front() );
+				setRedefinedTransition(_redefinedTransition);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Vertex> _source = std::dynamic_pointer_cast<uml::Vertex>( references.front() );
+				setSource(_source);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Vertex> _target = std::dynamic_pointer_cast<uml::Vertex>( references.front() );
+				setTarget(_target);
+			}
+			
+			return;
+		}
+	}
+	NamespaceImpl::resolveReferences(featureID, references);
+	RedefinableElementImpl::resolveReferences(featureID, references);
+}
+
+void TransitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'effect'
+		std::shared_ptr<uml::Behavior> effect = this->getEffect();
+		if (effect != nullptr)
+		{
+			saveHandler->addReference(effect, "effect", effect->eClass() != package->getBehavior_Class());
+		}
+
+		// Save 'trigger'
+		for (std::shared_ptr<uml::Trigger> trigger : *this->getTrigger()) 
+		{
+			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
+		{
+			uml::TransitionKind value = this->getKind();
+			std::string literal = "";
+			if (value == uml::TransitionKind::INTERNAL)
+			{
+				literal = "internal";
+			}
+			else if (value == uml::TransitionKind::LOCAL)
+			{
+				literal = "local";
+			}
+			else if (value == uml::TransitionKind::EXTERNAL)
+			{
+				literal = "external";
+			}
+			saveHandler->addAttribute("kind", literal);
+		}
+	// Add references
+		saveHandler->addReference(this->getGuard(), "guard", getGuard()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+		saveHandler->addReference(this->getRedefinedTransition(), "redefinedTransition", getRedefinedTransition()->eClass() != uml::umlPackage::eInstance()->getTransition_Class()); 
+		saveHandler->addReference(this->getSource(), "source", getSource()->eClass() != uml::umlPackage::eInstance()->getVertex_Class()); 
+		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != uml::umlPackage::eInstance()->getVertex_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const

@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityGroup.hpp"
@@ -365,6 +370,279 @@ std::shared_ptr<ecore::EObject> LoopNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LoopNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void LoopNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isTestedFirst");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsTestedFirst(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("bodyOutput");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyOutput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("bodyPart");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyPart")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("decider");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decider")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("setupPart");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("setupPart")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("test");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("test")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("loopVariable") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getLoopVariable());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("loopVariableInput") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			loadHandler->handleChildContainer<uml::InputPin>(this->getLoopVariableInput());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
+}
+
+void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
+		{
+			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
+				if (_r != nullptr)
+				{
+					_bodyOutput->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_bodyPart->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>( references.front() );
+				setDecider(_decider);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_setupPart->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_test->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	StructuredActivityNodeImpl::resolveReferences(featureID, references);
+}
+
+void LoopNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredActivityNodeImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	ActivityGroupImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'loopVariable'
+		for (std::shared_ptr<uml::OutputPin> loopVariable : *this->getLoopVariable()) 
+		{
+			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getLoopNode_Attribute_isTestedFirst()) )
+		{
+			saveHandler->addAttribute("isTestedFirst", this->getIsTestedFirst());
+		}
+	// Add references
+		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
+		saveHandler->addReferences<uml::ExecutableNode>("bodyPart", this->getBodyPart());
+		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
+		saveHandler->addReferences<uml::ExecutableNode>("setupPart", this->getSetupPart());
+		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'loopVariableInput'
+
+		saveHandler->addReferences<uml::InputPin>("loopVariableInput", this->getLoopVariableInput());
+
+		// Save 'result'
+
+		saveHandler->addReferences<uml::OutputPin>("result", this->getResult());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const

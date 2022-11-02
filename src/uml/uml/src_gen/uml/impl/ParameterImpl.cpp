@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Comment.hpp"
 #include "uml/ConnectableElement.hpp"
@@ -341,6 +346,277 @@ std::shared_ptr<ecore::EObject> ParameterImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("direction");
+		if ( iter != attr_list.end() )
+		{
+			uml::ParameterDirectionKind value = uml::ParameterDirectionKind::IN;
+			std::string literal = iter->second;
+						if (literal == "in")
+			{
+				value = uml::ParameterDirectionKind::IN;
+			}
+			else 			if (literal == "inout")
+			{
+				value = uml::ParameterDirectionKind::INOUT;
+			}
+			else 			if (literal == "out")
+			{
+				value = uml::ParameterDirectionKind::OUT;
+			}
+			else 			if (literal == "return")
+			{
+				value = uml::ParameterDirectionKind::RETURN;
+			}
+			this->setDirection(value);
+		}
+
+		iter = attr_list.find("effect");
+		if ( iter != attr_list.end() )
+		{
+			uml::ParameterEffectKind value = uml::ParameterEffectKind::CREATE;
+			std::string literal = iter->second;
+						if (literal == "create")
+			{
+				value = uml::ParameterEffectKind::CREATE;
+			}
+			else 			if (literal == "read")
+			{
+				value = uml::ParameterEffectKind::READ;
+			}
+			else 			if (literal == "update")
+			{
+				value = uml::ParameterEffectKind::UPDATE;
+			}
+			else 			if (literal == "delete")
+			{
+				value = uml::ParameterEffectKind::DELETE;
+			}
+			this->setEffect(value);
+		}
+
+		iter = attr_list.find("isException");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsException(value);
+		}
+
+		iter = attr_list.find("isStream");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsStream(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("parameterSet");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameterSet")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ConnectableElementImpl::loadAttributes(loadHandler, attr_list);
+	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("defaultValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getDefaultValue()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ConnectableElementImpl::loadNode(nodeName, loadHandler);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setBehavior(_behavior);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		{
+			std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ParameterSet>  _r = std::dynamic_pointer_cast<uml::ParameterSet>(ref);
+				if (_r != nullptr)
+				{
+					_parameterSet->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ConnectableElementImpl::resolveReferences(featureID, references);
+	MultiplicityElementImpl::resolveReferences(featureID, references);
+}
+
+void ParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ConnectableElementImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	
+	ParameterableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'defaultValue'
+		std::shared_ptr<uml::ValueSpecification> defaultValue = this->getDefaultValue();
+		if (defaultValue != nullptr)
+		{
+			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
+		{
+			uml::ParameterDirectionKind value = this->getDirection();
+			std::string literal = "";
+			if (value == uml::ParameterDirectionKind::IN)
+			{
+				literal = "in";
+			}
+			else if (value == uml::ParameterDirectionKind::INOUT)
+			{
+				literal = "inout";
+			}
+			else if (value == uml::ParameterDirectionKind::OUT)
+			{
+				literal = "out";
+			}
+			else if (value == uml::ParameterDirectionKind::RETURN)
+			{
+				literal = "return";
+			}
+			saveHandler->addAttribute("direction", literal);
+		}
+
+		if ( this->eIsSet(package->getParameter_Attribute_effect()) )
+		{
+			uml::ParameterEffectKind value = this->getEffect();
+			std::string literal = "";
+			if (value == uml::ParameterEffectKind::CREATE)
+			{
+				literal = "create";
+			}
+			else if (value == uml::ParameterEffectKind::READ)
+			{
+				literal = "read";
+			}
+			else if (value == uml::ParameterEffectKind::UPDATE)
+			{
+				literal = "update";
+			}
+			else if (value == uml::ParameterEffectKind::DELETE)
+			{
+				literal = "delete";
+			}
+			saveHandler->addAttribute("effect", literal);
+		}
+
+		if ( this->eIsSet(package->getParameter_Attribute_isException()) )
+		{
+			saveHandler->addAttribute("isException", this->getIsException());
+		}
+
+		if ( this->eIsSet(package->getParameter_Attribute_isStream()) )
+		{
+			saveHandler->addAttribute("isStream", this->getIsStream());
+		}
+	// Add references
+		saveHandler->addReferences<uml::ParameterSet>("parameterSet", this->getParameterSet());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const

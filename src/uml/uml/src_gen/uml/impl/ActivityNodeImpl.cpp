@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityGroup.hpp"
@@ -386,6 +391,219 @@ std::shared_ptr<ecore::EObject> ActivityNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ActivityNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("inInterruptibleRegion");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inInterruptibleRegion")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("inPartition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inPartition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("incoming");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("incoming")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("outgoing");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("outgoing")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("redefinedNode");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedNode")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>( references.front() );
+				setActivity(_activity);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
+		{
+			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> _inInterruptibleRegion = getInInterruptibleRegion();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::InterruptibleActivityRegion>  _r = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(ref);
+				if (_r != nullptr)
+				{
+					_inInterruptibleRegion->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
+		{
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
+				if (_r != nullptr)
+				{
+					_inPartition->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>( references.front() );
+				setInStructuredNode(_inStructuredNode);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_incoming->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_outgoing->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
+		{
+			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> _redefinedNode = getRedefinedNode();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
+				if (_r != nullptr)
+				{
+					_redefinedNode->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	RedefinableElementImpl::resolveReferences(featureID, references);
+}
+
+void ActivityNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::InterruptibleActivityRegion>("inInterruptibleRegion", this->getInInterruptibleRegion());
+		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+		saveHandler->addReferences<uml::ActivityEdge>("incoming", this->getIncoming());
+		saveHandler->addReferences<uml::ActivityEdge>("outgoing", this->getOutgoing());
+		saveHandler->addReferences<uml::ActivityNode>("redefinedNode", this->getRedefinedNode());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const

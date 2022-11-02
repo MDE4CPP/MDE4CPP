@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
 #include "uml/Dependency.hpp"
@@ -254,6 +259,121 @@ std::shared_ptr<ecore::EObject> InteractionOperandImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InteractionOperandImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InteractionOperandImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("fragment") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::InteractionFragment>(this->getFragment());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("guard") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InteractionConstraint";
+			}
+			loadHandler->handleChild(this->getGuard()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+}
+
+void InteractionOperandImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+	NamespaceImpl::resolveReferences(featureID, references);
+}
+
+void InteractionOperandImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'fragment'
+		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		{
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
+		}
+
+		// Save 'guard'
+		std::shared_ptr<uml::InteractionConstraint> guard = this->getGuard();
+		if (guard != nullptr)
+		{
+			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const

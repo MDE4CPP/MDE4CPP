@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -214,6 +219,141 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ConnectionPointReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ConnectionPointReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("entry");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("entry")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("exit");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("exit")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	VertexImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ConnectionPointReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	VertexImpl::loadNode(nodeName, loadHandler);
+}
+
+void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
+		{
+			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				if (_r != nullptr)
+				{
+					_entry->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
+		{
+			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				if (_r != nullptr)
+				{
+					_exit->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>( references.front() );
+				setState(_state);
+			}
+			
+			return;
+		}
+	}
+	VertexImpl::resolveReferences(featureID, references);
+}
+
+void ConnectionPointReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());
+		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const

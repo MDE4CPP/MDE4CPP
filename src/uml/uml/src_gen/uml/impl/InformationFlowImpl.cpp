@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -342,6 +347,245 @@ std::shared_ptr<ecore::EObject> InformationFlowImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InformationFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("conveyed");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("conveyed")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("informationSource");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("informationSource")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("informationTarget");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("informationTarget")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realization");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realization")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingActivityEdge");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingActivityEdge")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingConnector");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingConnector")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingMessage");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingMessage")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _conveyed = getConveyed();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_conveyed->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		{
+			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> _informationSource = getInformationSource();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_informationSource->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		{
+			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> _informationTarget = getInformationTarget();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_informationTarget->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		{
+			std::shared_ptr<Bag<uml::Relationship>> _realization = getRealization();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Relationship>  _r = std::dynamic_pointer_cast<uml::Relationship>(ref);
+				if (_r != nullptr)
+				{
+					_realization->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = getRealizingActivityEdge();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_realizingActivityEdge->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		{
+			std::shared_ptr<Bag<uml::Connector>> _realizingConnector = getRealizingConnector();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Connector>  _r = std::dynamic_pointer_cast<uml::Connector>(ref);
+				if (_r != nullptr)
+				{
+					_realizingConnector->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		{
+			std::shared_ptr<Bag<uml::Message>> _realizingMessage = getRealizingMessage();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Message>  _r = std::dynamic_pointer_cast<uml::Message>(ref);
+				if (_r != nullptr)
+				{
+					_realizingMessage->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+	PackageableElementImpl::resolveReferences(featureID, references);
+}
+
+void InformationFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("conveyed", this->getConveyed());
+		saveHandler->addReferences<uml::NamedElement>("informationSource", this->getInformationSource());
+		saveHandler->addReferences<uml::NamedElement>("informationTarget", this->getInformationTarget());
+		saveHandler->addReferences<uml::Relationship>("realization", this->getRealization());
+		saveHandler->addReferences<uml::ActivityEdge>("realizingActivityEdge", this->getRealizingActivityEdge());
+		saveHandler->addReferences<uml::Connector>("realizingConnector", this->getRealizingConnector());
+		saveHandler->addReferences<uml::Message>("realizingMessage", this->getRealizingMessage());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const

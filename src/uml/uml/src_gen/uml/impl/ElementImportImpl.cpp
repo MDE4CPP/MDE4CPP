@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
 #include "uml/Element.hpp"
@@ -200,6 +205,178 @@ std::shared_ptr<ecore::EObject> ElementImportImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ElementImportImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("alias");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setAlias(value);
+		}
+
+		iter = attr_list.find("visibility");
+		if ( iter != attr_list.end() )
+		{
+			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
+			std::string literal = iter->second;
+						if (literal == "public")
+			{
+				value = uml::VisibilityKind::PUBLIC;
+			}
+			else 			if (literal == "private")
+			{
+				value = uml::VisibilityKind::PRIVATE;
+			}
+			else 			if (literal == "protected")
+			{
+				value = uml::VisibilityKind::PROTECTED;
+			}
+			else 			if (literal == "package")
+			{
+				value = uml::VisibilityKind::PACKAGE;
+			}
+			this->setVisibility(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("importedElement");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("importedElement")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ElementImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
+}
+
+void ElementImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>( references.front() );
+				setImportedElement(_importedElement);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>( references.front() );
+				setImportingNamespace(_importingNamespace);
+			}
+			
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+}
+
+void ElementImportImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getElementImport_Attribute_alias()) )
+		{
+			saveHandler->addAttribute("alias", this->getAlias());
+		}
+
+		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
+		{
+			uml::VisibilityKind value = this->getVisibility();
+			std::string literal = "";
+			if (value == uml::VisibilityKind::PUBLIC)
+			{
+				literal = "public";
+			}
+			else if (value == uml::VisibilityKind::PRIVATE)
+			{
+				literal = "private";
+			}
+			else if (value == uml::VisibilityKind::PROTECTED)
+			{
+				literal = "protected";
+			}
+			else if (value == uml::VisibilityKind::PACKAGE)
+			{
+				literal = "package";
+			}
+			saveHandler->addAttribute("visibility", literal);
+		}
+	// Add references
+		saveHandler->addReference(this->getImportedElement(), "importedElement", getImportedElement()->eClass() != uml::umlPackage::eInstance()->getPackageableElement_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const

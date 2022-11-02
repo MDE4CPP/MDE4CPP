@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -224,6 +229,203 @@ std::shared_ptr<ecore::EObject> PseudostateImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PseudostateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("kind");
+		if ( iter != attr_list.end() )
+		{
+			uml::PseudostateKind value = uml::PseudostateKind::INITIAL;
+			std::string literal = iter->second;
+						if (literal == "initial")
+			{
+				value = uml::PseudostateKind::INITIAL;
+			}
+			else 			if (literal == "deepHistory")
+			{
+				value = uml::PseudostateKind::DEEPHISTORY;
+			}
+			else 			if (literal == "shallowHistory")
+			{
+				value = uml::PseudostateKind::SHALLOWHISTORY;
+			}
+			else 			if (literal == "join")
+			{
+				value = uml::PseudostateKind::JOIN;
+			}
+			else 			if (literal == "fork")
+			{
+				value = uml::PseudostateKind::FORK;
+			}
+			else 			if (literal == "junction")
+			{
+				value = uml::PseudostateKind::JUNCTION;
+			}
+			else 			if (literal == "choice")
+			{
+				value = uml::PseudostateKind::CHOICE;
+			}
+			else 			if (literal == "entryPoint")
+			{
+				value = uml::PseudostateKind::ENTRYPOINT;
+			}
+			else 			if (literal == "exitPoint")
+			{
+				value = uml::PseudostateKind::EXITPOINT;
+			}
+			else 			if (literal == "terminate")
+			{
+				value = uml::PseudostateKind::TERMINATE;
+			}
+			this->setKind(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	VertexImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PseudostateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	VertexImpl::loadNode(nodeName, loadHandler);
+}
+
+void PseudostateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>( references.front() );
+				setState(_state);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>( references.front() );
+				setStateMachine(_stateMachine);
+			}
+			
+			return;
+		}
+	}
+	VertexImpl::resolveReferences(featureID, references);
+}
+
+void PseudostateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
+		{
+			uml::PseudostateKind value = this->getKind();
+			std::string literal = "";
+			if (value == uml::PseudostateKind::INITIAL)
+			{
+				literal = "initial";
+			}
+			else if (value == uml::PseudostateKind::DEEPHISTORY)
+			{
+				literal = "deepHistory";
+			}
+			else if (value == uml::PseudostateKind::SHALLOWHISTORY)
+			{
+				literal = "shallowHistory";
+			}
+			else if (value == uml::PseudostateKind::JOIN)
+			{
+				literal = "join";
+			}
+			else if (value == uml::PseudostateKind::FORK)
+			{
+				literal = "fork";
+			}
+			else if (value == uml::PseudostateKind::JUNCTION)
+			{
+				literal = "junction";
+			}
+			else if (value == uml::PseudostateKind::CHOICE)
+			{
+				literal = "choice";
+			}
+			else if (value == uml::PseudostateKind::ENTRYPOINT)
+			{
+				literal = "entryPoint";
+			}
+			else if (value == uml::PseudostateKind::EXITPOINT)
+			{
+				literal = "exitPoint";
+			}
+			else if (value == uml::PseudostateKind::TERMINATE)
+			{
+				literal = "terminate";
+			}
+			saveHandler->addAttribute("kind", literal);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const

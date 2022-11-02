@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -337,6 +342,163 @@ std::shared_ptr<ecore::EObject> OpaqueActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OpaqueActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void OpaqueActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	try
+	{
+		if (nodeName.compare("body") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
+			list_body->push_back(value);
+			return;
+		}
+
+		if (nodeName.compare("language") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
+			list_language->push_back(value);
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	try
+	{
+		if ( nodeName.compare("inputValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			loadHandler->handleChildContainer<uml::InputPin>(this->getInputValue());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("outputValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getOutputValue());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+}
+
+void OpaqueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'inputValue'
+		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
+		{
+			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
+		}
+
+		// Save 'outputValue'
+		for (std::shared_ptr<uml::OutputPin> outputValue : *this->getOutputValue()) 
+		{
+			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_body)
+			{
+				saveHandler->addAttributeAsNode("body", *value);
+			}
+		}
+
+		if ( this->eIsSet(package->getOpaqueAction_Attribute_language()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_language)
+			{
+				saveHandler->addAttributeAsNode("language", *value);
+			}
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const

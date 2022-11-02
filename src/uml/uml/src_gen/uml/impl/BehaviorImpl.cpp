@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
 #include "uml/BehavioredClassifier.hpp"
@@ -544,6 +549,277 @@ std::shared_ptr<ecore::EObject> BehaviorImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void BehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void BehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isReentrant");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsReentrant(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("context");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("context")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("postcondition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("postcondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("precondition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("precondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("redefinedBehavior");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedBehavior")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("specification");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("specification")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("ownedParameter") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Parameter";
+			}
+			loadHandler->handleChildContainer<uml::Parameter>(this->getOwnedParameter());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedParameterSet") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ParameterSet";
+			}
+			loadHandler->handleChildContainer<uml::ParameterSet>(this->getOwnedParameterSet());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ClassImpl::loadNode(nodeName, loadHandler);
+}
+
+void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>( references.front() );
+				setBehavioredClassifier(_behavioredClassifier);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::BehavioredClassifier> _context = std::dynamic_pointer_cast<uml::BehavioredClassifier>( references.front() );
+				setContext(_context);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
+		{
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
+				if (_r != nullptr)
+				{
+					_postcondition->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
+		{
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
+				if (_r != nullptr)
+				{
+					_precondition->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
+		{
+			std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> _redefinedBehavior = getRedefinedBehavior();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
+				if (_r != nullptr)
+				{
+					_redefinedBehavior->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::BehavioralFeature> _specification = std::dynamic_pointer_cast<uml::BehavioralFeature>( references.front() );
+				setSpecification(_specification);
+			}
+			
+			return;
+		}
+	}
+	ClassImpl::resolveReferences(featureID, references);
+}
+
+void BehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'ownedParameter'
+		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
+		{
+			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getParameter_Class());
+		}
+
+		// Save 'ownedParameterSet'
+		for (std::shared_ptr<uml::ParameterSet> ownedParameterSet : *this->getOwnedParameterSet()) 
+		{
+			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getBehavior_Attribute_isReentrant()) )
+		{
+			saveHandler->addAttribute("isReentrant", this->getIsReentrant());
+		}
+	// Add references
+		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != uml::umlPackage::eInstance()->getBehavioredClassifier_Class()); 
+		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
+		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
+		saveHandler->addReferences<uml::Behavior>("redefinedBehavior", this->getRedefinedBehavior());
+		saveHandler->addReference(this->getSpecification(), "specification", getSpecification()->eClass() != uml::umlPackage::eInstance()->getBehavioralFeature_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const

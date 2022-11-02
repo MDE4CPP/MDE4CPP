@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
 #include "uml/Comment.hpp"
@@ -502,6 +507,216 @@ std::shared_ptr<ecore::EObject> InterfaceImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InterfaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InterfaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("redefinedInterface");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedInterface")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("nestedClassifier") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::Classifier>(this->getNestedClassifier());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedAttribute") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Property";
+			}
+			loadHandler->handleChildContainer<uml::Property>(this->getOwnedAttribute());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedOperation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Operation";
+			}
+			loadHandler->handleChildContainer<uml::Operation>(this->getOwnedOperation());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedReception") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Reception";
+			}
+			loadHandler->handleChildContainer<uml::Reception>(this->getOwnedReception());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("protocol") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ProtocolStateMachine";
+			}
+			loadHandler->handleChild(this->getProtocol()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ClassifierImpl::loadNode(nodeName, loadHandler);
+}
+
+void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		{
+			std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> _redefinedInterface = getRedefinedInterface();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Interface>  _r = std::dynamic_pointer_cast<uml::Interface>(ref);
+				if (_r != nullptr)
+				{
+					_redefinedInterface->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ClassifierImpl::resolveReferences(featureID, references);
+}
+
+void InterfaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'nestedClassifier'
+		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
+		{
+			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
+		}
+
+		// Save 'ownedAttribute'
+		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		{
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
+		}
+
+		// Save 'ownedOperation'
+		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		{
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
+		}
+
+		// Save 'ownedReception'
+		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
+		{
+			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
+		}
+
+		// Save 'protocol'
+		std::shared_ptr<uml::ProtocolStateMachine> protocol = this->getProtocol();
+		if (protocol != nullptr)
+		{
+			saveHandler->addReference(protocol, "protocol", protocol->eClass() != package->getProtocolStateMachine_Class());
+		}
+	// Add references
+		saveHandler->addReferences<uml::Interface>("redefinedInterface", this->getRedefinedInterface());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const

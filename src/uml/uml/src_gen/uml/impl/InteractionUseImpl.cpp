@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -328,6 +333,191 @@ std::shared_ptr<ecore::EObject> InteractionUseImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InteractionUseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InteractionUseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("refersTo");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("refersTo")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("returnValueRecipient");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("returnValueRecipient")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("actualGate") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Gate";
+			}
+			loadHandler->handleChildContainer<uml::Gate>(this->getActualGate());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("argument") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::ValueSpecification>(this->getArgument());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("returnValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getReturnValue()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+}
+
+void InteractionUseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>( references.front() );
+				setRefersTo(_refersTo);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setReturnValueRecipient(_returnValueRecipient);
+			}
+			
+			return;
+		}
+	}
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void InteractionUseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'actualGate'
+		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 
+		{
+			saveHandler->addReference(actualGate, "actualGate", actualGate->eClass() != package->getGate_Class());
+		}
+
+		// Save 'argument'
+		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
+		{
+			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
+		}
+
+		// Save 'returnValue'
+		std::shared_ptr<uml::ValueSpecification> returnValue = this->getReturnValue();
+		if (returnValue != nullptr)
+		{
+			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_Class());
+		}
+	// Add references
+		saveHandler->addReference(this->getRefersTo(), "refersTo", getRefersTo()->eClass() != uml::umlPackage::eInstance()->getInteraction_Class()); 
+		saveHandler->addReference(this->getReturnValueRecipient(), "returnValueRecipient", getReturnValueRecipient()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const

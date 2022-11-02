@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Artifact.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -448,6 +453,189 @@ std::shared_ptr<ecore::EObject> ArtifactImpl::eContainer() const
 	}
 
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ArtifactImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ArtifactImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("fileName");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setFileName(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadAttributes(loadHandler, attr_list);
+	DeployedArtifactImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("manifestation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Manifestation";
+			}
+			loadHandler->handleChildContainer<uml::Manifestation>(this->getManifestation());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("nestedArtifact") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Artifact";
+			}
+			loadHandler->handleChildContainer<uml::Artifact>(this->getNestedArtifact());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedAttribute") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Property";
+			}
+			loadHandler->handleChildContainer<uml::Property>(this->getOwnedAttribute());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedOperation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Operation";
+			}
+			loadHandler->handleChildContainer<uml::Operation>(this->getOwnedOperation());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ClassifierImpl::loadNode(nodeName, loadHandler);
+	DeployedArtifactImpl::loadNode(nodeName, loadHandler);
+}
+
+void ArtifactImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ClassifierImpl::resolveReferences(featureID, references);
+	DeployedArtifactImpl::resolveReferences(featureID, references);
+}
+
+void ArtifactImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassifierImpl::saveContent(saveHandler);
+	DeployedArtifactImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'manifestation'
+		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 
+		{
+			saveHandler->addReference(manifestation, "manifestation", manifestation->eClass() != package->getManifestation_Class());
+		}
+
+		// Save 'nestedArtifact'
+		for (std::shared_ptr<uml::Artifact> nestedArtifact : *this->getNestedArtifact()) 
+		{
+			saveHandler->addReference(nestedArtifact, "nestedArtifact", nestedArtifact->eClass() != package->getArtifact_Class());
+		}
+
+		// Save 'ownedAttribute'
+		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		{
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
+		}
+
+		// Save 'ownedOperation'
+		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		{
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getArtifact_Attribute_fileName()) )
+		{
+			saveHandler->addAttribute("fileName", this->getFileName());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const

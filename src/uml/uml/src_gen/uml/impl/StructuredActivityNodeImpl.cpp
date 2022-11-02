@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -512,6 +517,211 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StructuredActivityNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void StructuredActivityNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("mustIsolate");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setMustIsolate(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+	ActivityGroupImpl::loadAttributes(loadHandler, attr_list);
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("edge") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::ActivityEdge>(this->getEdge());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("node") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::ActivityNode>(this->getNode());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("structuredNodeInput") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			loadHandler->handleChildContainer<uml::InputPin>(this->getStructuredNodeInput());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("structuredNodeOutput") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getStructuredNodeOutput());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("variable") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Variable";
+			}
+			loadHandler->handleChildContainer<uml::Variable>(this->getVariable());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+	ActivityGroupImpl::loadNode(nodeName, loadHandler);
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+}
+
+void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ActionImpl::resolveReferences(featureID, references);
+	ActivityGroupImpl::resolveReferences(featureID, references);
+	NamespaceImpl::resolveReferences(featureID, references);
+}
+
+void StructuredActivityNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	ActivityGroupImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'edge'
+		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
+		{
+			saveHandler->addReference(edge, "edge", edge->eClass() != package->getActivityEdge_Class());
+		}
+
+		// Save 'node'
+		for (std::shared_ptr<uml::ActivityNode> node : *this->getNode()) 
+		{
+			saveHandler->addReference(node, "node", node->eClass() != package->getActivityNode_Class());
+		}
+
+		// Save 'structuredNodeInput'
+		for (std::shared_ptr<uml::InputPin> structuredNodeInput : *this->getStructuredNodeInput()) 
+		{
+			saveHandler->addReference(structuredNodeInput, "structuredNodeInput", structuredNodeInput->eClass() != package->getInputPin_Class());
+		}
+
+		// Save 'structuredNodeOutput'
+		for (std::shared_ptr<uml::OutputPin> structuredNodeOutput : *this->getStructuredNodeOutput()) 
+		{
+			saveHandler->addReference(structuredNodeOutput, "structuredNodeOutput", structuredNodeOutput->eClass() != package->getOutputPin_Class());
+		}
+
+		// Save 'variable'
+		for (std::shared_ptr<uml::Variable> variable : *this->getVariable()) 
+		{
+			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getStructuredActivityNode_Attribute_mustIsolate()) )
+		{
+			saveHandler->addAttribute("mustIsolate", this->getMustIsolate());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const

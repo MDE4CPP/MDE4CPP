@@ -33,6 +33,10 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
 //Factories and Package includes
 #include "ecore/ecorePackage.hpp"
 
@@ -140,6 +144,101 @@ void EStringToStringMapEntryImpl::setValue(std::string _value)
 std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::eContainer() const
 {
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EStringToStringMapEntryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get ecoreFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void EStringToStringMapEntryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("key");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setKey(value);
+		}
+
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setValue(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EStringToStringMapEntryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+}
+
+void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void EStringToStringMapEntryImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getEStringToStringMapEntry_Attribute_key()) )
+		{
+			saveHandler->addAttribute("key", this->getKey());
+		}
+
+		if ( this->eIsSet(package->getEStringToStringMapEntry_Attribute_value()) )
+		{
+			saveHandler->addAttribute("value", this->getValue());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const

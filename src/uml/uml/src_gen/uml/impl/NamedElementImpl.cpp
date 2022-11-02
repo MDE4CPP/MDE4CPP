@@ -36,6 +36,11 @@
 //Includes from codegen annotation
 #include <algorithm>
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
 #include "uml/Element.hpp"
@@ -297,6 +302,167 @@ std::shared_ptr<ecore::EObject> NamedElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void NamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("name");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setName(value);
+		}
+
+		iter = attr_list.find("visibility");
+		if ( iter != attr_list.end() )
+		{
+			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
+			std::string literal = iter->second;
+						if (literal == "public")
+			{
+				value = uml::VisibilityKind::PUBLIC;
+			}
+			else 			if (literal == "private")
+			{
+				value = uml::VisibilityKind::PRIVATE;
+			}
+			else 			if (literal == "protected")
+			{
+				value = uml::VisibilityKind::PROTECTED;
+			}
+			else 			if (literal == "package")
+			{
+				value = uml::VisibilityKind::PACKAGE;
+			}
+			this->setVisibility(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("nameExpression") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "StringExpression";
+			}
+			loadHandler->handleChild(this->getNameExpression()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void NamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'nameExpression'
+		std::shared_ptr<uml::StringExpression> nameExpression = this->getNameExpression();
+		if (nameExpression != nullptr)
+		{
+			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
+		{
+			saveHandler->addAttribute("name", this->getName());
+		}
+
+		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
+		{
+			uml::VisibilityKind value = this->getVisibility();
+			std::string literal = "";
+			if (value == uml::VisibilityKind::PUBLIC)
+			{
+				literal = "public";
+			}
+			else if (value == uml::VisibilityKind::PRIVATE)
+			{
+				literal = "private";
+			}
+			else if (value == uml::VisibilityKind::PROTECTED)
+			{
+				literal = "protected";
+			}
+			else if (value == uml::VisibilityKind::PACKAGE)
+			{
+				literal = "package";
+			}
+			saveHandler->addAttribute("visibility", literal);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const

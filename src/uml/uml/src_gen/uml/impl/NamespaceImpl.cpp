@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
 #include "uml/Dependency.hpp"
@@ -440,6 +445,146 @@ std::shared_ptr<ecore::EObject> NamespaceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void NamespaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void NamespaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("elementImport") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ElementImport";
+			}
+			loadHandler->handleChildContainer<uml::ElementImport>(this->getElementImport());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedMember") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::NamedElement>(this->getOwnedMember());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("ownedRule") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Constraint";
+			}
+			loadHandler->handleChildContainer<uml::Constraint>(this->getOwnedRule());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("packageImport") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "PackageImport";
+			}
+			loadHandler->handleChildContainer<uml::PackageImport>(this->getPackageImport());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void NamespaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void NamespaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'elementImport'
+
+		saveHandler->addReferences<uml::ElementImport>("elementImport", this->getElementImport());
+
+		// Save 'ownedMember'
+
+		saveHandler->addReferences<uml::NamedElement>("ownedMember", this->getOwnedMember());
+
+		// Save 'ownedRule'
+
+		saveHandler->addReferences<uml::Constraint>("ownedRule", this->getOwnedRule());
+
+		// Save 'packageImport'
+
+		saveHandler->addReferences<uml::PackageImport>("packageImport", this->getPackageImport());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const

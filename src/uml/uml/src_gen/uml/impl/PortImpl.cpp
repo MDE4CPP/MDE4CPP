@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -409,6 +414,180 @@ std::shared_ptr<ecore::EObject> PortImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PortImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void PortImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isBehavior");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsBehavior(value);
+		}
+
+		iter = attr_list.find("isConjugated");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsConjugated(value);
+		}
+
+		iter = attr_list.find("isService");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsService(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("protocol");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("protocol")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("redefinedPort");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedPort")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PropertyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PortImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	PropertyImpl::loadNode(nodeName, loadHandler);
+}
+
+void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>( references.front() );
+				setProtocol(_protocol);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
+		{
+			std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> _redefinedPort = getRedefinedPort();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
+				if (_r != nullptr)
+				{
+					_redefinedPort->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	PropertyImpl::resolveReferences(featureID, references);
+}
+
+void PortImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PropertyImpl::saveContent(saveHandler);
+	
+	ConnectableElementImpl::saveContent(saveHandler);
+	DeploymentTargetImpl::saveContent(saveHandler);
+	StructuralFeatureImpl::saveContent(saveHandler);
+	
+	FeatureImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getPort_Attribute_isBehavior()) )
+		{
+			saveHandler->addAttribute("isBehavior", this->getIsBehavior());
+		}
+
+		if ( this->eIsSet(package->getPort_Attribute_isConjugated()) )
+		{
+			saveHandler->addAttribute("isConjugated", this->getIsConjugated());
+		}
+
+		if ( this->eIsSet(package->getPort_Attribute_isService()) )
+		{
+			saveHandler->addAttribute("isService", this->getIsService());
+		}
+	// Add references
+		saveHandler->addReference(this->getProtocol(), "protocol", getProtocol()->eClass() != uml::umlPackage::eInstance()->getProtocolStateMachine_Class()); 
+		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const

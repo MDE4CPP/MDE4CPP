@@ -34,6 +34,11 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+
+#include <exception> // used in Persistence
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
@@ -214,6 +219,177 @@ std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get ecoreFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("containment");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setContainment(value);
+		}
+
+		iter = attr_list.find("resolveProxies");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setResolveProxies(value);
+		}
+		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eKeys");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eKeys")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eOpposite");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eOpposite")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eReferenceType");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eReferenceType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	EStructuralFeatureImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
+}
+
+void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		{
+			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ecore::EAttribute>  _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
+				if (_r != nullptr)
+				{
+					_eKeys->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>( references.front() );
+				setEOpposite(_eOpposite);
+			}
+			
+			return;
+		}
+
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>( references.front() );
+				setEReferenceType(_eReferenceType);
+			}
+			
+			return;
+		}
+	}
+	EStructuralFeatureImpl::resolveReferences(featureID, references);
+}
+
+void EReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EStructuralFeatureImpl::saveContent(saveHandler);
+	
+	ETypedElementImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	EObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getEReference_Attribute_containment()) )
+		{
+			saveHandler->addAttribute("containment", this->isContainment());
+		}
+
+		if ( this->eIsSet(package->getEReference_Attribute_resolveProxies()) )
+		{
+			saveHandler->addAttribute("resolveProxies", this->isResolveProxies());
+		}
+	// Add references
+		saveHandler->addReferences<ecore::EAttribute>("eKeys", this->getEKeys());
+		saveHandler->addReference(this->getEOpposite(),"eOpposite", getEOpposite()->eClass() != ecore::ecorePackage::eInstance()->getEReference_Class());
+		saveHandler->addReference(this->getEReferenceType(),"eReferenceType", getEReferenceType()->eClass() != ecore::ecorePackage::eInstance()->getEClass_Class());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
 }
 
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
