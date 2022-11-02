@@ -96,10 +96,8 @@ if (plugin)
 		DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
 		std::shared_ptr<Bag<Any>> parameterList(new Bag<Any>());
-	[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-	[let anyBagRequired : Boolean = ((par.upper <> 1) and not(par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration)))]
-		parameterList->push_back([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
-	[/let]
+	[for (aParameter : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+		parameterList->push_back([aParameter.generateAnyCreationFromParameter()/]);
 	[/for]
 		std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[anOperation.class.name.toUpperFirst()/]Ptr());
 

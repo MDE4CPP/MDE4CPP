@@ -85,6 +85,13 @@
 [/for]
 [/template]
 
+[template public generateAnyCreationFromParameter(aParameter : Parameter) post(trim())
+{
+	parameterTypeIsPrimitiveOrEnumeration : Boolean = aParameter.type.oclIsKindOf(PrimitiveType) or aParameter.type.oclIsKindOf(Enumeration);
+}]
+[if (parameterTypeIsPrimitiveOrEnumeration)]eAny[else][if (aParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if][/if]([aParameter.name/], [aParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(parameterTypeIsPrimitiveOrEnumeration)], [if(aParameter.upper = 1)]false[else]true[/if][/if])
+[/template]
+
 [query public collectParameterIncludeStrings(aParameter : Parameter) : Set(String) = Set(String)
 {
 	aParameter.type.collectTypeIncludeStrings()

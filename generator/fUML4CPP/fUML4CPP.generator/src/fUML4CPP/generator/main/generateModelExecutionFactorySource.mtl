@@ -30,6 +30,9 @@ originalName : String = aPackage.generateNamespacePath(false);
 	aPackage.collectActivitiesOwnedByPackage().node
 	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).input)
 	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).output)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).input)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).output)
 	.generateCorrespondingActivityNodeActivationInclude()->asSet()) before('//ActivityNodeActivation includes\n')]
 [anIncludeString/]
 [/for]
@@ -44,10 +47,16 @@ originalName : String = aPackage.generateNamespacePath(false);
 	aPackage.collectActivitiesOwnedByPackage().node
 	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).input)
 	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).output)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).input)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).output)
 	.generateCorrespondingActivityNodeInclude()->asSet()) before('//ActivityNode includes\n')]
 [anIncludeString/]
 [/for]
-[for (anIncludeString : String | aPackage.collectActivitiesOwnedByPackage().edge.generateCorrespondingActivityEdgeInclude()->asSet()) before('//ActivityEdge includes\n')]
+[for (anIncludeString : String | 
+	aPackage.collectActivitiesOwnedByPackage().edge
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().edge)
+	.generateCorrespondingActivityEdgeInclude()->asSet()) before('//ActivityEdge includes\n')]
 [anIncludeString/]
 [/for]
 
@@ -104,7 +113,10 @@ void [packageName/]ExecutionFactoryImpl::create[anActivity.memberName().toUpperF
 
 
 
-[template private generateActivityExecutionPrototypeCreatorBody(anActivity : Activity) {activityExecutionPrototypeMemberName : String = 'm_' + anActivity.memberName() + 'ExecutionPrototype';}]
+[template private generateActivityExecutionPrototypeCreatorBody(anActivity : Activity) post(trim())
+{
+	activityExecutionPrototypeMemberName : String = 'm_' + anActivity.memberName() + 'ExecutionPrototype';
+}]
 std::shared_ptr<uml::Activity> activity = [anActivity.generatePackageGetterCall()/];
 [activityExecutionPrototypeMemberName/] = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 [activityExecutionPrototypeMemberName/]->getTypes()->push_back(activity);
@@ -114,38 +126,55 @@ this->getLocus().lock()->add([activityExecutionPrototypeMemberName/]);
 
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution([activityExecutionPrototypeMemberName/]);
 
-[for (anActivityNode : ActivityNode | anActivity.node) before('//Create ActivityNodeActivations\n') separator('\n') after('\n')]
-	//Create ActivityNodeActivation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'
-	DEBUG_INFO("Creating [anActivityNode.eClass().name/]Activation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'.")
-	std::shared_ptr<[anActivityNode.generateCorrespondingActivityNodeActivationCPPType()/]> [anActivityNode.getActivityNodeActivationVariableName()/] = fUML::Semantics::[if(anActivityNode.oclIsKindOf(Action))]Actions::Actions[else]Activities::Activities[/if]Factory::eInstance()->create[anActivityNode.eClass().name/]Activation();
-	[anActivityNode.getActivityNodeActivationVariableName()/]->setNode([anActivityNode.generatePackageGetterCall()/]);
-	[anActivityNode.getActivityNodeActivationVariableName()/]->setRunning(false);
-	newActivationGroup->addNodeActivation([anActivityNode.getActivityNodeActivationVariableName()/]);
-	[if (anActivityNode.oclIsKindOf(Action))]
-	[let anAction : Action = anActivityNode.oclAsType(Action)]
-		[for (aPin : Pin | anAction.input->addAll(anAction.output))]
-		//Create PinActivation for [aPin.eClass().name/] '[anAction.name/]::[aPin.name/]'
-		std::shared_ptr<[aPin.generateCorrespondingActivityNodeActivationCPPType()/]> [aPin.getActivityNodeActivationVariableName()/] = fUML::Semantics::Actions::ActionsFactory::eInstance()->create[aPin.eClass().name/]Activation();
-		[aPin.getActivityNodeActivationVariableName()/]->setNode([aPin.generatePackageGetterCall()/]);
-		[aPin.getActivityNodeActivationVariableName()/]->setRunning(false);
-		[anActivityNode.getActivityNodeActivationVariableName()/]->addPinActivation([aPin.getActivityNodeActivationVariableName()/]);
-		newActivationGroup->addNodeActivation([aPin.getActivityNodeActivationVariableName()/]);
+[for (anActivityNode : ActivityNode | anActivity.node) before('//Create ActivityNodeActivations\n')]
+[anActivityNode.generateActivityNodeActivationCreation()/]
+
+[/for]
+[for (anActivityEdge : ActivityEdge | anActivity.edge) before('//Create ActivityEdgeInstances\n')]
+[anActivityEdge.generateActivityEdgeInstanceCreation()/]
+
+[/for]
+[/template]
+
+[template private generateActivityNodeActivationCreation(anActivityNode : ActivityNode)  post(trim())]
+//Create ActivityNodeActivation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'
+DEBUG_INFO("Creating [anActivityNode.eClass().name/]Activation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'.")
+std::shared_ptr<[anActivityNode.generateCorrespondingActivityNodeActivationCPPType()/]> [anActivityNode.getActivityNodeActivationVariableName()/] = [anActivityNode.generateCorrespondingFactoryNamespace()/]::eInstance()->create[anActivityNode.eClass().name/]Activation();
+[anActivityNode.getActivityNodeActivationVariableName()/]->setNode([anActivityNode.generatePackageGetterCall()/]);
+[anActivityNode.getActivityNodeActivationVariableName()/]->setRunning(false);
+newActivationGroup->addNodeActivation([anActivityNode.getActivityNodeActivationVariableName()/]);
+[if (anActivityNode.oclIsKindOf(Action))]
+[let anAction : Action = anActivityNode.oclAsType(Action)]
+	[for (aPin : Pin | anAction.input->addAll(anAction.output))]
+	//Create PinActivation for [aPin.eClass().name/] '[anAction.name/]::[aPin.name/]'
+	std::shared_ptr<[aPin.generateCorrespondingActivityNodeActivationCPPType()/]> [aPin.getActivityNodeActivationVariableName()/] = [aPin.generateCorrespondingFactoryNamespace()/]::eInstance()->create[aPin.eClass().name/]Activation();
+	[aPin.getActivityNodeActivationVariableName()/]->setNode([aPin.generatePackageGetterCall()/]);
+	[aPin.getActivityNodeActivationVariableName()/]->setRunning(false);
+	[anActivityNode.getActivityNodeActivationVariableName()/]->addPinActivation([aPin.getActivityNodeActivationVariableName()/]);
+	newActivationGroup->addNodeActivation([aPin.getActivityNodeActivationVariableName()/]);
+	[/for]
+	[if(anAction.oclIsKindOf(StructuredActivityNode))]
+	[let aStructuredActivityNode : StructuredActivityNode = anAction.oclAsType(StructuredActivityNode)]
+		[for (aNestedActivityNode : ActivityNode | aStructuredActivityNode.node) before('//Create nested ActivityNodeActivations\n')]
+	[aNestedActivityNode.generateActivityNodeActivationCreation()/]
+		[/for]
+		[for (aNestedActivityEdge : ActivityEdge | aStructuredActivityNode.edge) before('//Create nested ActivityEdgeInstances\n')]
+	[aNestedActivityEdge.generateActivityEdgeInstanceCreation()/]
 		[/for]
 	[/let]
-	[comment TODO /]
-	[elseif(anActivityNode.oclIsKindOf(StructuredActivityNode))]
-	[comment TODO /]
 	[/if]
-[/for]
-[for (anActivityEdge : ActivityEdge | anActivity.edge) before('//Create ActivityEdgeInstances\n') separator('\n')]
-	//Create ActivityEdgeInstance for [anActivityEdge.eClass().name/] '[anActivityEdge.metamodelElementName()/]'
-	DEBUG_INFO("Creating EdgeInstance for [anActivityEdge.eClass().name/] '[anActivityEdge.metamodelElementName()/]'.")
-	std::shared_ptr<[anActivityEdge.generateCorrespondingActivityEdgeInstanceCPPType()/]> [anActivityEdge.getEdgeInstanceVariableName()/] = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance();
-	[anActivityEdge.getEdgeInstanceVariableName()/]->setEdge([anActivityEdge.generatePackageGetterCall()/]);
-	newActivationGroup->addEdgeInstance([anActivityEdge.getEdgeInstanceVariableName()/]);
-	[anActivityEdge.source.getActivityNodeActivationVariableName()/]->addOutgoingEdge([anActivityEdge.getEdgeInstanceVariableName()/]);
-	[anActivityEdge.target.getActivityNodeActivationVariableName()/]->addIncomingEdge([anActivityEdge.getEdgeInstanceVariableName()/]);
-[/for]
+[/let]
+[/if]
+[/template]
+
+[template private generateActivityEdgeInstanceCreation(anActivityEdge : ActivityEdge)  post(trim())]
+//Create ActivityEdgeInstance for [anActivityEdge.eClass().name/] '[anActivityEdge.metamodelElementName()/]'
+DEBUG_INFO("Creating EdgeInstance for [anActivityEdge.eClass().name/] '[anActivityEdge.metamodelElementName()/]'.")
+std::shared_ptr<[anActivityEdge.generateCorrespondingActivityEdgeInstanceCPPType()/]> [anActivityEdge.getEdgeInstanceVariableName()/] = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance();
+[anActivityEdge.getEdgeInstanceVariableName()/]->setEdge([anActivityEdge.generatePackageGetterCall()/]);
+newActivationGroup->addEdgeInstance([anActivityEdge.getEdgeInstanceVariableName()/]);
+[anActivityEdge.source.getActivityNodeActivationVariableName()/]->addOutgoingEdge([anActivityEdge.getEdgeInstanceVariableName()/]);
+[anActivityEdge.target.getActivityNodeActivationVariableName()/]->addIncomingEdge([anActivityEdge.getEdgeInstanceVariableName()/]);
 [/template]
 
 [comment]
@@ -190,6 +219,9 @@ fUML::Semantics::Actions::InputPinActivation
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(OutputPin))]
 fUML::Semantics::Actions::OutputPinActivation
 [/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionNode))]
+fUML::Semantics::Actions::ExpansionNodeActivation
+[/template]
 
 [comment Actions /]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallOperationAction))]
@@ -225,7 +257,7 @@ fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
 
 [comment Structured Activity Nodes /]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionRegion))]
-fUML::Semantics::Activities::ExpansionRegionActivation
+fUML::Semantics::Actions::ExpansionRegionActivation
 [/template]
 
 [comment]
@@ -262,6 +294,37 @@ The following templates return the include path of the corresponding ActivityEdg
 
 [template private getActivityNodeActivationVariableName(anActivityNode : ActivityNode)]
 [anActivityNode.memberName()/]_[anActivityNode.eClass().name/]Activation
+[/template]
+
+
+[comment]
+The following templates return the namespace name of the corresponding fUML subpackage Factory class for a given ActivityNode
+[/comment]
+[comment Actions package /]
+[template private generateCorrespondingFactoryNamespace(anActivityNode : ActivityNode)
+? (
+	anActivityNode.oclIsKindOf(Action) or
+	anActivityNode.oclIsKindOf(ExpansionNode) or
+	anActivityNode.oclIsKindOf(StructuredActivityNode) or
+	anActivityNode.oclIsKindOf(Pin)
+)]
+fUML::Semantics::Actions::ActionsFactory
+[/template]
+
+[comment Activities package /]
+[template private generateCorrespondingFactoryNamespace(anActivityNode : ActivityNode)
+? (
+	anActivityNode.oclIsKindOf(ActivityFinalNode) or
+	anActivityNode.oclIsKindOf(ActivityParameterNode) or
+	anActivityNode.oclIsKindOf(CentralBufferNode) or
+	anActivityNode.oclIsKindOf(DataStoreNode) or
+	anActivityNode.oclIsKindOf(DecisionNode) or
+	anActivityNode.oclIsKindOf(FlowFinalNode) or
+	anActivityNode.oclIsKindOf(InitialNode) or
+	anActivityNode.oclIsKindOf(JoinNode) or
+	anActivityNode.oclIsKindOf(MergeNode)
+)]
+fUML::Semantics::Activities::ActivitiesFactory
 [/template]
 
 [comment]

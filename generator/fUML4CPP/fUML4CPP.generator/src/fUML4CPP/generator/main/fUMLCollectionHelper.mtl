@@ -64,6 +64,9 @@
 [query public collectActivitiesOwnedByPackage(aPackage : Package) : Set(Activity) = 
 	aPackage.getRootPackage().allOwnedElements()->filter(Activity)->asSet()/]
 
+[query public collectStructuredActivityNodesOwnedByPackage(aPackage : Package) : Set(StructuredActivityNode) = 
+	aPackage.getRootPackage().allOwnedElements()->filter(StructuredActivityNode)->asSet()/]
+
 [query private collectActivitiesUsedByCallBehaviorActions(aPackage : Package) : Set(Activity) = 
 	aPackage.getRootPackage().allOwnedElements()->filter(CallBehaviorAction).behavior->filter(Activity)->asSet()/]
 
