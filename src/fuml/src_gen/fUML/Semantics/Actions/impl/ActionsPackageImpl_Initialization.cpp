@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -24,6 +24,7 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -51,6 +52,9 @@ void ActionsPackageImpl::initializePackageContents()
 	m_clearStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_createObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_destroyObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_expansionActivationGroup_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
+	m_expansionNodeActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
+	m_expansionRegionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_inputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_invocationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
@@ -73,6 +77,9 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeClearStructuralFeatureActionActivationContent();
 	initializeCreateObjectActionActivationContent();
 	initializeDestroyObjectActionActivationContent();
+	initializeExpansionActivationGroupContent();
+	initializeExpansionNodeActivationContent();
+	initializeExpansionRegionActivationContent();
 	initializeInputPinActivationContent();
 	initializeInvocationActionActivationContent();
 	initializeOutputPinActivationContent();
@@ -962,6 +969,543 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
 		parameter->setName("link");
 		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
+}
+
+void ActionsPackageImpl::initializeExpansionActivationGroupContent()
+{
+	m_expansionActivationGroup_Class->setName("ExpansionActivationGroup");
+	m_expansionActivationGroup_Class->setAbstract(false);
+	m_expansionActivationGroup_Class->setInterface(false);
+	
+	m_expansionActivationGroup_Attribute_index = getExpansionActivationGroup_Attribute_index();
+	m_expansionActivationGroup_Attribute_index->setName("index");
+		m_expansionActivationGroup_Attribute_index->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	m_expansionActivationGroup_Attribute_index->setLowerBound(1);
+	m_expansionActivationGroup_Attribute_index->setUpperBound(1);
+	m_expansionActivationGroup_Attribute_index->setTransient(false);
+	m_expansionActivationGroup_Attribute_index->setVolatile(false);
+	m_expansionActivationGroup_Attribute_index->setChangeable(true);
+	m_expansionActivationGroup_Attribute_index->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_index->setUnique(true);
+	m_expansionActivationGroup_Attribute_index->setDerived(false);
+	m_expansionActivationGroup_Attribute_index->setOrdered(true);
+	m_expansionActivationGroup_Attribute_index->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_expansionActivationGroup_Attribute_index->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	m_expansionActivationGroup_Attribute_groupInputs->setName("groupInputs");
+	m_expansionActivationGroup_Attribute_groupInputs->setEType(getExpansionNodeActivation_Class());
+	m_expansionActivationGroup_Attribute_groupInputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_groupInputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_groupInputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_groupInputs->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_expansionActivationGroup_Attribute_groupOutputs->setName("groupOutputs");
+	m_expansionActivationGroup_Attribute_groupOutputs->setEType(getExpansionNodeActivation_Class());
+	m_expansionActivationGroup_Attribute_groupOutputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_groupOutputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_groupOutputs->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_expansionActivationGroup_Attribute_regionActivation->setName("regionActivation");
+	m_expansionActivationGroup_Attribute_regionActivation->setEType(getExpansionRegionActivation_Class());
+	m_expansionActivationGroup_Attribute_regionActivation->setLowerBound(1);
+	m_expansionActivationGroup_Attribute_regionActivation->setUpperBound(1);
+	m_expansionActivationGroup_Attribute_regionActivation->setTransient(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setVolatile(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setChangeable(true);
+	m_expansionActivationGroup_Attribute_regionActivation->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setUnique(true);
+	m_expansionActivationGroup_Attribute_regionActivation->setDerived(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setOrdered(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setContainment(false);
+	m_expansionActivationGroup_Attribute_regionActivation->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_regionActivation->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_expansionActivationGroup_Attribute_regionInputs->setName("regionInputs");
+	m_expansionActivationGroup_Attribute_regionInputs->setEType(getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_regionInputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_regionInputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_regionInputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_regionInputs->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_expansionActivationGroup_Operation_getActivityExecution->setName("getActivityExecution");
+	m_expansionActivationGroup_Operation_getActivityExecution->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Class());
+	m_expansionActivationGroup_Operation_getActivityExecution->setLowerBound(1);
+	m_expansionActivationGroup_Operation_getActivityExecution->setUpperBound(1);
+	m_expansionActivationGroup_Operation_getActivityExecution->setUnique(true);
+	m_expansionActivationGroup_Operation_getActivityExecution->setOrdered(true);
+	
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class());
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUnique(true);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode);
+		parameter->setName("node");
+		parameter->setEType(uml::umlPackage::eInstance()->getActivityNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setName("resume");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setEType(unknownClass);
+	}
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setLowerBound(0);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUpperBound(1);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUnique(true);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_resume_ActivityNodeActivation);
+		parameter->setName("activation");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setName("suspend");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setEType(unknownClass);
+	}
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setLowerBound(0);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUpperBound(1);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUnique(true);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation);
+		parameter->setName("activation");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
+}
+
+void ActionsPackageImpl::initializeExpansionNodeActivationContent()
+{
+	m_expansionNodeActivation_Class->setName("ExpansionNodeActivation");
+	m_expansionNodeActivation_Class->setAbstract(false);
+	m_expansionNodeActivation_Class->setInterface(false);
+	
+	
+	
+	m_expansionNodeActivation_Operation_fire_Token->setName("fire");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionNodeActivation_Operation_fire_Token->setEType(unknownClass);
+	}
+	m_expansionNodeActivation_Operation_fire_Token->setLowerBound(1);
+	m_expansionNodeActivation_Operation_fire_Token->setUpperBound(1);
+	m_expansionNodeActivation_Operation_fire_Token->setUnique(true);
+	m_expansionNodeActivation_Operation_fire_Token->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionNodeActivation_Operation_fire_Token);
+		parameter->setName("incomingTokens");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setName("getExpansionRegionActivation");
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setEType(getExpansionRegionActivation_Class());
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setLowerBound(1);
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUpperBound(1);
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUnique(true);
+	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setOrdered(false);
+	
+	m_expansionNodeActivation_Operation_isReady->setName("isReady");
+	m_expansionNodeActivation_Operation_isReady->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_expansionNodeActivation_Operation_isReady->setLowerBound(1);
+	m_expansionNodeActivation_Operation_isReady->setUpperBound(1);
+	m_expansionNodeActivation_Operation_isReady->setUnique(true);
+	m_expansionNodeActivation_Operation_isReady->setOrdered(false);
+	
+	m_expansionNodeActivation_Operation_receiveOffer->setName("receiveOffer");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionNodeActivation_Operation_receiveOffer->setEType(unknownClass);
+	}
+	m_expansionNodeActivation_Operation_receiveOffer->setLowerBound(1);
+	m_expansionNodeActivation_Operation_receiveOffer->setUpperBound(1);
+	m_expansionNodeActivation_Operation_receiveOffer->setUnique(true);
+	m_expansionNodeActivation_Operation_receiveOffer->setOrdered(false);
+	
+	
+}
+
+void ActionsPackageImpl::initializeExpansionRegionActivationContent()
+{
+	m_expansionRegionActivation_Class->setName("ExpansionRegionActivation");
+	m_expansionRegionActivation_Class->setAbstract(false);
+	m_expansionRegionActivation_Class->setInterface(false);
+	
+	m_expansionRegionActivation_Attribute_next = getExpansionRegionActivation_Attribute_next();
+	m_expansionRegionActivation_Attribute_next->setName("next");
+		m_expansionRegionActivation_Attribute_next->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	m_expansionRegionActivation_Attribute_next->setLowerBound(0);
+	m_expansionRegionActivation_Attribute_next->setUpperBound(1);
+	m_expansionRegionActivation_Attribute_next->setTransient(false);
+	m_expansionRegionActivation_Attribute_next->setVolatile(false);
+	m_expansionRegionActivation_Attribute_next->setChangeable(true);
+	m_expansionRegionActivation_Attribute_next->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_next->setUnique(true);
+	m_expansionRegionActivation_Attribute_next->setDerived(false);
+	m_expansionRegionActivation_Attribute_next->setOrdered(true);
+	m_expansionRegionActivation_Attribute_next->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_expansionRegionActivation_Attribute_next->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	m_expansionRegionActivation_Attribute_activationGroups->setName("activationGroups");
+	m_expansionRegionActivation_Attribute_activationGroups->setEType(getExpansionActivationGroup_Class());
+	m_expansionRegionActivation_Attribute_activationGroups->setLowerBound(0);
+	m_expansionRegionActivation_Attribute_activationGroups->setUpperBound(-1);
+	m_expansionRegionActivation_Attribute_activationGroups->setTransient(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setVolatile(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setChangeable(true);
+	m_expansionRegionActivation_Attribute_activationGroups->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setUnique(true);
+	m_expansionRegionActivation_Attribute_activationGroups->setDerived(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setOrdered(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setContainment(false);
+	m_expansionRegionActivation_Attribute_activationGroups->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionRegionActivation_Attribute_activationGroups->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setName("inputExpansionTokens");
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class());
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setLowerBound(1);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUpperBound(-1);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setTransient(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setVolatile(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setChangeable(true);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUnique(true);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setDerived(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setOrdered(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setContainment(false);
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionRegionActivation_Attribute_inputExpansionTokens->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_expansionRegionActivation_Attribute_inputTokens->setName("inputTokens");
+	m_expansionRegionActivation_Attribute_inputTokens->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class());
+	m_expansionRegionActivation_Attribute_inputTokens->setLowerBound(0);
+	m_expansionRegionActivation_Attribute_inputTokens->setUpperBound(-1);
+	m_expansionRegionActivation_Attribute_inputTokens->setTransient(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setVolatile(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setChangeable(true);
+	m_expansionRegionActivation_Attribute_inputTokens->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setUnique(true);
+	m_expansionRegionActivation_Attribute_inputTokens->setDerived(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setOrdered(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setContainment(false);
+	m_expansionRegionActivation_Attribute_inputTokens->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionRegionActivation_Attribute_inputTokens->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_expansionRegionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_doAction->setLowerBound(0);
+	m_expansionRegionActivation_Operation_doAction->setUpperBound(1);
+	m_expansionRegionActivation_Operation_doAction->setUnique(true);
+	m_expansionRegionActivation_Operation_doAction->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_doOutput->setName("doOutput");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_doOutput->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_doOutput->setLowerBound(0);
+	m_expansionRegionActivation_Operation_doOutput->setUpperBound(1);
+	m_expansionRegionActivation_Operation_doOutput->setUnique(true);
+	m_expansionRegionActivation_Operation_doOutput->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_doStructuredActivity->setName("doStructuredActivity");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_doStructuredActivity->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_doStructuredActivity->setLowerBound(1);
+	m_expansionRegionActivation_Operation_doStructuredActivity->setUpperBound(1);
+	m_expansionRegionActivation_Operation_doStructuredActivity->setUnique(true);
+	m_expansionRegionActivation_Operation_doStructuredActivity->setOrdered(false);
+	
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setName("getExpansionNodeActivation");
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setEType(getExpansionNodeActivation_Class());
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setLowerBound(1);
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setUpperBound(1);
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setUnique(true);
+	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode);
+		parameter->setName("node");
+		parameter->setEType(uml::umlPackage::eInstance()->getExpansionNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionRegionActivation_Operation_isSuspended->setName("isSuspended");
+	m_expansionRegionActivation_Operation_isSuspended->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_expansionRegionActivation_Operation_isSuspended->setLowerBound(0);
+	m_expansionRegionActivation_Operation_isSuspended->setUpperBound(1);
+	m_expansionRegionActivation_Operation_isSuspended->setUnique(true);
+	m_expansionRegionActivation_Operation_isSuspended->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_numberOfValues->setName("numberOfValues");
+	m_expansionRegionActivation_Operation_numberOfValues->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_expansionRegionActivation_Operation_numberOfValues->setLowerBound(1);
+	m_expansionRegionActivation_Operation_numberOfValues->setUpperBound(1);
+	m_expansionRegionActivation_Operation_numberOfValues->setUnique(true);
+	m_expansionRegionActivation_Operation_numberOfValues->setOrdered(false);
+	
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setName("resume");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setLowerBound(0);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUpperBound(1);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUnique(true);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup);
+		parameter->setName("activationGroup");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setName("runGroup");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setLowerBound(1);
+	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setUpperBound(1);
+	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setUnique(true);
+	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup);
+		parameter->setName("activationGroup");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionRegionActivation_Operation_runIterative->setName("runIterative");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_runIterative->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_runIterative->setLowerBound(0);
+	m_expansionRegionActivation_Operation_runIterative->setUpperBound(1);
+	m_expansionRegionActivation_Operation_runIterative->setUnique(true);
+	m_expansionRegionActivation_Operation_runIterative->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_runParallel->setName("runParallel");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_runParallel->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_runParallel->setLowerBound(0);
+	m_expansionRegionActivation_Operation_runParallel->setUpperBound(1);
+	m_expansionRegionActivation_Operation_runParallel->setUnique(true);
+	m_expansionRegionActivation_Operation_runParallel->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_sendOffers->setName("sendOffers");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_sendOffers->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_sendOffers->setLowerBound(0);
+	m_expansionRegionActivation_Operation_sendOffers->setUpperBound(1);
+	m_expansionRegionActivation_Operation_sendOffers->setUnique(true);
+	m_expansionRegionActivation_Operation_sendOffers->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setName("takeOfferedTokens");
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class());
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setLowerBound(0);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setUpperBound(-1);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setUnique(true);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setOrdered(false);
+	
+	m_expansionRegionActivation_Operation_terminate->setName("terminate");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_terminate->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_terminate->setLowerBound(0);
+	m_expansionRegionActivation_Operation_terminate->setUpperBound(1);
+	m_expansionRegionActivation_Operation_terminate->setUnique(true);
+	m_expansionRegionActivation_Operation_terminate->setOrdered(true);
+	
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setName("terminateGroup");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setEType(unknownClass);
+	}
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setLowerBound(0);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUpperBound(1);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUnique(true);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup);
+		parameter->setName("activationGroup");
+		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

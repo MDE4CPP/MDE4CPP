@@ -35,10 +35,11 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-//#include "fUML/Semantics/Activities/ExpansionActivationGroup.hpp"
-//#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
+#include "fUML/Semantics/Actions/ExpansionActivationGroup.hpp"
+#include "fUML/Semantics/Actions/ExpansionRegionActivation.hpp"
+#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/fUMLFactory.hpp"
-//#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "uml/ActivityNode.hpp"
 //Forward declaration includes
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -47,8 +48,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -124,10 +125,10 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		DEBUG_INFO("Fireing ActivityFinalNode. Terminating execution of activity '" << this->getNode()->getName() << "'.")
+	DEBUG_INFO("Fireing ActivityFinalNode. Terminating execution of activity '" << this->getNode()->getName() << "'.")
 
-    if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
-    {
+	if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
+    	{
 		auto this_group = this->getGroup().lock();
 		if(this_group )
 		{
@@ -136,7 +137,6 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 			{
 				activityExecution->terminate();
 			}
-			/*Currently not supported
 			else if (this_group->getContainingNodeActivation().lock())
 			{
 				auto activation= this_group->getContainingNodeActivation().lock();
@@ -147,14 +147,13 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 			}
 			else
 			{
-				if (this_group->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS)
+				if (this_group->getMetaElementID() == fUML::Semantics::Actions::ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS)
 				{
-					std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();
+					std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();
 				}
 			}
-			*/
 		}
-    }
+    	}
 
 
 	//end of body

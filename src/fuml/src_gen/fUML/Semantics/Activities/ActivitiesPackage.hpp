@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EAttribute;
-	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
 	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Activities 
@@ -38,9 +38,6 @@ namespace fUML::Semantics::Activities
 	class ControlToken;
 	class DataStoreNodeActivation;
 	class DecisionNodeActivation;
-	class ExpansionActivationGroup;
-	class ExpansionNodeActivation;
-	class ExpansionRegionActivation;
 	class FlowFinalNodeActivation;
 	class ForkNodeActivation;
 	class ForkedToken;
@@ -445,119 +442,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const = 0;
 			
 			// End Class DecisionNodeActivation
-
-
-			// Begin Class ExpansionActivationGroup
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONACTIVATIONGROUP_CLASS = 2118091381;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_OPERATION_COUNT = 21;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX = 1854627739;
-			
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS = 1135874802;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS = 433714641;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION = 1329361640;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS = 1419365982;
-			
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION = 3008748080;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 156883141;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION = 4278059019;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION = 415784904;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionActivationGroup_Class() const = 0;
-			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionActivationGroup_Attribute_index() const = 0;
-			
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupInputs() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupOutputs() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionInputs() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_resume_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_suspend_ActivityNodeActivation() const = 0;
-			
-			// End Class ExpansionActivationGroup
-
-
-			// Begin Class ExpansionNodeActivation
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 2051282899;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 42;
-			
-			
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 2655396851;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 451366782;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_ISREADY = 2578844217;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER = 935567755;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation_Class() const = 0;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_getExpansionRegionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_isReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_receiveOffer() const = 0;
-			
-			// End Class ExpansionNodeActivation
-
-
-			// Begin Class ExpansionRegionActivation
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONREGIONACTIVATION_CLASS = 918124971;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 60;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT = 1468361356;
-			
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 1554958381;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS = 433864060;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS = 1087448901;
-			
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOACTION = 2818883973;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT = 3223295572;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 3512627221;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE = 684269277;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED = 939459401;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES = 1113964543;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP = 2463471261;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP = 717168838;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE = 1467340922;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL = 2412031918;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS = 1622572467;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 1713936329;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE = 1114479685;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP = 2109160294;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation_Class() const = 0;
-			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionRegionActivation_Attribute_next() const = 0;
-			
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_activationGroups() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputExpansionTokens() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputTokens() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doOutput() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doStructuredActivity() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_isSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_numberOfValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_resume_ExpansionActivationGroup() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runIterative() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runParallel() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_sendOffers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup() const = 0;
-			
-			// End Class ExpansionRegionActivation
 
 
 			// Begin Class FlowFinalNodeActivation

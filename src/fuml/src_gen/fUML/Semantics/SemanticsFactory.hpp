@@ -18,6 +18,7 @@
 
 namespace fUML::Semantics::Activities
 {
+	class ActivityExecution;
 	class ActivityNodeActivationGroup;
 }
 

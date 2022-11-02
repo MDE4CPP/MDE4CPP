@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP
-#define FUML_SEMANTICS_ACTIVITIES_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -16,13 +16,13 @@
 // model includes
 #include "../ExpansionActivationGroup.hpp"
 
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityNodeActivationGroupImpl.hpp"
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
-	class FUML_API ExpansionActivationGroupImpl : virtual public ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup 
+	class FUML_API ExpansionActivationGroupImpl : virtual public fUML::Semantics::Activities::ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup 
 	{
 		public: 
 			ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj);
@@ -30,10 +30,10 @@ namespace fUML::Semantics::Activities
 			ExpansionActivationGroupImpl& operator=(ExpansionActivationGroupImpl const&); 
 
 		protected:
-			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ExpansionActivationGroupImpl();
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> getThisExpansionActivationGroupPtr() const;
-			virtual void setThisExpansionActivationGroupPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> thisExpansionActivationGroupPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> getThisExpansionActivationGroupPtr() const;
+			virtual void setThisExpansionActivationGroupPtr(std::weak_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> thisExpansionActivationGroupPtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution);
@@ -61,10 +61,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupInputs() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupOutputs() const ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getRegionActivation() const ;
-			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation>) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupInputs() const ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupOutputs() const ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getRegionActivation() const ;
+			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getRegionInputs() const ;
 			
 			//*********************************
@@ -92,7 +92,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> m_thisExpansionActivationGroupPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> m_thisExpansionActivationGroupPtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP */

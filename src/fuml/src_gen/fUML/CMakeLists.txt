@@ -123,9 +123,9 @@ SET(SOURCE_FILES
 	Semantics/CommonBehavior/impl/ExecutionImpl.cpp
 	Semantics/Loci/impl/ExecutionFactoryImpl.cpp
 	Semantics/Loci/impl/ExecutorImpl.cpp
-	Semantics/Activities/impl/ExpansionActivationGroupImpl.cpp
-	Semantics/Activities/impl/ExpansionNodeActivationImpl.cpp
-	Semantics/Activities/impl/ExpansionRegionActivationImpl.cpp
+	Semantics/Actions/impl/ExpansionActivationGroupImpl.cpp
+	Semantics/Actions/impl/ExpansionNodeActivationImpl.cpp
+	Semantics/Actions/impl/ExpansionRegionActivationImpl.cpp
 	Semantics/Loci/impl/FirstChoiceStrategyImpl.cpp
 	Semantics/Activities/impl/FlowFinalNodeActivationImpl.cpp
 	Semantics/Activities/impl/ForkNodeActivationImpl.cpp
@@ -172,38 +172,38 @@ endif(APPLE)
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
+		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
+		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
+		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
 ENDIF()
@@ -216,15 +216,15 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		debug ${UML_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${TYPES_DEBUG}
-		debug ${UML_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${UML_RELEASE}
 		optimized ${ECORE_RELEASE}
 		optimized ${TYPES_RELEASE}
-		optimized ${UML_RELEASE}
 	)
 ENDIF()
 

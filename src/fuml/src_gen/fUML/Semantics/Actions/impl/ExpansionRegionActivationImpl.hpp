@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP
-#define FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -16,13 +16,13 @@
 // model includes
 #include "../ExpansionRegionActivation.hpp"
 
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
-	class FUML_API ExpansionRegionActivationImpl : virtual public fUML::Semantics::Actions::ActionActivationImpl, virtual public ExpansionRegionActivation 
+	class FUML_API ExpansionRegionActivationImpl : virtual public ActionActivationImpl, virtual public ExpansionRegionActivation 
 	{
 		public: 
 			ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj);
@@ -30,10 +30,10 @@ namespace fUML::Semantics::Activities
 			ExpansionRegionActivationImpl& operator=(ExpansionRegionActivationImpl const&); 
 
 		protected:
-			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ExpansionRegionActivationImpl();
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getThisExpansionRegionActivationPtr() const;
-			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> thisExpansionRegionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getThisExpansionRegionActivationPtr() const;
+			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> thisExpansionRegionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -48,17 +48,17 @@ namespace fUML::Semantics::Activities
 			virtual void doAction() ;
 			virtual void doOutput() ;
 			virtual void doStructuredActivity() ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) ;
 			virtual bool isSuspended() ;
 			virtual int numberOfValues() ;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
 			virtual void runIterative() ;
 			virtual void runParallel() ;
 			virtual void sendOffers() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
 			virtual void terminate() ;
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -69,7 +69,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> getActivationGroups() const ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const ;
 			
@@ -98,7 +98,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP */

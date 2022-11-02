@@ -126,8 +126,8 @@
 //#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 //#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/DataStoreNodeActivation.hpp"
-#include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
-#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
+#include "fUML/Semantics/Actions/ExpansionNodeActivation.hpp"
+#include "fUML/Semantics/Actions/ExpansionRegionActivation.hpp"
 //#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
 //#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
 //#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
@@ -159,8 +159,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -449,12 +449,12 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::EXPANSIONREGION_CLASS:
 		{
-			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionRegionActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createExpansionRegionActivation();
 			break;
 		}
 		case uml::umlPackage::EXPANSIONNODE_CLASS:
 		{
-			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionNodeActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createExpansionNodeActivation();
 			break;
 		}
 		case uml::umlPackage::INPUTPIN_CLASS:

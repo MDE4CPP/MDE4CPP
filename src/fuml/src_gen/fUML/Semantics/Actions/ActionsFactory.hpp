@@ -18,6 +18,7 @@
 
 namespace fUML::Semantics::Activities
 {
+	class ActivityExecution;
 	class ActivityNodeActivationGroup;
 }
 
@@ -62,6 +63,16 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> createDestroyObjectActionActivation(const int metaElementID = ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> createDestroyObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> createExpansionActivationGroup(const int metaElementID = ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> createExpansionActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_StructuredActivityNodeActivation, const int metaElementID = ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> createExpansionActivationGroup_as_activationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_ActivityExecution, const int metaElementID = ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> createExpansionNodeActivation(const int metaElementID = ActionsPackage::EXPANSIONNODEACTIVATION_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> createExpansionNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::EXPANSIONNODEACTIVATION_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> createExpansionRegionActivation(const int metaElementID = ActionsPackage::EXPANSIONREGIONACTIVATION_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> createExpansionRegionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::EXPANSIONREGIONACTIVATION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> createInputPinActivation(const int metaElementID = ActionsPackage::INPUTPINACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> createInputPinActivation_as_inputPinActivation_in_ActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> par_ActionActivation, const int metaElementID = ActionsPackage::INPUTPINACTIVATION_CLASS) const = 0;

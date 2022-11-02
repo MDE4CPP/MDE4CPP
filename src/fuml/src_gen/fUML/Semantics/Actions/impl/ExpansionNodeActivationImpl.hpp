@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP
-#define FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -16,13 +16,13 @@
 // model includes
 #include "../ExpansionNodeActivation.hpp"
 
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ObjectNodeActivationImpl.hpp"
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
-	class FUML_API ExpansionNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
+	class FUML_API ExpansionNodeActivationImpl : virtual public fUML::Semantics::Activities::ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
 	{
 		public: 
 			ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj);
@@ -30,10 +30,10 @@ namespace fUML::Semantics::Activities
 			ExpansionNodeActivationImpl& operator=(ExpansionNodeActivationImpl const&); 
 
 		protected:
-			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ExpansionNodeActivationImpl();
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getThisExpansionNodeActivationPtr() const;
-			virtual void setThisExpansionNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> thisExpansionNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> getThisExpansionNodeActivationPtr() const;
+			virtual void setThisExpansionNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> thisExpansionNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -46,7 +46,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getExpansionRegionActivation() ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getExpansionRegionActivation() ;
 			virtual bool isReady() ;
 			virtual void receiveOffer() ;
 			
@@ -83,7 +83,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> m_thisExpansionNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> m_thisExpansionNodeActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATIONEXPANSIONNODEACTIVATIONIMPL_HPP */

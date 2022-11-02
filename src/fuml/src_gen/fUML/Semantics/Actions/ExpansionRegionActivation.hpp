@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
-#define FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATION_HPP
+#define FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATION_HPP
 
 
 #include <memory>
@@ -20,6 +20,8 @@ template<class T> class Bag;
 //Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
+	class ExpansionActivationGroup;
+	class ExpansionNodeActivation;
 	class InputPinActivation;
 	class OutputPinActivation;
 	class PinActivation;
@@ -28,8 +30,6 @@ namespace fUML::Semantics::Activities
 {
 	class ActivityEdgeInstance;
 	class ActivityNodeActivationGroup;
-	class ExpansionActivationGroup;
-	class ExpansionNodeActivation;
 	class Token;
 	class TokenSet;
 }
@@ -50,10 +50,10 @@ namespace uml
 
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ExpansionRegionActivation : virtual public fUML::Semantics::Actions::ActionActivation
+	class FUML_API ExpansionRegionActivation : virtual public ActionActivation
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}
@@ -73,17 +73,17 @@ namespace fUML::Semantics::Activities
 			virtual void doAction() = 0;
 			virtual void doOutput() = 0;
 			virtual void doStructuredActivity() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) = 0;
 			virtual bool isSuspended() = 0;
 			virtual int numberOfValues() = 0;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) = 0;
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) = 0;
 			virtual void runIterative() = 0;
 			virtual void runParallel() = 0;
 			virtual void sendOffers() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
 			virtual void terminate() = 0;
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,7 +94,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> getActivationGroups() const = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const = 0;
 
@@ -116,9 +116,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> m_activationGroups;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> m_activationGroups;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> m_inputExpansionTokens;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> m_inputTokens;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONREGIONACTIVATION_HPP */

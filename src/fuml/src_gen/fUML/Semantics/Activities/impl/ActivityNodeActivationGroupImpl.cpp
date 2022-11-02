@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -466,7 +466,10 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = (*it);
 
 			const int class_id = activation->eClass()->getClassifierID();
-			if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ||  class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS || class_id ==fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS))
+
+			if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS 
+			|| class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS 
+			|| class_id == fUML::Semantics::Actions::ActionsPackage::EXPANSIONNODEACTIVATION_CLASS))
 			{
 				std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
 				bool isEnabled = this->checkIncomingEdges(edges, activations);

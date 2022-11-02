@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATION_HPP
-#define FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATION_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATION_HPP
+#define FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATION_HPP
 
 
 #include <memory>
@@ -18,11 +18,14 @@ template<class T> class Bag;
 // generated Includes
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
+{
+	class ExpansionRegionActivation;
+}
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
 	class ActivityNodeActivationGroup;
-	class ExpansionRegionActivation;
 	class Token;
 }
 namespace uml 
@@ -40,10 +43,10 @@ namespace uml
 
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ExpansionNodeActivation : virtual public ObjectNodeActivation
+	class FUML_API ExpansionNodeActivation : virtual public fUML::Semantics::Activities::ObjectNodeActivation
 	{
 		public:
  			ExpansionNodeActivation(const ExpansionNodeActivation &) {}
@@ -61,7 +64,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getExpansionRegionActivation() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getExpansionRegionActivation() = 0;
 			virtual bool isReady() = 0;
 			virtual void receiveOffer() = 0;
 
@@ -92,4 +95,4 @@ namespace fUML::Semantics::Activities
 			//*********************************
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONNODEACTIVATION_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATION_HPP */

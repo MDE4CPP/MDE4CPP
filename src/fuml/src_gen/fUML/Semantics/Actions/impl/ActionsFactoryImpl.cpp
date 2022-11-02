@@ -12,6 +12,9 @@
 #include "fUML/Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CreateObjectActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ExpansionActivationGroupImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ExpansionNodeActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ExpansionRegionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/InputPinActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/InvocationActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/OutputPinActivationImpl.hpp"
@@ -26,6 +29,7 @@
 #include "fUML/Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.hpp"
 
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
 
@@ -43,6 +47,9 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ClearStructuralFeatureActionActivation", ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CreateObjectActionActivation", ActionsPackage::CREATEOBJECTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::DestroyObjectActionActivation", ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ExpansionActivationGroup", ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ExpansionNodeActivation", ActionsPackage::EXPANSIONNODEACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ExpansionRegionActivation", ActionsPackage::EXPANSIONREGIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::InputPinActivation", ActionsPackage::INPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::OutputPinActivation", ActionsPackage::OUTPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadSelfActionActivation", ActionsPackage::READSELFACTIONACTIVATION_CLASS));
@@ -151,6 +158,62 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation>(this->createDestroyObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case ActionsPackage::EXPANSIONACTIVATIONGROUP_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createExpansionActivationGroup(metaElementID);
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//ExpansionActivationGroup has activationGroup as a containment
+					case  fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
+					{
+						std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation> (container);
+						return this->createExpansionActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(castedContainer,metaElementID);
+					}
+					//ExpansionActivationGroup has activationGroup as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
+					{
+						std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution> (container);
+						return this->createExpansionActivationGroup_as_activationGroup_in_ActivityExecution(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
+		}
+		case ActionsPackage::EXPANSIONNODEACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createExpansionNodeActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation>(this->createExpansionNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case ActionsPackage::EXPANSIONREGIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createExpansionRegionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>(this->createExpansionRegionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -431,6 +494,79 @@ std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> Actions
 	}
 	
 	element->setThisDestroyObjectActionActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> ActionsFactoryImpl::createExpansionActivationGroup(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroupImpl> element(new fUML::Semantics::Actions::ExpansionActivationGroupImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisExpansionActivationGroupPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> ActionsFactoryImpl::createExpansionActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_StructuredActivityNodeActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroupImpl> element(new fUML::Semantics::Actions::ExpansionActivationGroupImpl(par_StructuredActivityNodeActivation));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_StructuredActivityNodeActivation.lock())
+	{
+		wp->setActivationGroup(element);
+	}
+	
+	element->setThisExpansionActivationGroupPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> ActionsFactoryImpl::createExpansionActivationGroup_as_activationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_ActivityExecution, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroupImpl> element(new fUML::Semantics::Actions::ExpansionActivationGroupImpl(par_ActivityExecution));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityExecution.lock())
+	{
+		wp->setActivationGroup(element);
+	}
+	
+	element->setThisExpansionActivationGroupPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> ActionsFactoryImpl::createExpansionNodeActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivationImpl> element(new fUML::Semantics::Actions::ExpansionNodeActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisExpansionNodeActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> ActionsFactoryImpl::createExpansionNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivationImpl> element(new fUML::Semantics::Actions::ExpansionNodeActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisExpansionNodeActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> ActionsFactoryImpl::createExpansionRegionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivationImpl> element(new fUML::Semantics::Actions::ExpansionRegionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisExpansionRegionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> ActionsFactoryImpl::createExpansionRegionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivationImpl> element(new fUML::Semantics::Actions::ExpansionRegionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisExpansionRegionActivationPtr(element);
 	return element;
 	
 }
