@@ -94,6 +94,6 @@
 
 [query public collectParameterIncludeStrings(aParameter : Parameter) : Set(String) = Set(String)
 {
-	aParameter.type.collectTypeIncludeStrings()
+	aParameter.type->reject(t : Type | t.oclIsKindOf(PrimitiveType)).collectTypeIncludeStrings()
 }->flatten()
  /]

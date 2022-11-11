@@ -156,6 +156,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr
 [collectAbstractDataTypes_Bag_IncludeString()/]
 [collectUML_OpaqueBehavior_IncludeString()/]
 [collectPackageInterface_IncludeString(aPackage)/]
+[opaqueBehaviorsForGlobalFunctionsOfPackage.ownedParameter.type._package->excluding(aPackage)->asOrderedSet().collectPackageInterface_IncludeString()/]
 [for (includeStatement : String | includeStatements->asOrderedSet())]
 [includeStatement/]
 [/for]
@@ -166,4 +167,4 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr
 [query private collectAbstractDataTypes_Any_IncludeString(arg : OclAny) : String = '#include "uml/UMLAny.hpp"\n#include"uml/UMLContainerAny.hpp"' /]
 [query private collectAbstractDataTypes_Bag_IncludeString(arg : OclAny) : String = '#include "abstractDataTypes/Bag.hpp"' /]
 [query private collectUML_OpaqueBehavior_IncludeString(arg : OclAny) : String = '#include "uml/OpaqueBehavior.hpp"\n#include "uml/FunctionBehavior.hpp"' /]
-[query private collectPackageInterface_IncludeString(aPackage : Package) : String = '#include "' + aPackage.generateNamespacePath(true) + '/' + aPackage.name + 'Package.hpp"' /]
+[query private collectPackageInterface_IncludeString(aPackage : Package) : String = '#include "' + (if(aPackage.name = 'PrimitiveTypes') then ('types/typesPackage.hpp"') else (aPackage.generateNamespacePath(false) + '/' + aPackage.name + 'Package.hpp"') endif) /]
