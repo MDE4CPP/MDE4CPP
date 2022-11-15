@@ -51,6 +51,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createInvocationActionActivationContent(package, factory);
 	createOutputPinActivationContent(package, factory);
 	createPinActivationContent(package, factory);
+	createReadIsClassifiedObjectActionActivationContent(package, factory);
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
 	createRemoveStructuralFeatureValueActionActivationContent(package, factory);
@@ -263,6 +264,16 @@ void ActionsPackageImpl::createPinActivationContent(std::shared_ptr<ecore::EPack
 	
 	m_pinActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_pinActivation_Class, PINACTIVATION_OPERATION_FIRE_TOKEN);
 	m_pinActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_pinActivation_Class, PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
+	
+}
+
+void ActionsPackageImpl::createReadIsClassifiedObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_readIsClassifiedObjectActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS);
+	
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction = factory->createEReference_as_eReferences_in_EClass(m_readIsClassifiedObjectActionActivation_Class, READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION);
+	
+	m_readIsClassifiedObjectActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_readIsClassifiedObjectActionActivation_Class, READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

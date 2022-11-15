@@ -42,6 +42,7 @@ namespace fUML::Semantics::Actions
 	class InvocationActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
+	class ReadIsClassifiedObjectActionActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
 	class RemoveStructuralFeatureValueActionActivation;
@@ -491,6 +492,27 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getPinActivation_Operation_takeOfferedTokens() const = 0;
 			
 			// End Class PinActivation
+
+
+			// Begin Class ReadIsClassifiedObjectActionActivation
+			//Class and Feature IDs 
+			static const unsigned long READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS = 882448659;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			
+			static const unsigned long READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION = 691102859;
+			
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_DOACTION = 2223647656;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getReadIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectActionActivation_Operation_doAction() const = 0;
+			
+			// End Class ReadIsClassifiedObjectActionActivation
 
 
 			// Begin Class ReadSelfActionActivation

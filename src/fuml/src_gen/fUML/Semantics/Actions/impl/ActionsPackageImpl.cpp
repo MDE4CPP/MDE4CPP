@@ -552,6 +552,25 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 
 // End Class PinActivation
 
+// Begin Class ReadIsClassifiedObjectActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Class() const
+{
+	return m_readIsClassifiedObjectActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction() const
+{
+	return m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Operation_doAction() const
+{
+	return m_readIsClassifiedObjectActionActivation_Operation_doAction;
+}
+
+// End Class ReadIsClassifiedObjectActionActivation
+
 // Begin Class ReadSelfActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadSelfActionActivation_Class() const
 {

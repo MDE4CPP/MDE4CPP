@@ -142,6 +142,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/OutputPinActivationImpl.cpp
 	Semantics/CommonBehavior/impl/ParameterValueImpl.cpp
 	Semantics/Actions/impl/PinActivationImpl.cpp
+	Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp

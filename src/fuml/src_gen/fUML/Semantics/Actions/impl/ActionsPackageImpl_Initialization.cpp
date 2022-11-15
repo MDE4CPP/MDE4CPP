@@ -59,6 +59,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_invocationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
+	m_readIsClassifiedObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_removeStructuralFeatureValueActionActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
@@ -84,6 +85,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeInvocationActionActivationContent();
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
+	initializeReadIsClassifiedObjectActionActivationContent();
 	initializeReadSelfActionActivationContent();
 	initializeReadStructuralFeatureActionActivationContent();
 	initializeRemoveStructuralFeatureValueActionActivationContent();
@@ -1651,6 +1653,52 @@ void ActionsPackageImpl::initializePinActivationContent()
 	m_pinActivation_Operation_takeOfferedTokens->setUpperBound(-1);
 	m_pinActivation_Operation_takeOfferedTokens->setUnique(true);
 	m_pinActivation_Operation_takeOfferedTokens->setOrdered(false);
+	
+	
+}
+
+void ActionsPackageImpl::initializeReadIsClassifiedObjectActionActivationContent()
+{
+	m_readIsClassifiedObjectActionActivation_Class->setName("ReadIsClassifiedObjectActionActivation");
+	m_readIsClassifiedObjectActionActivation_Class->setAbstract(false);
+	m_readIsClassifiedObjectActionActivation_Class->setInterface(false);
+	
+	
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setName("readIsClassifiedObjectAction");
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setEType(uml::umlPackage::eInstance()->getReadIsClassifiedObjectAction_Class());
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setLowerBound(1);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setUpperBound(1);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setTransient(false);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setVolatile(false);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setChangeable(true);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setUnsettable(false);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setUnique(true);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setDerived(false);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setOrdered(true);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setContainment(false);
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_readIsClassifiedObjectActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_readIsClassifiedObjectActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_readIsClassifiedObjectActionActivation_Operation_doAction->setLowerBound(0);
+	m_readIsClassifiedObjectActionActivation_Operation_doAction->setUpperBound(1);
+	m_readIsClassifiedObjectActionActivation_Operation_doAction->setUnique(true);
+	m_readIsClassifiedObjectActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 }
