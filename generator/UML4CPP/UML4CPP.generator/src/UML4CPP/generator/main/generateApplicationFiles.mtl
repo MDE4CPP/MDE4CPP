@@ -122,6 +122,7 @@ int main ()
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Any.hpp"
+#include "uml/UMLAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 [if (mainActivity.owner.oclIsKindOf(Classifier))]
 #include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
@@ -157,10 +158,8 @@ int main()
 			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
 			std::shared_ptr<Bag<Any>> parameterList(new Bag<Any>());
-			[for (par : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-			[let anyBagRequired : Boolean = ((par.upper <> 1) and not(par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration)))]
-			parameterList->add([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
-			[/let]
+			[for (aParameter : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+			parameterList->add([aParameter.generateAnyCreationFromParameter()/]);
 			[/for]
 			std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
 

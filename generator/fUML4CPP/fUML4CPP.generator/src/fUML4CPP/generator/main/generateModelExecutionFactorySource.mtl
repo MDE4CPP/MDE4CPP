@@ -207,10 +207,10 @@ fUML::Semantics::Activities::DecisionNodeActivation
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ActivityParameterNode))]
 fUML::Semantics::Activities::ActivityParameterNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CentralBufferNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(CentralBufferNode))]
 fUML::Semantics::Activities::CentralBufferNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DataStoreNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(DataStoreNode))]
 fUML::Semantics::Activities::DataStoreNodeActivation
 [/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(InputPin))]
@@ -319,6 +319,7 @@ fUML::Semantics::Actions::ActionsFactory
 	anActivityNode.oclIsKindOf(CentralBufferNode) or
 	anActivityNode.oclIsKindOf(DataStoreNode) or
 	anActivityNode.oclIsKindOf(DecisionNode) or
+	anActivityNode.oclIsKindOf(ForkNode) or
 	anActivityNode.oclIsKindOf(FlowFinalNode) or
 	anActivityNode.oclIsKindOf(InitialNode) or
 	anActivityNode.oclIsKindOf(JoinNode) or
