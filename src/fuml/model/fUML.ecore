@@ -1935,13 +1935,17 @@
       <eClassifiers xsi:type="ecore:EClass" name="ReadIsClassifiedObjectActionActivation"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'ReadIsClassifiedObjectActionActivation' is currently not supported."/>
-          <details key="TODO" value="implement"/>
+          <details key="implIncludes" value="#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;"/>
         </eAnnotations>
-        <eOperations name="checkAllParents" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-          <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
-          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+        <eOperations name="doAction">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="&#x9;// Get the value on the object input pin and determine if it is classified by the classifier specified in the action.&#xA;// If the isDirect attribute of the action is false, then place true on the result output pin if the input object has the specified classifier or of one its (direct or indirect) descendants as a type.&#xA;&#x9;// If the isDirect attribute of the action is true, then place true on the result output pin if the input object has the specified classifier as a type.&#xA;&#x9;// Otherwise place false on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadIsClassifiedObjectAction> readIsClassifiedObjectAction = this->getReadIsClassifiedObjectAction();&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> classifier = readIsClassifiedObjectAction->getClassifier();&#xA;&#x9;bool isDirect = readIsClassifiedObjectAction->getIsDirect();&#xA;&#x9;bool result = false;&#xA;&#xA;&#x9;std::shared_ptr&lt;Any> inputAsAny = this->takeTokens(readIsClassifiedObjectAction->getObject())->at(0);&#xA;&#xA;&#x9;if(inputAsAny)&#xA;&#x9;{&#xA;&#x9;&#x9;try&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::UMLAny> umlAny = std::dynamic_pointer_cast&lt;uml::UMLAny>(inputAsAny);&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Element> input = umlAny->getAsElement();&#xA;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Classifier> typeOfInput = input->getMetaClass();&#xA;&#xA;&#x9;&#x9;&#x9;result = (classifier == typeOfInput);&#xA;&#xA;&#x9;&#x9;&#x9;if(!isDirect &amp;&amp; !result)&#xA;&#x9;&#x9;&#x9;{&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superTypesOfInput = typeOfInput->allParents();&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;for(std::shared_ptr&lt;uml::Classifier> superType : *superTypesOfInput)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result = (classifier == superType);&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(result)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;catch(...)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_ERROR(&quot;Provided input is not an instance of uml::Element. Failed read is classified!&quot;)&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;std::shared_ptr&lt;Any> resultValue = eAny(result, 0, false);&#xA;&#xA;&#x9;&#x9;if(readIsClassifiedObjectAction->getResult())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;this->putToken(readIsClassifiedObjectAction->getResult(), resultValue);&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
+          </eAnnotations>
         </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="readIsClassifiedObjectAction"
+            lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ReadIsClassifiedObjectAction">
+          <eAnnotations source="redefines" references="#//Semantics/Actions/ActionActivation/action"/>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadLinkActionActivation" eSuperTypes="#//Semantics/Actions/LinkActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
