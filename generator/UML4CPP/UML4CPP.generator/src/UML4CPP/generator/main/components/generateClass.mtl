@@ -129,8 +129,13 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 	[/for]
 [/for]
-[for (anInterface :Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+[for (anInterface : Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticInterfaceID(anInterface)/]
+	[comment  Operations of c/]
+	[for (anOperation : Operation | anInterface.ownedOperation) before('//Operations\n')]
+	//[anOperation.generateQualifiedNameWithSignature()/]
+	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
+	[/for]
 [/for]
 [for (anEnumeration : Enumeration | aPackage.allOwnedElements()->selectByType(Enumeration)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticEnumerationID(anEnumeration)/]
