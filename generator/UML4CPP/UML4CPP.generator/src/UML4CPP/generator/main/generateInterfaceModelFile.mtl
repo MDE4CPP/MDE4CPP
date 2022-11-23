@@ -106,7 +106,7 @@ virtual public [aClassifier.getClassifierName(anInterface, false, aClassifier.ge
 			//*********************************
 			// Operations
 			//*********************************
-			[for (anOperation : Operation | anInterface.ownedOperation->sortedBy(name)) before('Methods defined by Operations') after('\n')]
+			[for (anOperation : Operation | anInterface.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
 			[anOperation.generateOperationDecl(false)/]
 			[/for]
 
