@@ -2906,10 +2906,15 @@
         <details key="documentation" value="Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.&#xA;The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.&#xA;If an Argument is not supplied for a Parameter, its default value, if any, will be used."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
-        <details value="Substituted original type &quot;Argument&quot; with EJavaObject."/>
+        <details value="- Substituted original type &quot;Argument&quot; with EJavaObject.&#xA;- Renamed &quot;arguments&quot; parameter to &quot;inputArguments&quot;&#xA;- Added parameter &quot;outputArguments&quot; for uml::Parameters with direction = uml::ParameterDirectionKind::out"/>
       </eAnnotations>
       <eParameters name="_operation" eType="#//Operation"/>
-      <eParameters name="arguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+          <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
         <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
           <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
         </eAnnotations>
@@ -2920,10 +2925,15 @@
         <details key="documentation" value="Calls the Operation corresponding to the supplied OpaqueBehavior on the object, passing the supplied Arguments and returning the result.&#xA;The OpaqueBehavior must be zin the context of the Class of the Object, and the arguments must refer to Parameters of the OpaqueBehavior.&#xA;If an Argument is not supplied for a Parameter, its default value, if any, will be used."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
-        <details value="Substituted original type &quot;Argument&quot; with EJavaObject."/>
+        <details value="Added &quot;invoke&quot; method for invoking OpaqueBehaviors corresponding to invocation of Operations."/>
       </eAnnotations>
       <eParameters name="_opaqueBehavior" eType="#//OpaqueBehavior"/>
-      <eParameters name="arguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+          <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
         <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
           <details value="Substituted original type &quot;Argument[*]&quot; with EJavaObject[*]."/>
         </eAnnotations>
