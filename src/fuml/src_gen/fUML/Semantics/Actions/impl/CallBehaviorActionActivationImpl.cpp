@@ -65,8 +65,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -156,25 +156,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallBehavi
 			context = this->getExecutionContext();
 		}
 		
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-		
-		// Add all ParameterValues from inputParameterValues with direction INOUT or OUT
-		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputParameterValues)
-		{
-			if(inputParameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::INOUT || inputParameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::OUT)
-			{
-				outputParameterValues->add(inputParameterValue);
-			}
-		}
-		
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> returnParameterValues = this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);
-		if(returnParameterValues->size() > 0)
-		{
-			// ->at(0) as we only consider the first return parameter
-			outputParameterValues->add(returnParameterValues->at(0));
-		}
-
-		return outputParameterValues;
+		return this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);
 	}
 	return nullptr;
 

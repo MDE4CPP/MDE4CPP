@@ -53,9 +53,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -72,8 +72,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -314,51 +314,51 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 		}
 		else
 		{
-			std::shared_ptr<Bag<Any>> arguments(new Bag<Any>());
+			std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
 			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputParameterValues)
 			{
 				//Only first value as lists are handled by a single instance of Any
 				std::shared_ptr<Any> argument = inputParameterValue->getValues()->at(0);
-				arguments->add(argument);
+				inputArguments->add(argument);
 			}
 			
 			// Do the actual call
-			std::shared_ptr<Any> returnValue = context->invoke(operation, arguments);
+			std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
+			std::shared_ptr<Any> returnValue = context->invoke(operation, inputArguments, outputArguments);
 			
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());		
 			
-			// Add all ParameterValues from inputParameterValues with direction INOUT or OUT
-			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputParameterValues)
-			{
-				if(inputParameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::INOUT || inputParameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::OUT)
-				{
-					outputParameterValues->add(inputParameterValue);
-				}
-			}
-			
-			//Check if the Behavior of operation has a return parameter
-			//If so, retrieve it.
 			std::shared_ptr<Bag<uml::Parameter>> parametersOfBehavior = this->retrieveBehavior()->getOwnedParameter();
-			std::shared_ptr<uml::Parameter> returnParameter = nullptr;
+			bool foundFirstReturnParameter = false;
 			
-			for(std::shared_ptr<uml::Parameter> parameter : *parametersOfBehavior)
+			for(std::shared_ptr<uml::Parameter> aParameter : *parametersOfBehavior)
 			{
-				if(parameter->getDirection() == uml::ParameterDirectionKind::RETURN)
+				unsigned int parameterCounter = 0;
+		
+				if(aParameter->getDirection() == uml::ParameterDirectionKind::INOUT || aParameter->getDirection() == uml::ParameterDirectionKind::OUT)
 				{
-					returnParameter = parameter;
-					break;
+					std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+					outputParameterValue->setParameter(aParameter);
+					outputParameterValue->getValues()->add(outputArguments->at(parameterCounter));
+					outputParameterValues->add(outputParameterValue);
 				}
-			}
-			
-			if(returnParameter)
-			{
-				if(!returnValue->isEmpty())
+				else if(aParameter->getDirection() == uml::ParameterDirectionKind::RETURN)
 				{
-					std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-					returnParameterValue->setParameter(returnParameter);
-					returnParameterValue->getValues()->add(returnValue);
-					outputParameterValues->add(returnParameterValue);
+					if(!foundFirstReturnParameter)
+					{
+						if(!returnValue->isEmpty())
+						{
+							std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+							returnParameterValue->setParameter(aParameter);
+							returnParameterValue->getValues()->add(returnValue);
+							outputParameterValues->add(returnParameterValue);
+						}
+						
+						foundFirstReturnParameter = true;
+					}
 				}
+		
+				parameterCounter++;
 			}
 			
 			return outputParameterValues;
