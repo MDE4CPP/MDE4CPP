@@ -129,12 +129,12 @@ std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) c
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -415,7 +415,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 			result = eAny(this->get(incoming_param__property), 0, false);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, Any[*]) : Any: 2657839141
+		// uml::Object::invoke(uml::Operation, Any[*], Any[*]) : Any: 2370151843
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_operation'
@@ -444,24 +444,38 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 			}
 		
-			//Retrieve input parameter 'arguments'
+			//Retrieve input parameter 'inputArguments'
 			//parameter 1
-			std::shared_ptr<Bag<Any>> incoming_param_arguments;
-			Bag<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
 			try
 			{
-				incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
 			}
 			catch(...)
 			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'invoke'!")
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invoke'!")
 				return nullptr;
 			}
 		
-			result = eAny(this->invoke(incoming_param__operation,incoming_param_arguments), 0, false);
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invoke(incoming_param__operation,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
-		// uml::Object::invoke(uml::OpaqueBehavior, Any[*]) : Any: 4152766635
+		// uml::Object::invoke(uml::OpaqueBehavior, Any[*], Any[*]) : Any: 1414710241
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_opaqueBehavior'
@@ -490,21 +504,35 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<An
 				}
 			}
 		
-			//Retrieve input parameter 'arguments'
+			//Retrieve input parameter 'inputArguments'
 			//parameter 1
-			std::shared_ptr<Bag<Any>> incoming_param_arguments;
-			Bag<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
 			try
 			{
-				incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
 			}
 			catch(...)
 			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'arguments'. Failed to invoke operation 'invoke'!")
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invoke'!")
 				return nullptr;
 			}
 		
-			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_arguments), 0, false);
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
 		// uml::Object::remove(uml::Property, Any): 1546275363

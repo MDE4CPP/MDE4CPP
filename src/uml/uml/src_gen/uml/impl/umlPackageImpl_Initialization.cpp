@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -12523,7 +12523,17 @@ void umlPackageImpl::initializeObjectContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
-		parameter->setName("arguments");
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
+		parameter->setName("outputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -12549,7 +12559,17 @@ void umlPackageImpl::initializeObjectContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject);
-		parameter->setName("arguments");
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject);
+		parameter->setName("outputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
