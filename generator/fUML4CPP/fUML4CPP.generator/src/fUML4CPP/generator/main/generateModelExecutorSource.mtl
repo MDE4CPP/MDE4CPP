@@ -24,10 +24,6 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 
-
-[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
-[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
-
 [template public generateModelExecutorSource(aPackage : Package) 
 {
 packageName : String = aPackage.getPackageName().sanitize(); 
@@ -41,10 +37,13 @@ originalName : String = aPackage.generateNamespacePath(false);
 [defineDebugMacro()/]
 
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EClass.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/Activity.hpp"
+#include "uml/Enumeration.hpp"
 #include "uml/EnumerationLiteral.hpp"
 #include "uml/FunctionBehavior.hpp"
+#include "uml/InstanceValue.hpp"
 #include "uml/OpaqueBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
@@ -56,6 +55,9 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
+[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable())->sortedBy(myQualifiedName()))]
+#include "[aPackage.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+[/for]
 [for (anIncludeString : String | 	
 	aPackage.allOwnedElements()
 	->filter(OpaqueBehavior)
@@ -66,19 +68,9 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
 [anIncludeString/]
 [/for]
-[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction()) before('\n')]
-#include "[enumerationPackage.generateNamespacePath(true)/]/[enumerationPackage.myNamespaceName()/]Package.hpp"
-	[if (enumerationPackage.isReflectionModel())]
-#include "[enumerationPackage.generateNamespacePath(false)/]/[enumerationPackage.name/]Package.hpp"
-	[/if]
-	[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(isGeneratable())->sortedBy(myQualifiedName()))]
-#include "[anEnumeration.getNearestPackage().generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
-	[/for]
-[/for]
 
-[for (anActivityPackage : Package | aPackage.collectPossiblyUsedActivities().getRootPackage()->asSet())]
-#include "[aPackage.generateNamespace(false)/]Exec/[aPackage.generateNamespace(false)/]ExecPlugin.hpp"
-[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -95,32 +87,62 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
 {
-	[let packageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()]
-	[if (packageList->size() > 0)]
 	switch (specification->eClass()->getClassifierID())
 	{
-		case uml::umlPackage::ENUMERATIONLITERAL_CLASS:
+		case uml::umlPackage::INSTANCEVALUE_CLASS:
 		{
-			std::shared_ptr<uml::EnumerationLiteral> literal = std::dynamic_pointzer_cast<uml::EnumerationLiteral>(specification);
-			std::shared_ptr<uml::Enumeration> enumeration = literal->getEnumeration();
-			std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
+			std::shared_ptr<uml::EnumerationLiteral> literal = 
+				std::dynamic_pointer_cast<uml::EnumerationLiteral>((std::dynamic_pointer_cast<uml::InstanceValue>(specification))->getInstance());
 
-			[for (enumerationPackage : Package | aPackage.getEnumerationPackagesOfValueSpecificationAction())]
-			if(enumerationPackage == [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::eInstance())
+			if(literal)
 			{
-				[for (anEnumeration : Enumeration | aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = enumerationPackage))]
-				if(enumeration == [anEnumeration.generatePackageGetterCall()/])
+				std::shared_ptr<uml::Enumeration> enumeration = literal->getEnumeration().lock();
+				std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
+	
+				//Model-internal Enumerations
+				if(enumerationPackage == [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::eInstance())
 				{
-					[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
-					if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
-					{	
-						return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+					[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable())->sortedBy(myQualifiedName()))]
+					if(enumeration == [anEnumeration.generatePackageGetterCall()/])
+					{
+						[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
+						if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
+						{	
+							return eAny([aPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+						}
+						[/for]
 					}
 					[/for]
 				}
-				[/for]
+				//Model-external Enumerations
+				else
+				{
+					std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+					std::string pluginName = enumerationPackage->getName() + "Exec";
+					std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+			
+					if (plugin)
+					{
+						DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+			
+						std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+						if (executionPlugin)
+						{
+							DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+			
+							return executionPlugin->evaluateSpecification(specification);
+						}
+						else
+						{
+							DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!")
+						}
+					}
+					else
+					{ 
+						DEBUG_ERROR("Plugin '" << pluginName << "' not found!")
+					}
+				}
 			}
-			[/for]
 		}
 		default:
 		{
@@ -128,11 +150,8 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 			//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 		}
 	}
-	[else]
 	return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
 	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
-	[/if]
-	[/let]
 }
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
@@ -283,6 +302,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	}
 
 	return outputParameterValues;
+}
+
+void [packageName/]ExecutorImpl::setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr)
+{
+	/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);
 }
 [/file]
 [/template]

@@ -317,6 +317,7 @@ FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 [/for]
+FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/template]
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
@@ -327,6 +328,8 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
 	[/if]
 [/for]
+	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+	${CMAKE_DL_LIBS}
 )
 [/template]
 

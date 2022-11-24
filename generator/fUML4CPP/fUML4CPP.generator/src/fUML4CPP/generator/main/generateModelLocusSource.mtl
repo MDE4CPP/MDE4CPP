@@ -44,17 +44,13 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 
-[for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
-#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Factory.hpp"
-#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Package.hpp"
-[if (classPackage.isReflectionModel())]
-#include "[classPackage.generateNamespacePath(false)/]/[classPackage.name/]Package.hpp"
-[/if]
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName()))]
-#include "[aClass.getNearestPackage().generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Factory.hpp"
+#include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
+[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName()))]
+#include "[aPackage.generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
-[/for]
-
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -74,25 +70,23 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
-[let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
-[if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
-[for (classPackage : Package | packageList)]
-[let packageNamespace : String = classPackage.generateNamespace(true)]
-	if (typePackage == [classPackage.generateNamespace(false)/]::[classPackage.name/]Package::eInstance())
+
+	//Model-internal types
+[let packageNamespace : String = aPackage.generateNamespace(true)]
+	if (typePackage == [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(oclIsKindOf(Behavior) or isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName())) separator('\n')]
-[let className : String = aClass.name.toUpperFirst()]
-			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
+		[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(oclIsKindOf(Behavior) or isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName())) separator('\n')]
+			[let className : String = aClass.name.toUpperFirst()]
+			case [packageNamespace/]::[aPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
+				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[aPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
 				return instance;
 			}
-[/let]
-[/for]
-[/let]
+			[/let]
+		[/for]
 			default:
 			{
 				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
@@ -100,11 +94,43 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 			}
 		}
 	}
-[/for]
-[/if]
 [/let]
+	//Model-external types
+	else
+	{
+		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+		std::string pluginName = typePackage->getName() + "Exec";
+		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+
+		if (plugin)
+		{
+			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+
+			std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+			if (executionPlugin)
+			{
+				DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+
+				return executionPlugin->instantiateClass(type);
+			}
+			else
+			{
+				DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!")
+			}
+		}
+		else
+		{ 
+			DEBUG_ERROR("Plugin '" << pluginName << "' not found!")
+		}
+	}
+
 	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
+}
+
+void [packageName/]LocusImpl::setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus> thisLocusPtr)
+{
+	/*PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr)*/ fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);
 }
 [/file]
 [/template]

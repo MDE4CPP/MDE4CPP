@@ -108,6 +108,11 @@ void [packageName/]ExecutionFactoryImpl::create[anActivity.memberName().toUpperF
 	[anActivity.generateActivityExecutionPrototypeCreatorBody()/]
 }
 [/for]
+
+void [packageName/]ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr)
+{
+	/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr)*/ fUML::Semantics::Loci::ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr);
+}
 [/file]
 [/template]
 

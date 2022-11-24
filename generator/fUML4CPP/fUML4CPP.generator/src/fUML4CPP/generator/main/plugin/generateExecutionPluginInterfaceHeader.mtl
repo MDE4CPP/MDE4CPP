@@ -30,27 +30,12 @@
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-namespace fUML::Semantics::Activities
-{
-	class ActivityExecution;
-}
-
-
 namespace [aPackage.generateNamespace(false)/]
 {
 	class [packageName/] : virtual public UMLExecutionModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
-	
-			virtual std::string eclipseURI() = 0;
-			virtual std::string eNAME() = 0;
-			virtual std::string eNS_URI() = 0;
-			virtual std::string eNS_PREFIX() = 0;
-	
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
-			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
 			
 		protected:
 			[packageName/](){};

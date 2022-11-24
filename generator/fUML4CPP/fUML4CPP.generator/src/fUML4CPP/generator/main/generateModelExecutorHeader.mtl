@@ -42,8 +42,8 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
+			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>) = 0;
 	};
 }
 [endGuard(aPackage,'Executor')/]
@@ -74,7 +74,7 @@ namespace [aPackage.generateNamespace(false)/]
 	{
 		private:    
 			[upperName/]ExecutorImpl& operator=([upperName/]ExecutorImpl const&) = delete;
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs);
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
 
 		public:
 			[upperName/]ExecutorImpl();
@@ -82,9 +82,9 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification> specification);
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs);
-			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr){/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);};
+			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification>);
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
+			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor>);
 	};
 }
 [endGuard(aPackage,'ExecutorImpl')/]

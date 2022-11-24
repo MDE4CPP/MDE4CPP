@@ -107,6 +107,31 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 [/for]
 	return nullptr;
 }
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]::executeBehavior(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+
+	return this->m_executor->execute(behavior, context, inputs);
+}
+
+std::shared_ptr<uml::Element> [packageName/]::instantiateClass(std::shared_ptr<uml::Class> type)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+
+	return this->m_locus->instantiate(type);
+}
+
+std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::ValueSpecification> specification)
+{
+	return this->m_executor->evaluate(specification);
+}
 [/file]
 [/template]
 

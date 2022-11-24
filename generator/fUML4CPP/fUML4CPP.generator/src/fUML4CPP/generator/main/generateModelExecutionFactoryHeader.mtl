@@ -30,7 +30,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>) = 0;
 	};
 }
 [endGuard(aPackage,'ExecutionFactory')/]
@@ -65,8 +65,8 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context);
-			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr){/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr)*/ fUML::Semantics::Loci::ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr);};
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>);
+			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory>);
 	
 		private:
 			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()) before('\t\t\t//ActivityExecution Prototypes\n')]

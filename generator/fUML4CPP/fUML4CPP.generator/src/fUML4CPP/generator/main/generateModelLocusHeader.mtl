@@ -42,7 +42,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>) = 0;
 	};
 }
 [endGuard(aPackage,'LocusExecution')/]
@@ -71,8 +71,8 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type);
-			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus> thisLocusPtr){/*PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr)*/ fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);};
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
+			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
 	};
 }
 [endGuard(aPackage,'LocusImpl_Execution')/]
