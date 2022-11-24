@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_iMJXkBJVEeuI2oJVG-zT2A" name="ModelA">
+    <packagedElement xmi:type="uml:Class" xmi:id="_wSCTUGvfEe2Jx67SqDLwOQ" name="ClassA">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_WBSt8GvgEe2Jx67SqDLwOQ" name="fbPrint">
+        <language>CPP</language>
+        <body>std::cout&lt;&lt;&quot;Hello from ClassA::print...&quot;&lt;&lt;std::endl;</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_fQzxgGvgEe2Jx67SqDLwOQ" name="act_fooA" specification="_b3g6cGvgEe2Jx67SqDLwOQ" node="_hSmNoGvhEe2Jx67SqDLwOQ _fbLjkGviEe2Jx67SqDLwOQ _nkAr4GviEe2Jx67SqDLwOQ _ze3UUGviEe2Jx67SqDLwOQ">
+        <ownedParameter xmi:id="_eYksgGvhEe2Jx67SqDLwOQ" name="b">
+          <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        </ownedParameter>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_tVneIGviEe2Jx67SqDLwOQ" target="_nkAr4GviEe2Jx67SqDLwOQ" source="_fbLjkGviEe2Jx67SqDLwOQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_tVoFMGviEe2Jx67SqDLwOQ" name="cba_A_print_To_coa_B_fooB_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_tVoFMWviEe2Jx67SqDLwOQ" name="cba_A_print_To_coa_B_fooB_weight"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_uG7mUGviEe2Jx67SqDLwOQ" target="_nkAr4WviEe2Jx67SqDLwOQ" source="_hSmNoGvhEe2Jx67SqDLwOQ"/>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_3PFdoGviEe2Jx67SqDLwOQ" target="_ze3UUGviEe2Jx67SqDLwOQ" source="_nkAr4GviEe2Jx67SqDLwOQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_3PFdoWviEe2Jx67SqDLwOQ" name="coa_B_fooB_To_cba_A_print_2_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_3PFdomviEe2Jx67SqDLwOQ" name="coa_B_fooB_To_cba_A_print_2_weight"/>
+        </edge>
+        <node xmi:type="uml:ActivityParameterNode" xmi:id="_hSmNoGvhEe2Jx67SqDLwOQ" name="param_b" outgoing="_uG7mUGviEe2Jx67SqDLwOQ" parameter="_eYksgGvhEe2Jx67SqDLwOQ">
+          <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        </node>
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_fbLjkGviEe2Jx67SqDLwOQ" name="cba_A_print" outgoing="_tVneIGviEe2Jx67SqDLwOQ" behavior="_WBSt8GvgEe2Jx67SqDLwOQ"/>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_nkAr4GviEe2Jx67SqDLwOQ" name="coa_B_fooB" incoming="_tVneIGviEe2Jx67SqDLwOQ" outgoing="_3PFdoGviEe2Jx67SqDLwOQ">
+          <operation href="../../ModelB/model/ModelB.uml#_b3g6cGvgEe2Jx67SqDLwOQ"/>
+          <target xmi:id="_nkAr4WviEe2Jx67SqDLwOQ" name="target" incoming="_uG7mUGviEe2Jx67SqDLwOQ">
+            <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+          </target>
+        </node>
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_ze3UUGviEe2Jx67SqDLwOQ" name="cba_A_print_2" incoming="_3PFdoGviEe2Jx67SqDLwOQ" behavior="_WBSt8GvgEe2Jx67SqDLwOQ"/>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_b3g6cGvgEe2Jx67SqDLwOQ" name="fooA" method="_fQzxgGvgEe2Jx67SqDLwOQ">
+        <ownedParameter xmi:id="_a-rYgGvhEe2Jx67SqDLwOQ" name="b">
+          <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_0Pp_cGvfEe2Jx67SqDLwOQ" name="main" node="_xEYrYGvhEe2Jx67SqDLwOQ _BVAaMGviEe2Jx67SqDLwOQ _IJqk4GviEe2Jx67SqDLwOQ">
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_GrPfEGviEe2Jx67SqDLwOQ" target="_BVBBQGviEe2Jx67SqDLwOQ" source="_xEYrYWvhEe2Jx67SqDLwOQ"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_UMjH8GviEe2Jx67SqDLwOQ" target="_DkiM0GviEe2Jx67SqDLwOQ" source="_IJqk4WviEe2Jx67SqDLwOQ"/>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_xEYrYGvhEe2Jx67SqDLwOQ" name="CreateA" classifier="_wSCTUGvfEe2Jx67SqDLwOQ">
+        <result xmi:id="_xEYrYWvhEe2Jx67SqDLwOQ" name="out_a" outgoing="_GrPfEGviEe2Jx67SqDLwOQ" type="_wSCTUGvfEe2Jx67SqDLwOQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_BVAaMGviEe2Jx67SqDLwOQ" name="coa_fooA" operation="_b3g6cGvgEe2Jx67SqDLwOQ">
+        <argument xmi:id="_DkiM0GviEe2Jx67SqDLwOQ" name="b" incoming="_UMjH8GviEe2Jx67SqDLwOQ">
+          <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        </argument>
+        <target xmi:id="_BVBBQGviEe2Jx67SqDLwOQ" name="target" incoming="_GrPfEGviEe2Jx67SqDLwOQ" type="_wSCTUGvfEe2Jx67SqDLwOQ"/>
+      </node>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_IJqk4GviEe2Jx67SqDLwOQ" name="CreateB">
+        <classifier xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        <result xmi:id="_IJqk4WviEe2Jx67SqDLwOQ" name="out_b" outgoing="_UMjH8GviEe2Jx67SqDLwOQ">
+          <type xmi:type="uml:Class" href="../../ModelB/model/ModelB.uml#_wSCTUGvfEe2Jx67SqDLwOQ"/>
+        </result>
+      </node>
+    </packagedElement>
+    <profileApplication xmi:id="_40NIsGvfEe2Jx67SqDLwOQ">
+      <eAnnotations xmi:id="_40Pk8GvfEe2Jx67SqDLwOQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_6Wy80GvfEe2Jx67SqDLwOQ" base_Behavior="_0Pp_cGvfEe2Jx67SqDLwOQ"/>
+</xmi:XMI>
