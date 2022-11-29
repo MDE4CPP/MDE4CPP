@@ -134,7 +134,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr
 			[comment anOpaqueBehavior has a return parameter /]
 			[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 			[let returnParameter : Parameter = returnParameterList->first()]
-		[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
+		[returnParameter.generateCppType(false)/] [returnParameter.name/] = [if (anOpaqueBehavior.namespace.oclIsKindOf(Classifier))][anOpaqueBehavior.namespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.namespace.oclIsKindOf(Package))][anOpaqueBehavior.namespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
 				[comment returnParameter is typed by a PrimitiveType or Enumeration /]
 				[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
 		std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
@@ -145,7 +145,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr
 			[/let]
 			[comment anOpaqueBehavior has no return parameter /]
 			[else]
-		this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
+		[if (anOpaqueBehavior.namespace.oclIsKindOf(Classifier))][anOpaqueBehavior.namespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.namespace.oclIsKindOf(Package))][anOpaqueBehavior.namespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
 		std::shared_ptr<Any> returnArgument = eAny(nullptr, -1, false);
 			[/if]
 		[/let]
