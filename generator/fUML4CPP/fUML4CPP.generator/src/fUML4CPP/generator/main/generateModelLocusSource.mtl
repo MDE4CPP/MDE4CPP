@@ -24,11 +24,12 @@
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 
-[query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction())
-																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node)) /]
-[query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class) /]
+[query private getClassesOwnedByPackage(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()
+																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))
+																	->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())) /]
+[query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class)->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())) /]
 [query private getClassesOfCreateObjectActionForPackage(aPackage : Package, classPackage : Package) : Set(Class) = aPackage.getClassesOfCreateObjectAction()->select(aClass : Class | aClass.getNearestPackage() = classPackage)->sortedBy(name) /]
-[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getAllLocusClasses().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassesOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
 
 [template public generateModelLocusSource(aPackage : Package) 
 {
@@ -46,11 +47,22 @@ originalName : String = aPackage.generateNamespacePath(false);
 
 #include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Factory.hpp"
 #include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
-[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName()))]
 #include "[aPackage.generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
+[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->excluding(aPackage)]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+		[if (externalPackage.isReflectionModel())]
+#include "[externalPackage.generateNamespacePath(false)/]/[externalPackage.name/]Package.hpp"
+		[else]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+		[/if]
+	[/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -70,6 +82,7 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
+[if (aPackage.getClassesOfCreateObjectAction()->addAll(aPackage.getClassesOwnedByPackage())->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 
 	//Model-internal types
@@ -78,7 +91,7 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 	{		
 		switch(type->getMetaElementID())
 		{
-		[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGeneratable())->reject(oclIsKindOf(Behavior) or isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName())) separator('\n')]
+		[for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName())) separator('\n')]
 			[let className : String = aClass.name.toUpperFirst()]
 			case [packageNamespace/]::[aPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
@@ -98,10 +111,19 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 	//Model-external types
 	else
 	{
+	[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->excluding(aPackage)]
+	[if (externalPackageList->size() = 0)]
+	//No external types used in Activities of this model
+	[else]
 		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-		std::string pluginName = typePackage->getName() + "Exec";
+		std::string pluginName;
+	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+		if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
+		{
+			pluginName = "[externalPackage.name/]Exec";
+		}
+	[/for]
 		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
-
 		if (plugin)
 		{
 			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
@@ -113,17 +135,14 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 
 				return executionPlugin->instantiateClass(type);
 			}
-			else
-			{
-				DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!")
-			}
+			else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
 		}
-		else
-		{ 
-			DEBUG_ERROR("Plugin '" << pluginName << "' not found!")
-		}
+		else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+	[/if]
+	[/let]
 	}
 
+[/if]
 	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }

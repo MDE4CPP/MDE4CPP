@@ -24,6 +24,28 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 
+
+[query private getEnumerationsOwnedByPackage(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable()) /]
+[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
+[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
+[query private getEnumerationsOfValueSpecificationActionForPackage(aPackage : Package, otherPackage : Package) : Set(Enumeration) = aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getBehaviorsOwnedByPackage(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(Behavior) /]
+[query private getBehaviorsOfCallBehaviorAction(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getBehaviorsOfDecisionNodes(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getCalledBehaviors(aPackage : Package) : Set(Behavior) = aPackage.getBehaviorsOfCallBehaviorAction()->addAll(aPackage.getBehaviorsOfDecisionNodes())->asSet()->sortedBy(name)/]
+[query private getPackagesOfCalledBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(Behavior) = aPackage.getCalledBehaviors()->select(b : Behavior | b.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledActivities(aPackage : Package) : Set(Activity) = aPackage.getCalledBehaviors()->filter(Activity) /]
+[query private getPackagesOfCalledActivities(aPackage : Package) : Set(Package) = aPackage.getCalledActivities().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledActivitiesOfPackage(aPackage : Package, otherPackage : Package) : Set(Activity) = aPackage.getCalledActivities()->select(a : Activity | a.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledBehaviors()->filter(OpaqueBehavior) /]
+[query private getPackagesOfCalledOpaqueBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledOpaqueBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledOpaqueBehaviors()->select(oB : OpaqueBehavior | oB.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+
 [template public generateModelExecutorSource(aPackage : Package) 
 {
 packageName : String = aPackage.getPackageName().sanitize(); 
@@ -55,11 +77,20 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
-[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable())->sortedBy(myQualifiedName()))]
+[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
 #include "[aPackage.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
 [/for]
+[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()->excluding(aPackage)]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+#include "[externalPackage.generateNamespace(false)/]/[externalPackage.generateNamespace(false)/]Package.hpp"
+	[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
 [for (anIncludeString : String | 	
-	aPackage.allOwnedElements()
+	aPackage.getBehaviorsOwnedByPackage()
 	->filter(OpaqueBehavior)
 	->reject(oB : OpaqueBehavior | (not oB._context.oclIsUndefined()) and oB._context.oclIsTypeOf(Class))
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
@@ -68,9 +99,15 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
 [anIncludeString/]
 [/for]
-
+[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->excluding(aPackage)]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+#include "[externalPackage.generateNamespace(false)/]/[externalPackage.generateNamespace(false)/]Package.hpp"
+	[/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -87,6 +124,7 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
 {
+[if (aPackage.getEnumerationsOfValueSpecificationAction()->addAll(aPackage.getEnumerationsOwnedByPackage())->size() > 0)]
 	switch (specification->eClass()->getClassifierID())
 	{
 		case uml::umlPackage::INSTANCEVALUE_CLASS:
@@ -102,7 +140,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 				//Model-internal Enumerations
 				if(enumerationPackage == [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::eInstance())
 				{
-					[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable())->sortedBy(myQualifiedName()))]
+					[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
 					if(enumeration == [anEnumeration.generatePackageGetterCall()/])
 					{
 						[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
@@ -117,30 +155,35 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 				//Model-external Enumerations
 				else
 				{
-					std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-					std::string pluginName = enumerationPackage->getName() + "Exec";
-					std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
-			
-					if (plugin)
-					{
-						DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
-			
-						std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
-						if (executionPlugin)
+					[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->excluding(aPackage)]
+					[if (externalPackageList->size() = 0)]
+					//No external enumerations used in Activities of this model
+					[else]
+						std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+						std::string pluginName;
+					[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+						if(enumerationPackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
 						{
-							DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
-			
-							return executionPlugin->evaluateSpecification(specification);
+							pluginName = "[externalPackage.name/]Exec";
 						}
-						else
+					[/for]
+						std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+						if (plugin)
 						{
-							DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!")
+							DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+				
+							std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+							if (executionPlugin)
+							{
+								DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+				
+								return executionPlugin->evaluateSpecification(specification);
+							}
+							else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
 						}
-					}
-					else
-					{ 
-						DEBUG_ERROR("Plugin '" << pluginName << "' not found!")
-					}
+						else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+					[/if]
+					[/let]
 				}
 			}
 		}
@@ -150,12 +193,15 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 			//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 		}
 	}
+
+[/if]
 	return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
 	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 }
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
+[if (aPackage.getBehaviorsOwnedByPackage()->addAll(aPackage.getCalledBehaviors())->size() > 0)]
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
@@ -167,54 +213,110 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = 
 			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
 
-		if(!activityExecution)
+		//Model-internal activities
+		if(activityExecution)
 		{
-		    std::cerr << "['['/][packageName/]ExecutorImpl::execute[']'/] Execution is null" << std::endl;
-		    return nullptr;
+			activityExecution->getParameterValues()->clear();
+			activityExecution->setContext(context);
+	
+			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
+		    {
+		        activityExecution->setParameterValue(inputParameterValue);
+		    }
+	
+			activityExecution->execute_new();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
+			activityExecution->getActivationGroup()->terminateAll();
+			
+			return outputParameterValues;
 		}
-
-		activityExecution->getParameterValues()->clear();
-		activityExecution->setContext(context);
-
-		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
-	    {
-	        activityExecution->setParameterValue(inputParameterValue);
-	    }
-
-		activityExecution->execute_new();
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
-		activityExecution->getActivationGroup()->terminateAll();
+		//Model-external activities
+		else
+		{
+			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->excluding(aPackage)]
+			[if (externalPackageList->size() = 0)]
+			//No external activities called in Activities of this model
+			[else]
+				std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+				std::string pluginName;
+			[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+				[for (externalActivityOfPackage : Activity | externalPackage.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities()))]
+			if(behavior == [externalActivityOfPackage.generatePackageGetterCall()/]) 
+			{
+				pluginName = "[externalPackage.name/]Exec";
+			}
+				[/for]
+			[/for]
+				std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+				if (plugin)
+				{
+					DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 		
-		return outputParameterValues;
+					std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+					if (executionPlugin)
+					{
+						DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+		
+						return executionPlugin->executeBehavior(behavior);
+					}
+					else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+				}
+				else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+			[/if]
+			[/let]
+		}
 	}
 	else
 	{
 		std::cerr<<__PRETTY_FUNCTION__<<" : Unsupported type of Behavior! Currently only Activities, OpaqueBehaviors and FunctionBehaviors are supported!"<<std::endl;
 	}
 
+[/if]
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
 }
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+	std::string pluginName;
 
-	std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
-	std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
-	std::shared_ptr<Any> result;
-
-	for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs)
+	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->excluding(aPackage)]
+	[if (externalPackageList->size() = 0)]
+	//No external opaque behaviors called in Activities of this model
+	[else]
+	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+		[for (externalOpaqueBehaviorsOfPackage : OpaqueBehavior | externalPackage.allOwnedElements()->filter(OpaqueBehavior)->intersection(aPackage.getCalledOpaqueBehaviors()))]
+	if(opaqueBehavior == [externalOpaqueBehaviorsOfPackage.generatePackageGetterCall()/]) 
 	{
-		inputArguments->add(parameterValue->getValues()->at(0));
+		pluginName = "[externalPackage.name/]Exec";
 	}
+		[/for]
+	[/for]
+	[/if]
+	[/let]
+
+	//I know, this is a very ugly way to determine if we are handling an internal or external behavior...
+	//Model-internal OpaqueBehavior
+	if(pluginName.empty())
+	{
+
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+
+		std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
+		std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
+		std::shared_ptr<Any> result;
+
+		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs)
+		{
+			inputArguments->add(parameterValue->getValues()->at(0));
+		}
 
 	[for (anOpaqueBehavior : OpaqueBehavior | 	aPackage.allOwnedElements()
 	->filter(OpaqueBehavior)
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
 	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))]
-	if(opaqueBehavior == [anOpaqueBehavior.generatePackageGetterCall()/])
-	{	
+		if(opaqueBehavior == [anOpaqueBehavior.generatePackageGetterCall()/])
+		{	
 		[comment 
 			If the OpaqueBehavior has a specification (i.e. it implements an Operation),
 			then invoke this Operation on the corresponding context object
@@ -222,25 +324,25 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		[if (not anOpaqueBehavior.specification.oclIsUndefined())]
 			[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
 			[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
-		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
-		if(!context)
-		{
-			DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
-			return outputParameterValues;
-		}
-		result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
+			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+			if(!context)
+			{
+				DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+				return outputParameterValues;
+			}
+			result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
 				[let outputParameters : OrderedSet(Parameter) = specifiedOperation.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 				[for (outputParameter : Parameter | outputParameters) before('\n')]
-		//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
-		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-		[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-		[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-		outputParameterValues->add([outputParameter.name/]ParameterValue);
+			//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+			outputParameterValues->add([outputParameter.name/]ParameterValue);
 				[/for]
 				[/let]
 				[if (specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 				[let returnParameter : Parameter = specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
 				[/let]
 				[/if]
 			[/let]
@@ -251,57 +353,84 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			then execute this Behavior on the corresponding context object
 		/]
 		[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
-		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
-		if(!context)
-		{
-			DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
-			return outputParameterValues;
-		}
-		result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
+			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
+			if(!context)
+			{
+				DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+				return outputParameterValues;
+			}
+			result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
 			[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 			[for (outputParameter : Parameter | outputParameters) before('\n')]
-		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-		[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-		[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-		outputParameterValues->add([outputParameter.name/]ParameterValue);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+			outputParameterValues->add([outputParameter.name/]ParameterValue);
 			[/for]
 			[/let]
 			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
 			[/let]
 			[/if]
 		[comment 
 			Else execute the global model function corresponding to this Behavior
 		/]
 		[else]
-		// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
-		// and is therefore realized as a global function
-		result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
+			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
+			// and is therefore realized as a global function
+			result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
 			[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 			[for (outputParameter : Parameter | outputParameters) before('\n')]
-		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-		[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-		[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-		outputParameterValues->add([outputParameter.name/]ParameterValue);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+			outputParameterValues->add([outputParameter.name/]ParameterValue);
 			[/for]
 			[/let]
 			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-		returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
 			[/let]
 			[/if]
 		[/if]
-	}
+		}
 	[/for]
 
-	if(result)
+		if(result)
+		{
+			returnParameterValue->getValues()->add(result);
+			outputParameterValues->add(returnParameterValue);
+		}
+
+		return outputParameterValues;
+	}
+	//Model-external OpaqueBehavior
+	else
 	{
-		returnParameterValue->getValues()->add(result);
-		outputParameterValues->add(returnParameterValue);
+	[if (aPackage.getPackagesOfCalledOpaqueBehaviors()->excluding(aPackage)->size() = 0)]
+		//No external opaque behaviors called in Activities of this model
+	[else]
+		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+		if (plugin)
+		{
+			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+		
+			std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+			if (executionPlugin)
+			{
+				DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+		
+				return executionPlugin->executeBehavior(opaqueBehavior, context, inputs);
+			}
+			else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+		}
+		else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+	[/if]
 	}
 
-	return outputParameterValues;
+	return nullptr;
 }
 
 void [packageName/]ExecutorImpl::setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr)
