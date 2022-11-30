@@ -54,8 +54,8 @@ namespace uml
 {
 	class Action;
 	class ActivityNode;
-	class Behavior;
 	class CallAction;
+	class Parameter;
 }
 
 // namespace macro header include
@@ -92,7 +92,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues) = 0;
 			
 			
-			virtual std::shared_ptr<uml::Behavior> retrieveBehavior() const = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> retrieveCallParameters() const = 0;
 			virtual void terminate() = 0;
 
 			//*********************************

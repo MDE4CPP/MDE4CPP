@@ -48,6 +48,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues) ;
 			
 			virtual std::shared_ptr<uml::Behavior> retrieveBehavior() const ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> retrieveCallParameters() const ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -205,9 +205,9 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_callActionActivation_Operation_doCall_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_retrieveBehavior() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_retrieveCallParameters() const
 {
-	return m_callActionActivation_Operation_retrieveBehavior;
+	return m_callActionActivation_Operation_retrieveCallParameters;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallActionActivation_Operation_terminate() const
 {
@@ -236,6 +236,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 {
 	return m_callBehaviorActionActivation_Operation_retrieveBehavior;
 }
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallBehaviorActionActivation_Operation_retrieveCallParameters() const
+{
+	return m_callBehaviorActionActivation_Operation_retrieveCallParameters;
+}
 
 // End Class CallBehaviorActionActivation
 
@@ -258,6 +262,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Operation_retrieveBehavior() const
 {
 	return m_callOperationActionActivation_Operation_retrieveBehavior;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getCallOperationActionActivation_Operation_retrieveCallParameters() const
+{
+	return m_callOperationActionActivation_Operation_retrieveCallParameters;
 }
 
 // End Class CallOperationActionActivation

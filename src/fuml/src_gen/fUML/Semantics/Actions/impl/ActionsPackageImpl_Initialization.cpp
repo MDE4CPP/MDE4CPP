@@ -639,12 +639,12 @@ void ActionsPackageImpl::initializeCallActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_callActionActivation_Operation_retrieveBehavior->setName("retrieveBehavior");
-	m_callActionActivation_Operation_retrieveBehavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
-	m_callActionActivation_Operation_retrieveBehavior->setLowerBound(1);
-	m_callActionActivation_Operation_retrieveBehavior->setUpperBound(1);
-	m_callActionActivation_Operation_retrieveBehavior->setUnique(true);
-	m_callActionActivation_Operation_retrieveBehavior->setOrdered(true);
+	m_callActionActivation_Operation_retrieveCallParameters->setName("retrieveCallParameters");
+	m_callActionActivation_Operation_retrieveCallParameters->setEType(uml::umlPackage::eInstance()->getParameter_Class());
+	m_callActionActivation_Operation_retrieveCallParameters->setLowerBound(0);
+	m_callActionActivation_Operation_retrieveCallParameters->setUpperBound(-1);
+	m_callActionActivation_Operation_retrieveCallParameters->setUnique(true);
+	m_callActionActivation_Operation_retrieveCallParameters->setOrdered(true);
 	
 	m_callActionActivation_Operation_terminate->setName("terminate");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -715,6 +715,13 @@ void ActionsPackageImpl::initializeCallBehaviorActionActivationContent()
 	m_callBehaviorActionActivation_Operation_retrieveBehavior->setUnique(true);
 	m_callBehaviorActionActivation_Operation_retrieveBehavior->setOrdered(true);
 	
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setName("retrieveCallParameters");
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setEType(uml::umlPackage::eInstance()->getParameter_Class());
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setLowerBound(0);
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setUpperBound(-1);
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setUnique(true);
+	m_callBehaviorActionActivation_Operation_retrieveCallParameters->setOrdered(true);
+	
 	
 }
 
@@ -770,6 +777,13 @@ void ActionsPackageImpl::initializeCallOperationActionActivationContent()
 	m_callOperationActionActivation_Operation_retrieveBehavior->setUpperBound(1);
 	m_callOperationActionActivation_Operation_retrieveBehavior->setUnique(true);
 	m_callOperationActionActivation_Operation_retrieveBehavior->setOrdered(true);
+	
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setName("retrieveCallParameters");
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setEType(uml::umlPackage::eInstance()->getParameter_Class());
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setLowerBound(0);
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setUpperBound(-1);
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setUnique(true);
+	m_callOperationActionActivation_Operation_retrieveCallParameters->setOrdered(true);
 	
 	
 }

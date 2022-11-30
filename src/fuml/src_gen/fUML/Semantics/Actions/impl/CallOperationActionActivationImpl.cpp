@@ -54,8 +54,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -68,6 +68,7 @@
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -374,7 +375,29 @@ std::shared_ptr<uml::Behavior> CallOperationActionActivationImpl::retrieveBehavi
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return this->getCallOperationAction()->getOperation()->getMethod()->at(0);
+	std::shared_ptr<uml::Behavior> method = nullptr;
+	std::shared_ptr<Bag<uml::Behavior>> methods = this->getCallOperationAction()->getOperation()->getMethod();
+	if(!(methods->empty()))
+	{
+		method = methods->front();
+	}
+	
+	return method;
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::Parameter>> CallOperationActionActivationImpl::retrieveCallParameters() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::Behavior> behavior = this->retrieveBehavior();
+
+if(!behavior)
+{
+	return this->getCallOperationAction()->getOperation()->getOwnedParameter();
+}
+
+return behavior->getOwnedParameter();
 	//end of body
 }
 
@@ -685,6 +708,13 @@ std::shared_ptr<Any> CallOperationActionActivationImpl::eInvoke(int operationID,
 		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR:
 		{
 			result = eEcoreAny(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			break;
+		}
+		// fUML::Semantics::Actions::CallOperationActionActivation::retrieveCallParameters() : uml::Parameter[*] {const}: 3011147290
+		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS:
+		{
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->retrieveCallParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 

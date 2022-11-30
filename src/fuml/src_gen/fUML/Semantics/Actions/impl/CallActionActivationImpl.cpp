@@ -54,20 +54,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "uml/Behavior.hpp"
 #include "uml/CallAction.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/InvocationActionActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -149,15 +149,8 @@ void CallActionActivationImpl::doAction()
 	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList = this->getInputPinActivation();
 
 	unsigned int inputPinNumber = 0;
-	std::shared_ptr<uml::Behavior> behavior = this->retrieveBehavior();
 	
-	if(!behavior)
-	{
-		DEBUG_ERROR("Behavior is nullptr! Failed to perform call!")
-		return;
-	}
-	
-	std::shared_ptr<Bag<uml::Parameter>> parameterList = behavior->getOwnedParameter();
+	std::shared_ptr<Bag<uml::Parameter>> parameterList = this->retrieveCallParameters();
 	unsigned int size = parameterList->size();
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 	
@@ -303,7 +296,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallAction
 
 
 
-std::shared_ptr<uml::Behavior> CallActionActivationImpl::retrieveBehavior() const
+std::shared_ptr<Bag<uml::Parameter>> CallActionActivationImpl::retrieveCallParameters() const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -617,10 +610,11 @@ std::shared_ptr<Any> CallActionActivationImpl::eInvoke(int operationID, std::sha
 			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::retrieveBehavior() : uml::Behavior {const}: 3994859198
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR:
+		// fUML::Semantics::Actions::CallActionActivation::retrieveCallParameters() : uml::Parameter[*] {const}: 3734106017
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS:
 		{
-			result = eEcoreAny(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->retrieveCallParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::CallActionActivation::terminate(): 2819746834

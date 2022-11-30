@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -61,6 +61,7 @@
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -170,6 +171,14 @@ std::shared_ptr<uml::Behavior> CallBehaviorActionActivationImpl::retrieveBehavio
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getCallBehaviorAction()->getBehavior();
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::Parameter>> CallBehaviorActionActivationImpl::retrieveCallParameters() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->retrieveBehavior()->getOwnedParameter();
 	//end of body
 }
 
@@ -480,6 +489,13 @@ std::shared_ptr<Any> CallBehaviorActionActivationImpl::eInvoke(int operationID, 
 		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR:
 		{
 			result = eEcoreAny(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			break;
+		}
+		// fUML::Semantics::Actions::CallBehaviorActionActivation::retrieveCallParameters() : uml::Parameter[*] {const}: 3812119957
+		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS:
+		{
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->retrieveCallParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 
