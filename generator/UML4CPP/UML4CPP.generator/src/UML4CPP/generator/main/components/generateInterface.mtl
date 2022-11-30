@@ -36,6 +36,13 @@
 [query private isCompositionForInterface(anAssociation : Association, aInterface : Interface) : Boolean = anAssociation.memberEnd->select(type = aInterface and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
 [query public getCompositionsToInterface(aInterface : Interface) : Set(Association) = getAssociationsToInterface()->select(isCompositionForInterface(aInterface))->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
+[query public getAllBaseInterfaces(anInterface : Interface) : Set(Interface) = 
+	anInterface.getBaseInterfaces()
+	->addAll(anInterface.getBaseInterfaces().getAllBaseInterfaces())
+	->flatten()->asSet() /]
+[query public getBaseInterfaces(anInterface : Interface) : Set(Interface) = anInterface.generalization.general->filter(Interface)->flatten()->asSet() /]
+
+
 [**
  * generate creation of meta model instance for an Interface element
 */]

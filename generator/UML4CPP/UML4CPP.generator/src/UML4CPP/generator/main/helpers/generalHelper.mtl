@@ -180,6 +180,6 @@ nullptr['cannot terminate package of element '.concat(failureElement.toString())
 [if (aClassifier._package.name = 'PrimitiveTypes')]
 types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 [else]
-[aClassifier.generateNamespace(true)/]::[aClassifier._package.myNamespaceName()/]Package::[aClassifier.name.toUpperCase()/]_CLASS
+[aClassifier.generateNamespace(true)/]::[aClassifier._package.myNamespaceName()/]Package::[aClassifier.getMemberName().toUpperCase()/]
 [/if]
 [/template]

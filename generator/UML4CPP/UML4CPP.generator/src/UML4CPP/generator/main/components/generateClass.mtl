@@ -56,6 +56,12 @@
 */]
 [query public collectOpaqueBehaviorsContexedByClass(aClass : Class) : Set(OpaqueBehavior) = aClass.allOwnedElements()->filter(OpaqueBehavior)->reject(isDoNotGenerateElement())->select(_context = aClass)->select(specification.oclIsUndefined()) /]
 
+[** 
+ * Get all Interfaces (direct or indirect) that are realized by aClass
+*/]
+[query public collectAllRealizedInterfaces(aClass : Class) : Set(Interface) = aClass.interfaceRealization.contract->addAll(aClass.interfaceRealization.contract.getAllBaseInterfaces())->flatten()->asSet() /]
+
+
 
 [**
  * template to generate create function declarations
@@ -131,6 +137,10 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticInterfaceID(anInterface)/]
+	[comment  Properties of c/]
+	[for (aProperty : Property | anInterface.ownedAttribute) before('\t\t//Properties\n')]
+		static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	[/for]
 	[comment  Operations of c/]
 	[for (anOperation : Operation | anInterface.ownedOperation) before('//Operations\n')]
 	//[anOperation.generateQualifiedNameWithSignature()/]

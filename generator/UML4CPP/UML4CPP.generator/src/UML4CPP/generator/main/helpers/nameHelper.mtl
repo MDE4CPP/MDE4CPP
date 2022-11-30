@@ -65,7 +65,9 @@
 [query public generateNamespace(aPackage : Package, noReflection : Boolean) : String = getNamespace(noReflection, false) /]
 [query public generateNamespace(aClassifier : Classifier, noReflection : Boolean) : String = aClassifier.getNearestPackage().getNamespace(noReflection ,false) /]
 [query public generateNamespaceName(aClassifier : Classifier, noReflection : Boolean) : String = generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst())/]
+[query public generateNamespace(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
 [query public generateNamespaceName(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(anOperation.name)/]
+[query public generateNamespace(aProperty : Property, noReflection : Boolean) : String = aProperty.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
 [query public generateNamespaceName(aProperty : Property, noReflection : Boolean) : String = aProperty.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(aProperty.name)/]
 [query private getNamespace(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageNamespaceName(noReflection, ignoreRoot) else aPackage.getSuperPackage().getNamespace(noReflection, ignoreRoot).concat('::').concat(aPackage.name) endif/]
 [query private getRootPackageNamespaceName(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else if (noReflection) then aPackage.myNamespaceName() else aPackage.name endif endif /]
@@ -186,7 +188,7 @@
 [query private getMemberNameOperation(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined()) then ''else if (anENamedElement.oclIsKindOf(BehavioralFeature)) then anENamedElement.oclAsType(BehavioralFeature).getMemberNameOP() else anENamedElement.getMemberNameGeneral() endif endif/]
 [query private getMemberNameGeneral(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined() or anENamedElement.name.oclIsUndefined()) then '' else anENamedElement.name.toLowerFirst().concat('_Element') endif/]
 
-[query private getMemberNameCL(anEClassifier : Classifier) : String = if (anEClassifier.oclIsUndefined()) then '' else anEClassifier.name.toLowerFirst().concat('_Class') endif/]
+[query private getMemberNameCL(aClassifier : Classifier) : String = if (aClassifier.oclIsUndefined()) then '' else aClassifier.name.toLowerFirst().concat('_').concat(aClassifier.eClass().name) endif/]
 [query private getMemberNameST(aStructural : StructuralFeature) : String = if (aStructural.oclIsUndefined()) then '' else aStructural.eContainer().oclAsType(NamedElement).myName().toLowerFirst().concat('_Attribute_').concat(aStructural.name.toLowerFirst()) endif/]
 [query private getMemberNameOP(aOperation : BehavioralFeature) : String = if (aOperation.oclIsUndefined()) then '' else aOperation.eContainer().oclAsType(NamedElement).myName().toLowerFirst().concat('_Operation_'.concat(aOperation.name.toLowerFirst()).concat(aOperation.parameterListName())) endif/]
 

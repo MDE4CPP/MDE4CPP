@@ -119,7 +119,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 			[if(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
 			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
 			[else]
@@ -171,7 +171,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(hasSetter()))]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
 		[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
@@ -357,7 +357,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[aProperty.type.generateCppType(false)/] valueToAdd;
 			if(value->isContainer())
@@ -439,7 +439,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
 			m_[aProperty.name/].reset();
@@ -486,7 +486,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 	switch(_uID)
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[aProperty.type.generateCppType(false)/] valueToRemove;
 			if(value->isContainer())
@@ -560,7 +560,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 	[for (anOperation : Operation | aClass.getOperationsForInvoke())]
 	if(_operation == [anOperation.generatePackageGetterCall()/])
 	{
-		return this->invoke([aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/], inputArguments, outputArguments);
+		return this->invoke([anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/], inputArguments, outputArguments);
 	}
 	[/for]
 [/if]	
@@ -607,7 +607,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 	switch(_uID)
 	{
 		[for (anOperation : Operation | aClass.getOperationsForInvoke())]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
+		case [anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
 		{
 			[comment Retrieve all parameter values for parameters with in or inout direction /]
 			[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select((direction = ParameterDirectionKind::_in) or (direction = ParameterDirectionKind::inout))]

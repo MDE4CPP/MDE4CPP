@@ -83,11 +83,19 @@
 #include "types/typesPackage.hpp"
 [/if]
 [comment Packages for used (non-primitive) Types /]
-[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n') after('\n')]
+[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n')]
 #include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
 [/for]
+[comment Packages of external Interfaces realized by this class /]
+[for (externalPackage : Package | 
+		aClass.collectAllRealizedInterfaces().ownedAttribute.getNearestPackage()
+		->addAll(aClass.collectAllRealizedInterfaces().ownedOperation.getNearestPackage())
+		->flatten()->asSet()->reject(p : Package | p = aPackage))
+	before('\n//external Interfaces realized by this class\n')]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+[/for]
 [comment Used Types /]
-[for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Used Types\n') after('\n')]
+[for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [elseif (cl.getNearestPackage().hasIncludePath())]
@@ -97,12 +105,12 @@
 [/if]
 [/for]
 [comment PackgeImpl and Factories included from types of attributes, operation parameters, imports and composite owner classes /]
-[for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName())) before('\n//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes\n') after('\n')]
+[for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName())) before('\n//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes\n')]
 #include "[typePackage.generateNamespacePath(true)/]/[typePackage.myNamespaceName().concat('Factory')/].hpp"
 #include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
 [/for]
 [comment Packages of included Enumerations /]
-[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n') after('\n')]
+[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n')]
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 [comment Plugin Framework /]
