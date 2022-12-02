@@ -1,5 +1,5 @@
 modelFolder=$PWD
-modelFile=$modelFolder/ModelB.uml
+modelFile=$modelFolder/PrimitiveLibrary.uml
 
 # Go to MDE4CPP home folder to call the gradle task 'generateModel'
 # Task 'generateModel' is defined in $MDE4CPP_HOME/src/common/universalGradleTasks/build.gradle

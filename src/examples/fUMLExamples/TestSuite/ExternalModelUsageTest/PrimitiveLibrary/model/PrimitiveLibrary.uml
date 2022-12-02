@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_iMJXkBJVEeuI2oJVG-zT2A" name="PrimitiveLibrary">
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_YROkgHCnEe246fp4p9T-ZQ" name="add_integer">
+    <ownedParameter xmi:id="_Zf6lMHCnEe246fp4p9T-ZQ" name="summand_1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_hwLyQHCnEe246fp4p9T-ZQ" name="summand_2">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_j9BdQHCnEe246fp4p9T-ZQ" name="sum" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>sum = summand_1 + summand_2;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_5l6RQHCnEe246fp4p9T-ZQ" name="subtract_integer">
+    <ownedParameter xmi:id="_5l6RQXCnEe246fp4p9T-ZQ" name="minuend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_5l6RQnCnEe246fp4p9T-ZQ" name="subtrahend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_5l6RQ3CnEe246fp4p9T-ZQ" name="difference" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>difference = minuend - subtrahend;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_MSS34HCoEe246fp4p9T-ZQ" name="multiply_integer">
+    <ownedParameter xmi:id="_MSS34XCoEe246fp4p9T-ZQ" name="factor_1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_MSS34nCoEe246fp4p9T-ZQ" name="factor_2">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_MSS343CoEe246fp4p9T-ZQ" name="product" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>product = factor_1 * factor_2;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_hKw7kHCoEe246fp4p9T-ZQ" name="divide_integer">
+    <ownedParameter xmi:id="_hKw7kXCoEe246fp4p9T-ZQ" name="dividend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_hKw7knCoEe246fp4p9T-ZQ" name="divisor">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_hKw7k3CoEe246fp4p9T-ZQ" name="quotient" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>quotient = dividend / divisor;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_IxcK0HCpEe246fp4p9T-ZQ" name="add_real">
+    <ownedParameter xmi:id="_IxcK0XCpEe246fp4p9T-ZQ" name="summand_1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK0nCpEe246fp4p9T-ZQ" name="summand_2">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK03CpEe246fp4p9T-ZQ" name="sum" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>sum = summand_1 + summand_2;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_IxcK1HCpEe246fp4p9T-ZQ" name="subtract_real">
+    <ownedParameter xmi:id="_IxcK1XCpEe246fp4p9T-ZQ" name="minuend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK1nCpEe246fp4p9T-ZQ" name="subtrahend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK13CpEe246fp4p9T-ZQ" name="difference" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>difference = minuend - subtrahend;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_IxcK2HCpEe246fp4p9T-ZQ" name="multiply_real">
+    <ownedParameter xmi:id="_IxcK2XCpEe246fp4p9T-ZQ" name="factor_1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK2nCpEe246fp4p9T-ZQ" name="factor_2">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK23CpEe246fp4p9T-ZQ" name="product" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>product = factor_1 * factor_2;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_IxcK3HCpEe246fp4p9T-ZQ" name="divide_real">
+    <ownedParameter xmi:id="_IxcK3XCpEe246fp4p9T-ZQ" name="dividend">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK3nCpEe246fp4p9T-ZQ" name="divisor">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_IxcK33CpEe246fp4p9T-ZQ" name="quotient" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>quotient = dividend / divisor;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_rW0DYHCpEe246fp4p9T-ZQ" name="not_boolean">
+    <ownedParameter xmi:id="_rW0DYXCpEe246fp4p9T-ZQ" name="a">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_rW0DY3CpEe246fp4p9T-ZQ" name="result" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>result = (!a);</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_yrfx8HCpEe246fp4p9T-ZQ" name="and_boolean">
+    <ownedParameter xmi:id="_yrfx8XCpEe246fp4p9T-ZQ" name="a">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_0-uY0HCpEe246fp4p9T-ZQ" name="b">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_yrfx8nCpEe246fp4p9T-ZQ" name="result" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>result = (a &amp;&amp; b);</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_5zwOEHCpEe246fp4p9T-ZQ" name="or_boolean">
+    <ownedParameter xmi:id="_5zwOEXCpEe246fp4p9T-ZQ" name="a">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_5zwOEnCpEe246fp4p9T-ZQ" name="b">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_5zwOE3CpEe246fp4p9T-ZQ" name="result" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>result = (a || b);</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_T72_YHCqEe246fp4p9T-ZQ" name="concat_string">
+    <ownedParameter xmi:id="_T72_YXCqEe246fp4p9T-ZQ" name="str_1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_U7PYwHCqEe246fp4p9T-ZQ" name="str_2">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedParameter>
+    <ownedParameter xmi:id="_a_NtYHCqEe246fp4p9T-ZQ" name="result" direction="return">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedParameter>
+    <language>CPP</language>
+    <body>result = str_1 + &quot; &quot; + str_2;</body>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_usctAHCqEe246fp4p9T-ZQ" name="Converter">
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4sLFgHCqEe246fp4p9T-ZQ" name="oB_integer_to_string" specification="_wyInIHCqEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_5iYUwHCqEe246fp4p9T-ZQ" name="_integer">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_5iYUwXCqEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>_string = std::to_string(_integer);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_agFr8HCrEe246fp4p9T-ZQ" name="oB_real_to_string" specification="_agFr83CrEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_f2JKoHCrEe246fp4p9T-ZQ" name="_real">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_f2JKoXCrEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>_string = std::to_string(_real);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_rr9iEHCrEe246fp4p9T-ZQ" name="oB_boolean_to_string" specification="_rr9iE3CrEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_yoku4HCrEe246fp4p9T-ZQ" name="_boolean">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_yoku4XCrEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>if(_boolean) { _string = &quot;true&quot;; }&#xD;
+else { _string = &quot;false&quot;; }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_7LSr8HCtEe246fp4p9T-ZQ" name="oB_string_to_integer" specification="_L9EAAHCuEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_7LSr8nCtEe246fp4p9T-ZQ" name="_string">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_7LSr8XCtEe246fp4p9T-ZQ" name="_integer" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>_integer = std::stoi(_string);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_aRSTkHCuEe246fp4p9T-ZQ" name="oB_string_to_real" specification="_gEm9EHCuEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_aRSTkXCuEe246fp4p9T-ZQ" name="_string">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_aRSTknCuEe246fp4p9T-ZQ" name="_real" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>_real = std::stod(_string);</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_wyInIHCqEe246fp4p9T-ZQ" name="integer_to_string" method="_4sLFgHCqEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_zHc4sHCqEe246fp4p9T-ZQ" name="_integer">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zkYFQHCqEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_agFr83CrEe246fp4p9T-ZQ" name="real_to_string" method="_agFr8HCrEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_agFr9HCrEe246fp4p9T-ZQ" name="_real">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_agFr9XCrEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_rr9iE3CrEe246fp4p9T-ZQ" name="boolean_to_string" method="_rr9iEHCrEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_rr9iFHCrEe246fp4p9T-ZQ" name="_boolean">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_rr9iFXCrEe246fp4p9T-ZQ" name="_string" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_L9EAAHCuEe246fp4p9T-ZQ" name="string_to_integer" method="_7LSr8HCtEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_NtAToHCuEe246fp4p9T-ZQ" name="_string">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_NtAToXCuEe246fp4p9T-ZQ" name="_integer" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_gEm9EHCuEe246fp4p9T-ZQ" name="string_to_real" method="_aRSTkHCuEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_iRrRkHCuEe246fp4p9T-ZQ" name="_string">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_iRrRkXCuEe246fp4p9T-ZQ" name="_real" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VldIgHCsEe246fp4p9T-ZQ" name="IO">
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_AxJMEHCsEe246fp4p9T-ZQ" name="oB_read_string" specification="_bZfjsHCsEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_AxJMEXCsEe246fp4p9T-ZQ" name="str" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>std::cin>>str;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_OEcgEHCqEe246fp4p9T-ZQ" name="oB_write_string" specification="_s3uVIHCsEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_OEcgEXCqEe246fp4p9T-ZQ" name="str">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>std::cout&lt;&lt;str&lt;&lt;std::endl;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_6UmJ8HCsEe246fp4p9T-ZQ" name="act_read_integer" specification="_yMcXEHCsEe246fp4p9T-ZQ" node="_AIyWIHCtEe246fp4p9T-ZQ _eXcGEHCtEe246fp4p9T-ZQ _rzpzkHCtEe246fp4p9T-ZQ _lS-fYHCuEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_818FUHCsEe246fp4p9T-ZQ" name="integer" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_14bOsHCuEe246fp4p9T-ZQ" target="_ohdNkXCuEe246fp4p9T-ZQ" source="_jhcs0HCtEe246fp4p9T-ZQ"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_y7XnsHCuEe246fp4p9T-ZQ" target="_lS-fYXCuEe246fp4p9T-ZQ" source="_rzpzkXCtEe246fp4p9T-ZQ"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_6xz_gHCuEe246fp4p9T-ZQ" target="_AIyWIHCtEe246fp4p9T-ZQ" source="_ohdNkHCuEe246fp4p9T-ZQ"/>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_AIyWIHCtEe246fp4p9T-ZQ" name="aPN_integer" incoming="_6xz_gHCuEe246fp4p9T-ZQ" parameter="_818FUHCsEe246fp4p9T-ZQ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </node>
+      <node xmi:type="uml:CallBehaviorAction" xmi:id="_eXcGEHCtEe246fp4p9T-ZQ" name="cba_read_string_1" behavior="_AxJMEHCsEe246fp4p9T-ZQ">
+        <result xmi:id="_jhcs0HCtEe246fp4p9T-ZQ" name="str" outgoing="_14bOsHCuEe246fp4p9T-ZQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </result>
+      </node>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_rzpzkHCtEe246fp4p9T-ZQ" name="Create_Converter" classifier="_usctAHCqEe246fp4p9T-ZQ">
+        <result xmi:id="_rzpzkXCtEe246fp4p9T-ZQ" name="result" outgoing="_y7XnsHCuEe246fp4p9T-ZQ" type="_usctAHCqEe246fp4p9T-ZQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_lS-fYHCuEe246fp4p9T-ZQ" name="coa_Converter_string_to_integer" operation="_L9EAAHCuEe246fp4p9T-ZQ">
+        <argument xmi:id="_ohdNkXCuEe246fp4p9T-ZQ" name="_string" incoming="_14bOsHCuEe246fp4p9T-ZQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </argument>
+        <result xmi:id="_ohdNkHCuEe246fp4p9T-ZQ" name="_integer" outgoing="_6xz_gHCuEe246fp4p9T-ZQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </result>
+        <target xmi:id="_lS-fYXCuEe246fp4p9T-ZQ" name="target" incoming="_y7XnsHCuEe246fp4p9T-ZQ" type="_usctAHCqEe246fp4p9T-ZQ"/>
+      </node>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_bZfjsHCsEe246fp4p9T-ZQ" name="read_string" method="_AxJMEHCsEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_lDu0YHCsEe246fp4p9T-ZQ" name="str" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_s3uVIHCsEe246fp4p9T-ZQ" name="write_string" method="_OEcgEHCqEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_vmj58HCsEe246fp4p9T-ZQ" name="str">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_yMcXEHCsEe246fp4p9T-ZQ" name="read_integer" method="_6UmJ8HCsEe246fp4p9T-ZQ">
+      <ownedParameter xmi:id="_2sMf4HCsEe246fp4p9T-ZQ" name="integer" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>
