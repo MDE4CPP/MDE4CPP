@@ -331,7 +331,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 				return outputParameterValues;
 			}
 			result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
-				[let outputParameters : OrderedSet(Parameter) = specifiedOperation.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 				[for (outputParameter : Parameter | outputParameters) before('\n')]
 			//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
@@ -340,8 +340,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			outputParameterValues->add([outputParameter.name/]ParameterValue);
 				[/for]
 				[/let]
-				[if (specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-				[let returnParameter : Parameter = specifiedOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+				[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
 			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
 				[/let]
 				[/if]
