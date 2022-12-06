@@ -224,7 +224,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		        activityExecution->setParameterValue(inputParameterValue);
 		    }
 	
-			activityExecution->execute_new();
+			activityExecution->execute();
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
 			activityExecution->getActivationGroup()->terminateAll();
 			
