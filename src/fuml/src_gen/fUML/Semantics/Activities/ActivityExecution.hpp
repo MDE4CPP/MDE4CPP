@@ -88,7 +88,6 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual std::shared_ptr<Any> _copy() = 0;
 			virtual void execute() = 0;
-			virtual void execute_new() = 0;
 			virtual std::shared_ptr<Any> new_() = 0;
 			virtual void terminate() = 0;
 

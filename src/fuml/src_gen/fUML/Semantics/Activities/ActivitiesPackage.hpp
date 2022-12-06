@@ -116,14 +116,13 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
 			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 52;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 51;
 			
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;
 			
 			static const unsigned int ACTIVITYEXECUTION_OPERATION__COPY = 2018352062;
 			static const unsigned int ACTIVITYEXECUTION_OPERATION_EXECUTE = 2440252333;
-			static const unsigned int ACTIVITYEXECUTION_OPERATION_EXECUTE_NEW = 1013829974;
 			static const unsigned int ACTIVITYEXECUTION_OPERATION_NEW_ = 357511021;
 			static const unsigned int ACTIVITYEXECUTION_OPERATION_TERMINATE = 1105822471;
 			
@@ -136,7 +135,6 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_execute_new() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_terminate() const = 0;
 			

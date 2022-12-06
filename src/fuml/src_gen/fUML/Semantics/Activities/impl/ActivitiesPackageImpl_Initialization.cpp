@@ -361,19 +361,6 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Operation_execute->setUnique(true);
 	m_activityExecution_Operation_execute->setOrdered(false);
 	
-	m_activityExecution_Operation_execute_new->setName("execute_new");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_activityExecution_Operation_execute_new->setEType(unknownClass);
-	}
-	m_activityExecution_Operation_execute_new->setLowerBound(1);
-	m_activityExecution_Operation_execute_new->setUpperBound(1);
-	m_activityExecution_Operation_execute_new->setUnique(true);
-	m_activityExecution_Operation_execute_new->setOrdered(false);
-	
 	m_activityExecution_Operation_new_->setName("new_");
 	m_activityExecution_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_activityExecution_Operation_new_->setLowerBound(1);
