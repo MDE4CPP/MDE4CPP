@@ -79,13 +79,12 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual int getOperationID() = 0;
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getOperationID() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -116,7 +115,6 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			int m_operationID= -1;
 			
 			//*********************************
 			// Reference Members

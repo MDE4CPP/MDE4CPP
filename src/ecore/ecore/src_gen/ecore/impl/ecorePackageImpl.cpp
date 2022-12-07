@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/ETypeParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -556,10 +556,6 @@ std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEOperation_Class() co
 	return m_eOperation_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ecore::ecorePackageImpl::getEOperation_Attribute_operationID() const
-{
-	return m_eOperation_Attribute_operationID;
-}
 
 std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEOperation_Attribute_eContainingClass() const
 {
@@ -582,6 +578,10 @@ std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEOperation_Attrib
 	return m_eOperation_Attribute_eTypeParameters;
 }
 
+std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEOperation_Operation_getOperationID() const
+{
+	return m_eOperation_Operation_getOperationID;
+}
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEOperation_Operation_isOverrideOf_EOperation() const
 {
 	return m_eOperation_Operation_isOverrideOf_EOperation;
@@ -719,10 +719,6 @@ std::shared_ptr<ecore::EAttribute> ecore::ecorePackageImpl::getEStructuralFeatur
 {
 	return m_eStructuralFeature_Attribute_derived;
 }
-std::shared_ptr<ecore::EAttribute> ecore::ecorePackageImpl::getEStructuralFeature_Attribute_featureID() const
-{
-	return m_eStructuralFeature_Attribute_featureID;
-}
 std::shared_ptr<ecore::EAttribute> ecore::ecorePackageImpl::getEStructuralFeature_Attribute_transient() const
 {
 	return m_eStructuralFeature_Attribute_transient;
@@ -744,6 +740,10 @@ std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEStructuralFeatur
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEStructuralFeature_Operation_getContainerClass() const
 {
 	return m_eStructuralFeature_Operation_getContainerClass;
+}
+std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEStructuralFeature_Operation_getFeatureID() const
+{
+	return m_eStructuralFeature_Operation_getFeatureID;
 }
 
 // End Class EStructuralFeature

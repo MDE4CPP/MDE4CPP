@@ -47,7 +47,7 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual void * getContainerClass() ;
-			
+			virtual int getFeatureID() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -60,8 +60,6 @@ namespace ecore
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);
 			virtual bool isDerived() const ;
 			virtual void setDerived (bool _derived);
-			virtual int getFeatureID() const ;
-			virtual void setFeatureID (int _featureID);
 			virtual bool isTransient() const ;
 			virtual void setTransient (bool _transient);
 			virtual bool isUnsettable() const ;

@@ -59,9 +59,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const unsigned int DISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const unsigned int DISPATCHSTRATEGY_OPERATION_DISPATCH_ELEMENT_OPERATION = 2531361209;
-			static const unsigned int DISPATCHSTRATEGY_OPERATION_GETNAME = 1474882685;
-			static const unsigned int DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 2607212722;
+			static const unsigned long DISPATCHSTRATEGY_OPERATION_DISPATCH_ELEMENT_OPERATION = 2531361209;
+			static const unsigned long DISPATCHSTRATEGY_OPERATION_GETNAME = 1474882685;
+			static const unsigned long DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 2607212722;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_Class() const = 0;
@@ -82,8 +82,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
 			
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 3748574732;
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 4193381461;
+			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 3748574732;
+			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 4193381461;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_Class() const = 0;

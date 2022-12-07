@@ -372,10 +372,10 @@ namespace uml
 			static const unsigned long ACTION_ATTRIBUTE_LOCALPRECONDITION = 1031741033;
 			static const unsigned long ACTION_ATTRIBUTE_OUTPUT = 571103227;
 			
-			static const unsigned int ACTION_OPERATION_ALLACTIONS = 666610799;
-			static const unsigned int ACTION_OPERATION_ALLOWNEDNODES = 1529799585;
-			static const unsigned int ACTION_OPERATION_CONTAININGBEHAVIOR = 3666051963;
-			static const unsigned int ACTION_OPERATION_GETCONTEXT = 42483851;
+			static const unsigned long ACTION_OPERATION_ALLACTIONS = 666610799;
+			static const unsigned long ACTION_OPERATION_ALLOWNEDNODES = 1529799585;
+			static const unsigned long ACTION_OPERATION_CONTAININGBEHAVIOR = 3666051963;
+			static const unsigned long ACTION_OPERATION_GETCONTEXT = 42483851;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAction_Class() const = 0;
@@ -537,7 +537,7 @@ namespace uml
 			static const unsigned long ACTIVITYGROUP_ATTRIBUTE_SUBGROUP = 1269882643;
 			static const unsigned long ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP = 99363445;
 			
-			static const unsigned int ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY = 2017091657;
+			static const unsigned long ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY = 2017091657;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityGroup_Class() const = 0;
@@ -569,7 +569,7 @@ namespace uml
 			static const unsigned long ACTIVITYNODE_ATTRIBUTE_OUTGOING = 217032432;
 			static const unsigned long ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE = 1222920921;
 			
-			static const unsigned int ACTIVITYNODE_OPERATION_CONTAININGACTIVITY = 3068363550;
+			static const unsigned long ACTIVITYNODE_OPERATION_CONTAININGACTIVITY = 3068363550;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityNode_Class() const = 0;
@@ -748,8 +748,8 @@ namespace uml
 			static const unsigned long ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE = 1399712355;
 			static const unsigned long ARTIFACT_ATTRIBUTE_OWNEDOPERATION = 1990451269;
 			
-			static const unsigned int ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2148983055;
-			static const unsigned int ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 153390480;
+			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2148983055;
+			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 153390480;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getArtifact_Class() const = 0;
@@ -779,8 +779,8 @@ namespace uml
 			static const unsigned long ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND = 388526276;
 			static const unsigned long ASSOCIATION_ATTRIBUTE_OWNEDEND = 121265286;
 			
-			static const unsigned int ASSOCIATION_OPERATION_GETENDTYPES = 2690402644;
-			static const unsigned int ASSOCIATION_OPERATION_ISBINARY = 1073463579;
+			static const unsigned long ASSOCIATION_OPERATION_GETENDTYPES = 2690402644;
+			static const unsigned long ASSOCIATION_OPERATION_ISBINARY = 1073463579;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociation_Class() const = 0;
@@ -831,10 +831,10 @@ namespace uml
 			static const unsigned long BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR = 372527018;
 			static const unsigned long BEHAVIOR_ATTRIBUTE_SPECIFICATION = 975260079;
 			
-			static const unsigned int BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT = 880896847;
-			static const unsigned int BEHAVIOR_OPERATION_GETCONTEXT = 548943186;
-			static const unsigned int BEHAVIOR_OPERATION_INPUTPARAMETERS = 2569274578;
-			static const unsigned int BEHAVIOR_OPERATION_OUTPUTPARAMETERS = 2790902847;
+			static const unsigned long BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT = 880896847;
+			static const unsigned long BEHAVIOR_OPERATION_GETCONTEXT = 548943186;
+			static const unsigned long BEHAVIOR_OPERATION_INPUTPARAMETERS = 2569274578;
+			static const unsigned long BEHAVIOR_OPERATION_OUTPUTPARAMETERS = 2790902847;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavior_Class() const = 0;
@@ -890,9 +890,9 @@ namespace uml
 			static const unsigned long BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET = 1385000521;
 			static const unsigned long BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION = 234653561;
 			
-			static const unsigned int BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE = 2358256606;
-			static const unsigned int BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS = 2494913883;
-			static const unsigned int BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS = 3232178764;
+			static const unsigned long BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE = 2358256606;
+			static const unsigned long BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS = 2494913883;
+			static const unsigned long BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS = 3232178764;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavioralFeature_Class() const = 0;
@@ -922,8 +922,8 @@ namespace uml
 			static const unsigned long BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION = 1404211083;
 			static const unsigned long BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR = 1291425958;
 			
-			static const unsigned int BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES = 3121381189;
-			static const unsigned int BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES = 329551508;
+			static const unsigned long BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES = 3121381189;
+			static const unsigned long BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES = 329551508;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavioredClassifier_Class() const = 0;
@@ -967,8 +967,8 @@ namespace uml
 			
 			static const unsigned long CALLACTION_ATTRIBUTE_RESULT = 936404819;
 			
-			static const unsigned int CALLACTION_OPERATION_INPUTPARAMETERS = 105388692;
-			static const unsigned int CALLACTION_OPERATION_OUTPUTPARAMETERS = 4183905689;
+			static const unsigned long CALLACTION_OPERATION_INPUTPARAMETERS = 105388692;
+			static const unsigned long CALLACTION_OPERATION_OUTPUTPARAMETERS = 4183905689;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallAction_Class() const = 0;
@@ -1092,10 +1092,10 @@ namespace uml
 			static const unsigned long CLASS_ATTRIBUTE_OWNEDRECEPTION = 1160725708;
 			static const unsigned long CLASS_ATTRIBUTE_SUPERCLASS = 1440746768;
 			
-			static const unsigned int CLASS_OPERATION_GETALLOPERATIONS = 3178057285;
-			static const unsigned int CLASS_OPERATION_GETEXTENSIONS = 4033444456;
-			static const unsigned int CLASS_OPERATION_GETSUPERCLASSES = 1013854710;
-			static const unsigned int CLASS_OPERATION_ISMETACLASS = 3169682088;
+			static const unsigned long CLASS_OPERATION_GETALLOPERATIONS = 3178057285;
+			static const unsigned long CLASS_OPERATION_GETEXTENSIONS = 4033444456;
+			static const unsigned long CLASS_OPERATION_GETSUPERCLASSES = 1013854710;
+			static const unsigned long CLASS_OPERATION_ISMETACLASS = 3169682088;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClass_Class() const = 0;
@@ -1138,30 +1138,30 @@ namespace uml
 			static const unsigned long CLASSIFIER_ATTRIBUTE_SUBSTITUTION = 1158986863;
 			static const unsigned long CLASSIFIER_ATTRIBUTE_USECASE = 1157379690;
 			
-			static const unsigned int CLASSIFIER_OPERATION_ALLATTRIBUTES = 3067782479;
-			static const unsigned int CLASSIFIER_OPERATION_ALLFEATURES = 2625373874;
-			static const unsigned int CLASSIFIER_OPERATION_ALLPARENTS = 299467449;
-			static const unsigned int CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES = 1667853328;
-			static const unsigned int CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES = 1526814209;
-			static const unsigned int CLASSIFIER_OPERATION_ALLUSEDINTERFACES = 703777961;
-			static const unsigned int CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES = 2958885839;
-			static const unsigned int CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES = 2666848748;
-			static const unsigned int CLASSIFIER_OPERATION_GETALLATTRIBUTES = 385172867;
-			static const unsigned int CLASSIFIER_OPERATION_GETALLOPERATIONS = 3362998652;
-			static const unsigned int CLASSIFIER_OPERATION_GETALLUSEDINTERFACES = 1284650005;
-			static const unsigned int CLASSIFIER_OPERATION_GETGENERALS = 3949457156;
-			static const unsigned int CLASSIFIER_OPERATION_GETINHERITEDMEMBERS = 4185121864;
-			static const unsigned int CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE = 119886986;
-			static const unsigned int CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN = 3635929158;
-			static const unsigned int CLASSIFIER_OPERATION_GETOPERATIONS = 1789810819;
-			static const unsigned int CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING = 1124921106;
-			static const unsigned int CLASSIFIER_OPERATION_GETUSEDINTERFACES = 2875330752;
-			static const unsigned int CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT = 3476094388;
-			static const unsigned int CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT = 1076598219;
-			static const unsigned int CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER = 2989880290;
-			static const unsigned int CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER = 2463563559;
-			static const unsigned int CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER = 211370547;
-			static const unsigned int CLASSIFIER_OPERATION_PARENTS = 3079307280;
+			static const unsigned long CLASSIFIER_OPERATION_ALLATTRIBUTES = 3067782479;
+			static const unsigned long CLASSIFIER_OPERATION_ALLFEATURES = 2625373874;
+			static const unsigned long CLASSIFIER_OPERATION_ALLPARENTS = 299467449;
+			static const unsigned long CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES = 1667853328;
+			static const unsigned long CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES = 1526814209;
+			static const unsigned long CLASSIFIER_OPERATION_ALLUSEDINTERFACES = 703777961;
+			static const unsigned long CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES = 2958885839;
+			static const unsigned long CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES = 2666848748;
+			static const unsigned long CLASSIFIER_OPERATION_GETALLATTRIBUTES = 385172867;
+			static const unsigned long CLASSIFIER_OPERATION_GETALLOPERATIONS = 3362998652;
+			static const unsigned long CLASSIFIER_OPERATION_GETALLUSEDINTERFACES = 1284650005;
+			static const unsigned long CLASSIFIER_OPERATION_GETGENERALS = 3949457156;
+			static const unsigned long CLASSIFIER_OPERATION_GETINHERITEDMEMBERS = 4185121864;
+			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE = 119886986;
+			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN = 3635929158;
+			static const unsigned long CLASSIFIER_OPERATION_GETOPERATIONS = 1789810819;
+			static const unsigned long CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING = 1124921106;
+			static const unsigned long CLASSIFIER_OPERATION_GETUSEDINTERFACES = 2875330752;
+			static const unsigned long CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT = 3476094388;
+			static const unsigned long CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT = 1076598219;
+			static const unsigned long CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER = 2989880290;
+			static const unsigned long CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER = 2463563559;
+			static const unsigned long CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER = 211370547;
+			static const unsigned long CLASSIFIER_OPERATION_PARENTS = 3079307280;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClassifier_Class() const = 0;
@@ -1430,12 +1430,12 @@ namespace uml
 			static const unsigned long COMPONENT_ATTRIBUTE_REALIZATION = 546948835;
 			static const unsigned long COMPONENT_ATTRIBUTE_REQUIRED = 2060616931;
 			
-			static const unsigned int COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 46843329;
-			static const unsigned int COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING = 3554753543;
-			static const unsigned int COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING = 2133826027;
-			static const unsigned int COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 1105443607;
-			static const unsigned int COMPONENT_OPERATION_GETPROVIDEDS = 1978665601;
-			static const unsigned int COMPONENT_OPERATION_GETREQUIREDS = 1044914701;
+			static const unsigned long COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 46843329;
+			static const unsigned long COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING = 3554753543;
+			static const unsigned long COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING = 2133826027;
+			static const unsigned long COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 1105443607;
+			static const unsigned long COMPONENT_OPERATION_GETPROVIDEDS = 1978665601;
+			static const unsigned long COMPONENT_OPERATION_GETREQUIREDS = 1044914701;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getComponent_Class() const = 0;
@@ -1511,7 +1511,7 @@ namespace uml
 			
 			static const unsigned long CONNECTABLEELEMENT_ATTRIBUTE_END = 590737455;
 			
-			static const unsigned int CONNECTABLEELEMENT_OPERATION_GETENDS = 700294205;
+			static const unsigned long CONNECTABLEELEMENT_OPERATION_GETENDS = 700294205;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectableElement_Class() const = 0;
@@ -1577,7 +1577,7 @@ namespace uml
 			static const unsigned long CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER = 1090796029;
 			static const unsigned long CONNECTOR_ATTRIBUTE_TYPE = 1386618595;
 			
-			static const unsigned int CONNECTOR_OPERATION_GETKIND = 401249273;
+			static const unsigned long CONNECTOR_OPERATION_GETKIND = 401249273;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnector_Class() const = 0;
@@ -1606,7 +1606,7 @@ namespace uml
 			static const unsigned long CONNECTOREND_ATTRIBUTE_PARTWITHPORT = 535796657;
 			static const unsigned long CONNECTOREND_ATTRIBUTE_ROLE = 1851379606;
 			
-			static const unsigned int CONNECTOREND_OPERATION_GETDEFININGEND = 2695724953;
+			static const unsigned long CONNECTOREND_OPERATION_GETDEFININGEND = 2695724953;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectorEnd_Class() const = 0;
@@ -1800,8 +1800,8 @@ namespace uml
 			static const unsigned long DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE = 1339735686;
 			static const unsigned long DATATYPE_ATTRIBUTE_OWNEDOPERATION = 1930474600;
 			
-			static const unsigned int DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 1758368293;
-			static const unsigned int DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 4057743014;
+			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 1758368293;
+			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 4057743014;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataType_Class() const = 0;
@@ -1930,7 +1930,7 @@ namespace uml
 			static const unsigned long DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT = 207278260;
 			static const unsigned long DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT = 773838147;
 			
-			static const unsigned int DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS = 270386154;
+			static const unsigned long DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS = 270386154;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDeploymentTarget_Class() const = 0;
@@ -2127,42 +2127,42 @@ namespace uml
 			static const unsigned long ELEMENT_ATTRIBUTE_OWNEDELEMENT = 1240642817;
 			static const unsigned long ELEMENT_ATTRIBUTE_OWNER = 1133077880;
 			
-			static const unsigned int ELEMENT_OPERATION_ADDKEYWORD_STRING = 2139570527;
-			static const unsigned int ELEMENT_OPERATION_ALLOWNEDELEMENTS = 247654748;
-			static const unsigned int ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE = 2648262877;
-			static const unsigned int ELEMENT_OPERATION_CONTAINER = 3193550054;
-			static const unsigned int ELEMENT_OPERATION_CREATEEANNOTATION_STRING = 516144683;
-			static const unsigned int ELEMENT_OPERATION_DESTROY = 2011566363;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING = 2658452236;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES = 4106909555;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING = 87051473;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES = 536733808;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING = 1806954958;
-			static const unsigned int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE = 2456228169;
-			static const unsigned int ELEMENT_OPERATION_GETKEYWORDS = 98894063;
-			static const unsigned int ELEMENT_OPERATION_GETMETACLASS = 1459052667;
-			static const unsigned int ELEMENT_OPERATION_GETMODEL = 3573763623;
-			static const unsigned int ELEMENT_OPERATION_GETNEARESTPACKAGE = 4263471119;
-			static const unsigned int ELEMENT_OPERATION_GETRELATIONSHIPS = 2213814646;
-			static const unsigned int ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS = 1674629135;
-			static const unsigned int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING = 3654047872;
-			static const unsigned int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES = 1705085663;
-			static const unsigned int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS = 2795621331;
-			static const unsigned int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS = 3097970596;
-			static const unsigned int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE = 2473257019;
-			static const unsigned int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS = 3677056906;
-			static const unsigned int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS = 1070993753;
-			static const unsigned int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS = 1373343018;
-			static const unsigned int ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING = 56841400;
-			static const unsigned int ELEMENT_OPERATION_HASKEYWORD_STRING = 1990850902;
-			static const unsigned int ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING = 878246468;
-			static const unsigned int ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE = 545376678;
-			static const unsigned int ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE = 3830373488;
-			static const unsigned int ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE = 1281257946;
-			static const unsigned int ELEMENT_OPERATION_MUSTBEOWNED = 3952176544;
-			static const unsigned int ELEMENT_OPERATION_REMOVEKEYWORD_STRING = 1157618568;
-			static const unsigned int ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT = 813757714;
-			static const unsigned int ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 3541463368;
+			static const unsigned long ELEMENT_OPERATION_ADDKEYWORD_STRING = 2139570527;
+			static const unsigned long ELEMENT_OPERATION_ALLOWNEDELEMENTS = 247654748;
+			static const unsigned long ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE = 2648262877;
+			static const unsigned long ELEMENT_OPERATION_CONTAINER = 3193550054;
+			static const unsigned long ELEMENT_OPERATION_CREATEEANNOTATION_STRING = 516144683;
+			static const unsigned long ELEMENT_OPERATION_DESTROY = 2011566363;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING = 2658452236;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES = 4106909555;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING = 87051473;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES = 536733808;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING = 1806954958;
+			static const unsigned long ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE = 2456228169;
+			static const unsigned long ELEMENT_OPERATION_GETKEYWORDS = 98894063;
+			static const unsigned long ELEMENT_OPERATION_GETMETACLASS = 1459052667;
+			static const unsigned long ELEMENT_OPERATION_GETMODEL = 3573763623;
+			static const unsigned long ELEMENT_OPERATION_GETNEARESTPACKAGE = 4263471119;
+			static const unsigned long ELEMENT_OPERATION_GETRELATIONSHIPS = 2213814646;
+			static const unsigned long ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS = 1674629135;
+			static const unsigned long ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING = 3654047872;
+			static const unsigned long ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES = 1705085663;
+			static const unsigned long ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS = 2795621331;
+			static const unsigned long ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS = 3097970596;
+			static const unsigned long ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE = 2473257019;
+			static const unsigned long ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS = 3677056906;
+			static const unsigned long ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS = 1070993753;
+			static const unsigned long ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS = 1373343018;
+			static const unsigned long ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING = 56841400;
+			static const unsigned long ELEMENT_OPERATION_HASKEYWORD_STRING = 1990850902;
+			static const unsigned long ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING = 878246468;
+			static const unsigned long ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE = 545376678;
+			static const unsigned long ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE = 3830373488;
+			static const unsigned long ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE = 1281257946;
+			static const unsigned long ELEMENT_OPERATION_MUSTBEOWNED = 3952176544;
+			static const unsigned long ELEMENT_OPERATION_REMOVEKEYWORD_STRING = 1157618568;
+			static const unsigned long ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT = 813757714;
+			static const unsigned long ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 3541463368;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getElement_Class() const = 0;
@@ -2223,7 +2223,7 @@ namespace uml
 			static const unsigned long ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT = 665643335;
 			static const unsigned long ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE = 843121113;
 			
-			static const unsigned int ELEMENTIMPORT_OPERATION_GETNAME = 2948686225;
+			static const unsigned long ELEMENTIMPORT_OPERATION_GETNAME = 2948686225;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getElementImport_Class() const = 0;
@@ -2247,7 +2247,7 @@ namespace uml
 			
 			static const unsigned long ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT = 577469266;
 			
-			static const unsigned int ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS = 1835476817;
+			static const unsigned long ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS = 1835476817;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEncapsulatedClassifier_Class() const = 0;
@@ -2287,8 +2287,8 @@ namespace uml
 			
 			static const unsigned long ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION = 675599268;
 			
-			static const unsigned int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER = 3407036823;
-			static const unsigned int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS = 4270076526;
+			static const unsigned long ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER = 3407036823;
+			static const unsigned long ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS = 4270076526;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumerationLiteral_Class() const = 0;
@@ -2519,11 +2519,11 @@ namespace uml
 			
 			static const unsigned long EXTENSION_ATTRIBUTE_METACLASS = 216461909;
 			
-			static const unsigned int EXTENSION_OPERATION_GETMETACLASS = 892341383;
-			static const unsigned int EXTENSION_OPERATION_GETSTEREOTYPE = 2020808468;
-			static const unsigned int EXTENSION_OPERATION_GETSTEREOTYPEEND = 2320579564;
-			static const unsigned int EXTENSION_OPERATION_ISREQUIRED = 2180088823;
-			static const unsigned int EXTENSION_OPERATION_METACLASSEND = 2327939617;
+			static const unsigned long EXTENSION_OPERATION_GETMETACLASS = 892341383;
+			static const unsigned long EXTENSION_OPERATION_GETSTEREOTYPE = 2020808468;
+			static const unsigned long EXTENSION_OPERATION_GETSTEREOTYPEEND = 2320579564;
+			static const unsigned long EXTENSION_OPERATION_ISREQUIRED = 2180088823;
+			static const unsigned long EXTENSION_OPERATION_METACLASSEND = 2327939617;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtension_Class() const = 0;
@@ -2584,7 +2584,7 @@ namespace uml
 			static const unsigned int FACTORY_CLASS_OPERATION_COUNT = 46;
 			
 			
-			static const unsigned int FACTORY_OPERATION_CREATE_CLASS = 503103173;
+			static const unsigned long FACTORY_OPERATION_CREATE_CLASS = 503103173;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFactory_Class() const = 0;
@@ -2692,7 +2692,7 @@ namespace uml
 			static const unsigned int FUNCTIONBEHAVIOR_CLASS_OPERATION_COUNT = 114;
 			
 			
-			static const unsigned int FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE = 206268165;
+			static const unsigned long FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE = 206268165;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFunctionBehavior_Class() const = 0;
@@ -2711,13 +2711,13 @@ namespace uml
 			static const unsigned int GATE_CLASS_OPERATION_COUNT = 67;
 			
 			
-			static const unsigned int GATE_OPERATION_GETNAME = 2596943572;
-			static const unsigned int GATE_OPERATION_GETOPERAND = 1268229058;
-			static const unsigned int GATE_OPERATION_ISACTUAL = 3905407116;
-			static const unsigned int GATE_OPERATION_ISFORMAL = 1119363663;
-			static const unsigned int GATE_OPERATION_ISINSIDECF = 1549572147;
-			static const unsigned int GATE_OPERATION_ISOUTSIDECF = 2940571944;
-			static const unsigned int GATE_OPERATION_MATCHES_GATE = 2884710854;
+			static const unsigned long GATE_OPERATION_GETNAME = 2596943572;
+			static const unsigned long GATE_OPERATION_GETOPERAND = 1268229058;
+			static const unsigned long GATE_OPERATION_ISACTUAL = 3905407116;
+			static const unsigned long GATE_OPERATION_ISFORMAL = 1119363663;
+			static const unsigned long GATE_OPERATION_ISINSIDECF = 1549572147;
+			static const unsigned long GATE_OPERATION_ISOUTSIDECF = 2940571944;
+			static const unsigned long GATE_OPERATION_MATCHES_GATE = 2884710854;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGate_Class() const = 0;
@@ -3126,8 +3126,8 @@ namespace uml
 			static const unsigned long INTERFACE_ATTRIBUTE_PROTOCOL = 635086941;
 			static const unsigned long INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE = 463033915;
 			
-			static const unsigned int INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 3523817730;
-			static const unsigned int INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 836626359;
+			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 3523817730;
+			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 836626359;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInterface_Class() const = 0;
@@ -3304,7 +3304,7 @@ namespace uml
 			static const unsigned long LINKACTION_ATTRIBUTE_ENDDATA = 607829210;
 			static const unsigned long LINKACTION_ATTRIBUTE_INPUTVALUE = 650987886;
 			
-			static const unsigned int LINKACTION_OPERATION_ASSOCIATION = 4091876769;
+			static const unsigned long LINKACTION_OPERATION_ASSOCIATION = 4091876769;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkAction_Class() const = 0;
@@ -3349,7 +3349,7 @@ namespace uml
 			static const unsigned long LINKENDDATA_ATTRIBUTE_QUALIFIER = 1257705145;
 			static const unsigned long LINKENDDATA_ATTRIBUTE_VALUE = 1098162654;
 			
-			static const unsigned int LINKENDDATA_OPERATION_ALLPINS = 3830825810;
+			static const unsigned long LINKENDDATA_OPERATION_ALLPINS = 3830825810;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkEndData_Class() const = 0;
@@ -3393,8 +3393,8 @@ namespace uml
 			static const unsigned long LITERALBOOLEAN_ATTRIBUTE_VALUE = 1474928700;
 			
 			
-			static const unsigned int LITERALBOOLEAN_OPERATION_BOOLEANVALUE = 1974710047;
-			static const unsigned int LITERALBOOLEAN_OPERATION_ISCOMPUTABLE = 243741030;
+			static const unsigned long LITERALBOOLEAN_OPERATION_BOOLEANVALUE = 1974710047;
+			static const unsigned long LITERALBOOLEAN_OPERATION_ISCOMPUTABLE = 243741030;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralBoolean_Class() const = 0;
@@ -3416,8 +3416,8 @@ namespace uml
 			static const unsigned long LITERALINTEGER_ATTRIBUTE_VALUE = 873717386;
 			
 			
-			static const unsigned int LITERALINTEGER_OPERATION_INTEGERVALUE = 3507556350;
-			static const unsigned int LITERALINTEGER_OPERATION_ISCOMPUTABLE = 780783796;
+			static const unsigned long LITERALINTEGER_OPERATION_INTEGERVALUE = 3507556350;
+			static const unsigned long LITERALINTEGER_OPERATION_ISCOMPUTABLE = 780783796;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralInteger_Class() const = 0;
@@ -3438,8 +3438,8 @@ namespace uml
 			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 67;
 			
 			
-			static const unsigned int LITERALNULL_OPERATION_ISCOMPUTABLE = 1849010665;
-			static const unsigned int LITERALNULL_OPERATION_ISNULL = 1191978620;
+			static const unsigned long LITERALNULL_OPERATION_ISCOMPUTABLE = 1849010665;
+			static const unsigned long LITERALNULL_OPERATION_ISNULL = 1191978620;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralNull_Class() const = 0;
@@ -3460,8 +3460,8 @@ namespace uml
 			static const unsigned long LITERALREAL_ATTRIBUTE_VALUE = 2070729638;
 			
 			
-			static const unsigned int LITERALREAL_OPERATION_ISCOMPUTABLE = 2284792698;
-			static const unsigned int LITERALREAL_OPERATION_REALVALUE = 1756286746;
+			static const unsigned long LITERALREAL_OPERATION_ISCOMPUTABLE = 2284792698;
+			static const unsigned long LITERALREAL_OPERATION_REALVALUE = 1756286746;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralReal_Class() const = 0;
@@ -3500,8 +3500,8 @@ namespace uml
 			static const unsigned long LITERALSTRING_ATTRIBUTE_VALUE = 2004912864;
 			
 			
-			static const unsigned int LITERALSTRING_OPERATION_ISCOMPUTABLE = 3555956385;
-			static const unsigned int LITERALSTRING_OPERATION_STRINGVALUE = 3894136783;
+			static const unsigned long LITERALSTRING_OPERATION_ISCOMPUTABLE = 3555956385;
+			static const unsigned long LITERALSTRING_OPERATION_STRINGVALUE = 3894136783;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralString_Class() const = 0;
@@ -3523,8 +3523,8 @@ namespace uml
 			static const unsigned long LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 242904276;
 			
 			
-			static const unsigned int LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE = 3321491888;
-			static const unsigned int LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE = 2738594635;
+			static const unsigned long LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE = 3321491888;
+			static const unsigned long LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE = 2738594635;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNatural_Class() const = 0;
@@ -3624,7 +3624,7 @@ namespace uml
 			static const unsigned long MESSAGE_ATTRIBUTE_SENDEVENT = 505824222;
 			static const unsigned long MESSAGE_ATTRIBUTE_SIGNATURE = 1485847638;
 			
-			static const unsigned int MESSAGE_OPERATION_GETMESSAGEKIND = 1342630738;
+			static const unsigned long MESSAGE_OPERATION_GETMESSAGEKIND = 1342630738;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessage_Class() const = 0;
@@ -3652,10 +3652,10 @@ namespace uml
 			
 			static const unsigned long MESSAGEEND_ATTRIBUTE_MESSAGE = 1055665128;
 			
-			static const unsigned int MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT = 3122365935;
-			static const unsigned int MESSAGEEND_OPERATION_ISRECEIVE = 3791628316;
-			static const unsigned int MESSAGEEND_OPERATION_ISSEND = 2112067343;
-			static const unsigned int MESSAGEEND_OPERATION_OPPOSITEEND = 2418148191;
+			static const unsigned long MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT = 3122365935;
+			static const unsigned long MESSAGEEND_OPERATION_ISRECEIVE = 3791628316;
+			static const unsigned long MESSAGEEND_OPERATION_ISSEND = 2112067343;
+			static const unsigned long MESSAGEEND_OPERATION_OPPOSITEEND = 2418148191;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessageEnd_Class() const = 0;
@@ -3713,7 +3713,7 @@ namespace uml
 			static const unsigned long MODEL_ATTRIBUTE_VIEWPOINT = 1327862345;
 			
 			
-			static const unsigned int MODEL_OPERATION_ISMETAMODEL = 1662104762;
+			static const unsigned long MODEL_OPERATION_ISMETAMODEL = 1662104762;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getModel_Class() const = 0;
@@ -3739,12 +3739,12 @@ namespace uml
 			static const unsigned long MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE = 736757199;
 			static const unsigned long MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE = 1807633203;
 			
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT = 4183352193;
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT = 935007317;
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL = 2447710154;
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED = 2268498524;
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_LOWERBOUND = 4073704864;
-			static const unsigned int MULTIPLICITYELEMENT_OPERATION_UPPERBOUND = 2210299255;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT = 4183352193;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT = 935007317;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL = 2447710154;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED = 2268498524;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_LOWERBOUND = 4073704864;
+			static const unsigned long MULTIPLICITYELEMENT_OPERATION_UPPERBOUND = 2210299255;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMultiplicityElement_Class() const = 0;
@@ -3780,17 +3780,17 @@ namespace uml
 			static const unsigned long NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION = 1108820653;
 			static const unsigned long NAMEDELEMENT_ATTRIBUTE_NAMESPACE = 635713624;
 			
-			static const unsigned int NAMEDELEMENT_OPERATION_ALLNAMESPACES = 2409538685;
-			static const unsigned int NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES = 2217156650;
-			static const unsigned int NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT = 2833389569;
-			static const unsigned int NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT = 3040273665;
-			static const unsigned int NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES = 3811456257;
-			static const unsigned int NAMEDELEMENT_OPERATION_GETLABEL = 2648850226;
-			static const unsigned int NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN = 1545748466;
-			static const unsigned int NAMEDELEMENT_OPERATION_GETNAMESPACE = 3703030268;
-			static const unsigned int NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME = 679696374;
-			static const unsigned int NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE = 3034150359;
-			static const unsigned int NAMEDELEMENT_OPERATION_SEPARATOR = 2764162934;
+			static const unsigned long NAMEDELEMENT_OPERATION_ALLNAMESPACES = 2409538685;
+			static const unsigned long NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES = 2217156650;
+			static const unsigned long NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT = 2833389569;
+			static const unsigned long NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT = 3040273665;
+			static const unsigned long NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES = 3811456257;
+			static const unsigned long NAMEDELEMENT_OPERATION_GETLABEL = 2648850226;
+			static const unsigned long NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN = 1545748466;
+			static const unsigned long NAMEDELEMENT_OPERATION_GETNAMESPACE = 3703030268;
+			static const unsigned long NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME = 679696374;
+			static const unsigned long NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE = 3034150359;
+			static const unsigned long NAMEDELEMENT_OPERATION_SEPARATOR = 2764162934;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNamedElement_Class() const = 0;
@@ -3831,16 +3831,16 @@ namespace uml
 			static const unsigned long NAMESPACE_ATTRIBUTE_OWNEDRULE = 547554707;
 			static const unsigned long NAMESPACE_ATTRIBUTE_PACKAGEIMPORT = 1800704889;
 			
-			static const unsigned int NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND = 3041688654;
-			static const unsigned int NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND = 3501829020;
-			static const unsigned int NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT = 2855843539;
-			static const unsigned int NAMESPACE_OPERATION_GETIMPORTEDELEMENTS = 2588792065;
-			static const unsigned int NAMESPACE_OPERATION_GETIMPORTEDMEMBERS = 2627629447;
-			static const unsigned int NAMESPACE_OPERATION_GETIMPORTEDPACKAGES = 1496815389;
-			static const unsigned int NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT = 3293858424;
-			static const unsigned int NAMESPACE_OPERATION_GETOWNEDMEMBERS = 353105181;
-			static const unsigned int NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT = 2696590848;
-			static const unsigned int NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE = 1431982872;
+			static const unsigned long NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND = 3041688654;
+			static const unsigned long NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND = 3501829020;
+			static const unsigned long NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT = 2855843539;
+			static const unsigned long NAMESPACE_OPERATION_GETIMPORTEDELEMENTS = 2588792065;
+			static const unsigned long NAMESPACE_OPERATION_GETIMPORTEDMEMBERS = 2627629447;
+			static const unsigned long NAMESPACE_OPERATION_GETIMPORTEDPACKAGES = 1496815389;
+			static const unsigned long NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT = 3293858424;
+			static const unsigned long NAMESPACE_OPERATION_GETOWNEDMEMBERS = 353105181;
+			static const unsigned long NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT = 2696590848;
+			static const unsigned long NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE = 1431982872;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNamespace_Class() const = 0;
@@ -3875,8 +3875,8 @@ namespace uml
 			
 			static const unsigned long NODE_ATTRIBUTE_NESTEDNODE = 2122983149;
 			
-			static const unsigned int NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL = 2087191607;
-			static const unsigned int NODE_OPERATION_GETCOMMUNICATIONPATHS = 810632424;
+			static const unsigned long NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL = 2087191607;
+			static const unsigned long NODE_OPERATION_GETCOMMUNICATIONPATHS = 810632424;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNode_Class() const = 0;
@@ -3897,15 +3897,15 @@ namespace uml
 			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 9;
 			
 			
-			static const unsigned int OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT = 637724934;
-			static const unsigned int OBJECT_OPERATION_ADD_PROPERTY_EINT = 319727429;
-			static const unsigned int OBJECT_OPERATION_DESTROY = 2359110280;
-			static const unsigned int OBJECT_OPERATION_GET_PROPERTY = 511579154;
-			static const unsigned int OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
-			static const unsigned int OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
-			static const unsigned int OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT = 1546275363;
-			static const unsigned int OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 183386425;
-			static const unsigned int OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
+			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT = 637724934;
+			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EINT = 319727429;
+			static const unsigned long OBJECT_OPERATION_DESTROY = 2359110280;
+			static const unsigned long OBJECT_OPERATION_GET_PROPERTY = 511579154;
+			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
+			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
+			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT = 1546275363;
+			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 183386425;
+			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
@@ -4003,8 +4003,8 @@ namespace uml
 			static const unsigned long OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER = 2095848155;
 			static const unsigned long OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE = 1260038621;
 			
-			static const unsigned int OCCURRENCESPECIFICATION_OPERATION_GETCOVERED = 69876793;
-			static const unsigned int OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE = 3135951751;
+			static const unsigned long OCCURRENCESPECIFICATION_OPERATION_GETCOVERED = 69876793;
+			static const unsigned long OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE = 3135951751;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOccurrenceSpecification_Class() const = 0;
@@ -4076,11 +4076,11 @@ namespace uml
 			static const unsigned long OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR = 1777943579;
 			static const unsigned long OPAQUEEXPRESSION_ATTRIBUTE_RESULT = 233696186;
 			
-			static const unsigned int OPAQUEEXPRESSION_OPERATION_GETRESULT = 664786386;
-			static const unsigned int OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 810802950;
-			static const unsigned int OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 2422740566;
-			static const unsigned int OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 157142355;
-			static const unsigned int OPAQUEEXPRESSION_OPERATION_VALUE = 2181682856;
+			static const unsigned long OPAQUEEXPRESSION_OPERATION_GETRESULT = 664786386;
+			static const unsigned long OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 810802950;
+			static const unsigned long OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 2422740566;
+			static const unsigned long OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 157142355;
+			static const unsigned long OPAQUEEXPRESSION_OPERATION_VALUE = 2181682856;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueExpression_Class() const = 0;
@@ -4121,19 +4121,19 @@ namespace uml
 			static const unsigned long OPERATION_ATTRIBUTE_REDEFINEDOPERATION = 491777724;
 			static const unsigned long OPERATION_ATTRIBUTE_TYPE = 1054328972;
 			
-			static const unsigned int OPERATION_OPERATION_GETLOWER = 2432712746;
-			static const unsigned int OPERATION_OPERATION_GETRETURNRESULT = 3209085960;
-			static const unsigned int OPERATION_OPERATION_GETTYPE = 3297735132;
-			static const unsigned int OPERATION_OPERATION_GETUPPER = 1198605197;
-			static const unsigned int OPERATION_OPERATION_ISORDERED = 2709191195;
-			static const unsigned int OPERATION_OPERATION_ISUNIQUE = 4020565657;
-			static const unsigned int OPERATION_OPERATION_MATCHES_OPERATION = 1582514854;
-			static const unsigned int OPERATION_OPERATION_RETURNRESULT = 3088060264;
-			static const unsigned int OPERATION_OPERATION_SETISORDERED_BOOLEAN = 563533641;
-			static const unsigned int OPERATION_OPERATION_SETISUNIQUE_BOOLEAN = 1317393399;
-			static const unsigned int OPERATION_OPERATION_SETLOWER_INTEGER = 3045305040;
-			static const unsigned int OPERATION_OPERATION_SETTYPE_TYPE = 295406386;
-			static const unsigned int OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL = 1811197491;
+			static const unsigned long OPERATION_OPERATION_GETLOWER = 2432712746;
+			static const unsigned long OPERATION_OPERATION_GETRETURNRESULT = 3209085960;
+			static const unsigned long OPERATION_OPERATION_GETTYPE = 3297735132;
+			static const unsigned long OPERATION_OPERATION_GETUPPER = 1198605197;
+			static const unsigned long OPERATION_OPERATION_ISORDERED = 2709191195;
+			static const unsigned long OPERATION_OPERATION_ISUNIQUE = 4020565657;
+			static const unsigned long OPERATION_OPERATION_MATCHES_OPERATION = 1582514854;
+			static const unsigned long OPERATION_OPERATION_RETURNRESULT = 3088060264;
+			static const unsigned long OPERATION_OPERATION_SETISORDERED_BOOLEAN = 563533641;
+			static const unsigned long OPERATION_OPERATION_SETISUNIQUE_BOOLEAN = 1317393399;
+			static const unsigned long OPERATION_OPERATION_SETLOWER_INTEGER = 3045305040;
+			static const unsigned long OPERATION_OPERATION_SETTYPE_TYPE = 295406386;
+			static const unsigned long OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL = 1811197491;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperation_Class() const = 0;
@@ -4236,29 +4236,29 @@ namespace uml
 			static const unsigned long PACKAGE_ATTRIBUTE_PACKAGEDELEMENT = 510995713;
 			static const unsigned long PACKAGE_ATTRIBUTE_PROFILEAPPLICATION = 735019315;
 			
-			static const unsigned int PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES = 3081223090;
-			static const unsigned int PACKAGE_OPERATION_APPLYPROFILE_PROFILE = 1307726167;
-			static const unsigned int PACKAGE_OPERATION_CONTAININGPROFILE = 297814107;
-			static const unsigned int PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 3225469238;
-			static const unsigned int PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING = 4030973228;
-			static const unsigned int PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING = 4044228400;
-			static const unsigned int PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 1311535292;
-			static const unsigned int PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN = 1764677662;
-			static const unsigned int PACKAGE_OPERATION_GETALLAPPLIEDPROFILES = 1897955286;
-			static const unsigned int PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS = 3294067191;
-			static const unsigned int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING = 1220237638;
-			static const unsigned int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN = 3532488162;
-			static const unsigned int PACKAGE_OPERATION_GETAPPLIEDPROFILES = 2071132101;
-			static const unsigned int PACKAGE_OPERATION_GETNESTEDPACKAGES = 2155135055;
-			static const unsigned int PACKAGE_OPERATION_GETOWNEDSTEREOTYPES = 2086351653;
-			static const unsigned int PACKAGE_OPERATION_GETOWNEDTYPES = 2779567969;
-			static const unsigned int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE = 1494696140;
-			static const unsigned int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN = 3694877816;
-			static const unsigned int PACKAGE_OPERATION_ISMODELLIBRARY = 1153574071;
-			static const unsigned int PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE = 1902112608;
-			static const unsigned int PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT = 4229111501;
-			static const unsigned int PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE = 2851150210;
-			static const unsigned int PACKAGE_OPERATION_VISIBLEMEMBERS = 3140448168;
+			static const unsigned long PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES = 3081223090;
+			static const unsigned long PACKAGE_OPERATION_APPLYPROFILE_PROFILE = 1307726167;
+			static const unsigned long PACKAGE_OPERATION_CONTAININGPROFILE = 297814107;
+			static const unsigned long PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 3225469238;
+			static const unsigned long PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING = 4030973228;
+			static const unsigned long PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING = 4044228400;
+			static const unsigned long PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 1311535292;
+			static const unsigned long PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN = 1764677662;
+			static const unsigned long PACKAGE_OPERATION_GETALLAPPLIEDPROFILES = 1897955286;
+			static const unsigned long PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS = 3294067191;
+			static const unsigned long PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING = 1220237638;
+			static const unsigned long PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN = 3532488162;
+			static const unsigned long PACKAGE_OPERATION_GETAPPLIEDPROFILES = 2071132101;
+			static const unsigned long PACKAGE_OPERATION_GETNESTEDPACKAGES = 2155135055;
+			static const unsigned long PACKAGE_OPERATION_GETOWNEDSTEREOTYPES = 2086351653;
+			static const unsigned long PACKAGE_OPERATION_GETOWNEDTYPES = 2779567969;
+			static const unsigned long PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE = 1494696140;
+			static const unsigned long PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN = 3694877816;
+			static const unsigned long PACKAGE_OPERATION_ISMODELLIBRARY = 1153574071;
+			static const unsigned long PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE = 1902112608;
+			static const unsigned long PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT = 4229111501;
+			static const unsigned long PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE = 2851150210;
+			static const unsigned long PACKAGE_OPERATION_VISIBLEMEMBERS = 3140448168;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackage_Class() const = 0;
@@ -4379,14 +4379,14 @@ namespace uml
 			static const unsigned long PARAMETER_ATTRIBUTE_OPERATION = 1835137369;
 			static const unsigned long PARAMETER_ATTRIBUTE_PARAMETERSET = 1392928791;
 			
-			static const unsigned int PARAMETER_OPERATION_ISSETDEFAULT = 1989057623;
-			static const unsigned int PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 126976962;
-			static const unsigned int PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 747752843;
-			static const unsigned int PARAMETER_OPERATION_SETNULLDEFAULTVALUE = 2746464937;
-			static const unsigned int PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL = 1763278425;
-			static const unsigned int PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 2547376863;
-			static const unsigned int PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 3942902083;
-			static const unsigned int PARAMETER_OPERATION_UNSETDEFAULT = 190690520;
+			static const unsigned long PARAMETER_OPERATION_ISSETDEFAULT = 1989057623;
+			static const unsigned long PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 126976962;
+			static const unsigned long PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 747752843;
+			static const unsigned long PARAMETER_OPERATION_SETNULLDEFAULTVALUE = 2746464937;
+			static const unsigned long PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL = 1763278425;
+			static const unsigned long PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 2547376863;
+			static const unsigned long PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 3942902083;
+			static const unsigned long PARAMETER_OPERATION_UNSETDEFAULT = 190690520;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameter_Class() const = 0;
@@ -4444,8 +4444,8 @@ namespace uml
 			static const unsigned long PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER = 520183037;
 			static const unsigned long PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER = 913583391;
 			
-			static const unsigned int PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT = 2979209573;
-			static const unsigned int PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER = 2453023377;
+			static const unsigned long PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT = 2979209573;
+			static const unsigned long PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER = 2453023377;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterableElement_Class() const = 0;
@@ -4510,10 +4510,10 @@ namespace uml
 			static const unsigned long PORT_ATTRIBUTE_REDEFINEDPORT = 607078563;
 			static const unsigned long PORT_ATTRIBUTE_REQUIRED = 1183644079;
 			
-			static const unsigned int PORT_OPERATION_BASICPROVIDED = 2234995286;
-			static const unsigned int PORT_OPERATION_BASICREQUIRED = 149776146;
-			static const unsigned int PORT_OPERATION_GETPROVIDEDS = 4122866187;
-			static const unsigned int PORT_OPERATION_GETREQUIREDS = 2874458023;
+			static const unsigned long PORT_OPERATION_BASICPROVIDED = 2234995286;
+			static const unsigned long PORT_OPERATION_BASICREQUIRED = 149776146;
+			static const unsigned long PORT_OPERATION_GETPROVIDEDS = 4122866187;
+			static const unsigned long PORT_OPERATION_GETREQUIREDS = 2874458023;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPort_Class() const = 0;
@@ -4561,15 +4561,15 @@ namespace uml
 			static const unsigned long PROFILE_ATTRIBUTE_METACLASSREFERENCE = 978340336;
 			static const unsigned long PROFILE_ATTRIBUTE_METAMODELREFERENCE = 1707423538;
 			
-			static const unsigned int PROFILE_OPERATION_CREATE_CLASSIFIER = 2317940279;
-			static const unsigned int PROFILE_OPERATION_DEFINE = 1369026160;
-			static const unsigned int PROFILE_OPERATION_DEFINE_EMAP_EMAP = 1280241598;
-			static const unsigned int PROFILE_OPERATION_GETDEFINITION = 3919615722;
-			static const unsigned int PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT = 230708030;
-			static const unsigned int PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN = 1345091052;
-			static const unsigned int PROFILE_OPERATION_GETREFERENCEDMETACLASSES = 2481786676;
-			static const unsigned int PROFILE_OPERATION_GETREFERENCEDMETAMODELS = 2762577013;
-			static const unsigned int PROFILE_OPERATION_ISDEFINED = 2217318421;
+			static const unsigned long PROFILE_OPERATION_CREATE_CLASSIFIER = 2317940279;
+			static const unsigned long PROFILE_OPERATION_DEFINE = 1369026160;
+			static const unsigned long PROFILE_OPERATION_DEFINE_EMAP_EMAP = 1280241598;
+			static const unsigned long PROFILE_OPERATION_GETDEFINITION = 3919615722;
+			static const unsigned long PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT = 230708030;
+			static const unsigned long PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN = 1345091052;
+			static const unsigned long PROFILE_OPERATION_GETREFERENCEDMETACLASSES = 2481786676;
+			static const unsigned long PROFILE_OPERATION_GETREFERENCEDMETAMODELS = 2762577013;
+			static const unsigned long PROFILE_OPERATION_ISDEFINED = 2217318421;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProfile_Class() const = 0;
@@ -4601,8 +4601,8 @@ namespace uml
 			static const unsigned long PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE = 1071745703;
 			static const unsigned long PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE = 1297500153;
 			
-			static const unsigned int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION = 1478312265;
-			static const unsigned int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT = 1076549117;
+			static const unsigned long PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION = 1478312265;
+			static const unsigned long PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT = 1076549117;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProfileApplication_Class() const = 0;
@@ -4642,21 +4642,21 @@ namespace uml
 			static const unsigned long PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY = 750220605;
 			static const unsigned long PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY = 2025707853;
 			
-			static const unsigned int PROPERTY_OPERATION_GETOPPOSITE = 677753464;
-			static const unsigned int PROPERTY_OPERATION_GETOTHEREND = 3759990426;
-			static const unsigned int PROPERTY_OPERATION_ISATTRIBUTE = 2655051450;
-			static const unsigned int PROPERTY_OPERATION_ISCOMPOSITE = 656738949;
-			static const unsigned int PROPERTY_OPERATION_ISNAVIGABLE = 2533598543;
-			static const unsigned int PROPERTY_OPERATION_ISSETDEFAULT = 3535385199;
-			static const unsigned int PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 3743362958;
-			static const unsigned int PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 2377444691;
-			static const unsigned int PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN = 3193042677;
-			static const unsigned int PROPERTY_OPERATION_SETNULLDEFAULTVALUE = 3954861497;
-			static const unsigned int PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL = 2801791145;
-			static const unsigned int PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 142360535;
-			static const unsigned int PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 1546322219;
-			static const unsigned int PROPERTY_OPERATION_SUBSETTINGCONTEXT = 2305810549;
-			static const unsigned int PROPERTY_OPERATION_UNSETDEFAULT = 1637600012;
+			static const unsigned long PROPERTY_OPERATION_GETOPPOSITE = 677753464;
+			static const unsigned long PROPERTY_OPERATION_GETOTHEREND = 3759990426;
+			static const unsigned long PROPERTY_OPERATION_ISATTRIBUTE = 2655051450;
+			static const unsigned long PROPERTY_OPERATION_ISCOMPOSITE = 656738949;
+			static const unsigned long PROPERTY_OPERATION_ISNAVIGABLE = 2533598543;
+			static const unsigned long PROPERTY_OPERATION_ISSETDEFAULT = 3535385199;
+			static const unsigned long PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 3743362958;
+			static const unsigned long PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 2377444691;
+			static const unsigned long PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN = 3193042677;
+			static const unsigned long PROPERTY_OPERATION_SETNULLDEFAULTVALUE = 3954861497;
+			static const unsigned long PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL = 2801791145;
+			static const unsigned long PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 142360535;
+			static const unsigned long PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 1546322219;
+			static const unsigned long PROPERTY_OPERATION_SUBSETTINGCONTEXT = 2305810549;
+			static const unsigned long PROPERTY_OPERATION_UNSETDEFAULT = 1637600012;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProperty_Class() const = 0;
@@ -4749,7 +4749,7 @@ namespace uml
 			static const unsigned long PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION = 1185636740;
 			static const unsigned long PROTOCOLTRANSITION_ATTRIBUTE_REFERRED = 890693801;
 			
-			static const unsigned int PROTOCOLTRANSITION_OPERATION_GETREFERREDS = 37225025;
+			static const unsigned long PROTOCOLTRANSITION_OPERATION_GETREFERREDS = 37225025;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProtocolTransition_Class() const = 0;
@@ -4881,7 +4881,7 @@ namespace uml
 			
 			static const unsigned long READLINKACTION_ATTRIBUTE_RESULT = 1153351474;
 			
-			static const unsigned int READLINKACTION_OPERATION_OPENEND = 4152235483;
+			static const unsigned long READLINKACTION_OPERATION_OPENEND = 4152235483;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadLinkAction_Class() const = 0;
@@ -5068,8 +5068,8 @@ namespace uml
 			static const unsigned long REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT = 562420762;
 			static const unsigned long REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT = 2061209301;
 			
-			static const unsigned int REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT = 2046464111;
-			static const unsigned int REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT = 3034109494;
+			static const unsigned long REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT = 2046464111;
+			static const unsigned long REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT = 3034109494;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinableElement_Class() const = 0;
@@ -5095,7 +5095,7 @@ namespace uml
 			static const unsigned long REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE = 759350967;
 			static const unsigned long REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER = 1181612395;
 			
-			static const unsigned int REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS = 1729090337;
+			static const unsigned long REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS = 1729090337;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinableTemplateSignature_Class() const = 0;
@@ -5147,9 +5147,9 @@ namespace uml
 			static const unsigned long REGION_ATTRIBUTE_SUBVERTEX = 1399284492;
 			static const unsigned long REGION_ATTRIBUTE_TRANSITION = 1795980520;
 			
-			static const unsigned int REGION_OPERATION_BELONGSTOPSM = 1481257058;
-			static const unsigned int REGION_OPERATION_CONTAININGSTATEMACHINE = 3298185933;
-			static const unsigned int REGION_OPERATION_REDEFINITIONCONTEXT = 2569630837;
+			static const unsigned long REGION_OPERATION_BELONGSTOPSM = 1481257058;
+			static const unsigned long REGION_OPERATION_CONTAININGSTATEMACHINE = 3298185933;
+			static const unsigned long REGION_OPERATION_REDEFINITIONCONTEXT = 2569630837;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRegion_Class() const = 0;
@@ -5321,7 +5321,7 @@ namespace uml
 			
 			static const unsigned long SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE = 424599147;
 			
-			static const unsigned int SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2958211947;
+			static const unsigned long SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2958211947;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSignal_Class() const = 0;
@@ -5403,7 +5403,7 @@ namespace uml
 			
 			static const unsigned long STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT = 1845738587;
 			
-			static const unsigned int STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR = 3504813546;
+			static const unsigned long STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR = 3504813546;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorAction_Class() const = 0;
@@ -5437,11 +5437,11 @@ namespace uml
 			static const unsigned long STATE_ATTRIBUTE_STATEINVARIANT = 384677899;
 			static const unsigned long STATE_ATTRIBUTE_SUBMACHINE = 1314572652;
 			
-			static const unsigned int STATE_OPERATION_ISCOMPOSITE = 3032748621;
-			static const unsigned int STATE_OPERATION_ISORTHOGONAL = 2196397295;
-			static const unsigned int STATE_OPERATION_ISSIMPLE = 1376170544;
-			static const unsigned int STATE_OPERATION_ISSUBMACHINESTATE = 3460868526;
-			static const unsigned int STATE_OPERATION_REDEFINITIONCONTEXT = 2354287234;
+			static const unsigned long STATE_OPERATION_ISCOMPOSITE = 3032748621;
+			static const unsigned long STATE_OPERATION_ISORTHOGONAL = 2196397295;
+			static const unsigned long STATE_OPERATION_ISSIMPLE = 1376170544;
+			static const unsigned long STATE_OPERATION_ISSUBMACHINESTATE = 3460868526;
+			static const unsigned long STATE_OPERATION_REDEFINITIONCONTEXT = 2354287234;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getState_Class() const = 0;
@@ -5501,9 +5501,9 @@ namespace uml
 			static const unsigned long STATEMACHINE_ATTRIBUTE_REGION = 1939978611;
 			static const unsigned long STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE = 397489273;
 			
-			static const unsigned int STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX = 1015890553;
-			static const unsigned int STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX = 3201604183;
-			static const unsigned int STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX = 2492087526;
+			static const unsigned long STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX = 1015890553;
+			static const unsigned long STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX = 3201604183;
+			static const unsigned long STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX = 2492087526;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStateMachine_Class() const = 0;
@@ -5530,16 +5530,16 @@ namespace uml
 			static const unsigned long STEREOTYPE_ATTRIBUTE_ICON = 1104794320;
 			static const unsigned long STEREOTYPE_ATTRIBUTE_PROFILE = 96869722;
 			
-			static const unsigned int STEREOTYPE_OPERATION_CONTAININGPROFILE = 3116027671;
-			static const unsigned int STEREOTYPE_OPERATION_CREATEEXTENSION_CLASS_BOOLEAN = 2355039413;
-			static const unsigned int STEREOTYPE_OPERATION_CREATEICON_STRING = 4268768905;
-			static const unsigned int STEREOTYPE_OPERATION_CREATEICON_STRING_STRING = 1814185679;
-			static const unsigned int STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES = 912925586;
-			static const unsigned int STEREOTYPE_OPERATION_GETDEFINITION = 1669546995;
-			static const unsigned int STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES = 1491956517;
-			static const unsigned int STEREOTYPE_OPERATION_GETKEYWORD = 263636712;
-			static const unsigned int STEREOTYPE_OPERATION_GETKEYWORD_BOOLEAN = 3455502248;
-			static const unsigned int STEREOTYPE_OPERATION_GETPROFILE = 3683170205;
+			static const unsigned long STEREOTYPE_OPERATION_CONTAININGPROFILE = 3116027671;
+			static const unsigned long STEREOTYPE_OPERATION_CREATEEXTENSION_CLASS_BOOLEAN = 2355039413;
+			static const unsigned long STEREOTYPE_OPERATION_CREATEICON_STRING = 4268768905;
+			static const unsigned long STEREOTYPE_OPERATION_CREATEICON_STRING_STRING = 1814185679;
+			static const unsigned long STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES = 912925586;
+			static const unsigned long STEREOTYPE_OPERATION_GETDEFINITION = 1669546995;
+			static const unsigned long STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES = 1491956517;
+			static const unsigned long STEREOTYPE_OPERATION_GETKEYWORD = 263636712;
+			static const unsigned long STEREOTYPE_OPERATION_GETKEYWORD_BOOLEAN = 3455502248;
+			static const unsigned long STEREOTYPE_OPERATION_GETPROFILE = 3683170205;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStereotype_Class() const = 0;
@@ -5636,8 +5636,8 @@ namespace uml
 			static const unsigned long STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT = 691121825;
 			static const unsigned long STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE = 139148501;
 			
-			static const unsigned int STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES = 3462902530;
-			static const unsigned int STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES = 2207842792;
+			static const unsigned long STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES = 3462902530;
+			static const unsigned long STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES = 2207842792;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNode_Class() const = 0;
@@ -5667,9 +5667,9 @@ namespace uml
 			static const unsigned long STRUCTUREDCLASSIFIER_ATTRIBUTE_PART = 1932901596;
 			static const unsigned long STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE = 1070141206;
 			
-			static const unsigned int STRUCTUREDCLASSIFIER_OPERATION_ALLROLES = 3047328929;
-			static const unsigned int STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2674132819;
-			static const unsigned int STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 2304451414;
+			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_ALLROLES = 3047328929;
+			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2674132819;
+			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 2304451414;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredClassifier_Class() const = 0;
@@ -5815,8 +5815,8 @@ namespace uml
 			static const unsigned long TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE = 1475197560;
 			static const unsigned long TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING = 755748643;
 			
-			static const unsigned int TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE = 2563687071;
-			static const unsigned int TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS = 3445105528;
+			static const unsigned long TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE = 2563687071;
+			static const unsigned long TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS = 3445105528;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateableElement_Class() const = 0;
@@ -5968,8 +5968,8 @@ namespace uml
 			static const unsigned long TRANSITION_ATTRIBUTE_TARGET = 1948875614;
 			static const unsigned long TRANSITION_ATTRIBUTE_TRIGGER = 1537085281;
 			
-			static const unsigned int TRANSITION_OPERATION_CONTAININGSTATEMACHINE = 3793766704;
-			static const unsigned int TRANSITION_OPERATION_REDEFINITIONCONTEXT = 4168264280;
+			static const unsigned long TRANSITION_OPERATION_CONTAININGSTATEMACHINE = 3793766704;
+			static const unsigned long TRANSITION_OPERATION_REDEFINITIONCONTEXT = 4168264280;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTransition_Class() const = 0;
@@ -6019,9 +6019,9 @@ namespace uml
 			
 			static const unsigned long TYPE_ATTRIBUTE_PACKAGE = 1093190655;
 			
-			static const unsigned int TYPE_OPERATION_CONFORMSTO_TYPE = 2823302737;
-			static const unsigned int TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL = 1855728755;
-			static const unsigned int TYPE_OPERATION_GETASSOCIATIONS = 831147640;
+			static const unsigned long TYPE_OPERATION_CONFORMSTO_TYPE = 2823302737;
+			static const unsigned long TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL = 1855728755;
+			static const unsigned long TYPE_OPERATION_GETASSOCIATIONS = 831147640;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getType_Class() const = 0;
@@ -6106,7 +6106,7 @@ namespace uml
 			static const unsigned long USECASE_ATTRIBUTE_INCLUDE = 1077742044;
 			static const unsigned long USECASE_ATTRIBUTE_SUBJECT = 1213404644;
 			
-			static const unsigned int USECASE_OPERATION_ALLINCLUDEDUSECASES = 3794514740;
+			static const unsigned long USECASE_OPERATION_ALLINCLUDEDUSECASES = 3794514740;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUseCase_Class() const = 0;
@@ -6150,13 +6150,13 @@ namespace uml
 			static const unsigned long VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT = 1352766667;
 			static const unsigned long VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION = 1353122062;
 			
-			static const unsigned int VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 1350723800;
-			static const unsigned int VALUESPECIFICATION_OPERATION_INTEGERVALUE = 2449030041;
-			static const unsigned int VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 3895370351;
-			static const unsigned int VALUESPECIFICATION_OPERATION_ISNULL = 1141016246;
-			static const unsigned int VALUESPECIFICATION_OPERATION_REALVALUE = 1448638351;
-			static const unsigned int VALUESPECIFICATION_OPERATION_STRINGVALUE = 1518605845;
-			static const unsigned int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 1134102830;
+			static const unsigned long VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 1350723800;
+			static const unsigned long VALUESPECIFICATION_OPERATION_INTEGERVALUE = 2449030041;
+			static const unsigned long VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 3895370351;
+			static const unsigned long VALUESPECIFICATION_OPERATION_ISNULL = 1141016246;
+			static const unsigned long VALUESPECIFICATION_OPERATION_REALVALUE = 1448638351;
+			static const unsigned long VALUESPECIFICATION_OPERATION_STRINGVALUE = 1518605845;
+			static const unsigned long VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 1134102830;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecification_Class() const = 0;
@@ -6206,7 +6206,7 @@ namespace uml
 			static const unsigned long VARIABLE_ATTRIBUTE_ACTIVITYSCOPE = 1331925521;
 			static const unsigned long VARIABLE_ATTRIBUTE_SCOPE = 2122350253;
 			
-			static const unsigned int VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION = 268671640;
+			static const unsigned long VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION = 268671640;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariable_Class() const = 0;
@@ -6249,11 +6249,11 @@ namespace uml
 			static const unsigned long VERTEX_ATTRIBUTE_INCOMING = 778072183;
 			static const unsigned long VERTEX_ATTRIBUTE_OUTGOING = 1035611398;
 			
-			static const unsigned int VERTEX_OPERATION_CONTAININGSTATEMACHINE = 2007948051;
-			static const unsigned int VERTEX_OPERATION_GETINCOMINGS = 124960789;
-			static const unsigned int VERTEX_OPERATION_GETOUTGOINGS = 3840074001;
-			static const unsigned int VERTEX_OPERATION_ISCONTAINEDINREGION_REGION = 1632706225;
-			static const unsigned int VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE = 3997919607;
+			static const unsigned long VERTEX_OPERATION_CONTAININGSTATEMACHINE = 2007948051;
+			static const unsigned long VERTEX_OPERATION_GETINCOMINGS = 124960789;
+			static const unsigned long VERTEX_OPERATION_GETOUTGOINGS = 3840074001;
+			static const unsigned long VERTEX_OPERATION_ISCONTAINEDINREGION_REGION = 1632706225;
+			static const unsigned long VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE = 3997919607;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVertex_Class() const = 0;

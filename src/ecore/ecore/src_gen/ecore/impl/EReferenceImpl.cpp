@@ -405,17 +405,17 @@ std::shared_ptr<Any> EReferenceImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
-			return eAny(isContainer(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4623
+			return eAny(isContainer(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4622
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
-			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4622
+			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4621
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return eEcoreContainerAny(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4627
+			return eEcoreContainerAny(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4626
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4625
+			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4624
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return eAny(getEReferenceType(),ecore::ecorePackage::ECLASS_CLASS,false); //4626
+			return eAny(getEReferenceType(),ecore::ecorePackage::ECLASS_CLASS,false); //4625
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
-			return eAny(isResolveProxies(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4624
+			return eAny(isResolveProxies(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4623
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -425,17 +425,17 @@ bool EReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
-			return isContainer() != false; //4623
+			return isContainer() != false; //4622
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
-			return isContainment() != false; //4622
+			return isContainment() != false; //4621
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return getEKeys() != nullptr; //4627
+			return getEKeys() != nullptr; //4626
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return getEOpposite() != nullptr; //4625
+			return getEOpposite() != nullptr; //4624
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return getEReferenceType() != nullptr; //4626
+			return getEReferenceType() != nullptr; //4625
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
-			return isResolveProxies() != true; //4624
+			return isResolveProxies() != true; //4623
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -449,7 +449,7 @@ bool EReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			try
 			{
 				bool _containment = newValue->get<bool>();
-				setContainment(_containment); //4622
+				setContainment(_containment); //4621
 			}
 			catch(...)
 			{
@@ -514,7 +514,7 @@ bool EReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(eObject);
 					if(_eOpposite)
 					{
-						setEOpposite(_eOpposite); //4625
+						setEOpposite(_eOpposite); //4624
 					}
 					else
 					{
@@ -545,7 +545,7 @@ bool EReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 					std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(eObject);
 					if(_eReferenceType)
 					{
-						setEReferenceType(_eReferenceType); //4626
+						setEReferenceType(_eReferenceType); //4625
 					}
 					else
 					{
@@ -570,7 +570,7 @@ bool EReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			try
 			{
 				bool _resolveProxies = newValue->get<bool>();
-				setResolveProxies(_resolveProxies); //4624
+				setResolveProxies(_resolveProxies); //4623
 			}
 			catch(...)
 			{

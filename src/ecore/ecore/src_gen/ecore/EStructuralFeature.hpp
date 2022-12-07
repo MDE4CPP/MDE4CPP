@@ -77,7 +77,7 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual void * getContainerClass() = 0;
-			
+			virtual int getFeatureID() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -90,7 +90,6 @@ namespace ecore
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;
 			virtual bool isDerived() const = 0;
 			virtual void setDerived (bool _derived)= 0;
-			virtual int getFeatureID() const = 0;
 			virtual bool isTransient() const = 0;
 			virtual void setTransient (bool _transient)= 0;
 			virtual bool isUnsettable() const = 0;
@@ -127,7 +126,6 @@ namespace ecore
 			std::shared_ptr<Any> m_defaultValue= nullptr;
 			std::string m_defaultValueLiteral= "";
 			bool m_derived= false;
-			int m_featureID= -1;
 			bool m_transient= false;
 			bool m_unsettable= false;
 			bool m_volatile= false;

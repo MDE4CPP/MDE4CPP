@@ -7,16 +7,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/ETypeParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 //include subpackages 
@@ -260,7 +260,6 @@ void ecorePackageImpl::createEObjectContainerContent(std::shared_ptr<ecore::EPac
 void ecorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eOperation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EOPERATION_CLASS);
-	m_eOperation_Attribute_operationID = factory->createEAttribute_as_eAttributes_in_EClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_OPERATIONID);
 	
 	m_eOperation_Attribute_eContainingClass = factory->createEReference_as_eReferences_in_EClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_ECONTAININGCLASS);
 	m_eOperation_Attribute_eExceptions = factory->createEReference_as_eReferences_in_EClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_EEXCEPTIONS);
@@ -268,6 +267,7 @@ void ecorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> 
 	m_eOperation_Attribute_eParameters = factory->createEReference_as_eReferences_in_EClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_EPARAMETERS);
 	m_eOperation_Attribute_eTypeParameters = factory->createEReference_as_eReferences_in_EClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_ETYPEPARAMETERS);
 	
+	m_eOperation_Operation_getOperationID = factory->createEOperation_as_eOperations_in_EClass(m_eOperation_Class, EOPERATION_OPERATION_GETOPERATIONID);
 	m_eOperation_Operation_isOverrideOf_EOperation = factory->createEOperation_as_eOperations_in_EClass(m_eOperation_Class, EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION);
 	
 }
@@ -327,7 +327,6 @@ void ecorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EP
 	m_eStructuralFeature_Attribute_defaultValue = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE);
 	m_eStructuralFeature_Attribute_defaultValueLiteral = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL);
 	m_eStructuralFeature_Attribute_derived = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED);
-	m_eStructuralFeature_Attribute_featureID = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID);
 	m_eStructuralFeature_Attribute_transient = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT);
 	m_eStructuralFeature_Attribute_unsettable = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE);
 	m_eStructuralFeature_Attribute_volatile = factory->createEAttribute_as_eAttributes_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE);
@@ -335,6 +334,7 @@ void ecorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EP
 	m_eStructuralFeature_Attribute_eContainingClass = factory->createEReference_as_eReferences_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS);
 	
 	m_eStructuralFeature_Operation_getContainerClass = factory->createEOperation_as_eOperations_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS);
+	m_eStructuralFeature_Operation_getFeatureID = factory->createEOperation_as_eOperations_in_EClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_OPERATION_GETFEATUREID);
 	
 }
 

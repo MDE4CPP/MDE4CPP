@@ -46,14 +46,12 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual int getOperationID() ;
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const ;
 			
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getOperationID() const ;
-			virtual void setOperationID (int _operationID);
 			
 			//*********************************
 			// Reference Getters & Setters

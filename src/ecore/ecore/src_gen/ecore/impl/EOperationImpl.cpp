@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
@@ -109,7 +109,6 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EOperation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	m_operationID = obj.getOperationID();
 
 	//copy references with no containment (soft copy)
 	m_eContainingClass  = obj.getEContainingClass();
@@ -199,7 +198,13 @@ std::shared_ptr<ecore::EObject> EOperationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-
+int EOperationImpl::getOperationID()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->_getID();
+	//end of body
+}
 
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
 {
@@ -244,16 +249,6 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperati
 //*********************************
 // Attribute Getters & Setters
 //*********************************
-/* Getter & Setter for attribute operationID */
-int EOperationImpl::getOperationID() const 
-{
-	return m_operationID;
-}
-void EOperationImpl::setOperationID(int _operationID)
-{
-	m_operationID = _operationID;
-	
-}
 
 //*********************************
 // Reference Getters & Setters
@@ -366,15 +361,6 @@ void EOperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("operationID");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream(iter->second) >> value;
-			this->setOperationID(value);
-		}
 		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("eExceptions");
 		if ( iter != attr_list.end() )
@@ -494,11 +480,6 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
 		}
-		// Add attributes
-		if ( this->eIsSet(package->getEOperation_Attribute_operationID()) )
-		{
-			saveHandler->addAttribute("operationID", this->getOperationID());
-		}
 	// Add references
 		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());
 		//
@@ -534,18 +515,16 @@ std::shared_ptr<Any> EOperationImpl::eGet(int featureID, bool resolve, bool core
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //4314
+			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //4313
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return eEcoreContainerAny(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4317
+			return eEcoreContainerAny(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4316
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return eEcoreContainerAny(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4318
+			return eEcoreContainerAny(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4317
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return eEcoreContainerAny(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4316
+			return eEcoreContainerAny(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4315
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return eEcoreContainerAny(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4315
-		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID(),ecore::ecorePackage::EINT_CLASS,false); //4313
+			return eEcoreContainerAny(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4314
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -555,17 +534,15 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //4314
+			return getEContainingClass().lock() != nullptr; //4313
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //4317
+			return getEExceptions() != nullptr; //4316
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //4318
+			return getEGenericExceptions() != nullptr; //4317
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return getEParameters() != nullptr; //4316
+			return getEParameters() != nullptr; //4315
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //4315
-		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //4313
+			return getETypeParameters() != nullptr; //4314
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -768,6 +745,12 @@ std::shared_ptr<Any> EOperationImpl::eInvoke(int operationID, std::shared_ptr<Ba
  
   	switch(operationID)
 	{
+		// ecore::EOperation::getOperationID() : int: 1478918368
+		case ecorePackage::EOPERATION_OPERATION_GETOPERATIONID:
+		{
+			result = eAny(this->getOperationID(), 0, false);
+			break;
+		}
 		// ecore::EOperation::isOverrideOf(ecore::EOperation) : bool {const}: 4079142759
 		case ecorePackage::EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION:
 		{

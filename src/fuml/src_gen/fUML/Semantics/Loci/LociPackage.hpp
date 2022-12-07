@@ -64,8 +64,8 @@ namespace fUML::Semantics::Loci
 			static const unsigned int CHOICESTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
 			
-			static const unsigned int CHOICESTRATEGY_OPERATION_CHOOSE_EINT = 3427851710;
-			static const unsigned int CHOICESTRATEGY_OPERATION_GETNAME = 1209409598;
+			static const unsigned long CHOICESTRATEGY_OPERATION_CHOOSE_EINT = 3427851710;
+			static const unsigned long CHOICESTRATEGY_OPERATION_GETNAME = 1209409598;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getChoiceStrategy_Class() const = 0;
@@ -88,13 +88,13 @@ namespace fUML::Semantics::Loci
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 648263615;
 			static const unsigned long EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES = 1614243054;
 			
-			static const unsigned int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 1000019030;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4022033692;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT = 2395760303;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 3934172273;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4148006243;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 353629829;
-			static const unsigned int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 442268567;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 1000019030;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4022033692;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT = 2395760303;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 3934172273;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4148006243;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 353629829;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 442268567;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionFactory_Class() const = 0;
@@ -123,9 +123,9 @@ namespace fUML::Semantics::Loci
 			
 			static const unsigned long EXECUTOR_ATTRIBUTE_LOCUS = 32912316;
 			
-			static const unsigned int EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 321446891;
-			static const unsigned int EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 3205044137;
-			static const unsigned int EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
+			static const unsigned long EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 321446891;
+			static const unsigned long EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 3205044137;
+			static const unsigned long EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutor_Class() const = 0;
@@ -147,7 +147,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned int FIRSTCHOICESTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const unsigned int FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT = 1235408894;
+			static const unsigned long FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT = 1235408894;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFirstChoiceStrategy_Class() const = 0;
@@ -169,13 +169,13 @@ namespace fUML::Semantics::Loci
 			static const unsigned long LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 1315349633;
 			static const unsigned long LOCUS_ATTRIBUTE_FACTORY = 897667860;
 			
-			static const unsigned int LOCUS_OPERATION_ADD_ELEMENT = 2336178890;
-			static const unsigned int LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 4071294562;
-			static const unsigned int LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2681202388;
-			static const unsigned int LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 2253046160;
-			static const unsigned int LOCUS_OPERATION_INSTANTIATE_CLASS = 928635219;
-			static const unsigned int LOCUS_OPERATION_REMOVE_ELEMENT = 2186013543;
-			static const unsigned int LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
+			static const unsigned long LOCUS_OPERATION_ADD_ELEMENT = 2336178890;
+			static const unsigned long LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 4071294562;
+			static const unsigned long LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2681202388;
+			static const unsigned long LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 2253046160;
+			static const unsigned long LOCUS_OPERATION_INSTANTIATE_CLASS = 928635219;
+			static const unsigned long LOCUS_OPERATION_REMOVE_ELEMENT = 2186013543;
+			static const unsigned long LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLocus_Class() const = 0;
@@ -203,7 +203,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned int SEMANTICSTRATEGY_CLASS_OPERATION_COUNT = 1;
 			
 			
-			static const unsigned int SEMANTICSTRATEGY_OPERATION_GETNAME = 3310607623;
+			static const unsigned long SEMANTICSTRATEGY_OPERATION_GETNAME = 3310607623;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSemanticStrategy_Class() const = 0;
@@ -222,8 +222,8 @@ namespace fUML::Semantics::Loci
 			static const unsigned int SEMANTICVISITOR_CLASS_OPERATION_COUNT = 2;
 			
 			
-			static const unsigned int SEMANTICVISITOR_OPERATION__BEGINISOLATION = 1570555301;
-			static const unsigned int SEMANTICVISITOR_OPERATION__ENDISOLATION = 3956519543;
+			static const unsigned long SEMANTICVISITOR_OPERATION__BEGINISOLATION = 1570555301;
+			static const unsigned long SEMANTICVISITOR_OPERATION__ENDISOLATION = 3956519543;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSemanticVisitor_Class() const = 0;

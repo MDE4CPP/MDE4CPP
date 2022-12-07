@@ -110,7 +110,6 @@ EStructuralFeatureImpl& EStructuralFeatureImpl::operator=(const EStructuralFeatu
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
 	m_derived = obj.isDerived();
-	m_featureID = obj.getFeatureID();
 	m_transient = obj.isTransient();
 	m_unsettable = obj.isUnsettable();
 	m_volatile = obj.isVolatile();
@@ -129,7 +128,13 @@ void * EStructuralFeatureImpl::getContainerClass()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-
+int EStructuralFeatureImpl::getFeatureID()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->_getID();
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -175,17 +180,6 @@ bool EStructuralFeatureImpl::isDerived() const
 void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
-	
-}
-
-/* Getter & Setter for attribute featureID */
-int EStructuralFeatureImpl::getFeatureID() const 
-{
-	return m_featureID;
-}
-void EStructuralFeatureImpl::setFeatureID(int _featureID)
-{
-	m_featureID = _featureID;
 	
 }
 
@@ -304,15 +298,6 @@ void EStructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfa
 			this->setDerived(value);
 		}
 
-		iter = attr_list.find("featureID");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream(iter->second) >> value;
-			this->setFeatureID(value);
-		}
-
 		iter = attr_list.find("transient");
 		if ( iter != attr_list.end() )
 		{
@@ -400,11 +385,6 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 			saveHandler->addAttribute("derived", this->isDerived());
 		}
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_featureID()) )
-		{
-			saveHandler->addAttribute("featureID", this->getFeatureID());
-		}
-
 		if ( this->eIsSet(package->getEStructuralFeature_Attribute_transient()) )
 		{
 			saveHandler->addAttribute("transient", this->isTransient());
@@ -449,10 +429,8 @@ std::shared_ptr<Any> EStructuralFeatureImpl::eGet(int featureID, bool resolve, b
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //5321
+			return eEcoreAny(returnValue,ecore::ecorePackage::ECLASS_CLASS); //5320
 		}
-		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
-			return eAny(getFeatureID(),ecore::ecorePackage::EINT_CLASS,false); //5320
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 			return eAny(isTransient(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //5315
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
@@ -476,9 +454,7 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return isDerived() != false; //5319
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //5321
-		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
-			return getFeatureID() != -1; //5320
+			return getEContainingClass().lock() != nullptr; //5320
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 			return isTransient() != false; //5315
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
@@ -609,6 +585,12 @@ std::shared_ptr<Any> EStructuralFeatureImpl::eInvoke(int operationID, std::share
 		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS:
 		{
 			result = eAny(this->getContainerClass(), 0, false);
+			break;
+		}
+		// ecore::EStructuralFeature::getFeatureID() : int: 3630625003
+		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETFEATUREID:
+		{
+			result = eAny(this->getFeatureID(), 0, false);
 			break;
 		}
 

@@ -65,14 +65,14 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned long EXECUTION_ATTRIBUTE_PARAMETERVALUES = 1718346120;
 			static const unsigned long EXECUTION_ATTRIBUTE_TYPES = 1361902853;
 			
-			static const unsigned int EXECUTION_OPERATION__COPY = 4021493409;
-			static const unsigned int EXECUTION_OPERATION_DESTROY = 2183551203;
-			static const unsigned int EXECUTION_OPERATION_EXECUTE = 2717216448;
-			static const unsigned int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 3117320457;
-			static const unsigned int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 972104598;
-			static const unsigned int EXECUTION_OPERATION_NEW_ = 1530257024;
-			static const unsigned int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 1714178337;
-			static const unsigned int EXECUTION_OPERATION_TERMINATE = 1246638906;
+			static const unsigned long EXECUTION_OPERATION__COPY = 4021493409;
+			static const unsigned long EXECUTION_OPERATION_DESTROY = 2183551203;
+			static const unsigned long EXECUTION_OPERATION_EXECUTE = 2717216448;
+			static const unsigned long EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 3117320457;
+			static const unsigned long EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 972104598;
+			static const unsigned long EXECUTION_OPERATION_NEW_ = 1530257024;
+			static const unsigned long EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 1714178337;
+			static const unsigned long EXECUTION_OPERATION_TERMINATE = 1246638906;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
@@ -105,7 +105,7 @@ namespace fUML::Semantics::CommonBehavior
 			
 			static const unsigned long PARAMETERVALUE_ATTRIBUTE_PARAMETER = 1803315899;
 			
-			static const unsigned int PARAMETERVALUE_OPERATION__COPY = 2742640749;
+			static const unsigned long PARAMETERVALUE_OPERATION__COPY = 2742640749;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterValue_Class() const = 0;

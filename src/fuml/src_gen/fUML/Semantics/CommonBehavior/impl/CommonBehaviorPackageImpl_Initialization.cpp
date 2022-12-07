@@ -60,7 +60,15 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Class->setAbstract(true);
 	m_execution_Class->setInterface(false);
 	
+	m_execution_Class->_setID(EXECUTION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_execution_Attribute_behavior->setName("behavior");
 	m_execution_Attribute_behavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 	m_execution_Attribute_behavior->setLowerBound(1);
@@ -74,15 +82,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_behavior->setOrdered(true);
 	m_execution_Attribute_behavior->setContainment(false);
 	m_execution_Attribute_behavior->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_execution_Attribute_behavior->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_execution_Attribute_behavior->setDefaultValueLiteral("");	
+	
+	m_execution_Attribute_behavior->_setID(EXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_execution_Attribute_context->setName("context");
 	m_execution_Attribute_context->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_execution_Attribute_context->setLowerBound(1);
@@ -96,15 +98,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_context->setOrdered(false);
 	m_execution_Attribute_context->setContainment(false);
 	m_execution_Attribute_context->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_execution_Attribute_context->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_execution_Attribute_context->setDefaultValueLiteral("");	
+	
+	m_execution_Attribute_context->_setID(EXECUTION_ATTRIBUTE_CONTEXT);
 	m_execution_Attribute_locus->setName("locus");
 	m_execution_Attribute_locus->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class());
 	m_execution_Attribute_locus->setLowerBound(0);
@@ -118,15 +114,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_locus->setOrdered(false);
 	m_execution_Attribute_locus->setContainment(false);
 	m_execution_Attribute_locus->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_execution_Attribute_locus->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_execution_Attribute_locus->setDefaultValueLiteral("");	
+	
+	m_execution_Attribute_locus->_setID(EXECUTION_ATTRIBUTE_LOCUS);
 	m_execution_Attribute_parameterValues->setName("parameterValues");
 	m_execution_Attribute_parameterValues->setEType(getParameterValue_Class());
 	m_execution_Attribute_parameterValues->setLowerBound(0);
@@ -140,15 +130,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_parameterValues->setOrdered(false);
 	m_execution_Attribute_parameterValues->setContainment(true);
 	m_execution_Attribute_parameterValues->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_execution_Attribute_parameterValues->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_execution_Attribute_parameterValues->setDefaultValueLiteral("");	
+	
+	m_execution_Attribute_parameterValues->_setID(EXECUTION_ATTRIBUTE_PARAMETERVALUES);
 	m_execution_Attribute_types->setName("types");
 	m_execution_Attribute_types->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 	m_execution_Attribute_types->setLowerBound(0);
@@ -162,22 +146,22 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_types->setOrdered(false);
 	m_execution_Attribute_types->setContainment(false);
 	m_execution_Attribute_types->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_execution_Attribute_types->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_execution_Attribute_types->setDefaultValueLiteral("");	
 	
+	m_execution_Attribute_types->_setID(EXECUTION_ATTRIBUTE_TYPES);
+	
+	/*
+	 * EOperations
+	 */
 	m_execution_Operation__copy->setName("_copy");
 	m_execution_Operation__copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_execution_Operation__copy->setLowerBound(1);
 	m_execution_Operation__copy->setUpperBound(1);
 	m_execution_Operation__copy->setUnique(true);
 	m_execution_Operation__copy->setOrdered(true);
+	
+	m_execution_Operation__copy->_setID(EXECUTION_OPERATION__COPY);
+	
 	
 	m_execution_Operation_destroy->setName("destroy");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -192,6 +176,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_destroy->setUnique(true);
 	m_execution_Operation_destroy->setOrdered(false);
 	
+	m_execution_Operation_destroy->_setID(EXECUTION_OPERATION_DESTROY);
+	
+	
 	m_execution_Operation_execute->setName("execute");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -205,6 +192,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_execute->setUnique(true);
 	m_execution_Operation_execute->setOrdered(false);
 	
+	m_execution_Operation_execute->_setID(EXECUTION_OPERATION_EXECUTE);
+	
+	
 	m_execution_Operation_getOutputParameterValues->setName("getOutputParameterValues");
 	m_execution_Operation_getOutputParameterValues->setEType(getParameterValue_Class());
 	m_execution_Operation_getOutputParameterValues->setLowerBound(0);
@@ -212,12 +202,18 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_getOutputParameterValues->setUnique(true);
 	m_execution_Operation_getOutputParameterValues->setOrdered(false);
 	
+	m_execution_Operation_getOutputParameterValues->_setID(EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES);
+	
+	
 	m_execution_Operation_getParameterValue_Parameter->setName("getParameterValue");
 	m_execution_Operation_getParameterValue_Parameter->setEType(getParameterValue_Class());
 	m_execution_Operation_getParameterValue_Parameter->setLowerBound(1);
 	m_execution_Operation_getParameterValue_Parameter->setUpperBound(1);
 	m_execution_Operation_getParameterValue_Parameter->setUnique(true);
 	m_execution_Operation_getParameterValue_Parameter->setOrdered(false);
+	
+	m_execution_Operation_getParameterValue_Parameter->_setID(EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_execution_Operation_getParameterValue_Parameter);
 		parameter->setName("parameter");
@@ -235,6 +231,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_new_->setUnique(true);
 	m_execution_Operation_new_->setOrdered(false);
 	
+	m_execution_Operation_new_->_setID(EXECUTION_OPERATION_NEW_);
+	
+	
 	m_execution_Operation_setParameterValue_ParameterValue->setName("setParameterValue");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -247,6 +246,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_setParameterValue_ParameterValue->setUpperBound(1);
 	m_execution_Operation_setParameterValue_ParameterValue->setUnique(true);
 	m_execution_Operation_setParameterValue_ParameterValue->setOrdered(false);
+	
+	m_execution_Operation_setParameterValue_ParameterValue->_setID(EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_execution_Operation_setParameterValue_ParameterValue);
 		parameter->setName("parameterValue");
@@ -270,6 +272,9 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_terminate->setUnique(true);
 	m_execution_Operation_terminate->setOrdered(false);
 	
+	m_execution_Operation_terminate->_setID(EXECUTION_OPERATION_TERMINATE);
+	
+	
 	
 }
 
@@ -279,9 +284,14 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 	m_parameterValue_Class->setAbstract(false);
 	m_parameterValue_Class->setInterface(false);
 	
+	m_parameterValue_Class->_setID(PARAMETERVALUE_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	m_parameterValue_Attribute_values = getParameterValue_Attribute_values();
 	m_parameterValue_Attribute_values->setName("values");
-		m_parameterValue_Attribute_values->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_parameterValue_Attribute_values->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_parameterValue_Attribute_values->setLowerBound(0);
 	m_parameterValue_Attribute_values->setUpperBound(-1);
 	m_parameterValue_Attribute_values->setTransient(false);
@@ -292,14 +302,13 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 	m_parameterValue_Attribute_values->setDerived(false);
 	m_parameterValue_Attribute_values->setOrdered(true);
 	m_parameterValue_Attribute_values->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_parameterValue_Attribute_values->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_parameterValue_Attribute_values->setDefaultValueLiteral("");
 	
+	m_parameterValue_Attribute_values->_setID(PARAMETERVALUE_ATTRIBUTE_VALUES);
+	
+	/*
+	 * EReferences
+	 */
 	m_parameterValue_Attribute_parameter->setName("parameter");
 	m_parameterValue_Attribute_parameter->setEType(uml::umlPackage::eInstance()->getParameter_Class());
 	m_parameterValue_Attribute_parameter->setLowerBound(1);
@@ -313,22 +322,22 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 	m_parameterValue_Attribute_parameter->setOrdered(false);
 	m_parameterValue_Attribute_parameter->setContainment(false);
 	m_parameterValue_Attribute_parameter->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_parameterValue_Attribute_parameter->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_parameterValue_Attribute_parameter->setDefaultValueLiteral("");	
 	
+	m_parameterValue_Attribute_parameter->_setID(PARAMETERVALUE_ATTRIBUTE_PARAMETER);
+	
+	/*
+	 * EOperations
+	 */
 	m_parameterValue_Operation__copy->setName("_copy");
 	m_parameterValue_Operation__copy->setEType(getParameterValue_Class());
 	m_parameterValue_Operation__copy->setLowerBound(1);
 	m_parameterValue_Operation__copy->setUpperBound(1);
 	m_parameterValue_Operation__copy->setUnique(true);
 	m_parameterValue_Operation__copy->setOrdered(true);
+	
+	m_parameterValue_Operation__copy->_setID(PARAMETERVALUE_OPERATION__COPY);
+	
 	
 	
 }

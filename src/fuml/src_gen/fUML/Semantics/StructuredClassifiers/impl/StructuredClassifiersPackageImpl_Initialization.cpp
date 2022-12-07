@@ -59,14 +59,28 @@ void StructuredClassifiersPackageImpl::initializeDispatchStrategyContent()
 	m_dispatchStrategy_Class->setAbstract(false);
 	m_dispatchStrategy_Class->setInterface(false);
 	
+	m_dispatchStrategy_Class->_setID(DISPATCHSTRATEGY_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setName("dispatch");
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setLowerBound(1);
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setUpperBound(1);
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setUnique(true);
 	m_dispatchStrategy_Operation_dispatch_Element_Operation->setOrdered(false);
+	
+	m_dispatchStrategy_Operation_dispatch_Element_Operation->_setID(DISPATCHSTRATEGY_OPERATION_DISPATCH_ELEMENT_OPERATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dispatchStrategy_Operation_dispatch_Element_Operation);
 		parameter->setName("object");
@@ -94,12 +108,18 @@ void StructuredClassifiersPackageImpl::initializeDispatchStrategyContent()
 	m_dispatchStrategy_Operation_getName->setUnique(true);
 	m_dispatchStrategy_Operation_getName->setOrdered(false);
 	
+	m_dispatchStrategy_Operation_getName->_setID(DISPATCHSTRATEGY_OPERATION_GETNAME);
+	
+	
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setName("retrieveMethod");
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setLowerBound(1);
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setUpperBound(1);
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setUnique(true);
 	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->setOrdered(false);
+	
+	m_dispatchStrategy_Operation_retrieveMethod_Element_Operation->_setID(DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dispatchStrategy_Operation_retrieveMethod_Element_Operation);
 		parameter->setName("object");
@@ -129,14 +149,28 @@ void StructuredClassifiersPackageImpl::initializeRedefinitionBasedDispatchStrate
 	m_redefinitionBasedDispatchStrategy_Class->setAbstract(false);
 	m_redefinitionBasedDispatchStrategy_Class->setInterface(false);
 	
+	m_redefinitionBasedDispatchStrategy_Class->_setID(REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setName("operationsMatch");
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setLowerBound(1);
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setUpperBound(1);
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setUnique(true);
 	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->setOrdered(false);
+	
+	m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation->_setID(REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation);
 		parameter->setName("ownedOperation");
@@ -163,6 +197,9 @@ void StructuredClassifiersPackageImpl::initializeRedefinitionBasedDispatchStrate
 	m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation->setUpperBound(1);
 	m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation->setUnique(true);
 	m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation->setOrdered(false);
+	
+	m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation->_setID(REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation);
 		parameter->setName("object");

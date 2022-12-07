@@ -276,9 +276,9 @@ std::shared_ptr<Any> EAttributeImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return eAny(getEAttributeType(),ecore::ecorePackage::EDATATYPE_CLASS,false); //323
+			return eAny(getEAttributeType(),ecore::ecorePackage::EDATATYPE_CLASS,false); //322
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-			return eAny(isID(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //322
+			return eAny(isID(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //321
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -288,9 +288,9 @@ bool EAttributeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return getEAttributeType() != nullptr; //323
+			return getEAttributeType() != nullptr; //322
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-			return isID() != false; //322
+			return isID() != false; //321
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -304,7 +304,7 @@ bool EAttributeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 			try
 			{
 				bool _iD = newValue->get<bool>();
-				setID(_iD); //322
+				setID(_iD); //321
 			}
 			catch(...)
 			{
