@@ -457,7 +457,7 @@
     </eAnnotations>
     <eOperations name="getOperationID" eType="#//EInt">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="doNotGenerate" value="true"/>
+        <details key="body" value="return this->_getID();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isOverrideOf" eType="#//EBoolean">
@@ -467,12 +467,6 @@
       </eAnnotations>
       <eParameters name="someOperation" eType="#//EOperation"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationID" eType="#//EInt"
-        changeable="false" defaultValueLiteral="-1">
-      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implSetterOnly"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
         changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eOperations">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -561,7 +555,7 @@
     </eAnnotations>
     <eOperations name="getFeatureID" eType="#//EInt">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="doNotGenerate" value="true"/>
+        <details key="body" value="return this->_getID();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getContainerClass">
@@ -578,12 +572,6 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsettable" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureID" eType="#//EInt"
-        changeable="false" defaultValueLiteral="-1">
-      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implSetterOnly"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
         changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eStructuralFeatures">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">

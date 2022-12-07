@@ -255,10 +255,6 @@ This leads to overwriting union getters in all subclasses of classes where a uni
 [query public getSubsetedUnionsReference(aClass : EClass): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not e.oclAsType(EModelElement).isUnion()) else false endif ).Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 [query public getSubsetsForUnion(aClass : EClass,union : EReference): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not (e.oclAsType(EReference) = union)) else false endif ).oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 
-[query public getClassifierIDName(anEClass : EClass) : String = if(name = 'EClass' or name = 'EDataType' or name = 'EEnum') then 'MetaElement' else getFeatureIDName(anEClass) endif/]
-[query public getFeatureIDName(anEClass : EClass) : String = if(name = 'EAttribute' or name = 'EReference') then 'Feature' else getOperationIDName(anEClass) endif/]
-[query public getOperationIDName(anEClass : EClass) : String = if(name = 'EOperation') then 'Operation' else 'MetaElement' endif/]
-
 [**
  * generate member names for package generation
  *

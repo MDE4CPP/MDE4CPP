@@ -106,6 +106,9 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [anEOperation.getClassMemberName()/]->setUpperBound([anEOperation.upperBound/]);
 [anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
 [anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
+
+[anEOperation.getClassMemberName()/]->_setID([anEOperation.getStaticAttributeIDName()/]);
+
 [for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
 {
 	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation([anEOperation.getClassMemberName()/]);
@@ -132,7 +135,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const unsigned int [aOperation.getStaticAttributeIDName()/] = [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash(true)/];
+static const unsigned long [aOperation.getStaticAttributeIDName()/] = [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash(true)/];
 
 [/template]
 

@@ -255,7 +255,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 	[anEAttribute.getClassMemberName()/]->setEType(unknownClass);
 }
 [else]
-	[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
 [/if]
 [anEAttribute.getClassMemberName()/]->setLowerBound([anEAttribute.lowerBound/]);
 [anEAttribute.getClassMemberName()/]->setUpperBound([anEAttribute.upperBound/]);
@@ -267,13 +267,9 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 [anEAttribute.getClassMemberName()/]->setDerived([anEAttribute.derived.toString()/]);
 [anEAttribute.getClassMemberName()/]->setOrdered([anEAttribute.ordered.toString()/]);
 [anEAttribute.getClassMemberName()/]->setID([anEAttribute.iD.toString()/]);
-{
-	std::string defaultValue = "[anEAttribute.defaultValueLiteral/]";
-	if (!defaultValue.empty())
-	{
-	   [anEAttribute.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
-	}
-}
+[anEAttribute.getClassMemberName()/]->setDefaultValueLiteral("[anEAttribute.defaultValueLiteral/]");
+
+[anEAttribute.getClassMemberName()/]->_setID([anEAttribute.getStaticAttributeIDName()/]);
 
 [/template]
 
