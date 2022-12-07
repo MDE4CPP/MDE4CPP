@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
   <uml:Model xmi:id="_iMJXkBJVEeuI2oJVG-zT2A" name="ExternalModelUsage">
     <packagedElement xmi:type="uml:Activity" xmi:id="_0Pp_cGvfEe2Jx67SqDLwOQ" name="main" node="_UZKNIHCvEe246fp4p9T-ZQ _o-OMoHCvEe246fp4p9T-ZQ _1Nov0HCvEe246fp4p9T-ZQ _9tpCAHCvEe246fp4p9T-ZQ _a49FoHCwEe246fp4p9T-ZQ _vX-HgHCwEe246fp4p9T-ZQ _zfwcQHCwEe246fp4p9T-ZQ _0rvuQHCwEe246fp4p9T-ZQ _PrcO4HCxEe246fp4p9T-ZQ _y6QtEHCxEe246fp4p9T-ZQ _mwdiUHC0Ee246fp4p9T-ZQ _7IImEHC0Ee246fp4p9T-ZQ _CJtycHC1Ee246fp4p9T-ZQ _ky_TkHC1Ee246fp4p9T-ZQ">
       <edge xmi:type="uml:ObjectFlow" xmi:id="_8Lf50HCvEe246fp4p9T-ZQ" target="_1Nov0HCvEe246fp4p9T-ZQ" source="_tX_pQHCvEe246fp4p9T-ZQ"/>
@@ -142,12 +142,12 @@
         </target>
       </node>
     </packagedElement>
-    <profileApplication xmi:id="_40NIsGvfEe2Jx67SqDLwOQ">
-      <eAnnotations xmi:id="_40Pk8GvfEe2Jx67SqDLwOQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+    <profileApplication xmi:id="_MD0qsHYREe2q-JLuN4kblA">
+      <eAnnotations xmi:id="_MD9NkHYREe2q-JLuN4kblA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
-      <appliedProfile href="file:/C:/src/MDE4CPP-FastFUML/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+      <appliedProfile href="../../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
   </uml:Model>
-  <UML4CPPProfile:MainBehavior xmi:id="_6Wy80GvfEe2Jx67SqDLwOQ" base_Behavior="_0Pp_cGvfEe2Jx67SqDLwOQ"/>
+  <UML4CPPProfile:MainBehavior xmi:id="_OhN6MHYREe2q-JLuN4kblA" base_Behavior="_0Pp_cGvfEe2Jx67SqDLwOQ"/>
 </xmi:XMI>
