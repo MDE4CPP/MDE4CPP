@@ -14,10 +14,10 @@
  */]
 [module generateMetamodelPackage('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::package::generatePackageImplementationHeader /]
-[import ecore4CPP::generator::main::package::generatePackageImplementationSource /]
-[import ecore4CPP::generator::main::package::generatePackageInterface /]
-[import ecore4CPP::generator::main::package::generatePackageInterfaceSource /]
+[import ecore4CPP::generator::main::model_package::generatePackageImplementationHeader /]
+[import ecore4CPP::generator::main::model_package::generatePackageImplementationSource /]
+[import ecore4CPP::generator::main::model_package::generatePackageInterface /]
+[import ecore4CPP::generator::main::model_package::generatePackageInterfaceSource /]
 
 [template public generatePackageImpl(anEPackage : EPackage)]
 [anEPackage.generatePackageInterface()/]

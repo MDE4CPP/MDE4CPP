@@ -20,7 +20,7 @@
 [import ecore4CPP::generator::main::generateOperation /]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::package::generatePackageHelper /]
+[import ecore4CPP::generator::main::model_package::generatePackageHelper /]
 [import ecore4CPP::generator::main::validation::validation /]
 
 [query private metaModelIncludes(anEPackage : EPackage) : Sequence(EPackage) = Sequence{anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten() /]
@@ -104,7 +104,7 @@ void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 [anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
 [/file]
 
-[comment] create additional file for create function to reduce comiling time
+[comment] create additional file for create function to reduce compile time
 [/comment]
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('_Creation.cpp'), false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/impl/[packageName/].hpp"
@@ -169,7 +169,7 @@ void [packageName/]::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> pa
 }
 [/file]
 
-[comment] create additional file for initialize function to reduce comiling time
+[comment] create additional file for initialize function to reduce compile time
 [/comment]
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('_Initialization.cpp'), false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/impl/[packageName/].hpp"
@@ -233,8 +233,17 @@ void [packageName/]::initializePackageContents()
 void [packageName/]::initialize[aClass.name.toUpperFirst()/]Content()
 {
 	[aClass.generateClassInit()/]
+	/*
+	 * EAttributes
+	 */
 	[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeInitialization()/]
+	/*
+	 * EReferences
+	 */
 	[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceInitialization()/]
+	/*
+	 * EOperations
+	 */
 	[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateOperationInitialization()/]
 }
 [/for]

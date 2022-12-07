@@ -14,10 +14,10 @@
  */]
 [module generateMetamodelFactory('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::factory::generateFactoryImplementationHeader /]
-[import ecore4CPP::generator::main::factory::generateFactoryImplementationSource /]
-[import ecore4CPP::generator::main::factory::generateFactoryInterface /]
-[import ecore4CPP::generator::main::factory::generateFactoryInterfaceSource /]
+[import ecore4CPP::generator::main::model_factory::generateFactoryImplementationHeader /]
+[import ecore4CPP::generator::main::model_factory::generateFactoryImplementationSource /]
+[import ecore4CPP::generator::main::model_factory::generateFactoryInterface /]
+[import ecore4CPP::generator::main::model_factory::generateFactoryInterfaceSource /]
 
 [template public generateFactoryImpl(anEPackage : EPackage)]
 [anEPackage.generateFactoryInterface()/]

@@ -16,7 +16,7 @@
 
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::package::generatePackageHelper /]
+[import ecore4CPP::generator::main::model_package::generatePackageHelper /]
 [import ecore4CPP::generator::main::validation::validation /]
 
 [template public generatePackageInterfaceSource(anEPackage : EPackage) {

@@ -14,7 +14,7 @@
  */]
 [module generate('http://www.eclipse.org/emf/2002/Ecore')/]
 
-[import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
+[import ecore4CPP::generator::main::model_factory::generateMetamodelFactory/]
 [import ecore4CPP::generator::main::generateApplication/]
 [import ecore4CPP::generator::main::generateBuildFile/]
 [import ecore4CPP::generator::main::generateEnum /]
@@ -22,8 +22,8 @@
 [import ecore4CPP::generator::main::generatePackageHeaderFile/]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::classes::generateClass/]
-[import ecore4CPP::generator::main::package::generateMetamodelPackage/]
-[import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
+[import ecore4CPP::generator::main::model_package::generateMetamodelPackage/]
+[import ecore4CPP::generator::main::model_plugin::generateEcorePlugin/]
 [import ecore4CPP::generator::main::validation::validation /]
 
 [template public generateModel(anEPackage : ecore::EPackage)]
