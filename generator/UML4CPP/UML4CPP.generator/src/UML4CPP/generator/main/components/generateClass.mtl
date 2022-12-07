@@ -94,7 +94,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
 */]
 [template public generateStaticClassID(aClass : Class)]
 //[aClass.eClass().name/] [aClass.generateNamespaceName(true)/]
-static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generatePolynomialRollingHash()/];
+static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.generateNamespaceName(true).generatePolynomialRollingHash()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 [/template]
@@ -107,39 +107,19 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageIDs(aPackage : Package)]
-[for (c : Class | aPackage.ownedElement->selectByType(Class)->addAll(aPackage.ownedElement->selectByType(Stereotype))->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
-	[generateStaticClassID(c)/]
-	[comment  Properties of c/]
-	[for (aProperty : Property | c.ownedAttribute) before('\t\t//Properties\n')]
-		static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
-	[/for]
-	[comment TODO Notwendig? Hierfür werden keine Getter generiert/]
-	[comment  Properties for compositions of c/]
-	[for (anAssociation : Association | c.getCompositionsToClass()) before('//Properties from compositions\n')]
-		[let containerProperty : Property = anAssociation.getCompositeProperty(c)]
-			[if (not containerProperty.opposite.oclIsUndefined())]
-				[let containmentProperty : Property = containerProperty.opposite]
-	static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containerProperty.name.toUpperCase().concat('_').concat(containmentProperty.name.toUpperCase()).generatePolynomialRollingHash()/];
-				[/let]
-			[/if]
-		[/let]
-	[/for]
-	[comment  Properties of composite owners of c (i.e. back references to classes that have parts and/or ports of type c)/]
-	[for (compositeOwnerClass : Class | c.getImplicitCompositeOwners()) before('//Properties for composite owners\n')]
-	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	static const unsigned long [c.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [c.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
-	[/for]
-	[comment  Operations of c/]
-	[for (anOperation : Operation | c.ownedOperation) before('//Operations\n')]
-	//[anOperation.generateQualifiedNameWithSignature()/]
-	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
-	[/for]
+[for (aClass : Class | aPackage.ownedElement->selectByType(Class)
+	->addAll(aPackage.ownedElement->selectByKind(Behavior))
+	->addAll(aPackage.ownedElement->selectByType(Stereotype))
+	->reject(isDoNotGenerateElement())
+	->sortedBy(name)
+	->reject(name.oclIsInvalid() or name = ''))]
+[aClass.generateStaticPackageIDsForClass()/]
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticInterfaceID(anInterface)/]
 	[comment  Properties of c/]
 	[for (aProperty : Property | anInterface.ownedAttribute) before('\t\t//Properties\n')]
-		static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
 	[/for]
 	[comment  Operations of c/]
 	[for (anOperation : Operation | anInterface.ownedOperation) before('//Operations\n')]
@@ -151,6 +131,41 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[generateStaticEnumerationID(anEnumeration)/]
 [/for]
 
+[/template]
+
+[template private generateStaticPackageIDsForClass(aClass : Class)]
+[generateStaticClassID(aClass)/]
+[if (aClass.oclIsTypeOf(Class))]
+	[comment  Properties of aClass/]
+	[for (aProperty : Property | aClass.ownedAttribute) before('//Properties\n')]
+static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	[/for]
+	[comment TODO Notwendig? Hierfür werden keine Getter generiert/]
+	[comment  Properties for compositions of aClass/]
+	[for (anAssociation : Association | aClass.getCompositionsToClass()) before('//Properties from compositions\n')]
+		[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
+			[if (not containerProperty.opposite.oclIsUndefined())]
+				[let containmentProperty : Property = containerProperty.opposite]
+static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containerProperty.name.toUpperCase().concat('_').concat(containmentProperty.name.toUpperCase()).generatePolynomialRollingHash()/];
+				[/let]
+			[/if]
+		[/let]
+	[/for]
+	[comment  Properties of composite owners of aClass (i.e. back references to classes that have parts and/or ports of type aClass)/]
+	[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Properties for composite owners\n')]
+//Property [compositeOwnerClass.name.toLowerFirst()/]
+static const unsigned long [aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
+	[/for]
+	[comment  Operations of aClass/]
+	[for (anOperation : Operation | aClass.ownedOperation) before('//Operations\n')]
+//[anOperation.generateQualifiedNameWithSignature()/]
+static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
+	[/for]
+[/if]
+[comment  Behaviors of aClass/]
+[for (aBehavior : Behavior | aClass.ownedBehavior) before('//Behaviors\n')]
+	[aBehavior.generateStaticPackageIDsForClass()/]
+[/for]
 [/template]
 
 [**
@@ -180,6 +195,9 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [template public generateClassInitialization(aClass : Class)]
 [aClass.memberName()/]->setName("[aClass.metamodelElementName()/]");
 [aClass.memberName()/]->setIsAbstract([aClass.isAbstract/]);
+
+[aClass.memberName()/]->_setID([aClass.getMemberName().toUpperCase()/]);
+
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
 gen = uml::umlFactory::eInstance()->createGeneralization_as_generalization_in_Classifier([aClass.generatePackageGetterCall(aClass)/]);
 gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);

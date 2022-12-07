@@ -103,8 +103,7 @@ virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaque
 [template private generateGetImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	return this->get(qualifiedName);
+	return this->get(_property->_getID());
 }
 
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName) const
@@ -155,8 +154,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 [template private generateSetImplementation(aClass : Class)]
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->set(_property->_getID(), value);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -341,8 +339,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 [template private generateAddImplementation(aClass : Class)]
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->add(qualifiedName, value);
+	this->add(_property->_getID(), value);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -423,8 +420,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 [template private generateUnSetImplementation(aClass : Class)]
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->unset(qualifiedName);
+	this->unset(_property->_getID());
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedName)
@@ -470,8 +466,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [template public generateRemoveImplementation(aClass : Class)]
 void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->remove(qualifiedName, value);
+	this->remove(_property->_getID(), value);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -556,41 +551,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 [template private generateOperationInvokeImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-[if (not aClass.getOperationsForInvoke()->isEmpty())]
-	[for (anOperation : Operation | aClass.getOperationsForInvoke())]
-	if(_operation == [anOperation.generatePackageGetterCall()/])
-	{
-		return this->invoke([anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/], inputArguments, outputArguments);
-	}
-	[/for]
-[/if]	
-	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-	[if (classList->size() > 0)]
-	std::shared_ptr<Any> result;
-	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call invoke() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_operation, inputArguments, outputArguments);
-	if (result != nullptr)
-	{
-		return result;
-	}
-	[/for]
-	return result;
-	[else]
-	return eAny(nullptr, -1, false);
-	[/if]
-	[/let]
-
-	/* Currently not functioning. TODO: Clarifiy how this should work in the future
-	std::string qualifiedName = _operation->getQualifiedName();
-
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
-	{
-		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
-	}
-
-	return this->invoke(qualifiedName, inputArguments, outputArguments);
-	*/
+	this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
@@ -768,142 +729,147 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 [if (not aClass.collectOpaqueBehaviorsContexedByClass()->isEmpty())]
-	[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass())]
-	if(_opaqueBehavior == [anOpaqueBehavior.generatePackageGetterCall()/])
+	unsigned long uID = _opaqueBehavior->_getID();
+
+	switch(uID)
 	{
-		[comment Retrieve all parameter values for parameters with in or inout direction /]
-		[let inputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_in) or (direction = ParameterDirectionKind::inout))]
-		[for (anInputParameter : Parameter | inputParameterList) before('\t\t//Retrieve input parameters\n') after('\n')]
-		//Retrieve [anInputParameter.direction/] parameter '[anInputParameter.name/]'
-		std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] =  inputArguments->at([inputParameterList->indexOf(anInputParameter) - 1/]);
-		[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
-		[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
-			[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
-		try
+	[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass())]
+		case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
 		{
-			[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
-		}
-		catch(...)
-		{
-			DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-			return nullptr;
-		}
-			[comment anInputParameter is typed by a Class or Interface /]
-			[else]
-				[comment anInputParameter is a single-instanced value /]
-				[if (anInputParameter.upper = 1)]
-		{
-			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(any[anInputParameter.name.toUpperFirst()/]);
-			if(umlAny)
+			[comment Retrieve all parameter values for parameters with in or inout direction /]
+			[let inputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_in) or (direction = ParameterDirectionKind::inout))]
+			[for (anInputParameter : Parameter | inputParameterList) before('\t\t//Retrieve input parameters\n') after('\n')]
+			//Retrieve [anInputParameter.direction/] parameter '[anInputParameter.name/]'
+			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] =  inputArguments->at([inputParameterList->indexOf(anInputParameter) - 1/]);
+			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
+			[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
+				[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
+			try
 			{
-				try
-				{
-					std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
-					[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(_temp);
-				}
-				catch(...)
-				{
-					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-					return nullptr;
-				}
+				[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
 			}
-			else
+			catch(...)
 			{
-				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 				return nullptr;
 			}
-		}
-				[comment anInputParameter is a bag value /]
+				[comment anInputParameter is typed by a Class or Interface /]
 				[else]
-		{
-			std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(any[anInputParameter.name.toUpperFirst()/]);
-			if(umlContainerAny)
+					[comment anInputParameter is a single-instanced value /]
+					[if (anInputParameter.upper = 1)]
 			{
-				try
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(any[anInputParameter.name.toUpperFirst()/]);
+				if(umlAny)
 				{
-					std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
-				
-					if(elementList)
+					try
 					{
-						[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppType(true)/]>>();
-						for(const std::shared_ptr<uml::Element> anElement: *elementList)
-						{
-							std::shared_ptr<[anInputParameter.type.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(anElement);
-							[anInputParameter.name/]->add(_temp);
-						}
+						std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
+						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
+						return nullptr;
 					}
 				}
-				catch(...)
+				else
 				{
-					DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
+					DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
 					return nullptr;
 				}
 			}
-			else
+					[comment anInputParameter is a bag value /]
+					[else]
 			{
-				DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-				return nullptr;
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(any[anInputParameter.name.toUpperFirst()/]);
+				if(umlContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
+					
+						if(elementList)
+						{
+							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppType(true)/]>>();
+							for(const std::shared_ptr<uml::Element> anElement: *elementList)
+							{
+								std::shared_ptr<[anInputParameter.type.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(anElement);
+								[anInputParameter.name/]->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
+					return nullptr;
+				}
 			}
-		}
+					[/if]
 				[/if]
-			[/if]
-		[/for]
-		[/let]
-		[comment Create all parameter values for parameters with out direction /]
-		[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::out)]
-		[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Create output parameters\n') after('\n')]
-		//Create [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
-		[anOutputParameter.generateCppType(false)/] [anOutputParameter.name/];
-		[/for]
-		[/let]
-		[comment Create return parameter (if there is any) and invoke the operation /]
-		//Invoke method
-		[let returnParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
-			[comment anOpaqueBehavior has a return parameter /]
-			[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
-			[let returnParameter : Parameter = returnParameterList->first()]
-		[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
-				[comment returnParameter is typed by a PrimitiveType or Enumeration /]
-				[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
-		std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
-				[comment returnParameter is typed by a Class or Interface /]
+			[/for]
+			[/let]
+			[comment Create all parameter values for parameters with out direction /]
+			[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::out)]
+			[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Create output parameters\n') after('\n')]
+			//Create [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
+			[anOutputParameter.generateCppType(false)/] [anOutputParameter.name/];
+			[/for]
+			[/let]
+			[comment Create return parameter (if there is any) and invoke the operation /]
+			//Invoke method
+			[let returnParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+				[comment anOpaqueBehavior has a return parameter /]
+				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
+				[let returnParameter : Parameter = returnParameterList->first()]
+			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
+					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
+					[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
+			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
+					[comment returnParameter is typed by a Class or Interface /]
+					[else]
+			std::shared_ptr<Any> returnArgument = [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+					[/if]
+				[/let]
+				[comment anOpaqueBehavior has no return parameter /]
 				[else]
-		std::shared_ptr<Any> returnArgument = [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
+			std::shared_ptr<Any> returnArgument = eAny(nullptr, -1, false);
 				[/if]
 			[/let]
-			[comment anOpaqueBehavior has no return parameter /]
-			[else]
-		this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
-		std::shared_ptr<Any> returnArgument = eAny(nullptr, -1, false);
-			[/if]
-		[/let]
-
-		[comment Add all parameter values for parameters with inout or out direction the outputArguments /]
-		[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::out))]
-		[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Store output parameters\n') after('\n')]
-			[comment For inout parameters, we can reuse the previously retrieved Any-object IF the stored value is of non-primitive type (i.e. stored as a shared pointer /]
-		//Store [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
-			[if (anOutputParameter.direction = ParameterDirectionKind::inout)]
-				[comment Only IF the inout parameter is primitive-typed, the new value (i.e. after operation invocation) has to be re-stored /]
-				[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
-		any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]); 
-				[/if]
-			[comment For out parameters, create a new Any-object to store the value /]
-			[else]
-				[comment anOutputParameter is typed by a PrimitiveType or Enumeration /]
-				[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
-		std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]);
-				[comment anOutputParameter is typed by a Class or Interface /]
+	
+			[comment Add all parameter values for parameters with inout or out direction the outputArguments /]
+			[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::out))]
+			[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Store output parameters\n') after('\n')]
+				[comment For inout parameters, we can reuse the previously retrieved Any-object IF the stored value is of non-primitive type (i.e. stored as a shared pointer /]
+			//Store [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
+				[if (anOutputParameter.direction = ParameterDirectionKind::inout)]
+					[comment Only IF the inout parameter is primitive-typed, the new value (i.e. after operation invocation) has to be re-stored /]
+					[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
+			any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]); 
+					[/if]
+				[comment For out parameters, create a new Any-object to store the value /]
 				[else]
-		std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = [if(anOutputParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+					[comment anOutputParameter is typed by a PrimitiveType or Enumeration /]
+					[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
+			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]);
+					[comment anOutputParameter is typed by a Class or Interface /]
+					[else]
+			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = [if(anOutputParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+					[/if]
 				[/if]
-			[/if]
-		outputArguments->add(any[anOutputParameter.name.toUpperFirst()/]);
-		[/for]
-		[/let]
-		return returnArgument;
-	}
+			outputArguments->add(any[anOutputParameter.name.toUpperFirst()/]);
+			[/for]
+			[/let]
+			return returnArgument;
+		}
 	[/for]
+	}
 [/if]	
 	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
 	[if (classList->size() > 0)]

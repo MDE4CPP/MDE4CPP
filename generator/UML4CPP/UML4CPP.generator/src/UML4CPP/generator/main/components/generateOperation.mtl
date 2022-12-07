@@ -151,6 +151,9 @@ else
 [for (anOwnedParameter : Parameter | anOperation.ownedParameter) separator ('\n')]
 [anOwnedParameter.generateParameterInitialization()/]
 [/for]
+
+[anOperation.memberName()/]->_setID([anOperation.getMemberName().toUpperCase()/]);
+
 [anOperation.generateStereotypeApplication()/]
 [/template]
 
