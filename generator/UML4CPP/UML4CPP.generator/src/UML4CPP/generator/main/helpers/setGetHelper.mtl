@@ -551,7 +551,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 [template private generateOperationInvokeImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-	this->invoke(_operation->_getID(), inputArguments, outputArguments);
+	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
