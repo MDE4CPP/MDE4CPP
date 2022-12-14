@@ -45,12 +45,14 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 
-#include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Factory.hpp"
-#include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
-[for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName()))]
-#include "[aPackage.generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
+[for (classPackage : Package | aPackage.getClassesOwnedByPackage()._package->asSet()->sortedBy(myQualifiedName()))]
+#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Factory.hpp"
+#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Package.hpp"
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->excluding(aPackage)]
+[for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName()))]
+#include "[aClass._package.generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
+[/for]
+[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
 		[if (externalPackage.isReflectionModel())]
@@ -86,16 +88,21 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 
 	//Model-internal types
-[let packageNamespace : String = aPackage.generateNamespace(true)]
-	if (typePackage == [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::eInstance())
+[let internalPackages : OrderedSet(Package) = aPackage.getClassesOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
+[if (internalPackages->size() = 0)]
+	//No internal types
+[else]
+[for (classPackage : Package | internalPackages)]
+[let packageNamespace : String = classPackage.generateNamespace(true)]
+	[getIfElseIfString(internalPackages->indexOf(classPackage))/](typePackage == [classPackage.generateNamespace(false)/]::[classPackage.name/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
-		[for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName())) separator('\n')]
+		[for (aClass : Class | aPackage.getClassesOwnedByPackage()->select(c : Class | c._package = classPackage)->sortedBy(myQualifiedName())) separator('\n')]
 			[let className : String = aClass.name.toUpperFirst()]
-			case [packageNamespace/]::[aPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
+			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[aPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
+				std::shared_ptr<[classPackage.generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
 				return instance;
 			}
 			[/let]
@@ -108,39 +115,39 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 		}
 	}
 [/let]
+[/for]
+[/if]
+[/let]
 	//Model-external types
-	else
-	{
-	[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->excluding(aPackage)]
-	[if (externalPackageList->size() = 0)]
+[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[if (externalPackageList->size() = 0)]
 	//No external types used in Activities of this model
-	[else]
-		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-		std::string pluginName;
+[else]
+	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	std::string pluginName;
 	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
-		if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
-		{
-			pluginName = "[externalPackage.name/]Exec";
-		}
-	[/for]
-		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
-		if (plugin)
-		{
-			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
-
-			std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
-			if (executionPlugin)
-			{
-				DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
-
-				return executionPlugin->instantiateClass(type);
-			}
-			else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
-		}
-		else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
-	[/if]
-	[/let]
+	if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
+	{
+		pluginName = "[externalPackage.getRootPackage().name/]Exec";
 	}
+	[/for]
+	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	if (plugin)
+	{
+		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+
+		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+		if (executionPlugin)
+		{
+			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+
+			return executionPlugin->instantiateClass(type);
+		}
+		else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+	}
+	else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+[/if]
+[/let]
 
 [/if]
 	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
@@ -153,3 +160,5 @@ void [packageName/]LocusImpl::setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::L
 }
 [/file]
 [/template]
+
+[query private getIfElseIfString(index : Integer) : String = if(index = 1) then 'if' else 'else if' endif /]

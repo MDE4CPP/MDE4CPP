@@ -18,7 +18,9 @@ originalName : String = aPackage.generateNamespacePath(false);
 [defineDebugMacro()/]
 
 //Model includes
-#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
+[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage().getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
+#include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
+[/for]
 
 //fUML includes
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"

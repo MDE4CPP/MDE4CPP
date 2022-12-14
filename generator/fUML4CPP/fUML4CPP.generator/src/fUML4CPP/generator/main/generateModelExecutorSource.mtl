@@ -76,14 +76,19 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "[aPackage.generateNamespace(false)/]/[aPackage.generateNamespace(false)/]Package.hpp"
-[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
-#include "[aPackage.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+[for (requiredPackage : Package | 
+	aPackage.getEnumerationsOwnedByPackage()._package
+	->addAll(aPackage.getBehaviorsOwnedByPackage()->filter(OpaqueBehavior).getNearestPackage())
+->flatten()->asSet()->sortedBy(myQualifiedName()))]
+#include "[requiredPackage.generateNamespacePath(true)/]/[requiredPackage.myNamespaceName()/]Package.hpp"
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()->excluding(aPackage)]
+[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
+#include "[anEnumeration._package.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+[/for]
+[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
-#include "[externalPackage.generateNamespace(false)/]/[externalPackage.generateNamespace(false)/]Package.hpp"
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
 	[/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
@@ -99,10 +104,10 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
 [anIncludeString/]
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->excluding(aPackage)]
+[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
-#include "[externalPackage.generateNamespace(false)/]/[externalPackage.generateNamespace(false)/]Package.hpp"
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
 	[/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
@@ -138,53 +143,58 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 				std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
 	
 				//Model-internal Enumerations
-				if(enumerationPackage == [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::eInstance())
+[let internalPackages : OrderedSet(Package) = aPackage.getEnumerationsOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
+[if (internalPackages->size() = 0)]
+				//No internal enumerations
+[else]
+	[for (enumerationPackage : Package | internalPackages)]
+				[getIfElseIfString(internalPackages->indexOf(enumerationPackage))/](enumerationPackage == [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.name/]Package::eInstance())
 				{
-					[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
+					[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->select(e : Enumeration | e._package = enumerationPackage)->sortedBy(myQualifiedName()))]
 					if(enumeration == [anEnumeration.generatePackageGetterCall()/])
 					{
 						[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
 						if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
 						{	
-							return eAny([aPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [aPackage.generateNamespace(false)/]::[aPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+							return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
 						}
 						[/for]
 					}
 					[/for]
 				}
+	[/for]
+[/if]
+[/let]
 				//Model-external Enumerations
-				else
-				{
-					[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->excluding(aPackage)]
-					[if (externalPackageList->size() = 0)]
-					//No external enumerations used in Activities of this model
-					[else]
-						std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-						std::string pluginName;
-					[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
-						if(enumerationPackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
-						{
-							pluginName = "[externalPackage.name/]Exec";
-						}
-					[/for]
-						std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
-						if (plugin)
-						{
-							DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+				[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+				[if (externalPackageList->size() = 0)]
+				//No external enumerations used in Activities of this model
+				[else]
+					std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+					std::string pluginName;
+				[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+					if(enumerationPackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
+					{
+						pluginName = "[externalPackage.getRootPackage().name/]Exec";
+					}
+				[/for]
+					std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+					if (plugin)
+					{
+						DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 				
-							std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
-							if (executionPlugin)
-							{
-								DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+						std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+						if (executionPlugin)
+						{
+							DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 				
-								return executionPlugin->evaluateSpecification(specification);
-							}
-							else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+							return executionPlugin->evaluateSpecification(specification);
 						}
-						else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
-					[/if]
-					[/let]
-				}
+						else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+					}
+					else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+				[/if]
+				[/let]
 			}
 		}
 		default:
@@ -233,7 +243,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		//Model-external activities
 		else
 		{
-			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->excluding(aPackage)]
+			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 			[if (externalPackageList->size() = 0)]
 			//No external activities called in Activities of this model
 			[else]
@@ -243,7 +253,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 				[for (externalActivityOfPackage : Activity | externalPackage.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities()))]
 			if(behavior == [externalActivityOfPackage.generatePackageGetterCall()/]) 
 			{
-				pluginName = "[externalPackage.name/]Exec";
+				pluginName = "[externalPackage.getRootPackage().name/]Exec";
 			}
 				[/for]
 			[/for]
@@ -279,7 +289,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 {
 	std::string pluginName;
 
-	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->excluding(aPackage)]
+	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 	[if (externalPackageList->size() = 0)]
 	//No external opaque behaviors called in Activities of this model
 	[else]
@@ -287,7 +297,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		[for (externalOpaqueBehaviorsOfPackage : OpaqueBehavior | externalPackage.allOwnedElements()->filter(OpaqueBehavior)->intersection(aPackage.getCalledOpaqueBehaviors()))]
 	if(opaqueBehavior == [externalOpaqueBehaviorsOfPackage.generatePackageGetterCall()/]) 
 	{
-		pluginName = "[externalPackage.name/]Exec";
+		pluginName = "[externalPackage.getRootPackage().name/]Exec";
 	}
 		[/for]
 	[/for]
@@ -408,7 +418,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	//Model-external OpaqueBehavior
 	else
 	{
-	[if (aPackage.getPackagesOfCalledOpaqueBehaviors()->excluding(aPackage)->size() = 0)]
+	[if (aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))->size() = 0)]
 		//No external opaque behaviors called in Activities of this model
 	[else]
 		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
@@ -441,3 +451,4 @@ void [packageName/]ExecutorImpl::setThisExecutorPtr(std::weak_ptr</*PSCS::Semant
 [/template]
 
 [query private collectPackageGlobalFunctions_IncludeString(aPackage : Package) : String = '#include "' + aPackage.generateNamespacePath(true) + '/_GlobalFunctions.hpp"' /]
+[query private getIfElseIfString(index : Integer) : String = if(index = 1) then 'if' else 'else if' endif /]

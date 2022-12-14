@@ -35,9 +35,12 @@
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
 
-[if (aPackage.collectActivitiesOwnedByPackage()->size() > 0)]
+//Includes of model-specific Locus, Executor and ExecutionFactory
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutorImpl.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutionFactoryImpl.hpp"
+
 [generateMainIncludes()/]
-[/if]
 
 using namespace [aPackage.generateNamespace(false)/];
 
@@ -86,9 +89,7 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, 
 void [packageName/]::initialize()
 {
 	[comment initialization of execution locus, factory, executer/]
-	[if (collectActivitiesOwnedByPackage()->size() > 0)]
 	[generateExecutionPluginInitialization()/]
-	[/if]
 
 	m_IsInitialized = true;
 }
@@ -187,11 +188,10 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 #include "uml/UMLAny.hpp"
 #include "uml/UMLContainerAny.hpp"
 
-//Includes of model-specific Locus, Executor and model package
-#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
-#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
-#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutorImpl.hpp"
-#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]ExecutionFactoryImpl.hpp"
+//Model includes
+[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage().getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
+#include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
+[/for]
 [/template]
 
 
