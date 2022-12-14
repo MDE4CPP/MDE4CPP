@@ -27,7 +27,6 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
-[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
  
 [**
@@ -62,7 +61,7 @@
 		aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 		aPackage.packageImport.importedPackage
 	}->flatten()->reject(oclIsUndefined())
-	->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) 
+	->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()).getRootPackage()->asSet()
 /]
 
 [**
