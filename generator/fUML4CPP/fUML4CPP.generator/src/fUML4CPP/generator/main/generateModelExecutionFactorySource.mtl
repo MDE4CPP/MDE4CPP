@@ -77,18 +77,23 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context)
 {
-	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity>(behavior);
-
-	[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage())]
-	if(activity == [anActivity.generatePackageGetterCall()/])
+[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
+[if (activitiesOwnedByPackage->size() > 0)]
+	switch(behavior->_getID())
 	{
-		if(!m_[anActivity.memberName()/]ExecutionPrototype)
+	[for (anActivity : Activity | activitiesOwnedByPackage)]
+		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
 		{
-			this->create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
+			if(!m_[anActivity.memberName()/]ExecutionPrototype)
+			{
+				this->create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
+			}
+			return m_[anActivity.memberName()/]ExecutionPrototype;
 		}
-		return m_[anActivity.memberName()/]ExecutionPrototype;
-	}
 	[/for]
+	}
+[/if]
+[/let]
 
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::createExecution(behavior, context);
 }

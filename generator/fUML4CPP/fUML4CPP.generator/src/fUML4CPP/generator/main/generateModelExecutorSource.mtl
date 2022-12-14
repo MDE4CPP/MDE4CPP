@@ -150,17 +150,25 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 	[for (enumerationPackage : Package | internalPackages)]
 				[getIfElseIfString(internalPackages->indexOf(enumerationPackage))/](enumerationPackage == [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.name/]Package::eInstance())
 				{
-					[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->select(e : Enumeration | e._package = enumerationPackage)->sortedBy(myQualifiedName()))]
-					if(enumeration == [anEnumeration.generatePackageGetterCall()/])
+					[let enumerationsOfPackage : Set(Enumeration) = aPackage.getEnumerationsOwnedByPackage()->select(e : Enumeration | e._package = enumerationPackage)->sortedBy(myQualifiedName())->asSet()]
+					[if (enumerationsOfPackage->size() > 0)]
+					switch(enumeration->_getID())
 					{
-						[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
-						if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
-						{	
-							return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+						[for (anEnumeration : Enumeration | enumerationsOfPackage)]
+						case [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.getPackageName()/]Package::[anEnumeration.getMemberName().toUpperCase()/]:
+						{
+							[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
+							if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
+							{	
+								return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+							}
+							[/for]
+							return nullptr;
 						}
-						[/for]
 					}
-					[/for]
+						[/for]
+					[/if]
+					[/let]
 				}
 	[/for]
 [/if]
@@ -247,31 +255,31 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			[if (externalPackageList->size() = 0)]
 			//No external activities called in Activities of this model
 			[else]
-				std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-				std::string pluginName;
-			[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
-				[for (externalActivityOfPackage : Activity | externalPackage.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities()))]
-			if(behavior == [externalActivityOfPackage.generatePackageGetterCall()/]) 
-			{
-				pluginName = "[externalPackage.getRootPackage().name/]Exec";
-			}
-				[/for]
-			[/for]
-				std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
-				if (plugin)
+			std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+			std::string pluginName;
+				[for (externalActivity : Activity | externalPackageList.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities())) 
+				before('\t\t\tswitch(behavior->_getID())\n\t\t\t{\n') after('\n\t\t\t}')]
+				case [externalActivity.getNearestPackage().generateNamespace(true)/]::[externalActivity.getNearestPackage().getPackageName()/]Package::[externalActivity.getMemberName().toUpperCase()/]:
 				{
-					DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
-		
-					std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
-					if (executionPlugin)
-					{
-						DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
-		
-						return executionPlugin->executeBehavior(behavior);
-					}
-					else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+					pluginName = "[externalActivity.getNearestPackage().getRootPackage().name/]Exec";
+					break;
 				}
-				else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+				[/for]
+			std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+			if (plugin)
+			{
+				DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+		
+				std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+				if (executionPlugin)
+				{
+					DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+	
+					return executionPlugin->executeBehavior(behavior);
+				}
+				else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+			}
+			else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
 			[/if]
 			[/let]
 		}
@@ -293,14 +301,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	[if (externalPackageList->size() = 0)]
 	//No external opaque behaviors called in Activities of this model
 	[else]
-	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
-		[for (externalOpaqueBehaviorsOfPackage : OpaqueBehavior | externalPackage.allOwnedElements()->filter(OpaqueBehavior)->intersection(aPackage.getCalledOpaqueBehaviors()))]
-	if(opaqueBehavior == [externalOpaqueBehaviorsOfPackage.generatePackageGetterCall()/]) 
-	{
-		pluginName = "[externalPackage.getRootPackage().name/]Exec";
-	}
+		[for (externalOpaqueBehavior : OpaqueBehavior | externalPackageList.allOwnedElements()->filter(OpaqueBehavior)->intersection(aPackage.getCalledOpaqueBehaviors()))
+		before('\tswitch(opaqueBehavior->_getID())\n\t{\n') after('\n\t}')]
+		case [externalOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[externalOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[externalOpaqueBehavior.getMemberName().toUpperCase()/]:
+		{
+			pluginName = "[externalOpaqueBehavior.getNearestPackage().getRootPackage().name/]Exec";
+			break;
+		}
 		[/for]
-	[/for]
 	[/if]
 	[/let]
 
@@ -324,87 +332,89 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	[for (anOpaqueBehavior : OpaqueBehavior | 	aPackage.allOwnedElements()
 	->filter(OpaqueBehavior)
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
-	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))]
-		if(opaqueBehavior == [anOpaqueBehavior.generatePackageGetterCall()/])
-		{	
-		[comment 
-			If the OpaqueBehavior has a specification (i.e. it implements an Operation),
-			then invoke this Operation on the corresponding context object
-		/]
-		[if (not anOpaqueBehavior.specification.oclIsUndefined())]
-			[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
-			[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
-			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
-			if(!context)
-			{
-				DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
-				return outputParameterValues;
-			}
-			result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
+	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))
+	before('\t\tswitch(opaqueBehavior->_getID())\n\t\t{\n') after('\n\t\t}')]
+			case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
+			{	
+			[comment 
+				If the OpaqueBehavior has a specification (i.e. it implements an Operation),
+				then invoke this Operation on the corresponding context object
+			/]
+			[if (not anOpaqueBehavior.specification.oclIsUndefined())]
+				[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
+				[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+					return outputParameterValues;
+				}
+				result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
+					[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+					[for (outputParameter : Parameter | outputParameters) before('\n')]
+				//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
+					[/for]
+					[/let]
+					[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+					[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+					[/let]
+					[/if]
+				[/let]
+				[/if]
+			[comment 
+				Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
+				but it has a defined context and this context is a class,
+				then execute this Behavior on the corresponding context object
+			/]
+			[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+					return outputParameterValues;
+				}
+				result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
 				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 				[for (outputParameter : Parameter | outputParameters) before('\n')]
-			//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-			outputParameterValues->add([outputParameter.name/]ParameterValue);
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
 				[/for]
 				[/let]
 				[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 				[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
 				[/let]
 				[/if]
-			[/let]
+			[comment 
+				Else execute the global model function corresponding to this Behavior
+			/]
+			[else]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
+				// and is therefore realized as a global function
+				result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
+				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+				[for (outputParameter : Parameter | outputParameters) before('\n')]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
+				[/for]
+				[/let]
+				[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+				[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+				[/let]
+				[/if]
 			[/if]
-		[comment 
-			Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
-			but it has a defined context and this context is a class,
-			then execute this Behavior on the corresponding context object
-		/]
-		[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
-			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
-			if(!context)
-			{
-				DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
-				return outputParameterValues;
+				break;
 			}
-			result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
-			[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
-			[for (outputParameter : Parameter | outputParameters) before('\n')]
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-			outputParameterValues->add([outputParameter.name/]ParameterValue);
-			[/for]
-			[/let]
-			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
-			[/let]
-			[/if]
-		[comment 
-			Else execute the global model function corresponding to this Behavior
-		/]
-		[else]
-			// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
-			// and is therefore realized as a global function
-			result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
-			[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
-			[for (outputParameter : Parameter | outputParameters) before('\n')]
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-			[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
-			[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
-			outputParameterValues->add([outputParameter.name/]ParameterValue);
-			[/for]
-			[/let]
-			[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-			[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-			returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
-			[/let]
-			[/if]
-		[/if]
-		}
 	[/for]
 
 		if(result)

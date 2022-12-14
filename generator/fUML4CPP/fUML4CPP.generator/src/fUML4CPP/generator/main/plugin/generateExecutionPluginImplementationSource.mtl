@@ -88,7 +88,7 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, 
 
 void [packageName/]::initialize()
 {
-	[comment initialization of execution locus, factory, executer/]
+	[comment initialization of execution locus, factory, executor/]
 	[generateExecutionPluginInitialization()/]
 
 	m_IsInitialized = true;
@@ -100,12 +100,19 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 	{
 		initialize();
 	}
-[for (act : Activity | aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName()))]
-	if (activity == [act.generatePackageGetterCall()/])
+[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
+[if (activitiesOwnedByPackage->size() > 0)]
+	switch(activity->_getID())
 	{
-		[act.generateActivityExecution()/]
+	[for (anActivity : Activity | activitiesOwnedByPackage)]
+		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
+		{
+			[anActivity.generateActivityExecution()/]
+		}
+	[/for]
 	}
-[/for]
+[/if]
+[/let]
 	return nullptr;
 }
 
