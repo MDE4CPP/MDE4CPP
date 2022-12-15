@@ -95,10 +95,12 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 [for (classPackage : Package | internalPackages)]
 [let packageNamespace : String = classPackage.generateNamespace(true)]
 	[getIfElseIfString(internalPackages->indexOf(classPackage))/](typePackage == [classPackage.generateNamespace(false)/]::[classPackage.name/]Package::eInstance())
-	{		
-		switch(type->getMetaElementID())
-		{
-		[for (aClass : Class | aPackage.getClassesOwnedByPackage()->select(c : Class | c._package = classPackage)->sortedBy(myQualifiedName())) separator('\n')]
+	{	
+		[let classesOfPackage : OrderedSet(Class) = aPackage.getClassesOwnedByPackage()->select(c : Class | c._package = classPackage)->sortedBy(myQualifiedName())]
+		[if (classesOfPackage->size() = 0)]
+		//Package does not contain any classes
+		[else]
+		[for (aClass : Class | classesOfPackage) before('\t\tswitch(type->_getID())\n\t\t{\n') after('\t\t}\n')]
 			[let className : String = aClass.name.toUpperFirst()]
 			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
@@ -107,12 +109,8 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 			}
 			[/let]
 		[/for]
-			default:
-			{
-				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
-				//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
-			}
-		}
+		[/if]
+		[/let]
 	}
 [/let]
 [/for]

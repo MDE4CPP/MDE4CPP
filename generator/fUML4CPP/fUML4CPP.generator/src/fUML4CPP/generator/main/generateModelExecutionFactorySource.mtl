@@ -79,9 +79,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 {
 [let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]
-	switch(behavior->_getID())
-	{
-	[for (anActivity : Activity | activitiesOwnedByPackage)]
+	[for (anActivity : Activity | activitiesOwnedByPackage)  before('\tswitch(behavior->_getID())\n\t{\n') after('\t}\n')]
 		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
 		{
 			if(!m_[anActivity.memberName()/]ExecutionPrototype)
@@ -91,7 +89,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 			return m_[anActivity.memberName()/]ExecutionPrototype;
 		}
 	[/for]
-	}
 [/if]
 [/let]
 

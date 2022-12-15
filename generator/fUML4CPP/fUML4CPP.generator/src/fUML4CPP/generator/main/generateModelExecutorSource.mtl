@@ -152,9 +152,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 				{
 					[let enumerationsOfPackage : Set(Enumeration) = aPackage.getEnumerationsOwnedByPackage()->select(e : Enumeration | e._package = enumerationPackage)->sortedBy(myQualifiedName())->asSet()]
 					[if (enumerationsOfPackage->size() > 0)]
-					switch(enumeration->_getID())
-					{
-						[for (anEnumeration : Enumeration | enumerationsOfPackage)]
+						[for (anEnumeration : Enumeration | enumerationsOfPackage) before('\t\t\t\t\tswitch(enumeration->_getID())\n\t\t\t\t\t{\n') after('\t\t\t\t\t}\n')]
 						case [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.getPackageName()/]Package::[anEnumeration.getMemberName().toUpperCase()/]:
 						{
 							[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
@@ -165,7 +163,6 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 							[/for]
 							return nullptr;
 						}
-					}
 						[/for]
 					[/if]
 					[/let]

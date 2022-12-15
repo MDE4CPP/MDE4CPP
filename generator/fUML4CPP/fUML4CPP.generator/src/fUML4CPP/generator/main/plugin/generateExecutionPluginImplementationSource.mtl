@@ -102,15 +102,12 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 	}
 [let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]
-	switch(activity->_getID())
-	{
-	[for (anActivity : Activity | activitiesOwnedByPackage)]
+	[for (anActivity : Activity | activitiesOwnedByPackage) before('\n\tswitch(activity->_getID())\n\t{\n') after('\t}\n')]
 		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
 		{
 			[anActivity.generateActivityExecution()/]
 		}
 	[/for]
-	}
 [/if]
 [/let]
 	return nullptr;
@@ -276,7 +273,7 @@ std::shared_ptr<[aStrategyClass.generateNamespaceName(true)/]> [aStrategyClass.n
 m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
 [/template]
 
-[template private generateActivityExecution(anActivity : Activity)]
+[template private generateActivityExecution(anActivity : Activity) post(trim())]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (aParameter : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))) before('\n')]
 //Creating ParameterValue for input parameter [anActivity.name/]::[aParameter.name/]
