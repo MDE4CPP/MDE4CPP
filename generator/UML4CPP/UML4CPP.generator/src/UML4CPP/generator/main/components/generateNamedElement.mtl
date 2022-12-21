@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validation /]
 
 [**
  generate getter function declaration for meta model element
@@ -32,10 +33,10 @@ virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(Na
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
 virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/][abstractSuffix(impl)/];
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [/template]
 
@@ -67,10 +68,10 @@ std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().
 	return [anElement.oclAsType(ConnectorEnd).memberName()/];
 }
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [/template]
 
@@ -84,9 +85,9 @@ std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(NamedEleme
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(ConnectorEnd).memberName()/] = nullptr;
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [else]
-[anElement.handleUndefinedElement()/]
+[printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
 [/template]

@@ -22,7 +22,7 @@
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 
 [**
  * generate creation of meta model instance for an InterfaceRealization element
@@ -60,9 +60,6 @@
 */]
 [template public generateInterfaceExtensions(aClass : Class) post (trim())]
 [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))]
-[for (aSupplier : NamedElement | interfaceR.supplier->select(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
-['class '.concat(aClass.name).concat(': interface realization cannot be generated because interface is undefined (').concat(aSupplier.toString()).concat(')').registerError()/]
-[/for]
 [for (aSupplier : NamedElement | interfaceR.supplier->reject(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
 public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.getNearestPackage().generateNamespace(false)/]::[/if][aSupplier.name/][/for]
 [/for]

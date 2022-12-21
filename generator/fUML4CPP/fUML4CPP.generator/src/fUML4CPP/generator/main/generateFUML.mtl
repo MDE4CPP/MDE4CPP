@@ -56,29 +56,19 @@
 [comment import for build files generation /]
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [comment import for model validation /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation /]
 
 
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
-
-[if (aPackage.name.oclIsUndefined() or aPackage.name = '')]
-	['package has no name '.registerError()/]
-[else]
-	[if (not aPackage.isDoNotGenerate())]
-		[aPackage.generateUML()/]
-		[if (aPackage.isPackageOnly())]
-			[aPackage.generateFUMLModelForPackageOnly()/]
-		[else]
-			[aPackage.generateFUMLModel()/]
-		[/if]
+[if (not aPackage.isDoNotGenerate())]
+	[aPackage.generateUML()/]
+	[if (aPackage.isPackageOnly())]
+		[aPackage.generateFUMLModelForPackageOnly()/]
+	[else]
+		[aPackage.generateFUMLModel()/]
 	[/if]
-[/if]
-
-[if (aPackage.errorExisting())]
-	[aPackage.printErrors()/]
-	[closeWithErrorExit(1)/]
 [/if]
 [/template]
 

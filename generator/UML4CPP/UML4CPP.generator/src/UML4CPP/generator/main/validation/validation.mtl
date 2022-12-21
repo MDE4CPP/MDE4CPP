@@ -1,0 +1,128 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2019 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to provide queries triggering the functions of the service Class ValidationService 
+ * 
+ */]
+[module validation('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+
+[**
+ * Invocation queries for utility services
+ * NOTE: These invocations have to be made via templates (not queries), because Acceleo caches results of queries (see https://wiki.eclipse.org/Acceleo/FAQ#My_query_is_only_executed_once).
+ * So if the same call for a print-query is done more than once with the same parameters (e.g. the same string) the query will not be executed again,
+ * but the previously cached result of this query call will be returned.
+ * This would make it impossible to output the same string multiple times during generation.
+ * @param message : The message that should be printed out
+ * @param callingOperation : The name of the query/template from which the message is originated (optional for Infos, mandatory for Warnings and Errors) 
+ * @param level : A message ca be provided a level (optional for all). The level of a message has two effects: 
+ * 				  1) Infos as well as Warnings can be disabled from a specific level (see disableInfos(level : Integer) or disableWarnings(level : Integer) below)
+ * 				  2) The level of a message also effects it's indentation when printed out, so that messages can be printed hierarchically
+*/]
+[comment Prints an INFO message /]
+[template public printInfo(message : String, callingOperation : String, level : Integer) post(trim())][invoke('UML4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printInfo(message : String, callingOperation : String) post(trim())][printInfo(message, callingOperation, 0)/][/template]
+[template public printInfo(message : String, level : Integer) post(trim())][printInfo(message, '', level)/][/template]
+[template public printInfo(message : String) post(trim())][printInfo(message, '')/][/template]
+
+[comment Prints a WARNING message /]
+[template public printWarning(message : String, callingOperation : String, level : Integer) post(trim())][invoke('UML4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printWarning(message : String, callingOperation : String) post(trim())][printWarning(message, callingOperation, 0)/][/template]
+
+[comment Prints an ERROR message /]
+[template public printError(message : String, callingOperation : String, level : Integer) post(trim())][invoke('UML4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printError(message : String, callingOperation : String) post(trim())][printError(message, callingOperation, 0)/][/template]
+
+[comment Disables the printing of infos /]
+[query public disableInfosAll(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'disableInfos()', Sequence{})
+/]
+[comment Disables the printing of infos from a specific level of depth /]
+[comment Has to be implemented as a template, see explanation at the top of this file /]
+[template public disableInfos(level : Integer) post(trim())][invoke('UML4CPP.generator.main.validation.ValidationService', 'disableInfos(java.lang.Integer)', Sequence{level})/][/template]
+
+[comment Enables the printing of infos /]
+[query public enableInfos(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'enableInfos()', Sequence{})
+/]
+
+[comment Disables the printing of warnings /]
+[query public disableWarningsAll(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'disableWarnings()', Sequence{})
+/]
+[comment Disables the printing of warnings from a specific level of depth /]
+[comment Has to be implemented as a template, see explanation at the top of this file /]
+[template public disableWarnings(level : Integer) post(trim())][invoke('UML4CPP.generator.main.validation.ValidationService', 'disableWarnings(java.lang.Integer)', Sequence{level})/][/template]
+
+[comment Enables the printing of warnings /]
+[query public enableWarnings(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'enableWarnings()', Sequence{})
+/]
+
+[comment Retrieves if the model has already been validated or not /]
+[query public getValidationStatus(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'getValidationStatus()', Sequence{})
+/]
+
+[comment Exits the generator with certain exit code /]
+[query public closeWithErrorExit(exitStatus : Integer) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'closeWithErrorExit(java.lang.Integer)', Sequence{exitStatus})
+/]
+
+[comment Checks whether errors occured during model validation /]
+[query private errorsExist(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'errorsExist()', Sequence{})
+/]
+
+[comment Checks whether warnings occured during model validation /]
+[query private warningsExist(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'warningsExist()', Sequence{})
+/]
+
+[comment Sets if the model has already been validated or not /]
+[query private setValidationStatus(status : Boolean) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'setValidationStatus(java.lang.Boolean)', Sequence{status})
+/]
+
+[comment prints out all error messages that occured during model validation /]
+[query private printErrors(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'printErrors()', Sequence{})
+/]
+
+[comment prints out all warning messages that occured during model validation /]
+[query private printWarnings(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'printWarnings()', Sequence{})
+/]
+
+
+[**
+ * Additional utility queries for standardized messages
+*/]
+	[**
+	 * Messages to inform about the generation of an element or the element being skipped because it is configured as doNotGenerate
+	*/]
+[query public packageGenerationMessage(aPackage : Package) : String = 
+	'Generating ' + aPackage.eClass().name + ' ' 
+	+ aPackage.generateNamespace(false)
+/]
+
+[query public packageNoGenerationMessage(aPackage : Package) : String = 
+	'Skipping ' + aPackage.eClass().name + ' ' 
+	+ aPackage.generateNamespace(false)
+	+ ' because it is configured as doNotGenerate'
+/]

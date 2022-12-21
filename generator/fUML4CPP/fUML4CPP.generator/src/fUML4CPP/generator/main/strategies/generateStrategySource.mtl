@@ -5,7 +5,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 [import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::components::generateProperty /]
@@ -32,9 +32,7 @@
 
 //Includes from attributes, operation parameters, and imports
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? (oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
-[if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
-// undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
-[elseif (cl.getNearestPackage().hasIncludePath())]
+[if (cl.getNearestPackage().hasIncludePath())]
 #include "[cl.getNearestPackage().getIncludePath()/]"
 [else]
 #include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
@@ -54,12 +52,8 @@
 [/let]
 [/for]
 [for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('//Includes from InstanceValues\n')]
-[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
-// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
-[else]
 #include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
 #include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
-[/if]
 [/for]
 
 [aClass.generateStrategySourceIncludesSpecific()/]

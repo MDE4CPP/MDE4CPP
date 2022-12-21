@@ -8,7 +8,7 @@
 [import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
 [import UML4CPP::generator::main::profiles::PSCSStrategiesProfileKeywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation /]
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateProperty /]
 
@@ -36,15 +36,11 @@ namespace [aPackage.generateNamespace(false)/]
 template<class T> class Bag;
 
 [for (usedType : Type | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) before('//Forward declarations for used types\n') separator('\n') after('\n')]
-	[if (usedType.oclIsUndefined() or usedType.name.oclIsUndefined())]
-// undefined  [usedType.eClass().name/] ([usedType.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(usedType.eClass().name).concat(' ').concat(usedType.toString()).registerError()/]
-	[else]
 [if (not usedType.getNearestPackage().isIgnoreNamespace())]namespace [usedType._package.generateNamespace(true)/] 
 {
 [/if]
 	class [usedType.name.toUpperFirst()/];
 [if (not usedType.getNearestPackage().isIgnoreNamespace())]}[/if]
-	[/if]
 [/for]
 [for (usedEnum : Enumeration | aClass.includes()->filter(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of used enumerations') after('\n')]
 #include "[usedEnum.getNearestPackage().generateNamespacePath(false)/]/[usedEnum.name.toUpperFirst().concat('.hpp')/]"

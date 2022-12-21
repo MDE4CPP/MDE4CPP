@@ -27,7 +27,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
@@ -66,11 +66,7 @@ namespace [aPackage.generateNamespace(true)/]
 {
 			[/if]
 			[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
-				[if (aClassifier.oclIsUndefined() or aClassifier.name.oclIsUndefined())]
-// undefined  [aClassifier.eClass().name/] ([aClassifier.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(aClassifier.eClass().name).concat(' ').concat(aClassifier.toString()).registerError()/]
-				[else]
 class [aClassifier.name.toUpperFirst()/];
-				[/if]
 			[/for]
 			[if (not aPackage.isIgnoreNamespace())]
 }
@@ -84,20 +80,13 @@ class [aClassifier.name.toUpperFirst()/];
 #include "uml/[aClass.getGeneralSuperClassName()/].hpp"
 [else]
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (elements.oclIsUndefined() or elements.name.oclIsUndefined())]
-// undefined superclass [elements.toString()/]['class: '.concat(aClass.name).concat(': undefined superclass: ').concat(elements.toString()).registerError()/]
-[else]
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"
-[/if]
 [/for]
 [/if]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName()))]
-[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(oclIsUndefined() or name.oclIsUndefined()))]
-// undefined interface realization supplier [aNamedElement.toString()/]['class: '.concat(aClass.name).concat(': undefined interface realization supplier: ').concat(aNamedElement.toString()).registerError()/]
-[/for]
 [for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(not oclIsUndefined() and not name.oclIsUndefined()))]
 #include "[aNamedElement.getNearestPackage().generateNamespacePath(false)/]/[aNamedElement.name.toUpperFirst()/].hpp"
 [/for]

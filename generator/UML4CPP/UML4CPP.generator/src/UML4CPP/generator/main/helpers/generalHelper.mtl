@@ -21,7 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 
 
@@ -161,10 +161,10 @@ template<class T> class Bag;
 [query public getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().generateNamespace(false).concat('::').concat(anElement1.getNearestPackage().name).concat('Package').concat('::eInstance()->') /]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
-nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
+nullptr[printError('Cannot terminate package of element ' + failureElement.toString() + ' used by ' + name, 'UML4CPP::generator::main::helpers::generalHelper::handlePackageGetterError')/]
 [/template]
 [template private handlePackageGetterError(failureElement : ConnectorEnd, name : String)]
-nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
+nullptr[printError('Cannot terminate package of element ' + failureElement.toString() + ' used by ' + name, 'UML4CPP::generator::main::helpers::generalHelper::handlePackageGetterError')/]
 [/template]
 
 [query private hasMultiplicityConflict(firstProperty : Property, secondProperty : Property) : Boolean = not (firstProperty.upper = secondProperty.upper) /]

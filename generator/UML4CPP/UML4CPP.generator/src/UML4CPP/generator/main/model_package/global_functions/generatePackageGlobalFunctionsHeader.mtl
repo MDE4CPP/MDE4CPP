@@ -7,7 +7,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 
 [template public generatePackageGlobalFunctionsHeader(aPackage : Package)]
 [file (aPackage.generateNamespacePath(false) + '/_GlobalFunctions.hpp', false, 'UTF-8')]
@@ -34,11 +34,7 @@ namespace [aPackage.generateNamespace(true)/]
 {
 			[/if]
 		[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
-			[if (aClassifier.oclIsUndefined() or aClassifier.name.oclIsUndefined())]
-// undefined  [aClassifier.eClass().name/] ([aClassifier.toString()/]) ['_GlobalFunctions: header include failed for undefined ' + (aClassifier.eClass().name).concat(' ').concat(aClassifier.toString()).registerError()/]
-			[else]
 class [aClassifier.name.toUpperFirst()/];
-			[/if]
 		[/for]
 		[if (not aPackage.isIgnoreNamespace())]
 }
