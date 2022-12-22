@@ -22,6 +22,19 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
+[template public validateModel(modelRootPackage : Package)]
+[setValidationStatus(true)/]
+[modelRootPackage.validatePackage()/]
+[if (errorsExist())]
+	[printErrors()/]
+	[closeWithErrorExit(1)/]
+[elseif (warningsExist())]
+	[printWarnings()/]
+[/if]
+[/template]
+
+
+
 [**
  * Invocation queries for utility services
  * NOTE: These invocations have to be made via templates (not queries), because Acceleo caches results of queries (see https://wiki.eclipse.org/Acceleo/FAQ#My_query_is_only_executed_once).
@@ -125,4 +138,12 @@
 	'Skipping ' + aPackage.eClass().name + ' ' 
 	+ aPackage.generateNamespace(false)
 	+ ' because it is configured as doNotGenerate'
+/]
+
+
+[**
+ * Invocation queries for type-specific validation services
+*/]
+[query private validatePackage(aPackage : Package) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'validatePackage(org.eclipse.uml2.uml.Package)', Sequence{aPackage})
 /]

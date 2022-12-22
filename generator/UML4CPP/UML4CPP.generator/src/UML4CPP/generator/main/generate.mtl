@@ -50,9 +50,9 @@
 	[/comment]
 	[comment] [disableWarningsAll()/] [/comment]
 	[printInfo('Validating model...')/]
-	[comment] [modelRootPackage.validateModel()/] [/comment]
+	[modelRootPackage.validateModel()/]
 	[printInfo('Finished model validation')/]
-	[printInfo('Generation started', 'ecore4CPP.generator.main.generate:generteModel')/]
+	[printInfo('Generation started', 'UML4CPP.generator.main.generate:generateUML')/]
 [/let]
 [/if]
 
