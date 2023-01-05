@@ -64,7 +64,6 @@
 [comment @main/]
 [if (not aPackage.isDoNotGenerate())]
 	[aPackage.generateUML()/]
-	[printInfo('fUML generation started', 'fUML4CPP.generator.main.generateFUML:generateFUML')/]
 	[if (aPackage.isPackageOnly())]
 		[aPackage.generateFUMLModelForPackageOnly()/]
 	[else]
