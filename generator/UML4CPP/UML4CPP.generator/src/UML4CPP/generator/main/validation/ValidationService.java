@@ -364,13 +364,15 @@ public class ValidationService
 		 */
 		private String getPrintableName(NamedElement namedElement)
 		{
-			if(namedElement.getQualifiedName().isEmpty())
+			String qualifiedName = namedElement.getQualifiedName();
+			
+			if(qualifiedName == null || qualifiedName.isEmpty())
 			{
 				return namedElement.toString();
 			}
 			else
 			{
-				return namedElement.getQualifiedName();
+				return qualifiedName;
 			}
 		}
 		
@@ -678,7 +680,10 @@ public class ValidationService
 		public void validateNamedElement(NamedElement namedElement)
 		{
 			//check if name is set (warning only) 
-			if(namedElement.getName().isEmpty())
+			
+			String name = namedElement.getName();
+			
+			if(name == null || name.isEmpty())
 			{
 				registerWarning(new UML4CPPMessage(
 						UML4CPPMessageServerityLevel.WARNING,

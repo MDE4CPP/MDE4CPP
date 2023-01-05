@@ -64,6 +64,7 @@
 [comment @main/]
 [if (not aPackage.isDoNotGenerate())]
 	[aPackage.generateUML()/]
+	[printInfo('fUML generation started', 'fUML4CPP.generator.main.generateFUML:generateFUML')/]
 	[if (aPackage.isPackageOnly())]
 		[aPackage.generateFUMLModelForPackageOnly()/]
 	[else]
@@ -81,22 +82,26 @@
 
 [comment Generate execution plugin, model Locus, model Executor, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
-//generate execution plugin
+[comment Generate execution plugin /]
+[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateExecutionPlugin()/]
 
-//generate model Locus
+[comment Generate model Locus /]
+[printInfo('Generating Locus class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateModelLocusHeader()/]
 [aPackage.generateModelLocusSource()/]
 
-//generate model Executor
+[comment Generate model Executor /]
+[printInfo('Generating Executor class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateModelExecutorHeader()/]
 [aPackage.generateModelExecutorSource()/]
 
-//generate model ExecutionFactory
+[comment Generate model ExecutionFactory /]
+[printInfo('Generating ExecutionFactory class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateModelExecutionFactoryHeader()/]
 [aPackage.generateModelExecutionFactorySource()/]
 
-//generate project files
+[comment Generate project files /]
 [aPackage.generateExecutionBuildFiles(false)/]
 [/if]
 [/template]
@@ -106,10 +111,11 @@
 [template public generateFUMLModelForPackageOnly(aPackage : Package)]
 [comment Generate execution plugin, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
-//generate execution plugin
-[aPackage.generateExecutionPlugin()/]
+	[comment Generate execution plugin /]
+	[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+	[aPackage.generateExecutionPlugin()/]
 
-//generate project files
-[aPackage.generateExecutionBuildFiles(true)/]
+	[comment Generate project files /]
+	[aPackage.generateExecutionBuildFiles(true)/]
 [/if]
 [/template]

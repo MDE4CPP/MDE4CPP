@@ -140,6 +140,17 @@
 	+ ' because it is configured as doNotGenerate'
 /]
 
+[query public classifierGenerationMessage(aClassifier : Classifier) : String = 
+	'Generating ' + aClassifier.eClass().name + ' ' 
+	+ aClassifier.generateNamespaceName(false)
+/]
+
+[query public classifierNoGenerationMessage(aClassifier : Classifier) : String = 
+	'Skipping ' + aClassifier.eClass().name + ' ' 
+	+ aClassifier.generateNamespaceName(false)
+	+ ' because it is configured as doNotGenerate'
+/]
+
 
 [**
  * Invocation queries for type-specific validation services
