@@ -12,6 +12,7 @@
 #include <string>
 // forward declarations
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -44,20 +45,12 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Link;
-	class Reference;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
 	class DestroyObjectAction;
+	class Element;
 }
 
 // namespace macro header include
@@ -73,7 +66,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API DestroyObjectActionActivation: virtual public ActionActivation
+	class FUML_API DestroyObjectActionActivation : virtual public ActionActivation
 	{
 		public:
  			DestroyObjectActionActivation(const DestroyObjectActionActivation &) {}
@@ -90,9 +83,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects) = 0;
+			virtual void destroyObject(std::shared_ptr<Any> value, bool isDestroyLinks, bool isDestroyOwnedObjects) = 0;
 			virtual void doAction() = 0;
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) = 0;
+			virtual bool objectIsComposite(std::shared_ptr<uml::Element> reference, std::shared_ptr<uml::Element> link) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,7 +104,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

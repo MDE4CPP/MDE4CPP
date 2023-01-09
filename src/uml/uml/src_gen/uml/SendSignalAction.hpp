@@ -7,15 +7,12 @@
 #ifndef UML_SENDSIGNALACTION_HPP
 #define UML_SENDSIGNALACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -76,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API SendSignalAction: virtual public InvocationAction
+	class UML_API SendSignalAction : virtual public InvocationAction
 	{
 		public:
  			SendSignalAction(const SendSignalAction &) {}
@@ -93,28 +90,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The number and order of argument InputPins must be the same as the number and order of attributes of the signal.
-			argument->size()=signal.allAttributes()->size()
-			*/
-			 
-			virtual bool number_order(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
-			let attribute: OrderedSet(Property) = signal.allAttributes() in
-			Sequence{1..argument->size()}->forAll(i | 
-				argument->at(i).type.conformsTo(attribute->at(i).type) and 
-				argument->at(i).isOrdered = attribute->at(i).isOrdered and
-				argument->at(i).compatibleWith(attribute->at(i)))
-			*/
-			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
-			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
-			*/
-			 
-			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,36 +126,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

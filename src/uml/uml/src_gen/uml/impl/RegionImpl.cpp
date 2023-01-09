@@ -1,9 +1,13 @@
 
 #include "uml/impl/RegionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -166,7 +170,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr subvertex."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for subvertex.")
 	}
 
 	//clone reference 'transition'
@@ -193,7 +197,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr transition."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for transition.")
 	}
 	/*Subset*/
 	getSubvertex()->initSubset(getOwnedMember());
@@ -231,27 +235,7 @@ std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RegionImpl::initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RegionImpl::owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RegionImpl::shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -341,80 +325,6 @@ std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTrans
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement>> RegionImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> RegionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> RegionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> RegionImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> RegionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> RegionImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -624,7 +534,7 @@ std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -633,19 +543,19 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATE_CLASS); //20719
+			return eEcoreAny(returnValue,uml::umlPackage::STATE_CLASS); //20719
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //20720
+			return eEcoreAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS); //20720
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
-			return eAnyBag(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
+			return eEcoreContainerAny(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
-			return eAnyBag(getTransition(),uml::umlPackage::TRANSITION_CLASS); //20721
+			return eEcoreContainerAny(getTransition(),uml::umlPackage::TRANSITION_CLASS); //20721
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -680,107 +590,192 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RegionImpl::eSet(int featureID, Any newValue)
+bool RegionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
-			// CAST Any to uml::Region
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setExtendedRegion(_extendedRegion); //20718
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(eObject);
+					if(_extendedRegion)
+					{
+						setExtendedRegion(_extendedRegion); //20718
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'extendedRegion'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'extendedRegion'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
-			// CAST Any to uml::State
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //20719
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(eObject);
+					if(_state)
+					{
+						setState(_state); //20719
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'state'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'state'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
-			// CAST Any to uml::StateMachine
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
-			setStateMachine(_stateMachine); //20720
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(eObject);
+					if(_stateMachine)
+					{
+						setStateMachine(_stateMachine); //20720
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'stateMachine'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			// CAST Any to Bag<uml::Vertex>
-			if((newValue->isContainer()) && (uml::umlPackage::VERTEX_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Vertex>> subvertexList= newValue->get<std::shared_ptr<Bag<uml::Vertex>>>();
-					std::shared_ptr<Bag<uml::Vertex>> _subvertex=getSubvertex();
-					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *_subvertex)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (subvertexList->find(indexSubvertex) == -1)
+						std::shared_ptr<Bag<uml::Vertex>> _subvertex = getSubvertex();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_subvertex->erase(indexSubvertex);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *subvertexList)
-					{
-						if (_subvertex->find(indexSubvertex) == -1)
-						{
-							_subvertex->add(indexSubvertex);
+							std::shared_ptr<uml::Vertex> valueToAdd = std::dynamic_pointer_cast<uml::Vertex>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_subvertex->find(valueToAdd) == -1)
+								{
+									_subvertex->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'subvertex'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'subvertex'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			// CAST Any to Bag<uml::Transition>
-			if((newValue->isContainer()) && (uml::umlPackage::TRANSITION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Transition>> transitionList= newValue->get<std::shared_ptr<Bag<uml::Transition>>>();
-					std::shared_ptr<Bag<uml::Transition>> _transition=getTransition();
-					for(const std::shared_ptr<uml::Transition> indexTransition: *_transition)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (transitionList->find(indexTransition) == -1)
+						std::shared_ptr<Bag<uml::Transition>> _transition = getTransition();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_transition->erase(indexTransition);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Transition> indexTransition: *transitionList)
-					{
-						if (_transition->find(indexTransition) == -1)
-						{
-							_transition->add(indexTransition);
+							std::shared_ptr<uml::Transition> valueToAdd = std::dynamic_pointer_cast<uml::Transition>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_transition->find(valueToAdd) == -1)
+								{
+									_transition->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'transition'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'transition'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -797,92 +792,28 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> RegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::Region::belongsToPSM() : bool: 1481257058
 		case umlPackage::REGION_OPERATION_BELONGSTOPSM:
 		{
-			result = eAny(this->belongsToPSM(),0,false);
+			result = eAny(this->belongsToPSM(), 0, false);
 			break;
 		}
 		// uml::Region::containingStateMachine() : uml::StateMachine: 3298185933
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
-			break;
-		}
-		// uml::Region::deep_history_vertex(Any, std::map) : bool: 2568391094
-		case umlPackage::REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Region::initial_vertex(Any, std::map) : bool: 3908107437
-		case umlPackage::REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Region::owned(Any, std::map) : bool: 2693807543
-		case umlPackage::REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Region::redefinitionContext() : uml::Classifier: 2569630837
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
-			break;
-		}
-		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 338218634
-		case umlPackage::REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eEcoreAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

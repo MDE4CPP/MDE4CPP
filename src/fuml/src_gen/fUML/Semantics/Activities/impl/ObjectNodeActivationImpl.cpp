@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ObjectNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -46,8 +50,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -161,7 +165,7 @@ int ObjectNodeActivationImpl::countUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationImpl::getUnofferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImpl::getUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -171,8 +175,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
   int offeredTokenCount=this->getOfferedTokenCount(); 
 
 //NEWDEBUG
-  DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : numberUnofferedTokens = "<<numberUnofferedTokens<<std::endl;)
-  DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : offeredTokenCount = "<<offeredTokenCount<<std::endl;)
+  DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << numberUnofferedTokens << " unoffered tokens.")
+  DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << offeredTokenCount << " offered tokens on incoming edges.")
  
   Bag<fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); 
   Bag<fUML::Semantics::Activities::Token>* tokensPtr = tokens.get();
@@ -231,23 +235,17 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationImpl::takeUnofferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImpl::takeUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
-
-//NEWDEBUG
-DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #unofferedTokens before withdraw = "<<tokens->size()<<std::endl;)
 
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> token = tokens->at(i);
         token->withdraw();
     }
-
-//NEWDEBUG
-DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #unofferedTokens after withdraw = "<<countUnofferedTokens()<<std::endl;)
 
     return tokens;
 	//end of body
@@ -390,12 +388,12 @@ std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return eAny(getOfferedTokenCount(),ecore::ecorePackage::EINT_CLASS,false); //826
+			return eAny(getOfferedTokenCount(),ecore::ecorePackage::EINT_CLASS,false); //816
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -405,21 +403,28 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount() != 0; //826
+			return getOfferedTokenCount() != 0; //816
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ObjectNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
-			// CAST Any to int
-			int _offeredTokenCount = newValue->get<int>();
-			setOfferedTokenCount(_offeredTokenCount); //826
-			return true;
+			try
+			{
+				int _offeredTokenCount = newValue->get<int>();
+				setOfferedTokenCount(_offeredTokenCount); //816
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'offeredTokenCount'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -429,9 +434,9 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -441,8 +446,29 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'token'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'addToken'!")
+					return nullptr;
+				}
+			}
+		
 			this->addToken(incoming_param_token);
 			break;
 		}
@@ -455,20 +481,20 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// fUML::Semantics::Activities::ObjectNodeActivation::countOfferedValues() : int: 2731645893
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES:
 		{
-			result = eAny(this->countOfferedValues(),0,false);
+			result = eAny(this->countOfferedValues(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::countUnofferedTokens() : int: 209809884
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS:
 		{
-			result = eAny(this->countUnofferedTokens(),0,false);
+			result = eAny(this->countUnofferedTokens(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::getUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 2051750135
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getUnofferedTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->getUnofferedTokens();
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 794012241
@@ -477,9 +503,30 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'token'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->removeToken(incoming_param_token),0,false);
+			Bag<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_token_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'token'. Failed to invoke operation 'removeToken'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->removeToken(incoming_param_token), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::run(): 2383055481
@@ -494,8 +541,38 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'tokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
-			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			Bag<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_tokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_tokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_tokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'tokens'. Failed to invoke operation 'sendOffers'!")
+					return nullptr;
+				}
+			}
+		
 			this->sendOffers(incoming_param_tokens);
 			break;
 		}
@@ -508,8 +585,8 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// fUML::Semantics::Activities::ObjectNodeActivation::takeUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 4049856236
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeUnofferedTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->takeUnofferedTokens();
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::terminate(): 2022976081

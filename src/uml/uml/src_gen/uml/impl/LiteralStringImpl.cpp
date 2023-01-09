@@ -1,9 +1,13 @@
 
 #include "uml/impl/LiteralStringImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -195,32 +199,6 @@ void LiteralStringImpl::setValue(std::string _value)
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> LiteralStringImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> LiteralStringImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> LiteralStringImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -363,7 +341,7 @@ std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -383,16 +361,23 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralStringImpl::eSet(int featureID, Any newValue)
+bool LiteralStringImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to std::string
-			std::string _value = newValue->get<std::string>();
-			setValue(_value); //14215
-			return true;
+			try
+			{
+				std::string _value = newValue->get<std::string>();
+				setValue(_value); //14215
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'value'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -402,22 +387,22 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::LiteralString::isComputable() : bool: 3555956385
 		case umlPackage::LITERALSTRING_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::LiteralString::stringValue() : std::string: 3894136783
 		case umlPackage::LITERALSTRING_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue(),0,false);
+			result = eAny(this->stringValue(), 0, false);
 			break;
 		}
 

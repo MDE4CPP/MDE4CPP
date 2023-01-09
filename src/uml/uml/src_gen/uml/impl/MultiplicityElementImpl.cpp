@@ -1,9 +1,13 @@
 
 #include "uml/impl/MultiplicityElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -129,7 +133,7 @@ bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::Multipli
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::is(int lowerbound,int upperbound)
+bool MultiplicityElementImpl::is(int lowerbound, int upperbound)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -144,37 +148,7 @@ int MultiplicityElementImpl::lowerBound()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::lower_ge_0(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 int MultiplicityElementImpl::upperBound()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MultiplicityElementImpl::upper_ge_lower(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MultiplicityElementImpl::value_specification_constant(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -254,20 +228,6 @@ void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecificat
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> MultiplicityElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter
@@ -438,7 +398,7 @@ std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -478,53 +438,127 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
+bool MultiplicityElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 		{
-			// CAST Any to bool
-			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //1543
-			return true;
+			try
+			{
+				bool _isOrdered = newValue->get<bool>();
+				setIsOrdered(_isOrdered); //1543
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isOrdered'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 		{
-			// CAST Any to bool
-			bool _isUnique = newValue->get<bool>();
-			setIsUnique(_isUnique); //1544
-			return true;
+			try
+			{
+				bool _isUnique = newValue->get<bool>();
+				setIsUnique(_isUnique); //1544
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isUnique'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 		{
-			// CAST Any to int
-			int _lower = newValue->get<int>();
-			setLower(_lower); //1545
-			return true;
+			try
+			{
+				int _lower = newValue->get<int>();
+				setLower(_lower); //1545
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'lower'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setLowerValue(_lowerValue); //1546
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_lowerValue)
+					{
+						setLowerValue(_lowerValue); //1546
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'lowerValue'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
-			// CAST Any to int
-			int _upper = newValue->get<int>();
-			setUpper(_upper); //1547
-			return true;
+			try
+			{
+				int _upper = newValue->get<int>();
+				setUpper(_upper); //1547
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'upper'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperValue(_upperValue); //1548
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_upperValue)
+					{
+						setUpperValue(_upperValue); //1548
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'upperValue'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -534,9 +568,9 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -546,9 +580,30 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<uml::MultiplicityElement> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<uml::MultiplicityElement> >();
-			result = eAny(this->compatibleWith(incoming_param_other),0,false);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_other_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_other = std::dynamic_pointer_cast<uml::MultiplicityElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'compatibleWith'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->compatibleWith(incoming_param_other), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::includesMultiplicity(uml::MultiplicityElement) : bool: 935007317
@@ -557,9 +612,30 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			//Retrieve input parameter 'M'
 			//parameter 0
 			std::shared_ptr<uml::MultiplicityElement> incoming_param_M;
-			std::list<Any>::const_iterator incoming_param_M_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_M = (*incoming_param_M_arguments_citer)->get<std::shared_ptr<uml::MultiplicityElement> >();
-			result = eAny(this->includesMultiplicity(incoming_param_M),0,false);
+			Bag<Any>::const_iterator incoming_param_M_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_M_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_M = std::dynamic_pointer_cast<uml::MultiplicityElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'M'. Failed to invoke operation 'includesMultiplicity'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->includesMultiplicity(incoming_param_M), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::is(int, int) : bool: 2447710154
@@ -568,128 +644,50 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			//Retrieve input parameter 'lowerbound'
 			//parameter 0
 			int incoming_param_lowerbound;
-			std::list<Any>::const_iterator incoming_param_lowerbound_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_lowerbound = (*incoming_param_lowerbound_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_lowerbound_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_lowerbound = (*incoming_param_lowerbound_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'lowerbound'. Failed to invoke operation 'is'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'upperbound'
 			//parameter 1
 			int incoming_param_upperbound;
-			std::list<Any>::const_iterator incoming_param_upperbound_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_upperbound = (*incoming_param_upperbound_arguments_citer)->get<int >();
-			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound),0,false);
+			Bag<Any>::const_iterator incoming_param_upperbound_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_upperbound = (*incoming_param_upperbound_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'upperbound'. Failed to invoke operation 'is'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::isMultivalued() : bool: 2268498524
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED:
 		{
-			result = eAny(this->isMultivalued(),0,false);
+			result = eAny(this->isMultivalued(), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::lowerBound() : int: 4073704864
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWERBOUND:
 		{
-			result = eAny(this->lowerBound(),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::lower_ge_0(Any, std::map) : bool: 27225824
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::lower_is_integer(Any, std::map) : bool: 3479893910
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->lowerBound(), 0, false);
 			break;
 		}
 		// uml::MultiplicityElement::upperBound() : int: 2210299255
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPERBOUND:
 		{
-			result = eAny(this->upperBound(),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::upper_ge_lower(Any, std::map) : bool: 1007813900
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::upper_is_unlimitedNatural(Any, std::map) : bool: 2998336909
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::value_specification_constant(Any, std::map) : bool: 141713939
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::MultiplicityElement::value_specification_no_side_effects(Any, std::map) : bool: 3115291509
-		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->value_specification_no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->upperBound(), 0, false);
 			break;
 		}
 

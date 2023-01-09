@@ -26,7 +26,7 @@
  * - set connector ends
 */]
 [template public generateConnectorInitialization(aConnector : Connector)]
-[aConnector.memberName()/]->setName("[aConnector.name/]");
+[aConnector.memberName()/]->setName("[aConnector.metamodelElementName()/]");
 [aConnector.memberName()/]->setType([aConnector.type.generatePackageGetterCall()/]);
 [aConnector.memberName()/]->setVisibility(uml::VisibilityKind::[aConnector.visibility.toString().toUpperCase()/]);
 [for (redefConnector : Connector | aConnector.redefinedConnector)]

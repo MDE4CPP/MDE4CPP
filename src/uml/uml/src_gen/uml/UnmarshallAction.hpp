@@ -7,15 +7,12 @@
 #ifndef UML_UNMARSHALLACTION_HPP
 #define UML_UNMARSHALLACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -74,7 +71,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API UnmarshallAction: virtual public Action
+	class UML_API UnmarshallAction : virtual public Action
 	{
 		public:
  			UnmarshallAction(const UnmarshallAction &) {}
@@ -91,40 +88,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of the object InputPin is 1..1
-			object.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
-			unmarshallType.allAttributes()->size() = result->size()
-			*/
-			 
-			virtual bool number_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type of the object InputPin conform to the unmarshallType.
-			object.type.conformsTo(unmarshallType)
-			*/
-			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The unmarshallType must have at least one StructuralFeature.
-			unmarshallType.allAttributes()->size() >= 1
-			*/
-			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
-			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
-			Sequence{1..result->size()}->forAll(i | 
-				attribute->at(i).type.conformsTo(result->at(i).type) and
-				attribute->at(i).isOrdered=result->at(i).isOrdered and
-				attribute->at(i).compatibleWith(result->at(i)))
-			*/
-			 
-			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -167,42 +130,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;
-			/*!
-			The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

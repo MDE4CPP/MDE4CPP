@@ -44,24 +44,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of the value InputPin is 1..1.
-			value.is(1,1)
-			*/
-			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
-			linkEndData.end.qualifier->includes(qualifier)
-			*/
-			 
-			virtual bool qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the value InputPin conforms to the type of the qualifier Property.
-			value.type.conformsTo(qualifier.type)
-			*/
-			 
-			virtual bool type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -98,18 +80,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -126,14 +102,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::QualifierValue> m_thisQualifierValuePtr;

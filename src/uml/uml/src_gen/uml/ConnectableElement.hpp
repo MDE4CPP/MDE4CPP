@@ -64,7 +64,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API ConnectableElement: virtual public ParameterableElement, virtual public TypedElement
+	class UML_API ConnectableElement : virtual public ParameterableElement, virtual public TypedElement
 	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}
@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() = 0;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnds() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -106,19 +106,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

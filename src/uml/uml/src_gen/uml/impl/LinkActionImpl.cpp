@@ -1,9 +1,13 @@
 
 #include "uml/impl/LinkActionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -161,7 +165,7 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr endData."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for endData.")
 	}
 
 	//clone reference 'inputValue'
@@ -188,7 +192,7 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inputValue.")
 	}
 	/*Subset*/
 	getEndData()->initSubset(getOwnedElement());
@@ -209,21 +213,6 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 // Operations
 //*********************************
 std::shared_ptr<uml::Association> LinkActionImpl::association()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool LinkActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool LinkActionImpl::same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool LinkActionImpl::same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -280,75 +269,6 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> LinkActionImpl::getInputVa
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup>> LinkActionImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> LinkActionImpl::getInput() const
-{
-	if(m_input == nullptr)
-	{
-		/*SubsetUnion*/
-		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getInput()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_input;
-}
-
-std::shared_ptr<Union<uml::Element>> LinkActionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> LinkActionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> LinkActionImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -500,14 +420,14 @@ std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-			return eAnyBag(getEndData(),uml::umlPackage::LINKENDDATA_CLASS); //13327
+			return eEcoreContainerAny(getEndData(),uml::umlPackage::LINKENDDATA_CLASS); //13327
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-			return eAnyBag(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //13328
+			return eEcoreContainerAny(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //13328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -524,83 +444,99 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool LinkActionImpl::eSet(int featureID, Any newValue)
+bool LinkActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
-			// CAST Any to Bag<uml::LinkEndData>
-			if((newValue->isContainer()) && (uml::umlPackage::LINKENDDATA_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::LinkEndData>> endDataList= newValue->get<std::shared_ptr<Bag<uml::LinkEndData>>>();
-					std::shared_ptr<Bag<uml::LinkEndData>> _endData=getEndData();
-					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *_endData)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (endDataList->find(indexEndData) == -1)
+						std::shared_ptr<Bag<uml::LinkEndData>> _endData = getEndData();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_endData->erase(indexEndData);
-						}
-					}
-
-					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *endDataList)
-					{
-						if (_endData->find(indexEndData) == -1)
-						{
-							_endData->add(indexEndData);
+							std::shared_ptr<uml::LinkEndData> valueToAdd = std::dynamic_pointer_cast<uml::LinkEndData>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_endData->find(valueToAdd) == -1)
+								{
+									_endData->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'endData'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'endData'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			// CAST Any to Bag<uml::InputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (inputValueList->find(indexInputValue) == -1)
+						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_inputValue->erase(indexInputValue);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
-					{
-						if (_inputValue->find(indexInputValue) == -1)
-						{
-							_inputValue->add(indexInputValue);
+							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_inputValue->find(valueToAdd) == -1)
+								{
+									_inputValue->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -610,64 +546,16 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LinkActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::LinkAction::association() : uml::Association: 4091876769
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
-			result = eAnyObject(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
-			break;
-		}
-		// uml::LinkAction::not_static(Any, std::map) : bool: 4073421866
-		case umlPackage::LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::LinkAction::same_association(Any, std::map) : bool: 1009969332
-		case umlPackage::LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::LinkAction::same_pins(Any, std::map) : bool: 3042884065
-		case umlPackage::LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_pins(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eEcoreAny(this->association(), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
 

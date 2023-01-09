@@ -162,9 +162,13 @@
 
 [template public defineDebugMacros(namedelement : ENamedElement)]
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"['['/]\e['['/]0;32mInfo\e['['/]0m[']'/]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"['['/]\e['['/]0;33mWarning\e['['/]0m[']'/]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"['['/]\e['['/]0;31mError\e['['/]0m[']'/]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -231,15 +235,25 @@
 
 
 [query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
+[comment/]
+[query public getUnionsReference(aClass : EClass) : Set(EReference) = aClass.eReferences->select(isUnion())->sortedBy(name) /]
+[comment/]
 
-[query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet{aClass.getSubsetedUnionsReference(),aClass.eReferences->select(isUnion())}->flatten()->sortedBy(name) /]
+[**
+Why is this: "aClass.getSubsetedUnionsReference()" done? Shouldn't Union Getters only be generated in classes where the union property is defined?
+This leads to overwriting union getters in all subclasses of classes where a union property is defined.
+
+[query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet
+{
+	aClass.getSubsetedUnionsReference(),
+	aClass.eReferences->select(isUnion())
+}->flatten()->sortedBy(name) /]
+[comment/]
+
+
 
 [query public getSubsetedUnionsReference(aClass : EClass): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not e.oclAsType(EModelElement).isUnion()) else false endif ).Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 [query public getSubsetsForUnion(aClass : EClass,union : EReference): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not (e.oclAsType(EReference) = union)) else false endif ).oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
-
-[query public getClassifierIDName(anEClass : EClass) : String = if(name = 'EClass' or name = 'EDataType' or name = 'EEnum') then 'MetaElement' else getFeatureIDName(anEClass) endif/]
-[query public getFeatureIDName(anEClass : EClass) : String = if(name = 'EAttribute' or name = 'EReference') then 'Feature' else getOperationIDName(anEClass) endif/]
-[query public getOperationIDName(anEClass : EClass) : String = if(name = 'EOperation') then 'Operation' else 'MetaElement' endif/]
 
 [**
  * generate member names for package generation

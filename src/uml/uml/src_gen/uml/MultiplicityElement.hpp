@@ -7,15 +7,12 @@
 #ifndef UML_MULTIPLICITYELEMENT_HPP
 #define UML_MULTIPLICITYELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -59,7 +56,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API MultiplicityElement: virtual public Element
+	class UML_API MultiplicityElement : virtual public Element
 	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}
@@ -97,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool is(int lowerbound,int upperbound) = 0;
+			virtual bool is(int lowerbound, int upperbound) = 0;
 			/*!
 			The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.
 			upperBound()->notEmpty()
@@ -114,46 +111,12 @@ namespace uml
 			 
 			virtual int lowerBound() = 0;
 			/*!
-			The lower bound must be a non-negative integer literal.
-			lowerBound() >= 0
-			*/
-			 
-			virtual bool lower_ge_0(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If it is not empty, then lowerValue must have an Integer value.
-			lowerValue <> null implies lowerValue.integerValue() <> null
-			*/
-			 
-			virtual bool lower_is_integer(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual int upperBound() = 0;
-			/*!
-			The upper bound must be greater than or equal to the lower bound.
-			upperBound() >= lowerBound()
-			*/
-			 
-			virtual bool upper_ge_lower(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If it is not empty, then upperValue must have an UnlimitedNatural value.
-			upperValue <> null implies upperValue.unlimitedValue() <> null
-			*/
-			 
-			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
-			*/
-			 
-			virtual bool value_specification_constant(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
-			*/
-			 
-			virtual bool value_specification_no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -238,12 +201,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

@@ -124,7 +124,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateFactoryInterface",
 								"generateFactoryInterfaceSource"
 								};
-		generateFilePathMapData(moduleNames, "factory", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_factory", resourcePathPrefix);
 	}
 	
 	private void initializeHelpersEmtls(String resourcePathPrefix)
@@ -154,7 +154,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generatePackageInterface",
 								"generatePackageInterfaceSource"
 								};
-		generateFilePathMapData(moduleNames, "package", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_package", resourcePathPrefix);
 	}
 	
 	private void initializePluginEmtls(String resourcePathPrefix)
@@ -165,7 +165,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateEcorePluginInterfaceHeader",
 								"generateEcorePluginInterfaceSource"
 								};
-		generateFilePathMapData(moduleNames, "plugin", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_plugin", resourcePathPrefix);
 	}
 	
 	private void initializeValidationEmtls(String resourcePathPrefix)

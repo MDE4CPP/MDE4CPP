@@ -1,9 +1,13 @@
 
 #include "uml/impl/ClassifierTemplateParameterImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -122,35 +126,6 @@ std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -184,29 +159,6 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstr
 //*********************************
 // Union Getter
 //*********************************
-
-
-std::shared_ptr<Union<uml::Element>> ClassifierTemplateParameterImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ClassifierTemplateParameterImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -346,14 +298,14 @@ std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() c
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return eAny(getAllowSubstitutable(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //378
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
-			return eAnyBag(getConstrainingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //379
+			return eEcoreContainerAny(getConstrainingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //379
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
@@ -370,53 +322,68 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
+bool ClassifierTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 		{
-			// CAST Any to bool
-			bool _allowSubstitutable = newValue->get<bool>();
-			setAllowSubstitutable(_allowSubstitutable); //378
-			return true;
+			try
+			{
+				bool _allowSubstitutable = newValue->get<bool>();
+				setAllowSubstitutable(_allowSubstitutable); //378
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'allowSubstitutable'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
-			// CAST Any to Bag<uml::Classifier>
-			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Classifier>> constrainingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier=getConstrainingClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexConstrainingClassifier: *_constrainingClassifier)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (constrainingClassifierList->find(indexConstrainingClassifier) == -1)
+						std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = getConstrainingClassifier();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_constrainingClassifier->erase(indexConstrainingClassifier);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Classifier> indexConstrainingClassifier: *constrainingClassifierList)
-					{
-						if (_constrainingClassifier->find(indexConstrainingClassifier) == -1)
-						{
-							_constrainingClassifier->add(indexConstrainingClassifier);
+							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_constrainingClassifier->find(valueToAdd) == -1)
+								{
+									_constrainingClassifier->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'constrainingClassifier'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -426,108 +393,12 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ClassifierTemplateParameter::actual_is_classifier(Any, std::map) : bool: 880187681
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_ACTUAL_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->actual_is_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_args(Any, std::map) : bool: 3871983478
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->constraining_classifiers_constrain_args(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ClassifierTemplateParameter::constraining_classifiers_constrain_parametered_element(Any, std::map) : bool: 2071195364
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->constraining_classifiers_constrain_parametered_element(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ClassifierTemplateParameter::has_constraining_classifier(Any, std::map) : bool: 2660850038
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_HAS_CONSTRAINING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_constraining_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ClassifierTemplateParameter::matching_abstract(Any, std::map) : bool: 1998922742
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_MATCHING_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ClassifierTemplateParameter::parametered_element_no_features(Any, std::map) : bool: 1560953665
-		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->parametered_element_no_features(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

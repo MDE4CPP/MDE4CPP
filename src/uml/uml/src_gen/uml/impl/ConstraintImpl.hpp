@@ -51,22 +51,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The ValueSpecification for a Constraint must evaluate to a Boolean value.
-			*/
-			 
-			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Evaluating the ValueSpecification for a Constraint must not have side effects.
-			*/
-			 
-			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Constraint cannot be applied to itself.
-			not constrainedElement->includes(self)
-			*/
-			 
-			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -109,31 +93,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -150,14 +115,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Constraint> m_thisConstraintPtr;

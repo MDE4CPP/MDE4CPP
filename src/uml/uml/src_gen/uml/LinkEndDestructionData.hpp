@@ -7,14 +7,11 @@
 #ifndef UML_LINKENDDESTRUCTIONDATA_HPP
 #define UML_LINKENDDESTRUCTIONDATA_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -60,7 +57,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API LinkEndDestructionData: virtual public LinkEndData
+	class UML_API LinkEndDestructionData : virtual public LinkEndData
 	{
 		public:
  			LinkEndDestructionData(const LinkEndDestructionData &) {}
@@ -77,17 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			LinkEndDestructionData for ordered, nonunique Association ends must have a single destroyAt InputPin if isDestroyDuplicates is false, which must be of type UnlimitedNatural and have a multiplicity of 1..1. Otherwise, the action has no destroyAt input pin.
-			if  not end.isOrdered or end.isUnique or isDestroyDuplicates
-			then destroyAt = null
-			else
-				destroyAt <> null and 
-				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
-			endif
-			*/
-			 
-			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -124,12 +110,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

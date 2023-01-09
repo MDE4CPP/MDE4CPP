@@ -1,9 +1,13 @@
 
 #include "uml/impl/ProfileImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -179,7 +183,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr metaclassReference."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for metaclassReference.")
 	}
 
 	//clone reference 'metamodelReference'
@@ -206,7 +210,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr metamodelReference."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for metamodelReference.")
 	}
 	return *this;
 }
@@ -232,7 +236,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options,Any diagnostics,std::shared_ptr<std::unordered_map < Any, Any>> context)
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -247,32 +251,22 @@ std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly)
+std::shared_ptr<Bag<uml::Extension>> ProfileImpl::getOwnedExtensions(bool requiredOnly)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> ProfileImpl::getReferencedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels()
+std::shared_ptr<Bag<uml::Model>> ProfileImpl::getReferencedMetamodels()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool ProfileImpl::isDefined()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ProfileImpl::references_same_metamodel(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -329,67 +323,6 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement>> ProfileImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> ProfileImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ProfileImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ProfileImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> ProfileImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -559,14 +492,14 @@ std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-			return eAnyBag(getMetaclassReference(),uml::umlPackage::ELEMENTIMPORT_CLASS); //18328
+			return eEcoreContainerAny(getMetaclassReference(),uml::umlPackage::ELEMENTIMPORT_CLASS); //18328
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-			return eAnyBag(getMetamodelReference(),uml::umlPackage::PACKAGEIMPORT_CLASS); //18329
+			return eEcoreContainerAny(getMetamodelReference(),uml::umlPackage::PACKAGEIMPORT_CLASS); //18329
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -583,83 +516,99 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	return PackageImpl::internalEIsSet(featureID);
 }
 
-bool ProfileImpl::eSet(int featureID, Any newValue)
+bool ProfileImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
-			// CAST Any to Bag<uml::ElementImport>
-			if((newValue->isContainer()) && (uml::umlPackage::ELEMENTIMPORT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ElementImport>> metaclassReferenceList= newValue->get<std::shared_ptr<Bag<uml::ElementImport>>>();
-					std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference=getMetaclassReference();
-					for(const std::shared_ptr<uml::ElementImport> indexMetaclassReference: *_metaclassReference)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (metaclassReferenceList->find(indexMetaclassReference) == -1)
+						std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_metaclassReference->erase(indexMetaclassReference);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ElementImport> indexMetaclassReference: *metaclassReferenceList)
-					{
-						if (_metaclassReference->find(indexMetaclassReference) == -1)
-						{
-							_metaclassReference->add(indexMetaclassReference);
+							std::shared_ptr<uml::ElementImport> valueToAdd = std::dynamic_pointer_cast<uml::ElementImport>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_metaclassReference->find(valueToAdd) == -1)
+								{
+									_metaclassReference->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'metaclassReference'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'metaclassReference'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
-			// CAST Any to Bag<uml::PackageImport>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEIMPORT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PackageImport>> metamodelReferenceList= newValue->get<std::shared_ptr<Bag<uml::PackageImport>>>();
-					std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference=getMetamodelReference();
-					for(const std::shared_ptr<uml::PackageImport> indexMetamodelReference: *_metamodelReference)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (metamodelReferenceList->find(indexMetamodelReference) == -1)
+						std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_metamodelReference->erase(indexMetamodelReference);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PackageImport> indexMetamodelReference: *metamodelReferenceList)
-					{
-						if (_metamodelReference->find(indexMetamodelReference) == -1)
-						{
-							_metamodelReference->add(indexMetamodelReference);
+							std::shared_ptr<uml::PackageImport> valueToAdd = std::dynamic_pointer_cast<uml::PackageImport>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_metamodelReference->find(valueToAdd) == -1)
+								{
+									_metamodelReference->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'metamodelReference'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'metamodelReference'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -669,9 +618,9 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -681,15 +630,36 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'classifier'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAnyObject(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
+			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_classifier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'create'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'create'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->create(incoming_param_classifier), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Profile::define() : ecore::EPackage: 1369026160
 		case umlPackage::PROFILE_OPERATION_DEFINE:
 		{
-			result = eAnyObject(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->define(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1280241598
@@ -698,25 +668,52 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'options'
 			//parameter 0
 			std::shared_ptr<std::unordered_map < std::string, std::string>> incoming_param_options;
-			std::list<Any>::const_iterator incoming_param_options_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_options = (*incoming_param_options_arguments_citer)->get<std::shared_ptr<std::unordered_map < std::string, std::string>> >();
+			Bag<Any>::const_iterator incoming_param_options_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_options = (*incoming_param_options_arguments_citer)->get<std::shared_ptr<std::unordered_map < std::string, std::string>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'options'. Failed to invoke operation 'define'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'diagnostics'
 			//parameter 1
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_diagnostics;
+			Bag<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'diagnostics'. Failed to invoke operation 'define'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'context'
 			//parameter 2
 			std::shared_ptr<std::unordered_map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::unordered_map < Any, Any>> >();
-			result = eAnyObject(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::unordered_map < Any, Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'context'. Failed to invoke operation 'define'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::getDefinition() : ecore::EPackage: 3919615722
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION:
 		{
-			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->getDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::Profile::getDefinition(uml::NamedElement) : ecore::ENamedElement: 230708030
@@ -725,9 +722,30 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'namedElement'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
-			std::list<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_namedElement_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_namedElement = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getDefinition'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getDefinition'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Profile::getOwnedExtensions(bool) : uml::Extension[*]: 1345091052
@@ -736,62 +754,39 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'requiredOnly'
 			//parameter 0
 			bool incoming_param_requiredOnly;
-			std::list<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get<bool >();
-			std::shared_ptr<Bag<uml::Extension> > resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
-			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
+			Bag<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'requiredOnly'. Failed to invoke operation 'getOwnedExtensions'!")
+				return nullptr;
+			}
+		
+			std::shared_ptr<Bag<uml::Extension>> resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
+			return eEcoreContainerAny(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 2481786676
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getReferencedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			std::shared_ptr<Bag<uml::Class>> resultList = this->getReferencedMetaclasses();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 2762577013
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
-			std::shared_ptr<Bag<uml::Model> > resultList = this->getReferencedMetamodels();
-			return eAnyBag(resultList,uml::umlPackage::MODEL_CLASS);
+			std::shared_ptr<Bag<uml::Model>> resultList = this->getReferencedMetamodels();
+			return eEcoreContainerAny(resultList,uml::umlPackage::MODEL_CLASS);
 			break;
 		}
 		// uml::Profile::isDefined() : bool: 2217318421
 		case umlPackage::PROFILE_OPERATION_ISDEFINED:
 		{
-			result = eAny(this->isDefined(),0,false);
-			break;
-		}
-		// uml::Profile::metaclass_reference_not_specialized(Any, std::map) : bool: 4152976330
-		case umlPackage::PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Profile::references_same_metamodel(Any, std::map) : bool: 2161741941
-		case umlPackage::PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->references_same_metamodel(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->isDefined(), 0, false);
 			break;
 		}
 

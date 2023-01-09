@@ -7,7 +7,6 @@
 #ifndef UML_CLASS_HPP
 #define UML_CLASS_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -86,7 +83,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API Class: virtual public BehavioredClassifier, virtual public EncapsulatedClassifier
+	class UML_API Class : virtual public BehavioredClassifier, virtual public EncapsulatedClassifier
 	{
 		public:
  			Class(const Class &) {}
@@ -103,12 +100,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class.
-			*/
-			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
-			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() = 0;
+			virtual std::shared_ptr<Bag<uml::Operation>> getAllOperations() = 0;
 			/*!
 			Derivation for Class::/extension : Extension
 			result = (Extension.allInstances()->select(ext | 
@@ -117,25 +109,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions() = 0;
+			virtual std::shared_ptr<Bag<uml::Extension>> getExtensions() = 0;
 			/*!
 			Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses() = 0;
+			virtual std::shared_ptr<Bag<uml::Class>> getSuperClasses() = 0;
 			/*!
 			Determines whether this class is a metaclass.
 			*/
 			 
 			virtual bool isMetaclass() = 0;
-			/*!
-			Only an active Class may own Receptions and have a classifierBehavior.
-			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null)
-			*/
-			 
-			virtual bool passive_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -191,61 +177,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const = 0;
-			/*!
-			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			/*!
-			The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const = 0;
-			
 
 			//*********************************
 			// Container Getter

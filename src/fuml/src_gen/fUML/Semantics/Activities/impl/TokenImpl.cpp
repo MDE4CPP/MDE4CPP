@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -20,8 +24,8 @@
 #include <stdexcept>
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -42,12 +46,10 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
 
@@ -124,7 +126,7 @@ bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> TokenImpl::getValue() const
+std::shared_ptr<Any> TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -164,14 +166,12 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();
-		//NEWDEBUG
-		DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : !isWithdrawn"<<std::endl;)
 		this->setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>(nullptr));
 		this->setWithdrawn(true);
 		if (holder)
 		{	
 			//NEWDEBUG
-			DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : withdrawing token..."<<std::endl;)
+			DEBUG_INFO("Withdrawing " << this->eClass()->getName() << " from it's old holder: " << (holder->getNode() == nullptr ? "anonymous node" : ("'" + holder->getNode()->getName() + "'")) << ".")
 			holder->removeToken(getThisTokenPtr());
 		}
     }
@@ -325,17 +325,17 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1150
+			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1140
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1151
+			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1141
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -345,31 +345,61 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return getHolder().lock() != nullptr; //1150
+			return getHolder().lock() != nullptr; //1140
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //1151
+			return isWithdrawn() != true; //1141
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool TokenImpl::eSet(int featureID, Any newValue)
+bool TokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
-			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivation
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
-			setHolder(_holder); //1150
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(eObject);
+					if(_holder)
+					{
+						setHolder(_holder); //1140
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'holder'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 		{
-			// CAST Any to bool
-			bool _withdrawn = newValue->get<bool>();
-			setWithdrawn(_withdrawn); //1151
-			return true;
+			try
+			{
+				bool _withdrawn = newValue->get<bool>();
+				setWithdrawn(_withdrawn); //1141
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'withdrawn'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -379,16 +409,16 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::Token::_copy() : fUML::Semantics::Activities::Token: 2860108519
 		case ActivitiesPackage::TOKEN_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			result = eEcoreAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::equals(fUML::Semantics::Activities::Token) : bool: 378713648
@@ -397,21 +427,42 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other),0,false);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_other_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_other = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->equals(incoming_param_other), 0, false);
 			break;
 		}
-		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 3442224848
+		// fUML::Semantics::Activities::Token::getValue() : Any {const}: 900354032
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
-			result = eAnyObject(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = eAny(this->getValue(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::isControl() : bool: 2683482097
 		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::transfer(fUML::Semantics::Activities::ActivityNodeActivation) : fUML::Semantics::Activities::Token: 2200060239
@@ -420,9 +471,30 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			//Retrieve input parameter 'holder'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
-			std::list<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
-			result = eAnyObject(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			Bag<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_holder_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'holder'. Failed to invoke operation 'transfer'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::Token::withdraw(): 81284716

@@ -1,9 +1,13 @@
 
 #include "uml/impl/DestructionOccurrenceSpecificationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -141,10 +145,6 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::copy() c
 //*********************************
 // Operations
 //*********************************
-bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -157,30 +157,6 @@ bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> DestructionOccurrenceSpecificationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> DestructionOccurrenceSpecificationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> DestructionOccurrenceSpecificationImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -286,7 +262,7 @@ std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticCl
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -302,7 +278,7 @@ bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -314,28 +290,12 @@ bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::DestructionOccurrenceSpecification::no_occurrence_specifications_below(Any, std::map) : bool: 2453932104
-		case umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_occurrence_specifications_below(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

@@ -1,9 +1,13 @@
 
 #include "uml/impl/ConstraintImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -160,20 +164,6 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConstraintImpl::no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -219,32 +209,6 @@ void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ConstraintImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ConstraintImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -429,16 +393,16 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-			return eAnyBag(getConstrainedElement(),uml::umlPackage::ELEMENT_CLASS); //5712
+			return eEcoreContainerAny(getConstrainedElement(),uml::umlPackage::ELEMENT_CLASS); //5712
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
-			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //5713
+			return eEcoreAny(returnValue,uml::umlPackage::NAMESPACE_CLASS); //5713
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //5714
@@ -460,62 +424,116 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool ConstraintImpl::eSet(int featureID, Any newValue)
+bool ConstraintImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			// CAST Any to Bag<uml::Element>
-			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Element>> constrainedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
-					std::shared_ptr<Bag<uml::Element>> _constrainedElement=getConstrainedElement();
-					for(const std::shared_ptr<uml::Element> indexConstrainedElement: *_constrainedElement)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (constrainedElementList->find(indexConstrainedElement) == -1)
+						std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_constrainedElement->erase(indexConstrainedElement);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Element> indexConstrainedElement: *constrainedElementList)
-					{
-						if (_constrainedElement->find(indexConstrainedElement) == -1)
-						{
-							_constrainedElement->add(indexConstrainedElement);
+							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_constrainedElement->find(valueToAdd) == -1)
+								{
+									_constrainedElement->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'constrainedElement'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'constrainedElement'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
-			// CAST Any to uml::Namespace
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setContext(_context); //5713
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(eObject);
+					if(_context)
+					{
+						setContext(_context); //5713
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'context'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'context'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //5714
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_specification)
+					{
+						setSpecification(_specification); //5714
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'specification'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'specification'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -525,60 +543,12 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ConstraintImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Constraint::boolean_value(Any, std::map) : bool: 2957172679
-		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Constraint::no_side_effects(Any, std::map) : bool: 2403847167
-		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Constraint::not_apply_to_self(Any, std::map) : bool: 2965731128
-		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

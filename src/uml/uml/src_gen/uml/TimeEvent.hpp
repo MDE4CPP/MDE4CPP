@@ -7,15 +7,12 @@
 #ifndef UML_TIMEEVENT_HPP
 #define UML_TIMEEVENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -66,7 +63,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API TimeEvent: virtual public Event
+	class UML_API TimeEvent : virtual public Event
 	{
 		public:
  			TimeEvent(const TimeEvent &) {}
@@ -83,12 +80,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The ValueSpecification when must return a non-negative Integer.
-			when.integerValue() >= 0
-			*/
-			 
-			virtual bool when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -125,25 +116,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

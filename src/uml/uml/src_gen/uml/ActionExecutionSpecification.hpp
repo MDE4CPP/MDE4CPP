@@ -7,14 +7,11 @@
 #ifndef UML_ACTIONEXECUTIONSPECIFICATION_HPP
 #define UML_ACTIONEXECUTIONSPECIFICATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -68,7 +65,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ActionExecutionSpecification: virtual public ExecutionSpecification
+	class UML_API ActionExecutionSpecification : virtual public ExecutionSpecification
 	{
 		public:
  			ActionExecutionSpecification(const ActionExecutionSpecification &) {}
@@ -85,16 +82,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The Action referenced by the ActionExecutionSpecification must be owned by the Interaction owning that ActionExecutionSpecification.
-			(enclosingInteraction->notEmpty() or enclosingOperand.combinedFragment->notEmpty()) and
-			let parentInteraction : Set(Interaction) = enclosingInteraction.oclAsType(Interaction)->asSet()->union(
-			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
-			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
-			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
-			*/
-			 
-			virtual bool action_referenced(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -119,24 +106,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

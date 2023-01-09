@@ -36,10 +36,6 @@ namespace fUML::Semantics::Activities
 {
 	class ActivityNodeActivation;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
@@ -54,7 +50,7 @@ namespace fUML::Semantics::Values
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ForkedToken: virtual public Token
+	class FUML_API ForkedToken : virtual public Token
 	{
 		public:
  			ForkedToken(const ForkedToken &) {}
@@ -73,7 +69,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
+			virtual std::shared_ptr<Any> getValue() const = 0;
 			virtual bool isControl() = 0;
 			virtual void withdraw() = 0;
 

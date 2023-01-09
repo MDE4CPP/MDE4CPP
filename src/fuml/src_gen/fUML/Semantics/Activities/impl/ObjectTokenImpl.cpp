@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/ObjectTokenImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -20,8 +24,8 @@
 
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -36,15 +40,12 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
 
@@ -97,15 +98,10 @@ ObjectTokenImpl& ObjectTokenImpl::operator=(const ObjectTokenImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	//clone reference 'value'
-	if(obj.getValue()!=nullptr)
-	{
-		m_value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(obj.getValue()->copy());
-	}
-	
 	return *this;
 }
 
@@ -153,20 +149,20 @@ bool ObjectTokenImpl::isControl()
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute value */
+std::shared_ptr<Any> ObjectTokenImpl::getValue() const 
+{
+	return m_value;
+}
+void ObjectTokenImpl::setValue(std::shared_ptr<Any> _value)
+{
+	m_value = _value;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference value */
-std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() const
-{
-    return m_value;
-}
-void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
-{
-    m_value = _value;
-	
-}
 
 //*********************************
 // Union Getter
@@ -205,26 +201,16 @@ void ObjectTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 
 void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
-
-	TokenImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
 	try
 	{
-		if ( nodeName.compare("value") == 0 )
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
 		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getValue()); 
-
-			return; 
+			// TODO this attribute has a non handle type
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@31d6f3fe (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
 	catch (std::exception& e)
@@ -235,6 +221,13 @@ void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
+
+	TokenImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
 	//load BasePackage Nodes
 	TokenImpl::loadNode(nodeName, loadHandler);
 }
@@ -258,13 +251,6 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'value'
-
-		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -280,12 +266,12 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(getValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //832
+			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //822
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,22 +281,28 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //832
+			return getValue() != nullptr; //822
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
 
-bool ObjectTokenImpl::eSet(int featureID, Any newValue)
+bool ObjectTokenImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
-			// CAST Any to fUML::Semantics::Values::Value
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //832
-			return true;
+			try
+			{
+				std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
+				setValue(_value); //822
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'value'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -320,16 +312,16 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// fUML::Semantics::Activities::ObjectToken::_copy() : fUML::Semantics::Activities::Token: 2325156054
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			result = eEcoreAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectToken::equals(fUML::Semantics::Activities::Token) : bool: 1120332551
@@ -338,15 +330,36 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other),0,false);
+			Bag<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_other_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_other = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'other'. Failed to invoke operation 'equals'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->equals(incoming_param_other), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::ObjectToken::isControl() : bool: 3725482608
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(), 0, false);
 			break;
 		}
 

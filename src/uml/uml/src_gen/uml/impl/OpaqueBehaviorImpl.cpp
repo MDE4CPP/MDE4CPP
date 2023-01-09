@@ -1,9 +1,13 @@
 
 #include "uml/impl/OpaqueBehaviorImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -181,7 +185,7 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for body.")
 	}
 	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
 	if(languageList)
@@ -194,7 +198,7 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr language."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for language.")
 	}
 
 	//copy references with no containment (soft copy)
@@ -244,157 +248,6 @@ std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getLanguage() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> OpaqueBehaviorImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> OpaqueBehaviorImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> OpaqueBehaviorImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> OpaqueBehaviorImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> OpaqueBehaviorImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> OpaqueBehaviorImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> OpaqueBehaviorImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> OpaqueBehaviorImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-std::shared_ptr<Union<uml::Classifier>> OpaqueBehaviorImpl::getRedefinitionContext() const
-{
-	if(m_redefinitionContext == nullptr)
-	{
-		/*Union*/
-		m_redefinitionContext.reset(new Union<uml::Classifier>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinitionContext;
-}
-
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueBehaviorImpl::getRole() const
-{
-	if(m_role == nullptr)
-	{
-		/*SubsetUnion*/
-		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRole()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_role;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -564,7 +417,7 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -588,21 +441,69 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	return BehaviorImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
+bool OpaqueBehaviorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _body = getBody();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				{
+					if (valueToAdd)
+					{
+						if(_body->find(valueToAdd) == -1)
+						{
+							_body->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'body'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _language = getLanguage();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				{
+					if (valueToAdd)
+					{
+						if(_language->find(valueToAdd) == -1)
+						{
+							_language->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'language'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -612,9 +513,9 @@ bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

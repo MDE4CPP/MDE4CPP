@@ -7,7 +7,6 @@
 #ifndef UML_CONSTRAINT_HPP
 #define UML_CONSTRAINT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -67,7 +64,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Constraint: virtual public PackageableElement
+	class UML_API Constraint : virtual public PackageableElement
 	{
 		public:
  			Constraint(const Constraint &) {}
@@ -97,22 +94,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The ValueSpecification for a Constraint must evaluate to a Boolean value.
-			*/
-			 
-			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Evaluating the ValueSpecification for a Constraint must not have side effects.
-			*/
-			 
-			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Constraint cannot be applied to itself.
-			not constrainedElement->includes(self)
-			*/
-			 
-			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -155,25 +136,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

@@ -1,9 +1,13 @@
 
 #include "uml/impl/DependencyImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -151,7 +155,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr client."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for client.")
 	}
 
 	//clone reference 'supplier'
@@ -178,7 +182,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr supplier."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for supplier.")
 	}
 	return *this;
 }
@@ -247,87 +251,6 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> DependencyImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> DependencyImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> DependencyImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::Element>> DependencyImpl::getRelatedElement() const
-{
-	if(m_relatedElement == nullptr)
-	{
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_relatedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getSource() const
-{
-	if(m_source == nullptr)
-	{
-		/*SubsetUnion*/
-		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getSource()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_source;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarget() const
-{
-	if(m_target == nullptr)
-	{
-		/*SubsetUnion*/
-		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getTarget()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_target;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -493,16 +416,16 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return eAnyBag(getClient(),uml::umlPackage::NAMEDELEMENT_CLASS); //6715
+			return eEcoreContainerAny(getClient(),uml::umlPackage::NAMEDELEMENT_CLASS); //6715
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return eAnyBag(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
+			return eEcoreContainerAny(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -531,83 +454,99 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool DependencyImpl::eSet(int featureID, Any newValue)
+bool DependencyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			// CAST Any to Bag<uml::NamedElement>
-			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::NamedElement>> clientList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _client=getClient();
-					for(const std::shared_ptr<uml::NamedElement> indexClient: *_client)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (clientList->find(indexClient) == -1)
+						std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_client->erase(indexClient);
-						}
-					}
-
-					for(const std::shared_ptr<uml::NamedElement> indexClient: *clientList)
-					{
-						if (_client->find(indexClient) == -1)
-						{
-							_client->add(indexClient);
+							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_client->find(valueToAdd) == -1)
+								{
+									_client->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'client'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'client'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			// CAST Any to Bag<uml::NamedElement>
-			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::NamedElement>> supplierList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _supplier=getSupplier();
-					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *_supplier)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (supplierList->find(indexSupplier) == -1)
+						std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_supplier->erase(indexSupplier);
-						}
-					}
-
-					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *supplierList)
-					{
-						if (_supplier->find(indexSupplier) == -1)
-						{
-							_supplier->add(indexSupplier);
+							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_supplier->find(valueToAdd) == -1)
+								{
+									_supplier->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'supplier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'supplier'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -624,9 +563,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DependencyImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

@@ -1,18 +1,22 @@
 #include "UML4CPPProfile/impl/SetterNameImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -48,35 +52,14 @@ SetterNameImpl::SetterNameImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"SetterName is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'SetterName' is created.")
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Property
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(554856804,[this](){ return eAny(this->getBase_Property(), uml::umlPackage::PROPERTY_CLASS, false);}));
-		//Property setterName
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1550049626,[this](){ return eAny(this->getSetterName(), types::typesPackage::STRING_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Property
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(554856804,[this](Any object){this->setBase_Property(object->get<std::shared_ptr<uml::Property>>());}));
-	//Property setterName
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1550049626,[this](Any object){this->setSetterName(object->get<std::string>());}));
-	
-	
-	//unsetter init
-		//Property base_Property
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(554856804,[this](){m_base_Property = std::shared_ptr<uml::Property>(nullptr);}));
-	
-	
-	
 }
 
 
 SetterNameImpl::~SetterNameImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"SetterName is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'SetterName' is destroyed.")
 }
 
 SetterNameImpl::SetterNameImpl(const SetterNameImpl & obj):SetterNameImpl()
@@ -173,83 +156,165 @@ std::string SetterNameImpl::getSetterName() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any SetterNameImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SetterNameImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any SetterNameImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> SetterNameImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any SetterNameImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> SetterNameImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+			return eUMLAny(this->getBase_Property().lock(), uml::umlPackage::PROPERTY_CLASS);
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
+			return eAny(this->getSetterName(), types::typesPackage::STRING_CLASS, false);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void SetterNameImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void SetterNameImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void SetterNameImpl::set(std::string _qualifiedName, Any value)
+void SetterNameImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void SetterNameImpl::set(unsigned long _uID, Any value)
+void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+		{
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Property> _base_Property = std::dynamic_pointer_cast<uml::Property>(umlAny);
+					if(_base_Property)
+					{
+						setBase_Property(_base_Property);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Property'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Property'. Failed to set property!")
+				return;
+			}
+		break;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
+		{
+			try
+			{
+				std::string _setterName = value->get<std::string>();
+				setSetterName(_setterName);
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property 'setterName'. Failed to set property!")
+				return;
+			}
+		break;
+		}
+	}
+}
+
+//Add
+void SetterNameImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->add(qualifiedName, value);
+}
+
+void SetterNameImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->add(uID, value);
+}
+
+void SetterNameImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void SetterNameImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void SetterNameImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void SetterNameImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+		{
+			m_base_Property.reset();
+			return;
+		}
+	}
+
 }
 
+//Remove
+void SetterNameImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void SetterNameImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void SetterNameImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -257,24 +322,18 @@ Any SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shar
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any SetterNameImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SetterNameImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

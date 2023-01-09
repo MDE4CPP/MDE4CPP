@@ -8,9 +8,13 @@
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef _WIN32
@@ -85,13 +89,12 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	struct dirent *file;
 	if((dir = opendir(folderName.c_str())) != NULL)
 	{
-		DEBUG_MESSAGE(std::cout << "libraries to be loaded" << std::endl;)
 		while((file = readdir(dir)) != NULL)
 		{
 			std::string libName = checkLibrary(file, folderName);
 			if (!libName.empty())
 			{
-				DEBUG_MESSAGE(std::cout << "\t" << libName << std::endl;)
+				DEBUG_INFO("Found plugin '" << libName << "'.")
 				libraries.push_back(libName);
 			}
 		}
@@ -99,7 +102,7 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	}
 	else
 	{
-		std::cerr << "Could not open directory " << folderName << " failed" << std::endl;
+		std::cerr << "Could not open directory '" << folderName << "'! Failed to load plugins!" << std::endl;
 	}
 
 	return libraries;
@@ -157,14 +160,14 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 
 	if(!handle)
 	{
-		std::cerr << "could not load the dynamic library, ErrorCode: " << getError() << std::endl;
+		std::cerr << "Could not load dynamic library! ErrorCode: " << getError() << "." << std::endl;
 		return;
 	}
 
 	StartFunction startFunction = (StartFunction) getStartFunction(handle, "_Z5startv");
 	if(!startFunction)
 	{
-		DEBUG_MESSAGE(std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;)
+		DEBUG_ERROR("Unable to locate start function 'std::shared_ptr<MDE4CPPPlugin> start()' in plugin '" << libraryPath << "'.")
 	}
 	else
 	{
@@ -177,7 +180,7 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 			m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(eclipseURI, plugin));
 		}
 
-		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
+		DEBUG_INFO("Started plugin '" << plugin << "'.")
 	}
 }
 

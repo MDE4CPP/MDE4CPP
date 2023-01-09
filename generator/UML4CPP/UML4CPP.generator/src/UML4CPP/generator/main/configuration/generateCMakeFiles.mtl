@@ -161,7 +161,8 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
-	${CMAKE_DL_LIBS}[/if]        
+	${CMAKE_DL_LIBS}
+[/if]        
 )
 [/template]
 
@@ -173,6 +174,10 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 # Factory of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]FactoryImpl.cpp
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Factory.cpp
+[if (aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0)]
+# Global functions of [aPackage.generateNamespace(false)/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]_GlobalFunctions.cpp
+[/if]
 # Contents of [aPackage.generateNamespace(false)/]
 [aPackage.generatePackageContents(isRoot)/]
 [/if]

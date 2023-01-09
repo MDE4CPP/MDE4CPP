@@ -61,24 +61,6 @@ namespace uml
 			*/
 			 
 			virtual uml::ConnectorKind getKind() ;
-			/*!
-			The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
-			structuredClassifier <> null
-			and
-			  end->forAll( e | structuredClassifier.allRoles()->includes(e.role)
-			or
-			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
-			*/
-			 
-			virtual bool roles(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
-			type<>null implies 
-			  let noOfEnds : Integer = end->size() in 
-			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type))
-			*/
-			 
-			virtual bool types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -129,48 +111,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -187,14 +133,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Connector> m_thisConnectorPtr;

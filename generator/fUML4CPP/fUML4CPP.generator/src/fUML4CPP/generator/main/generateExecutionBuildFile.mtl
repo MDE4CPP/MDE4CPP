@@ -14,8 +14,6 @@
  */]
 [module generateExecutionBuildFile('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -70,6 +68,10 @@ SET(SOURCE_FILES
 	[if (not packageOnly)]
 	# Model Execution Locus
 	impl/[aPackage.name/]LocusImpl.cpp
+	# Model Executor
+	impl/[aPackage.name/]ExecutorImpl.cpp
+	# Model ExecutionFactory
+	impl/[aPackage.name/]ExecutionFactoryImpl.cpp
 	[/if]
 	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
@@ -273,24 +275,28 @@ task clean {
 [/template]
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+[comment] Obsolete
 #ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
 [for (aClassifier : Classifier | getClassifiersForObjectClasses()->select(isGeneratable())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
+[/comment]
 #Strategy classes for Package [aPackage.generateNamespace(false)/]
 [for (aClass : Class | getPackageClasses()->select(isStrategyClass())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClass.name.toUpperFirst()/].cpp
 [/for]
+[comment] Obsolete
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
+	[/for]
 #OperationExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+	[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->sortedBy(name)/].cpp
-[/for]
+	[/for]
 [/if]
+[/comment]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
 [subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
 [/for]
@@ -307,20 +313,23 @@ ENDIF()
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 [/for]
+FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/template]
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
 	[/if]
 [/for]
+	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+	${CMAKE_DL_LIBS}
 )
 [/template]
 
@@ -339,7 +348,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).interfaceRealization.supplier.getNearestPackage(), 
 																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).generalization.general.getNearestPackage(), 
-																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
 																		    aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.packageImport->reject(isDoNotGenerateElement()).importedPackage
@@ -347,11 +355,13 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
+[comment] PSCS and OclParser are excluded for now
 [query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten()->addAll(aPackage.addOclParser()) endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'}->addAll(aPackage.addOclParser()) else OrderedSet{'ecore', 'uml'} endif/]
+[/comment]
+[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection().getRootPackage()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection().getRootPackage()->sortedBy(name).name)->flatten() endif/]
+[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'} else OrderedSet{'ecore', 'uml'} endif/]
 [query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
 [query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
 [query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
 [query public getBinaryTypeFolder(buildLibrary : Boolean) : String = if (buildLibrary) then 'libs' else 'exe' endif/]
 [query public getBuildTask(buildLibrary : Boolean) : String = if (buildLibrary) then 'NativeLibrarySpec' else 'NativeExecutableSpec' endif/]
-[query public addOclParser(aPackage : Package) : Set(String) = if (aPackage.getPackageOpaqueBehaviors().language->includes(keyOCL())->size() > 0) then Set{'oclParser'} else Set{} endif/]

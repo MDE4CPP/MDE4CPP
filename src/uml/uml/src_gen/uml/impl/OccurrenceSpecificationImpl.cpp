@@ -1,9 +1,13 @@
 
 #include "uml/impl/OccurrenceSpecificationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -183,30 +187,6 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBef
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> OccurrenceSpecificationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> OccurrenceSpecificationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> OccurrenceSpecificationImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -366,14 +346,14 @@ std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
-			return eAnyBag(getToAfter(),uml::umlPackage::GENERALORDERING_CLASS); //16313
+			return eEcoreContainerAny(getToAfter(),uml::umlPackage::GENERALORDERING_CLASS); //16313
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
-			return eAnyBag(getToBefore(),uml::umlPackage::GENERALORDERING_CLASS); //16314
+			return eEcoreContainerAny(getToBefore(),uml::umlPackage::GENERALORDERING_CLASS); //16314
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -390,83 +370,99 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool OccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			// CAST Any to Bag<uml::GeneralOrdering>
-			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter=getToAfter();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *_toAfter)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (toAfterList->find(indexToAfter) == -1)
+						std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_toAfter->erase(indexToAfter);
-						}
-					}
-
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *toAfterList)
-					{
-						if (_toAfter->find(indexToAfter) == -1)
-						{
-							_toAfter->add(indexToAfter);
+							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_toAfter->find(valueToAdd) == -1)
+								{
+									_toAfter->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'toAfter'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'toAfter'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			// CAST Any to Bag<uml::GeneralOrdering>
-			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore=getToBefore();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *_toBefore)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (toBeforeList->find(indexToBefore) == -1)
+						std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_toBefore->erase(indexToBefore);
-						}
-					}
-
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *toBeforeList)
-					{
-						if (_toBefore->find(indexToBefore) == -1)
-						{
-							_toBefore->add(indexToBefore);
+							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_toBefore->find(valueToAdd) == -1)
+								{
+									_toBefore->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'toBefore'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'toBefore'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -476,9 +472,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -488,8 +484,29 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<uml::Lifeline> incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<uml::Lifeline> >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_value = std::dynamic_pointer_cast<uml::Lifeline>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'setCovered'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'setCovered'!")
+					return nullptr;
+				}
+			}
+		
 			this->setCovered(incoming_param_value);
 			break;
 		}

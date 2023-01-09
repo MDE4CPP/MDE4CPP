@@ -7,15 +7,12 @@
 #ifndef UML_REPLYACTION_HPP
 #define UML_REPLYACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -75,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API ReplyAction: virtual public Action
+	class UML_API ReplyAction : virtual public Action
 	{
 		public:
  			ReplyAction(const ReplyAction &) {}
@@ -92,23 +89,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The event of the replyToCall Trigger must be a CallEvent.
-			replyToCall.event.oclIsKindOf(CallEvent)
-			*/
-			 
-			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
-			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
-			replyValue->size()=parameter->size() and
-			Sequence{1..replyValue->size()}->forAll(i |
-				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
-				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
-				replyValue->at(i).compatibleWith(parameter->at(i)))
-			*/
-			 
-			virtual bool pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,36 +131,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

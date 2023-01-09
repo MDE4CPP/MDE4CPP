@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
+#include <stdexcept>
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,7 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallAction.hpp"
 #include "uml/InputPin.hpp"
@@ -51,8 +56,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -62,11 +67,13 @@
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/InvocationActionActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "uml/Parameter.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -127,24 +134,6 @@ CallActionActivationImpl& CallActionActivationImpl::operator=(const CallActionAc
 	//copy references with no containment (soft copy)
 	m_callAction  = obj.getCallAction();
 	//Clone references with containment (deep copy)
-	//clone reference 'callExecutions'
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList = obj.getCallExecutions();
-	if(callExecutionsList)
-	{
-		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
-		
-		
-		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutionsindexElem: *callExecutionsList) 
-		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>((callExecutionsindexElem)->copy());
-			m_callExecutions->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr callExecutions."<< std::endl;)
-	}
-	
 	return *this;
 }
 
@@ -155,186 +144,176 @@ void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecution = this->getCallExecution();
+	std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
+	std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
+	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList = this->getInputPinActivation();
 
-    if (callExecution != nullptr)
-    {
-        this->getCallExecutions()->push_back(callExecution);
+	unsigned int inputPinNumber = 0;
+	
+	std::shared_ptr<Bag<uml::Parameter>> parameterList = this->retrieveCallParameters();
+	unsigned int size = parameterList->size();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	
+	for (unsigned int i=0; i<size; i++)
+	{
+		std::shared_ptr<uml::Parameter> parameter = parameterList->at(i);
+		uml::ParameterDirectionKind direction = parameter->getDirection();
+		
+		if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
+		{
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+			parameterValue->setParameter(parameter);
 
-        std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
-        std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
-        std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList=this->getInputPinActivation();
+			// get corresponding pin (pin and parameter list should be synchronized)
+			std::shared_ptr<uml::InputPin> correspondingInputpin = argumentPins->at(i);
+			std::string pinName = correspondingInputpin->getName();
 
-        unsigned int pinNumber = 0;
-        std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
-        std::shared_ptr<Bag<uml::Parameter>> parameterList = beh->getOwnedParameter();
-        unsigned int size = parameterList->size();
-        for (unsigned int i=0; i<size; i++)
-        {
-        	std::shared_ptr<uml::Parameter> parameter = parameterList->at(i);
-        	uml::ParameterDirectionKind direction=parameter->getDirection();
-            if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
-            {
-            	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
-                parameterValue->setParameter(parameter);
-                std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = parameterValue->getValues();
+			// if pin name starts with 'self', get values from context attribute
+			if (pinName.find("self.") == 0)
+			{
+				std::string attributeName = pinName.substr (5, std::string::npos);
+				DEBUG_INFO("Changing execution context to self." << attributeName << ".")
 
-                // get corresponding pin (pin and parameter list should be synchronized)
-                std::shared_ptr<uml::InputPin> correspondingInputpin = argumentPins->at(i);
-                std::string pinName = correspondingInputpin->getName();
+				std::shared_ptr<uml::Element> context = this->getExecutionContext();
 
-                // if pin name starts with 'self', get values from context attribute
-                if (pinName.find("self.") == 0)
-                {
-                	std::string attributeName = pinName.substr (5, std::string::npos);
-					DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
+				std::shared_ptr<uml::Property> attribute = nullptr;
+								
+				std::shared_ptr<uml::Classifier> contextImmediateType = context->getMetaClass();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes = contextImmediateType->allParents();
+				contextTypes->insert(contextTypes->begin(), contextImmediateType);
 
-                	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
+				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
-					std::shared_ptr<uml::Property> attribute = nullptr;
-					std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
-					Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
-					Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
-
-					while (attribute == nullptr || contextTypesIter < contextTypesEnd)
-					{
-						std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
-						contextTypesIter++;
-
-						std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
-						Bag<uml::Property>::iterator attributeIter = attributes->begin();
-						Bag<uml::Property>::iterator attributeEnd = attributes->end();
-						while (attribute == nullptr || attributeIter < attributeEnd)
-						{
-							if ((*attributeIter)->getName() == attributeName)
-							{
-								attribute = *attributeIter;
-							}
-							attributeIter++;
-						}
-					}
-
-					if(nullptr == attribute)
-					{
-						std::cerr << "Could not find the attribute in the current context for the input pin " << pinName << std::endl;
-						exit(EXIT_FAILURE);
-					}
-
-					DEBUG_MESSAGE(std::cout << "Self attribute found for target pin" <<std::endl;)
-
-					if (context != nullptr)
-					{
-						std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-						std::shared_ptr<Bag<fUML::Semantics::Values::Value>> attributeValues = context->getValues(attribute, featureValues);
-						values->insert(values->end(), attributeValues->begin(), attributeValues->end());
-					}
-                }
-                // if pin name starts with 'self', use context as value
-                else if (pinName.find("self") == 0)
+				while (attribute == nullptr || contextTypesIter < contextTypesEnd)
 				{
-					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+					std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
+					contextTypesIter++;
 
-					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-					contextReference->setReferent(context);
-					values->push_back(contextReference);
-				}
-                else
-                {
-					std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(pinNumber);
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
-					for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+					std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+					Bag<uml::Property>::iterator attributeIter = attributes->begin();
+					Bag<uml::Property>::iterator attributeEnd = attributes->end();
+					while (attribute == nullptr || attributeIter < attributeEnd)
 					{
-						std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
-						if(value != nullptr)
+						if ((*attributeIter)->getName() == attributeName)
 						{
-							DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
-							values->push_back(value);
+							attribute = *attributeIter;
 						}
+						attributeIter++;
 					}
-                }
+				}
 
-                callExecution->setParameterValue(parameterValue);
-                pinNumber++;
-            }
-        }
+				if(attribute == nullptr)
+				{
+					std::cerr << "Could not find the attribute in the current context for input pin '" << pinName << "'." << std::endl;
+					exit(EXIT_FAILURE);
+				}
 
-        callExecution->execute();
+				DEBUG_INFO("Found context attribute self."<< attributeName << " for target pin.")
 
+				if (context != nullptr)
+				{
+					std::shared_ptr<Any> attributeValue = context->get(attribute);
+					parameterValue->getValues()->add(attributeValue);
+				}
+			}
+			// if pin name starts with 'self', use context as value
+			else if (pinName.find("self") == 0)
+			{
+				std::shared_ptr<uml::Element> context = getExecutionContext();
+				std::shared_ptr<Any> contextValue = eUMLAny(context, context->getMetaElementID());
+				
+				parameterValue->getValues()->add(contextValue);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(inputPinNumber);
+				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
+				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+				{
+					std::shared_ptr<Any> value = token->getValue();
+					if(value != nullptr)
+					{
+						DEBUG_INFO("Target: "<<value->toString() << ".")
+						parameterValue->getValues()->add(value);
+					}
+				}
+			}
 
-        std::shared_ptr<Bag<uml::OutputPin> > resultPins = callAction->getResult();
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = callExecution->getOutputParameterValues();
-        std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputActivationList=this->getOutputPinActivation();
-        pinNumber = 0;
-        parameterList = callExecution->getBehavior()->getOwnedParameter();
-        for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
-        {
-            if (!(parameter->getDirection() == uml::ParameterDirectionKind::IN))
-            {
-                for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue : *outputParameterValues)
-                {
-                    if (outputParameterValue->getParameter() == parameter)
-                    {
-    					std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> resultPinActivation = outputActivationList->at(pinNumber);
-        				std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = outputParameterValue->getValues();
+			inputParameterValues->add(parameterValue);
+			inputPinNumber++;
+		}
+	}
 
-        				for (std::shared_ptr<fUML::Semantics::Values::Value> value : *values)
-        			    {
-        					DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = this->doCall(inputParameterValues);
+	
+	if(outputParameterValues)
+	{
+		std::shared_ptr<Bag<uml::OutputPin>> resultPins = callAction->getResult();
+		std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputActivationList=this->getOutputPinActivation();
+		unsigned int outputPinNumber = 0;
+		for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
+		{
+			if (!(parameter->getDirection() == uml::ParameterDirectionKind::IN))
+			{
+				for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue : *outputParameterValues)
+				{
+					if (outputParameterValue->getParameter() == parameter)
+					{
+						std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> resultPinActivation = outputActivationList->at(outputPinNumber);
+						std::shared_ptr<Bag<Any>> values = outputParameterValue->getValues();
 
-        					std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
-        					token->setValue(value);
+						for (std::shared_ptr<Any> value : *values)
+						{
+							DEBUG_INFO("Creating outgoing ObjectToken for CallAction '" << callAction ->getName() << "'.")
 
-        					resultPinActivation->addToken(token);
-        					ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< resultPinActivation->getNode()->getQualifiedName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) <<";DIRECTION:add"<<std::endl;)
-        			    }
-            			pinNumber++;
-        				break;
-        			}
-        		}
-            }
-        }
+							std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
+							token->setValue(value);
 
-        callExecution->destroy();
-        this->removeCallExecution(callExecution);
-    }
+							resultPinActivation->addToken(token);
+							ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< resultPinActivation->getNode()->getQualifiedName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) <<";DIRECTION:add"<<std::endl;)
+						}
+						outputPinNumber++;
+						break;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		DEBUG_ERROR("Output parameter values were NULL for CallAction '" << callAction ->getName() << "'.")
+	}
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallActionActivationImpl::getCallExecution()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallActionActivationImpl::doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues)
 {
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	    //TODO verify!
-    return this->m_callExecutions->front();
-	//end of body
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution)
+
+
+
+
+std::shared_ptr<Bag<uml::Parameter>> CallActionActivationImpl::retrieveCallParameters() const
 {
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	    bool notFound = true;
-    unsigned int i = 0;
-    while (notFound && (i < this->getCallExecutions()->size())) {
-        if (this->getCallExecutions()->at(i) == execution) {
-            this->getCallExecutions()->erase(this->getCallExecutions()->begin() + i);
-            notFound = false;
-        }
-    }
-	//end of body
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 void CallActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	/* Property CallActionActivation::callExecutions do not exist anymore
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution> > executionList = this->getCallExecutions();
 	for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution: *executionList)
-    {
-        execution->terminate();
-    }
+	{
+		execution->terminate();
+	}
+	*/
 
-    fUML::Semantics::Actions::InvocationActionActivationImpl::terminate();
+	fUML::Semantics::Actions::InvocationActionActivationImpl::terminate();
 	//end of body
 }
 
@@ -389,35 +368,11 @@ void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 	}
 }
 
-/* Getter & Setter for reference callExecutions */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActivationImpl::getCallExecutions() const
-{
-	if(m_callExecutions == nullptr)
-	{
-		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
-		
-		
-	}
-    return m_callExecutions;
-}
+
 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CallActionActivationImpl::getPinActivation() const
-{
-	if(m_pinActivation == nullptr)
-	{
-		/*Union*/
-		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_pinActivation;
-}
 
 //*********************************
 // Container Getter
@@ -478,29 +433,6 @@ void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::inter
 void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 
-	try
-	{
-		if ( nodeName.compare("callExecutions") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::Execution>(this->getCallExecutions());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
 	//load BasePackage Nodes
 	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
@@ -546,13 +478,6 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 	// Add references
 		saveHandler->addReference(this->getCallAction(), "callAction", getCallAction()->eClass() != uml::umlPackage::eInstance()->getCallAction_Class()); 
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'callExecutions'
-
-		saveHandler->addReferences<fUML::Semantics::CommonBehavior::Execution>("callExecutions", this->getCallExecutions());
 	}
 	catch (std::exception& e)
 	{
@@ -568,14 +493,12 @@ std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
 			return eAny(getCallAction(),uml::umlPackage::CALLACTION_CLASS,false); //1412
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-			return eAnyBag(getCallExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS); //1411
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -586,60 +509,44 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
 			return getCallAction() != nullptr; //1412
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-			return getCallExecutions() != nullptr; //1411
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CallActionActivationImpl::eSet(int featureID, Any newValue)
+bool CallActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
 		{
-			// CAST Any to uml::CallAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
-			setCallAction(_callAction); //1412
-			return true;
-		}
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-		{
-			// CAST Any to Bag<fUML::Semantics::CommonBehavior::Execution>
-			if((newValue->isContainer()) && (fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> _callExecutions=getCallExecutions();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *_callExecutions)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(eObject);
+					if(_callAction)
 					{
-						if (callExecutionsList->find(indexCallExecutions) == -1)
-						{
-							_callExecutions->erase(indexCallExecutions);
-						}
+						setCallAction(_callAction); //1412
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *callExecutionsList)
+					else
 					{
-						if (_callExecutions->find(indexCallExecutions) == -1)
-						{
-							_callExecutions->add(indexCallExecutions);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -649,9 +556,9 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -661,21 +568,53 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 910408163
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		// fUML::Semantics::Actions::CallActionActivation::doCall(fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 27461358
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE:
 		{
-			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			//Retrieve input parameter 'inputParameterValues'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameterValues;
+			Bag<Any>::const_iterator incoming_param_inputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputParameterValues_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputParameterValues.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputParameterValues->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->doCall(incoming_param_inputParameterValues);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::CallActionActivation::removeCallExecution(fUML::Semantics::CommonBehavior::Execution): 3901665011
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
+		// fUML::Semantics::Actions::CallActionActivation::retrieveCallParameters() : uml::Parameter[*] {const}: 3734106017
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS:
 		{
-			//Retrieve input parameter 'execution'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> incoming_param_execution;
-			std::list<Any>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> >();
-			this->removeCallExecution(incoming_param_execution);
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->retrieveCallParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::CallActionActivation::terminate(): 2819746834

@@ -84,15 +84,15 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes,std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0;
+			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes, std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0;
 			virtual void addEdgeInstance(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> instance) = 0;
 			virtual void addNodeActivation(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0;
+			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges, std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0;
 			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
 			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> getOutputParameterNodeActivations() = 0;
 			virtual bool hasSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
 			virtual bool isSuspended() = 0;
 			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;

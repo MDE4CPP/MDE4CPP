@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Activities/impl/DecisionNodeActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -39,7 +43,7 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+//#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/DecisionNode.hpp"
@@ -63,14 +67,12 @@
 #include "uml/DecisionNode.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -128,12 +130,6 @@ DecisionNodeActivationImpl& DecisionNodeActivationImpl::operator=(const Decision
 	//copy references with no containment (soft copy)
 	m_decisionNode  = obj.getDecisionNode();
 	//Clone references with containment (deep copy)
-	//clone reference 'decisionInputExecution'
-	if(obj.getDecisionInputExecution()!=nullptr)
-	{
-		m_decisionInputExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(obj.getDecisionInputExecution()->copy());
-	}
-	
 	return *this;
 }
 
@@ -148,11 +144,11 @@ std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue)
+std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<Any> inputValue, std::shared_ptr<Any> decisionInputValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::DecisionNode> decisionNode = this->getDecisionNode();
+	std::shared_ptr<uml::DecisionNode> decisionNode = this->getDecisionNode();
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
@@ -160,7 +156,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
         decisionInputBehavior = decisionNode->getDecisionInput();
     }
 
-    std::shared_ptr<fUML::Semantics::Values::Value> decisionInputResult = nullptr;
+    std::shared_ptr<Any> decisionInputResult = nullptr;
 
     if (decisionInputBehavior == nullptr)
     {
@@ -174,8 +170,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
         }
     }
     else
-    {
-        this->setDecisionInputExecution(this->getExecutionLocus()->getFactory()->createExecution(decisionInputBehavior,this->getExecutionContext()));
+    {	
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
         unsigned int i = 0;
         unsigned int j = 0;
@@ -199,14 +195,12 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
                     inputParameterValue->getValues()->push_back(decisionInputValue);
                 }
 
-                this->getDecisionInputExecution()->setParameterValue(inputParameterValue);
+                inputParameterValues->add(inputParameterValue);
             }
             i = i + 1;
         }
-        this->getDecisionInputExecution()->execute();
 
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = this->getDecisionInputExecution()->getOutputParameterValues();
-        this->getDecisionInputExecution()->destroy();
+        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(decisionInputBehavior, this->getExecutionContext(), inputParameterValues);
 
         decisionInputResult = outputParameterValues->at(0)->getValues()->at(0);
     }
@@ -219,11 +213,11 @@ void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activ
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
+	DEBUG_INFO("Firing DecisionNode '" << this->getNode()->getName() << "'.")
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > decisionValues = this->getDecisionValues(incomingTokens);
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
+	std::shared_ptr<Bag<Any>> decisionValues = this->getDecisionValues(incomingTokens);
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdges = this->getOutgoingEdges();
 
     for (unsigned int i = 0; i < outgoingEdges->size(); i++) 
     {
@@ -234,7 +228,7 @@ void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activ
         for (unsigned int j = 0; j < incomingTokens->size(); j++) 
         {
         	std::shared_ptr<fUML::Semantics::Activities::Token> incomingToken = incomingTokens->at(j);
-        	std::shared_ptr<fUML::Semantics::Values::Value> decisionValue = decisionValues->at(j);
+        	std::shared_ptr<Any> decisionValue = decisionValues->at(j);
             if (this->test(guard, decisionValue)) 
             {
                 offeredTokens->push_back(incomingToken);
@@ -279,13 +273,13 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> DecisionNodeA
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getDecisionInputFlowValue()
+std::shared_ptr<Any> DecisionNodeActivationImpl::getDecisionInputFlowValue()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> decisionInputFlowInstance = this->getDecisionInputFlowInstance();
 
-	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
+	std::shared_ptr<Any> value = nullptr;
     if (decisionInputFlowInstance != nullptr) 
     {
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = decisionInputFlowInstance->takeOfferedTokens();
@@ -299,36 +293,36 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getD
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue = this->getDecisionInputFlowValue();
+	std::shared_ptr<Any> decisionInputValue = this->getDecisionInputFlowValue();
 
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > decisionValues(new Bag<fUML::Semantics::Values::Value>());
+	std::shared_ptr<Bag<Any>> decisionValues(new Bag<Any>());
 
     for (unsigned int i = 0; i < incomingTokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> incomingToken = incomingTokens->at(i);
-    	std::shared_ptr<fUML::Semantics::Values::Value> value = this->executeDecisionInputBehavior(incomingToken->getValue(), decisionInputValue);
+    	std::shared_ptr<Any> value = this->executeDecisionInputBehavior(incomingToken->getValue(), decisionInputValue);
         decisionValues->push_back(value);
     }
 
-    DEBUG_MESSAGE(
-		for (unsigned int i = 0; i < decisionValues->size(); i++)
+#ifndef NDEBUG
+	std::string decisionValuesDebugInfoMessage;
+	for (unsigned int i = 0; i < decisionValues->size(); i++)
+	{
+		std::shared_ptr<Any> decisionValue = decisionValues->at(i);
+		if (decisionValue)
 		{
-			std::shared_ptr<fUML::Semantics::Values::Value> decisionValue = decisionValues->at(i);
-			if (decisionValue)
-			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = "
-				   << decisionValue->toString()<<std::endl;
-			}
-			else
-			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr" << std::endl;
-			}
+			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = " + decisionValue->toString() + " ; ";
 		}
-    )
+		else
+		{
+			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = nullptr ; ";
+		}
+	}
+#endif
 
     return decisionValues;
 	//end of body
@@ -358,17 +352,17 @@ bool DecisionNodeActivationImpl::isReady()
 	//generated from body annotation
 	unsigned int i = 0;
     bool ready = true;
-    DEBUG_MESSAGE(std::cout<< "INCOMING EDGE SIZE:"<< this->getIncomingEdges()->size()<<std::endl;)
+    DEBUG_INFO("DecisionNode '" << this->getNode()->getName() << "' has " << this->getIncomingEdges()->size() << "incoming edges.")
     while (ready && (i < this->getIncomingEdges()->size())) {
         ready = this->getIncomingEdges()->at(i)->hasOffer();
         i = i + 1;
     }
-    DEBUG_MESSAGE(std::cout<< "READY:"<< ready<<std::endl;)
+    DEBUG_INFO("DecisionNode '" << this->getNode()->getName() << "' " << ((ready) ? "is ready to execute." : "is not ready to execute yet."))
     return ready;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -394,7 +388,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivation
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -419,27 +413,106 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivation
 	//end of body
 }
 
-void DecisionNodeActivationImpl::terminate()
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	    if (this->getDecisionInputExecution() != nullptr) {
-        this->getDecisionInputExecution()->terminate();
-    }
 
-    fUML::Semantics::Activities::ControlNodeActivationImpl::terminate();
-	//end of body
-}
 
-bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> guard, std::shared_ptr<Any> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool guardResult = true;
-    if (gaurd != nullptr) 
+    if (guard != nullptr) 
     {
-    	std::shared_ptr<fUML::Semantics::Values::Value> guardValue = this->getExecutionLocus()->getExecutor()->evaluate(gaurd);
-        guardResult = guardValue->equals(value);
+		// Determine what kind of ValueSpecification is present
+		switch(guard->getMetaElementID())
+		{
+			case uml::umlPackage::LITERALBOOLEAN_CLASS:
+			{
+				bool guardValue = guard->booleanValue();
+				try
+				{
+					bool booleanValue = value->get<bool>();
+					
+					guardResult = (guardValue == booleanValue);
+				}
+				catch(...)
+				{
+					guardResult = false;
+				}
+				break;
+			}
+			case uml::umlPackage::LITERALINTEGER_CLASS:
+			{
+				int guardValue = guard->integerValue();
+				try
+				{
+					int integerValue = value->get<int>();
+					
+					guardResult = (guardValue == integerValue);
+				}
+				catch(...)
+				{
+					guardResult = false;
+				}
+				break;
+			}
+			case uml::umlPackage::LITERALREAL_CLASS:
+			{
+				double guardValue = guard->realValue();
+				try
+				{
+					double realValue = value->get<double>();
+					
+					guardResult = (guardValue == realValue);
+				}
+				catch(...)
+				{
+					guardResult = false;
+				}
+				break;
+			}
+			case uml::umlPackage::LITERALSTRING_CLASS:
+			{
+				std::string guardValue = guard->stringValue();
+				try
+				{
+					std::string stringValue = value->get<std::string>();
+					
+					guardResult = (guardValue == stringValue);
+				}
+				catch(...)
+				{
+					guardResult = false;
+				}
+				break;
+			}
+			case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+			{
+				int guardValue = guard->integerValue();
+				try
+				{
+					int integerValue = value->get<int>();
+					
+					guardResult = (guardValue == integerValue);
+				}
+				catch(...)
+				{
+					guardResult = false;
+				}
+				break;
+			}
+			case uml::umlPackage::INSTANCEVALUE_CLASS:
+			{
+				/*
+					Currently not supported
+				*/
+				DEBUG_WARNING("Evaluation of InstanceValues used for ActivityEdge guards is currently not supported!")
+				break;
+			}
+			default:
+			{
+				DEBUG_ERROR("Unknown kind of ValuesSpecification used for ActivityEdge guard!")
+			}
+		}
     }
     return guardResult;
 	//end of body
@@ -452,16 +525,7 @@ bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> g
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference decisionInputExecution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DecisionNodeActivationImpl::getDecisionInputExecution() const
-{
-    return m_decisionInputExecution;
-}
-void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution)
-{
-    m_decisionInputExecution = _decisionInputExecution;
-	
-}
+
 
 /* Getter & Setter for reference decisionNode */
 std::shared_ptr<uml::DecisionNode> DecisionNodeActivationImpl::getDecisionNode() const
@@ -554,29 +618,6 @@ void DecisionNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::int
 void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 
-	try
-	{
-		if ( nodeName.compare("decisionInputExecution") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getDecisionInputExecution()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
 	//load BasePackage Nodes
 	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
@@ -620,13 +661,6 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 	// Add references
 		saveHandler->addReference(this->getDecisionNode(), "decisionNode", getDecisionNode()->eClass() != uml::umlPackage::eInstance()->getDecisionNode_Class()); 
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'decisionInputExecution'
-
-		saveHandler->addReference(this->getDecisionInputExecution(), "decisionInputExecution", getDecisionInputExecution()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -642,12 +676,10 @@ std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return eAny(getDecisionInputExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //376
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
 			return eAny(getDecisionNode(),uml::umlPackage::DECISIONNODE_CLASS,false); //377
 	}
@@ -658,33 +690,46 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return getDecisionInputExecution() != nullptr; //376
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
 			return getDecisionNode() != nullptr; //377
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
+bool DecisionNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
-		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-		{
-			// CAST Any to fUML::Semantics::CommonBehavior::Execution
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
-			setDecisionInputExecution(_decisionInputExecution); //376
-			return true;
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
 		{
-			// CAST Any to uml::DecisionNode
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_temp);
-			setDecisionNode(_decisionNode); //377
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(eObject);
+					if(_decisionNode)
+					{
+						setDecisionNode(_decisionNode); //377
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decisionNode'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -694,26 +739,44 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::DecisionNodeActivation::executeDecisionInputBehavior(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value) : fUML::Semantics::Values::Value: 1497497786
-		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE:
+		// fUML::Semantics::Activities::DecisionNodeActivation::executeDecisionInputBehavior(Any, Any) : Any: 3052258302
+		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'inputValue'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_inputValue;
-			std::list<Any>::const_iterator incoming_param_inputValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_inputValue = (*incoming_param_inputValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::shared_ptr<Any> incoming_param_inputValue;
+			Bag<Any>::const_iterator incoming_param_inputValue_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_inputValue = (*incoming_param_inputValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'decisionInputValue'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_decisionInputValue;
-			std::list<Any>::const_iterator incoming_param_decisionInputValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_decisionInputValue = (*incoming_param_decisionInputValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAnyObject(this->executeDecisionInputBehavior(incoming_param_inputValue,incoming_param_decisionInputValue), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			std::shared_ptr<Any> incoming_param_decisionInputValue;
+			Bag<Any>::const_iterator incoming_param_decisionInputValue_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_decisionInputValue = (*incoming_param_decisionInputValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'decisionInputValue'. Failed to invoke operation 'executeDecisionInputBehavior'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->executeDecisionInputBehavior(incoming_param_inputValue,incoming_param_decisionInputValue), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 4127070096
@@ -722,45 +785,104 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_incomingTokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_incomingTokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_incomingTokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'fire'!")
+					return nullptr;
+				}
+			}
+		
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowInstance() : fUML::Semantics::Activities::ActivityEdgeInstance: 589400247
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE:
 		{
-			result = eAnyObject(this->getDecisionInputFlowInstance(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS);
+			result = eEcoreAny(this->getDecisionInputFlowInstance(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowValue() : fUML::Semantics::Values::Value: 15068892
+		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowValue() : Any: 1399588784
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE:
 		{
-			result = eAnyObject(this->getDecisionInputFlowValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			result = eAny(this->getDecisionInputFlowValue(), 0, false);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionValues(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Values::Value[*]: 1834254220
+		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionValues(fUML::Semantics::Activities::Token[*]) : Any[*]: 2333144120
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getDecisionValues(incoming_param_incomingTokens);
-			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_incomingTokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_incomingTokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_incomingTokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'getDecisionValues'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->getDecisionValues(incoming_param_incomingTokens), 0, true);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::hasObjectFlowInput() : bool: 336094904
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT:
 		{
-			result = eAny(this->hasObjectFlowInput(),0,false);
+			result = eAny(this->hasObjectFlowInput(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::isReady() : bool: 2829031806
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_ISREADY:
 		{
-			result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::removeJoinedControlTokens(fUML::Semantics::Activities::Token[*]) : fUML::Semantics::Activities::Token[*]: 1559509247
@@ -769,39 +891,93 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->removeJoinedControlTokens(incoming_param_incomingTokens);
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			Bag<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_incomingTokens_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_incomingTokens.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::Activities::Token> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
+								incoming_param_incomingTokens->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'incomingTokens'. Failed to invoke operation 'removeJoinedControlTokens'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->removeJoinedControlTokens(incoming_param_incomingTokens);
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 121080352
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
-			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> resultList = this->takeOfferedTokens();
+			return eEcoreContainerAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::terminate(): 1771187084
-		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TERMINATE:
+		// fUML::Semantics::Activities::DecisionNodeActivation::test(uml::ValueSpecification, Any) : bool: 2379610281
+		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT:
 		{
-			this->terminate();
-			break;
-		}
-		// fUML::Semantics::Activities::DecisionNodeActivation::test(uml::ValueSpecification, fUML::Semantics::Values::Value) : bool: 753683065
-		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE:
-		{
-			//Retrieve input parameter 'gaurd'
+			//Retrieve input parameter 'guard'
 			//parameter 0
-			std::shared_ptr<uml::ValueSpecification> incoming_param_gaurd;
-			std::list<Any>::const_iterator incoming_param_gaurd_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_gaurd = (*incoming_param_gaurd_arguments_citer)->get<std::shared_ptr<uml::ValueSpecification> >();
+			std::shared_ptr<uml::ValueSpecification> incoming_param_guard;
+			Bag<Any>::const_iterator incoming_param_guard_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_guard_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_guard = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'guard'. Failed to invoke operation 'test'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'guard'. Failed to invoke operation 'test'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'value'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->test(incoming_param_gaurd,incoming_param_value),0,false);
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'test'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->test(incoming_param_guard,incoming_param_value), 0, false);
 			break;
 		}
 

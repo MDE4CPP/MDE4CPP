@@ -65,7 +65,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Vertex: virtual public NamedElement
+	class UML_API Vertex : virtual public NamedElement
 	{
 		public:
  			Vertex(const Vertex &) {}
@@ -118,14 +118,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;
+			virtual std::shared_ptr<Bag<uml::Transition>> getIncomings() = 0;
 			/*!
 			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;
+			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoings() = 0;
 			/*!
 			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
@@ -192,24 +192,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

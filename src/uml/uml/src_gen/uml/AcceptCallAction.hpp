@@ -7,15 +7,12 @@
 #ifndef UML_ACCEPTCALLACTION_HPP
 #define UML_ACCEPTCALLACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -75,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API AcceptCallAction: virtual public AcceptEventAction
+	class UML_API AcceptCallAction : virtual public AcceptEventAction
 	{
 		public:
  			AcceptCallAction(const AcceptCallAction &) {}
@@ -92,30 +89,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The number of result OutputPins must be the same as the number of input (in and inout) ownedParameters of the Operation specified by the trigger Event. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
-			let parameter: OrderedSet(Parameter) = trigger.event->asSequence()->first().oclAsType(CallEvent).operation.inputParameters() in
-			result->size() = parameter->size() and
-			Sequence{1..result->size()}->forAll(i | 
-				parameter->at(i).type.conformsTo(result->at(i).type) and 
-				parameter->at(i).isOrdered = result->at(i).isOrdered and
-				parameter->at(i).compatibleWith(result->at(i)))
-			*/
-			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The action must have exactly one trigger, which must be for a CallEvent.
-			trigger->size()=1 and
-			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
-			*/
-			 
-			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			isUnmrashall must be true for an AcceptCallAction.
-			isUnmarshall = true
-			*/
-			 
-			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -140,36 +113,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

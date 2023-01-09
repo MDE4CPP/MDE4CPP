@@ -1,9 +1,13 @@
 
 #include "uml/impl/DurationConstraintImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -146,7 +150,7 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr firstEvent."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for firstEvent.")
 	}
 
 	//copy references with no containment (soft copy)
@@ -165,15 +169,6 @@ std::shared_ptr<ecore::EObject> DurationConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -195,32 +190,6 @@ std::shared_ptr<Bag<bool>> DurationConstraintImpl::isFirstEvent() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> DurationConstraintImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> DurationConstraintImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> DurationConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -355,7 +324,7 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -375,15 +344,39 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
 
-bool DurationConstraintImpl::eSet(int featureID, Any newValue)
+bool DurationConstraintImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
-			// CAST Any to Bag<bool>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<bool>> _firstEventList = newValue->get<std::shared_ptr<Bag<bool>>>();
+				std::shared_ptr<Bag<bool>> _firstEvent = isFirstEvent();
+				
+				for(const std::shared_ptr<bool> valueToAdd: *_firstEventList)
+				{
+					if (valueToAdd)
+					{
+						if(_firstEvent->find(valueToAdd) == -1)
+						{
+							_firstEvent->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'firstEvent'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -393,44 +386,12 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::DurationConstraint::first_event_multiplicity(Any, std::map) : bool: 1354212710
-		case umlPackage::DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::DurationConstraint::has_one_or_two_constrainedElements(Any, std::map) : bool: 4186177077
-		case umlPackage::DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

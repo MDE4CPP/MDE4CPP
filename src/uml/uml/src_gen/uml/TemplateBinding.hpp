@@ -7,15 +7,12 @@
 #ifndef UML_TEMPLATEBINDING_HPP
 #define UML_TEMPLATEBINDING_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -61,7 +58,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateBinding: virtual public DirectedRelationship
+	class UML_API TemplateBinding : virtual public DirectedRelationship
 	{
 		public:
  			TemplateBinding(const TemplateBinding &) {}
@@ -83,18 +80,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter of the target TemplateSignature.
-			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
-			*/
-			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
-			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
-			*/
-			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -137,36 +122,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
-			/*!
-			Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;
-			/*!
-			Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
 
 			//*********************************
 			// Container Getter

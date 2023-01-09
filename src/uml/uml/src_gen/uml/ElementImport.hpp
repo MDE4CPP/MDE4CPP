@@ -7,15 +7,12 @@
 #ifndef UML_ELEMENTIMPORT_HPP
 #define UML_ELEMENTIMPORT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -62,7 +59,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API ElementImport: virtual public DirectedRelationship
+	class UML_API ElementImport : virtual public DirectedRelationship
 	{
 		public:
  			ElementImport(const ElementImport &) {}
@@ -95,18 +92,6 @@ namespace uml
 			*/
 			 
 			virtual std::string getName() = 0;
-			/*!
-			An importedElement has either public visibility or no visibility at all.
-			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public
-			*/
-			 
-			virtual bool imported_element_is_public(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The visibility of an ElementImport is either public or private.
-			visibility = VisibilityKind::public or visibility = VisibilityKind::private
-			*/
-			 
-			virtual bool visibility_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -167,36 +152,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
-			/*!
-			Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;
-			/*!
-			Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
 
 			//*********************************
 			// Container Getter

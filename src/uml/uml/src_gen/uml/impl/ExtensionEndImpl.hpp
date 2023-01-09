@@ -58,18 +58,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The aggregation of an ExtensionEnd is composite.
-			self.aggregation = AggregationKind::composite
-			*/
-			 
-			virtual bool aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The multiplicity of ExtensionEnd is 0..1 or 1.
-			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
-			*/
-			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -83,49 +71,11 @@ namespace uml
 			// Union Reference Getters
 			//*********************************
 			
-			/*!
-			The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ;
-			
-			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -142,14 +92,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExtensionEnd> m_thisExtensionEndPtr;

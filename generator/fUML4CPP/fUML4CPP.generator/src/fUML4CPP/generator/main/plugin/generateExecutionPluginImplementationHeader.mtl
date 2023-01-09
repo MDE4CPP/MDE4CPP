@@ -23,6 +23,14 @@
 
 #include "[aPackage.generateNamespacePath(false)/]Exec/[aPackage.name/]ExecPlugin.hpp"
 
+namespace [aPackage.generateNamespace(false).sanitize()/]
+{
+	class [aPackage.generateNamespace(false).sanitize()/]Locus;
+	class [aPackage.generateNamespace(false).sanitize()/]Executor;
+	class [aPackage.generateNamespace(false).sanitize()/]ExecutionFactory;
+}
+
+
 namespace [aPackage.generateNamespace(false)/] 
 {
 	class [aPackage.name.concat('ExecPluginImpl')/] : virtual public [aPackage.name.concat('ExecPlugin')/] 
@@ -36,10 +44,23 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const;
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string&) const;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string&, std::shared_ptr<ecore::EObject>, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity>, std::shared_ptr<Bag<Any>>, std::shared_ptr<uml::Element>);
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> executeBehavior(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
+			virtual std::shared_ptr<uml::Element> instantiateClass(std::shared_ptr<uml::Class>);
+			virtual std::shared_ptr<Any> evaluateSpecification(std::shared_ptr<uml::ValueSpecification>);
+
+		private:
 			virtual void initialize();
-			virtual Any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element);
+[if (not aPackage.isReflectionModel())]
+
+		protected:
+			//Execution Environment
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Executor'/]> m_executor;
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'ExecutionFactory'/]> m_factory;
+[/if]
 
 		private:
 			bool m_IsInitialized = false;

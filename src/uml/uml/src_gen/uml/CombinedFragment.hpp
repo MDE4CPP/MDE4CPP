@@ -7,15 +7,12 @@
 #ifndef UML_COMBINEDFRAGMENT_HPP
 #define UML_COMBINEDFRAGMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -69,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API CombinedFragment: virtual public InteractionFragment
+	class UML_API CombinedFragment : virtual public InteractionFragment
 	{
 		public:
  			CombinedFragment(const CombinedFragment &) {}
@@ -86,29 +83,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If the interactionOperator is break, the corresponding InteractionOperand must cover all Lifelines covered by the enclosing InteractionFragment.
-			interactionOperator=InteractionOperatorKind::break  implies   
-			enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union(
-			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
-			*/
-			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
-			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
-			*/
-			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
-			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
-			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
-			interactionOperator = InteractionOperatorKind::neg)
-			implies operand->size()=1
-			*/
-			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -145,24 +119,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

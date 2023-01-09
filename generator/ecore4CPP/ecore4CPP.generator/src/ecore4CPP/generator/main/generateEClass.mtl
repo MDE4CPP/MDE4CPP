@@ -102,6 +102,8 @@ void [anEClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName(
 [aEClass.getClassMemberName()/]->setAbstract([aEClass.abstract.toString()/]);
 [aEClass.getClassMemberName()/]->setInterface([aEClass.interface.toString()/]);
 
+[aEClass.getClassMemberName()/]->_setID([aEClass.getStaticAttributeIDName()/]);
+
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]

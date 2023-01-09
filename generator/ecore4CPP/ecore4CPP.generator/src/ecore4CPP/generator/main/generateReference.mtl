@@ -299,23 +299,12 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 [anEReference.getClassMemberName()/]->setOrdered([anEReference.ordered.toString()/]);
 [anEReference.getClassMemberName()/]->setContainment([anEReference.containment.toString()/]);
 [anEReference.getClassMemberName()/]->setResolveProxies([anEReference.resolveProxies.toString()/]);
-{
-	std::string defaultValue = "[anEReference.defaultValueLiteral/]";
-	if (!defaultValue.empty())
-	{
-		[anEReference.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
-	}				
-	[if not anEReference.eOpposite.oclIsUndefined()]						
-	std::shared_ptr<ecore::EReference>  otherEnd = [anEReference.eOpposite.eContainingClass.getPackage_eInstance()/]->[anEReference.eOpposite.packageGetter()/];
-	if (otherEnd != nullptr)
-    {
-   		[anEReference.getClassMemberName()/]->setEOpposite(otherEnd);
-    }
-	[else]
-		//undefined otherEnd
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	[/if]
-}
+[anEReference.getClassMemberName()/]->setDefaultValueLiteral("[anEReference.defaultValueLiteral/]");	
+[if not anEReference.eOpposite.oclIsUndefined()]						
+[anEReference.getClassMemberName()/]->setEOpposite([anEReference.eOpposite.eContainingClass.getPackage_eInstance()/]->[anEReference.eOpposite.packageGetter()/]);
+[/if]
+
+[anEReference.getClassMemberName()/]->_setID([anEReference.getStaticAttributeIDName()/]);
 
 [/template]
 

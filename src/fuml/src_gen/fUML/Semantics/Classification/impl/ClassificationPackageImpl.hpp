@@ -18,7 +18,7 @@
 
 namespace fUML::Semantics::Classification 
 {
-	class InstanceValueEvaluation;}
+}
 
 namespace ecore
 {
@@ -39,26 +39,17 @@ namespace fUML::Semantics::Classification
 		public:
 			virtual ~ClassificationPackageImpl();
 
-			// Begin Class InstanceValueEvaluation
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_Operation_evaluate() const ;
-			
-			// End Class InstanceValueEvaluation
 
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_instanceValueEvaluation_Class = nullptr;
 			
 			
 			
-			std::shared_ptr<ecore::EOperation> m_instanceValueEvaluation_Operation_evaluate = nullptr;
+			
+			
 
 			friend class ClassificationPackage;
 
@@ -74,10 +65,8 @@ namespace fUML::Semantics::Classification
 			void initializePackageContents();
 
 		private:
-			void createInstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
-			void initializeInstanceValueEvaluationContent();
 			void initializePackageEDataTypes();
 
 

@@ -7,14 +7,11 @@
 #ifndef UML_DURATIONCONSTRAINT_HPP
 #define UML_DURATIONCONSTRAINT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -65,7 +62,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API DurationConstraint: virtual public IntervalConstraint
+	class UML_API DurationConstraint : virtual public IntervalConstraint
 	{
 		public:
  			DurationConstraint(const DurationConstraint &) {}
@@ -82,20 +79,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of firstEvent must be 2 if the multiplicity of constrainedElement is 2. Otherwise the multiplicity of firstEvent is 0.
-			if (constrainedElement->size() = 2)
-			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
-			endif
-			*/
-			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A DurationConstraint has either one or two constrainedElements.
-			constrainedElement->size() = 1 or constrainedElement->size()=2
-			*/
-			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -114,25 +97,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

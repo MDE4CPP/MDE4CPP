@@ -50,29 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If the interactionOperator is break, the corresponding InteractionOperand must cover all Lifelines covered by the enclosing InteractionFragment.
-			interactionOperator=InteractionOperatorKind::break  implies   
-			enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union(
-			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
-			*/
-			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
-			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
-			*/
-			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
-			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
-			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
-			interactionOperator = InteractionOperatorKind::neg)
-			implies operand->size()=1
-			*/
-			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -109,30 +86,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -149,14 +108,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::CombinedFragment> m_thisCombinedFragmentPtr;

@@ -1,9 +1,13 @@
 
 #include "uml/impl/NodeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -190,7 +194,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedNode."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for nestedNode.")
 	}
 	/*Subset*/
 	getNestedNode()->initSubset(getOwnedMember());
@@ -212,17 +216,12 @@ std::shared_ptr<ecore::EObject> NodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, std::shared_ptr<uml::Node> end1Node, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool NodeImpl::internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<Bag<uml::CommunicationPath>> NodeImpl::getCommunicationPaths()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -258,142 +257,6 @@ std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> NodeImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> NodeImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> NodeImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> NodeImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> NodeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> NodeImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> NodeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> NodeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> NodeImpl::getRole() const
-{
-	if(m_role == nullptr)
-	{
-		/*SubsetUnion*/
-		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRole()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_role;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -545,14 +408,14 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-			return eAnyBag(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
+			return eEcoreContainerAny(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -579,46 +442,54 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool NodeImpl::eSet(int featureID, Any newValue)
+bool NodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
-			// CAST Any to Bag<uml::Node>
-			if((newValue->isContainer()) && (uml::umlPackage::NODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Node>> nestedNodeList= newValue->get<std::shared_ptr<Bag<uml::Node>>>();
-					std::shared_ptr<Bag<uml::Node>> _nestedNode=getNestedNode();
-					for(const std::shared_ptr<uml::Node> indexNestedNode: *_nestedNode)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (nestedNodeList->find(indexNestedNode) == -1)
+						std::shared_ptr<Bag<uml::Node>> _nestedNode = getNestedNode();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_nestedNode->erase(indexNestedNode);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Node> indexNestedNode: *nestedNodeList)
-					{
-						if (_nestedNode->find(indexNestedNode) == -1)
-						{
-							_nestedNode->add(indexNestedNode);
+							std::shared_ptr<uml::Node> valueToAdd = std::dynamic_pointer_cast<uml::Node>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_nestedNode->find(valueToAdd) == -1)
+								{
+									_nestedNode->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedNode'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -635,9 +506,9 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -647,82 +518,177 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
+			Bag<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1IsNavigable'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
-			std::list<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
+			Bag<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Aggregation'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
-			std::list<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Name'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
-			std::list<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Lower'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
-			std::list<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
-			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
+			try
+			{
+				incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end1Upper'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end1Node'
 			//parameter 5
 			std::shared_ptr<uml::Node> incoming_param_end1Node;
-			std::list<Any>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
-			incoming_param_end1Node = (*incoming_param_end1Node_arguments_citer)->get<std::shared_ptr<uml::Node> >();
+			Bag<Any>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end1Node_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end1Node = std::dynamic_pointer_cast<uml::Node>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end1Node'. Failed to invoke operation 'createCommunicationPath'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
-			std::list<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
-			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
+			Bag<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
+			try
+			{
+				incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2IsNavigable'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
-			std::list<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
-			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
+			Bag<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
+			try
+			{
+				incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Aggregation'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
-			std::list<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
-			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
+			try
+			{
+				incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Name'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
-			std::list<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
-			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
+			try
+			{
+				incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Lower'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
-			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
-			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
+			Bag<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
+			try
+			{
+				incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'end2Upper'. Failed to invoke operation 'createCommunicationPath'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
 		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 810632424
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
-			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
-			return eAnyBag(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
-			break;
-		}
-		// uml::Node::internal_structure(Any, std::map) : bool: 1965611485
-		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->internal_structure(incoming_param_diagnostics,incoming_param_context),0,false);
+			std::shared_ptr<Bag<uml::CommunicationPath>> resultList = this->getCommunicationPaths();
+			return eEcoreContainerAny(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}
 

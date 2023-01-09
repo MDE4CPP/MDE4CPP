@@ -35,21 +35,21 @@ namespace fUML
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ObjectActivation;
 	class ParameterValue;
 }
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers 
+namespace ecore 
 {
-	class FeatureValue;
+	class EAnnotation;
 }
 namespace uml 
 {
 	class Behavior;
 	class Classifier;
+	class Comment;
 	class Parameter;
 }
 
@@ -57,7 +57,8 @@ namespace uml
 #include "fUML/fUML.hpp"
 
 // base class includes
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "uml/Element.hpp"
+#include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 
 
@@ -66,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class FUML_API Execution: virtual public fUML::Semantics::StructuredClassifiers::Object
+	class FUML_API Execution : virtual public uml::Element, virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Execution(const Execution &) {}
@@ -83,12 +84,13 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			virtual std::shared_ptr<Any> _copy() = 0;
+			virtual void destroy() = 0;
 			virtual void execute() = 0;
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getOutputParameterValues() = 0;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			virtual std::shared_ptr<Any> new_() = 0;
 			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) = 0;
 			virtual void terminate() = 0;
 
@@ -101,9 +103,13 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
 			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getContext() const = 0;
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) = 0;
+			virtual std::shared_ptr<uml::Element> getContext() const = 0;
+			virtual void setContext(std::shared_ptr<uml::Element>) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -130,8 +136,11 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<uml::Behavior> m_behavior;
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> m_context;
+			std::shared_ptr<uml::Element> m_context;
+			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
+			
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> m_parameterValues;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_types;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EXECUTION_HPP */

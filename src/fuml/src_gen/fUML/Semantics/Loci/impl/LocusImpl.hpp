@@ -45,13 +45,13 @@ virtual public Locus
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
+			virtual void add(std::shared_ptr<uml::Element> value) ;
 			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) ;
 			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) ;
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ;
-			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual bool conforms(std::shared_ptr<uml::Classifier> type, std::shared_ptr<uml::Classifier> classifier) ;
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type) ;
+			virtual void remove(std::shared_ptr<uml::Element> value) ;
+			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(std::shared_ptr<uml::Classifier> classifier) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -62,7 +62,7 @@ virtual public Locus
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getExecutor() const ;
 			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> getExtensionalValues() const ;
+			virtual std::shared_ptr<Bag<uml::Element>> getExtensionalValues() const ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getFactory() const ;
 			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>) ;
 			
@@ -74,7 +74,7 @@ virtual public Locus
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -91,14 +91,14 @@ virtual public Locus
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Loci::Locus> m_thisLocusPtr;

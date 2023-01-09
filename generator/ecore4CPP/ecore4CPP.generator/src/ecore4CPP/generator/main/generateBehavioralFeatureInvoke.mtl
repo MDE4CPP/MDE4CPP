@@ -42,11 +42,80 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [/comment]
 
 [comment] Helper [/comment]
-[template private _generateIncomingParameter(aEParameter : EParameter, index : Integer)]
+[template private _generateIncomingParameter(anEParameter : EParameter, index : Integer)]
 	//parameter [index/]
-	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
-	std::list<Any>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
-	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get<[aEParameter.generateParameterType()/] >();
+	[anEParameter.generateParameterType()/] incoming_param_[anEParameter.name/];
+	Bag<Any>::const_iterator incoming_param_[anEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	[comment anEParameter is typed by an EDataType /]
+	[if (anEParameter.eType.oclIsKindOf(EDataType))]
+	try
+	{
+		incoming_param_[anEParameter.name/] = (*incoming_param_[anEParameter.name/]_arguments_citer)->get<[anEParameter.generateParameterType()/]>();
+	}
+	catch(...)
+	{
+		DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
+		return nullptr;
+	}
+	[comment anEParameter is typed by an EClass /]
+	[else]
+		[comment anEParameter is a single-instanced value /]
+		[if (anEParameter.upperBound = 1)]
+	{
+		std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_[anEParameter.name/]_arguments_citer));
+		if(ecoreAny)
+		{
+			try
+			{
+				std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+				incoming_param_[anEParameter.name/] = std::dynamic_pointer_cast<[anEParameter.eType.generateType(false)/]>(_temp);
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
+				return nullptr;
+			}
+		}
+		else
+		{
+			DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
+			return nullptr;
+		}
+	}
+		[comment anEParameter is a bag value /]
+		[else]
+	{
+		std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_[anEParameter.name/]_arguments_citer));
+		if(ecoreContainerAny)
+		{
+			try
+			{
+				std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+		
+				if(eObjectList)
+				{
+					incoming_param_[anEParameter.name/].reset();
+					for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+					{
+						std::shared_ptr<[anEParameter.eType.generateType(false)/]> _temp = std::dynamic_pointer_cast<[anEParameter.eType.generateType(false)/]>(anEObject);
+						incoming_param_[anEParameter.name/]->add(_temp);
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
+				return nullptr;
+			}
+		}
+		else
+		{
+			DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter '[anEParameter.name/]'. Failed to invoke operation '[anEParameter.eOperation.name/]'!")
+			return nullptr;
+		}
+	}
+		[/if]
+	[/if]
 [/template]
 
 
@@ -54,16 +123,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
  *  Declaration of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDDeclaration(aClass : EClass, impl : Boolean)]
-virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) [abstractSufix(impl)/];
+virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) [abstractSufix(impl)/];
 [/template]
 
 [**/
  *  Implementation of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDImplementation(aClass : EClass) post(trim())]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -78,34 +147,34 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 		[inPar._generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
 			[/for]
 		[/let]
-			[comment Operation w/o return value /]
+		[comment anEOperation has no return parameter /]
 		[if (aOperation.eType.oclIsUndefined())]
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			break;
+		[comment anEOperation has a return parameter /]
  		[else]
-			[comment Operation w/ return value /]
-			[if (aOperation.eType.oclIsKindOf(EDataType))] [comment Primitive Returntype/]
-				[if (aOperation.isAnyNoPtr())]
-			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-				[elseif (aOperation.upperBound = 1)]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
-				[else]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
-				[/if]
-			[elseif (aOperation.eType.oclIsKindOf(EClass))] [comment Returntype Class/]
+			[comment anEOperation is typed by an EDataType /]
+			[if (aOperation.eType.oclIsKindOf(EDataType))]
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0, [if (aOperation.upperBound = 1)]false[else]true[/if]);
+			[comment anEOperation is typed by an EClass /]
+			[elseif (aOperation.eType.oclIsKindOf(EClass))]
+				[comment anEOperation returns a single-instance value /]
 				[if ((aOperation.upperBound = 1))]
 					[if (aOperation.hasKey(aOperation.keyWeakptr()))]
-			result = eAnyObject(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]).lock(), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
+			result = eEcoreAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]).lock(), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 					[else]
-			result = eAnyObject(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
+			result = eEcoreAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 					[/if]
-				[else] [comment Returntype Bag<EObject>/]
+				[comment anEOperation returns a a bag /]
+				[else]
 			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-			return eAnyBag(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
+			return eEcoreContainerAny(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 				[/if]
-			[elseif (aOperation.isAnyNoPtr())]
+			[comment anEOperation is typed by Any /]
+			[elseif (aOperation.isOfAnyType())]
 			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-			[else] [comment Unknown should be an EClass or EDataType /]
+			[comment anEOperation is typed by an unknown type /]
+			[else]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);
 			[/if]
 			break;

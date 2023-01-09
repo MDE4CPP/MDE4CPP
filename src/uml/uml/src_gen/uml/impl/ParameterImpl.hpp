@@ -53,39 +53,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty()
-			*/
-			 
-			virtual bool connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
-			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
-			and
-			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
-			*/
-			 
-			virtual bool in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual bool isSetDefault() ;
-			/*!
-			An input Parameter cannot be an exception.
-			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
-			*/
-			 
-			virtual bool not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Parameters typed by DataTypes cannot have an effect.
-			(type.oclIsKindOf(DataType)) implies (effect = null)
-			*/
-			 
-			virtual bool object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant
-			*/
-			 
-			virtual bool reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this parameter to the specified Boolean value.
 			*/
@@ -116,12 +84,6 @@ namespace uml
 			*/
 			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) ;
-			/*!
-			A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream)
-			*/
-			 
-			virtual bool stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
@@ -221,31 +183,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -262,14 +205,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Parameter> m_thisParameterPtr;

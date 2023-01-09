@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecore" nsURI="http://www.eclipse.org/emf/2002/Ecore" nsPrefix="ecore">
+  <eClassifiers xsi:type="ecore:EClass" name="EAttribute" eSuperTypes="#//EStructuralFeature">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentTransient"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iD" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributeType" lowerBound="1"
+        eType="#//EDataType" changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EAnnotation" eSuperTypes="#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedSourceURI"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eModelElement" eType="#//EModelElement"
+        transient="true" resolveProxies="false" eOpposite="#//EModelElement/eAnnotations">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//EObject" containment="true" resolveProxies="false">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" transient="true">
+      <eGenericType eClassifier="#//EMap">
+        <eTypeArguments eClassifier="#//EString"/>
+        <eTypeArguments eClassifier="#//EString"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="#//EClassifier">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="InterfaceIsAbstract AtMostOneID UniqueFeatureNames UniqueOperationSignatures NoCircularSuperTypes WellFormedMapEntryClass ConsistentSuperTypes DisjointFeatureAndOperationSignatures"/>
+    </eAnnotations>
+    <eOperations name="isSuperTypeOf" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="if(someClass.get() == this)&#xA;&#x9;{&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;&#x9;std::shared_ptr&lt; Bag&lt;ecore::EClass > > list = someClass->getEAllSuperTypes();&#xA;    for(const std::shared_ptr&lt; ecore::EClass> index: *list)&#xA;    {&#xA;&#x9;    if ((index).get()==this) return true;&#xA;    }&#xA;&#xA;    return false;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="someClass" eType="#//EClass"/>
+    </eOperations>
+    <eOperations name="getFeatureCount" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getEAllStructuralFeatures()->size();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> >  eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="featureID" eType="#//EInt"/>
+    </eOperations>
+    <eOperations name="getFeatureID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xA;    int index = feature->getFeatureID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;EStructuralFeature> iter: *eAllFeat)&#xA;        {&#xA;           if (feature == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    for(std::shared_ptr&lt;EStructuralFeature> f: *eAllFeat)&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="featureName" eType="#//EString"/>
+    </eOperations>
+    <eOperations name="getOperationCount" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getEAllOperations()->size();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getEOperation" eType="#//EOperation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;&#xA;    std::shared_ptr&lt;ecore::EOperation> operation;&#xA;    Bag&lt;ecore::EOperation >::iterator iter = eAllOps->begin();&#xA;    &#xA;    while (iter != eAllOps->end())&#xA;    {&#xA;        operation = *iter;&#xA;        if (operation->getOperationID() == operationID)&#xA;            return operation;&#xA;        iter++;&#xA;    }&#xA;    &#xA;    return nullptr;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="operationID" eType="#//EInt"/>
+    </eOperations>
+    <eOperations name="getOperationID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;    int index = operation->getOperationID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;ecore::EOperation>iter: *eAllOps)&#xA;        {&#xA;           if (operation == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="operation" eType="#//EOperation"/>
+    </eOperations>
+    <eOperations name="getOverride" eType="#//EOperation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="operation" eType="#//EOperation"/>
+    </eOperations>
+    <eOperations name="getFeatureType" eType="#//EGenericType">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperTypes" upperBound="-1"
+        eType="#//EClass" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperations" upperBound="-1"
+        eType="#//EOperation" containment="true" resolveProxies="false" eOpposite="#//EOperation/eContainingClass">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllAttributes" upperBound="-1"
+        eType="#//EAttribute" changeable="false" volatile="true" transient="true"
+        derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > eAllAttributes(new Bag&lt;ecore::EAttribute>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > attributeList = this->getEAttributes();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EAttribute> > attributeList = c->getEAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllReferences" upperBound="-1"
+        eType="#//EReference" changeable="false" volatile="true" transient="true"
+        derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EReference> > eAllReferences(new Bag&lt;ecore::EReference>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EReference> > referenceList = this->getEReferences();&#xD;&#xA;    eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EReference> > referenceList = c->getEAllReferences();&#xD;&#xA;        eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllReferences;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1"
+        eType="#//EReference" volatile="true" transient="true" derived="true">
+      <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributes" upperBound="-1"
+        eType="#//EAttribute" volatile="true" transient="true" derived="true">
+      <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllContainments" upperBound="-1"
+        eType="#//EReference" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllOperations" upperBound="-1"
+        eType="#//EOperation" changeable="false" volatile="true" transient="true"
+        derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOperations(new Bag&lt;ecore::EOperation> () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EOperation> > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; Bag&lt; EOperation> > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures"
+        upperBound="-1" eType="#//EStructuralFeature" changeable="false" volatile="true"
+        transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag&lt;ecore::EStructuralFeature> ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; Bag&lt; EStructuralFeature> > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EStructuralFeature> > featureList = c->getEAllStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1"
+        eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EClass> > eAllSuperTypes(new Bag&lt;ecore::EClass>  ());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = c->getEAllSuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
+        volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeatures" upperBound="-1"
+        eType="#//EStructuralFeature" containment="true" resolveProxies="false" eOpposite="#//EStructuralFeature/eContainingClass">
+      <eAnnotations source="union"/>
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericSuperTypes" upperBound="-1"
+        eType="#//EGenericType" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllGenericSuperTypes"
+        upperBound="-1" eType="#//EGenericType" changeable="false" volatile="true"
+        transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedInstanceTypeName UniqueTypeParameterNames"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Description"/>
+    </eAnnotations>
+    <eOperations name="isInstance" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="object" eType="#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="getClassifierID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getMetaElementID();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//EString"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClass" changeable="false"
+        volatile="true" transient="true" derived="true">
+      <eGenericType eClassifier="#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceTypeName" eType="#//EString"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="#//EPackage"
+        changeable="false" transient="true" eOpposite="#//EPackage/eClassifiers">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
+        eType="#//ETypeParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDataType" eSuperTypes="#//EClassifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serializable" eType="#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EEnum" eSuperTypes="#//EDataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueEnumeratorNames UniqueEnumeratorLiterals"/>
+    </eAnnotations>
+    <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="name" eType="#//EString"/>
+    </eOperations>
+    <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xD;&#xA;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="value" eType="#//EInt"/>
+    </eOperations>
+    <eOperations name="getEEnumLiteralByLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="literal" eType="#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eLiterals" upperBound="-1"
+        eType="#//EEnumLiteral" containment="true" resolveProxies="false" eOpposite="#//EEnumLiteral/eEnum">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EEnumLiteral" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instance" eType="#//EEnumerator"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eEnum" eType="#//EEnum"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EEnum/eLiterals">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFactory" eSuperTypes="#//EModelElement">
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="implIncludes" value="#include &quot;ecore/EObjectContainer.hpp&quot;&#xA;#include &quot;ecore/EObjectAny.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="create" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="eClass" eType="#//EClass"/>
+    </eOperations>
+    <eOperations name="createFromString" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="eDataType" eType="#//EDataType"/>
+      <eParameters name="literalValue" eType="#//EString"/>
+    </eOperations>
+    <eOperations name="convertToString" eType="#//EString">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="std::ostringstream returnStringStream;&#xA;&#x9;bool handled=false;&#xA;&#x9;if(!instanceValue->isEmpty())&#xA;&#x9;{&#xA;&#x9;&#x9;if(instanceValue->isContainer())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;switch (instanceValue->getTypeId())&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;eObjectBag= instanceValue->get&lt;std::shared_ptr&lt;Bag&lt;ecore::EObject>>>(); //throws exception&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;Bag&lt;EObject>> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EcoreContainerAny> anyObjectBag = std::dynamic_pointer_cast&lt;ecore::EcoreContainerAny>(instanceValue);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=anyObjectBag)// ecore::EcoreContainerAny?&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;eObjectBag=anyObjectBag->getAsEObjectContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;ecore::EcoreContainerAny&lt;EObject>> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;An EObject Container&quot;;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\t&quot;&lt;&lt; convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectContainer> eObjectContainer = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObjectContainer>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;EObjectContainer> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\t&quot;&lt;&lt;convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EcoreContainerAny> anyObjectBag = std::dynamic_pointer_cast&lt;ecore::EcoreContainerAny>(instanceValue);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=anyObjectBag)// ecore::EcoreContainerAny?&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag=anyObjectBag->getAsEObjectContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;ecore::EcoreContainerAny> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\t&quot;&lt;&lt;convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else // last supported type bag&lt;Any>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;Any>> anyBag = instanceValue->get&lt;std::shared_ptr&lt;Bag&lt;Any>>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;unsigned int size=anyBag->size();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;Bag&lt;Any>> size: &quot; &lt;&lt; size&lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(unsigned int i = 0; i &lt; size; i++)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\t&quot;&lt;&lt; convertToString(eDataType, anyBag->at(i));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;catch(...)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt;&quot;&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;switch(instanceValue->getTypeId())&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOBJECT_CLASS: // unknown or primitive type&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::ENamedElement> eNamedElement= std::dynamic_pointer_cast&lt;ecore::ENamedElement>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr != eNamedElement)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;name:&quot;&lt;&lt; eNamedElement->getName() &lt;&lt; &quot; :&quot; ;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;EObject>:&quot;;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Any> content = aObject->eAllContents();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; convertToString(eDataType,content);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ECLASS_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EClass> aValue = instanceValue->get&lt;std::shared_ptr&lt;ecore::EClass>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;EClass>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;:&quot;&lt;&lt; aValue->getName()&lt;&lt;std::endl;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Subset&lt;ecore::EAttribute, ecore::EStructuralFeature>> attributes = aValue->getEAttributes();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; convertToString(nullptr, eEcoreContainerAny(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Subset&lt;ecore::EReference, ecore::EStructuralFeature>> references = aValue->getEReferences();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; convertToString(nullptr, eEcoreContainerAny(references,ecore::ecorePackage::EREFERENCE_CLASS));&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOBJECTANY_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectAny> eObjectAny=nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;eObjectAny = std::dynamic_pointer_cast&lt;ecore::EObjectAny>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...) // 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectAny> eObjectAny= instanceValue->get&lt;std::shared_ptr&lt;ecore::EObjectAny>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=eObjectAny)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;Any: &quot; &lt;&lt; convertToString(nullptr, eObjectAny->getAny());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EATTRIBUTE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EAttribute> aValue =nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = std::dynamic_pointer_cast&lt;ecore::EAttribute>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...)// 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = instanceValue->get&lt;std::shared_ptr&lt;ecore::EAttribute>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=aValue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        if(aValue->getUpperBound() > 1 || aValue->getUpperBound() &lt; 0){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EAttribute>:&quot; + aValue->getName() &lt;&lt; &quot;:&quot; &lt;&lt;  aValue->getEType()->getName() &lt;&lt; &quot;[&quot; &lt;&lt; std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..*]&quot; &lt;&lt; std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EAttribute>:&quot; + aValue->getName() &lt;&lt; &quot;:&quot; &lt;&lt; aValue->getEType()->getName() &lt;&lt; &quot;[&quot; &lt;&lt;  std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..&quot; &lt;&lt; std::to_string(aValue->getUpperBound()) &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EREFERENCE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EReference> aValue = nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = std::dynamic_pointer_cast&lt;ecore::EReference>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...)// 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = instanceValue->get&lt;std::shared_ptr&lt;ecore::EReference>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=aValue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        if(aValue->getUpperBound() > 1 || aValue->getUpperBound() &lt; 0){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EReference>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;:&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt; std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..*]&quot; &lt;&lt;std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EReference>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;:&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt;  std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..&quot; &lt;&lt; std::to_string(aValue->getUpperBound()) &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EStructuralFeature> aValue =nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = std::dynamic_pointer_cast&lt;ecore::EStructuralFeature>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...)// 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue= instanceValue->get&lt;std::shared_ptr&lt;ecore::EStructuralFeature>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=aValue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        if(aValue->getUpperBound() > 1 || aValue->getUpperBound() &lt; 0){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EStructuralFeature>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;:&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt; std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..*]&quot; &lt;&lt;std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EStructuralFeature>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;:&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt;  std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..&quot; &lt;&lt; std::to_string(aValue->getUpperBound()) &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOPERATION_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EOperation> aValue = nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = std::dynamic_pointer_cast&lt;ecore::EOperation>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...)// 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aValue = instanceValue->get&lt;std::shared_ptr&lt;ecore::EOperation>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=aValue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        if(aValue->getUpperBound() > 1 || aValue->getUpperBound() &lt; 0){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EOperation>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;(...):&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt; std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..*]&quot; &lt;&lt;std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        else{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;        &#x9;returnStringStream &lt;&lt; &quot;&lt;EOperation>:&quot; &lt;&lt; aValue->getName() &lt;&lt; &quot;(...):&quot;&lt;&lt; aValue->getEType()->getName()&lt;&lt; &quot;[&quot; &lt;&lt;  std::to_string(aValue->getLowerBound()) &lt;&lt; &quot;..&quot; &lt;&lt; std::to_string(aValue->getUpperBound()) &lt;&lt; &quot;]&quot; &lt;&lt;std::endl;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectAny> eObjectAny=nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectContainer> eObjectContainer = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObjectContainer>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;EObjectContainer> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\tType: &quot;&lt;&lt;object->eClass()->getName()&lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...) // 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> eObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectContainer> eObjectContainer=std::dynamic_pointer_cast&lt;ecore::EObjectContainer>(eObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=eObjectContainer)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;EObjectContainer> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;\tType:&quot;&lt;&lt;object->eClass()->getName()&lt;&lt;std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//bool&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBOOLEAN_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bool result = instanceValue->get&lt;bool>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//char&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBYTE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBYTEARRAY_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBYTEOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ECHAR_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;char>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//int&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EDATE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ERESOURCE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EINTEGEROBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBIGINTEGER_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ESHORT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ESHORTOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EINT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;int>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//long&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ELONGOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ELONG_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;long>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//float&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EFLOATOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EFLOAT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;float>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//double&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EBIGDECIMAL_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EDOUBLE_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;double>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//std::string&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ESTRING_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::string result = instanceValue->get&lt;std::string>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true; break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EJAVAOBJECT_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EENUMERATOR_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::EDIAGNOSTICCHAIN_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;case ecore::ecorePackage::ANY_CLASS:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectAny> eObjectAny=nullptr;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> aObject = instanceValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;eObjectAny = std::dynamic_pointer_cast&lt;ecore::EObjectAny>(aObject);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...) // 2. try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;eObjectAny= instanceValue->get&lt;std::shared_ptr&lt;ecore::EObjectAny>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;catch(...) // 2. last try&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Any> anAny= instanceValue->get&lt;std::shared_ptr&lt;Any>>();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;Any: &quot; &lt;&lt; convertToString(nullptr, anAny);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// recursive Call of convertToString via new Any EObject Value&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(nullptr!=eObjectAny)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;Any: &quot; &lt;&lt; convertToString(nullptr, eObjectAny->getAny());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;handled = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;default: // unknown or primitive type / or 0--> Try &amp; Error&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;catch (...) { }&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(false==handled) // last chance try and error&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;bool result = instanceValue->get&lt;bool>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...) { }&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;int result = instanceValue->get&lt;int>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...) { }&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;std::string result = instanceValue->get&lt;std::string>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...) { }&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;double result = instanceValue->get&lt;double>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...){}&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;std::string result = instanceValue->get&lt;std::string>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; result &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...){}&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Any> any = instanceValue->get&lt;std::shared_ptr&lt;Any>>();&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;&lt;Any>:&quot; ;&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; convertToString(eDataType, any);&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;} catch (...) { }&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnStringStream &lt;&lt; &quot;Any (typeId: &quot; &lt;&lt; instanceValue->getTypeId() &lt;&lt;&quot;)&quot;;&#xA;&#x9;&#x9;&#x9;&#x9;return returnStringStream.str();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return returnStringStream.str();"/>
+      </eAnnotations>
+      <eParameters name="eDataType" eType="#//EDataType"/>
+      <eParameters name="instanceValue" eType="#//EJavaObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" lowerBound="1"
+        eType="#//EPackage" transient="true" resolveProxies="false" eOpposite="#//EPackage/eFactoryInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true" eSuperTypes="#//EObject">
+    <eOperations name="getEAnnotation" eType="#//EAnnotation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
+      </eAnnotations>
+      <eParameters name="source" eType="#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAnnotations" upperBound="-1"
+        eType="#//EAnnotation" containment="true" resolveProxies="false" eOpposite="#//EAnnotation/eModelElement">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ENamedElement" abstract="true" eSuperTypes="#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedName"/>
+    </eAnnotations>
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="const"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObject">
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="implIncludes" value="#include &quot;ecore/ecoreFactory.hpp&quot;&#xA;#include &quot;ecore/EObjectContainer.hpp&quot;&#xA;#include &quot;ecore/EObjectAny.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="eClass" eType="#//EClass">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eStaticClass();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eIsProxy" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eResource" eType="#//EResource">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eContainer" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;if(auto wp = m_eContainer.lock())&#xA;&#x9;{&#xA;&#x9;&#x9;return wp;&#xA;&#x9;}&#xA;&#x9;return nullptr;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eContainingFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eContainmentFeature" eType="#//EReference">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eContents" upperBound="-1" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;ecore::EObject>> returnList=std::make_shared&lt;Bag&lt;ecore::EObject>>();&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Any> anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;if(anyValue->isContainer())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EcoreContainerAny> bag= std::dynamic_pointer_cast&lt;ecore::EcoreContainerAny>(anyValue);&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;EObject>> valueList = bag->getAsEObjectContainer();&#xA;&#x9;&#x9;&#x9;&#x9;if(valueList)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectContainer> containerObject= ecore::ecoreFactory::eInstance()->createEObjectContainer();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;containerObject->setContainer(valueList);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;returnList->push_back(containerObject);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;catch(...){}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;try&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> value=anyValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;&#x9;if(value)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;returnList->push_back(value);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;continue;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;catch(...){}&#xA;&#x9;&#x9;&#x9;//Add as ObjectAny&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;EObjectAny> anyObject= ecore::ecoreFactory::eInstance()->createEObjectAny();&#xA;&#x9;&#x9;&#x9;anyObject->setAny(anyValue);&#xA;&#x9;&#x9;&#x9;returnList->push_back(anyObject);;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return returnList;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="eCrossReferences">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//EEList">
+        <eTypeArguments eClassifier="#//EObject"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="eGet" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eGet(feature,false);"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="eGet" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eGet(feature->getFeatureID(),resolve,false);"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+      <eParameters name="resolve" eType="#//EBoolean"/>
+    </eOperations>
+    <eOperations name="eSet">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="this->eSet(feature->getFeatureID(), newValue);"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+      <eParameters name="newValue" eType="#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="eIsSet" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="return this->internalEIsSet(feature->getFeatureID());"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="eUnset">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="eInvoke" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eInvoke(operation->getOperationID(), arguments);"/>
+      </eAnnotations>
+      <eParameters name="operation" eType="#//EOperation"/>
+      <eParameters name="arguments" upperBound="-1" eType="#//EJavaObject">
+        <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+          <details value="Substituted original type &quot;EEList&lt;T>&quot; with EJavaObject [*]."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="eAllContents" lowerBound="1" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;Any>> returnList=std::make_shared&lt;Bag&lt;Any>>();&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Any> anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;if(anyValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;returnList->push_back(anyValue);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return eAny(returnList,ecore::ecorePackage::ANY_CLASS, true);"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="return value to Any, Integer is no EObject in C++"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContentUnion" upperBound="-1"
+        eType="#//EObject" containment="true" eOpposite="#//EObject/eContainer.1">
+      <eAnnotations source="union"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="additional attribute to model union of content Model Elements"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainer" eType="#//EObject"
+        eOpposite="#//EObject/eContentUnion">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="noGetter"/>
+        <details key="getterName" value="eContainer"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaElementID" eType="#//EInt"
+        defaultValueLiteral="0" unsettable="true">
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="realization of ClassifierID or MetaType-ID for reflection support for ecore, UML and Evore/UML based models"/>
+      </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="cppType" value="long long"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EOperation" eSuperTypes="#//ETypedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueParameterNames UniqueTypeParameterNames NoRepeatingVoid"/>
+    </eAnnotations>
+    <eOperations name="getOperationID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->_getID();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isOverrideOf" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;ecore::EClass > containingClass = someOperation->getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == containingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; containing class not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;ecore::EClass > thisContainingClass = getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == thisContainingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; thisContainingClass not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;if (containingClass->isSuperTypeOf(thisContainingClass) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (Bag&lt;EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (parameter->getEType().get() != otherParameter->getEType().get())&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;            return true;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;    return false;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="someOperation" eType="#//EOperation"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eOperations">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
+        eType="#//ETypeParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eParameters" upperBound="-1"
+        eType="#//EParameter" containment="true" resolveProxies="false" eOpposite="#//EParameter/eOperation">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eExceptions" upperBound="-1"
+        eType="#//EClassifier" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericExceptions" upperBound="-1"
+        eType="#//EGenericType" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPackage" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedNsURI WellFormedNsPrefix UniqueSubpackageNames UniqueClassifierNames UniqueNsURIs"/>
+    </eAnnotations>
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="shared_this" value="true"/>
+    </eAnnotations>
+    <eOperations name="getEClassifier" eType="#//EClassifier">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;EClassifier> > classifierList = getEClassifiers();&#xA;    for (std::shared_ptr&lt;EClassifier> c : *classifierList)&#xA;    {&#xA;        if(c->getName()==name)&#xA;        {&#xA;            return c;&#xA;        }&#xA;    }&#xA;    return nullptr;"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="name" eType="#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eFactoryInstance" lowerBound="1"
+        eType="#//EFactory" transient="true" resolveProxies="false" eOpposite="#//EFactory/ePackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifiers" upperBound="-1"
+        eType="#//EClassifier" containment="true" eOpposite="#//EClassifier/ePackage">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSubpackages" upperBound="-1"
+        eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperPackage" eType="#//EPackage"
+        changeable="false" transient="true" eOpposite="#//EPackage/eSubpackages">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EParameter" eSuperTypes="#//ETypedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="#//EOperation"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EOperation/eParameters">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EReference" eSuperTypes="#//EStructuralFeature">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentOpposite SingleContainer ConsistentKeys ConsistentUnique ConsistentContainer"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolveProxies" eType="#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOpposite" eType="#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eReferenceType" lowerBound="1"
+        eType="#//EClass" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eKeys" upperBound="-1"
+        eType="#//EAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EStructuralFeature" abstract="true"
+      eSuperTypes="#//ETypedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidDefaultValueLiteral"/>
+    </eAnnotations>
+    <eOperations name="getFeatureID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->_getID();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getContainerClass">
+      <eGenericType eClassifier="#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeable" eType="#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="volatile" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsettable" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eStructuralFeatures">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypedElement" abstract="true" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidLowerBound ValidUpperBound ConsistentBounds ValidType"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordered" eType="#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="#//EBoolean"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EClassifier"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericType" eType="#//EGenericType"
+        volatile="true" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBigDecimal" instanceClassName="java.math.BigDecimal">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBigInteger" instanceClassName="java.math.BigInteger">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#integer"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBoolean" instanceClassName="boolean">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBooleanObject" instanceClassName="java.lang.Boolean">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EBoolean"/>
+      <details key="name" value="EBoolean:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByte" instanceClassName="byte">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#byte"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByteArray" instanceClassName="byte[]">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByteObject" instanceClassName="java.lang.Byte">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EByte"/>
+      <details key="name" value="EByte:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EChar" instanceClassName="char"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ECharacterObject" instanceClassName="java.lang.Character">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EChar"/>
+      <details key="name" value="EChar:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDate" instanceClassName="java.util.Date"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDiagnosticChain" instanceClassName="org.eclipse.emf.common.util.DiagnosticChain"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDouble" instanceClassName="double">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#double"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDoubleObject" instanceClassName="java.lang.Double">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EDouble"/>
+      <details key="name" value="EDouble:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EEList" instanceClassName="org.eclipse.emf.common.util.EList"
+      serializable="false">
+    <eTypeParameters name="E"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EEnumerator" instanceClassName="org.eclipse.emf.common.util.Enumerator"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFeatureMap" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFeatureMapEntry" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap$Entry"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFloat" instanceClassName="float">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#float"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFloatObject" instanceClassName="java.lang.Float">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EFloat"/>
+      <details key="name" value="EFloat:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EInt" instanceClassName="int">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#int"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EIntegerObject" instanceClassName="java.lang.Integer">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EInt"/>
+      <details key="name" value="EInt:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EJavaClass" instanceClassName="java.lang.Class">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EJavaObject" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ELong" instanceClassName="long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#long"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ELongObject" instanceClassName="java.lang.Long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="ELong"/>
+      <details key="name" value="ELong:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EMap" instanceClassName="java.util.Map"
+      serializable="false">
+    <eTypeParameters name="K"/>
+    <eTypeParameters name="V"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EResource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EResourceSet" instanceClassName="org.eclipse.emf.ecore.resource.ResourceSet"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EShort" instanceClassName="short">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#short"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EShortObject" instanceClassName="java.lang.Short">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EShort"/>
+      <details key="name" value="EShort:Object"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EString" instanceClassName="java.lang.String">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#string"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringToStringMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ETreeIterator" instanceClassName="org.eclipse.emf.common.util.TreeIterator"
+      serializable="false">
+    <eTypeParameters name="E"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EGenericType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentType ConsistentBounds ConsistentArguments"/>
+    </eAnnotations>
+    <eOperations name="isInstance" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="object" eType="#//EJavaObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eUpperBound" eType="#//EGenericType"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeArguments" upperBound="-1"
+        eType="#//EGenericType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eRawType" lowerBound="1"
+        eType="#//EClassifier" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eLowerBound" eType="#//EGenericType"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameter" eType="#//ETypeParameter"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifier" eType="#//EClassifier"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypeParameter" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eBounds" upperBound="-1"
+        eType="#//EGenericType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EInvocationTargetException" instanceClassName="java.lang.reflect.InvocationTargetException"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectContainer" eSuperTypes="#//EObject">
+    <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+      <details value="To enable an return of an Bag of EObjects as an EObject"/>
+    </eAnnotations>
+    <eOperations name="setContainer">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="m_container=container;"/>
+      </eAnnotations>
+      <eParameters name="container" upperBound="-1" eType="#//EObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" upperBound="-1"
+        eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="setterName" value="setContainer"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectAny" eSuperTypes="#//EObject">
+    <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+      <details value="To enable an return of Unknown Model Types as an EObject"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="any" lowerBound="1" eType="#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Any" instanceTypeName="Any">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Any is a generic container class that can contain any type of object. It is used in MDE4CPP as a substitution of Java's general base class 'Object' as no such concept exists in C++.&#xA;This class is not generated as it is included from an external library (see %MDE4CPP_root%\src\common\abstractDataTypes\src\abstractDataTypes)."/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

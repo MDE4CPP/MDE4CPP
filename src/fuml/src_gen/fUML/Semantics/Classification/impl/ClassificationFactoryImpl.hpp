@@ -15,7 +15,7 @@
 #include "fUML/Semantics/Classification/ClassificationFactory.hpp"
 
 namespace Classification 
-{	class InstanceValueEvaluation;
+{
 }
 
 namespace fUML::Semantics::Classification 
@@ -38,7 +38,6 @@ namespace fUML::Semantics::Classification
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> createInstanceValueEvaluation(const int metaElementID = ClassificationPackage::INSTANCEVALUEEVALUATION_CLASS) const ;
 			 
 
 		private:

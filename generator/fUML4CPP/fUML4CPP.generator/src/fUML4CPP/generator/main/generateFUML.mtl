@@ -17,25 +17,19 @@
 [**
  * fUML4CPP imports
  */]
-[comment imports for classifier object generation /]
-[import fUML4CPP::generator::main::generateClassifierObjectHeader /]
-[import fUML4CPP::generator::main::generateMetamodelClassifierObjectHeader /]
-[import fUML4CPP::generator::main::generateClassifierObjectSource /]
-[import fUML4CPP::generator::main::generateMetamodelClassifierObjectSource /]
+
 [comment imports for strategy class generation /]
 [import fUML4CPP::generator::main::strategies::generateStrategyHeader /]
 [import fUML4CPP::generator::main::strategies::generateStrategySource /]
 [comment imports for locus generation /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
-[comment imports for opaque behavior execution generation /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
-[comment imports for operation execution generation /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
-[import fUML4CPP::generator::main::generateOperationExecutionHeader /]
-[import fUML4CPP::generator::main::generateOperationExecutionSource /]
+[comment imports for executor generation /]
+[import fUML4CPP::generator::main::generateModelExecutorHeader /]
+[import fUML4CPP::generator::main::generateModelExecutorSource /]
+[comment imports for execution factory generation /]
+[import fUML4CPP::generator::main::generateModelExecutionFactoryHeader /]
+[import fUML4CPP::generator::main::generateModelExecutionFactorySource /]
 [comment import for execution plugin generation /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [comment import for build files generation /]
@@ -62,83 +56,51 @@
 [comment import for build files generation /]
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [comment import for model validation /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation /]
 
 
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
-
-[if (aPackage.name.oclIsUndefined() or aPackage.name = '')]
-	['package has no name '.registerError()/]
-[else]
-	[if (not aPackage.isDoNotGenerate())]
-		[aPackage.generateUML()/]
-		[if (aPackage.isPackageOnly())]
-			[aPackage.generateFUMLModelForPackageOnly()/]
-		[else]
-			[aPackage.generateFUMLModel()/]
-		[/if]
+[if (not aPackage.isDoNotGenerate())]
+	[aPackage.generateUML()/]
+	[if (aPackage.isPackageOnly())]
+		[aPackage.generateFUMLModelForPackageOnly()/]
+	[else]
+		[aPackage.generateFUMLModel()/]
 	[/if]
-[/if]
-
-[if (aPackage.errorExisting())]
-	[aPackage.printErrors()/]
-	[closeWithErrorExit(1)/]
 [/if]
 [/template]
 
 [template public generateFUMLModel(aPackage : Package)]
-//generate execution for OpaqueBehaviors
-[if (not aPackage.isReflectionModel())]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-	[anOpaqueBehavior.generateOpaqueBehaviorExecutionHeader(aPackage)/]
-	[anOpaqueBehavior.generateOpaqueBehaviorExecutionSource(aPackage)/]
-	[/for]
-[/if]
-
-//generate execution for Operations
-[comment]
-[aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionHeader(aPackage)/]
-[aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionSource(aPackage)/]
-[/comment]
-[if (not aPackage.isReflectionModel())]
-	[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-	[anOperation.generateOperationExecutionHeader(aPackage)/]
-	[anOperation.generateOperationExecutionSource(aPackage)/]
-	[/for]
-[/if]
-
-//generate execution classifier
-[if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGeneratable()))]
-[aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
-[aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
-[/for]
-[else]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGeneratable()))]
-[aClassifier.generateClassifierObjectHeader(aPackage)/]
-[aClassifier.generateClassifierObjectSource(aPackage)/]
-[/for]
-[/if]
-
 [comment Generate custom strategy classes /]
 [for (aStrategyClass : Class | aPackage.getPackageClasses()->select(isStrategyClass()))]
 [aStrategyClass.generateStrategyHeader()/]
 [aStrategyClass.generateStrategySource()/]
 [/for]
 
-
-[comment Generate execution plugin, model locus, CMakeLists and Gradle-Files only for root package /]
+[comment Generate execution plugin, model Locus, model Executor, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
-//generate execution plugin
+[comment Generate execution plugin /]
+[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateExecutionPlugin()/]
 
-//generate model locus
+[comment Generate model Locus /]
+[printInfo('Generating Locus class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 [aPackage.generateModelLocusHeader()/]
 [aPackage.generateModelLocusSource()/]
 
-//generate project files
+[comment Generate model Executor /]
+[printInfo('Generating Executor class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+[aPackage.generateModelExecutorHeader()/]
+[aPackage.generateModelExecutorSource()/]
+
+[comment Generate model ExecutionFactory /]
+[printInfo('Generating ExecutionFactory class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+[aPackage.generateModelExecutionFactoryHeader()/]
+[aPackage.generateModelExecutionFactorySource()/]
+
+[comment Generate project files /]
 [aPackage.generateExecutionBuildFiles(false)/]
 [/if]
 [/template]
@@ -146,25 +108,13 @@
 
 
 [template public generateFUMLModelForPackageOnly(aPackage : Package)]
-//generate execution classifier
-[if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
-[for (aClassifier : Classifier | aPackage.getClassifiersForPackageOnly()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-[aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
-[aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
-[/for]
-[else]
-[for (aClassifier : Classifier | aPackage.getClassifiersForPackageOnly()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-[aClassifier.generateClassifierObjectHeader(aPackage)/]
-[aClassifier.generateClassifierObjectSource(aPackage)/]
-[/for]
-[/if]
-
 [comment Generate execution plugin, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
-//generate execution plugin
-[aPackage.generateExecutionPlugin()/]
+	[comment Generate execution plugin /]
+	[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+	[aPackage.generateExecutionPlugin()/]
 
-//generate project files
-[aPackage.generateExecutionBuildFiles(true)/]
+	[comment Generate project files /]
+	[aPackage.generateExecutionBuildFiles(true)/]
 [/if]
 [/template]

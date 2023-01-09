@@ -1,9 +1,13 @@
 
 #include "uml/impl/ConsiderIgnoreFragmentImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -143,15 +147,6 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -175,30 +170,6 @@ std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage()
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ConsiderIgnoreFragmentImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ConsiderIgnoreFragmentImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ConsiderIgnoreFragmentImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -338,12 +309,12 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
-			return eAnyBag(getMessage(),uml::umlPackage::NAMEDELEMENT_CLASS); //5616
+			return eEcoreContainerAny(getMessage(),uml::umlPackage::NAMEDELEMENT_CLASS); //5616
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -358,46 +329,54 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }
 
-bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
+bool ConsiderIgnoreFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			// CAST Any to Bag<uml::NamedElement>
-			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::NamedElement>> messageList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _message=getMessage();
-					for(const std::shared_ptr<uml::NamedElement> indexMessage: *_message)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (messageList->find(indexMessage) == -1)
+						std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_message->erase(indexMessage);
-						}
-					}
-
-					for(const std::shared_ptr<uml::NamedElement> indexMessage: *messageList)
-					{
-						if (_message->find(indexMessage) == -1)
-						{
-							_message->add(indexMessage);
+							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_message->find(valueToAdd) == -1)
+								{
+									_message->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -407,44 +386,12 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ConsiderIgnoreFragment::consider_or_ignore(Any, std::map) : bool: 139354839
-		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConsiderIgnoreFragment::type(Any, std::map) : bool: 4270096363
-		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

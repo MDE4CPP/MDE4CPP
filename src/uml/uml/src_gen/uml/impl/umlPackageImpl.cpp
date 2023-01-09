@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -86,18 +86,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getAcceptCallAction_Attr
 	return m_acceptCallAction_Attribute_returnInformation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptCallAction_Operation_result_pins_EDiagnosticChain_EMap() const
-{
-	return m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap() const
-{
-	return m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap() const
-{
-	return m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap;
-}
 
 // End Class AcceptCallAction
 
@@ -121,26 +109,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getAcceptEventAction_Att
 	return m_acceptEventAction_Attribute_trigger;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap() const
-{
-	return m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap() const
-{
-	return m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap() const
-{
-	return m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAcceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap() const
-{
-	return m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap;
-}
 
 // End Class AcceptEventAction
 
@@ -207,10 +175,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActionExecutionSpecif
 	return m_actionExecutionSpecification_Attribute_action;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap() const
-{
-	return m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap;
-}
 
 // End Class ActionExecutionSpecification
 
@@ -226,18 +190,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActionInputPin_Attrib
 	return m_actionInputPin_Attribute_fromAction;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActionInputPin_Operation_input_pin_EDiagnosticChain_EMap() const
-{
-	return m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap() const
-{
-	return m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap() const
-{
-	return m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap;
-}
 
 // End Class ActionInputPin
 
@@ -289,14 +241,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActivity_Attribute_va
 	return m_activity_Attribute_variable;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap() const
-{
-	return m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap() const
-{
-	return m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap;
-}
 
 // End Class Activity
 
@@ -348,10 +292,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActivityEdge_Attribut
 	return m_activityEdge_Attribute_weight;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityEdge_Operation_source_and_target_EDiagnosticChain_EMap() const
-{
-	return m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap;
-}
 
 // End Class ActivityEdge
 
@@ -397,14 +337,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActivityGroup_Attribu
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityGroup_Operation_containingActivity() const
 {
 	return m_activityGroup_Operation_containingActivity;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap() const
-{
-	return m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityGroup_Operation_not_contained_EDiagnosticChain_EMap() const
-{
-	return m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap;
 }
 
 // End Class ActivityGroup
@@ -468,26 +400,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActivityParameterNode
 	return m_activityParameterNode_Attribute_parameter;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap() const
-{
-	return m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityParameterNode_Operation_no_edges_EDiagnosticChain_EMap() const
-{
-	return m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const
-{
-	return m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const
-{
-	return m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityParameterNode_Operation_same_type_EDiagnosticChain_EMap() const
-{
-	return m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap;
-}
 
 // End Class ActivityParameterNode
 
@@ -527,22 +439,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getActivityPartition_Att
 	return m_activityPartition_Attribute_superPartition;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap() const
-{
-	return m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityPartition_Operation_represents_classifier_EDiagnosticChain_EMap() const
-{
-	return m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityPartition_Operation_represents_property_EDiagnosticChain_EMap() const
-{
-	return m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActivityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap() const
-{
-	return m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap;
-}
 
 // End Class ActivityPartition
 
@@ -554,14 +450,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getActor_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActor_Operation_associations_EDiagnosticChain_EMap() const
-{
-	return m_actor_Operation_associations_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getActor_Operation_must_have_name_EDiagnosticChain_EMap() const
-{
-	return m_actor_Operation_must_have_name_EDiagnosticChain_EMap;
-}
 
 // End Class Actor
 
@@ -581,14 +469,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getAddStructuralFeatureV
 	return m_addStructuralFeatureValueAction_Attribute_insertAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAddStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const
-{
-	return m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAddStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap() const
-{
-	return m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap;
-}
 
 // End Class AddStructuralFeatureValueAction
 
@@ -608,14 +488,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getAddVariableValueActio
 	return m_addVariableValueAction_Attribute_insertAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAddVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const
-{
-	return m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAddVariableValueAction_Operation_required_value_EDiagnosticChain_EMap() const
-{
-	return m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap;
-}
 
 // End Class AddVariableValueAction
 
@@ -716,18 +588,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getAssociation_Attribute
 	return m_association_Attribute_ownedEnd;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_association_ends_EDiagnosticChain_EMap() const
-{
-	return m_association_Operation_association_ends_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_binary_associations_EDiagnosticChain_EMap() const
-{
-	return m_association_Operation_binary_associations_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_ends_must_be_typed_EDiagnosticChain_EMap() const
-{
-	return m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_getEndTypes() const
 {
 	return m_association_Operation_getEndTypes;
@@ -735,14 +595,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_isBinary() const
 {
 	return m_association_Operation_isBinary;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_specialized_end_number_EDiagnosticChain_EMap() const
-{
-	return m_association_Operation_specialized_end_number_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociation_Operation_specialized_end_types_EDiagnosticChain_EMap() const
-{
-	return m_association_Operation_specialized_end_types_EDiagnosticChain_EMap;
 }
 
 // End Class Association
@@ -755,14 +607,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getAssociationClass_Class() 
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap() const
-{
-	return m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getAssociationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap() const
-{
-	return m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap;
-}
 
 // End Class AssociationClass
 
@@ -814,10 +658,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_be
 {
 	return m_behavior_Operation_behavioredClassifier_Element;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap() const
-{
-	return m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_getContext() const
 {
 	return m_behavior_Operation_getContext;
@@ -826,17 +666,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_in
 {
 	return m_behavior_Operation_inputParameters;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_most_one_behavior_EDiagnosticChain_EMap() const
-{
-	return m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_outputParameters() const
 {
 	return m_behavior_Operation_outputParameters;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavior_Operation_parameters_match_EDiagnosticChain_EMap() const
-{
-	return m_behavior_Operation_parameters_match_EDiagnosticChain_EMap;
 }
 
 // End Class Behavior
@@ -888,10 +720,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getBehavioralFeature_Att
 	return m_behavioralFeature_Attribute_raisedException;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap() const
-{
-	return m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavioralFeature_Operation_createReturnResult_String_Type() const
 {
 	return m_behavioralFeature_Operation_createReturnResult_String_Type;
@@ -927,10 +755,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getBehavioredClassifier_
 	return m_behavioredClassifier_Attribute_ownedBehavior;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap() const
-{
-	return m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBehavioredClassifier_Operation_getAllImplementedInterfaces() const
 {
 	return m_behavioredClassifier_Operation_getAllImplementedInterfaces;
@@ -954,18 +778,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getBroadcastSignalAction
 	return m_broadcastSignalAction_Attribute_signal;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBroadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap() const
-{
-	return m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBroadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap() const
-{
-	return m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getBroadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class BroadcastSignalAction
 
@@ -985,10 +797,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCallAction_Attribute_
 	return m_callAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_argument_pins_EDiagnosticChain_EMap() const
-{
-	return m_callAction_Operation_argument_pins_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_inputParameters() const
 {
 	return m_callAction_Operation_inputParameters;
@@ -996,14 +804,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_outputParameters() const
 {
 	return m_callAction_Operation_outputParameters;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_result_pins_EDiagnosticChain_EMap() const
-{
-	return m_callAction_Operation_result_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallAction_Operation_synchronous_call_EDiagnosticChain_EMap() const
-{
-	return m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap;
 }
 
 // End Class CallAction
@@ -1020,10 +820,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCallBehaviorAction_At
 	return m_callBehaviorAction_Attribute_behavior;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const
-{
-	return m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap;
-}
 
 // End Class CallBehaviorAction
 
@@ -1058,10 +854,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCallOperationAction_A
 	return m_callOperationAction_Attribute_target;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCallOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap() const
-{
-	return m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap;
-}
 
 // End Class CallOperationAction
 
@@ -1127,10 +919,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getClass_Attribute_super
 	return m_class_Attribute_superClass;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClass_Operation_createOwnedOperation_String_Type() const
-{
-	return m_class_Operation_createOwnedOperation_String_Type;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClass_Operation_getAllOperations() const
 {
 	return m_class_Operation_getAllOperations;
@@ -1146,10 +934,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClass_Operation_getSu
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClass_Operation_isMetaclass() const
 {
 	return m_class_Operation_isMetaclass;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClass_Operation_passive_class_EDiagnosticChain_EMap() const
-{
-	return m_class_Operation_passive_class_EDiagnosticChain_EMap;
 }
 
 // End Class Class
@@ -1306,29 +1090,13 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_
 {
 	return m_classifier_Operation_isSubstitutableFor_Classifier;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const
-{
-	return m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_maySpecializeType_Classifier() const
 {
 	return m_classifier_Operation_maySpecializeType_Classifier;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap() const
-{
-	return m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_non_final_parents_EDiagnosticChain_EMap() const
-{
-	return m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_parents() const
 {
 	return m_classifier_Operation_parents;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifier_Operation_specialize_type_EDiagnosticChain_EMap() const
-{
-	return m_classifier_Operation_specialize_type_EDiagnosticChain_EMap;
 }
 
 // End Class Classifier
@@ -1349,30 +1117,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getClassifierTemplatePar
 	return m_classifierTemplateParameter_Attribute_constrainingClassifier;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClassifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap() const
-{
-	return m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap;
-}
 
 // End Class ClassifierTemplateParameter
 
@@ -1408,18 +1152,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getClause_Attribute_test
 	return m_clause_Attribute_test;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClause_Operation_body_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_clause_Operation_body_output_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClause_Operation_decider_output_EDiagnosticChain_EMap() const
-{
-	return m_clause_Operation_decider_output_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClause_Operation_test_and_body_EDiagnosticChain_EMap() const
-{
-	return m_clause_Operation_test_and_body_EDiagnosticChain_EMap;
-}
 
 // End Class Clause
 
@@ -1439,14 +1171,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getClearAssociationActio
 	return m_clearAssociationAction_Attribute_object;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClearAssociationAction_Operation_same_type_EDiagnosticChain_EMap() const
-{
-	return m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap;
-}
 
 // End Class ClearAssociationAction
 
@@ -1462,14 +1186,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getClearStructuralFeatur
 	return m_clearStructuralFeatureAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const
-{
-	return m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getClearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const
-{
-	return m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap;
-}
 
 // End Class ClearStructuralFeatureAction
 
@@ -1515,18 +1231,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCollaborationUse_Attr
 	return m_collaborationUse_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCollaborationUse_Operation_client_elements_EDiagnosticChain_EMap() const
-{
-	return m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCollaborationUse_Operation_connectors_EDiagnosticChain_EMap() const
-{
-	return m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCollaborationUse_Operation_every_role_EDiagnosticChain_EMap() const
-{
-	return m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap;
-}
 
 // End Class CollaborationUse
 
@@ -1550,18 +1254,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCombinedFragment_Attr
 	return m_combinedFragment_Attribute_operand;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCombinedFragment_Operation_break__EDiagnosticChain_EMap() const
-{
-	return m_combinedFragment_Operation_break__EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCombinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap() const
-{
-	return m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCombinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap() const
-{
-	return m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap;
-}
 
 // End Class CombinedFragment
 
@@ -1647,14 +1339,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getComponent_Operation_g
 {
 	return m_component_Operation_getRequireds;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getComponent_Operation_no_nested_classifiers_EDiagnosticChain_EMap() const
-{
-	return m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getComponent_Operation_no_packaged_elements_EDiagnosticChain_EMap() const
-{
-	return m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap;
-}
 
 // End Class Component
 
@@ -1701,30 +1385,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getConditionalNode_Attri
 	return m_conditionalNode_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const
-{
-	return m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap;
-}
 
 // End Class ConditionalNode
 
@@ -1778,14 +1438,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getConnectionPointRefere
 	return m_connectionPointReference_Attribute_state;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap() const
-{
-	return m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap() const
-{
-	return m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap;
-}
 
 // End Class ConnectionPointReference
 
@@ -1825,14 +1477,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnector_Operation_g
 {
 	return m_connector_Operation_getKind;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnector_Operation_roles_EDiagnosticChain_EMap() const
-{
-	return m_connector_Operation_roles_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnector_Operation_types_EDiagnosticChain_EMap() const
-{
-	return m_connector_Operation_types_EDiagnosticChain_EMap;
-}
 
 // End Class Connector
 
@@ -1864,22 +1508,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectorEnd_Operatio
 {
 	return m_connectorEnd_Operation_getDefiningEnd;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectorEnd_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap() const
-{
-	return m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap() const
-{
-	return m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConnectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap() const
-{
-	return m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap;
-}
 
 // End Class ConnectorEnd
 
@@ -1895,14 +1523,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getConsiderIgnoreFragmen
 	return m_considerIgnoreFragment_Attribute_message;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConsiderIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap() const
-{
-	return m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConsiderIgnoreFragment_Operation_type_EDiagnosticChain_EMap() const
-{
-	return m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap;
-}
 
 // End Class ConsiderIgnoreFragment
 
@@ -1926,18 +1546,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getConstraint_Attribute_
 	return m_constraint_Attribute_specification;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConstraint_Operation_boolean_value_EDiagnosticChain_EMap() const
-{
-	return m_constraint_Operation_boolean_value_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConstraint_Operation_no_side_effects_EDiagnosticChain_EMap() const
-{
-	return m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getConstraint_Operation_not_apply_to_self_EDiagnosticChain_EMap() const
-{
-	return m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap;
-}
 
 // End Class Constraint
 
@@ -1953,18 +1561,6 @@ std::shared_ptr<ecore::EAttribute> uml::umlPackageImpl::getContinuation_Attribut
 }
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getContinuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap() const
-{
-	return m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getContinuation_Operation_global_EDiagnosticChain_EMap() const
-{
-	return m_continuation_Operation_global_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getContinuation_Operation_same_name_EDiagnosticChain_EMap() const
-{
-	return m_continuation_Operation_same_name_EDiagnosticChain_EMap;
-}
 
 // End Class Continuation
 
@@ -1976,10 +1572,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getControlFlow_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getControlFlow_Operation_object_nodes_EDiagnosticChain_EMap() const
-{
-	return m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap;
-}
 
 // End Class ControlFlow
 
@@ -2002,10 +1594,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getCreateLinkAction_Class() 
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap() const
-{
-	return m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap;
-}
 
 // End Class CreateLinkAction
 
@@ -2021,18 +1609,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCreateLinkObjectActio
 	return m_createLinkObjectAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap() const
-{
-	return m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap() const
-{
-	return m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap;
-}
 
 // End Class CreateLinkObjectAction
 
@@ -2052,22 +1628,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getCreateObjectAction_At
 	return m_createObjectAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const
-{
-	return m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap() const
-{
-	return m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getCreateObjectAction_Operation_same_type_EDiagnosticChain_EMap() const
-{
-	return m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap;
-}
 
 // End Class CreateObjectAction
 
@@ -2125,38 +1685,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getDecisionNode_Attribut
 	return m_decisionNode_Attribute_decisionInputFlow;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_edges_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_parameters_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_parameters_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDecisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap() const
-{
-	return m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap;
-}
 
 // End Class DecisionNode
 
@@ -2233,14 +1761,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getDeploymentSpecificati
 	return m_deploymentSpecification_Attribute_deployment;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDeploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap() const
-{
-	return m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDeploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const
-{
-	return m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap;
-}
 
 // End Class DeploymentSpecification
 
@@ -2298,14 +1818,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getDestroyObjectAction_A
 	return m_destroyObjectAction_Attribute_target;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDestroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDestroyObjectAction_Operation_no_type_EDiagnosticChain_EMap() const
-{
-	return m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap;
-}
 
 // End Class DestroyObjectAction
 
@@ -2317,10 +1829,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getDestructionOccurrenceSpec
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDestructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap() const
-{
-	return m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap;
-}
 
 // End Class DestructionOccurrenceSpecification
 
@@ -2370,10 +1878,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getDuration_Attribute_ob
 	return m_duration_Attribute_observation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDuration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const
-{
-	return m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap;
-}
 
 // End Class Duration
 
@@ -2389,14 +1893,6 @@ std::shared_ptr<ecore::EAttribute> uml::umlPackageImpl::getDurationConstraint_At
 }
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDurationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDurationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap() const
-{
-	return m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap;
-}
 
 // End Class DurationConstraint
 
@@ -2427,10 +1923,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getDurationObservation_A
 	return m_durationObservation_Attribute_event;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getDurationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class DurationObservation
 
@@ -2570,10 +2062,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_has
 {
 	return m_element_Operation_hasValue_Stereotype_String;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_has_owner_EDiagnosticChain_EMap() const
-{
-	return m_element_Operation_has_owner_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_isStereotypeApplicable_Stereotype() const
 {
 	return m_element_Operation_isStereotypeApplicable_Stereotype;
@@ -2589,10 +2077,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_isS
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_mustBeOwned() const
 {
 	return m_element_Operation_mustBeOwned;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_not_own_self_EDiagnosticChain_EMap() const
-{
-	return m_element_Operation_not_own_self_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElement_Operation_removeKeyword_String() const
 {
@@ -2637,14 +2121,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElementImport_Operati
 {
 	return m_elementImport_Operation_getName;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap() const
-{
-	return m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getElementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap() const
-{
-	return m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap;
-}
 
 // End Class ElementImport
 
@@ -2679,10 +2155,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getEnumeration_Attribute
 	return m_enumeration_Attribute_ownedLiteral;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getEnumeration_Operation_immutable_EDiagnosticChain_EMap() const
-{
-	return m_enumeration_Operation_immutable_EDiagnosticChain_EMap;
-}
 
 // End Class Enumeration
 
@@ -2744,30 +2216,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getExceptionHandler_Attr
 	return m_exceptionHandler_Attribute_protectedNode;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_one_input_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExceptionHandler_Operation_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap;
-}
 
 // End Class ExceptionHandler
 
@@ -2828,10 +2276,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getExecutionSpecificatio
 	return m_executionSpecification_Attribute_start;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExecutionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap() const
-{
-	return m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap;
-}
 
 // End Class ExecutionSpecification
 
@@ -2851,10 +2295,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getExpansionNode_Attribu
 	return m_expansionNode_Attribute_regionAsOutput;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExpansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap() const
-{
-	return m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap;
-}
 
 // End Class ExpansionNode
 
@@ -2924,10 +2364,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getExtend_Attribute_exte
 	return m_extend_Attribute_extensionLocation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtend_Operation_extension_points_EDiagnosticChain_EMap() const
-{
-	return m_extend_Operation_extension_points_EDiagnosticChain_EMap;
-}
 
 // End Class Extend
 
@@ -2963,17 +2399,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtension_Operation_i
 {
 	return m_extension_Operation_isRequired;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtension_Operation_is_binary_EDiagnosticChain_EMap() const
-{
-	return m_extension_Operation_is_binary_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtension_Operation_metaclassEnd() const
 {
 	return m_extension_Operation_metaclassEnd;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtension_Operation_non_owned_end_EDiagnosticChain_EMap() const
-{
-	return m_extension_Operation_non_owned_end_EDiagnosticChain_EMap;
 }
 
 // End Class Extension
@@ -2986,14 +2414,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getExtensionEnd_Class() cons
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtensionEnd_Operation_aggregation_EDiagnosticChain_EMap() const
-{
-	return m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtensionEnd_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class ExtensionEnd
 
@@ -3009,10 +2429,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getExtensionPoint_Attrib
 	return m_extensionPoint_Attribute_useCase;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getExtensionPoint_Operation_must_have_name_EDiagnosticChain_EMap() const
-{
-	return m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap;
-}
 
 // End Class ExtensionPoint
 
@@ -3058,10 +2474,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getFinalNode_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const
-{
-	return m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap;
-}
 
 // End Class FinalNode
 
@@ -3073,30 +2485,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getFinalState_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_no_entry_behavior_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_no_exit_behavior_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_no_regions_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_no_regions_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFinalState_Operation_no_state_behavior_EDiagnosticChain_EMap() const
-{
-	return m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap;
-}
 
 // End Class FinalState
 
@@ -3119,14 +2507,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getForkNode_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getForkNode_Operation_edges_EDiagnosticChain_EMap() const
-{
-	return m_forkNode_Operation_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getForkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap() const
-{
-	return m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap;
-}
 
 // End Class ForkNode
 
@@ -3142,14 +2522,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFunctionBehavior_Oper
 {
 	return m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFunctionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap() const
-{
-	return m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getFunctionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap() const
-{
-	return m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap;
-}
 
 // End Class FunctionBehavior
 
@@ -3161,18 +2533,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getGate_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_actual_gate_matched_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_getName() const
 {
 	return m_gate_Operation_getName;
@@ -3180,14 +2540,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_getNam
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_getOperand() const
 {
 	return m_gate_Operation_getOperand;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_inside_cf_matched_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_isActual() const
 {
@@ -3209,14 +2561,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_matche
 {
 	return m_gate_Operation_matches_Gate;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGate_Operation_outside_cf_matched_EDiagnosticChain_EMap() const
-{
-	return m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap;
-}
 
 // End Class Gate
 
@@ -3236,10 +2580,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getGeneralOrdering_Attri
 	return m_generalOrdering_Attribute_before;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGeneralOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap() const
-{
-	return m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap;
-}
 
 // End Class GeneralOrdering
 
@@ -3294,14 +2634,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getGeneralizationSet_Att
 	return m_generalizationSet_Attribute_powertype;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGeneralizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap() const
-{
-	return m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getGeneralizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const
-{
-	return m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap;
-}
 
 // End Class GeneralizationSet
 
@@ -3383,18 +2715,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInformationFlow_Attri
 	return m_informationFlow_Attribute_realizingMessage;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap() const
-{
-	return m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationFlow_Operation_must_conform_EDiagnosticChain_EMap() const
-{
-	return m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap() const
-{
-	return m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap;
-}
 
 // End Class InformationFlow
 
@@ -3410,18 +2730,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInformationItem_Attri
 	return m_informationItem_Attribute_represented;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationItem_Operation_has_no_EDiagnosticChain_EMap() const
-{
-	return m_informationItem_Operation_has_no_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationItem_Operation_not_instantiable_EDiagnosticChain_EMap() const
-{
-	return m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInformationItem_Operation_sources_and_targets_EDiagnosticChain_EMap() const
-{
-	return m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap;
-}
 
 // End Class InformationItem
 
@@ -3433,14 +2741,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getInitialNode_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInitialNode_Operation_control_edges_EDiagnosticChain_EMap() const
-{
-	return m_initialNode_Operation_control_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInitialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const
-{
-	return m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap;
-}
 
 // End Class InitialNode
 
@@ -3484,10 +2784,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInputPin_Attribute_wr
 	return m_inputPin_Attribute_writeStructuralFeatureAction;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const
-{
-	return m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap;
-}
 
 // End Class InputPin
 
@@ -3511,22 +2807,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInstanceSpecification
 	return m_instanceSpecification_Attribute_specification;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInstanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap() const
-{
-	return m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInstanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap() const
-{
-	return m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInstanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const
-{
-	return m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInstanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap() const
-{
-	return m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap;
-}
 
 // End Class InstanceSpecification
 
@@ -3573,10 +2853,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInteraction_Attribute
 	return m_interaction_Attribute_message;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteraction_Operation_not_contained_EDiagnosticChain_EMap() const
-{
-	return m_interaction_Operation_not_contained_EDiagnosticChain_EMap;
-}
 
 // End Class Interaction
 
@@ -3596,30 +2872,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInteractionConstraint
 	return m_interactionConstraint_Attribute_minint;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_global_data_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap() const
-{
-	return m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap;
-}
 
 // End Class InteractionConstraint
 
@@ -3666,14 +2918,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInteractionOperand_At
 	return m_interactionOperand_Attribute_guard;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap() const
-{
-	return m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap() const
-{
-	return m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap;
-}
 
 // End Class InteractionOperand
 
@@ -3705,30 +2949,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInteractionUse_Attrib
 	return m_interactionUse_Attribute_returnValueRecipient;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_all_lifelines_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_gates_match_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInteractionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap() const
-{
-	return m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap;
-}
 
 // End Class InteractionUse
 
@@ -3772,10 +2992,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInterface_Operation_c
 {
 	return m_interface_Operation_createOwnedOperation_String_Type;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInterface_Operation_visibility_EDiagnosticChain_EMap() const
-{
-	return m_interface_Operation_visibility_EDiagnosticChain_EMap;
-}
 
 // End Class Interface
 
@@ -3814,10 +3030,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getInterruptibleActivity
 	return m_interruptibleActivityRegion_Attribute_node;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getInterruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap() const
-{
-	return m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap;
-}
 
 // End Class InterruptibleActivityRegion
 
@@ -3886,14 +3098,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getJoinNode_Attribute_jo
 	return m_joinNode_Attribute_joinSpec;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getJoinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap() const
-{
-	return m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getJoinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const
-{
-	return m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap;
-}
 
 // End Class JoinNode
 
@@ -3925,22 +3129,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getLifeline_Attribute_se
 	return m_lifeline_Attribute_selector;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap() const
-{
-	return m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLifeline_Operation_same_classifier_EDiagnosticChain_EMap() const
-{
-	return m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap() const
-{
-	return m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLifeline_Operation_selector_specified_EDiagnosticChain_EMap() const
-{
-	return m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap;
-}
 
 // End Class Lifeline
 
@@ -3964,18 +3152,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkAction_Operation_
 {
 	return m_linkAction_Operation_association;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkAction_Operation_not_static_EDiagnosticChain_EMap() const
-{
-	return m_linkAction_Operation_not_static_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkAction_Operation_same_association_EDiagnosticChain_EMap() const
-{
-	return m_linkAction_Operation_same_association_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkAction_Operation_same_pins_EDiagnosticChain_EMap() const
-{
-	return m_linkAction_Operation_same_pins_EDiagnosticChain_EMap;
-}
 
 // End Class LinkAction
 
@@ -3995,10 +3171,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getLinkEndCreationData_A
 	return m_linkEndCreationData_Attribute_insertAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap() const
-{
-	return m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap;
-}
 
 // End Class LinkEndCreationData
 
@@ -4026,26 +3198,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation
 {
 	return m_linkEndData_Operation_allPins;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap() const
-{
-	return m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap() const
-{
-	return m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation_qualifiers_EDiagnosticChain_EMap() const
-{
-	return m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndData_Operation_same_type_EDiagnosticChain_EMap() const
-{
-	return m_linkEndData_Operation_same_type_EDiagnosticChain_EMap;
-}
 
 // End Class LinkEndData
 
@@ -4065,10 +3217,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getLinkEndDestructionDat
 	return m_linkEndDestructionData_Attribute_destroyAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLinkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap() const
-{
-	return m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap;
-}
 
 // End Class LinkEndDestructionData
 
@@ -4261,42 +3409,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getLoopNode_Attribute_te
 	return m_loopNode_Attribute_test;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_body_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_executable_nodes_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_input_edges_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_input_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_matching_result_pins_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getLoopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap() const
-{
-	return m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap;
-}
 
 // End Class LoopNode
 
@@ -4323,14 +3435,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getMergeNode_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMergeNode_Operation_edges_EDiagnosticChain_EMap() const
-{
-	return m_mergeNode_Operation_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const
-{
-	return m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap;
-}
 
 // End Class MergeNode
 
@@ -4374,41 +3478,9 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getMessage_Attribute_sig
 	return m_message_Attribute_signature;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_arguments_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_arguments_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_getMessageKind() const
 {
 	return m_message_Operation_getMessageKind;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_occurrence_specifications_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_sending_receiving_message_event_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_signature_is_operation_reply_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_signature_is_operation_request_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_signature_is_signal_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_signature_is_signal_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMessage_Operation_signature_refer_to_EDiagnosticChain_EMap() const
-{
-	return m_message_Operation_signature_refer_to_EDiagnosticChain_EMap;
 }
 
 // End Class Message
@@ -4537,33 +3609,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_O
 {
 	return m_multiplicityElement_Operation_lowerBound;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_upperBound() const
 {
 	return m_multiplicityElement_Operation_upperBound;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getMultiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap() const
-{
-	return m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap;
 }
 
 // End Class MultiplicityElement
@@ -4636,14 +3684,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operatio
 {
 	return m_namedElement_Operation_getQualifiedName;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap() const
-{
-	return m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operation_has_qualified_name_EDiagnosticChain_EMap() const
-{
-	return m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operation_isDistinguishableFrom_NamedElement_Namespace() const
 {
 	return m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace;
@@ -4651,10 +3691,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operatio
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operation_separator() const
 {
 	return m_namedElement_Operation_separator;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap() const
-{
-	return m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap;
 }
 
 // End Class NamedElement
@@ -4691,14 +3727,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getNamespace_Attribute_p
 	return m_namespace_Attribute_packageImport;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap() const
-{
-	return m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamespace_Operation_cannot_import_self_EDiagnosticChain_EMap() const
-{
-	return m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamespace_Operation_createElementImport_PackageableElement_VisibilityKind() const
 {
 	return m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind;
@@ -4739,10 +3767,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamespace_Operation_m
 {
 	return m_namespace_Operation_membersAreDistinguishable;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNamespace_Operation_members_distinguishable_EDiagnosticChain_EMap() const
-{
-	return m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap;
-}
 
 // End Class Namespace
 
@@ -4766,10 +3790,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNode_Operation_getCom
 {
 	return m_node_Operation_getCommunicationPaths;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getNode_Operation_internal_structure_EDiagnosticChain_EMap() const
-{
-	return m_node_Operation_internal_structure_EDiagnosticChain_EMap;
-}
 
 // End Class Node
 
@@ -4781,13 +3801,33 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getObject_Class() const
 
 
 
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_add_Property_EJavaObject() const
+{
+	return m_object_Operation_add_Property_EJavaObject;
+}
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_add_Property_EInt() const
+{
+	return m_object_Operation_add_Property_EInt;
+}
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_destroy() const
+{
+	return m_object_Operation_destroy;
+}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_get_Property() const
 {
 	return m_object_Operation_get_Property;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_invoke_Operation_Argument() const
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_invoke_Operation_EJavaObject() const
 {
-	return m_object_Operation_invoke_Operation_Argument;
+	return m_object_Operation_invoke_Operation_EJavaObject;
+}
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_invoke_OpaqueBehavior_EJavaObject() const
+{
+	return m_object_Operation_invoke_OpaqueBehavior_EJavaObject;
+}
+std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_remove_Property_EJavaObject() const
+{
+	return m_object_Operation_remove_Property_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObject_Operation_set_Property_EJavaObject() const
 {
@@ -4824,38 +3864,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getObjectFlow_Attribute_
 	return m_objectFlow_Attribute_transformation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_compatible_types_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_selection_behavior_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_target_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_target_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap() const
-{
-	return m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap;
-}
 
 // End Class ObjectFlow
 
@@ -4887,18 +3895,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getObjectNode_Attribute_
 	return m_objectNode_Attribute_upperBound;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectNode_Operation_input_output_parameter_EDiagnosticChain_EMap() const
-{
-	return m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectNode_Operation_object_flow_edges_EDiagnosticChain_EMap() const
-{
-	return m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getObjectNode_Operation_selection_behavior_EDiagnosticChain_EMap() const
-{
-	return m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap;
-}
 
 // End Class ObjectNode
 
@@ -4964,10 +3960,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getOpaqueAction_Attribut
 	return m_opaqueAction_Attribute_outputValue;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueAction_Operation_language_body_size_EDiagnosticChain_EMap() const
-{
-	return m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap;
-}
 
 // End Class OpaqueAction
 
@@ -5029,18 +4021,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Oper
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Operation_isPositive() const
 {
 	return m_opaqueExpression_Operation_isPositive;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap() const
-{
-	return m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap() const
-{
-	return m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap() const
-{
-	return m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOpaqueExpression_Operation_value() const
 {
@@ -5113,10 +4093,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getOperation_Attribute_t
 	return m_operation_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_at_most_one_return_EDiagnosticChain_EMap() const
-{
-	return m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_getLower() const
 {
 	return m_operation_Operation_getLower;
@@ -5144,10 +4120,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_i
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_matches_Operation() const
 {
 	return m_operation_Operation_matches_Operation;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const
-{
-	return m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperation_Operation_returnResult() const
 {
@@ -5184,10 +4156,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getOperationTemplateParamete
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOperationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap() const
-{
-	return m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap;
-}
 
 // End Class OperationTemplateParameter
 
@@ -5231,10 +4199,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getOutputPin_Attribute_w
 	return m_outputPin_Attribute_writeStructuralFeatureAction;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const
-{
-	return m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap;
-}
 
 // End Class OutputPin
 
@@ -5309,10 +4273,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackage_Operation_cre
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackage_Operation_createOwnedStereotype_String_Boolean() const
 {
 	return m_package_Operation_createOwnedStereotype_String_Boolean;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackage_Operation_elements_public_or_private_EDiagnosticChain_EMap() const
-{
-	return m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackage_Operation_getAllAppliedProfiles() const
 {
@@ -5397,10 +4357,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getPackageImport_Attribu
 	return m_packageImport_Attribute_importingNamespace;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackageImport_Operation_public_or_private_EDiagnosticChain_EMap() const
-{
-	return m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap;
-}
 
 // End Class PackageImport
 
@@ -5435,10 +4391,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getPackageableElement_At
 	return m_packageableElement_Attribute_owningPackage;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPackageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap() const
-{
-	return m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap;
-}
 
 // End Class PackageableElement
 
@@ -5486,29 +4438,9 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getParameter_Attribute_p
 	return m_parameter_Attribute_parameterSet;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_connector_end_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_connector_end_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_in_and_out_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_in_and_out_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_isSetDefault() const
 {
 	return m_parameter_Operation_isSetDefault;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_not_exception_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_not_exception_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_object_effect_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_object_effect_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_setBooleanDefaultValue_Boolean() const
 {
@@ -5534,10 +4466,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_s
 {
 	return m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_stream_and_exception_EDiagnosticChain_EMap() const
-{
-	return m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameter_Operation_unsetDefault() const
 {
 	return m_parameter_Operation_unsetDefault;
@@ -5561,18 +4489,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getParameterSet_Attribut
 	return m_parameterSet_Attribute_parameter;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameterSet_Operation_input_EDiagnosticChain_EMap() const
-{
-	return m_parameterSet_Operation_input_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap() const
-{
-	return m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getParameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap() const
-{
-	return m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap;
-}
 
 // End Class ParameterSet
 
@@ -5611,18 +4527,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getPartDecomposition_Class()
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPartDecomposition_Operation_assume_EDiagnosticChain_EMap() const
-{
-	return m_partDecomposition_Operation_assume_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPartDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap() const
-{
-	return m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPartDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap() const
-{
-	return m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap;
-}
 
 // End Class PartDecomposition
 
@@ -5638,14 +4542,6 @@ std::shared_ptr<ecore::EAttribute> uml::umlPackageImpl::getPin_Attribute_isContr
 }
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPin_Operation_control_pins_EDiagnosticChain_EMap() const
-{
-	return m_pin_Operation_control_pins_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPin_Operation_not_unique_EDiagnosticChain_EMap() const
-{
-	return m_pin_Operation_not_unique_EDiagnosticChain_EMap;
-}
 
 // End Class Pin
 
@@ -5693,14 +4589,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_basicR
 {
 	return m_port_Operation_basicRequired;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_default_value_EDiagnosticChain_EMap() const
-{
-	return m_port_Operation_default_value_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_encapsulated_owner_EDiagnosticChain_EMap() const
-{
-	return m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_getProvideds() const
 {
 	return m_port_Operation_getProvideds;
@@ -5708,10 +4596,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_getPro
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_getRequireds() const
 {
 	return m_port_Operation_getRequireds;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPort_Operation_port_aggregation_EDiagnosticChain_EMap() const
-{
-	return m_port_Operation_port_aggregation_EDiagnosticChain_EMap;
 }
 
 // End Class Port
@@ -5778,14 +4662,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProfile_Operation_get
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProfile_Operation_isDefined() const
 {
 	return m_profile_Operation_isDefined;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProfile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap() const
-{
-	return m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProfile_Operation_references_same_metamodel_EDiagnosticChain_EMap() const
-{
-	return m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap;
 }
 
 // End Class Profile
@@ -5897,22 +4773,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getProperty_Attribute_su
 	return m_property_Attribute_subsettedProperty;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_binding_to_attribute_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_deployment_target_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_deployment_target_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_derived_union_is_derived_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_derived_union_is_read_only_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_getOpposite() const
 {
 	return m_property_Operation_getOpposite;
@@ -5936,18 +4796,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_is
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_isSetDefault() const
 {
 	return m_property_Operation_isSetDefault;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_multiplicity_of_composite_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_qualified_is_association_end_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_redefined_property_inherited_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_setBooleanDefaultValue_Boolean() const
 {
@@ -5977,25 +4825,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_se
 {
 	return m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_subsetted_property_names_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_subsettingContext() const
 {
 	return m_property_Operation_subsettingContext;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_subsetting_context_conforms_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_subsetting_rules_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_subsetting_rules_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_type_of_opposite_end_EDiagnosticChain_EMap() const
-{
-	return m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProperty_Operation_unsetDefault() const
 {
@@ -6035,18 +4867,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getProtocolStateMachine_
 	return m_protocolStateMachine_Attribute_conformance;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap() const
-{
-	return m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap() const
-{
-	return m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap() const
-{
-	return m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap;
-}
 
 // End Class ProtocolStateMachine
 
@@ -6070,21 +4890,9 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getProtocolTransition_At
 	return m_protocolTransition_Attribute_referred;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolTransition_Operation_associated_actions_EDiagnosticChain_EMap() const
-{
-	return m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap() const
-{
-	return m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolTransition_Operation_getReferreds() const
 {
 	return m_protocolTransition_Operation_getReferreds;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getProtocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap() const
-{
-	return m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap;
 }
 
 // End Class ProtocolTransition
@@ -6109,42 +4917,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getPseudostate_Attribute
 	return m_pseudostate_Attribute_stateMachine;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_choice_vertex_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_fork_vertex_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_history_vertices_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_initial_vertex_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_join_vertex_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_junction_vertex_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getPseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap() const
-{
-	return m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap;
-}
 
 // End Class Pseudostate
 
@@ -6164,18 +4936,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getQualifierValue_Attrib
 	return m_qualifierValue_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getQualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const
-{
-	return m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getQualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap() const
-{
-	return m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getQualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap() const
-{
-	return m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap;
-}
 
 // End Class QualifierValue
 
@@ -6210,14 +4970,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadExtentAction_Attr
 	return m_readExtentAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const
-{
-	return m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap() const
-{
-	return m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap;
-}
 
 // End Class ReadExtentAction
 
@@ -6245,22 +4997,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadIsClassifiedObjec
 	return m_readIsClassifiedObjectAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap() const
-{
-	return m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap() const
-{
-	return m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap() const
-{
-	return m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap() const
-{
-	return m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap;
-}
 
 // End Class ReadIsClassifiedObjectAction
 
@@ -6276,29 +5012,9 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadLinkAction_Attrib
 	return m_readLinkAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap() const
-{
-	return m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_one_open_end_EDiagnosticChain_EMap() const
-{
-	return m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_openEnd() const
 {
 	return m_readLinkAction_Operation_openEnd;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const
-{
-	return m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkAction_Operation_visibility_EDiagnosticChain_EMap() const
-{
-	return m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap;
 }
 
 // End Class ReadLinkAction
@@ -6323,34 +5039,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadLinkObjectEndActi
 	return m_readLinkObjectEndAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap;
-}
 
 // End Class ReadLinkObjectEndAction
 
@@ -6374,38 +5062,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadLinkObjectEndQual
 	return m_readLinkObjectEndQualifierAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap() const
-{
-	return m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap;
-}
 
 // End Class ReadLinkObjectEndQualifierAction
 
@@ -6421,22 +5077,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadSelfAction_Attrib
 	return m_readSelfAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadSelfAction_Operation_contained_EDiagnosticChain_EMap() const
-{
-	return m_readSelfAction_Operation_contained_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadSelfAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadSelfAction_Operation_not_static_EDiagnosticChain_EMap() const
-{
-	return m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadSelfAction_Operation_type_EDiagnosticChain_EMap() const
-{
-	return m_readSelfAction_Operation_type_EDiagnosticChain_EMap;
-}
 
 // End Class ReadSelfAction
 
@@ -6452,10 +5092,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadStructuralFeature
 	return m_readStructuralFeatureAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const
-{
-	return m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap;
-}
 
 // End Class ReadStructuralFeatureAction
 
@@ -6471,14 +5107,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReadVariableAction_At
 	return m_readVariableAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReadVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const
-{
-	return m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap;
-}
 
 // End Class ReadVariableAction
 
@@ -6505,14 +5133,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReception_Attribute_s
 	return m_reception_Attribute_signal;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReception_Operation_same_name_as_signal_EDiagnosticChain_EMap() const
-{
-	return m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReception_Operation_same_structure_as_signal_EDiagnosticChain_EMap() const
-{
-	return m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap;
-}
 
 // End Class Reception
 
@@ -6540,18 +5160,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReclassifyObjectActio
 	return m_reclassifyObjectAction_Attribute_oldClassifier;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const
-{
-	return m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap() const
-{
-	return m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class ReclassifyObjectAction
 
@@ -6583,18 +5191,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableElement_Op
 {
 	return m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap() const
-{
-	return m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap() const
-{
-	return m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap() const
-{
-	return m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap;
-}
 
 // End Class RedefinableElement
 
@@ -6621,10 +5217,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getRedefinableTemplateSi
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableTemplateSignature_Operation_getInheritedParameters() const
 {
 	return m_redefinableTemplateSignature_Operation_getInheritedParameters;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRedefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap() const
-{
-	return m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap;
 }
 
 // End Class RedefinableTemplateSignature
@@ -6653,18 +5245,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReduceAction_Attribut
 	return m_reduceAction_Attribute_result;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap() const
-{
-	return m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap() const
-{
-	return m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap() const
-{
-	return m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap;
-}
 
 // End Class ReduceAction
 
@@ -6704,25 +5284,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_cont
 {
 	return m_region_Operation_containingStateMachine;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_deep_history_vertex_EDiagnosticChain_EMap() const
-{
-	return m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_initial_vertex_EDiagnosticChain_EMap() const
-{
-	return m_region_Operation_initial_vertex_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_owned_EDiagnosticChain_EMap() const
-{
-	return m_region_Operation_owned_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_redefinitionContext() const
 {
 	return m_region_Operation_redefinitionContext;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRegion_Operation_shallow_history_vertex_EDiagnosticChain_EMap() const
-{
-	return m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap;
 }
 
 // End Class Region
@@ -6758,10 +5322,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getRemoveStructuralFeatu
 	return m_removeStructuralFeatureValueAction_Attribute_removeAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRemoveStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const
-{
-	return m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap;
-}
 
 // End Class RemoveStructuralFeatureValueAction
 
@@ -6781,10 +5341,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getRemoveVariableValueAc
 	return m_removeVariableValueAction_Attribute_removeAt;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getRemoveVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const
-{
-	return m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap;
-}
 
 // End Class RemoveVariableValueAction
 
@@ -6808,14 +5364,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getReplyAction_Attribute
 	return m_replyAction_Attribute_returnInformation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReplyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap() const
-{
-	return m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getReplyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap() const
-{
-	return m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap;
-}
 
 // End Class ReplyAction
 
@@ -6835,10 +5383,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getSendObjectAction_Attr
 	return m_sendObjectAction_Attribute_target;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getSendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap() const
-{
-	return m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap;
-}
 
 // End Class SendObjectAction
 
@@ -6858,18 +5402,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getSendSignalAction_Attr
 	return m_sendSignalAction_Attribute_target;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getSendSignalAction_Operation_number_order_EDiagnosticChain_EMap() const
-{
-	return m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getSendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getSendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap() const
-{
-	return m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap;
-}
 
 // End Class SendSignalAction
 
@@ -6957,14 +5489,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStartClassifierBehavi
 	return m_startClassifierBehaviorAction_Attribute_object;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap() const
-{
-	return m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap;
-}
 
 // End Class StartClassifierBehaviorAction
 
@@ -6983,18 +5507,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStartObjectBehaviorAc
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartObjectBehaviorAction_Operation_behavior() const
 {
 	return m_startObjectBehaviorAction_Operation_behavior;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const
-{
-	return m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const
-{
-	return m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStartObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap() const
-{
-	return m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap;
 }
 
 // End Class StartObjectBehaviorAction
@@ -7063,18 +5575,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getState_Attribute_subma
 	return m_state_Attribute_submachine;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_composite_states_EDiagnosticChain_EMap() const
-{
-	return m_state_Operation_composite_states_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap() const
-{
-	return m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_entry_or_exit_EDiagnosticChain_EMap() const
-{
-	return m_state_Operation_entry_or_exit_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_isComposite() const
 {
 	return m_state_Operation_isComposite;
@@ -7094,14 +5594,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_isSub
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_redefinitionContext() const
 {
 	return m_state_Operation_redefinitionContext;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_submachine_or_regions_EDiagnosticChain_EMap() const
-{
-	return m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getState_Operation_submachine_states_EDiagnosticChain_EMap() const
-{
-	return m_state_Operation_submachine_states_EDiagnosticChain_EMap;
 }
 
 // End Class State
@@ -7157,22 +5649,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStateMachine_Operatio
 {
 	return m_stateMachine_Operation_ancestor_Vertex_Vertex;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStateMachine_Operation_classifier_context_EDiagnosticChain_EMap() const
-{
-	return m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStateMachine_Operation_connection_points_EDiagnosticChain_EMap() const
-{
-	return m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStateMachine_Operation_context_classifier_EDiagnosticChain_EMap() const
-{
-	return m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStateMachine_Operation_method_EDiagnosticChain_EMap() const
-{
-	return m_stateMachine_Operation_method_EDiagnosticChain_EMap;
-}
 
 // End Class StateMachine
 
@@ -7192,26 +5668,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStereotype_Attribute_
 	return m_stereotype_Attribute_profile;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_containingProfile() const
 {
 	return m_stereotype_Operation_containingProfile;
@@ -7227,10 +5683,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_createIcon_String_String() const
 {
 	return m_stereotype_Operation_createIcon_String_String;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_generalize_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_generalize_EDiagnosticChain_EMap;
 }
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_getAllExtendedMetaclasses() const
 {
@@ -7256,10 +5708,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_
 {
 	return m_stereotype_Operation_getProfile;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStereotype_Operation_name_not_clash_EDiagnosticChain_EMap() const
-{
-	return m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap;
-}
 
 // End Class Stereotype
 
@@ -7279,14 +5727,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStringExpression_Attr
 	return m_stringExpression_Attribute_subExpression;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStringExpression_Operation_operands_EDiagnosticChain_EMap() const
-{
-	return m_stringExpression_Operation_operands_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStringExpression_Operation_subexpressions_EDiagnosticChain_EMap() const
-{
-	return m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap;
-}
 
 // End Class StringExpression
 
@@ -7321,26 +5761,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStructuralFeatureActi
 	return m_structuralFeatureAction_Attribute_structuralFeature;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap() const
-{
-	return m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap() const
-{
-	return m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap() const
-{
-	return m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap() const
-{
-	return m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap;
-}
 
 // End Class StructuralFeatureAction
 
@@ -7376,18 +5796,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getStructuredActivityNod
 	return m_structuredActivityNode_Attribute_variable;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuredActivityNode_Operation_edges_EDiagnosticChain_EMap() const
-{
-	return m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap() const
-{
-	return m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap() const
-{
-	return m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getStructuredActivityNode_Operation_sourceNodes() const
 {
 	return m_structuredActivityNode_Operation_sourceNodes;
@@ -7477,14 +5885,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTemplateBinding_Attri
 	return m_templateBinding_Attribute_signature;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap() const
-{
-	return m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap() const
-{
-	return m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap;
-}
 
 // End Class TemplateBinding
 
@@ -7516,10 +5916,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTemplateParameter_Att
 	return m_templateParameter_Attribute_signature;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap() const
-{
-	return m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap;
-}
 
 // End Class TemplateParameter
 
@@ -7547,10 +5943,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTemplateParameterSubs
 	return m_templateParameterSubstitution_Attribute_templateBinding;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap() const
-{
-	return m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap;
-}
 
 // End Class TemplateParameterSubstitution
 
@@ -7574,14 +5966,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTemplateSignature_Att
 	return m_templateSignature_Attribute_template;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateSignature_Operation_own_elements_EDiagnosticChain_EMap() const
-{
-	return m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTemplateSignature_Operation_unique_parameters_EDiagnosticChain_EMap() const
-{
-	return m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap;
-}
 
 // End Class TemplateSignature
 
@@ -7632,18 +6016,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTestIdentityAction_At
 	return m_testIdentityAction_Attribute_second;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTestIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTestIdentityAction_Operation_no_type_EDiagnosticChain_EMap() const
-{
-	return m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTestIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap() const
-{
-	return m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap;
-}
 
 // End Class TestIdentityAction
 
@@ -7659,10 +6031,6 @@ std::shared_ptr<ecore::EAttribute> uml::umlPackageImpl::getTimeConstraint_Attrib
 }
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTimeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap() const
-{
-	return m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap;
-}
 
 // End Class TimeConstraint
 
@@ -7682,10 +6050,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTimeEvent_Attribute_w
 	return m_timeEvent_Attribute_when;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTimeEvent_Operation_when_non_negative_EDiagnosticChain_EMap() const
-{
-	return m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap;
-}
 
 // End Class TimeEvent
 
@@ -7705,10 +6069,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTimeExpression_Attrib
 	return m_timeExpression_Attribute_observation;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTimeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const
-{
-	return m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap;
-}
 
 // End Class TimeExpression
 
@@ -7786,45 +6146,9 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_
 {
 	return m_transition_Operation_containingStateMachine;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_fork_segment_guards_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_fork_segment_state_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_initial_transition_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_initial_transition_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_join_segment_guards_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_join_segment_state_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_join_segment_state_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap;
-}
 std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_redefinitionContext() const
 {
 	return m_transition_Operation_redefinitionContext;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_state_is_external_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_state_is_external_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_state_is_internal_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_state_is_internal_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTransition_Operation_state_is_local_EDiagnosticChain_EMap() const
-{
-	return m_transition_Operation_state_is_local_EDiagnosticChain_EMap;
 }
 
 // End Class Transition
@@ -7845,10 +6169,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getTrigger_Attribute_por
 	return m_trigger_Attribute_port;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getTrigger_Operation_trigger_with_ports_EDiagnosticChain_EMap() const
-{
-	return m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap;
-}
 
 // End Class Trigger
 
@@ -7914,26 +6234,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getUnmarshallAction_Attr
 	return m_unmarshallAction_Attribute_unmarshallType;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUnmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const
-{
-	return m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUnmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap() const
-{
-	return m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUnmarshallAction_Operation_object_type_EDiagnosticChain_EMap() const
-{
-	return m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUnmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap() const
-{
-	return m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUnmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class UnmarshallAction
 
@@ -7976,22 +6276,6 @@ std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUseCase_Operation_all
 {
 	return m_useCase_Operation_allIncludedUseCases;
 }
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUseCase_Operation_binary_associations_EDiagnosticChain_EMap() const
-{
-	return m_useCase_Operation_binary_associations_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUseCase_Operation_cannot_include_self_EDiagnosticChain_EMap() const
-{
-	return m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUseCase_Operation_must_have_name_EDiagnosticChain_EMap() const
-{
-	return m_useCase_Operation_must_have_name_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getUseCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap() const
-{
-	return m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap;
-}
 
 // End Class UseCase
 
@@ -8007,14 +6291,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getValuePin_Attribute_va
 	return m_valuePin_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getValuePin_Operation_compatible_type_EDiagnosticChain_EMap() const
-{
-	return m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getValuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap() const
-{
-	return m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap;
-}
 
 // End Class ValuePin
 
@@ -8081,14 +6357,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getValueSpecificationAct
 	return m_valueSpecificationAction_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getValueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap() const
-{
-	return m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getValueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
 
 // End Class ValueSpecificationAction
 
@@ -8127,10 +6395,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getVariableAction_Attrib
 	return m_variableAction_Attribute_variable;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getVariableAction_Operation_scope_of_variable_EDiagnosticChain_EMap() const
-{
-	return m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap;
-}
 
 // End Class VariableAction
 
@@ -8185,10 +6449,6 @@ std::shared_ptr<ecore::EClass> uml::umlPackageImpl::getWriteLinkAction_Class() c
 
 
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteLinkAction_Operation_allow_access_EDiagnosticChain_EMap() const
-{
-	return m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap;
-}
 
 // End Class WriteLinkAction
 
@@ -8208,22 +6468,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getWriteStructuralFeatur
 	return m_writeStructuralFeatureAction_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const
-{
-	return m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap() const
-{
-	return m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const
-{
-	return m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap() const
-{
-	return m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap;
-}
 
 // End Class WriteStructuralFeatureAction
 
@@ -8239,14 +6483,6 @@ std::shared_ptr<ecore::EReference> uml::umlPackageImpl::getWriteVariableAction_A
 	return m_writeVariableAction_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteVariableAction_Operation_multiplicity_EDiagnosticChain_EMap() const
-{
-	return m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap;
-}
-std::shared_ptr<ecore::EOperation> uml::umlPackageImpl::getWriteVariableAction_Operation_value_type_EDiagnosticChain_EMap() const
-{
-	return m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap;
-}
 
 // End Class WriteVariableAction
 std::shared_ptr<ecore::EEnum> uml::umlPackageImpl::getAggregationKind_Class() const

@@ -1,18 +1,22 @@
 #include "StandardProfile/impl/CallImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -47,31 +51,14 @@ CallImpl::CallImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"Call is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Call' is created.")
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Usage
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(803516267,[this](){ return eAny(this->getBase_Usage(), uml::umlPackage::USAGE_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Usage
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(803516267,[this](Any object){this->setBase_Usage(object->get<std::shared_ptr<uml::Usage>>());}));
-	
-	
-	//unsetter init
-		//Property base_Usage
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(803516267,[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
-	
-	
-	
 }
 
 
 CallImpl::~CallImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"Call is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Call' is destroyed.")
 }
 
 CallImpl::CallImpl(const CallImpl & obj):CallImpl()
@@ -154,83 +141,149 @@ std::weak_ptr<uml::Usage> CallImpl::getBase_Usage() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any CallImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> CallImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any CallImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> CallImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any CallImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> CallImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::CALL_ATTRIBUTE_BASE_USAGE:
+			return eUMLAny(this->getBase_Usage().lock(), uml::umlPackage::USAGE_CLASS);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void CallImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void CallImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void CallImpl::set(std::string _qualifiedName, Any value)
+void CallImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void CallImpl::set(unsigned long _uID, Any value)
+void CallImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::CALL_ATTRIBUTE_BASE_USAGE:
+		{
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Usage> _base_Usage = std::dynamic_pointer_cast<uml::Usage>(umlAny);
+					if(_base_Usage)
+					{
+						setBase_Usage(_base_Usage);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Usage'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Usage'. Failed to set property!")
+				return;
+			}
+		break;
+		}
+	}
+}
+
+//Add
+void CallImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->add(qualifiedName, value);
+}
+
+void CallImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->add(uID, value);
+}
+
+void CallImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void CallImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void CallImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void CallImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::CALL_ATTRIBUTE_BASE_USAGE:
+		{
+			m_base_Usage.reset();
+			return;
+		}
+	}
+
 }
 
+//Remove
+void CallImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void CallImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void CallImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any CallImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> CallImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +291,18 @@ Any CallImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any CallImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> CallImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any CallImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> CallImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

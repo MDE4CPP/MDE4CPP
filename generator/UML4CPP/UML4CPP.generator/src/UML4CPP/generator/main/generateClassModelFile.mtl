@@ -21,16 +21,23 @@
  
 [import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getImplicitCompositeOwners()}->flatten() /]
+[query private includes(aClass : Class) : Set(Type) = Set(Type)
+{
+	aClass.ownedAttribute.type, 
+	aClass.ownedOperation.ownedParameter.type, 
+	aClass.collectOpaqueBehaviorsContexedByClass().ownedParameter.type,
+	aClass.getImplicitCompositeOwners()
+}->flatten() /]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
@@ -41,47 +48,45 @@
 [if (not aClass.getRootPackage().allOwnedElements()->filter(Usage)->isEmpty())]
 //********************
 // usage
-[for (usages : Usage| aClass.getRootPackage().allOwnedElements()->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (usages : Usage| aClass.getRootPackage().allOwnedElements()->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (not (usages.supplier.name->asOrderedSet()->first() = aClass.name.toString()))]
-   #include "[usages.getNearestPackage().generateNamespacePath(false)/]/[usages.supplier.name/].hpp"
-[/if]
-[/for]
-[/if]
+#include "[usages.getNearestPackage().generateNamespacePath(false)/]/[usages.supplier.name/].hpp"
+[/if][/for][/if]
 
-[if (OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->size() > 0)]
-//Forward Declaration for used types
-[for (element : Classifier | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) separator ('\n')]
-[if (element.oclIsUndefined() or element.name.oclIsUndefined())]
-// undefined  [element.eClass().name/] ([element.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(element.eClass().name).concat(' ').concat(element.toString()).registerError()/]
-[else]
-[if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element.getPackage().generateNamespace(true)/] 
+[let classifiersForForwardDeclaration : Set(Classifier) = Set
 {
-[/if]
-	class [element.name.toUpperFirst()/];
-[if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
-[/if]
-[/for]
-[/if]
+	aClass.includes()->filter(Class),
+	aClass.includes()->filter(Interface)
+}->flatten()]
+	[if (classifiersForForwardDeclaration->size() > 0)]
+//Forward declarations for used types
+		[for (aPackage : Package | classifiersForForwardDeclaration.getNearestPackage()->sortedBy(name))]
+			[if (not aPackage.isIgnoreNamespace())]
+namespace [aPackage.generateNamespace(true)/] 
+{
+			[/if]
+			[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
+class [aClassifier.name.toUpperFirst()/];
+			[/for]
+			[if (not aPackage.isIgnoreNamespace())]
+}
+			[/if]
+		[/for]
+	[/if]
+[/let]
 
 // base class includes
 [if (aClass.superClass->isEmpty())]
 #include "uml/[aClass.getGeneralSuperClassName()/].hpp"
 [else]
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (elements.oclIsUndefined() or elements.name.oclIsUndefined())]
-// undefined superclass [elements.toString()/]['class: '.concat(aClass.name).concat(': undefined superclass: ').concat(elements.toString()).registerError()/]
-[else]
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"
-[/if]
 [/for]
 [/if]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName()))]
-[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(oclIsUndefined() or name.oclIsUndefined()))]
-// undefined interface realization supplier [aNamedElement.toString()/]['class: '.concat(aClass.name).concat(': undefined interface realization supplier: ').concat(aNamedElement.toString()).registerError()/]
-[/for]
 [for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(not oclIsUndefined() and not name.oclIsUndefined()))]
 #include "[aNamedElement.getNearestPackage().generateNamespacePath(false)/]/[aNamedElement.name.toUpperFirst()/].hpp"
 [/for]
@@ -119,8 +124,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.ownedOperation->sortedBy(name).generateOperationDecl(false)/]
-			
+			[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
+			[anOperation.generateOperationDecl(false)/]
+			[/for]
+			[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
+			(i.e. they do not define the method for any Operation) are treated as normal C++ methods/]
+			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
+			[anOpaqueBehavior.generateMethodDeclaration(false)/]
+			[/for]
 		protected:
 			//*********************************
 			// Members

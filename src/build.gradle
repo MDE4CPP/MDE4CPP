@@ -29,23 +29,24 @@ task deliverBasicInterfaces() {
 	group 'Basic interfaces'
 	description 'deliver abstractDataTypes, util, persistence and pluginFramework interfaces'
 		
-	dependsOn rootProject.tasks.getByPath(':src:common:abstractDataTypes:deliverAbstractDataTypes')
-	dependsOn rootProject.tasks.getByPath(':src:common:pluginFramework:deliverPluginFrameworkInterface')
-	dependsOn rootProject.tasks.getByPath(':src:common:persistence:deliverPersistenceInterface')
-	dependsOn rootProject.tasks.getByPath(':src:util:deliverUtil')
+	dependsOn 'common:abstractDataTypes:deliverAbstractDataTypes'
+	dependsOn 'common:pluginFramework:deliverPluginFrameworkInterface'
+	dependsOn 'common:persistence:deliverPersistenceInterface'
+	dependsOn 'util:deliverUtil'
 }
 
 task buildEcoreModels() {
 	group 'Source'
 	description 'generate and compile all ecore models'
 	
-	dependsOn 'ecore:buildEcore'
+	dependsOn 'ecore:ecore:buildEcore'
 	dependsOn 'uml:types:buildTypes'
 	dependsOn 'uml:uml:buildUml'
 	dependsOn 'fuml:buildFUML'
-	dependsOn 'pscs:buildPSCS'
-	dependsOn 'ocl:oclModel:buildOcl'
+	//dependsOn 'pscs:buildPSCS'
+	//dependsOn 'ocl:oclModel:buildOcl'
 }
+
 
 task buildReflectionModels() {
 	group 'Source'
@@ -64,19 +65,20 @@ task buildUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
 
+
 // Compile all without generating the models
 task compileEcoreModels() {
 	group 'Source'
 	description 'compile all ecore models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:deliverBasicInterfaces')
+	dependsOn 'deliverBasicInterfaces'
 	
-	dependsOn rootProject.tasks.getByPath(':src:ecore:src_gen:compileEcore')
-	dependsOn rootProject.tasks.getByPath(':src:uml:types:src_gen:compileTypes')
-	dependsOn rootProject.tasks.getByPath(':src:uml:uml:src_gen:compileUml')
-	dependsOn rootProject.tasks.getByPath(':src:fuml:src_gen:compileFUML')
-	dependsOn rootProject.tasks.getByPath(':src:pscs:src_gen:compilePSCS')
-	dependsOn rootProject.tasks.getByPath(':src:ocl:oclModel:src_gen:compileOcl')
+	dependsOn 'ecore:ecore:src_gen:compileEcore'
+	dependsOn 'uml:types:src_gen:compileTypes'
+	dependsOn 'uml:uml:src_gen:compileUml'
+	dependsOn 'fuml:src_gen:compileFUML'
+	//dependsOn 'pscs:src_gen:compilePSCS'
+	//dependsOn 'ocl:oclModel:src_gen:compileOcl'
 }
 
 // Compile all without generating the models
@@ -84,51 +86,54 @@ task compileReflectionModels() {
 	group 'Source'
 	description 'compile all reflection models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:common:ecoreReflection:src_gen:compileEcoreReflection')
-	dependsOn rootProject.tasks.getByPath(':src:common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection')
-	dependsOn rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
+	dependsOn 'common:ecoreReflection:src_gen:compileEcoreReflection'
+	dependsOn 'common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection'
+	dependsOn 'common:umlReflection:src_gen:compileUmlReflection'
 	
-	dependsOn rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')
+	/*dependsOn 'ocl:oclParser:compileOclParser'
 	rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
-		.mustRunAfter rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')
+		.mustRunAfter rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')*/
 }
 
 task compileUMLProfiles() {
 	group 'Source'
 	description 'compile all uml profile models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:common:standardProfile:src_gen:compileStandardProfile')
-	dependsOn rootProject.tasks.getByPath(':src:common:UML4CPPProfile:src_gen:compileUML4CPPProfile')
+	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
+	dependsOn 'common:UML4CPPProfile:src_gen:compileUML4CPPProfile'
 }
+
 
 task generateEcoreModels() {
 	group 'Source'
 	description 'generate all ecore models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:ecore:model:generateEcore')
-	dependsOn rootProject.tasks.getByPath(':src:uml:types:model:generateTypes')
-	dependsOn rootProject.tasks.getByPath(':src:uml:uml:model:generateUml')
-	dependsOn rootProject.tasks.getByPath(':src:fuml:model:generateFUML')
-	dependsOn rootProject.tasks.getByPath(':src:pscs:model:generatePSCS')
-	dependsOn rootProject.tasks.getByPath(':src:ocl:oclModel:model:generateOcl')
+	dependsOn 'ecore:ecore:model:generateEcore'
+	dependsOn 'uml:types:model:generateTypes'
+	dependsOn 'uml:uml:model:generateUml'
+	dependsOn 'fuml:model:generateFUML'
+	//dependsOn 'pscs:model:generatePSCS'
+	//dependsOn 'ocl:oclModel:model:generateOcl'
 }
+
 
 task generateReflectionModels() {
 	group 'Source'
 	description 'generate all reflection models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:common:ecoreReflection:model:generateEcoreReflection')
-	dependsOn rootProject.tasks.getByPath(':src:common:primitivetypesReflection:model:generatePrimitivetypesReflection')
-	dependsOn rootProject.tasks.getByPath(':src:common:umlReflection:model:generateUmlReflection')
+	dependsOn 'common:ecoreReflection:model:generateEcoreReflection'
+	dependsOn 'common:primitivetypesReflection:model:generatePrimitivetypesReflection'
+	dependsOn 'common:umlReflection:model:generateUmlReflection'
 }
 
 task generateUMLProfiles() {
 	group 'Source'
 	description 'generate all uml profile models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:common:standardProfile:model:generateStandardProfile')
-	dependsOn rootProject.tasks.getByPath(':src:common:UML4CPPProfile:model:generateUML4CPPProfile')
+	dependsOn 'common:standardProfile:model:generateStandardProfile'
+	dependsOn 'common:UML4CPPProfile:model:generateUML4CPPProfile'
 }
+
 
 /**
  * Convert line endings on GNU/Linux & macOS

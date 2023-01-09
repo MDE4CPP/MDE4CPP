@@ -1,9 +1,13 @@
 
 #include "uml/impl/NamedElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -127,7 +131,7 @@ NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
+std::shared_ptr<Bag<uml::Namespace>> NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +156,7 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
+std::shared_ptr<Bag<uml::Package>> NamedElementImpl::allOwningPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +171,7 @@ std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::N
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies()
+std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependencies()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -207,17 +211,7 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool NamedElementImpl::has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns)
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -228,11 +222,6 @@ std::string NamedElementImpl::separator() const
 	//generated from body annotation
 	return "::";
 	//end of body
-}
-
-bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
@@ -296,26 +285,6 @@ void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> 
 std::weak_ptr<uml::Namespace> NamedElementImpl::getNamespace() const
 {
 	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> NamedElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> NamedElementImpl::getOwner() const
-{
-	return m_owner;
 }
 
 //*********************************
@@ -504,12 +473,12 @@ std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
-			return eAnyBag(getClientDependency(),uml::umlPackage::DEPENDENCY_CLASS); //1553
+			return eEcoreContainerAny(getClientDependency(),uml::umlPackage::DEPENDENCY_CLASS); //1553
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //1554
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
@@ -517,7 +486,7 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();
-			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //1556
+			return eEcoreAny(returnValue,uml::umlPackage::NAMESPACE_CLASS); //1556
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName(),ecore::ecorePackage::ESTRING_CLASS,false); //1557
@@ -547,31 +516,68 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool NamedElementImpl::eSet(int featureID, Any newValue)
+bool NamedElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 		{
-			// CAST Any to std::string
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //1554
-			return true;
+			try
+			{
+				std::string _name = newValue->get<std::string>();
+				setName(_name); //1554
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'name'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
-			// CAST Any to uml::StringExpression
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setNameExpression(_nameExpression); //1555
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(eObject);
+					if(_nameExpression)
+					{
+						setNameExpression(_nameExpression); //1555
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'nameExpression'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'nameExpression'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
-			// CAST Any to uml::VisibilityKind
-			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //1558
-			return true;
+			try
+			{
+				uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
+				setVisibility(_visibility); //1558
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'visibility'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -581,24 +587,24 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NamedElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2409538685
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
-			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
-			return eAnyBag(resultList,uml::umlPackage::NAMESPACE_CLASS);
+			std::shared_ptr<Bag<uml::Namespace>> resultList = this->allNamespaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMESPACE_CLASS);
 			break;
 		}
 		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 2217156650
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
+			std::shared_ptr<Bag<uml::Package>> resultList = this->allOwningPackages();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 2833389569
@@ -607,9 +613,30 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
+			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_supplier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_supplier = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createDependency'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
 		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 3040273665
@@ -618,22 +645,43 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
+			Bag<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_supplier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_supplier = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'supplier'. Failed to invoke operation 'createUsage'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS);
 			break;
 		}
 		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 3811456257
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
-			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
-			return eAnyBag(resultList,uml::umlPackage::DEPENDENCY_CLASS);
+			std::shared_ptr<Bag<uml::Dependency>> resultList = this->getClientDependencies();
+			return eEcoreContainerAny(resultList,uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}
 		// uml::NamedElement::getLabel() : std::string: 2648850226
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL:
 		{
-			result = eAny(this->getLabel(),0,false);
+			result = eAny(this->getLabel(), 0, false);
 			break;
 		}
 		// uml::NamedElement::getLabel(bool) : std::string: 1545748466
@@ -642,47 +690,24 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'localize'
 			//parameter 0
 			bool incoming_param_localize;
-			std::list<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
-			result = eAny(this->getLabel(incoming_param_localize),0,false);
+			Bag<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getLabel'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->getLabel(incoming_param_localize), 0, false);
 			break;
 		}
 		// uml::NamedElement::getQualifiedName() : std::string {const}: 679696374
 		case umlPackage::NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME:
 		{
-			result = eAny(this->getQualifiedName(),0,false);
-			break;
-		}
-		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 539959656
-		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2208944440
-		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->getQualifiedName(), 0, false);
 			break;
 		}
 		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 3034150359
@@ -691,36 +716,62 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_n;
-			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			Bag<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_n_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_n = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'isDistinguishableFrom'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'ns'
 			//parameter 1
 			std::shared_ptr<uml::Namespace> incoming_param_ns;
-			std::list<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_ns = (*incoming_param_ns_arguments_citer)->get<std::shared_ptr<uml::Namespace> >();
-			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
+			Bag<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_ns_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_ns = std::dynamic_pointer_cast<uml::Namespace>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'ns'. Failed to invoke operation 'isDistinguishableFrom'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns), 0, false);
 			break;
 		}
 		// uml::NamedElement::separator() : std::string {const}: 2764162934
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
-			result = eAny(this->separator(),0,false);
-			break;
-		}
-		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 3453868149
-		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->separator(), 0, false);
 			break;
 		}
 

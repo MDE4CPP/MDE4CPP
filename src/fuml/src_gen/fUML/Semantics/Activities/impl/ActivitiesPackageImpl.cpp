@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -20,7 +20,6 @@
 //depending model packages
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
-#include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -432,28 +431,6 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 
 // End Class CentralBufferNodeActivation
 
-// Begin Class ClassifierBehaviorExecutionActivity
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getClassifierBehaviorExecutionActivity_Class() const
-{
-	return m_classifierBehaviorExecutionActivity_Class;
-}
-
-
-
-
-// End Class ClassifierBehaviorExecutionActivity
-
-// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class() const
-{
-	return m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class;
-}
-
-
-
-
-// End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-
 // Begin Class ControlNodeActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getControlNodeActivation_Class() const
 {
@@ -518,18 +495,14 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImp
 }
 
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionInputExecution() const
-{
-	return m_decisionNodeActivation_Attribute_decisionInputExecution;
-}
 std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionNode() const
 {
 	return m_decisionNodeActivation_Attribute_decisionNode;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const
 {
-	return m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value;
+	return m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_fire_Token() const
 {
@@ -563,173 +536,12 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 {
 	return m_decisionNodeActivation_Operation_takeOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_terminate() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const
 {
-	return m_decisionNodeActivation_Operation_terminate;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_Value() const
-{
-	return m_decisionNodeActivation_Operation_test_ValueSpecification_Value;
+	return m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject;
 }
 
 // End Class DecisionNodeActivation
-
-// Begin Class ExpansionActivationGroup
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Class() const
-{
-	return m_expansionActivationGroup_Class;
-}
-
-std::shared_ptr<ecore::EAttribute> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Attribute_index() const
-{
-	return m_expansionActivationGroup_Attribute_index;
-}
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Attribute_groupInputs() const
-{
-	return m_expansionActivationGroup_Attribute_groupInputs;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Attribute_groupOutputs() const
-{
-	return m_expansionActivationGroup_Attribute_groupOutputs;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Attribute_regionActivation() const
-{
-	return m_expansionActivationGroup_Attribute_regionActivation;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Attribute_regionInputs() const
-{
-	return m_expansionActivationGroup_Attribute_regionInputs;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Operation_getActivityExecution() const
-{
-	return m_expansionActivationGroup_Operation_getActivityExecution;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const
-{
-	return m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Operation_resume_ActivityNodeActivation() const
-{
-	return m_expansionActivationGroup_Operation_resume_ActivityNodeActivation;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionActivationGroup_Operation_suspend_ActivityNodeActivation() const
-{
-	return m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation;
-}
-
-// End Class ExpansionActivationGroup
-
-// Begin Class ExpansionNodeActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Class() const
-{
-	return m_expansionNodeActivation_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Operation_fire_Token() const
-{
-	return m_expansionNodeActivation_Operation_fire_Token;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Operation_getExpansionRegionActivation() const
-{
-	return m_expansionNodeActivation_Operation_getExpansionRegionActivation;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Operation_isReady() const
-{
-	return m_expansionNodeActivation_Operation_isReady;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Operation_receiveOffer() const
-{
-	return m_expansionNodeActivation_Operation_receiveOffer;
-}
-
-// End Class ExpansionNodeActivation
-
-// Begin Class ExpansionRegionActivation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Class() const
-{
-	return m_expansionRegionActivation_Class;
-}
-
-std::shared_ptr<ecore::EAttribute> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Attribute_next() const
-{
-	return m_expansionRegionActivation_Attribute_next;
-}
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Attribute_activationGroups() const
-{
-	return m_expansionRegionActivation_Attribute_activationGroups;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Attribute_inputExpansionTokens() const
-{
-	return m_expansionRegionActivation_Attribute_inputExpansionTokens;
-}
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Attribute_inputTokens() const
-{
-	return m_expansionRegionActivation_Attribute_inputTokens;
-}
-
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_doAction() const
-{
-	return m_expansionRegionActivation_Operation_doAction;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_doOutput() const
-{
-	return m_expansionRegionActivation_Operation_doOutput;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_doStructuredActivity() const
-{
-	return m_expansionRegionActivation_Operation_doStructuredActivity;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const
-{
-	return m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_isSuspended() const
-{
-	return m_expansionRegionActivation_Operation_isSuspended;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_numberOfValues() const
-{
-	return m_expansionRegionActivation_Operation_numberOfValues;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_resume_ExpansionActivationGroup() const
-{
-	return m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const
-{
-	return m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_runIterative() const
-{
-	return m_expansionRegionActivation_Operation_runIterative;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_runParallel() const
-{
-	return m_expansionRegionActivation_Operation_runParallel;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_sendOffers() const
-{
-	return m_expansionRegionActivation_Operation_sendOffers;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_takeOfferedTokens() const
-{
-	return m_expansionRegionActivation_Operation_takeOfferedTokens;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_terminate() const
-{
-	return m_expansionRegionActivation_Operation_terminate;
-}
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup() const
-{
-	return m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup;
-}
-
-// End Class ExpansionRegionActivation
 
 // Begin Class FlowFinalNodeActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImpl::getFlowFinalNodeActivation_Class() const
@@ -914,11 +726,11 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Activities::ActivitiesPackageImp
 	return m_objectToken_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Attribute_value() const
+std::shared_ptr<ecore::EAttribute> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Attribute_value() const
 {
 	return m_objectToken_Attribute_value;
 }
+
 
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getObjectToken_Operation__copy() const
 {

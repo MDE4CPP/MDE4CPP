@@ -7,15 +7,12 @@
 #ifndef UML_INFORMATIONITEM_HPP
 #define UML_INFORMATIONITEM_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -76,7 +73,7 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class UML_API InformationItem: virtual public Classifier
+	class UML_API InformationItem : virtual public Classifier
 	{
 		public:
  			InformationItem(const InformationItem &) {}
@@ -93,28 +90,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An informationItem has no feature, no generalization, and no associations.
-			self.generalization->isEmpty() and self.feature->isEmpty()
-			*/
-			 
-			virtual bool has_no(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			It is not instantiable.
-			isAbstract
-			*/
-			 
-			virtual bool not_instantiable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
-			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
-			  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and
-			    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and
-			      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or
-			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
-			*/
-			 
-			virtual bool sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -133,49 +108,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			
 
 			//*********************************
 			// Container Getter

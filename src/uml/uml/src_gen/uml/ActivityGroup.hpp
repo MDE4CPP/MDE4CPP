@@ -7,7 +7,6 @@
 #ifndef UML_ACTIVITYGROUP_HPP
 #define UML_ACTIVITYGROUP_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -67,7 +64,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityGroup: virtual public NamedElement
+	class UML_API ActivityGroup : virtual public NamedElement
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}
@@ -104,22 +101,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
-			/*!
-			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
-			containedNode->forAll(activity = self.containingActivity()) and 
-			containedEdge->forAll(activity = self.containingActivity())
-			*/
-			 
-			virtual bool nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
-			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
-			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
-			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
-			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
-			*/
-			 
-			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -160,18 +141,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 			/*!
 			Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p>

@@ -1,9 +1,13 @@
 
 #include "uml/impl/StructuredClassifierImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -180,7 +184,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedAttribute."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedAttribute.")
 	}
 
 	//clone reference 'ownedConnector'
@@ -207,7 +211,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedConnector."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedConnector.")
 	}
 	/*SubsetUnion*/
 	getOwnedAttribute()->initSubsetUnion(getRole(), getOwnedMember(), getAttribute());
@@ -227,17 +231,17 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRoles()
+std::shared_ptr<Bag<uml::ConnectableElement>> StructuredClassifierImpl::allRoles()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
+std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getParts()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -323,121 +327,6 @@ std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> StructuredClassifierImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> StructuredClassifierImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> StructuredClassifierImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> StructuredClassifierImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> StructuredClassifierImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StructuredClassifierImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> StructuredClassifierImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> StructuredClassifierImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
 std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StructuredClassifierImpl::getRole() const
 {
 	if(m_role == nullptr)
@@ -457,8 +346,6 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Structu
 	}
 	return m_role;
 }
-
-
 
 //*********************************
 // Container Getter
@@ -618,18 +505,18 @@ std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //22838
+			return eEcoreContainerAny(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //22838
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
-			return eAnyBag(getOwnedConnector(),uml::umlPackage::CONNECTOR_CLASS); //22839
+			return eEcoreContainerAny(getOwnedConnector(),uml::umlPackage::CONNECTOR_CLASS); //22839
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
-			return eAnyBag(getPart(),uml::umlPackage::PROPERTY_CLASS); //22840
+			return eEcoreContainerAny(getPart(),uml::umlPackage::PROPERTY_CLASS); //22840
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
-			return eAnyBag(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //22841
+			return eEcoreContainerAny(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //22841
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -650,83 +537,99 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
+bool StructuredClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// CAST Any to Bag<uml::Property>
-			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedAttribute->erase(indexOwnedAttribute);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
-					{
-						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
-						{
-							_ownedAttribute->add(indexOwnedAttribute);
+							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedAttribute->find(valueToAdd) == -1)
+								{
+									_ownedAttribute->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedAttribute'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedAttribute'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
-			// CAST Any to Bag<uml::Connector>
-			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Connector>> ownedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
-					std::shared_ptr<Bag<uml::Connector>> _ownedConnector=getOwnedConnector();
-					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *_ownedConnector)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedConnectorList->find(indexOwnedConnector) == -1)
+						std::shared_ptr<Bag<uml::Connector>> _ownedConnector = getOwnedConnector();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedConnector->erase(indexOwnedConnector);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *ownedConnectorList)
-					{
-						if (_ownedConnector->find(indexOwnedConnector) == -1)
-						{
-							_ownedConnector->add(indexOwnedConnector);
+							std::shared_ptr<uml::Connector> valueToAdd = std::dynamic_pointer_cast<uml::Connector>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedConnector->find(valueToAdd) == -1)
+								{
+									_ownedConnector->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedConnector'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedConnector'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -736,17 +639,17 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::StructuredClassifier::allRoles() : uml::ConnectableElement[*]: 3047328929
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
 		{
-			std::shared_ptr<Bag<uml::ConnectableElement> > resultList = this->allRoles();
-			return eAnyBag(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::ConnectableElement>> resultList = this->allRoles();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::StructuredClassifier::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2674132819
@@ -755,31 +658,79 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'lower'
 			//parameter 2
 			int incoming_param_lower;
-			std::list<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'lower'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'upper'
 			//parameter 3
 			int incoming_param_upper;
-			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
+			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'upper'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::StructuredClassifier::getParts() : uml::Property[*]: 2304451414
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->getParts();
-			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
+			std::shared_ptr<Bag<uml::Property>> resultList = this->getParts();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 

@@ -1,0 +1,13 @@
+modelFolder=$PWD
+modelFile=$modelFolder/ExternalModelUsage.uml
+
+# Go to MDE4CPP home folder to call the gradle task 'generateModel'
+# Task 'generateModel' is defined in $MDE4CPP_HOME/src/common/universalGradleTasks/build.gradle
+cd $MDE4CPP_HOME
+
+# Call the task 'generateModel' with model path as parameter
+# generator will be detected automatically (fUML4CPP is used here)
+gradlew generateModel --model=$modelFile
+
+# Go back to model folder
+cd $modelFolder

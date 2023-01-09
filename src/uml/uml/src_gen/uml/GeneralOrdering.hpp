@@ -7,14 +7,11 @@
 #ifndef UML_GENERALORDERING_HPP
 #define UML_GENERALORDERING_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -63,7 +60,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API GeneralOrdering: virtual public NamedElement
+	class UML_API GeneralOrdering : virtual public NamedElement
 	{
 		public:
  			GeneralOrdering(const GeneralOrdering &) {}
@@ -80,12 +77,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
-			after->closure(toAfter.after)->excludes(before)
-			*/
-			 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -122,18 +113,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

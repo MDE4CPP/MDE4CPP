@@ -7,7 +7,6 @@
 #ifndef UML_INTERRUPTIBLEACTIVITYREGION_HPP
 #define UML_INTERRUPTIBLEACTIVITYREGION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -67,7 +64,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API InterruptibleActivityRegion: virtual public ActivityGroup
+	class UML_API InterruptibleActivityRegion : virtual public ActivityGroup
 	{
 		public:
  			InterruptibleActivityRegion(const InterruptibleActivityRegion &) {}
@@ -84,13 +81,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
-			interruptingEdge->forAll(edge | 
-			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
-			*/
-			 
-			virtual bool interrupting_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -115,24 +105,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

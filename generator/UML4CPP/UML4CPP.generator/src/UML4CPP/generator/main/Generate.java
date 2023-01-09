@@ -393,8 +393,8 @@ public class Generate extends AbstractAcceleoGenerator {
 						if (url.getFile().startsWith("rsrc:org.eclipse.uml2.uml.resources_"))
 	    				{
 	    					path = url.toString().replace("plugin.xml", "");
-	    					System.out.println();
-	    	    			System.out.println("INFO: Using internal org.eclipse.uml2.uml.resources.*.jar (" + path.replace("!/", "") + ")");
+	    					//System.out.println();
+	    	    			//System.out.println("INFO: Using internal org.eclipse.uml2.uml.resources.*.jar (" + path.replace("!/", "") + ")");
 	    				}
 					}
 				} catch (IOException e) {
@@ -417,7 +417,7 @@ public class Generate extends AbstractAcceleoGenerator {
 		        }
 		        else
 		        {
-		            System.out.println(" *uml.resources_*.jar: " + path);
+		            //System.out.println(" *uml.resources_*.jar: " + path);
 		        	path = "jar:file:" + umlJarPath + "!/";
 		        }
         	}
@@ -435,11 +435,11 @@ public class Generate extends AbstractAcceleoGenerator {
 	        uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), uri.appendSegment("metamodels").appendSegment(""));
 	        uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), uri.appendSegment("profiles").appendSegment(""));
 	
-	        System.out.println();
+	        /*System.out.println();
 	        System.out.println("registered libraries/metamodels/profiles:");
 	        for (URI nsuri : uriMap.keySet()) {
 				System.out.println("    " + nsuri.toString());
-			}
+			}*/
 
 	        /*
 	         * If you need additional package registrations, you can register them here. The following line
@@ -476,11 +476,11 @@ public class Generate extends AbstractAcceleoGenerator {
 	        resourceSet.getPackageRegistry().put("http://www.eclipse.org/uml2/5.0.0/Types", TypesPackage.eINSTANCE);
         }
         
-        System.out.println();
+        /*System.out.println();
         System.out.println("registered packages:");
         for (String nsuri : resourceSet.getPackageRegistry().keySet()) {
 			System.out.println("    " + nsuri);
-		}
+		}*/
     }
 
     /**

@@ -46,57 +46,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
-			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
-			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source))
-			*/
-			 
-			virtual bool edge_source_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
-			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
-			*/
-			 
-			virtual bool exception_input_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
-			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
-			*/
-			 
-			virtual bool handler_body_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner
-			*/
-			 
-			virtual bool handler_body_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
-			handlerBody.oclIsKindOf(Action) and
-			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput
-			*/
-			 
-			virtual bool one_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
-			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
-			(
-			  handlerBody.oclIsKindOf(Action) and 
-			  let protectedNodeOutput : OrderedSet(OutputPin) = protectedNode.oclAsType(Action).output,
-			        handlerBodyOutput : OrderedSet(OutputPin) =  handlerBody.oclAsType(Action).output in
-			    protectedNodeOutput->size() = handlerBodyOutput->size() and
-			    Sequence{1..protectedNodeOutput->size()}->forAll(i |
-			    	handlerBodyOutput->at(i).type.conformsTo(protectedNodeOutput->at(i).type) and
-			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
-			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
-			)
-			*/
-			 
-			virtual bool output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,24 +100,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -185,14 +122,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExceptionHandler> m_thisExceptionHandlerPtr;

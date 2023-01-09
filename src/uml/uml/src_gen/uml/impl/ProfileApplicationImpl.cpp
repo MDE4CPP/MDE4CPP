@@ -1,9 +1,13 @@
 
 #include "uml/impl/ProfileApplicationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -182,80 +186,6 @@ void ProfileApplicationImpl::setApplyingPackage(std::weak_ptr<uml::Package> _app
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ProfileApplicationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ProfileApplicationImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::Element>> ProfileApplicationImpl::getRelatedElement() const
-{
-	if(m_relatedElement == nullptr)
-	{
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_relatedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl::getSource() const
-{
-	if(m_source == nullptr)
-	{
-		/*SubsetUnion*/
-		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getSource()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_source;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl::getTarget() const
-{
-	if(m_target == nullptr)
-	{
-		/*SubsetUnion*/
-		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getTarget()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_target;
-}
 
 //*********************************
 // Container Getter
@@ -407,7 +337,7 @@ std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -416,7 +346,7 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
-			return eAnyObject(returnValue,uml::umlPackage::PACKAGE_CLASS); //1848
+			return eEcoreAny(returnValue,uml::umlPackage::PACKAGE_CLASS); //1848
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1847
@@ -438,32 +368,85 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
+bool ProfileApplicationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
-			// CAST Any to uml::Profile
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(_temp);
-			setAppliedProfile(_appliedProfile); //1846
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(eObject);
+					if(_appliedProfile)
+					{
+						setAppliedProfile(_appliedProfile); //1846
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'appliedProfile'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'appliedProfile'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
-			// CAST Any to uml::Package
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setApplyingPackage(_applyingPackage); //1848
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(eObject);
+					if(_applyingPackage)
+					{
+						setApplyingPackage(_applyingPackage); //1848
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'applyingPackage'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'applyingPackage'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 		{
-			// CAST Any to bool
-			bool _isStrict = newValue->get<bool>();
-			setIsStrict(_isStrict); //1847
-			return true;
+			try
+			{
+				bool _isStrict = newValue->get<bool>();
+				setIsStrict(_isStrict); //1847
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isStrict'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -473,16 +456,16 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1478312265
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
-			result = eAnyObject(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
+			result = eEcoreAny(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS);
 			break;
 		}
 		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1076549117
@@ -491,9 +474,30 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			//Retrieve input parameter 'namedElement'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
-			std::list<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAnyObject(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_namedElement_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_namedElement = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getAppliedDefinition'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'namedElement'. Failed to invoke operation 'getAppliedDefinition'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS);
 			break;
 		}
 

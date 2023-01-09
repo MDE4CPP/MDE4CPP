@@ -7,7 +7,6 @@
 #ifndef UML_OUTPUTPIN_HPP
 #define UML_OUTPUTPIN_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -84,7 +81,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API OutputPin: virtual public Pin
+	class UML_API OutputPin : virtual public Pin
 	{
 		public:
  			OutputPin(const OutputPin &) {}
@@ -136,15 +133,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An OutputPin may have incoming ActivityEdges only when it is owned by a StructuredActivityNode, and these edges must have sources contained (directly or indirectly) in the owning StructuredActivityNode.
-			incoming->notEmpty() implies
-				action<>null and
-				action.oclIsKindOf(StructuredActivityNode) and
-				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source)
-			*/
-			 
-			virtual bool incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -172,30 +160,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

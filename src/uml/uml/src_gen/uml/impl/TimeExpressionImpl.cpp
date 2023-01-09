@@ -1,9 +1,13 @@
 
 #include "uml/impl/TimeExpressionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -165,10 +169,6 @@ std::shared_ptr<ecore::EObject> TimeExpressionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -203,32 +203,6 @@ std::shared_ptr<Bag<uml::Observation>> TimeExpressionImpl::getObservation() cons
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> TimeExpressionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> TimeExpressionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> TimeExpressionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -409,14 +383,14 @@ std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 			return eAny(getExpr(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //23815
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-			return eAnyBag(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //23816
+			return eEcoreContainerAny(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //23816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -433,54 +407,85 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool TimeExpressionImpl::eSet(int featureID, Any newValue)
+bool TimeExpressionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setExpr(_expr); //23815
-			return true;
-		}
-		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-		{
-			// CAST Any to Bag<uml::Observation>
-			if((newValue->isContainer()) && (uml::umlPackage::OBSERVATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Observation>> observationList= newValue->get<std::shared_ptr<Bag<uml::Observation>>>();
-					std::shared_ptr<Bag<uml::Observation>> _observation=getObservation();
-					for(const std::shared_ptr<uml::Observation> indexObservation: *_observation)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_expr)
 					{
-						if (observationList->find(indexObservation) == -1)
-						{
-							_observation->erase(indexObservation);
-						}
+						setExpr(_expr); //23815
 					}
-
-					for(const std::shared_ptr<uml::Observation> indexObservation: *observationList)
+					else
 					{
-						if (_observation->find(indexObservation) == -1)
-						{
-							_observation->add(indexObservation);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'expr'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'expr'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::Observation> valueToAdd = std::dynamic_pointer_cast<uml::Observation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_observation->find(valueToAdd) == -1)
+								{
+									_observation->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'observation'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'observation'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -490,28 +495,12 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TimeExpressionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::TimeExpression::no_expr_requires_observation(Any, std::map) : bool: 3626418142
-		case umlPackage::TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_expr_requires_observation(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

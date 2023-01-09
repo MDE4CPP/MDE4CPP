@@ -7,14 +7,11 @@
 #ifndef UML_REDEFINABLEELEMENT_HPP
 #define UML_REDEFINABLEELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -63,7 +60,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API RedefinableElement: virtual public NamedElement
+	class UML_API RedefinableElement : virtual public NamedElement
 	{
 		public:
  			RedefinableElement(const RedefinableElement &) {}
@@ -95,24 +92,6 @@ namespace uml
 			*/
 			 
 			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) = 0;
-			/*!
-			A RedefinableElement can only redefine non-leaf RedefinableElements.
-			redefinedElement->forAll(re | not re.isLeaf)
-			*/
-			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A redefining element must be consistent with each redefined element.
-			redefinedElement->forAll(re | re.isConsistentWith(self))
-			*/
-			 
-			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
-			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
-			*/
-			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -139,18 +118,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>

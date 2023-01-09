@@ -7,15 +7,12 @@
 #ifndef UML_STRINGEXPRESSION_HPP
 #define UML_STRINGEXPRESSION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -70,7 +67,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API StringExpression: virtual public Expression, virtual public TemplateableElement
+	class UML_API StringExpression : virtual public Expression, virtual public TemplateableElement
 	{
 		public:
  			StringExpression(const StringExpression &) {}
@@ -107,18 +104,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			All the operands of a StringExpression must be LiteralStrings
-			operand->forAll (oclIsKindOf (LiteralString))
-			*/
-			 
-			virtual bool operands(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
-			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
-			*/
-			 
-			virtual bool subexpressions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -149,25 +134,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

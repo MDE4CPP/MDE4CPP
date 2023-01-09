@@ -30,7 +30,7 @@
  * - creation of activity parameter
 */]
 [template public generateActivityCreation(anActivity : Activity)]
-// activity [anActivity.name/]
+// Activity [anActivity.metamodelElementName()/]
 [anActivity.memberName()/] = factory->createActivity_as_ownedType_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
 [anActivity.ownedParameter.generateParameterCreation()/]
 
@@ -44,8 +44,8 @@
  * - initialization of created activity parameter
 */]
 [template public generateActivityInitialization(anActivity : Activity)]
-// activity [anActivity.name/]
-[anActivity.memberName()/]->setName("[anActivity.name/]");
+// Activity [anActivity.metamodelElementName()/]
+[anActivity.memberName()/]->setName("[anActivity.metamodelElementName()/]");
 [anActivity.ownedParameter.generateParameterInitialization()/]
 [if (anActivity.owner.oclIsKindOf(BehavioredClassifier))]
 [anActivity.memberName()/]->setContext([anActivity.owner.oclAsType(BehavioredClassifier).memberName()/]);

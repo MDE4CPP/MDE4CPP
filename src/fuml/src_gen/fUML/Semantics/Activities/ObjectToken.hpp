@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <string>
+#include "abstractDataTypes/Any.hpp"
 // forward declarations
 
 
@@ -36,10 +37,6 @@ namespace fUML::Semantics::Activities
 {
 	class ActivityNodeActivation;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
@@ -54,7 +51,7 @@ namespace fUML::Semantics::Values
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ObjectToken: virtual public Token
+	class FUML_API ObjectToken : virtual public Token
 	{
 		public:
  			ObjectToken(const ObjectToken &) {}
@@ -78,12 +75,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<Any> getValue() const = 0;
+			virtual void setValue (std::shared_ptr<Any> _value)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -105,11 +102,11 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::shared_ptr<Any> m_value= nullptr;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::Values::Value> m_value;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_OBJECTTOKEN_HPP */

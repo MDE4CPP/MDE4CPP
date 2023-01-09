@@ -29,9 +29,9 @@
 [**
  * generate interface model file
 */]
-[template public generateInterfaceHeaderFile(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
-[file (aPackage.generateNamespacePath(false).concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
-[startGuard(aInterface)/]
+[template public generateInterfaceHeaderFile(anInterface : Interface) {aPackage:Package = anInterface.ancestors()->filter(Package)->first();}]
+[file (aPackage.generateNamespacePath(false).concat('/').concat(anInterface.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(anInterface)/]
 
 #include <memory>
 #include <string> 
@@ -42,7 +42,7 @@
 [generateAbstractDataTypesForwardDeclaration()/]
 
 //Forward Declaration for used types
-[for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (element : Interface| anInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element._package.generateNamespace(true)/] 
 {
 [/if]
@@ -50,7 +50,7 @@
 [if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
 [/for]
 
-[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (element : Class| anInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element._package.generateNamespace(true)/] 
 {
 [/if]
@@ -58,7 +58,7 @@
 [if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
 [/for]
 
-[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (element : Type | anInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element._package.generateNamespace(true)/]
 {
 [/if]
@@ -67,55 +67,57 @@
 [/for]
 
 // base class includes
-[if (aInterface.generalization->isEmpty())]
+[if (anInterface.generalization->isEmpty())]
 #include "uml/Element.hpp"
 [else]
-[for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (elements : Classifier| anInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 [/if]
 
-[if (aInterface.oclIsKindOf(Stereotype))]
+[if (anInterface.oclIsKindOf(Stereotype))]
 #include "uml/Stereotype.hpp"
 [/if]
 // enum includes
-[for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (elements : Enumeration| anInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.concat('.hpp')/]"[/for]
 
 //*********************************
 
-[if (not aInterface.getNearestPackage().isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
+[if (not anInterface.getNearestPackage().isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
-	class [aInterface.name/] [if (aInterface.generalization->isEmpty())] : virtual public uml::Element[else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
-virtual public [aClassifier.getClassifierName(aInterface, false, aClassifier.getNearestPackage().isIgnoreNamespace())/][/for][/if]
+	class [anInterface.name/] [if (anInterface.generalization->isEmpty())] : virtual public uml::Element[else][for (aClassifier : Classifier | anInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [aClassifier.getClassifierName(anInterface, false, aClassifier.getNearestPackage().isIgnoreNamespace())/][/for][/if]
 
 	{
 		protected:
-			[aInterface.name/](){}
+			[anInterface.name/](){}
 
 		public:
 			//destructor
-			virtual ~[aInterface.name/]() {}
+			virtual ~[anInterface.name/]() {}
 			
 			//*********************************
 			// Getter Setter
 			//*********************************
-			[aInterface.ownedAttribute.generateAttributeAccessorsDeclaration(false)/]
+			[anInterface.ownedAttribute.generateAttributeAccessorsDeclaration(false)/]
 			
 			//*********************************
 			// Operations
 			//*********************************
-			[aInterface.ownedOperation.generateOperationDecl(false)/]
+			[for (anOperation : Operation | anInterface.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
+			[anOperation.generateOperationDecl(false)/]
+			[/for]
 
 		protected:
 			//*********************************
 			// Members
 			//*********************************
-			[aInterface.ownedAttribute.generateAttributeProtectedMember()/]
+			[anInterface.ownedAttribute.generateAttributeProtectedMember()/]
 	};
-[if (not aInterface.getNearestPackage().isIgnoreNamespace())]}[/if]
-[endGuard(aInterface)/]
+[if (not anInterface.getNearestPackage().isIgnoreNamespace())]}[/if]
+[endGuard(anInterface)/]
 [/file]
 [/template]
 

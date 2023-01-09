@@ -7,15 +7,12 @@
 #ifndef UML_STRUCTURALFEATUREACTION_HPP
 #define UML_STRUCTURALFEATUREACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -75,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API StructuralFeatureAction: virtual public Action
+	class UML_API StructuralFeatureAction : virtual public Action
 	{
 		public:
  			StructuralFeatureAction(const StructuralFeatureAction &) {}
@@ -92,40 +89,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of the object InputPin must be 1..1.
-			object.is(1,1)
-			*/
-			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The structuralFeature must not be static.
-			not structuralFeature.isStatic
-			*/
-			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
-			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
-				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
-			*/
-			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The structuralFeature must have exactly one featuringClassifier.
-			structuralFeature.featuringClassifier->size() = 1
-			*/
-			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
-			structuralFeature.visibility = VisibilityKind::public or
-			_'context'.allFeatures()->includes(structuralFeature) or
-			structuralFeature.visibility=VisibilityKind::protected and
-			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
-			*/
-			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -162,36 +125,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

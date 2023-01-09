@@ -1,9 +1,13 @@
 
 #include "uml/impl/ObjectImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,8 +38,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/Argument.hpp"
-#include "uml/Object.hpp"
+#include "uml/OpaqueBehavior.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Property.hpp"
 //Factories and Package includes
@@ -103,22 +106,50 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-Any ObjectImpl::get(std::shared_ptr<uml::Property> property) const
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->add(_property, value, -1);
+	//end of body
+}
+
+void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments)
+void ObjectImpl::destroy()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property> property,Any value)
+std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property> property)
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+void ObjectImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+void ObjectImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+void ObjectImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -206,7 +237,7 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -222,7 +253,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ObjectImpl::eSet(int featureID, Any newValue)
+bool ObjectImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -234,65 +265,398 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
+		// uml::Object::add(uml::Property, Any): 637724934
+		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'value'
+			//parameter 1
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param__property,incoming_param_value);
+			break;
+		}
+		// uml::Object::add(uml::Property, Any, int): 319727429
+		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'value'
+			//parameter 1
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'insertAt'
+			//parameter 2
+			int incoming_param_insertAt;
+			Bag<Any>::const_iterator incoming_param_insertAt_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_insertAt = (*incoming_param_insertAt_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'insertAt'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
+			break;
+		}
+		// uml::Object::destroy(): 2359110280
+		case umlPackage::OBJECT_OPERATION_DESTROY:
+		{
+			this->destroy();
+			break;
+		}
 		// uml::Object::get(uml::Property) : Any {const}: 511579154
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
-			//Retrieve input parameter 'property'
+			//Retrieve input parameter '_property'
 			//parameter 0
-			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-			result = this->get(incoming_param_property);
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'get'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'get'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->get(incoming_param__property), 0, false);
 			break;
 		}
-		// uml::Object::invoke(uml::Operation, uml::Argument[*]) : uml::Object[*]: 1605333897
-		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT:
+		// uml::Object::invoke(uml::Operation, Any[*], Any[*]) : Any: 2370151843
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
 		{
-			//Retrieve input parameter 'op'
+			//Retrieve input parameter '_operation'
 			//parameter 0
-			std::shared_ptr<uml::Operation> incoming_param_op;
-			std::list<Any>::const_iterator incoming_param_op_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_op = (*incoming_param_op_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-			//Retrieve input parameter 'arguments'
+			std::shared_ptr<uml::Operation> incoming_param__operation;
+			Bag<Any>::const_iterator incoming_param__operation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__operation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'invoke'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'invoke'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputArguments'
 			//parameter 1
-			std::shared_ptr<Bag<uml::Argument>> incoming_param_arguments;
-			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<uml::Argument>> >();
-			std::shared_ptr<Bag<uml::Object> > resultList = this->invoke(incoming_param_op,incoming_param_arguments);
-			return eAnyBag(resultList,uml::umlPackage::OBJECT_CLASS);
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invoke(incoming_param__operation,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// uml::Object::invoke(uml::OpaqueBehavior, Any[*], Any[*]) : Any: 1414710241
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_opaqueBehavior'
+			//parameter 0
+			std::shared_ptr<uml::OpaqueBehavior> incoming_param__opaqueBehavior;
+			Bag<Any>::const_iterator incoming_param__opaqueBehavior_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__opaqueBehavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_opaqueBehavior'. Failed to invoke operation 'invoke'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_opaqueBehavior'. Failed to invoke operation 'invoke'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invoke'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// uml::Object::remove(uml::Property, Any): 1546275363
+		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'remove'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'remove'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'value'
+			//parameter 1
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'remove'!")
+				return nullptr;
+			}
+		
+			this->remove(incoming_param__property,incoming_param_value);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 183386425
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
-			//Retrieve input parameter 'property'
+			//Retrieve input parameter '_property'
 			//parameter 0
-			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'set'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'set'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'value'
 			//parameter 1
-			Any incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
-			this->set(incoming_param_property,incoming_param_value);
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'set'!")
+				return nullptr;
+			}
+		
+			this->set(incoming_param__property,incoming_param_value);
 			break;
 		}
 		// uml::Object::unset(uml::Property): 2421215512
 		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
 		{
-			//Retrieve input parameter 'property'
+			//Retrieve input parameter '_property'
 			//parameter 0
-			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-			this->unset(incoming_param_property);
+			std::shared_ptr<uml::Property> incoming_param__property;
+			Bag<Any>::const_iterator incoming_param__property_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__property_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__property = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'unset'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_property'. Failed to invoke operation 'unset'!")
+					return nullptr;
+				}
+			}
+		
+			this->unset(incoming_param__property);
 			break;
 		}
 

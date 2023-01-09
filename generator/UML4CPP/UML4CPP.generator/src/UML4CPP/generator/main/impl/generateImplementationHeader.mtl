@@ -22,40 +22,35 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
-#include <functional>
-
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 [for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (sClass.oclIsUndefined() or sClass.name.oclIsUndefined())]
-// undefined superclass [sClass.toString()/]['class: '.concat(aClass.name).concat('Impl: undefined superclass: ').concat(sClass.toString()).registerError()/]
-[else]
 #include "[sClass.getNearestPackage().generateNamespacePath(false)/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
-[/if]
 [/for]
 [if (aClass.superClass->isEmpty())]
 #include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
 [/if]
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
+class Any;
 
 namespace uml
 {
 	class Property;
 	class Operation;
+	class OpaqueBehavior;
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 	class EnumerationLiteral;
 [/if]
@@ -107,8 +102,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.ownedOperation.generateOperationDecl(true)/]
-			
+			[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
+			[anOperation.generateOperationDecl(true)/]
+			[/for]
+			[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
+			(i.e. they do not define the method for any Operation) are treated as normal C++ methods/]
+			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
+			[anOpaqueBehavior.generateMethodDeclaration(true)/]
+			[/for]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -129,15 +130,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			virtual void destroy();
 
 		public:
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			//**************************************
+			// StructuralFeature Getter & Setter
+			//**************************************
 			[aClass.generateeGetSetDel(true)/]
-			[aClass.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
 		
-			//*********************************
-			// Operation Invocation
-			//*********************************
+			//**************************************
+			// Operation & OpaqueBehavior Invocation
+			//**************************************
 			[aClass.generateInvoke(true)/]
 
 		private:
@@ -145,7 +145,6 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			static [aClass.name.toUpperFirst()/] * create();
 [/if]
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
-			[aClass.generateGetSetMemeberInit()/]
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(className)/]

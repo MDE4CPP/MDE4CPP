@@ -1,9 +1,13 @@
 
 #include "uml/impl/InteractionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -222,7 +226,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr action."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for action.")
 	}
 
 	//clone reference 'formalGate'
@@ -249,7 +253,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr formalGate."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for formalGate.")
 	}
 
 	//clone reference 'fragment'
@@ -276,7 +280,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr fragment."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for fragment.")
 	}
 
 	//clone reference 'lifeline'
@@ -303,7 +307,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr lifeline."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for lifeline.")
 	}
 
 	//clone reference 'message'
@@ -330,7 +334,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr message."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for message.")
 	}
 	/*Subset*/
 	getAction()->initSubset(getOwnedElement());
@@ -376,10 +380,6 @@ std::shared_ptr<ecore::EObject> InteractionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -496,157 +496,6 @@ std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMes
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> InteractionImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> InteractionImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> InteractionImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> InteractionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> InteractionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> InteractionImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> InteractionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> InteractionImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-std::shared_ptr<Union<uml::Classifier>> InteractionImpl::getRedefinitionContext() const
-{
-	if(m_redefinitionContext == nullptr)
-	{
-		/*Union*/
-		m_redefinitionContext.reset(new Union<uml::Classifier>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinitionContext;
-}
-
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> InteractionImpl::getRole() const
-{
-	if(m_role == nullptr)
-	{
-		/*SubsetUnion*/
-		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRole()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_role;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -889,22 +738,22 @@ std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
-			return eAnyBag(getAction(),uml::umlPackage::ACTION_CLASS); //11968
+			return eEcoreContainerAny(getAction(),uml::umlPackage::ACTION_CLASS); //11968
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
-			return eAnyBag(getFormalGate(),uml::umlPackage::GATE_CLASS); //11969
+			return eEcoreContainerAny(getFormalGate(),uml::umlPackage::GATE_CLASS); //11969
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
-			return eAnyBag(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //11967
+			return eEcoreContainerAny(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //11967
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
-			return eAnyBag(getLifeline(),uml::umlPackage::LIFELINE_CLASS); //11966
+			return eEcoreContainerAny(getLifeline(),uml::umlPackage::LIFELINE_CLASS); //11966
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
-			return eAnyBag(getMessage(),uml::umlPackage::MESSAGE_CLASS); //11970
+			return eEcoreContainerAny(getMessage(),uml::umlPackage::MESSAGE_CLASS); //11970
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -939,194 +788,234 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InteractionImpl::eSet(int featureID, Any newValue)
+bool InteractionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
 		{
-			// CAST Any to Bag<uml::Action>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Action>> actionList= newValue->get<std::shared_ptr<Bag<uml::Action>>>();
-					std::shared_ptr<Bag<uml::Action>> _action=getAction();
-					for(const std::shared_ptr<uml::Action> indexAction: *_action)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (actionList->find(indexAction) == -1)
+						std::shared_ptr<Bag<uml::Action>> _action = getAction();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_action->erase(indexAction);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Action> indexAction: *actionList)
-					{
-						if (_action->find(indexAction) == -1)
-						{
-							_action->add(indexAction);
+							std::shared_ptr<uml::Action> valueToAdd = std::dynamic_pointer_cast<uml::Action>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_action->find(valueToAdd) == -1)
+								{
+									_action->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'action'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'action'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
-			// CAST Any to Bag<uml::Gate>
-			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Gate>> formalGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
-					std::shared_ptr<Bag<uml::Gate>> _formalGate=getFormalGate();
-					for(const std::shared_ptr<uml::Gate> indexFormalGate: *_formalGate)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (formalGateList->find(indexFormalGate) == -1)
+						std::shared_ptr<Bag<uml::Gate>> _formalGate = getFormalGate();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_formalGate->erase(indexFormalGate);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Gate> indexFormalGate: *formalGateList)
-					{
-						if (_formalGate->find(indexFormalGate) == -1)
-						{
-							_formalGate->add(indexFormalGate);
+							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_formalGate->find(valueToAdd) == -1)
+								{
+									_formalGate->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'formalGate'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'formalGate'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
-			// CAST Any to Bag<uml::InteractionFragment>
-			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
-					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (fragmentList->find(indexFragment) == -1)
+						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_fragment->erase(indexFragment);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
-					{
-						if (_fragment->find(indexFragment) == -1)
-						{
-							_fragment->add(indexFragment);
+							std::shared_ptr<uml::InteractionFragment> valueToAdd = std::dynamic_pointer_cast<uml::InteractionFragment>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_fragment->find(valueToAdd) == -1)
+								{
+									_fragment->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'fragment'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'fragment'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
-			// CAST Any to Bag<uml::Lifeline>
-			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Lifeline>> lifelineList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
-					std::shared_ptr<Bag<uml::Lifeline>> _lifeline=getLifeline();
-					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *_lifeline)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (lifelineList->find(indexLifeline) == -1)
+						std::shared_ptr<Bag<uml::Lifeline>> _lifeline = getLifeline();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_lifeline->erase(indexLifeline);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *lifelineList)
-					{
-						if (_lifeline->find(indexLifeline) == -1)
-						{
-							_lifeline->add(indexLifeline);
+							std::shared_ptr<uml::Lifeline> valueToAdd = std::dynamic_pointer_cast<uml::Lifeline>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_lifeline->find(valueToAdd) == -1)
+								{
+									_lifeline->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'lifeline'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'lifeline'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
-			// CAST Any to Bag<uml::Message>
-			if((newValue->isContainer()) && (uml::umlPackage::MESSAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Message>> messageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();
-					std::shared_ptr<Bag<uml::Message>> _message=getMessage();
-					for(const std::shared_ptr<uml::Message> indexMessage: *_message)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (messageList->find(indexMessage) == -1)
+						std::shared_ptr<Bag<uml::Message>> _message = getMessage();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_message->erase(indexMessage);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Message> indexMessage: *messageList)
-					{
-						if (_message->find(indexMessage) == -1)
-						{
-							_message->add(indexMessage);
+							std::shared_ptr<uml::Message> valueToAdd = std::dynamic_pointer_cast<uml::Message>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_message->find(valueToAdd) == -1)
+								{
+									_message->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'message'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -1143,28 +1032,12 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> InteractionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Interaction::not_contained(Any, std::map) : bool: 3628466367
-		case umlPackage::INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

@@ -50,29 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The type of the collection InputPin must be a collection.
-			*/
-			 
-			virtual bool input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
-			reducer.outputParameters().type->forAll(conformsTo(result.type))
-			*/
-			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
-			let inputs: OrderedSet(Parameter) = reducer.inputParameters() in
-			let outputs: OrderedSet(Parameter) = reducer.outputParameters() in
-			inputs->size()=2 and outputs->size()=1 and
-			inputs.type->forAll(t | 
-				outputs.type->forAll(conformsTo(t)) and 
-				-- Note that the following only checks the case when the collection is via multiple tokens.
-				collection.upperBound()>1 implies collection.type.conformsTo(t))
-			*/
-			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -133,48 +110,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;
-			/*!
-			The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -191,14 +132,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReduceAction> m_thisReduceActionPtr;

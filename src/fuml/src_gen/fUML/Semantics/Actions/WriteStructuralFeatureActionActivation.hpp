@@ -13,6 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -45,10 +46,6 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Action;
@@ -68,7 +65,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API WriteStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
+	class FUML_API WriteStructuralFeatureActionActivation : virtual public StructuralFeatureActionActivation
 	{
 		public:
  			WriteStructuralFeatureActionActivation(const WriteStructuralFeatureActionActivation &) {}
@@ -85,7 +82,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual int position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list,int startAt) = 0;
+			virtual int position(std::shared_ptr<Any> value, std::shared_ptr<Bag<Any>> list, int startAt) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -98,7 +95,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

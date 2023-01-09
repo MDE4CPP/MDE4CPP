@@ -1,9 +1,13 @@
 
 #include "uml/impl/ElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -132,7 +136,7 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedComment."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedComment.")
 	}
 	/*Subset*/
 	getOwnedComment()->initSubset(getOwnedElement());
@@ -151,7 +155,7 @@ bool ElementImpl::addKeyword(std::string keyword)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
+std::shared_ptr<Bag<uml::Element>> ElementImpl::allOwnedElements()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +206,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getApplicableStereotype(std::strin
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getApplicableStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getApplicableStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -215,7 +219,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string q
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() const
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getAppliedStereotypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,17 +227,17 @@ std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() cons
 	//end of body
 }
 
-std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedSubstereotype(std::shared_ptr<uml::Stereotype> stereotype,std::string qualifiedName)
+std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedSubstereotype(std::shared_ptr<uml::Stereotype> stereotype, std::string qualifiedName)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype> stereotype)
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype> stereotype)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
+std::shared_ptr<Bag<std::string>> ElementImpl::getKeywords()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -257,12 +261,12 @@ std::shared_ptr<uml::Package> ElementImpl::getNearestPackage()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships()
+std::shared_ptr<Bag<uml::Relationship>> ElementImpl::getRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships(std::shared_ptr<ecore::EClass> eClass)
+std::shared_ptr<Bag<uml::Relationship>> ElementImpl::getRelationships(std::shared_ptr<ecore::EClass> eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -272,17 +276,17 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getRequiredStereotype(std::string 
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getRequiredStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getRequiredStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships()
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getSourceDirectedRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships(std::shared_ptr<ecore::EClass> eClass)
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getSourceDirectedRelationships(std::shared_ptr<ecore::EClass> eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -292,29 +296,29 @@ std::shared_ptr<ecore::EObject> ElementImpl::getStereotypeApplication(std::share
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > ElementImpl::getStereotypeApplications()
+std::shared_ptr<Bag<ecore::EObject>> ElementImpl::getStereotypeApplications()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships()
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getTargetDirectedRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships(std::shared_ptr<ecore::EClass> eClass)
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getTargetDirectedRelationships(std::shared_ptr<ecore::EClass> eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any ElementImpl::getValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName)
+std::shared_ptr<Any> ElementImpl::getValue(std::shared_ptr<uml::Stereotype> stereotype, std::string propertyName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());
 	if(stereoInstance == nullptr)
 	{
-	   return Any();
+		return eAny(nullptr, -1, false);
 	}
 
 	return stereoInstance->getPropertyValue(propertyName);
@@ -326,12 +330,7 @@ bool ElementImpl::hasKeyword(std::string keyword)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ElementImpl::has_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype> stereotype, std::string propertyName)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -359,17 +358,12 @@ bool ElementImpl::mustBeOwned()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImpl::not_own_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 bool ElementImpl::removeKeyword(std::string keyword)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ElementImpl::setValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName,Any newValue)
+void ElementImpl::setValue(std::shared_ptr<uml::Stereotype> stereotype, std::string propertyName, std::shared_ptr<Any> newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -568,18 +562,18 @@ std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return eAnyBag(getOwnedComment(),uml::umlPackage::COMMENT_CLASS); //810
+			return eEcoreContainerAny(getOwnedComment(),uml::umlPackage::COMMENT_CLASS); //810
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return eAnyBag(getOwnedElement(),uml::umlPackage::ELEMENT_CLASS); //811
+			return eEcoreContainerAny(getOwnedElement(),uml::umlPackage::ELEMENT_CLASS); //811
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ELEMENT_CLASS); //812
+			return eEcoreAny(returnValue,uml::umlPackage::ELEMENT_CLASS); //812
 		}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
@@ -599,46 +593,54 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	return ObjectImpl::internalEIsSet(featureID);
 }
 
-bool ElementImpl::eSet(int featureID, Any newValue)
+bool ElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
 		{
-			// CAST Any to Bag<uml::Comment>
-			if((newValue->isContainer()) && (uml::umlPackage::COMMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Comment>> ownedCommentList= newValue->get<std::shared_ptr<Bag<uml::Comment>>>();
-					std::shared_ptr<Bag<uml::Comment>> _ownedComment=getOwnedComment();
-					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *_ownedComment)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedCommentList->find(indexOwnedComment) == -1)
+						std::shared_ptr<Bag<uml::Comment>> _ownedComment = getOwnedComment();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedComment->erase(indexOwnedComment);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *ownedCommentList)
-					{
-						if (_ownedComment->find(indexOwnedComment) == -1)
-						{
-							_ownedComment->add(indexOwnedComment);
+							std::shared_ptr<uml::Comment> valueToAdd = std::dynamic_pointer_cast<uml::Comment>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedComment->find(valueToAdd) == -1)
+								{
+									_ownedComment->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedComment'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedComment'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -648,9 +650,9 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -660,16 +662,25 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'keyword'
 			//parameter 0
 			std::string incoming_param_keyword;
-			std::list<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string >();
-			result = eAny(this->addKeyword(incoming_param_keyword),0,false);
+			Bag<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'addKeyword'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->addKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::allOwnedElements() : uml::Element[*]: 247654748
 		case umlPackage::ELEMENT_OPERATION_ALLOWNEDELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::Element> > resultList = this->allOwnedElements();
-			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::Element>> resultList = this->allOwnedElements();
+			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// uml::Element::applyStereotype(uml::Stereotype) : ecore::EObject: 2648262877
@@ -678,15 +689,36 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->applyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'applyStereotype'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'applyStereotype'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->applyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::container() : uml::Element: 3193550054
 		case umlPackage::ELEMENT_OPERATION_CONTAINER:
 		{
-			result = eAnyObject(this->container(), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->container(), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// uml::Element::createEAnnotation(std::string) : ecore::EAnnotation: 516144683
@@ -695,9 +727,18 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'source'
 			//parameter 0
 			std::string incoming_param_source;
-			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
+			Bag<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'source'. Failed to invoke operation 'createEAnnotation'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS);
 			break;
 		}
 		// uml::Element::destroy(): 2011566363
@@ -712,16 +753,25 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 0
 			std::string incoming_param_qualifiedName;
-			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getApplicableStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getApplicableStereotype'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getApplicableStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getApplicableStereotypes() : uml::Stereotype[*]: 4106909555
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getApplicableStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getApplicableStereotypes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedStereotype(std::string) : uml::Stereotype {const}: 87051473
@@ -730,16 +780,25 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 0
 			std::string incoming_param_qualifiedName;
-			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getAppliedStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedStereotype'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getAppliedStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedStereotypes() : uml::Stereotype[*] {const}: 536733808
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getAppliedStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getAppliedStereotypes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedSubstereotype(uml::Stereotype, std::string) : uml::Stereotype: 1806954958
@@ -748,14 +807,44 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotype'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotype'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 1
 			std::string incoming_param_qualifiedName;
-			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getAppliedSubstereotype'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getAppliedSubstereotypes(uml::Stereotype) : uml::Stereotype[*]: 2456228169
@@ -764,41 +853,62 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getAppliedSubstereotypes(incoming_param_stereotype);
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotypes'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getAppliedSubstereotypes'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getAppliedSubstereotypes(incoming_param_stereotype);
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getKeywords() : std::string[*]: 98894063
 		case umlPackage::ELEMENT_OPERATION_GETKEYWORDS:
 		{
-			result = eAny(this->getKeywords(),0,true);
+			result = eAny(this->getKeywords(), 0, true);
 			break;
 		}
 		// uml::Element::getMetaClass() : uml::Class {const}: 1459052667
 		case umlPackage::ELEMENT_OPERATION_GETMETACLASS:
 		{
-			result = eAnyObject(this->getMetaClass(), uml::umlPackage::CLASS_CLASS);
+			result = eEcoreAny(this->getMetaClass(), uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Element::getModel() : uml::Model: 3573763623
 		case umlPackage::ELEMENT_OPERATION_GETMODEL:
 		{
-			result = eAnyObject(this->getModel(), uml::umlPackage::MODEL_CLASS);
+			result = eEcoreAny(this->getModel(), uml::umlPackage::MODEL_CLASS);
 			break;
 		}
 		// uml::Element::getNearestPackage() : uml::Package: 4263471119
 		case umlPackage::ELEMENT_OPERATION_GETNEARESTPACKAGE:
 		{
-			result = eAnyObject(this->getNearestPackage(), uml::umlPackage::PACKAGE_CLASS);
+			result = eEcoreAny(this->getNearestPackage(), uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::Element::getRelationships() : uml::Relationship[*]: 2213814646
 		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::Relationship> > resultList = this->getRelationships();
-			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
+			std::shared_ptr<Bag<uml::Relationship>> resultList = this->getRelationships();
+			return eEcoreContainerAny(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getRelationships(ecore::EClass) : uml::Relationship[*]: 1674629135
@@ -807,10 +917,31 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'eClass'
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
-			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::Relationship> > resultList = this->getRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
+			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eClass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eClass = std::dynamic_pointer_cast<ecore::EClass>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getRelationships'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getRelationships'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::Relationship>> resultList = this->getRelationships(incoming_param_eClass);
+			return eEcoreContainerAny(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getRequiredStereotype(std::string) : uml::Stereotype: 3654047872
@@ -819,23 +950,32 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 0
 			std::string incoming_param_qualifiedName;
-			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getRequiredStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'qualifiedName'. Failed to invoke operation 'getRequiredStereotype'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getRequiredStereotype(incoming_param_qualifiedName), uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getRequiredStereotypes() : uml::Stereotype[*]: 1705085663
 		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getRequiredStereotypes();
-			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
+			std::shared_ptr<Bag<uml::Stereotype>> resultList = this->getRequiredStereotypes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getSourceDirectedRelationships() : uml::DirectedRelationship[*]: 2795621331
 		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getSourceDirectedRelationships();
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getSourceDirectedRelationships();
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getSourceDirectedRelationships(ecore::EClass) : uml::DirectedRelationship[*]: 3097970596
@@ -844,10 +984,31 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'eClass'
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
-			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getSourceDirectedRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eClass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eClass = std::dynamic_pointer_cast<ecore::EClass>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getSourceDirectedRelationships'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getSourceDirectedRelationships'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getSourceDirectedRelationships(incoming_param_eClass);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getStereotypeApplication(uml::Stereotype) : ecore::EObject: 2473257019
@@ -856,23 +1017,44 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->getStereotypeApplication(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getStereotypeApplication(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::getStereotypeApplications() : ecore::EObject[*]: 3677056906
 		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject> > resultList = this->getStereotypeApplications();
-			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
+			std::shared_ptr<Bag<ecore::EObject>> resultList = this->getStereotypeApplications();
+			return eEcoreContainerAny(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::getTargetDirectedRelationships() : uml::DirectedRelationship[*]: 1070993753
 		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getTargetDirectedRelationships();
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getTargetDirectedRelationships();
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getTargetDirectedRelationships(ecore::EClass) : uml::DirectedRelationship[*]: 1373343018
@@ -881,10 +1063,31 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'eClass'
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
-			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getTargetDirectedRelationships(incoming_param_eClass);
-			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
+			Bag<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eClass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eClass = std::dynamic_pointer_cast<ecore::EClass>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getTargetDirectedRelationships'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eClass'. Failed to invoke operation 'getTargetDirectedRelationships'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::DirectedRelationship>> resultList = this->getTargetDirectedRelationships(incoming_param_eClass);
+			return eEcoreContainerAny(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
 		// uml::Element::getValue(uml::Stereotype, std::string) : Any: 56841400
@@ -893,14 +1096,44 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getValue'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'propertyName'
 			//parameter 1
 			std::string incoming_param_propertyName;
-			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
-			result = this->getValue(incoming_param_stereotype,incoming_param_propertyName);
+			Bag<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'getValue'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->getValue(incoming_param_stereotype,incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Element::hasKeyword(std::string) : bool: 1990850902
@@ -909,9 +1142,18 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'keyword'
 			//parameter 0
 			std::string incoming_param_keyword;
-			std::list<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string >();
-			result = eAny(this->hasKeyword(incoming_param_keyword),0,false);
+			Bag<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'hasKeyword'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->hasKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::hasValue(uml::Stereotype, std::string) : bool: 878246468
@@ -920,30 +1162,44 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'hasValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'hasValue'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'propertyName'
 			//parameter 1
 			std::string incoming_param_propertyName;
-			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
-			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName),0,false);
-			break;
-		}
-		// uml::Element::has_owner(Any, std::map) : bool: 2592501830
-		case umlPackage::ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_owner(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'hasValue'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeApplicable(uml::Stereotype) : bool: 545376678
@@ -952,9 +1208,30 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAny(this->isStereotypeApplicable(incoming_param_stereotype),0,false);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplicable'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplicable'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isStereotypeApplicable(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeApplied(uml::Stereotype) : bool: 3830373488
@@ -963,9 +1240,30 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAny(this->isStereotypeApplied(incoming_param_stereotype),0,false);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplied'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeApplied'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isStereotypeApplied(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::isStereotypeRequired(uml::Stereotype) : bool: 1281257946
@@ -974,31 +1272,36 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAny(this->isStereotypeRequired(incoming_param_stereotype),0,false);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeRequired'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'isStereotypeRequired'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isStereotypeRequired(incoming_param_stereotype), 0, false);
 			break;
 		}
 		// uml::Element::mustBeOwned() : bool: 3952176544
 		case umlPackage::ELEMENT_OPERATION_MUSTBEOWNED:
 		{
-			result = eAny(this->mustBeOwned(),0,false);
-			break;
-		}
-		// uml::Element::not_own_self(Any, std::map) : bool: 2801577721
-		case umlPackage::ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_own_self(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->mustBeOwned(), 0, false);
 			break;
 		}
 		// uml::Element::removeKeyword(std::string) : bool: 1157618568
@@ -1007,9 +1310,18 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'keyword'
 			//parameter 0
 			std::string incoming_param_keyword;
-			std::list<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string >();
-			result = eAny(this->removeKeyword(incoming_param_keyword),0,false);
+			Bag<Any>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'keyword'. Failed to invoke operation 'removeKeyword'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->removeKeyword(incoming_param_keyword), 0, false);
 			break;
 		}
 		// uml::Element::setValue(uml::Stereotype, std::string, Any): 813757714
@@ -1018,18 +1330,57 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'setValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'setValue'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'propertyName'
 			//parameter 1
 			std::string incoming_param_propertyName;
-			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'setValue'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'newValue'
 			//parameter 2
-			Any incoming_param_newValue;
-			std::list<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<Any >();
+			std::shared_ptr<Any> incoming_param_newValue;
+			Bag<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'newValue'. Failed to invoke operation 'setValue'!")
+				return nullptr;
+			}
+		
 			this->setValue(incoming_param_stereotype,incoming_param_propertyName,incoming_param_newValue);
 			break;
 		}
@@ -1039,9 +1390,30 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			result = eAnyObject(this->unapplyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Stereotype>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'unapplyStereotype'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'unapplyStereotype'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->unapplyStereotype(incoming_param_stereotype), ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 

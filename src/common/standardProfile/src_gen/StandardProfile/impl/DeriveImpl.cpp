@@ -1,18 +1,22 @@
 #include "StandardProfile/impl/DeriveImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -47,31 +51,14 @@ DeriveImpl::DeriveImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"Derive is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Derive' is created.")
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Abstraction
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(893379002,[this](){ return eAny(this->getBase_Abstraction(), uml::umlPackage::ABSTRACTION_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Abstraction
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(893379002,[this](Any object){this->setBase_Abstraction(object->get<std::shared_ptr<uml::Abstraction>>());}));
-	
-	
-	//unsetter init
-		//Property base_Abstraction
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(893379002,[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
-	
-	
-	
 }
 
 
 DeriveImpl::~DeriveImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"Derive is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'Derive' is destroyed.")
 }
 
 DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
@@ -154,83 +141,149 @@ std::weak_ptr<uml::Abstraction> DeriveImpl::getBase_Abstraction() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any DeriveImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> DeriveImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any DeriveImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> DeriveImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any DeriveImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> DeriveImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::DERIVE_ATTRIBUTE_BASE_ABSTRACTION:
+			return eUMLAny(this->getBase_Abstraction().lock(), uml::umlPackage::ABSTRACTION_CLASS);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void DeriveImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void DeriveImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void DeriveImpl::set(std::string _qualifiedName, Any value)
+void DeriveImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void DeriveImpl::set(unsigned long _uID, Any value)
+void DeriveImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::DERIVE_ATTRIBUTE_BASE_ABSTRACTION:
+		{
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Abstraction> _base_Abstraction = std::dynamic_pointer_cast<uml::Abstraction>(umlAny);
+					if(_base_Abstraction)
+					{
+						setBase_Abstraction(_base_Abstraction);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Abstraction'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Abstraction'. Failed to set property!")
+				return;
+			}
+		break;
+		}
+	}
+}
+
+//Add
+void DeriveImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->add(qualifiedName, value);
+}
+
+void DeriveImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->add(uID, value);
+}
+
+void DeriveImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void DeriveImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void DeriveImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void DeriveImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::DERIVE_ATTRIBUTE_BASE_ABSTRACTION:
+		{
+			m_base_Abstraction.reset();
+			return;
+		}
+	}
+
 }
 
+//Remove
+void DeriveImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void DeriveImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void DeriveImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any DeriveImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> DeriveImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +291,18 @@ Any DeriveImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_p
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any DeriveImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> DeriveImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any DeriveImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> DeriveImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

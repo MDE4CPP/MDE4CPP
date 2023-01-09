@@ -1,9 +1,13 @@
 
 #include "uml/impl/RedefinableTemplateSignatureImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -145,7 +149,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr extendedSignature."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for extendedSignature.")
 	}
 
 	//clone reference 'inheritedParameter'
@@ -172,7 +176,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inheritedParameter."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inheritedParameter.")
 	}
 	return *this;
 }
@@ -188,12 +192,7 @@ std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<Bag<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -278,70 +277,6 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> Redefina
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> RedefinableTemplateSignatureImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> RedefinableTemplateSignatureImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getParameter() const
-{
-	if(m_parameter == nullptr)
-	{
-		/*Union*/
-		m_parameter.reset(new Union<uml::TemplateParameter>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_parameter - Union<uml::TemplateParameter>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_parameter;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-std::shared_ptr<Union<uml::Classifier>> RedefinableTemplateSignatureImpl::getRedefinitionContext() const
-{
-	if(m_redefinitionContext == nullptr)
-	{
-		/*Union*/
-		m_redefinitionContext.reset(new Union<uml::Classifier>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinitionContext;
-}
 
 //*********************************
 // Container Getter
@@ -490,21 +425,21 @@ std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //20517
+			return eEcoreAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS); //20517
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-			return eAnyBag(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
+			return eEcoreContainerAny(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-			return eAnyBag(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
+			return eEcoreContainerAny(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -535,54 +470,85 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
+bool RedefinableTemplateSignatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
-			// CAST Any to uml::Classifier
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setClassifier(_classifier); //20517
-			return true;
-		}
-		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-		{
-			// CAST Any to Bag<uml::RedefinableTemplateSignature>
-			if((newValue->isContainer()) && (uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList= newValue->get<std::shared_ptr<Bag<uml::RedefinableTemplateSignature>>>();
-					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature=getExtendedSignature();
-					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *_extendedSignature)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(eObject);
+					if(_classifier)
 					{
-						if (extendedSignatureList->find(indexExtendedSignature) == -1)
-						{
-							_extendedSignature->erase(indexExtendedSignature);
-						}
+						setClassifier(_classifier); //20517
 					}
-
-					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *extendedSignatureList)
+					else
 					{
-						if (_extendedSignature->find(indexExtendedSignature) == -1)
-						{
-							_extendedSignature->add(indexExtendedSignature);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'classifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'classifier'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::RedefinableTemplateSignature> valueToAdd = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extendedSignature->find(valueToAdd) == -1)
+								{
+									_extendedSignature->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extendedSignature'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'extendedSignature'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -599,33 +565,17 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 1729090337
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
-			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
-			break;
-		}
-		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 2810722782
-		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context),0,false);
+			std::shared_ptr<Bag<uml::TemplateParameter>> resultList = this->getInheritedParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}
 

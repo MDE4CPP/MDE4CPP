@@ -1,9 +1,13 @@
 
 #include "uml/impl/OutputPinImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -229,10 +233,6 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -327,55 +327,6 @@ void OutputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStru
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup>> OutputPinImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<Union<uml::Element>> OutputPinImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> OutputPinImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> OutputPinImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -610,49 +561,49 @@ std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTION_CLASS); //16934
+			return eEcoreAny(returnValue,uml::umlPackage::ACTION_CLASS); //16934
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CALLACTION_CLASS); //16933
+			return eEcoreAny(returnValue,uml::umlPackage::CALLACTION_CLASS); //16933
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS); //16938
+			return eEcoreAny(returnValue,uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS); //16938
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS); //16940
+			return eEcoreAny(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS); //16940
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::READSELFACTION_CLASS); //16939
+			return eEcoreAny(returnValue,uml::umlPackage::READSELFACTION_CLASS); //16939
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS); //16937
+			return eEcoreAny(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS); //16937
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //16935
+			return eEcoreAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //16935
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS); //16936
+			return eEcoreAny(returnValue,uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS); //16936
 		}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -682,65 +633,226 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 	return PinImpl::internalEIsSet(featureID);
 }
 
-bool OutputPinImpl::eSet(int featureID, Any newValue)
+bool OutputPinImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
-			// CAST Any to uml::CallAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
-			setCallAction(_callAction); //16933
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(eObject);
+					if(_callAction)
+					{
+						setCallAction(_callAction); //16933
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'callAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
-			// CAST Any to uml::ClearStructuralFeatureAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_temp);
-			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //16938
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(eObject);
+					if(_clearStructuralFeatureAction)
+					{
+						setClearStructuralFeatureAction(_clearStructuralFeatureAction); //16938
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'clearStructuralFeatureAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'clearStructuralFeatureAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
-			// CAST Any to uml::CreateObjectAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
-			setCreateObjectAction(_createObjectAction); //16940
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(eObject);
+					if(_createObjectAction)
+					{
+						setCreateObjectAction(_createObjectAction); //16940
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'createObjectAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'createObjectAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
-			// CAST Any to uml::ReadSelfAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
-			setReadSelfAction(_readSelfAction); //16939
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(eObject);
+					if(_readSelfAction)
+					{
+						setReadSelfAction(_readSelfAction); //16939
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'readSelfAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'readSelfAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
-			// CAST Any to uml::ReadStructuralFeatureAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
-			setReadStructuralFeatureAction(_readStructuralFeatureAction); //16937
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(eObject);
+					if(_readStructuralFeatureAction)
+					{
+						setReadStructuralFeatureAction(_readStructuralFeatureAction); //16937
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'readStructuralFeatureAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'readStructuralFeatureAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
-			// CAST Any to uml::ValueSpecificationAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
-			setValueSpecificationAction(_valueSpecificationAction); //16935
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(eObject);
+					if(_valueSpecificationAction)
+					{
+						setValueSpecificationAction(_valueSpecificationAction); //16935
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
-			// CAST Any to uml::WriteStructuralFeatureAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
-			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //16936
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(eObject);
+					if(_writeStructuralFeatureAction)
+					{
+						setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //16936
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'writeStructuralFeatureAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'writeStructuralFeatureAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -750,28 +862,12 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OutputPinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::OutputPin::incoming_edges_structured_only(Any, std::map) : bool: 3765713794
-		case umlPackage::OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->incoming_edges_structured_only(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

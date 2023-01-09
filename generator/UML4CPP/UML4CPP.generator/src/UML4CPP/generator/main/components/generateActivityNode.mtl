@@ -24,7 +24,7 @@
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 
 [query private getOwnerPropertyName(anActivityNode : ActivityNode) : String = if (anActivityNode.owner.oclIsKindOf(Activity)) then 'Activity' else 'StructuredActivityNode' endif /]
 
@@ -47,24 +47,12 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
-[if (action.object.oclIsUndefined())]
-['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
-[else]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.value.oclIsUndefined())]
-['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
-[else]
 	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_as_value_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [if (not action.insertAt.oclIsUndefined())]
 	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_as_insertAt_in_AddStructuralFeatureValueAction([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.insertAt.memberName()/]); // subset/union in not implemented for upper=1
@@ -78,27 +66,15 @@
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallAction))]
 [let action : CallAction = self.oclAsType(CallAction)]
 [for (resultPin : OutputPin | action.result)]
-[if (resultPin.oclIsUndefined())]
-['UML4CPP_Generation Error: '.concat(action.eClass().name).concat(': ').concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[resultPin.memberName()/] = factory->create[resultPin.eClass().name/]_as_result_in_CallAction([resultPin.owner.oclAsType(NamedElement).memberName()/]);
-[/if]
 [/for]
 [for (argumentPin : InputPin | action.argument)]
-[if (argumentPin.oclIsUndefined())]
-['UML4CPP_Generation Error: CallBehaviorAction: '.concat(action.name).concat('argument pin is undefined.').registerError()/]
-[else]
 	[argumentPin.memberName()/] = factory->create[argumentPin.eClass().name/]_as_argument_in_InvocationAction([argumentPin.owner.oclAsType(NamedElement).memberName()/]);
-[/if]
 [/for]
 [if (anActivityNode.oclIsKindOf(CallOperationAction))]
 [let coaction : CallOperationAction = self.oclAsType(CallOperationAction)]
-[if (coaction.target.oclIsUndefined())]
-['UML4CPP_Generation Error: CallOperationAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
-[else]
 	[coaction.target.memberName()/] = factory->create[coaction.target.eClass().name/]_as_target_in_CallOperationAction([coaction.target.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([coaction.target.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/if]
 [/let]
@@ -109,18 +85,10 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ClearStructuralFeatureAction))]
 [let action : ClearStructuralFeatureAction = self.oclAsType(ClearStructuralFeatureAction)]
-[if (action.object.oclIsUndefined())]
-['UML4CPP_Generation Error: ClearStructuralFeatureAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
-[else]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: ClearStructuralFeatureAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ClearStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -129,12 +97,8 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateObjectAction))]
 [let action : CreateObjectAction = self.oclAsType(CreateObjectAction)]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: CreateObjectAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_CreateObjectAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -143,12 +107,8 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
-[if (action.target.oclIsUndefined())]
-['UML4CPP_Generation Error: DestroyObjectAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
-[else]
 	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_as_target_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.target.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -167,12 +127,8 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
 [let action : ReadSelfAction = self.oclAsType(ReadSelfAction)]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: ReadSelfAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadSelfAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -181,18 +137,10 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadStructuralFeatureAction))]
 [let action : ReadStructuralFeatureAction = self.oclAsType(ReadStructuralFeatureAction)]
-[if (action.object.oclIsUndefined())]
-['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
-[else]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -201,24 +149,12 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(RemoveStructuralFeatureValueAction))]
 [let action : RemoveStructuralFeatureValueAction = self.oclAsType(RemoveStructuralFeatureValueAction)]
-[if (action.object.oclIsUndefined())]
-['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
-[else]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.value.oclIsUndefined())]
-['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
-[else]
 	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_as_value_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [if (not action.removeAt.oclIsUndefined())]
 	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_as_removeAt_in_RemoveStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.removeAt.memberName()/]); // subset/union in not implemented for upper=1
@@ -231,12 +167,8 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
 [let action : ValueSpecificationAction = self.oclAsType(ValueSpecificationAction)]
-[if (action.result.oclIsUndefined())]
-['UML4CPP_Generation Error: ValueSpecificationAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
-[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ValueSpecificationAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
-[/if]
 [/let]
 [/template]
 
@@ -268,7 +200,7 @@
 */]
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
-[anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
+[anActivityNode.memberName()/]->setName("[anActivityNode.metamodelElementName()/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 [anActivityNode.generateStereotypeApplication()/]
 [/template]
@@ -390,6 +322,7 @@
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
 [action.memberName()/]->setIsDestroyOwnedObjects([action.isDestroyOwnedObjects/]);
 [action.memberName()/]->setIsDestroyLinks([action.isDestroyLinks/]);
+[action.input.initializePin(true)/]
 [action.output.initializePin()/]
 [/let]
 [/template]
@@ -487,11 +420,7 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
 [let action : ValueSpecificationAction = self.oclAsType(ValueSpecificationAction)]
 [action.output.initializePin()/]
-[if (action.value.oclIsUndefined())]
-['UML4CPP_Generation Error: ValueSpecificationAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
-[else]
 [action.memberName()/]->setValue([action.value.memberName()/]);
-[/if]
 [/let]
 [/template]
 
@@ -511,7 +440,7 @@
 [pin.initializePin(false)/]
 [/template]
 [template private initializePin(pin : Pin, isTarget : Boolean)]
-[pin.memberName()/]->setName("[pin.name/]");
+[pin.memberName()/]->setName("[pin.metamodelElementName()/]");
 [pin.memberName()/]->setLower([pin.lower/]);
 [pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
 [pin.generateStereotypeApplication()/]

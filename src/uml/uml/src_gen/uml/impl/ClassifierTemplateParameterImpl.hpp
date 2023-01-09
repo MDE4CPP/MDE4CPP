@@ -46,50 +46,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The argument to a ClassifierTemplateParameter is a Classifier.
-			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))
-			*/
-			 
-			virtual bool actual_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
-			templateParameterSubstitution.actual->forAll( a |
-			  let arg : Classifier = a.oclAsType(Classifier) in
-			    constrainingClassifier->forAll(
-			      cc |  
-			         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))
-			      )
-			)
-			*/
-			 
-			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
-			constrainingClassifier->forAll(
-			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
-			)
-			*/
-			 
-			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If allowSubstitutable is true, then there must be a constrainingClassifier.
-			allowSubstitutable implies constrainingClassifier->notEmpty()
-			*/
-			 
-			virtual bool has_constraining_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
-			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract)
-			*/
-			 
-			virtual bool matching_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
-			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())
-			*/
-			 
-			virtual bool parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -121,25 +77,11 @@ namespace uml
 			// Union Reference Getters
 			//*********************************
 			
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			
-			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -156,14 +98,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ClassifierTemplateParameter> m_thisClassifierTemplateParameterPtr;

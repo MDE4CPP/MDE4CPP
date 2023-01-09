@@ -1,9 +1,13 @@
 
 #include "uml/impl/BehavioralFeatureImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -146,7 +150,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedParameter."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedParameter.")
 	}
 
 	//clone reference 'ownedParameterSet'
@@ -173,7 +177,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedParameterSet."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedParameterSet.")
 	}
 	/*Subset*/
 	getOwnedParameter()->initSubset(getOwnedMember());
@@ -193,22 +197,17 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name, std::shared_ptr<uml::Type> type)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type> type)
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::inputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::outputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -310,60 +309,6 @@ std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() cons
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement>> BehavioralFeatureImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::shared_ptr<Union<uml::Element>> BehavioralFeatureImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> BehavioralFeatureImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> BehavioralFeatureImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -617,7 +562,7 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -626,15 +571,15 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2521
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
-			return eAnyBag(getMethod(),uml::umlPackage::BEHAVIOR_CLASS); //2522
+			return eEcoreContainerAny(getMethod(),uml::umlPackage::BEHAVIOR_CLASS); //2522
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return eAnyBag(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2523
+			return eEcoreContainerAny(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2523
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
-			return eAnyBag(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2524
+			return eEcoreContainerAny(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2524
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
-			return eAnyBag(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
+			return eEcoreContainerAny(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -671,171 +616,217 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
+bool BehavioralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
 		{
-			// CAST Any to uml::CallConcurrencyKind
-			uml::CallConcurrencyKind _concurrency = newValue->get<uml::CallConcurrencyKind>();
-			setConcurrency(_concurrency); //2520
-			return true;
+			try
+			{
+				uml::CallConcurrencyKind _concurrency = newValue->get<uml::CallConcurrencyKind>();
+				setConcurrency(_concurrency); //2520
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'concurrency'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 		{
-			// CAST Any to bool
-			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //2521
-			return true;
+			try
+			{
+				bool _isAbstract = newValue->get<bool>();
+				setIsAbstract(_isAbstract); //2521
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isAbstract'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
-			// CAST Any to Bag<uml::Behavior>
-			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Behavior>> methodList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
-					std::shared_ptr<Bag<uml::Behavior>> _method=getMethod();
-					for(const std::shared_ptr<uml::Behavior> indexMethod: *_method)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (methodList->find(indexMethod) == -1)
+						std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_method->erase(indexMethod);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Behavior> indexMethod: *methodList)
-					{
-						if (_method->find(indexMethod) == -1)
-						{
-							_method->add(indexMethod);
+							std::shared_ptr<uml::Behavior> valueToAdd = std::dynamic_pointer_cast<uml::Behavior>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_method->find(valueToAdd) == -1)
+								{
+									_method->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'method'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'method'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			// CAST Any to Bag<uml::Parameter>
-			if((newValue->isContainer()) && (uml::umlPackage::PARAMETER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Parameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
-					std::shared_ptr<Bag<uml::Parameter>> _ownedParameter=getOwnedParameter();
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *_ownedParameter)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedParameterList->find(indexOwnedParameter) == -1)
+						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getOwnedParameter();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedParameter->erase(indexOwnedParameter);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *ownedParameterList)
-					{
-						if (_ownedParameter->find(indexOwnedParameter) == -1)
-						{
-							_ownedParameter->add(indexOwnedParameter);
+							std::shared_ptr<uml::Parameter> valueToAdd = std::dynamic_pointer_cast<uml::Parameter>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedParameter->find(valueToAdd) == -1)
+								{
+									_ownedParameter->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedParameter'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedParameter'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
-			// CAST Any to Bag<uml::ParameterSet>
-			if((newValue->isContainer()) && (uml::umlPackage::PARAMETERSET_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
-					std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet=getOwnedParameterSet();
-					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *_ownedParameterSet)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedParameterSetList->find(indexOwnedParameterSet) == -1)
+						std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet = getOwnedParameterSet();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedParameterSet->erase(indexOwnedParameterSet);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *ownedParameterSetList)
-					{
-						if (_ownedParameterSet->find(indexOwnedParameterSet) == -1)
-						{
-							_ownedParameterSet->add(indexOwnedParameterSet);
+							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedParameterSet->find(valueToAdd) == -1)
+								{
+									_ownedParameterSet->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedParameterSet'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedParameterSet'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
-			// CAST Any to Bag<uml::Type>
-			if((newValue->isContainer()) && (uml::umlPackage::TYPE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Type>> raisedExceptionList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
-					std::shared_ptr<Bag<uml::Type>> _raisedException=getRaisedException();
-					for(const std::shared_ptr<uml::Type> indexRaisedException: *_raisedException)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (raisedExceptionList->find(indexRaisedException) == -1)
+						std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_raisedException->erase(indexRaisedException);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Type> indexRaisedException: *raisedExceptionList)
-					{
-						if (_raisedException->find(indexRaisedException) == -1)
-						{
-							_raisedException->add(indexRaisedException);
+							std::shared_ptr<uml::Type> valueToAdd = std::dynamic_pointer_cast<uml::Type>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_raisedException->find(valueToAdd) == -1)
+								{
+									_raisedException->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'raisedException'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'raisedException'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -852,56 +843,70 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::BehavioralFeature::abstract_no_method(Any, std::map) : bool: 862631547
-		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 		// uml::BehavioralFeature::createReturnResult(std::string, uml::Type) : uml::Parameter: 2358256606
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createReturnResult'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAnyObject(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createReturnResult'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createReturnResult'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 2494913883
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->inputParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 3232178764
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->outputParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 

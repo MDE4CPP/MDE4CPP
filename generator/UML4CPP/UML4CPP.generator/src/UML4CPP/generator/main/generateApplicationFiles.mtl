@@ -122,6 +122,7 @@ int main ()
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Any.hpp"
+#include "uml/UMLAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 [if (mainActivity.owner.oclIsKindOf(Classifier))]
 #include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
@@ -149,50 +150,46 @@ int main()
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
-		DEBUG_MESSAGE(std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;)
+		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 
 		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 		if (executionPlugin)
 		{
-			DEBUG_MESSAGE(std::cout << "fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
+			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
-			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
-			[for (par : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-			[let anyBagRequired : Boolean = ((par.upper <> 1) and not(par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration)))]
-			parameterList->push_back([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
-			[/let]
+			std::shared_ptr<Bag<Any>> parameterList(new Bag<Any>());
+			[for (aParameter : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+			parameterList->add([aParameter.generateAnyCreationFromParameter()/]);
 			[/for]
-			Any activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
+			std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
 
 
 			[if (mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[let returnParameter : Parameter = mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
 			[returnParameter.type.generateCppType(false)/] returnValue = activityResult->get<[returnParameter.type.generateCppType(false)/]>();
-			DEBUG_MESSAGE(
-			std::cout << "The activity has a return parameter" << std::endl;
-			std::cout << "Parameter name: [returnParameter.name/]"<< std::endl;
+			DEBUG_INFO("Activity '[mainActivity.name/]' has a return parameter named '[returnParameter.name/]'.")
+			
 			if(returnValue == nullptr)
 			{
-				std::cout << "The returned value was nullptr" << std::endl;
+				DEBUG_WARNING("The returned value was nullptr!")
 			}
 			else
 			{
-				std::cout << "The returned value was " << returnValue << std::endl;
+				DEBUG_INFO("The returned value was " << returnValue << ".")
 			}
-			)
 			[/let]
 			[else]
-			DEBUG_MESSAGE(std::cout << "The activity did not return any result." << std::endl;)
+			DEBUG_INFO("Activity '[mainActivity.name/] does not have any return parameter.")
 			[/if]
 		}
 		else
 		{
-			std::cout << "plugin " << plugin->eNAME() << " is not a fuml based plugin" << std::endl;
+			std::cout << "Plugin '" << plugin->eNAME() << "' is not an execution plugin!" << std::endl;
 		}
 	}
 	else
 	{ 
-		std::cout << "plugin" << pluginName << " not found" << std::endl;
+		std::cout << "Plugin '" << pluginName << "' not found!" << std::endl;
 	}
     return EXIT_SUCCESS;
 }

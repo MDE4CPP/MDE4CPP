@@ -1,9 +1,13 @@
 
 #include "uml/impl/ConditionalNodeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -187,7 +191,7 @@ ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & 
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr clause."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for clause.")
 	}
 	/*Subset*/
 	getClause()->initSubset(getOwnedElement());
@@ -210,35 +214,6 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -299,160 +274,6 @@ std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityEdge>> ConditionalNodeImpl::getContainedEdge() const
-{
-	if(m_containedEdge == nullptr)
-	{
-		/*Union*/
-		m_containedEdge.reset(new Union<uml::ActivityEdge>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_containedEdge;
-}
-
-std::shared_ptr<Union<uml::ActivityNode>> ConditionalNodeImpl::getContainedNode() const
-{
-	if(m_containedNode == nullptr)
-	{
-		/*Union*/
-		m_containedNode.reset(new Union<uml::ActivityNode>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_containedNode;
-}
-
-std::shared_ptr<Union<uml::ActivityGroup>> ConditionalNodeImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ConditionalNodeImpl::getInput() const
-{
-	if(m_input == nullptr)
-	{
-		/*SubsetUnion*/
-		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getInput()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_input;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> ConditionalNodeImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ConditionalNodeImpl::getOutput() const
-{
-	if(m_output == nullptr)
-	{
-		/*SubsetUnion*/
-		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOutput()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_output;
-}
-
-std::shared_ptr<Union<uml::Element>> ConditionalNodeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ConditionalNodeImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> ConditionalNodeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ConditionalNodeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -659,18 +480,18 @@ std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return eAnyBag(getClause(),uml::umlPackage::CLAUSE_CLASS); //4944
+			return eEcoreContainerAny(getClause(),uml::umlPackage::CLAUSE_CLASS); //4944
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4945
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 			return eAny(getIsDeterminate(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4946
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //4947
+			return eEcoreContainerAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //4947
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -691,97 +512,127 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
+bool ConditionalNodeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
-			// CAST Any to Bag<uml::Clause>
-			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Clause>> clauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _clause=getClause();
-					for(const std::shared_ptr<uml::Clause> indexClause: *_clause)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (clauseList->find(indexClause) == -1)
+						std::shared_ptr<Bag<uml::Clause>> _clause = getClause();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_clause->erase(indexClause);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Clause> indexClause: *clauseList)
-					{
-						if (_clause->find(indexClause) == -1)
-						{
-							_clause->add(indexClause);
+							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_clause->find(valueToAdd) == -1)
+								{
+									_clause->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'clause'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'clause'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 		{
-			// CAST Any to bool
-			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //4945
-			return true;
+			try
+			{
+				bool _isAssured = newValue->get<bool>();
+				setIsAssured(_isAssured); //4945
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isAssured'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
-			// CAST Any to bool
-			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //4946
-			return true;
+			try
+			{
+				bool _isDeterminate = newValue->get<bool>();
+				setIsDeterminate(_isDeterminate); //4946
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isDeterminate'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
-			// CAST Any to Bag<uml::OutputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (resultList->find(indexResult) == -1)
+						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_result->erase(indexResult);
-						}
-					}
-
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
-					{
-						if (_result->find(indexResult) == -1)
-						{
-							_result->add(indexResult);
+							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_result->find(valueToAdd) == -1)
+								{
+									_result->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'result'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'result'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -791,108 +642,12 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ConditionalNode::clause_no_predecessor(Any, std::map) : bool: 976934855
-		case umlPackage::CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConditionalNode::executable_nodes(Any, std::map) : bool: 3475178446
-		case umlPackage::CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConditionalNode::matching_output_pins(Any, std::map) : bool: 3565877168
-		case umlPackage::CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConditionalNode::no_input_pins(Any, std::map) : bool: 3507258893
-		case umlPackage::CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConditionalNode::one_clause_with_executable_node(Any, std::map) : bool: 34142531
-		case umlPackage::CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ConditionalNode::result_no_incoming(Any, std::map) : bool: 1196289718
-		case umlPackage::CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

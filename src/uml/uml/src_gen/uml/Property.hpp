@@ -7,7 +7,6 @@
 #ifndef UML_PROPERTY_HPP
 #define UML_PROPERTY_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -16,8 +15,6 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -79,7 +76,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Property: virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
+	class UML_API Property : virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
 	{
 		public:
  			Property(const Property &) {}
@@ -119,34 +116,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A binding of a PropertyTemplateParameter representing an attribute must be to an attribute.
-			(self.isAttribute()
-			and (templateParameterSubstitution->notEmpty())
-			implies (templateParameterSubstitution->forAll(ts |
-			    ts.formal.oclIsKindOf(Property)
-			    and ts.formal.oclAsType(Property).isAttribute())))
-			*/
-			 
-			virtual bool binding_to_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
-			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))
-			*/
-			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A derived union is derived.
-			isDerivedUnion implies isDerived
-			*/
-			 
-			virtual bool derived_union_is_derived(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A derived union is read only.
-			isDerivedUnion implies isReadOnly
-			*/
-			 
-			virtual bool derived_union_is_read_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			
 			/*!
 			Retrieves the other end of the (binary) association in which this property is a member end.
@@ -175,28 +144,6 @@ namespace uml
 			 
 			virtual bool isNavigable() = 0;
 			virtual bool isSetDefault() = 0;
-			/*!
-			A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.
-			isComposite and association <> null implies opposite.upperBound() <= 1
-			*/
-			 
-			virtual bool multiplicity_of_composite(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			All qualified Properties must be Association ends
-			qualifier->notEmpty() implies association->notEmpty()
-			*/
-			 
-			virtual bool qualified_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A redefined Property must be inherited from a more general Classifier.
-			(redefinedProperty->notEmpty()) implies
-			  (redefinitionContext->notEmpty() and
-			      redefinedProperty->forAll(rp|
-			        ((redefinitionContext->collect(fc|
-			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))
-			*/
-			 
-			virtual bool redefined_property_inherited(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Sets the default value for this property to the specified Boolean value.
 			*/
@@ -233,12 +180,6 @@ namespace uml
 			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
 			/*!
-			A Property may not subset a Property with the same name.
-			subsettedProperty->forAll(sp | sp.name <> name)
-			*/
-			 
-			virtual bool subsetted_property_names(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
 			result = (if association <> null
 			then association.memberEnd->excluding(self)->collect(type)->asSet()
@@ -251,31 +192,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > subsettingContext() = 0;
-			/*!
-			Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.
-			subsettedProperty->notEmpty() implies
-			  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
-			    subsettedProperty->forAll(sp |
-			      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
-			*/
-			 
-			virtual bool subsetting_context_conforms(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
-			subsettedProperty->forAll(sp |
-			  self.type.conformsTo(sp.type) and
-			    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
-			      self.upperBound() <= sp.upperBound() ))
-			*/
-			 
-			virtual bool subsetting_rules(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
-			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type
-			*/
-			 
-			virtual bool type_of_opposite_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual std::shared_ptr<Bag<uml::Type>> subsettingContext() = 0;
 			virtual void unsetDefault() = 0;
 
 			//*********************************
@@ -465,44 +382,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			
-			/*!
-			The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
-			
 
 			//*********************************
 			// Container Getter

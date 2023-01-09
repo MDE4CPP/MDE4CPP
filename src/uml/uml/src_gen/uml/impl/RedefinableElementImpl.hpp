@@ -61,24 +61,6 @@ namespace uml
 			*/
 			 
 			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) ;
-			/*!
-			A RedefinableElement can only redefine non-leaf RedefinableElements.
-			redefinedElement->forAll(re | not re.isLeaf)
-			*/
-			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A redefining element must be consistent with each redefined element.
-			redefinedElement->forAll(re | re.isConsistentWith(self))
-			*/
-			 
-			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
-			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
-			*/
-			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -106,18 +88,6 @@ namespace uml
 			// Union Reference Getters
 			//*********************************
 			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -134,7 +104,7 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -151,14 +121,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::RedefinableElement> m_thisRedefinableElementPtr;

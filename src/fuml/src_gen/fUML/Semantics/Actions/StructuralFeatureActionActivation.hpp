@@ -12,6 +12,7 @@
 #include <string>
 // forward declarations
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -44,19 +45,12 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Link;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
 	class Association;
+	class Element;
 	class Property;
 	class StructuralFeature;
 }
@@ -74,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API StructuralFeatureActionActivation: virtual public ActionActivation
+	class FUML_API StructuralFeatureActionActivation : virtual public ActionActivation
 	{
 		public:
  			StructuralFeatureActionActivation(const StructuralFeatureActionActivation &) {}
@@ -92,9 +86,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature> feature) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) = 0;
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinks(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue, std::shared_ptr<Any> endValue) = 0;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -107,7 +101,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

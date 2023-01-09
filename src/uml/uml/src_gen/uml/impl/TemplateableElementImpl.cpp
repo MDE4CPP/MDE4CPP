@@ -1,9 +1,13 @@
 
 #include "uml/impl/TemplateableElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -127,7 +131,7 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr templateBinding."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for templateBinding.")
 	}
 	
 	/*Subset*/
@@ -147,7 +151,7 @@ bool TemplateableElementImpl::isTemplate()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parameterableElements()
+std::shared_ptr<Bag<uml::ParameterableElement>> TemplateableElementImpl::parameterableElements()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -194,20 +198,6 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementI
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> TemplateableElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter
@@ -335,14 +325,14 @@ std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 			return eAny(getOwnedTemplateSignature(),uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2344
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-			return eAnyBag(getTemplateBinding(),uml::umlPackage::TEMPLATEBINDING_CLASS); //2343
+			return eEcoreContainerAny(getTemplateBinding(),uml::umlPackage::TEMPLATEBINDING_CLASS); //2343
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,54 +349,85 @@ bool TemplateableElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateableElementImpl::eSet(int featureID, Any newValue)
+bool TemplateableElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 		{
-			// CAST Any to uml::TemplateSignature
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
-			setOwnedTemplateSignature(_ownedTemplateSignature); //2344
-			return true;
-		}
-		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-		{
-			// CAST Any to Bag<uml::TemplateBinding>
-			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEBINDING_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList= newValue->get<std::shared_ptr<Bag<uml::TemplateBinding>>>();
-					std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding=getTemplateBinding();
-					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *_templateBinding)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(eObject);
+					if(_ownedTemplateSignature)
 					{
-						if (templateBindingList->find(indexTemplateBinding) == -1)
-						{
-							_templateBinding->erase(indexTemplateBinding);
-						}
+						setOwnedTemplateSignature(_ownedTemplateSignature); //2344
 					}
-
-					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *templateBindingList)
+					else
 					{
-						if (_templateBinding->find(indexTemplateBinding) == -1)
-						{
-							_templateBinding->add(indexTemplateBinding);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'ownedTemplateSignature'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'ownedTemplateSignature'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding = getTemplateBinding();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::TemplateBinding> valueToAdd = std::dynamic_pointer_cast<uml::TemplateBinding>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_templateBinding->find(valueToAdd) == -1)
+								{
+									_templateBinding->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'templateBinding'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'templateBinding'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -416,23 +437,23 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::TemplateableElement::isTemplate() : bool: 2563687071
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
 		{
-			result = eAny(this->isTemplate(),0,false);
+			result = eAny(this->isTemplate(), 0, false);
 			break;
 		}
 		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 3445105528
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();
-			return eAnyBag(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::ParameterableElement>> resultList = this->parameterableElements();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
 			break;
 		}
 

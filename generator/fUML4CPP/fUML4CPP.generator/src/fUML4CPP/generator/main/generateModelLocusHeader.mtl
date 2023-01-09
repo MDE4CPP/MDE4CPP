@@ -18,18 +18,20 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
+[template public generateModelLocusHeader(aPackage : Package)
+{
+upperName : String = aPackage.getPackageName().sanitize();
+originalName : String = aPackage.generateNamespacePath(false);
+}]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 
-#include "PSCS/Semantics/Loci/CS_Locus.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+//#include "PSCS/Semantics/Loci/CS_Locus.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]Locus: virtual public PSCS::Semantics::Loci::CS_Locus
+	class [upperName/]Locus: virtual public /*PSCS::Semantics::Loci::CS_Locus*/ fUML::Semantics::Loci::Locus
 	{
 		public: 
 			[upperName/]Locus (){};
@@ -40,7 +42,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>) = 0;
 	};
 }
 [endGuard(aPackage,'LocusExecution')/]
@@ -50,13 +52,12 @@ namespace [aPackage.generateNamespace(false)/]
 [startGuard(aPackage,'LocusImpl_Execution')/]
 
 #include "../[upperName/]Locus.hpp"
-#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
+//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]LocusImpl :virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public [upperName/]Locus
+	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
 	{
 		private:    
 			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
@@ -70,8 +71,8 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
-			virtual void setThisLocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisLocusPtr){PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr);};
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
+			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
 	};
 }
 [endGuard(aPackage,'LocusImpl_Execution')/]

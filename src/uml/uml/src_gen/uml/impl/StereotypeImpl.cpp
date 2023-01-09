@@ -1,9 +1,13 @@
 
 #include "uml/impl/StereotypeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -190,7 +194,7 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr icon."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for icon.")
 	}
 	/*Subset*/
 	getIcon()->initSubset(getOwnedElement());
@@ -212,37 +216,12 @@ std::shared_ptr<ecore::EObject> StereotypeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StereotypeImpl::associationEndOwnership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool StereotypeImpl::base_property_multiplicity_multiple_extension(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool StereotypeImpl::base_property_multiplicity_single_extension(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool StereotypeImpl::base_property_upper_bound(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool StereotypeImpl::binaryAssociationsOnly(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 std::shared_ptr<uml::Profile> StereotypeImpl::containingProfile()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class> metaclass,bool isRequired)
+std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class> metaclass, bool isRequired)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -252,17 +231,12 @@ std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string location)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format,std::string content)
+std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format, std::string content)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StereotypeImpl::generalize(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getAllExtendedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> StereotypeImpl::getAllExtendedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -272,7 +246,7 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::getDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getExtendedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> StereotypeImpl::getExtendedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -288,11 +262,6 @@ std::string StereotypeImpl::getKeyword(bool localize)
 }
 
 
-
-bool StereotypeImpl::name_not_clash(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -331,142 +300,6 @@ std::shared_ptr<uml::Profile> StereotypeImpl::getProfile() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> StereotypeImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> StereotypeImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> StereotypeImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> StereotypeImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> StereotypeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StereotypeImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> StereotypeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> StereotypeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StereotypeImpl::getRole() const
-{
-	if(m_role == nullptr)
-	{
-		/*SubsetUnion*/
-		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRole()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_role;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -614,12 +447,12 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-			return eAnyBag(getIcon(),uml::umlPackage::IMAGE_CLASS); //22353
+			return eEcoreContainerAny(getIcon(),uml::umlPackage::IMAGE_CLASS); //22353
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return eAny(getProfile(),uml::umlPackage::PROFILE_CLASS,false); //22354
 	}
@@ -638,46 +471,54 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	return ClassImpl::internalEIsSet(featureID);
 }
 
-bool StereotypeImpl::eSet(int featureID, Any newValue)
+bool StereotypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
-			// CAST Any to Bag<uml::Image>
-			if((newValue->isContainer()) && (uml::umlPackage::IMAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Image>> iconList= newValue->get<std::shared_ptr<Bag<uml::Image>>>();
-					std::shared_ptr<Bag<uml::Image>> _icon=getIcon();
-					for(const std::shared_ptr<uml::Image> indexIcon: *_icon)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (iconList->find(indexIcon) == -1)
+						std::shared_ptr<Bag<uml::Image>> _icon = getIcon();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_icon->erase(indexIcon);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Image> indexIcon: *iconList)
-					{
-						if (_icon->find(indexIcon) == -1)
-						{
-							_icon->add(indexIcon);
+							std::shared_ptr<uml::Image> valueToAdd = std::dynamic_pointer_cast<uml::Image>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_icon->find(valueToAdd) == -1)
+								{
+									_icon->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'icon'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'icon'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -687,96 +528,16 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StereotypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Stereotype::associationEndOwnership(Any, std::map) : bool: 970518141
-		case umlPackage::STEREOTYPE_OPERATION_ASSOCIATIONENDOWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->associationEndOwnership(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Stereotype::base_property_multiplicity_multiple_extension(Any, std::map) : bool: 1355961636
-		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->base_property_multiplicity_multiple_extension(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Stereotype::base_property_multiplicity_single_extension(Any, std::map) : bool: 547814422
-		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->base_property_multiplicity_single_extension(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Stereotype::base_property_upper_bound(Any, std::map) : bool: 3083226999
-		case umlPackage::STEREOTYPE_OPERATION_BASE_PROPERTY_UPPER_BOUND_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->base_property_upper_bound(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Stereotype::binaryAssociationsOnly(Any, std::map) : bool: 1954710553
-		case umlPackage::STEREOTYPE_OPERATION_BINARYASSOCIATIONSONLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->binaryAssociationsOnly(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 		// uml::Stereotype::containingProfile() : uml::Profile: 3116027671
 		case umlPackage::STEREOTYPE_OPERATION_CONTAININGPROFILE:
 		{
-			result = eAnyObject(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
+			result = eEcoreAny(this->containingProfile(), uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
 		// uml::Stereotype::createExtension(uml::Class, bool) : uml::Extension: 2355039413
@@ -785,14 +546,44 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'metaclass'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_metaclass;
-			std::list<Any>::const_iterator incoming_param_metaclass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_metaclass = (*incoming_param_metaclass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			Bag<Any>::const_iterator incoming_param_metaclass_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_metaclass_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_metaclass = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'metaclass'. Failed to invoke operation 'createExtension'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'isRequired'
 			//parameter 1
 			bool incoming_param_isRequired;
-			std::list<Any>::const_iterator incoming_param_isRequired_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isRequired = (*incoming_param_isRequired_arguments_citer)->get<bool >();
-			result = eAnyObject(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
+			Bag<Any>::const_iterator incoming_param_isRequired_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_isRequired = (*incoming_param_isRequired_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isRequired'. Failed to invoke operation 'createExtension'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createExtension(incoming_param_metaclass,incoming_param_isRequired), uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Stereotype::createIcon(std::string) : uml::Image: 4268768905
@@ -801,9 +592,18 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'location'
 			//parameter 0
 			std::string incoming_param_location;
-			std::list<Any>::const_iterator incoming_param_location_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_location = (*incoming_param_location_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
+			Bag<Any>::const_iterator incoming_param_location_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_location = (*incoming_param_location_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'location'. Failed to invoke operation 'createIcon'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createIcon(incoming_param_location), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
 		// uml::Stereotype::createIcon(std::string, std::string) : uml::Image: 1814185679
@@ -812,56 +612,58 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'format'
 			//parameter 0
 			std::string incoming_param_format;
-			std::list<Any>::const_iterator incoming_param_format_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_format = (*incoming_param_format_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_format_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_format = (*incoming_param_format_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'format'. Failed to invoke operation 'createIcon'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'content'
 			//parameter 1
 			std::string incoming_param_content;
-			std::list<Any>::const_iterator incoming_param_content_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_content = (*incoming_param_content_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
-			break;
-		}
-		// uml::Stereotype::generalize(Any, std::map) : bool: 3688775516
-		case umlPackage::STEREOTYPE_OPERATION_GENERALIZE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->generalize(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_content_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_content = (*incoming_param_content_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'content'. Failed to invoke operation 'createIcon'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createIcon(incoming_param_format,incoming_param_content), uml::umlPackage::IMAGE_CLASS);
 			break;
 		}
 		// uml::Stereotype::getAllExtendedMetaclasses() : uml::Class[*]: 912925586
 		case umlPackage::STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getAllExtendedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			std::shared_ptr<Bag<uml::Class>> resultList = this->getAllExtendedMetaclasses();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getDefinition() : ecore::EClass: 1669546995
 		case umlPackage::STEREOTYPE_OPERATION_GETDEFINITION:
 		{
-			result = eAnyObject(this->getDefinition(), ecore::ecorePackage::ECLASS_CLASS);
+			result = eEcoreAny(this->getDefinition(), ecore::ecorePackage::ECLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getExtendedMetaclasses() : uml::Class[*]: 1491956517
 		case umlPackage::STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getExtendedMetaclasses();
-			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
+			std::shared_ptr<Bag<uml::Class>> resultList = this->getExtendedMetaclasses();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Stereotype::getKeyword() : std::string: 263636712
 		case umlPackage::STEREOTYPE_OPERATION_GETKEYWORD:
 		{
-			result = eAny(this->getKeyword(),0,false);
+			result = eAny(this->getKeyword(), 0, false);
 			break;
 		}
 		// uml::Stereotype::getKeyword(bool) : std::string: 3455502248
@@ -870,25 +672,18 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'localize'
 			//parameter 0
 			bool incoming_param_localize;
-			std::list<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
-			result = eAny(this->getKeyword(incoming_param_localize),0,false);
-			break;
-		}
-		// uml::Stereotype::name_not_clash(Any, std::map) : bool: 344796417
-		case umlPackage::STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->name_not_clash(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'localize'. Failed to invoke operation 'getKeyword'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->getKeyword(incoming_param_localize), 0, false);
 			break;
 		}
 

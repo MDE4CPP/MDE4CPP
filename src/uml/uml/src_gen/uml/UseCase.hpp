@@ -7,7 +7,6 @@
 #ifndef UML_USECASE_HPP
 #define UML_USECASE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -81,7 +78,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API UseCase: virtual public BehavioredClassifier
+	class UML_API UseCase : virtual public BehavioredClassifier
 	{
 		public:
  			UseCase(const UseCase &) {}
@@ -104,36 +101,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() = 0;
-			/*!
-			UseCases can only be involved in binary Associations.
-			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
-			*/
-			 
-			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A UseCase cannot include UseCases that directly or indirectly include it.
-			not allIncludedUseCases()->includes(self)
-			*/
-			 
-			virtual bool cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A UseCase must have a name.
-			name -> notEmpty ()
-			*/
-			 
-			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			UseCases cannot have Associations to UseCases specifying the same subject.
-			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
-			   (
-			   let usecases: Set(UseCase) = a.memberEnd.type->select(oclIsKindOf(UseCase))->collect(oclAsType(UseCase))->asSet() in
-			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
-			   )
-			)
-			*/
-			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual std::shared_ptr<Bag<uml::UseCase>> allIncludedUseCases() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -170,49 +138,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			
 
 			//*********************************
 			// Container Getter

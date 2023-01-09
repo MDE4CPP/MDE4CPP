@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -18,11 +22,10 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,15 +40,12 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -93,28 +93,23 @@ ParameterValueImpl& ParameterValueImpl::operator=(const ParameterValueImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-
-	//copy references with no containment (soft copy)
-	m_parameter  = obj.getParameter();
-	//Clone references with containment (deep copy)
-	//clone reference 'values'
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList = obj.getValues();
+	std::shared_ptr<Bag<Any>> valuesList = obj.getValues();
 	if(valuesList)
-	{
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-		
-		
-		for(const std::shared_ptr<fUML::Semantics::Values::Value> valuesindexElem: *valuesList) 
+	{	
+		m_values.reset(new Bag<Any>());
+		for(const std::shared_ptr<Any> it: *valuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::Values::Value> temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((valuesindexElem)->copy());
-			m_values->push_back(temp);
+			m_values->push_back(it);
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr values."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for values.")
 	}
-	
+
+	//copy references with no containment (soft copy)
+	m_parameter  = obj.getParameter();
+	//Clone references with containment (deep copy)
 	return *this;
 }
 
@@ -139,13 +134,15 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueI
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> newValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 newValue->setParameter(this->getParameter());
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+std::shared_ptr<Bag<Any>> values = this->getValues();
 unsigned int valuesSize = values->size();
 
 for(unsigned int i = 0; i < valuesSize; i++)
 {
-	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
+	std::shared_ptr<Any> value = values->at(i);
+	/* Currently not supported
 	newValue->getValues()->add(value->_copy());
+	*/
 }
 
 return newValue;
@@ -155,6 +152,15 @@ return newValue;
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute values */
+std::shared_ptr<Bag<Any>> ParameterValueImpl::getValues() const 
+{
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<Any>());
+	}
+	return m_values;
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -168,18 +174,6 @@ void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter
 {
     m_parameter = _parameter;
 	
-}
-
-/* Getter & Setter for reference values */
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValues() const
-{
-	if(m_values == nullptr)
-	{
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-		
-		
-	}
-    return m_values;
 }
 
 //*********************************
@@ -240,20 +234,12 @@ void ParameterValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-
 	try
 	{
-		if ( nodeName.compare("values") == 0 )
+		if (nodeName.compare("values") == 0)
 		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<fUML::Semantics::Values::Value>(this->getValues());  
-
-			return; 
+			std::cout << "| ERROR    | unhandled attribute with upperbound <> 1" << std::endl;
+			return;
 		}
 	}
 	catch (std::exception& e)
@@ -264,6 +250,7 @@ void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
+
 	//load BasePackage Nodes
 }
 
@@ -300,13 +287,6 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
 		saveHandler->addReference(this->getParameter(), "parameter", getParameter()->eClass() != uml::umlPackage::eInstance()->getParameter_Class()); 
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'values'
-
-		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());
 	}
 	catch (std::exception& e)
 	{
@@ -322,14 +302,14 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //870
+			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //860
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return eAnyBag(getValues(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS); //871
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //861
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -339,61 +319,77 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //870
+			return getParameter() != nullptr; //860
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //871
+			return getValues() != nullptr; //861
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ParameterValueImpl::eSet(int featureID, Any newValue)
+bool ParameterValueImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
-			// CAST Any to uml::Parameter
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
-			setParameter(_parameter); //870
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-		{
-			// CAST Any to Bag<fUML::Semantics::Values::Value>
-			if((newValue->isContainer()) && (fUML::Semantics::Values::ValuesPackage::VALUE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(eObject);
+					if(_parameter)
 					{
-						if (valuesList->find(indexValues) == -1)
-						{
-							_values->erase(indexValues);
-						}
+						setParameter(_parameter); //860
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
+					else
 					{
-						if (_values->find(indexValues) == -1)
-						{
-							_values->add(indexValues);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'parameter'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'parameter'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		{
+			try
+			{
+				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
+				std::shared_ptr<Bag<Any>> _values = getValues();
+				
+				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				{
+					if (valueToAdd)
+					{
+						if(_values->find(valueToAdd) == -1)
+						{
+							_values->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'values'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -403,16 +399,16 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// fUML::Semantics::CommonBehavior::ParameterValue::_copy() : fUML::Semantics::CommonBehavior::ParameterValue: 2742640749
 		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
 		{
-			result = eAnyObject(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			result = eEcoreAny(this->_copy(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 

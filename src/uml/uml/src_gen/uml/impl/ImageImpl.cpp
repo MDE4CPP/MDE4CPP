@@ -1,9 +1,13 @@
 
 #include "uml/impl/ImageImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -155,20 +159,6 @@ void ImageImpl::setLocation(std::string _location)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ImageImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter
@@ -304,7 +294,7 @@ std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -332,30 +322,51 @@ bool ImageImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ImageImpl::eSet(int featureID, Any newValue)
+bool ImageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
-			// CAST Any to std::string
-			std::string _content = newValue->get<std::string>();
-			setContent(_content); //1113
-			return true;
+			try
+			{
+				std::string _content = newValue->get<std::string>();
+				setContent(_content); //1113
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'content'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
-			// CAST Any to std::string
-			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //1114
-			return true;
+			try
+			{
+				std::string _format = newValue->get<std::string>();
+				setFormat(_format); //1114
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'format'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
-			// CAST Any to std::string
-			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //1115
-			return true;
+			try
+			{
+				std::string _location = newValue->get<std::string>();
+				setLocation(_location); //1115
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'location'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -365,9 +376,9 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ImageImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

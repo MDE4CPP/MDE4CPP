@@ -7,7 +7,6 @@
 #ifndef UML_TIMEEXPRESSION_HPP
 #define UML_TIMEEXPRESSION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -70,7 +67,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API TimeExpression: virtual public ValueSpecification
+	class UML_API TimeExpression : virtual public ValueSpecification
 	{
 		public:
  			TimeExpression(const TimeExpression &) {}
@@ -87,12 +84,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If a TimeExpression has no expr, then it must have a single observation that is a TimeObservation.
-			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))
-			*/
-			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -123,25 +114,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

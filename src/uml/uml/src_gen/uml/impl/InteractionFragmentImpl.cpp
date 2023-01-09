@@ -1,9 +1,13 @@
 
 #include "uml/impl/InteractionFragmentImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -153,7 +157,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr generalOrdering."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for generalOrdering.")
 	}
 	/*Subset*/
 	getGeneralOrdering()->initSubset(getOwnedElement());
@@ -233,30 +237,6 @@ std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentI
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> InteractionFragmentImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> InteractionFragmentImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> InteractionFragmentImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -443,24 +423,24 @@ std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
-			return eAnyBag(getCovered(),uml::umlPackage::LIFELINE_CLASS); //1219
+			return eEcoreContainerAny(getCovered(),uml::umlPackage::LIFELINE_CLASS); //1219
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //12111
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTION_CLASS); //12111
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS); //12110
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS); //12110
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-			return eAnyBag(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
+			return eEcoreContainerAny(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -481,99 +461,161 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
+bool InteractionFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			// CAST Any to Bag<uml::Lifeline>
-			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Lifeline>> coveredList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
-					std::shared_ptr<Bag<uml::Lifeline>> _covered=getCovered();
-					for(const std::shared_ptr<uml::Lifeline> indexCovered: *_covered)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (coveredList->find(indexCovered) == -1)
+						std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_covered->erase(indexCovered);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Lifeline> indexCovered: *coveredList)
-					{
-						if (_covered->find(indexCovered) == -1)
-						{
-							_covered->add(indexCovered);
+							std::shared_ptr<uml::Lifeline> valueToAdd = std::dynamic_pointer_cast<uml::Lifeline>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_covered->find(valueToAdd) == -1)
+								{
+									_covered->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'covered'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'covered'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
-			// CAST Any to uml::Interaction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setEnclosingInteraction(_enclosingInteraction); //12111
-			return true;
-		}
-		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-		{
-			// CAST Any to uml::InteractionOperand
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(_temp);
-			setEnclosingOperand(_enclosingOperand); //12110
-			return true;
-		}
-		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-		{
-			// CAST Any to Bag<uml::GeneralOrdering>
-			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering=getGeneralOrdering();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *_generalOrdering)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(eObject);
+					if(_enclosingInteraction)
 					{
-						if (generalOrderingList->find(indexGeneralOrdering) == -1)
-						{
-							_generalOrdering->erase(indexGeneralOrdering);
-						}
+						setEnclosingInteraction(_enclosingInteraction); //12111
 					}
-
-					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *generalOrderingList)
+					else
 					{
-						if (_generalOrdering->find(indexGeneralOrdering) == -1)
-						{
-							_generalOrdering->add(indexGeneralOrdering);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'enclosingInteraction'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'enclosingInteraction'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(eObject);
+					if(_enclosingOperand)
+					{
+						setEnclosingOperand(_enclosingOperand); //12110
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'enclosingOperand'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'enclosingOperand'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering = getGeneralOrdering();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_generalOrdering->find(valueToAdd) == -1)
+								{
+									_generalOrdering->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'generalOrdering'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'generalOrdering'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -583,9 +625,9 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

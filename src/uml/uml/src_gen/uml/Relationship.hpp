@@ -54,7 +54,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API Relationship: virtual public Element
+	class UML_API Relationship : virtual public Element
 	{
 		public:
  			Relationship(const Relationship &) {}
@@ -84,12 +84,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 			/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>

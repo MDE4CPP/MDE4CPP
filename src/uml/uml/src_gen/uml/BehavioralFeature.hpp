@@ -7,7 +7,6 @@
 #ifndef UML_BEHAVIORALFEATURE_HPP
 #define UML_BEHAVIORALFEATURE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -74,7 +71,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API BehavioralFeature: virtual public Feature, virtual public Namespace
+	class UML_API BehavioralFeature : virtual public Feature, virtual public Namespace
 	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}
@@ -92,30 +89,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			When isAbstract is true there are no methods.
-			isAbstract implies method->isEmpty()
-			*/
-			 
-			virtual bool abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) = 0;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name, std::shared_ptr<uml::Type> type) = 0;
 			/*!
 			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() = 0;
 			/*!
 			The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -176,30 +167,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

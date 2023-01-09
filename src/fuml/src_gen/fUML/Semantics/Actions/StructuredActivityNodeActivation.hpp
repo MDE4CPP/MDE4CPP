@@ -13,6 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -45,10 +46,6 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Action;
@@ -70,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API StructuredActivityNodeActivation: virtual public ActionActivation
+	class FUML_API StructuredActivityNodeActivation : virtual public ActionActivation
 	{
 		public:
  			StructuredActivityNodeActivation(const StructuredActivityNodeActivation &) {}
@@ -87,17 +84,17 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() = 0;
 			virtual void createEdgeInstances() = 0;
 			virtual void createNodeActivations() = 0;
 			virtual void doAction() = 0;
 			virtual void doStructuredActivity() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin> pin) = 0;
+			virtual std::shared_ptr<Bag<Any>> getPinValues(std::shared_ptr<uml::OutputPin> pin) = 0;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
 			virtual bool isSuspended() = 0;
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) = 0;
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) = 0;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Bag<Any>> values) = 0;
 			virtual void resume() = 0;
 			virtual void terminate() = 0;
 			virtual void terminateAll() = 0;
@@ -115,7 +112,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

@@ -49,12 +49,12 @@ namespace fUML::Semantics::Activities
 			virtual void clearTokens() ;
 			virtual int countOfferedValues() ;
 			virtual int countUnofferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getUnofferedTokens() ;
 			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
 			virtual void run() ;
 			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
 			virtual void sendUnofferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeUnofferedTokens() ;
 			virtual void terminate() ;
 			
 			//*********************************
@@ -75,7 +75,7 @@ namespace fUML::Semantics::Activities
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -92,14 +92,14 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ObjectNodeActivation> m_thisObjectNodeActivationPtr;

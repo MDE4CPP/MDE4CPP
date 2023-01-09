@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -22,11 +22,8 @@
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
-#include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -55,9 +52,6 @@ void ActivitiesPackageImpl::initializePackageContents()
 	m_controlToken_Class->getESuperTypes()->push_back(getToken_Class());
 	m_dataStoreNodeActivation_Class->getESuperTypes()->push_back(getCentralBufferNodeActivation_Class());
 	m_decisionNodeActivation_Class->getESuperTypes()->push_back(getControlNodeActivation_Class());
-	m_expansionActivationGroup_Class->getESuperTypes()->push_back(getActivityNodeActivationGroup_Class());
-	m_expansionNodeActivation_Class->getESuperTypes()->push_back(getObjectNodeActivation_Class());
-	m_expansionRegionActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Class());
 	m_flowFinalNodeActivation_Class->getESuperTypes()->push_back(getControlNodeActivation_Class());
 	m_forkNodeActivation_Class->getESuperTypes()->push_back(getControlNodeActivation_Class());
 	m_forkedToken_Class->getESuperTypes()->push_back(getToken_Class());
@@ -76,15 +70,10 @@ void ActivitiesPackageImpl::initializePackageContents()
 	initializeActivityNodeActivationGroupContent();
 	initializeActivityParameterNodeActivationContent();
 	initializeCentralBufferNodeActivationContent();
-	initializeClassifierBehaviorExecutionActivityContent();
-	initializeClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content();
 	initializeControlNodeActivationContent();
 	initializeControlTokenContent();
 	initializeDataStoreNodeActivationContent();
 	initializeDecisionNodeActivationContent();
-	initializeExpansionActivationGroupContent();
-	initializeExpansionNodeActivationContent();
-	initializeExpansionRegionActivationContent();
 	initializeFlowFinalNodeActivationContent();
 	initializeForkNodeActivationContent();
 	initializeForkedTokenContent();
@@ -107,7 +96,15 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Class->setAbstract(false);
 	m_activityEdgeInstance_Class->setInterface(false);
 	
+	m_activityEdgeInstance_Class->_setID(ACTIVITYEDGEINSTANCE_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_activityEdgeInstance_Attribute_edge->setName("edge");
 	m_activityEdgeInstance_Attribute_edge->setEType(uml::umlPackage::eInstance()->getActivityEdge_Class());
 	m_activityEdgeInstance_Attribute_edge->setLowerBound(0);
@@ -121,15 +118,9 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_edge->setOrdered(false);
 	m_activityEdgeInstance_Attribute_edge->setContainment(false);
 	m_activityEdgeInstance_Attribute_edge->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityEdgeInstance_Attribute_edge->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_activityEdgeInstance_Attribute_edge->setDefaultValueLiteral("");	
+	
+	m_activityEdgeInstance_Attribute_edge->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE);
 	m_activityEdgeInstance_Attribute_group->setName("group");
 	m_activityEdgeInstance_Attribute_group->setEType(getActivityNodeActivationGroup_Class());
 	m_activityEdgeInstance_Attribute_group->setLowerBound(1);
@@ -143,18 +134,10 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_group->setOrdered(false);
 	m_activityEdgeInstance_Attribute_group->setContainment(false);
 	m_activityEdgeInstance_Attribute_group->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityEdgeInstance_Attribute_group->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_edgeInstances();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdgeInstance_Attribute_group->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityEdgeInstance_Attribute_group->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_group->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_edgeInstances());
+	
+	m_activityEdgeInstance_Attribute_group->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP);
 	m_activityEdgeInstance_Attribute_offers->setName("offers");
 	m_activityEdgeInstance_Attribute_offers->setEType(getOffer_Class());
 	m_activityEdgeInstance_Attribute_offers->setLowerBound(0);
@@ -168,15 +151,9 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_offers->setOrdered(false);
 	m_activityEdgeInstance_Attribute_offers->setContainment(false);
 	m_activityEdgeInstance_Attribute_offers->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityEdgeInstance_Attribute_offers->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_activityEdgeInstance_Attribute_offers->setDefaultValueLiteral("");	
+	
+	m_activityEdgeInstance_Attribute_offers->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS);
 	m_activityEdgeInstance_Attribute_source->setName("source");
 	m_activityEdgeInstance_Attribute_source->setEType(getActivityNodeActivation_Class());
 	m_activityEdgeInstance_Attribute_source->setLowerBound(1);
@@ -190,18 +167,10 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_source->setOrdered(false);
 	m_activityEdgeInstance_Attribute_source->setContainment(false);
 	m_activityEdgeInstance_Attribute_source->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityEdgeInstance_Attribute_source->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_outgoingEdges();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdgeInstance_Attribute_source->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityEdgeInstance_Attribute_source->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_source->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_outgoingEdges());
+	
+	m_activityEdgeInstance_Attribute_source->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE);
 	m_activityEdgeInstance_Attribute_target->setName("target");
 	m_activityEdgeInstance_Attribute_target->setEType(getActivityNodeActivation_Class());
 	m_activityEdgeInstance_Attribute_target->setLowerBound(1);
@@ -215,25 +184,23 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_target->setOrdered(false);
 	m_activityEdgeInstance_Attribute_target->setContainment(false);
 	m_activityEdgeInstance_Attribute_target->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityEdgeInstance_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_incomingEdges();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdgeInstance_Attribute_target->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityEdgeInstance_Attribute_target->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_target->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_incomingEdges());
 	
+	m_activityEdgeInstance_Attribute_target->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET);
+	
+	/*
+	 * EOperations
+	 */
 	m_activityEdgeInstance_Operation_countOfferedValue->setName("countOfferedValue");
 	m_activityEdgeInstance_Operation_countOfferedValue->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_activityEdgeInstance_Operation_countOfferedValue->setLowerBound(1);
 	m_activityEdgeInstance_Operation_countOfferedValue->setUpperBound(1);
 	m_activityEdgeInstance_Operation_countOfferedValue->setUnique(true);
 	m_activityEdgeInstance_Operation_countOfferedValue->setOrdered(false);
+	
+	m_activityEdgeInstance_Operation_countOfferedValue->_setID(ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE);
+	
 	
 	m_activityEdgeInstance_Operation_getOfferedTokens->setName("getOfferedTokens");
 	m_activityEdgeInstance_Operation_getOfferedTokens->setEType(getToken_Class());
@@ -242,12 +209,18 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Operation_getOfferedTokens->setUnique(true);
 	m_activityEdgeInstance_Operation_getOfferedTokens->setOrdered(false);
 	
+	m_activityEdgeInstance_Operation_getOfferedTokens->_setID(ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS);
+	
+	
 	m_activityEdgeInstance_Operation_hasOffer->setName("hasOffer");
 	m_activityEdgeInstance_Operation_hasOffer->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityEdgeInstance_Operation_hasOffer->setLowerBound(1);
 	m_activityEdgeInstance_Operation_hasOffer->setUpperBound(1);
 	m_activityEdgeInstance_Operation_hasOffer->setUnique(true);
 	m_activityEdgeInstance_Operation_hasOffer->setOrdered(false);
+	
+	m_activityEdgeInstance_Operation_hasOffer->_setID(ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER);
+	
 	
 	m_activityEdgeInstance_Operation_sendOffer_Token->setName("sendOffer");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -261,6 +234,9 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Operation_sendOffer_Token->setUpperBound(1);
 	m_activityEdgeInstance_Operation_sendOffer_Token->setUnique(true);
 	m_activityEdgeInstance_Operation_sendOffer_Token->setOrdered(false);
+	
+	m_activityEdgeInstance_Operation_sendOffer_Token->_setID(ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityEdgeInstance_Operation_sendOffer_Token);
 		parameter->setName("tokens");
@@ -278,12 +254,18 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Operation_takeOfferedTokens->setUnique(true);
 	m_activityEdgeInstance_Operation_takeOfferedTokens->setOrdered(false);
 	
+	m_activityEdgeInstance_Operation_takeOfferedTokens->_setID(ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS);
+	
+	
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setName("takeOfferedTokens");
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setEType(getToken_Class());
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setLowerBound(0);
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setUpperBound(-1);
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setUnique(true);
 	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->setOrdered(false);
+	
+	m_activityEdgeInstance_Operation_takeOfferedTokens_EInt->_setID(ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityEdgeInstance_Operation_takeOfferedTokens_EInt);
 		parameter->setName("maxCount");
@@ -303,7 +285,15 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Class->setAbstract(false);
 	m_activityExecution_Class->setInterface(false);
 	
+	m_activityExecution_Class->_setID(ACTIVITYEXECUTION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_activityExecution_Attribute_activationGroup->setName("activationGroup");
 	m_activityExecution_Attribute_activationGroup->setEType(getActivityNodeActivationGroup_Class());
 	m_activityExecution_Attribute_activationGroup->setLowerBound(1);
@@ -317,18 +307,10 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Attribute_activationGroup->setOrdered(false);
 	m_activityExecution_Attribute_activationGroup->setContainment(true);
 	m_activityExecution_Attribute_activationGroup->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityExecution_Attribute_activationGroup->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_activityExecution();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityExecution_Attribute_activationGroup->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityExecution_Attribute_activationGroup->setDefaultValueLiteral("");	
+	m_activityExecution_Attribute_activationGroup->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_activityExecution());
+	
+	m_activityExecution_Attribute_activationGroup->_setID(ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP);
 	m_activityExecution_Attribute_activity->setName("activity");
 	m_activityExecution_Attribute_activity->setEType(uml::umlPackage::eInstance()->getActivity_Class());
 	m_activityExecution_Attribute_activity->setLowerBound(1);
@@ -342,22 +324,22 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Attribute_activity->setOrdered(true);
 	m_activityExecution_Attribute_activity->setContainment(false);
 	m_activityExecution_Attribute_activity->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityExecution_Attribute_activity->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_activityExecution_Attribute_activity->setDefaultValueLiteral("");	
 	
+	m_activityExecution_Attribute_activity->_setID(ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY);
+	
+	/*
+	 * EOperations
+	 */
 	m_activityExecution_Operation__copy->setName("_copy");
-	m_activityExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation__copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_activityExecution_Operation__copy->setLowerBound(1);
 	m_activityExecution_Operation__copy->setUpperBound(1);
 	m_activityExecution_Operation__copy->setUnique(true);
 	m_activityExecution_Operation__copy->setOrdered(true);
+	
+	m_activityExecution_Operation__copy->_setID(ACTIVITYEXECUTION_OPERATION__COPY);
+	
 	
 	m_activityExecution_Operation_execute->setName("execute");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -372,12 +354,18 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Operation_execute->setUnique(true);
 	m_activityExecution_Operation_execute->setOrdered(false);
 	
+	m_activityExecution_Operation_execute->_setID(ACTIVITYEXECUTION_OPERATION_EXECUTE);
+	
+	
 	m_activityExecution_Operation_new_->setName("new_");
-	m_activityExecution_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_activityExecution_Operation_new_->setLowerBound(1);
 	m_activityExecution_Operation_new_->setUpperBound(1);
 	m_activityExecution_Operation_new_->setUnique(true);
 	m_activityExecution_Operation_new_->setOrdered(false);
+	
+	m_activityExecution_Operation_new_->_setID(ACTIVITYEXECUTION_OPERATION_NEW_);
+	
 	
 	m_activityExecution_Operation_terminate->setName("terminate");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -392,6 +380,9 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Operation_terminate->setUnique(true);
 	m_activityExecution_Operation_terminate->setOrdered(false);
 	
+	m_activityExecution_Operation_terminate->_setID(ACTIVITYEXECUTION_OPERATION_TERMINATE);
+	
+	
 	
 }
 
@@ -401,8 +392,19 @@ void ActivitiesPackageImpl::initializeActivityFinalNodeActivationContent()
 	m_activityFinalNodeActivation_Class->setAbstract(false);
 	m_activityFinalNodeActivation_Class->setInterface(false);
 	
+	m_activityFinalNodeActivation_Class->_setID(ACTIVITYFINALNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_activityFinalNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -415,6 +417,9 @@ void ActivitiesPackageImpl::initializeActivityFinalNodeActivationContent()
 	m_activityFinalNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_activityFinalNodeActivation_Operation_fire_Token->setUnique(true);
 	m_activityFinalNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_activityFinalNodeActivation_Operation_fire_Token->_setID(ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityFinalNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -434,9 +439,14 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Class->setAbstract(true);
 	m_activityNodeActivation_Class->setInterface(false);
 	
+	m_activityNodeActivation_Class->_setID(ACTIVITYNODEACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	m_activityNodeActivation_Attribute_running = getActivityNodeActivation_Attribute_running();
 	m_activityNodeActivation_Attribute_running->setName("running");
-		m_activityNodeActivation_Attribute_running->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_activityNodeActivation_Attribute_running->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityNodeActivation_Attribute_running->setLowerBound(1);
 	m_activityNodeActivation_Attribute_running->setUpperBound(1);
 	m_activityNodeActivation_Attribute_running->setTransient(false);
@@ -447,14 +457,13 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_running->setDerived(false);
 	m_activityNodeActivation_Attribute_running->setOrdered(false);
 	m_activityNodeActivation_Attribute_running->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_activityNodeActivation_Attribute_running->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_activityNodeActivation_Attribute_running->setDefaultValueLiteral("");
 	
+	m_activityNodeActivation_Attribute_running->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING);
+	
+	/*
+	 * EReferences
+	 */
 	m_activityNodeActivation_Attribute_group->setName("group");
 	m_activityNodeActivation_Attribute_group->setEType(getActivityNodeActivationGroup_Class());
 	m_activityNodeActivation_Attribute_group->setLowerBound(1);
@@ -468,18 +477,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_group->setOrdered(false);
 	m_activityNodeActivation_Attribute_group->setContainment(false);
 	m_activityNodeActivation_Attribute_group->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivation_Attribute_group->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_nodeActivations();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivation_Attribute_group->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivation_Attribute_group->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_group->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_nodeActivations());
+	
+	m_activityNodeActivation_Attribute_group->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP);
 	m_activityNodeActivation_Attribute_heldTokens->setName("heldTokens");
 	m_activityNodeActivation_Attribute_heldTokens->setEType(getToken_Class());
 	m_activityNodeActivation_Attribute_heldTokens->setLowerBound(0);
@@ -493,18 +494,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_heldTokens->setOrdered(false);
 	m_activityNodeActivation_Attribute_heldTokens->setContainment(true);
 	m_activityNodeActivation_Attribute_heldTokens->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivation_Attribute_heldTokens->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Attribute_holder();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivation_Attribute_heldTokens->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivation_Attribute_heldTokens->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_heldTokens->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Attribute_holder());
+	
+	m_activityNodeActivation_Attribute_heldTokens->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS);
 	m_activityNodeActivation_Attribute_incomingEdges->setName("incomingEdges");
 	m_activityNodeActivation_Attribute_incomingEdges->setEType(getActivityEdgeInstance_Class());
 	m_activityNodeActivation_Attribute_incomingEdges->setLowerBound(0);
@@ -518,18 +511,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_incomingEdges->setOrdered(false);
 	m_activityNodeActivation_Attribute_incomingEdges->setContainment(false);
 	m_activityNodeActivation_Attribute_incomingEdges->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivation_Attribute_incomingEdges->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_target();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivation_Attribute_incomingEdges->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivation_Attribute_incomingEdges->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_incomingEdges->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_target());
+	
+	m_activityNodeActivation_Attribute_incomingEdges->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES);
 	m_activityNodeActivation_Attribute_node->setName("node");
 	m_activityNodeActivation_Attribute_node->setEType(uml::umlPackage::eInstance()->getActivityNode_Class());
 	m_activityNodeActivation_Attribute_node->setLowerBound(0);
@@ -543,15 +528,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_node->setOrdered(false);
 	m_activityNodeActivation_Attribute_node->setContainment(false);
 	m_activityNodeActivation_Attribute_node->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivation_Attribute_node->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_activityNodeActivation_Attribute_node->setDefaultValueLiteral("");	
+	
+	m_activityNodeActivation_Attribute_node->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE);
 	m_activityNodeActivation_Attribute_outgoingEdges->setName("outgoingEdges");
 	m_activityNodeActivation_Attribute_outgoingEdges->setEType(getActivityEdgeInstance_Class());
 	m_activityNodeActivation_Attribute_outgoingEdges->setLowerBound(0);
@@ -565,19 +544,14 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_outgoingEdges->setOrdered(false);
 	m_activityNodeActivation_Attribute_outgoingEdges->setContainment(false);
 	m_activityNodeActivation_Attribute_outgoingEdges->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivation_Attribute_outgoingEdges->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_source();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivation_Attribute_outgoingEdges->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivation_Attribute_outgoingEdges->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_outgoingEdges->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_source());
 	
+	m_activityNodeActivation_Attribute_outgoingEdges->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES);
+	
+	/*
+	 * EOperations
+	 */
 	m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance->setName("addIncomingEdge");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -590,6 +564,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance->setUpperBound(1);
 	m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance->setUnique(true);
 	m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance->_setID(ACTIVITYNODEACTIVATION_OPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance);
 		parameter->setName("edge");
@@ -612,6 +589,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance->setUpperBound(1);
 	m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance->setUnique(true);
 	m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance->_setID(ACTIVITYNODEACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance);
 		parameter->setName("edge");
@@ -634,6 +614,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_addToken_Token->setUpperBound(1);
 	m_activityNodeActivation_Operation_addToken_Token->setUnique(true);
 	m_activityNodeActivation_Operation_addToken_Token->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_addToken_Token->_setID(ACTIVITYNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_addToken_Token);
 		parameter->setName("token");
@@ -656,6 +639,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_addTokens_Token->setUpperBound(1);
 	m_activityNodeActivation_Operation_addTokens_Token->setUnique(true);
 	m_activityNodeActivation_Operation_addTokens_Token->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_addTokens_Token->_setID(ACTIVITYNODEACTIVATION_OPERATION_ADDTOKENS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_addTokens_Token);
 		parameter->setName("tokens");
@@ -679,6 +665,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_clearTokens->setUnique(true);
 	m_activityNodeActivation_Operation_clearTokens->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_clearTokens->_setID(ACTIVITYNODEACTIVATION_OPERATION_CLEARTOKENS);
+	
+	
 	m_activityNodeActivation_Operation_createEdgeInstances->setName("createEdgeInstances");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -691,6 +680,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_createEdgeInstances->setUpperBound(1);
 	m_activityNodeActivation_Operation_createEdgeInstances->setUnique(true);
 	m_activityNodeActivation_Operation_createEdgeInstances->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_createEdgeInstances->_setID(ACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES);
+	
 	
 	m_activityNodeActivation_Operation_createNodeActivations->setName("createNodeActivations");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -705,6 +697,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_createNodeActivations->setUnique(true);
 	m_activityNodeActivation_Operation_createNodeActivations->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_createNodeActivations->_setID(ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS);
+	
+	
 	m_activityNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -717,6 +712,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_activityNodeActivation_Operation_fire_Token->setUnique(true);
 	m_activityNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_fire_Token->_setID(ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -734,12 +732,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_getActivityExecution->setUnique(true);
 	m_activityNodeActivation_Operation_getActivityExecution->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_getActivityExecution->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION);
+	
+	
 	m_activityNodeActivation_Operation_getExecutionContext->setName("getExecutionContext");
-	m_activityNodeActivation_Operation_getExecutionContext->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
+	m_activityNodeActivation_Operation_getExecutionContext->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_activityNodeActivation_Operation_getExecutionContext->setLowerBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUpperBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUnique(true);
 	m_activityNodeActivation_Operation_getExecutionContext->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_getExecutionContext->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT);
+	
 	
 	m_activityNodeActivation_Operation_getExecutionLocus->setName("getExecutionLocus");
 	m_activityNodeActivation_Operation_getExecutionLocus->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class());
@@ -748,12 +752,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_getExecutionLocus->setUnique(true);
 	m_activityNodeActivation_Operation_getExecutionLocus->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_getExecutionLocus->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS);
+	
+	
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setEType(getActivityNodeActivation_Class());
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setUnique(true);
 	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_getNodeActivation_ActivityNode->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_getNodeActivation_ActivityNode);
 		parameter->setName("node");
@@ -771,12 +781,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_getRunning->setUnique(true);
 	m_activityNodeActivation_Operation_getRunning->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_getRunning->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING);
+	
+	
 	m_activityNodeActivation_Operation_getTokens->setName("getTokens");
 	m_activityNodeActivation_Operation_getTokens->setEType(getToken_Class());
 	m_activityNodeActivation_Operation_getTokens->setLowerBound(0);
 	m_activityNodeActivation_Operation_getTokens->setUpperBound(-1);
 	m_activityNodeActivation_Operation_getTokens->setUnique(true);
 	m_activityNodeActivation_Operation_getTokens->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_getTokens->_setID(ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS);
+	
 	
 	m_activityNodeActivation_Operation_isReady->setName("isReady");
 	m_activityNodeActivation_Operation_isReady->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
@@ -785,12 +801,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_isReady->setUnique(true);
 	m_activityNodeActivation_Operation_isReady->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_isReady->_setID(ACTIVITYNODEACTIVATION_OPERATION_ISREADY);
+	
+	
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setName("isSourceFor");
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setLowerBound(1);
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setUpperBound(1);
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setUnique(true);
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance->_setID(ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance);
 		parameter->setName("edgeInstances");
@@ -814,12 +836,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_receiveOffer->setUnique(true);
 	m_activityNodeActivation_Operation_receiveOffer->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_receiveOffer->_setID(ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER);
+	
+	
 	m_activityNodeActivation_Operation_removeToken_Token->setName("removeToken");
 	m_activityNodeActivation_Operation_removeToken_Token->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_activityNodeActivation_Operation_removeToken_Token->setLowerBound(1);
 	m_activityNodeActivation_Operation_removeToken_Token->setUpperBound(1);
 	m_activityNodeActivation_Operation_removeToken_Token->setUnique(true);
 	m_activityNodeActivation_Operation_removeToken_Token->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_removeToken_Token->_setID(ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_removeToken_Token);
 		parameter->setName("token");
@@ -843,6 +871,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_resume->setUnique(true);
 	m_activityNodeActivation_Operation_resume->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_resume->_setID(ACTIVITYNODEACTIVATION_OPERATION_RESUME);
+	
+	
 	m_activityNodeActivation_Operation_run->setName("run");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -856,6 +887,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_run->setUnique(true);
 	m_activityNodeActivation_Operation_run->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_run->_setID(ACTIVITYNODEACTIVATION_OPERATION_RUN);
+	
+	
 	m_activityNodeActivation_Operation_sendOffers_Token->setName("sendOffers");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -868,6 +902,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_sendOffers_Token->setUpperBound(1);
 	m_activityNodeActivation_Operation_sendOffers_Token->setUnique(true);
 	m_activityNodeActivation_Operation_sendOffers_Token->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_sendOffers_Token->_setID(ACTIVITYNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_sendOffers_Token);
 		parameter->setName("tokens");
@@ -891,6 +928,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_suspend->setUnique(true);
 	m_activityNodeActivation_Operation_suspend->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_suspend->_setID(ACTIVITYNODEACTIVATION_OPERATION_SUSPEND);
+	
+	
 	m_activityNodeActivation_Operation_takeOfferedTokens->setName("takeOfferedTokens");
 	m_activityNodeActivation_Operation_takeOfferedTokens->setEType(getToken_Class());
 	m_activityNodeActivation_Operation_takeOfferedTokens->setLowerBound(0);
@@ -898,12 +938,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_takeOfferedTokens->setUnique(true);
 	m_activityNodeActivation_Operation_takeOfferedTokens->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_takeOfferedTokens->_setID(ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
+	
+	
 	m_activityNodeActivation_Operation_takeTokens->setName("takeTokens");
 	m_activityNodeActivation_Operation_takeTokens->setEType(getToken_Class());
 	m_activityNodeActivation_Operation_takeTokens->setLowerBound(1);
 	m_activityNodeActivation_Operation_takeTokens->setUpperBound(-1);
 	m_activityNodeActivation_Operation_takeTokens->setUnique(true);
 	m_activityNodeActivation_Operation_takeTokens->setOrdered(false);
+	
+	m_activityNodeActivation_Operation_takeTokens->_setID(ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS);
+	
 	
 	m_activityNodeActivation_Operation_terminate->setName("terminate");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -918,6 +964,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_terminate->setUnique(true);
 	m_activityNodeActivation_Operation_terminate->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_terminate->_setID(ACTIVITYNODEACTIVATION_OPERATION_TERMINATE);
+	
+	
 	
 }
 
@@ -927,7 +976,15 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Class->setAbstract(false);
 	m_activityNodeActivationGroup_Class->setInterface(false);
 	
+	m_activityNodeActivationGroup_Class->_setID(ACTIVITYNODEACTIVATIONGROUP_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_activityNodeActivationGroup_Attribute_activityExecution->setName("activityExecution");
 	m_activityNodeActivationGroup_Attribute_activityExecution->setEType(getActivityExecution_Class());
 	m_activityNodeActivationGroup_Attribute_activityExecution->setLowerBound(0);
@@ -941,18 +998,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_activityExecution->setOrdered(true);
 	m_activityNodeActivationGroup_Attribute_activityExecution->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_activityExecution->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivationGroup_Attribute_activityExecution->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Attribute_activationGroup();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivationGroup_Attribute_activityExecution->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivationGroup_Attribute_activityExecution->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_activityExecution->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Attribute_activationGroup());
+	
+	m_activityNodeActivationGroup_Attribute_activityExecution->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION);
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setName("containingNodeActivation");
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEType(fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Class());
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setLowerBound(0);
@@ -966,18 +1015,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEOpposite(fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup());
+	
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION);
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setName("edgeInstances");
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setEType(getActivityEdgeInstance_Class());
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setLowerBound(0);
@@ -991,18 +1032,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setContainment(true);
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivationGroup_Attribute_edgeInstances->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_group();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivationGroup_Attribute_edgeInstances->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivationGroup_Attribute_edgeInstances->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_edgeInstances->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_group());
+	
+	m_activityNodeActivationGroup_Attribute_edgeInstances->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES);
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setName("nodeActivations");
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setEType(getActivityNodeActivation_Class());
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setLowerBound(0);
@@ -1016,18 +1049,10 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setContainment(true);
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivationGroup_Attribute_nodeActivations->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_group();
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNodeActivationGroup_Attribute_nodeActivations->setEOpposite(otherEnd);
-	    }
-	}
+	m_activityNodeActivationGroup_Attribute_nodeActivations->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_nodeActivations->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_group());
+	
+	m_activityNodeActivationGroup_Attribute_nodeActivations->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setName("suspendedActivations");
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setEType(getActivityNodeActivation_Class());
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setLowerBound(0);
@@ -1041,16 +1066,13 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_activityNodeActivationGroup_Attribute_suspendedActivations->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_activityNodeActivationGroup_Attribute_suspendedActivations->setDefaultValueLiteral("");	
 	
+	m_activityNodeActivationGroup_Attribute_suspendedActivations->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS);
+	
+	/*
+	 * EOperations
+	 */
 	m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge->setName("activate");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1063,6 +1085,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge->setUnique(true);
 	m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge);
 		parameter->setName("nodes");
@@ -1095,6 +1120,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance->setUnique(true);
 	m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance);
 		parameter->setName("instance");
@@ -1117,6 +1145,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation->setUnique(true);
 	m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation);
 		parameter->setName("activation");
@@ -1133,6 +1164,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation->setUnique(true);
 	m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation);
 		parameter->setName("incomingEdges");
@@ -1165,6 +1199,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge->setUnique(true);
 	m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge);
 		parameter->setName("edges");
@@ -1181,6 +1218,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode->setUnique(true);
 	m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode);
 		parameter->setName("node");
@@ -1203,6 +1243,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode->setUnique(true);
 	m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode);
 		parameter->setName("nodes");
@@ -1219,6 +1262,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode->setUnique(true);
 	m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode);
 		parameter->setName("node");
@@ -1236,12 +1282,18 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_getOutputParameterNodeActivations->setUnique(true);
 	m_activityNodeActivationGroup_Operation_getOutputParameterNodeActivations->setOrdered(false);
 	
+	m_activityNodeActivationGroup_Operation_getOutputParameterNodeActivations->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS);
+	
+	
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setName("hasSourceFor");
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setLowerBound(1);
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setUnique(true);
 	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance);
 		parameter->setName("edgeInstance");
@@ -1259,6 +1311,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_isSuspended->setUnique(true);
 	m_activityNodeActivationGroup_Operation_isSuspended->setOrdered(false);
 	
+	m_activityNodeActivationGroup_Operation_isSuspended->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED);
+	
+	
 	m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation->setName("resume");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1271,6 +1326,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation->setUnique(true);
 	m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation);
 		parameter->setName("activation");
@@ -1288,6 +1346,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_retrieveActivityExecution->setUnique(true);
 	m_activityNodeActivationGroup_Operation_retrieveActivityExecution->setOrdered(false);
 	
+	m_activityNodeActivationGroup_Operation_retrieveActivityExecution->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION);
+	
+	
 	m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation->setName("run");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1300,6 +1361,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation->setUnique(true);
 	m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation);
 		parameter->setName("activations");
@@ -1322,6 +1386,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_runNodes_ActivityNode->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_runNodes_ActivityNode->setUnique(true);
 	m_activityNodeActivationGroup_Operation_runNodes_ActivityNode->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_runNodes_ActivityNode->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_runNodes_ActivityNode);
 		parameter->setName("nodes");
@@ -1344,6 +1411,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation->setUpperBound(1);
 	m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation->setUnique(true);
 	m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation->setOrdered(false);
+	
+	m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation);
 		parameter->setName("activation");
@@ -1367,6 +1437,9 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Operation_terminateAll->setUnique(true);
 	m_activityNodeActivationGroup_Operation_terminateAll->setOrdered(false);
 	
+	m_activityNodeActivationGroup_Operation_terminateAll->_setID(ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL);
+	
+	
 	
 }
 
@@ -1376,8 +1449,19 @@ void ActivitiesPackageImpl::initializeActivityParameterNodeActivationContent()
 	m_activityParameterNodeActivation_Class->setAbstract(false);
 	m_activityParameterNodeActivation_Class->setInterface(false);
 	
+	m_activityParameterNodeActivation_Class->_setID(ACTIVITYPARAMETERNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_activityParameterNodeActivation_Operation_clearTokens->setName("clearTokens");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1391,6 +1475,9 @@ void ActivitiesPackageImpl::initializeActivityParameterNodeActivationContent()
 	m_activityParameterNodeActivation_Operation_clearTokens->setUnique(true);
 	m_activityParameterNodeActivation_Operation_clearTokens->setOrdered(false);
 	
+	m_activityParameterNodeActivation_Operation_clearTokens->_setID(ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS);
+	
+	
 	m_activityParameterNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1403,6 +1490,9 @@ void ActivitiesPackageImpl::initializeActivityParameterNodeActivationContent()
 	m_activityParameterNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_activityParameterNodeActivation_Operation_fire_Token->setUnique(true);
 	m_activityParameterNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_activityParameterNodeActivation_Operation_fire_Token->_setID(ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityParameterNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -1422,8 +1512,19 @@ void ActivitiesPackageImpl::initializeCentralBufferNodeActivationContent()
 	m_centralBufferNodeActivation_Class->setAbstract(false);
 	m_centralBufferNodeActivation_Class->setInterface(false);
 	
+	m_centralBufferNodeActivation_Class->_setID(CENTRALBUFFERNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_centralBufferNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1436,6 +1537,9 @@ void ActivitiesPackageImpl::initializeCentralBufferNodeActivationContent()
 	m_centralBufferNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_centralBufferNodeActivation_Operation_fire_Token->setUnique(true);
 	m_centralBufferNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_centralBufferNodeActivation_Operation_fire_Token->_setID(CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_centralBufferNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -1449,36 +1553,25 @@ void ActivitiesPackageImpl::initializeCentralBufferNodeActivationContent()
 	
 }
 
-void ActivitiesPackageImpl::initializeClassifierBehaviorExecutionActivityContent()
-{
-	m_classifierBehaviorExecutionActivity_Class->setName("ClassifierBehaviorExecutionActivity");
-	m_classifierBehaviorExecutionActivity_Class->setAbstract(false);
-	m_classifierBehaviorExecutionActivity_Class->setInterface(false);
-	
-	
-	
-	
-}
-
-void ActivitiesPackageImpl::initializeClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content()
-{
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setName("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1");
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setAbstract(false);
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class->setInterface(false);
-	
-	
-	
-	
-}
-
 void ActivitiesPackageImpl::initializeControlNodeActivationContent()
 {
 	m_controlNodeActivation_Class->setName("ControlNodeActivation");
 	m_controlNodeActivation_Class->setAbstract(true);
 	m_controlNodeActivation_Class->setInterface(false);
 	
+	m_controlNodeActivation_Class->_setID(CONTROLNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_controlNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1491,6 +1584,9 @@ void ActivitiesPackageImpl::initializeControlNodeActivationContent()
 	m_controlNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_controlNodeActivation_Operation_fire_Token->setUnique(true);
 	m_controlNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_controlNodeActivation_Operation_fire_Token->_setID(CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_controlNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -1510,8 +1606,19 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 	m_controlToken_Class->setAbstract(false);
 	m_controlToken_Class->setInterface(false);
 	
+	m_controlToken_Class->_setID(CONTROLTOKEN_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_controlToken_Operation__copy->setName("_copy");
 	m_controlToken_Operation__copy->setEType(getToken_Class());
 	m_controlToken_Operation__copy->setLowerBound(1);
@@ -1519,12 +1626,18 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 	m_controlToken_Operation__copy->setUnique(true);
 	m_controlToken_Operation__copy->setOrdered(true);
 	
+	m_controlToken_Operation__copy->_setID(CONTROLTOKEN_OPERATION__COPY);
+	
+	
 	m_controlToken_Operation_equals_Token->setName("equals");
 	m_controlToken_Operation_equals_Token->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_controlToken_Operation_equals_Token->setLowerBound(1);
 	m_controlToken_Operation_equals_Token->setUpperBound(1);
 	m_controlToken_Operation_equals_Token->setUnique(true);
 	m_controlToken_Operation_equals_Token->setOrdered(false);
+	
+	m_controlToken_Operation_equals_Token->_setID(CONTROLTOKEN_OPERATION_EQUALS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_controlToken_Operation_equals_Token);
 		parameter->setName("other");
@@ -1542,6 +1655,9 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 	m_controlToken_Operation_isControl->setUnique(true);
 	m_controlToken_Operation_isControl->setOrdered(false);
 	
+	m_controlToken_Operation_isControl->_setID(CONTROLTOKEN_OPERATION_ISCONTROL);
+	
+	
 	
 }
 
@@ -1551,8 +1667,19 @@ void ActivitiesPackageImpl::initializeDataStoreNodeActivationContent()
 	m_dataStoreNodeActivation_Class->setAbstract(false);
 	m_dataStoreNodeActivation_Class->setInterface(false);
 	
+	m_dataStoreNodeActivation_Class->_setID(DATASTORENODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_dataStoreNodeActivation_Operation_addToken_Token->setName("addToken");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -1565,6 +1692,9 @@ void ActivitiesPackageImpl::initializeDataStoreNodeActivationContent()
 	m_dataStoreNodeActivation_Operation_addToken_Token->setUpperBound(1);
 	m_dataStoreNodeActivation_Operation_addToken_Token->setUnique(true);
 	m_dataStoreNodeActivation_Operation_addToken_Token->setOrdered(false);
+	
+	m_dataStoreNodeActivation_Operation_addToken_Token->_setID(DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataStoreNodeActivation_Operation_addToken_Token);
 		parameter->setName("token");
@@ -1581,6 +1711,9 @@ void ActivitiesPackageImpl::initializeDataStoreNodeActivationContent()
 	m_dataStoreNodeActivation_Operation_removeToken_Token->setUpperBound(1);
 	m_dataStoreNodeActivation_Operation_removeToken_Token->setUnique(true);
 	m_dataStoreNodeActivation_Operation_removeToken_Token->setOrdered(false);
+	
+	m_dataStoreNodeActivation_Operation_removeToken_Token->_setID(DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataStoreNodeActivation_Operation_removeToken_Token);
 		parameter->setName("token");
@@ -1600,29 +1733,15 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Class->setAbstract(false);
 	m_decisionNodeActivation_Class->setInterface(false);
 	
+	m_decisionNodeActivation_Class->_setID(DECISIONNODEACTIVATION_CLASS);
 	
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setName("decisionInputExecution");
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setLowerBound(1);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUpperBound(1);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setTransient(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setVolatile(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setChangeable(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUnsettable(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setUnique(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setDerived(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setOrdered(false);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setContainment(true);
-	m_decisionNodeActivation_Attribute_decisionInputExecution->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_decisionNodeActivation_Attribute_decisionInputExecution->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_decisionNodeActivation_Attribute_decisionNode->setName("decisionNode");
 	m_decisionNodeActivation_Attribute_decisionNode->setEType(uml::umlPackage::eInstance()->getDecisionNode_Class());
 	m_decisionNodeActivation_Attribute_decisionNode->setLowerBound(1);
@@ -1636,26 +1755,26 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Attribute_decisionNode->setOrdered(true);
 	m_decisionNodeActivation_Attribute_decisionNode->setContainment(false);
 	m_decisionNodeActivation_Attribute_decisionNode->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_decisionNodeActivation_Attribute_decisionNode->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_decisionNodeActivation_Attribute_decisionNode->setDefaultValueLiteral("");	
 	
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setName("executeDecisionInputBehavior");
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setLowerBound(1);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setUpperBound(1);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setUnique(true);
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value->setOrdered(false);
+	m_decisionNodeActivation_Attribute_decisionNode->_setID(DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
+	
+	/*
+	 * EOperations
+	 */
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setName("executeDecisionInputBehavior");
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setLowerBound(1);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setUpperBound(1);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setUnique(true);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject->_setID(DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
+	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject);
 		parameter->setName("inputValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1663,9 +1782,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject);
 		parameter->setName("decisionInputValue");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1684,6 +1803,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_decisionNodeActivation_Operation_fire_Token->setUnique(true);
 	m_decisionNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_fire_Token->_setID(DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -1701,19 +1823,28 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance->setUnique(true);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance->setOrdered(false);
 	
+	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance->_setID(DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE);
+	
+	
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setName("getDecisionInputFlowValue");
-	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setLowerBound(0);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setUpperBound(1);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setUnique(true);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->setOrdered(false);
 	
+	m_decisionNodeActivation_Operation_getDecisionInputFlowValue->_setID(DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE);
+	
+	
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setName("getDecisionValues");
-	m_decisionNodeActivation_Operation_getDecisionValues_Token->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_decisionNodeActivation_Operation_getDecisionValues_Token->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setLowerBound(0);
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setUpperBound(-1);
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setUnique(true);
 	m_decisionNodeActivation_Operation_getDecisionValues_Token->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_getDecisionValues_Token->_setID(DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_getDecisionValues_Token);
 		parameter->setName("incomingTokens");
@@ -1731,6 +1862,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_hasObjectFlowInput->setUnique(true);
 	m_decisionNodeActivation_Operation_hasObjectFlowInput->setOrdered(false);
 	
+	m_decisionNodeActivation_Operation_hasObjectFlowInput->_setID(DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT);
+	
+	
 	m_decisionNodeActivation_Operation_isReady->setName("isReady");
 	m_decisionNodeActivation_Operation_isReady->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNodeActivation_Operation_isReady->setLowerBound(1);
@@ -1738,12 +1872,18 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_isReady->setUnique(true);
 	m_decisionNodeActivation_Operation_isReady->setOrdered(false);
 	
+	m_decisionNodeActivation_Operation_isReady->_setID(DECISIONNODEACTIVATION_OPERATION_ISREADY);
+	
+	
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setName("removeJoinedControlTokens");
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setEType(getToken_Class());
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setLowerBound(0);
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setUpperBound(-1);
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setUnique(true);
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token->_setID(DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token);
 		parameter->setName("incomingTokens");
@@ -1761,28 +1901,21 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Operation_takeOfferedTokens->setUnique(true);
 	m_decisionNodeActivation_Operation_takeOfferedTokens->setOrdered(false);
 	
-	m_decisionNodeActivation_Operation_terminate->setName("terminate");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_decisionNodeActivation_Operation_terminate->setEType(unknownClass);
-	}
-	m_decisionNodeActivation_Operation_terminate->setLowerBound(1);
-	m_decisionNodeActivation_Operation_terminate->setUpperBound(1);
-	m_decisionNodeActivation_Operation_terminate->setUnique(true);
-	m_decisionNodeActivation_Operation_terminate->setOrdered(false);
+	m_decisionNodeActivation_Operation_takeOfferedTokens->_setID(DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
 	
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setName("test");
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setLowerBound(1);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setUpperBound(1);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setUnique(true);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setName("test");
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setLowerBound(1);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setUpperBound(1);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setUnique(true);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->setOrdered(false);
+	
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject->_setID(DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT);
+	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_Value);
-		parameter->setName("gaurd");
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject);
+		parameter->setName("guard");
 		parameter->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -1791,546 +1924,9 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject);
 		parameter->setName("value");
-		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void ActivitiesPackageImpl::initializeExpansionActivationGroupContent()
-{
-	m_expansionActivationGroup_Class->setName("ExpansionActivationGroup");
-	m_expansionActivationGroup_Class->setAbstract(false);
-	m_expansionActivationGroup_Class->setInterface(false);
-	
-	m_expansionActivationGroup_Attribute_index = getExpansionActivationGroup_Attribute_index();
-	m_expansionActivationGroup_Attribute_index->setName("index");
-		m_expansionActivationGroup_Attribute_index->setEType(types::typesPackage::eInstance()->getInteger_Class());
-	m_expansionActivationGroup_Attribute_index->setLowerBound(1);
-	m_expansionActivationGroup_Attribute_index->setUpperBound(1);
-	m_expansionActivationGroup_Attribute_index->setTransient(false);
-	m_expansionActivationGroup_Attribute_index->setVolatile(false);
-	m_expansionActivationGroup_Attribute_index->setChangeable(true);
-	m_expansionActivationGroup_Attribute_index->setUnsettable(false);
-	m_expansionActivationGroup_Attribute_index->setUnique(true);
-	m_expansionActivationGroup_Attribute_index->setDerived(false);
-	m_expansionActivationGroup_Attribute_index->setOrdered(true);
-	m_expansionActivationGroup_Attribute_index->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_expansionActivationGroup_Attribute_index->setDefaultValueLiteral(defaultValue);
-		}
-	}
-	
-	m_expansionActivationGroup_Attribute_groupInputs->setName("groupInputs");
-	m_expansionActivationGroup_Attribute_groupInputs->setEType(getExpansionNodeActivation_Class());
-	m_expansionActivationGroup_Attribute_groupInputs->setLowerBound(0);
-	m_expansionActivationGroup_Attribute_groupInputs->setUpperBound(-1);
-	m_expansionActivationGroup_Attribute_groupInputs->setTransient(false);
-	m_expansionActivationGroup_Attribute_groupInputs->setVolatile(false);
-	m_expansionActivationGroup_Attribute_groupInputs->setChangeable(true);
-	m_expansionActivationGroup_Attribute_groupInputs->setUnsettable(false);
-	m_expansionActivationGroup_Attribute_groupInputs->setUnique(true);
-	m_expansionActivationGroup_Attribute_groupInputs->setDerived(false);
-	m_expansionActivationGroup_Attribute_groupInputs->setOrdered(true);
-	m_expansionActivationGroup_Attribute_groupInputs->setContainment(false);
-	m_expansionActivationGroup_Attribute_groupInputs->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionActivationGroup_Attribute_groupInputs->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_expansionActivationGroup_Attribute_groupOutputs->setName("groupOutputs");
-	m_expansionActivationGroup_Attribute_groupOutputs->setEType(getExpansionNodeActivation_Class());
-	m_expansionActivationGroup_Attribute_groupOutputs->setLowerBound(0);
-	m_expansionActivationGroup_Attribute_groupOutputs->setUpperBound(-1);
-	m_expansionActivationGroup_Attribute_groupOutputs->setTransient(false);
-	m_expansionActivationGroup_Attribute_groupOutputs->setVolatile(false);
-	m_expansionActivationGroup_Attribute_groupOutputs->setChangeable(true);
-	m_expansionActivationGroup_Attribute_groupOutputs->setUnsettable(false);
-	m_expansionActivationGroup_Attribute_groupOutputs->setUnique(true);
-	m_expansionActivationGroup_Attribute_groupOutputs->setDerived(false);
-	m_expansionActivationGroup_Attribute_groupOutputs->setOrdered(true);
-	m_expansionActivationGroup_Attribute_groupOutputs->setContainment(false);
-	m_expansionActivationGroup_Attribute_groupOutputs->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionActivationGroup_Attribute_groupOutputs->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_expansionActivationGroup_Attribute_regionActivation->setName("regionActivation");
-	m_expansionActivationGroup_Attribute_regionActivation->setEType(getExpansionRegionActivation_Class());
-	m_expansionActivationGroup_Attribute_regionActivation->setLowerBound(1);
-	m_expansionActivationGroup_Attribute_regionActivation->setUpperBound(1);
-	m_expansionActivationGroup_Attribute_regionActivation->setTransient(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setVolatile(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setChangeable(true);
-	m_expansionActivationGroup_Attribute_regionActivation->setUnsettable(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setUnique(true);
-	m_expansionActivationGroup_Attribute_regionActivation->setDerived(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setOrdered(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setContainment(false);
-	m_expansionActivationGroup_Attribute_regionActivation->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionActivationGroup_Attribute_regionActivation->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_expansionActivationGroup_Attribute_regionInputs->setName("regionInputs");
-	m_expansionActivationGroup_Attribute_regionInputs->setEType(fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class());
-	m_expansionActivationGroup_Attribute_regionInputs->setLowerBound(0);
-	m_expansionActivationGroup_Attribute_regionInputs->setUpperBound(-1);
-	m_expansionActivationGroup_Attribute_regionInputs->setTransient(false);
-	m_expansionActivationGroup_Attribute_regionInputs->setVolatile(false);
-	m_expansionActivationGroup_Attribute_regionInputs->setChangeable(true);
-	m_expansionActivationGroup_Attribute_regionInputs->setUnsettable(false);
-	m_expansionActivationGroup_Attribute_regionInputs->setUnique(true);
-	m_expansionActivationGroup_Attribute_regionInputs->setDerived(false);
-	m_expansionActivationGroup_Attribute_regionInputs->setOrdered(true);
-	m_expansionActivationGroup_Attribute_regionInputs->setContainment(false);
-	m_expansionActivationGroup_Attribute_regionInputs->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionActivationGroup_Attribute_regionInputs->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	
-	m_expansionActivationGroup_Operation_getActivityExecution->setName("getActivityExecution");
-	m_expansionActivationGroup_Operation_getActivityExecution->setEType(getActivityExecution_Class());
-	m_expansionActivationGroup_Operation_getActivityExecution->setLowerBound(1);
-	m_expansionActivationGroup_Operation_getActivityExecution->setUpperBound(1);
-	m_expansionActivationGroup_Operation_getActivityExecution->setUnique(true);
-	m_expansionActivationGroup_Operation_getActivityExecution->setOrdered(true);
-	
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setEType(getActivityNodeActivation_Class());
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUnique(true);
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode);
-		parameter->setName("node");
-		parameter->setEType(uml::umlPackage::eInstance()->getActivityNode_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setName("resume");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setEType(unknownClass);
-	}
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setLowerBound(0);
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUpperBound(1);
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUnique(true);
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_resume_ActivityNodeActivation);
-		parameter->setName("activation");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setName("suspend");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setEType(unknownClass);
-	}
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setLowerBound(0);
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUpperBound(1);
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUnique(true);
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation);
-		parameter->setName("activation");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void ActivitiesPackageImpl::initializeExpansionNodeActivationContent()
-{
-	m_expansionNodeActivation_Class->setName("ExpansionNodeActivation");
-	m_expansionNodeActivation_Class->setAbstract(false);
-	m_expansionNodeActivation_Class->setInterface(false);
-	
-	
-	
-	m_expansionNodeActivation_Operation_fire_Token->setName("fire");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionNodeActivation_Operation_fire_Token->setEType(unknownClass);
-	}
-	m_expansionNodeActivation_Operation_fire_Token->setLowerBound(1);
-	m_expansionNodeActivation_Operation_fire_Token->setUpperBound(1);
-	m_expansionNodeActivation_Operation_fire_Token->setUnique(true);
-	m_expansionNodeActivation_Operation_fire_Token->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionNodeActivation_Operation_fire_Token);
-		parameter->setName("incomingTokens");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setName("getExpansionRegionActivation");
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setEType(getExpansionRegionActivation_Class());
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setLowerBound(1);
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUpperBound(1);
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUnique(true);
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setOrdered(false);
-	
-	m_expansionNodeActivation_Operation_isReady->setName("isReady");
-	m_expansionNodeActivation_Operation_isReady->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_expansionNodeActivation_Operation_isReady->setLowerBound(1);
-	m_expansionNodeActivation_Operation_isReady->setUpperBound(1);
-	m_expansionNodeActivation_Operation_isReady->setUnique(true);
-	m_expansionNodeActivation_Operation_isReady->setOrdered(false);
-	
-	m_expansionNodeActivation_Operation_receiveOffer->setName("receiveOffer");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionNodeActivation_Operation_receiveOffer->setEType(unknownClass);
-	}
-	m_expansionNodeActivation_Operation_receiveOffer->setLowerBound(1);
-	m_expansionNodeActivation_Operation_receiveOffer->setUpperBound(1);
-	m_expansionNodeActivation_Operation_receiveOffer->setUnique(true);
-	m_expansionNodeActivation_Operation_receiveOffer->setOrdered(false);
-	
-	
-}
-
-void ActivitiesPackageImpl::initializeExpansionRegionActivationContent()
-{
-	m_expansionRegionActivation_Class->setName("ExpansionRegionActivation");
-	m_expansionRegionActivation_Class->setAbstract(false);
-	m_expansionRegionActivation_Class->setInterface(false);
-	
-	m_expansionRegionActivation_Attribute_next = getExpansionRegionActivation_Attribute_next();
-	m_expansionRegionActivation_Attribute_next->setName("next");
-		m_expansionRegionActivation_Attribute_next->setEType(types::typesPackage::eInstance()->getInteger_Class());
-	m_expansionRegionActivation_Attribute_next->setLowerBound(0);
-	m_expansionRegionActivation_Attribute_next->setUpperBound(1);
-	m_expansionRegionActivation_Attribute_next->setTransient(false);
-	m_expansionRegionActivation_Attribute_next->setVolatile(false);
-	m_expansionRegionActivation_Attribute_next->setChangeable(true);
-	m_expansionRegionActivation_Attribute_next->setUnsettable(false);
-	m_expansionRegionActivation_Attribute_next->setUnique(true);
-	m_expansionRegionActivation_Attribute_next->setDerived(false);
-	m_expansionRegionActivation_Attribute_next->setOrdered(true);
-	m_expansionRegionActivation_Attribute_next->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_expansionRegionActivation_Attribute_next->setDefaultValueLiteral(defaultValue);
-		}
-	}
-	
-	m_expansionRegionActivation_Attribute_activationGroups->setName("activationGroups");
-	m_expansionRegionActivation_Attribute_activationGroups->setEType(getExpansionActivationGroup_Class());
-	m_expansionRegionActivation_Attribute_activationGroups->setLowerBound(0);
-	m_expansionRegionActivation_Attribute_activationGroups->setUpperBound(-1);
-	m_expansionRegionActivation_Attribute_activationGroups->setTransient(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setVolatile(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setChangeable(true);
-	m_expansionRegionActivation_Attribute_activationGroups->setUnsettable(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setUnique(true);
-	m_expansionRegionActivation_Attribute_activationGroups->setDerived(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setOrdered(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setContainment(false);
-	m_expansionRegionActivation_Attribute_activationGroups->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionRegionActivation_Attribute_activationGroups->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setName("inputExpansionTokens");
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setEType(getTokenSet_Class());
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setLowerBound(1);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUpperBound(-1);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setTransient(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setVolatile(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setChangeable(true);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUnsettable(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setUnique(true);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setDerived(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setOrdered(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setContainment(false);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionRegionActivation_Attribute_inputExpansionTokens->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_expansionRegionActivation_Attribute_inputTokens->setName("inputTokens");
-	m_expansionRegionActivation_Attribute_inputTokens->setEType(getTokenSet_Class());
-	m_expansionRegionActivation_Attribute_inputTokens->setLowerBound(0);
-	m_expansionRegionActivation_Attribute_inputTokens->setUpperBound(-1);
-	m_expansionRegionActivation_Attribute_inputTokens->setTransient(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setVolatile(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setChangeable(true);
-	m_expansionRegionActivation_Attribute_inputTokens->setUnsettable(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setUnique(true);
-	m_expansionRegionActivation_Attribute_inputTokens->setDerived(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setOrdered(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setContainment(false);
-	m_expansionRegionActivation_Attribute_inputTokens->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_expansionRegionActivation_Attribute_inputTokens->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	
-	m_expansionRegionActivation_Operation_doAction->setName("doAction");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_doAction->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_doAction->setLowerBound(0);
-	m_expansionRegionActivation_Operation_doAction->setUpperBound(1);
-	m_expansionRegionActivation_Operation_doAction->setUnique(true);
-	m_expansionRegionActivation_Operation_doAction->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_doOutput->setName("doOutput");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_doOutput->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_doOutput->setLowerBound(0);
-	m_expansionRegionActivation_Operation_doOutput->setUpperBound(1);
-	m_expansionRegionActivation_Operation_doOutput->setUnique(true);
-	m_expansionRegionActivation_Operation_doOutput->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_doStructuredActivity->setName("doStructuredActivity");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_doStructuredActivity->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_doStructuredActivity->setLowerBound(1);
-	m_expansionRegionActivation_Operation_doStructuredActivity->setUpperBound(1);
-	m_expansionRegionActivation_Operation_doStructuredActivity->setUnique(true);
-	m_expansionRegionActivation_Operation_doStructuredActivity->setOrdered(false);
-	
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setName("getExpansionNodeActivation");
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setEType(getExpansionNodeActivation_Class());
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setLowerBound(1);
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setUpperBound(1);
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setUnique(true);
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode);
-		parameter->setName("node");
-		parameter->setEType(uml::umlPackage::eInstance()->getExpansionNode_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionRegionActivation_Operation_isSuspended->setName("isSuspended");
-	m_expansionRegionActivation_Operation_isSuspended->setEType(types::typesPackage::eInstance()->getBoolean_Class());
-	m_expansionRegionActivation_Operation_isSuspended->setLowerBound(0);
-	m_expansionRegionActivation_Operation_isSuspended->setUpperBound(1);
-	m_expansionRegionActivation_Operation_isSuspended->setUnique(true);
-	m_expansionRegionActivation_Operation_isSuspended->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_numberOfValues->setName("numberOfValues");
-	m_expansionRegionActivation_Operation_numberOfValues->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
-	m_expansionRegionActivation_Operation_numberOfValues->setLowerBound(1);
-	m_expansionRegionActivation_Operation_numberOfValues->setUpperBound(1);
-	m_expansionRegionActivation_Operation_numberOfValues->setUnique(true);
-	m_expansionRegionActivation_Operation_numberOfValues->setOrdered(false);
-	
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setName("resume");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setLowerBound(0);
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUpperBound(1);
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUnique(true);
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup);
-		parameter->setName("activationGroup");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setName("runGroup");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setLowerBound(1);
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setUpperBound(1);
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setUnique(true);
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup);
-		parameter->setName("activationGroup");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_expansionRegionActivation_Operation_runIterative->setName("runIterative");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_runIterative->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_runIterative->setLowerBound(0);
-	m_expansionRegionActivation_Operation_runIterative->setUpperBound(1);
-	m_expansionRegionActivation_Operation_runIterative->setUnique(true);
-	m_expansionRegionActivation_Operation_runIterative->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_runParallel->setName("runParallel");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_runParallel->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_runParallel->setLowerBound(0);
-	m_expansionRegionActivation_Operation_runParallel->setUpperBound(1);
-	m_expansionRegionActivation_Operation_runParallel->setUnique(true);
-	m_expansionRegionActivation_Operation_runParallel->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_sendOffers->setName("sendOffers");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_sendOffers->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_sendOffers->setLowerBound(0);
-	m_expansionRegionActivation_Operation_sendOffers->setUpperBound(1);
-	m_expansionRegionActivation_Operation_sendOffers->setUnique(true);
-	m_expansionRegionActivation_Operation_sendOffers->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setName("takeOfferedTokens");
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setEType(getToken_Class());
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setLowerBound(0);
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setUpperBound(-1);
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setUnique(true);
-	m_expansionRegionActivation_Operation_takeOfferedTokens->setOrdered(false);
-	
-	m_expansionRegionActivation_Operation_terminate->setName("terminate");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_terminate->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_terminate->setLowerBound(0);
-	m_expansionRegionActivation_Operation_terminate->setUpperBound(1);
-	m_expansionRegionActivation_Operation_terminate->setUnique(true);
-	m_expansionRegionActivation_Operation_terminate->setOrdered(true);
-	
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setName("terminateGroup");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setEType(unknownClass);
-	}
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setLowerBound(0);
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUpperBound(1);
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUnique(true);
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup);
-		parameter->setName("activationGroup");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -2346,8 +1942,19 @@ void ActivitiesPackageImpl::initializeFlowFinalNodeActivationContent()
 	m_flowFinalNodeActivation_Class->setAbstract(false);
 	m_flowFinalNodeActivation_Class->setInterface(false);
 	
+	m_flowFinalNodeActivation_Class->_setID(FLOWFINALNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	
 }
 
@@ -2357,8 +1964,19 @@ void ActivitiesPackageImpl::initializeForkNodeActivationContent()
 	m_forkNodeActivation_Class->setAbstract(false);
 	m_forkNodeActivation_Class->setInterface(false);
 	
+	m_forkNodeActivation_Class->_setID(FORKNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_forkNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2371,6 +1989,9 @@ void ActivitiesPackageImpl::initializeForkNodeActivationContent()
 	m_forkNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_forkNodeActivation_Operation_fire_Token->setUnique(true);
 	m_forkNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_forkNodeActivation_Operation_fire_Token->_setID(FORKNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_forkNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -2394,6 +2015,9 @@ void ActivitiesPackageImpl::initializeForkNodeActivationContent()
 	m_forkNodeActivation_Operation_terminate->setUnique(true);
 	m_forkNodeActivation_Operation_terminate->setOrdered(false);
 	
+	m_forkNodeActivation_Operation_terminate->_setID(FORKNODEACTIVATION_OPERATION_TERMINATE);
+	
+	
 	
 }
 
@@ -2403,9 +2027,14 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Class->setAbstract(false);
 	m_forkedToken_Class->setInterface(false);
 	
+	m_forkedToken_Class->_setID(FORKEDTOKEN_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	m_forkedToken_Attribute_baseTokenIsWithdrawn = getForkedToken_Attribute_baseTokenIsWithdrawn();
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setName("baseTokenIsWithdrawn");
-		m_forkedToken_Attribute_baseTokenIsWithdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_forkedToken_Attribute_baseTokenIsWithdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setLowerBound(1);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setUpperBound(1);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setTransient(false);
@@ -2416,16 +2045,12 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setDerived(false);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setOrdered(false);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_forkedToken_Attribute_baseTokenIsWithdrawn->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_forkedToken_Attribute_baseTokenIsWithdrawn->setDefaultValueLiteral("");
+	
+	m_forkedToken_Attribute_baseTokenIsWithdrawn->_setID(FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN);
 	m_forkedToken_Attribute_remainingOffersCount = getForkedToken_Attribute_remainingOffersCount();
 	m_forkedToken_Attribute_remainingOffersCount->setName("remainingOffersCount");
-		m_forkedToken_Attribute_remainingOffersCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_forkedToken_Attribute_remainingOffersCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_forkedToken_Attribute_remainingOffersCount->setLowerBound(1);
 	m_forkedToken_Attribute_remainingOffersCount->setUpperBound(1);
 	m_forkedToken_Attribute_remainingOffersCount->setTransient(false);
@@ -2436,14 +2061,13 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Attribute_remainingOffersCount->setDerived(false);
 	m_forkedToken_Attribute_remainingOffersCount->setOrdered(false);
 	m_forkedToken_Attribute_remainingOffersCount->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_forkedToken_Attribute_remainingOffersCount->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_forkedToken_Attribute_remainingOffersCount->setDefaultValueLiteral("");
 	
+	m_forkedToken_Attribute_remainingOffersCount->_setID(FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT);
+	
+	/*
+	 * EReferences
+	 */
 	m_forkedToken_Attribute_baseToken->setName("baseToken");
 	m_forkedToken_Attribute_baseToken->setEType(getToken_Class());
 	m_forkedToken_Attribute_baseToken->setLowerBound(0);
@@ -2457,16 +2081,13 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Attribute_baseToken->setOrdered(false);
 	m_forkedToken_Attribute_baseToken->setContainment(false);
 	m_forkedToken_Attribute_baseToken->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_forkedToken_Attribute_baseToken->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_forkedToken_Attribute_baseToken->setDefaultValueLiteral("");	
 	
+	m_forkedToken_Attribute_baseToken->_setID(FORKEDTOKEN_ATTRIBUTE_BASETOKEN);
+	
+	/*
+	 * EOperations
+	 */
 	m_forkedToken_Operation__copy->setName("_copy");
 	m_forkedToken_Operation__copy->setEType(getToken_Class());
 	m_forkedToken_Operation__copy->setLowerBound(1);
@@ -2474,12 +2095,18 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Operation__copy->setUnique(true);
 	m_forkedToken_Operation__copy->setOrdered(true);
 	
+	m_forkedToken_Operation__copy->_setID(FORKEDTOKEN_OPERATION__COPY);
+	
+	
 	m_forkedToken_Operation_equals_Token->setName("equals");
 	m_forkedToken_Operation_equals_Token->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkedToken_Operation_equals_Token->setLowerBound(1);
 	m_forkedToken_Operation_equals_Token->setUpperBound(1);
 	m_forkedToken_Operation_equals_Token->setUnique(true);
 	m_forkedToken_Operation_equals_Token->setOrdered(false);
+	
+	m_forkedToken_Operation_equals_Token->_setID(FORKEDTOKEN_OPERATION_EQUALS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_forkedToken_Operation_equals_Token);
 		parameter->setName("otherToken");
@@ -2491,11 +2118,14 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	}
 	
 	m_forkedToken_Operation_getValue->setName("getValue");
-	m_forkedToken_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_forkedToken_Operation_getValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_forkedToken_Operation_getValue->setLowerBound(0);
 	m_forkedToken_Operation_getValue->setUpperBound(1);
 	m_forkedToken_Operation_getValue->setUnique(true);
 	m_forkedToken_Operation_getValue->setOrdered(false);
+	
+	m_forkedToken_Operation_getValue->_setID(FORKEDTOKEN_OPERATION_GETVALUE);
+	
 	
 	m_forkedToken_Operation_isControl->setName("isControl");
 	m_forkedToken_Operation_isControl->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
@@ -2503,6 +2133,9 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Operation_isControl->setUpperBound(1);
 	m_forkedToken_Operation_isControl->setUnique(true);
 	m_forkedToken_Operation_isControl->setOrdered(false);
+	
+	m_forkedToken_Operation_isControl->_setID(FORKEDTOKEN_OPERATION_ISCONTROL);
+	
 	
 	m_forkedToken_Operation_withdraw->setName("withdraw");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -2517,6 +2150,9 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Operation_withdraw->setUnique(true);
 	m_forkedToken_Operation_withdraw->setOrdered(false);
 	
+	m_forkedToken_Operation_withdraw->_setID(FORKEDTOKEN_OPERATION_WITHDRAW);
+	
+	
 	
 }
 
@@ -2526,8 +2162,19 @@ void ActivitiesPackageImpl::initializeInitialNodeActivationContent()
 	m_initialNodeActivation_Class->setAbstract(false);
 	m_initialNodeActivation_Class->setInterface(false);
 	
+	m_initialNodeActivation_Class->_setID(INITIALNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_initialNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2540,6 +2187,9 @@ void ActivitiesPackageImpl::initializeInitialNodeActivationContent()
 	m_initialNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_initialNodeActivation_Operation_fire_Token->setUnique(true);
 	m_initialNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_initialNodeActivation_Operation_fire_Token->_setID(INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_initialNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -2559,8 +2209,19 @@ void ActivitiesPackageImpl::initializeJoinNodeActivationContent()
 	m_joinNodeActivation_Class->setAbstract(false);
 	m_joinNodeActivation_Class->setInterface(false);
 	
+	m_joinNodeActivation_Class->_setID(JOINNODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_joinNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2573,6 +2234,9 @@ void ActivitiesPackageImpl::initializeJoinNodeActivationContent()
 	m_joinNodeActivation_Operation_fire_Token->setUpperBound(1);
 	m_joinNodeActivation_Operation_fire_Token->setUnique(true);
 	m_joinNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	m_joinNodeActivation_Operation_fire_Token->_setID(JOINNODEACTIVATION_OPERATION_FIRE_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_joinNodeActivation_Operation_fire_Token);
 		parameter->setName("incomingTokens");
@@ -2590,6 +2254,9 @@ void ActivitiesPackageImpl::initializeJoinNodeActivationContent()
 	m_joinNodeActivation_Operation_isReady->setUnique(true);
 	m_joinNodeActivation_Operation_isReady->setOrdered(false);
 	
+	m_joinNodeActivation_Operation_isReady->_setID(JOINNODEACTIVATION_OPERATION_ISREADY);
+	
+	
 	
 }
 
@@ -2599,8 +2266,19 @@ void ActivitiesPackageImpl::initializeMergeNodeActivationContent()
 	m_mergeNodeActivation_Class->setAbstract(false);
 	m_mergeNodeActivation_Class->setInterface(false);
 	
+	m_mergeNodeActivation_Class->_setID(MERGENODEACTIVATION_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	
 }
 
@@ -2610,9 +2288,14 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Class->setAbstract(true);
 	m_objectNodeActivation_Class->setInterface(false);
 	
+	m_objectNodeActivation_Class->_setID(OBJECTNODEACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	m_objectNodeActivation_Attribute_offeredTokenCount = getObjectNodeActivation_Attribute_offeredTokenCount();
 	m_objectNodeActivation_Attribute_offeredTokenCount->setName("offeredTokenCount");
-		m_objectNodeActivation_Attribute_offeredTokenCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_objectNodeActivation_Attribute_offeredTokenCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_objectNodeActivation_Attribute_offeredTokenCount->setLowerBound(1);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setUpperBound(1);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setTransient(false);
@@ -2623,15 +2306,17 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Attribute_offeredTokenCount->setDerived(false);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setOrdered(false);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setID(false);
-	{
-		std::string defaultValue = "0";
-		if (!defaultValue.empty())
-		{
-		   m_objectNodeActivation_Attribute_offeredTokenCount->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_objectNodeActivation_Attribute_offeredTokenCount->setDefaultValueLiteral("0");
 	
+	m_objectNodeActivation_Attribute_offeredTokenCount->_setID(OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT);
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_objectNodeActivation_Operation_addToken_Token->setName("addToken");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2644,6 +2329,9 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_addToken_Token->setUpperBound(1);
 	m_objectNodeActivation_Operation_addToken_Token->setUnique(true);
 	m_objectNodeActivation_Operation_addToken_Token->setOrdered(false);
+	
+	m_objectNodeActivation_Operation_addToken_Token->_setID(OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectNodeActivation_Operation_addToken_Token);
 		parameter->setName("token");
@@ -2667,12 +2355,18 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_clearTokens->setUnique(true);
 	m_objectNodeActivation_Operation_clearTokens->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_clearTokens->_setID(OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS);
+	
+	
 	m_objectNodeActivation_Operation_countOfferedValues->setName("countOfferedValues");
 	m_objectNodeActivation_Operation_countOfferedValues->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_objectNodeActivation_Operation_countOfferedValues->setLowerBound(1);
 	m_objectNodeActivation_Operation_countOfferedValues->setUpperBound(1);
 	m_objectNodeActivation_Operation_countOfferedValues->setUnique(true);
 	m_objectNodeActivation_Operation_countOfferedValues->setOrdered(false);
+	
+	m_objectNodeActivation_Operation_countOfferedValues->_setID(OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES);
+	
 	
 	m_objectNodeActivation_Operation_countUnofferedTokens->setName("countUnofferedTokens");
 	m_objectNodeActivation_Operation_countUnofferedTokens->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
@@ -2681,6 +2375,9 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_countUnofferedTokens->setUnique(true);
 	m_objectNodeActivation_Operation_countUnofferedTokens->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_countUnofferedTokens->_setID(OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS);
+	
+	
 	m_objectNodeActivation_Operation_getUnofferedTokens->setName("getUnofferedTokens");
 	m_objectNodeActivation_Operation_getUnofferedTokens->setEType(getToken_Class());
 	m_objectNodeActivation_Operation_getUnofferedTokens->setLowerBound(0);
@@ -2688,12 +2385,18 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_getUnofferedTokens->setUnique(true);
 	m_objectNodeActivation_Operation_getUnofferedTokens->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_getUnofferedTokens->_setID(OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS);
+	
+	
 	m_objectNodeActivation_Operation_removeToken_Token->setName("removeToken");
 	m_objectNodeActivation_Operation_removeToken_Token->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_objectNodeActivation_Operation_removeToken_Token->setLowerBound(1);
 	m_objectNodeActivation_Operation_removeToken_Token->setUpperBound(1);
 	m_objectNodeActivation_Operation_removeToken_Token->setUnique(true);
 	m_objectNodeActivation_Operation_removeToken_Token->setOrdered(false);
+	
+	m_objectNodeActivation_Operation_removeToken_Token->_setID(OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectNodeActivation_Operation_removeToken_Token);
 		parameter->setName("token");
@@ -2717,6 +2420,9 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_run->setUnique(true);
 	m_objectNodeActivation_Operation_run->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_run->_setID(OBJECTNODEACTIVATION_OPERATION_RUN);
+	
+	
 	m_objectNodeActivation_Operation_sendOffers_Token->setName("sendOffers");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2729,6 +2435,9 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_sendOffers_Token->setUpperBound(1);
 	m_objectNodeActivation_Operation_sendOffers_Token->setUnique(true);
 	m_objectNodeActivation_Operation_sendOffers_Token->setOrdered(false);
+	
+	m_objectNodeActivation_Operation_sendOffers_Token->_setID(OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectNodeActivation_Operation_sendOffers_Token);
 		parameter->setName("tokens");
@@ -2752,12 +2461,18 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_sendUnofferedTokens->setUnique(true);
 	m_objectNodeActivation_Operation_sendUnofferedTokens->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_sendUnofferedTokens->_setID(OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS);
+	
+	
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setName("takeUnofferedTokens");
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setEType(getToken_Class());
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setLowerBound(0);
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setUpperBound(-1);
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setUnique(true);
 	m_objectNodeActivation_Operation_takeUnofferedTokens->setOrdered(false);
+	
+	m_objectNodeActivation_Operation_takeUnofferedTokens->_setID(OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS);
+	
 	
 	m_objectNodeActivation_Operation_terminate->setName("terminate");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -2772,6 +2487,9 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	m_objectNodeActivation_Operation_terminate->setUnique(true);
 	m_objectNodeActivation_Operation_terminate->setOrdered(false);
 	
+	m_objectNodeActivation_Operation_terminate->_setID(OBJECTNODEACTIVATION_OPERATION_TERMINATE);
+	
+	
 	
 }
 
@@ -2781,9 +2499,14 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Class->setAbstract(false);
 	m_objectToken_Class->setInterface(false);
 	
+	m_objectToken_Class->_setID(OBJECTTOKEN_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	m_objectToken_Attribute_value = getObjectToken_Attribute_value();
 	m_objectToken_Attribute_value->setName("value");
-	m_objectToken_Attribute_value->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_objectToken_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_objectToken_Attribute_value->setLowerBound(0);
 	m_objectToken_Attribute_value->setUpperBound(1);
 	m_objectToken_Attribute_value->setTransient(false);
@@ -2792,19 +2515,19 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Attribute_value->setUnsettable(false);
 	m_objectToken_Attribute_value->setUnique(true);
 	m_objectToken_Attribute_value->setDerived(false);
-	m_objectToken_Attribute_value->setOrdered(false);
-	m_objectToken_Attribute_value->setContainment(true);
-	m_objectToken_Attribute_value->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_objectToken_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_objectToken_Attribute_value->setOrdered(true);
+	m_objectToken_Attribute_value->setID(false);
+	m_objectToken_Attribute_value->setDefaultValueLiteral("");
 	
+	m_objectToken_Attribute_value->_setID(OBJECTTOKEN_ATTRIBUTE_VALUE);
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_objectToken_Operation__copy->setName("_copy");
 	m_objectToken_Operation__copy->setEType(getToken_Class());
 	m_objectToken_Operation__copy->setLowerBound(1);
@@ -2812,12 +2535,18 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Operation__copy->setUnique(true);
 	m_objectToken_Operation__copy->setOrdered(true);
 	
+	m_objectToken_Operation__copy->_setID(OBJECTTOKEN_OPERATION__COPY);
+	
+	
 	m_objectToken_Operation_equals_Token->setName("equals");
 	m_objectToken_Operation_equals_Token->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectToken_Operation_equals_Token->setLowerBound(1);
 	m_objectToken_Operation_equals_Token->setUpperBound(1);
 	m_objectToken_Operation_equals_Token->setUnique(true);
 	m_objectToken_Operation_equals_Token->setOrdered(false);
+	
+	m_objectToken_Operation_equals_Token->_setID(OBJECTTOKEN_OPERATION_EQUALS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectToken_Operation_equals_Token);
 		parameter->setName("other");
@@ -2835,6 +2564,9 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 	m_objectToken_Operation_isControl->setUnique(true);
 	m_objectToken_Operation_isControl->setOrdered(false);
 	
+	m_objectToken_Operation_isControl->_setID(OBJECTTOKEN_OPERATION_ISCONTROL);
+	
+	
 	
 }
 
@@ -2844,7 +2576,15 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Class->setAbstract(false);
 	m_offer_Class->setInterface(false);
 	
+	m_offer_Class->_setID(OFFER_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_offer_Attribute_offeredTokens->setName("offeredTokens");
 	m_offer_Attribute_offeredTokens->setEType(getToken_Class());
 	m_offer_Attribute_offeredTokens->setLowerBound(0);
@@ -2858,16 +2598,13 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Attribute_offeredTokens->setOrdered(false);
 	m_offer_Attribute_offeredTokens->setContainment(false);
 	m_offer_Attribute_offeredTokens->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_offer_Attribute_offeredTokens->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_offer_Attribute_offeredTokens->setDefaultValueLiteral("");	
 	
+	m_offer_Attribute_offeredTokens->_setID(OFFER_ATTRIBUTE_OFFEREDTOKENS);
+	
+	/*
+	 * EOperations
+	 */
 	m_offer_Operation_countOfferedVales->setName("countOfferedVales");
 	m_offer_Operation_countOfferedVales->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_offer_Operation_countOfferedVales->setLowerBound(1);
@@ -2875,12 +2612,18 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Operation_countOfferedVales->setUnique(true);
 	m_offer_Operation_countOfferedVales->setOrdered(false);
 	
+	m_offer_Operation_countOfferedVales->_setID(OFFER_OPERATION_COUNTOFFEREDVALES);
+	
+	
 	m_offer_Operation_hasTokens->setName("hasTokens");
 	m_offer_Operation_hasTokens->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_offer_Operation_hasTokens->setLowerBound(1);
 	m_offer_Operation_hasTokens->setUpperBound(1);
 	m_offer_Operation_hasTokens->setUnique(true);
 	m_offer_Operation_hasTokens->setOrdered(false);
+	
+	m_offer_Operation_hasTokens->_setID(OFFER_OPERATION_HASTOKENS);
+	
 	
 	m_offer_Operation_removeOfferedValues_EInt->setName("removeOfferedValues");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -2894,6 +2637,9 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Operation_removeOfferedValues_EInt->setUpperBound(1);
 	m_offer_Operation_removeOfferedValues_EInt->setUnique(true);
 	m_offer_Operation_removeOfferedValues_EInt->setOrdered(false);
+	
+	m_offer_Operation_removeOfferedValues_EInt->_setID(OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_offer_Operation_removeOfferedValues_EInt);
 		parameter->setName("count");
@@ -2917,12 +2663,18 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Operation_removeWithdrawnTokens->setUnique(true);
 	m_offer_Operation_removeWithdrawnTokens->setOrdered(false);
 	
+	m_offer_Operation_removeWithdrawnTokens->_setID(OFFER_OPERATION_REMOVEWITHDRAWNTOKENS);
+	
+	
 	m_offer_Operation_retrieveOfferedTokens->setName("retrieveOfferedTokens");
 	m_offer_Operation_retrieveOfferedTokens->setEType(getToken_Class());
 	m_offer_Operation_retrieveOfferedTokens->setLowerBound(0);
 	m_offer_Operation_retrieveOfferedTokens->setUpperBound(-1);
 	m_offer_Operation_retrieveOfferedTokens->setUnique(true);
 	m_offer_Operation_retrieveOfferedTokens->setOrdered(false);
+	
+	m_offer_Operation_retrieveOfferedTokens->_setID(OFFER_OPERATION_RETRIEVEOFFEREDTOKENS);
+	
 	
 	
 }
@@ -2933,9 +2685,14 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Class->setAbstract(true);
 	m_token_Class->setInterface(false);
 	
+	m_token_Class->_setID(TOKEN_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	m_token_Attribute_withdrawn = getToken_Attribute_withdrawn();
 	m_token_Attribute_withdrawn->setName("withdrawn");
-		m_token_Attribute_withdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_token_Attribute_withdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_token_Attribute_withdrawn->setLowerBound(0);
 	m_token_Attribute_withdrawn->setUpperBound(1);
 	m_token_Attribute_withdrawn->setTransient(false);
@@ -2946,14 +2703,13 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Attribute_withdrawn->setDerived(false);
 	m_token_Attribute_withdrawn->setOrdered(true);
 	m_token_Attribute_withdrawn->setID(false);
-	{
-		std::string defaultValue = "true";
-		if (!defaultValue.empty())
-		{
-		   m_token_Attribute_withdrawn->setDefaultValueLiteral(defaultValue);
-		}
-	}
+	m_token_Attribute_withdrawn->setDefaultValueLiteral("true");
 	
+	m_token_Attribute_withdrawn->_setID(TOKEN_ATTRIBUTE_WITHDRAWN);
+	
+	/*
+	 * EReferences
+	 */
 	m_token_Attribute_holder->setName("holder");
 	m_token_Attribute_holder->setEType(getActivityNodeActivation_Class());
 	m_token_Attribute_holder->setLowerBound(0);
@@ -2967,19 +2723,14 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Attribute_holder->setOrdered(false);
 	m_token_Attribute_holder->setContainment(false);
 	m_token_Attribute_holder->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_token_Attribute_holder->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_heldTokens();
-		if (otherEnd != nullptr)
-	    {
-	   		m_token_Attribute_holder->setEOpposite(otherEnd);
-	    }
-	}
+	m_token_Attribute_holder->setDefaultValueLiteral("");	
+	m_token_Attribute_holder->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_heldTokens());
 	
+	m_token_Attribute_holder->_setID(TOKEN_ATTRIBUTE_HOLDER);
+	
+	/*
+	 * EOperations
+	 */
 	m_token_Operation__copy->setName("_copy");
 	m_token_Operation__copy->setEType(getToken_Class());
 	m_token_Operation__copy->setLowerBound(1);
@@ -2987,12 +2738,18 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Operation__copy->setUnique(true);
 	m_token_Operation__copy->setOrdered(true);
 	
+	m_token_Operation__copy->_setID(TOKEN_OPERATION__COPY);
+	
+	
 	m_token_Operation_equals_Token->setName("equals");
 	m_token_Operation_equals_Token->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_token_Operation_equals_Token->setLowerBound(1);
 	m_token_Operation_equals_Token->setUpperBound(1);
 	m_token_Operation_equals_Token->setUnique(true);
 	m_token_Operation_equals_Token->setOrdered(false);
+	
+	m_token_Operation_equals_Token->_setID(TOKEN_OPERATION_EQUALS_TOKEN);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_token_Operation_equals_Token);
 		parameter->setName("other");
@@ -3004,11 +2761,14 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	}
 	
 	m_token_Operation_getValue->setName("getValue");
-	m_token_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_token_Operation_getValue->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_token_Operation_getValue->setLowerBound(1);
 	m_token_Operation_getValue->setUpperBound(1);
 	m_token_Operation_getValue->setUnique(true);
 	m_token_Operation_getValue->setOrdered(true);
+	
+	m_token_Operation_getValue->_setID(TOKEN_OPERATION_GETVALUE);
+	
 	
 	m_token_Operation_isControl->setName("isControl");
 	m_token_Operation_isControl->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
@@ -3017,12 +2777,18 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Operation_isControl->setUnique(true);
 	m_token_Operation_isControl->setOrdered(false);
 	
+	m_token_Operation_isControl->_setID(TOKEN_OPERATION_ISCONTROL);
+	
+	
 	m_token_Operation_transfer_ActivityNodeActivation->setName("transfer");
 	m_token_Operation_transfer_ActivityNodeActivation->setEType(getToken_Class());
 	m_token_Operation_transfer_ActivityNodeActivation->setLowerBound(1);
 	m_token_Operation_transfer_ActivityNodeActivation->setUpperBound(1);
 	m_token_Operation_transfer_ActivityNodeActivation->setUnique(true);
 	m_token_Operation_transfer_ActivityNodeActivation->setOrdered(false);
+	
+	m_token_Operation_transfer_ActivityNodeActivation->_setID(TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_token_Operation_transfer_ActivityNodeActivation);
 		parameter->setName("holder");
@@ -3046,6 +2812,9 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Operation_withdraw->setUnique(true);
 	m_token_Operation_withdraw->setOrdered(false);
 	
+	m_token_Operation_withdraw->_setID(TOKEN_OPERATION_WITHDRAW);
+	
+	
 	
 }
 
@@ -3055,7 +2824,15 @@ void ActivitiesPackageImpl::initializeTokenSetContent()
 	m_tokenSet_Class->setAbstract(false);
 	m_tokenSet_Class->setInterface(false);
 	
+	m_tokenSet_Class->_setID(TOKENSET_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_tokenSet_Attribute_tokens->setName("tokens");
 	m_tokenSet_Attribute_tokens->setEType(getToken_Class());
 	m_tokenSet_Attribute_tokens->setLowerBound(0);
@@ -3069,16 +2846,13 @@ void ActivitiesPackageImpl::initializeTokenSetContent()
 	m_tokenSet_Attribute_tokens->setOrdered(false);
 	m_tokenSet_Attribute_tokens->setContainment(false);
 	m_tokenSet_Attribute_tokens->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_tokenSet_Attribute_tokens->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_tokenSet_Attribute_tokens->setDefaultValueLiteral("");	
 	
+	m_tokenSet_Attribute_tokens->_setID(TOKENSET_ATTRIBUTE_TOKENS);
+	
+	/*
+	 * EOperations
+	 */
 	
 }
 

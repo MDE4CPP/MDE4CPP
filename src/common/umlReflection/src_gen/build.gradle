@@ -13,43 +13,30 @@ task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	inputs.files(fileTree('.') {
         exclude 'umlReflection/.cmake/**'
-        exclude 'umlReflectionExec/.cmake/**'
     })
 
 	if(!file('.' + File.separator + 'umlReflection' + File.separator + '.cmake' + File.separator).exists()) {
 		outputs.upToDateWhen { false }
 	}
 
-	if(!file('.' + File.separator + 'umlReflectionExec' + File.separator + '.cmake' + File.separator).exists()) {
-		outputs.upToDateWhen { false }
-	}
-
 	if(OperatingSystem.current().isWindows()){
 		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' +                '.dll'].join(File.separator))}
 		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' +          'd' + '.dll'].join(File.separator))}
-		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' +       '.dll'].join(File.separator))}
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' + 'd' + '.dll'].join(File.separator))}
 	}
 	else if(OperatingSystem.current().isLinux()){
 		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' +                '.so'].join(File.separator))}
 		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' +          'd' + '.so'].join(File.separator))}
-		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' +       '.so'].join(File.separator))}
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' + 'd' + '.so'].join(File.separator))}
 	}
 	else if(OperatingSystem.current().isMacOsX()){
 		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' +                '.dylib'].join(File.separator))}
 		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' +          'd' + '.dylib'].join(File.separator))}
-		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' +       '.dylib'].join(File.separator))}
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin','umlReflection' + 'Exec' + 'd' + '.dylib'].join(File.separator))}
 	}
 	else {
 	    //not supported os
 	}
 
 	outputs.files(fileTree([rootDir,'application','include','umlReflection'].join(File.separator)))
-	outputs.files(fileTree([rootDir,'application','include','umlReflectionExec'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','umlReflection'].join(File.separator))
-	outputs.dir([rootDir,'application','include','umlReflectionExec'].join(File.separator))
 	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
@@ -73,21 +60,6 @@ task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	dependsOn primitivetypesReflection
 	inputs.files(primitivetypesReflection.outputs)
-
-	// dependency to model 'fUML'
-	def fUML = getRootProject().getTasksByName('compileFUML', true)
-	dependsOn fUML
-	inputs.files(fUML.outputs)
-
-	// dependency to model 'PSCS'
-	def PSCS = getRootProject().getTasksByName('compilePSCS', true)
-	dependsOn PSCS
-	inputs.files(PSCS.outputs)
-
-	// dependency to model 'oclParser'
-	def oclParser = getRootProject().getTasksByName('compileOclParser', true)
-	dependsOn oclParser
-	inputs.files(oclParser.outputs)
 }
 
 task clean {

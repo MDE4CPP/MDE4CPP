@@ -54,7 +54,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class UML_API Image: virtual public Element
+	class UML_API Image : virtual public Element
 	{
 		public:
  			Image(const Image &) {}
@@ -119,12 +119,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

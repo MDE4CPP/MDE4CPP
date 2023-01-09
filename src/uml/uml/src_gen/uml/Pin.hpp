@@ -7,14 +7,11 @@
 #ifndef UML_PIN_HPP
 #define UML_PIN_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -75,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Pin: virtual public MultiplicityElement, virtual public ObjectNode
+	class UML_API Pin : virtual public MultiplicityElement, virtual public ObjectNode
 	{
 		public:
  			Pin(const Pin &) {}
@@ -92,18 +89,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A control Pin has a control type.
-			isControl implies isControlType
-			*/
-			 
-			virtual bool control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Pin multiplicity is not unique.
-			not isUnique
-			*/
-			 
-			virtual bool not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,30 +113,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

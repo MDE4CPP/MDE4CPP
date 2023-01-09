@@ -7,15 +7,12 @@
 #ifndef UML_ACTIVITYEDGE_HPP
 #define UML_ACTIVITYEDGE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -71,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityEdge: virtual public RedefinableElement
+	class UML_API ActivityEdge : virtual public RedefinableElement
 	{
 		public:
  			ActivityEdge(const ActivityEdge &) {}
@@ -99,12 +96,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If an ActivityEdge is directly owned by an Activity, then its source and target must be directly or indirectly contained in the same Activity.
-			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity
-			*/
-			 
-			virtual bool source_and_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -220,24 +211,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

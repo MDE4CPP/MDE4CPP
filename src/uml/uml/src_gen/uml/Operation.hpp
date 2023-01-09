@@ -7,7 +7,6 @@
 #ifndef UML_OPERATION_HPP
 #define UML_OPERATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -81,7 +78,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API Operation: virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
+	class UML_API Operation : virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
 	{
 		public:
  			Operation(const Operation &) {}
@@ -115,12 +112,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
-			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
-			*/
-			 
-			virtual bool at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
@@ -156,12 +147,6 @@ namespace uml
 			 
 			virtual bool isUnique() = 0;
 			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) = 0;
-			/*!
-			A bodyCondition can only be specified for a query Operation.
-			bodyCondition <> null implies isQuery
-			*/
-			 
-			virtual bool only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -295,55 +280,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
-			
 
 			//*********************************
 			// Container Getter

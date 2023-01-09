@@ -1,0 +1,115 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePackageInterface('http://www.eclipse.org/emf/2002/Ecore')]
+ 
+[import ecore4CPP::generator::main::generateAttribute /]
+[import ecore4CPP::generator::main::generateEClass /]
+[import ecore4CPP::generator::main::generateDatatype /]
+[import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateReference /]
+[import ecore4CPP::generator::main::generateSingleton /]
+[import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::model_package::generatePackageHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
+
+[template public generatePackageInterface(anEPackage : EPackage) { 
+	packageName : String = anEPackage.name.concat('Package'); 
+	fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'packge interface header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
+[startGuard(anEPackage,'Package')/]
+
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"
+
+#include "ecore/EPackage.hpp"
+
+namespace [anEPackage.eClass().ePackage.name/] 
+{
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()->reject(doNotGenerateEClassifier()))]
+	class [elements.name/];
+[/for]
+}
+
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->reject(doNotGenerateEPackage())->sortedBy(name)) separator ('\n')]
+	namespace [aSubPackage.name/] 
+	{
+		class [aSubPackage.name/]Package;
+	}
+[/for]
+
+}
+ 
+[comment namespace /]
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+	/*!
+	The Metamodel Package for the [anEPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements
+	which were described in an ecore file.
+	*/
+	[anEPackage.generateDocumentation()/]
+	class [anEPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public [needNamespace(anEPackage, 'EPackage')/] 
+	{
+		private:    
+			[packageName/]([packageName/] const&) = delete;
+			[packageName/]& operator=([packageName/] const&) = delete;
+
+		protected:
+			[packageName/](){}
+
+		public:
+			//static variables
+			static const std::string eNAME;
+			static const std::string eNS_URI;
+			static const std::string eNS_PREFIX;
+
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+			// Begin Class [aClass.name.toUpperFirst()/]
+			//Class and Feature IDs 
+			[aClass.generateStaticClassID()/]
+			[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateStaticAttributeID()/]
+			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateStaticReferenceID()/]
+			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateStaticOperationID()/]
+			//Class and Feature Getter
+			[aClass.generateModelElementGetter(anEPackage, false)/]
+			[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			// End Class [aClass.name.toUpperFirst()/]
+
+[/for]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateStaticDatatypeID()/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+
+			[anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name).generateSubPackageGetter(false)/]
+
+			//Singleton Instance and Getter
+			[generateSingletonDecl(packageName)/]
+[if anEPackage.name.equalsIgnoreCase('ecore')]
+
+			//prevent from hiding functions
+			using EPackage::getEAnnotation;
+			using EPackage::getEClassifier;
+[/if]
+	};
+}
+[endGuard(anEPackage,'Package')/]
+[/file]
+[/template]

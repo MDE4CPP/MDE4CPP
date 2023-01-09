@@ -1,9 +1,13 @@
 
 #include "uml/impl/ActivityEdgeImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -167,7 +171,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inPartition."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inPartition.")
 	}
 
 	//clone reference 'redefinedEdge'
@@ -194,7 +198,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedEdge."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for redefinedEdge.")
 	}
 
 	//clone reference 'weight'
@@ -210,10 +214,6 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -359,41 +359,6 @@ std::shared_ptr<Union<uml::ActivityGroup>> ActivityEdgeImpl::getInGroup() const
 		
 	}
 	return m_inGroup;
-}
-
-std::shared_ptr<Union<uml::Element>> ActivityEdgeImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ActivityEdgeImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
 }
 
 //*********************************
@@ -687,30 +652,30 @@ std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ACTIVITY_CLASS); //812
+			return eEcoreAny(returnValue,uml::umlPackage::ACTIVITY_CLASS); //812
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 			return eAny(getGuard(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //813
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
-			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //821
+			return eEcoreContainerAny(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //821
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
-			return eAnyBag(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //814
+			return eEcoreContainerAny(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //814
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAnyObject(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //816
+			return eEcoreAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS); //816
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 			return eAny(getInterrupts(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS,false); //815
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
-			return eAnyBag(getRedefinedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //819
+			return eEcoreContainerAny(getRedefinedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //819
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 			return eAny(getSource(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //818
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
@@ -749,139 +714,316 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
 
-bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
+bool ActivityEdgeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
-			// CAST Any to uml::Activity
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivity(_activity); //812
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(eObject);
+					if(_activity)
+					{
+						setActivity(_activity); //812
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'activity'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'activity'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _guard = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setGuard(_guard); //813
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _guard = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_guard)
+					{
+						setGuard(_guard); //813
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'guard'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'guard'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			// CAST Any to Bag<uml::ActivityPartition>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
-					std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition=getInPartition();
-					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *_inPartition)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (inPartitionList->find(indexInPartition) == -1)
+						std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_inPartition->erase(indexInPartition);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *inPartitionList)
-					{
-						if (_inPartition->find(indexInPartition) == -1)
-						{
-							_inPartition->add(indexInPartition);
+							std::shared_ptr<uml::ActivityPartition> valueToAdd = std::dynamic_pointer_cast<uml::ActivityPartition>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_inPartition->find(valueToAdd) == -1)
+								{
+									_inPartition->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inPartition'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inPartition'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
-			// CAST Any to uml::StructuredActivityNode
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
-			setInStructuredNode(_inStructuredNode); //816
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-		{
-			// CAST Any to uml::InterruptibleActivityRegion
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_temp);
-			setInterrupts(_interrupts); //815
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
-		{
-			// CAST Any to Bag<uml::ActivityEdge>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
-					std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge=getRedefinedEdge();
-					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *_redefinedEdge)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(eObject);
+					if(_inStructuredNode)
 					{
-						if (redefinedEdgeList->find(indexRedefinedEdge) == -1)
-						{
-							_redefinedEdge->erase(indexRedefinedEdge);
-						}
+						setInStructuredNode(_inStructuredNode); //816
 					}
-
-					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *redefinedEdgeList)
+					else
 					{
-						if (_redefinedEdge->find(indexRedefinedEdge) == -1)
-						{
-							_redefinedEdge->add(indexRedefinedEdge);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'inStructuredNode'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'inStructuredNode'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(eObject);
+					if(_interrupts)
+					{
+						setInterrupts(_interrupts); //815
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'interrupts'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'interrupts'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge = getRedefinedEdge();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_redefinedEdge->find(valueToAdd) == -1)
+								{
+									_redefinedEdge->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'redefinedEdge'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'redefinedEdge'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 		{
-			// CAST Any to uml::ActivityNode
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ActivityNode> _source = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
-			setSource(_source); //818
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ActivityNode> _source = std::dynamic_pointer_cast<uml::ActivityNode>(eObject);
+					if(_source)
+					{
+						setSource(_source); //818
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
 		{
-			// CAST Any to uml::ActivityNode
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ActivityNode> _target = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
-			setTarget(_target); //817
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ActivityNode> _target = std::dynamic_pointer_cast<uml::ActivityNode>(eObject);
+					if(_target)
+					{
+						setTarget(_target); //817
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _weight = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setWeight(_weight); //820
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _weight = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_weight)
+					{
+						setWeight(_weight); //820
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'weight'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'weight'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -891,28 +1033,12 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::ActivityEdge::source_and_target(Any, std::map) : bool: 2060103261
-		case umlPackage::ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->source_and_target(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

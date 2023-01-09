@@ -7,20 +7,19 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
-#include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
 //include subpackages 
  
@@ -43,15 +42,10 @@ void ActivitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackag
 	createActivityNodeActivationGroupContent(package, factory);
 	createActivityParameterNodeActivationContent(package, factory);
 	createCentralBufferNodeActivationContent(package, factory);
-	createClassifierBehaviorExecutionActivityContent(package, factory);
-	createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(package, factory);
 	createControlNodeActivationContent(package, factory);
 	createControlTokenContent(package, factory);
 	createDataStoreNodeActivationContent(package, factory);
 	createDecisionNodeActivationContent(package, factory);
-	createExpansionActivationGroupContent(package, factory);
-	createExpansionNodeActivationContent(package, factory);
-	createExpansionRegionActivationContent(package, factory);
 	createFlowFinalNodeActivationContent(package, factory);
 	createForkNodeActivationContent(package, factory);
 	createForkedTokenContent(package, factory);
@@ -198,22 +192,6 @@ void ActivitiesPackageImpl::createCentralBufferNodeActivationContent(std::shared
 	
 }
 
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivityContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_classifierBehaviorExecutionActivity_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS);
-	
-	
-	
-}
-
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS);
-	
-	
-	
-}
-
 void ActivitiesPackageImpl::createControlNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_controlNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CONTROLNODEACTIVATION_CLASS);
@@ -248,10 +226,9 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 {
 	m_decisionNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, DECISIONNODEACTIVATION_CLASS);
 	
-	m_decisionNodeActivation_Attribute_decisionInputExecution = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION);
 	m_decisionNodeActivation_Attribute_decisionNode = factory->createEReference_as_eReferences_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
 	
-	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE);
+	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
 	m_decisionNodeActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowInstance = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE);
 	m_decisionNodeActivation_Operation_getDecisionInputFlowValue = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE);
@@ -260,63 +237,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	m_decisionNodeActivation_Operation_isReady = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_ISREADY);
 	m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN);
 	m_decisionNodeActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
-	m_decisionNodeActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TERMINATE);
-	m_decisionNodeActivation_Operation_test_ValueSpecification_Value = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE);
-	
-}
-
-void ActivitiesPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_expansionActivationGroup_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONACTIVATIONGROUP_CLASS);
-	m_expansionActivationGroup_Attribute_index = factory->createEAttribute_as_eAttributes_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX);
-	
-	m_expansionActivationGroup_Attribute_groupInputs = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS);
-	m_expansionActivationGroup_Attribute_groupOutputs = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS);
-	m_expansionActivationGroup_Attribute_regionActivation = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION);
-	m_expansionActivationGroup_Attribute_regionInputs = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS);
-	
-	m_expansionActivationGroup_Operation_getActivityExecution = factory->createEOperation_as_eOperations_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION);
-	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode = factory->createEOperation_as_eOperations_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
-	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation = factory->createEOperation_as_eOperations_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION);
-	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation = factory->createEOperation_as_eOperations_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION);
-	
-}
-
-void ActivitiesPackageImpl::createExpansionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_expansionNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONNODEACTIVATION_CLASS);
-	
-	
-	m_expansionNodeActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
-	m_expansionNodeActivation_Operation_getExpansionRegionActivation = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION);
-	m_expansionNodeActivation_Operation_isReady = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_ISREADY);
-	m_expansionNodeActivation_Operation_receiveOffer = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER);
-	
-}
-
-void ActivitiesPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
-{
-	m_expansionRegionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONREGIONACTIVATION_CLASS);
-	m_expansionRegionActivation_Attribute_next = factory->createEAttribute_as_eAttributes_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT);
-	
-	m_expansionRegionActivation_Attribute_activationGroups = factory->createEReference_as_eReferences_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens = factory->createEReference_as_eReferences_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS);
-	m_expansionRegionActivation_Attribute_inputTokens = factory->createEReference_as_eReferences_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS);
-	
-	m_expansionRegionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOACTION);
-	m_expansionRegionActivation_Operation_doOutput = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT);
-	m_expansionRegionActivation_Operation_doStructuredActivity = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY);
-	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE);
-	m_expansionRegionActivation_Operation_isSuspended = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED);
-	m_expansionRegionActivation_Operation_numberOfValues = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES);
-	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP);
-	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP);
-	m_expansionRegionActivation_Operation_runIterative = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE);
-	m_expansionRegionActivation_Operation_runParallel = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL);
-	m_expansionRegionActivation_Operation_sendOffers = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS);
-	m_expansionRegionActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
-	m_expansionRegionActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE);
-	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup = factory->createEOperation_as_eOperations_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP);
+	m_decisionNodeActivation_Operation_test_ValueSpecification_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT);
 	
 }
 
@@ -404,8 +325,8 @@ void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ec
 void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectToken_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECTTOKEN_CLASS);
+	m_objectToken_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_objectToken_Class, OBJECTTOKEN_ATTRIBUTE_VALUE);
 	
-	m_objectToken_Attribute_value = factory->createEReference_as_eReferences_in_EClass(m_objectToken_Class, OBJECTTOKEN_ATTRIBUTE_VALUE);
 	
 	m_objectToken_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_objectToken_Class, OBJECTTOKEN_OPERATION__COPY);
 	m_objectToken_Operation_equals_Token = factory->createEOperation_as_eOperations_in_EClass(m_objectToken_Class, OBJECTTOKEN_OPERATION_EQUALS_TOKEN);

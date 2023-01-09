@@ -85,7 +85,7 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
         <language>CPP</language>
-        <body>result = (index &lt; (int) context->getModules()->size());</body>
+        <body>result = (index &lt; this->getModules()->size());</body>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vySDEF0cEeq5aMbnrvR8VA" name="obGetModulesAtIndex" specification="_1zr-IF0XEeq5aMbnrvR8VA">
         <ownedParameter xmi:id="_xUgq0F0cEeq5aMbnrvR8VA" name="index">

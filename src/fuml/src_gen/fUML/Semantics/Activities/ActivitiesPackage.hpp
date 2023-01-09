@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EAnnotation;
 	class EAttribute;
+	class EReference;
 	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Activities 
@@ -34,15 +34,10 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class ActivityParameterNodeActivation;
 	class CentralBufferNodeActivation;
-	class ClassifierBehaviorExecutionActivity;
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1;
 	class ControlNodeActivation;
 	class ControlToken;
 	class DataStoreNodeActivation;
 	class DecisionNodeActivation;
-	class ExpansionActivationGroup;
-	class ExpansionNodeActivation;
-	class ExpansionRegionActivation;
 	class FlowFinalNodeActivation;
 	class ForkNodeActivation;
 	class ForkedToken;
@@ -90,12 +85,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE = 1109285379;
 			static const unsigned long ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET = 1425032255;
 			
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE = 3512353870;
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS = 247253392;
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER = 2669398996;
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN = 2265631071;
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS = 3785400521;
-			static const unsigned int ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT = 1787668928;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE = 3512353870;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS = 247253392;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER = 2669398996;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN = 2265631071;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS = 3785400521;
+			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT = 1787668928;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityEdgeInstance_Class() const = 0;
@@ -120,16 +115,16 @@ namespace fUML::Semantics::Activities
 			// Begin Class ActivityExecution
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 51;
 			
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;
 			
-			static const unsigned int ACTIVITYEXECUTION_OPERATION__COPY = 2012185658;
-			static const unsigned int ACTIVITYEXECUTION_OPERATION_EXECUTE = 2440252333;
-			static const unsigned int ACTIVITYEXECUTION_OPERATION_NEW_ = 4166139257;
-			static const unsigned int ACTIVITYEXECUTION_OPERATION_TERMINATE = 1105822471;
+			static const unsigned long ACTIVITYEXECUTION_OPERATION__COPY = 2018352062;
+			static const unsigned long ACTIVITYEXECUTION_OPERATION_EXECUTE = 2440252333;
+			static const unsigned long ACTIVITYEXECUTION_OPERATION_NEW_ = 357511021;
+			static const unsigned long ACTIVITYEXECUTION_OPERATION_TERMINATE = 1105822471;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityExecution_Class() const = 0;
@@ -153,7 +148,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned int ACTIVITYFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
-			static const unsigned int ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3991177345;
+			static const unsigned long ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3991177345;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityFinalNodeActivation_Class() const = 0;
@@ -178,31 +173,31 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE = 1710961840;
 			static const unsigned long ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES = 1556272480;
 			
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE = 2329513027;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE = 3040559551;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 1438112633;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ADDTOKENS_TOKEN = 1994943910;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_CLEARTOKENS = 305402021;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 2189392667;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 1346898969;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN = 3892530199;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION = 415943298;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT = 769426444;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS = 4097970094;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4201354494;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING = 254630437;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS = 3137100059;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ISREADY = 2594491909;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 2410514251;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER = 4022154831;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 2530926611;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_RESUME = 1522436987;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_RUN = 3682367227;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 3528690584;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_SUSPEND = 1833763532;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 4181507751;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS = 1423548432;
-			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 1536647187;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE = 2329513027;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE = 3040559551;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 1438112633;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ADDTOKENS_TOKEN = 1994943910;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_CLEARTOKENS = 305402021;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 2189392667;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 1346898969;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN = 3892530199;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION = 415943298;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT = 3574975649;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS = 4097970094;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4201354494;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING = 254630437;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS = 3137100059;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ISREADY = 2594491909;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 2410514251;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER = 4022154831;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 2530926611;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_RESUME = 1522436987;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_RUN = 3682367227;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 3528690584;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_SUSPEND = 1833763532;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 4181507751;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS = 1423548432;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 1536647187;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivation_Class() const = 0;
@@ -256,23 +251,23 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS = 312223170;
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS = 652260595;
 			
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE = 1424879345;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE = 3481165333;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION = 1678168073;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION = 2941723279;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE = 553340279;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE = 221360211;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE = 3543208085;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4739911;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS = 2536177538;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE = 2460897072;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED = 1715228724;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION = 3637760725;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION = 1009503597;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION = 3898662735;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE = 485740428;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION = 1485995758;
-			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL = 2675640689;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE = 1424879345;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE = 3481165333;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION = 1678168073;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION = 2941723279;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE = 553340279;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE = 221360211;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE = 3543208085;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4739911;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS = 2536177538;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE = 2460897072;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED = 1715228724;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION = 3637760725;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION = 1009503597;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION = 3898662735;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE = 485740428;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION = 1485995758;
+			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL = 2675640689;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivationGroup_Class() const = 0;
@@ -312,8 +307,8 @@ namespace fUML::Semantics::Activities
 			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
 			
-			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS = 779512874;
-			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1225512580;
+			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS = 779512874;
+			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1225512580;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityParameterNodeActivation_Class() const = 0;
@@ -333,7 +328,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
 			
 			
-			static const unsigned int CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 3196789593;
+			static const unsigned long CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 3196789593;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation_Class() const = 0;
@@ -345,40 +340,6 @@ namespace fUML::Semantics::Activities
 			// End Class CentralBufferNodeActivation
 
 
-			// Begin Class ClassifierBehaviorExecutionActivity
-			//Class and Feature IDs 
-			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS = 1651964304;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_OPERATION_COUNT = 0;
-			
-			
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_Class() const = 0;
-			
-			
-			
-			
-			// End Class ClassifierBehaviorExecutionActivity
-
-
-			// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-			//Class and Feature IDs 
-			static const unsigned long CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS = 285113084;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_OPERATION_COUNT = 0;
-			
-			
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class() const = 0;
-			
-			
-			
-			
-			// End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-
-
 			// Begin Class ControlNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long CONTROLNODEACTIVATION_CLASS = 1062574970;
@@ -386,7 +347,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned int CONTROLNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
 			
 			
-			static const unsigned int CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 1708232627;
+			static const unsigned long CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 1708232627;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlNodeActivation_Class() const = 0;
@@ -405,9 +366,9 @@ namespace fUML::Semantics::Activities
 			static const unsigned int CONTROLTOKEN_CLASS_OPERATION_COUNT = 9;
 			
 			
-			static const unsigned int CONTROLTOKEN_OPERATION__COPY = 4065084616;
-			static const unsigned int CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 338981101;
-			static const unsigned int CONTROLTOKEN_OPERATION_ISCONTROL = 972980650;
+			static const unsigned long CONTROLTOKEN_OPERATION__COPY = 4065084616;
+			static const unsigned long CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 338981101;
+			static const unsigned long CONTROLTOKEN_OPERATION_ISCONTROL = 972980650;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlToken_Class() const = 0;
@@ -428,8 +389,8 @@ namespace fUML::Semantics::Activities
 			static const unsigned int DATASTORENODEACTIVATION_CLASS_OPERATION_COUNT = 41;
 			
 			
-			static const unsigned int DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 2150799315;
-			static const unsigned int DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 4235365301;
+			static const unsigned long DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 2150799315;
+			static const unsigned long DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 4235365301;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation_Class() const = 0;
@@ -445,32 +406,29 @@ namespace fUML::Semantics::Activities
 			// Begin Class DecisionNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long DECISIONNODEACTIVATION_CLASS = 52454155;
-			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 38;
 			
-			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION = 1327941012;
 			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE = 1894640136;
 			
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE = 1497497786;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 4127070096;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE = 589400247;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE = 15068892;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN = 1834254220;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT = 336094904;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_ISREADY = 2829031806;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 1559509247;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 121080352;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TERMINATE = 1771187084;
-			static const unsigned int DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE = 753683065;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT = 3052258302;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 4127070096;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE = 589400247;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE = 1399588784;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN = 2333144120;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT = 336094904;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_ISREADY = 2829031806;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 1559509247;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 121080352;
+			static const unsigned long DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT = 2379610281;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_Attribute_decisionInputExecution() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_Attribute_decisionNode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_fire_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_getDecisionInputFlowInstance() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_getDecisionInputFlowValue() const = 0;
@@ -479,123 +437,9 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_isReady() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_removeJoinedControlTokens_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_test_ValueSpecification_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const = 0;
 			
 			// End Class DecisionNodeActivation
-
-
-			// Begin Class ExpansionActivationGroup
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONACTIVATIONGROUP_CLASS = 2118091381;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_OPERATION_COUNT = 21;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX = 1854627739;
-			
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS = 1135874802;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS = 433714641;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION = 1329361640;
-			static const unsigned long EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS = 1419365982;
-			
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION = 3008748080;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 156883141;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION = 4278059019;
-			static const unsigned int EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION = 415784904;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionActivationGroup_Class() const = 0;
-			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionActivationGroup_Attribute_index() const = 0;
-			
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupInputs() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupOutputs() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionInputs() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_resume_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_suspend_ActivityNodeActivation() const = 0;
-			
-			// End Class ExpansionActivationGroup
-
-
-			// Begin Class ExpansionNodeActivation
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 2051282899;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 42;
-			
-			
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 2655396851;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 451366782;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_ISREADY = 2578844217;
-			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER = 935567755;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation_Class() const = 0;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_getExpansionRegionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_isReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_receiveOffer() const = 0;
-			
-			// End Class ExpansionNodeActivation
-
-
-			// Begin Class ExpansionRegionActivation
-			//Class and Feature IDs 
-			static const unsigned long EXPANSIONREGIONACTIVATION_CLASS = 918124971;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 61;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT = 1468361356;
-			
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 1554958381;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS = 433864060;
-			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS = 1087448901;
-			
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOACTION = 2818883973;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT = 3223295572;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 3512627221;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE = 684269277;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED = 939459401;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES = 1113964543;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP = 2463471261;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP = 717168838;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE = 1467340922;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL = 2412031918;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS = 1622572467;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 1713936329;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE = 1114479685;
-			static const unsigned int EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP = 2109160294;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation_Class() const = 0;
-			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionRegionActivation_Attribute_next() const = 0;
-			
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_activationGroups() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputExpansionTokens() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputTokens() const = 0;
-			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doOutput() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doStructuredActivity() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_isSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_numberOfValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_resume_ExpansionActivationGroup() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runIterative() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runParallel() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_sendOffers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup() const = 0;
-			
-			// End Class ExpansionRegionActivation
 
 
 			// Begin Class FlowFinalNodeActivation
@@ -622,8 +466,8 @@ namespace fUML::Semantics::Activities
 			static const unsigned int FORKNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
-			static const unsigned int FORKNODEACTIVATION_OPERATION_FIRE_TOKEN = 974284456;
-			static const unsigned int FORKNODEACTIVATION_OPERATION_TERMINATE = 3793874788;
+			static const unsigned long FORKNODEACTIVATION_OPERATION_FIRE_TOKEN = 974284456;
+			static const unsigned long FORKNODEACTIVATION_OPERATION_TERMINATE = 3793874788;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkNodeActivation_Class() const = 0;
@@ -646,11 +490,11 @@ namespace fUML::Semantics::Activities
 			
 			static const unsigned long FORKEDTOKEN_ATTRIBUTE_BASETOKEN = 1285402041;
 			
-			static const unsigned int FORKEDTOKEN_OPERATION__COPY = 3813886438;
-			static const unsigned int FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 2609062935;
-			static const unsigned int FORKEDTOKEN_OPERATION_GETVALUE = 3937215927;
-			static const unsigned int FORKEDTOKEN_OPERATION_ISCONTROL = 919245696;
-			static const unsigned int FORKEDTOKEN_OPERATION_WITHDRAW = 3679135667;
+			static const unsigned long FORKEDTOKEN_OPERATION__COPY = 3813886438;
+			static const unsigned long FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 2609062935;
+			static const unsigned long FORKEDTOKEN_OPERATION_GETVALUE = 776594391;
+			static const unsigned long FORKEDTOKEN_OPERATION_ISCONTROL = 919245696;
+			static const unsigned long FORKEDTOKEN_OPERATION_WITHDRAW = 3679135667;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkedToken_Class() const = 0;
@@ -676,7 +520,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned int INITIALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
-			static const unsigned int INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3439352700;
+			static const unsigned long INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3439352700;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInitialNodeActivation_Class() const = 0;
@@ -695,8 +539,8 @@ namespace fUML::Semantics::Activities
 			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
-			static const unsigned int JOINNODEACTIVATION_OPERATION_FIRE_TOKEN = 1770507194;
-			static const unsigned int JOINNODEACTIVATION_OPERATION_ISREADY = 1408588552;
+			static const unsigned long JOINNODEACTIVATION_OPERATION_FIRE_TOKEN = 1770507194;
+			static const unsigned long JOINNODEACTIVATION_OPERATION_ISREADY = 1408588552;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation_Class() const = 0;
@@ -734,17 +578,17 @@ namespace fUML::Semantics::Activities
 			static const unsigned long OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT = 1384449261;
 			
 			
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 3455616103;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS = 955294195;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES = 2731645893;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS = 209809884;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS = 2051750135;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 794012241;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_RUN = 2383055481;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 1025246782;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS = 230468136;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS = 4049856236;
-			static const unsigned int OBJECTNODEACTIVATION_OPERATION_TERMINATE = 2022976081;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 3455616103;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS = 955294195;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES = 2731645893;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS = 209809884;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS = 2051750135;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 794012241;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_RUN = 2383055481;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 1025246782;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS = 230468136;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS = 4049856236;
+			static const unsigned long OBJECTNODEACTIVATION_OPERATION_TERMINATE = 2022976081;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectNodeActivation_Class() const = 0;
@@ -772,18 +616,18 @@ namespace fUML::Semantics::Activities
 			static const unsigned long OBJECTTOKEN_CLASS = 85097778;
 			static const unsigned int OBJECTTOKEN_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int OBJECTTOKEN_CLASS_OPERATION_COUNT = 9;
-			
 			static const unsigned long OBJECTTOKEN_ATTRIBUTE_VALUE = 2030770298;
 			
-			static const unsigned int OBJECTTOKEN_OPERATION__COPY = 2325156054;
-			static const unsigned int OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 1120332551;
-			static const unsigned int OBJECTTOKEN_OPERATION_ISCONTROL = 3725482608;
+			
+			static const unsigned long OBJECTTOKEN_OPERATION__COPY = 2325156054;
+			static const unsigned long OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 1120332551;
+			static const unsigned long OBJECTTOKEN_OPERATION_ISCONTROL = 3725482608;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectToken_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getObjectToken_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectToken_Attribute_value() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_equals_Token() const = 0;
@@ -800,11 +644,11 @@ namespace fUML::Semantics::Activities
 			
 			static const unsigned long OFFER_ATTRIBUTE_OFFEREDTOKENS = 295657861;
 			
-			static const unsigned int OFFER_OPERATION_COUNTOFFEREDVALES = 904773483;
-			static const unsigned int OFFER_OPERATION_HASTOKENS = 3339319593;
-			static const unsigned int OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT = 1313324759;
-			static const unsigned int OFFER_OPERATION_REMOVEWITHDRAWNTOKENS = 3955994697;
-			static const unsigned int OFFER_OPERATION_RETRIEVEOFFEREDTOKENS = 1383812745;
+			static const unsigned long OFFER_OPERATION_COUNTOFFEREDVALES = 904773483;
+			static const unsigned long OFFER_OPERATION_HASTOKENS = 3339319593;
+			static const unsigned long OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT = 1313324759;
+			static const unsigned long OFFER_OPERATION_REMOVEWITHDRAWNTOKENS = 3955994697;
+			static const unsigned long OFFER_OPERATION_RETRIEVEOFFEREDTOKENS = 1383812745;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOffer_Class() const = 0;
@@ -830,12 +674,12 @@ namespace fUML::Semantics::Activities
 			
 			static const unsigned long TOKEN_ATTRIBUTE_HOLDER = 1704390519;
 			
-			static const unsigned int TOKEN_OPERATION__COPY = 2860108519;
-			static const unsigned int TOKEN_OPERATION_EQUALS_TOKEN = 378713648;
-			static const unsigned int TOKEN_OPERATION_GETVALUE = 3442224848;
-			static const unsigned int TOKEN_OPERATION_ISCONTROL = 2683482097;
-			static const unsigned int TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION = 2200060239;
-			static const unsigned int TOKEN_OPERATION_WITHDRAW = 81284716;
+			static const unsigned long TOKEN_OPERATION__COPY = 2860108519;
+			static const unsigned long TOKEN_OPERATION_EQUALS_TOKEN = 378713648;
+			static const unsigned long TOKEN_OPERATION_GETVALUE = 900354032;
+			static const unsigned long TOKEN_OPERATION_ISCONTROL = 2683482097;
+			static const unsigned long TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION = 2200060239;
+			static const unsigned long TOKEN_OPERATION_WITHDRAW = 81284716;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getToken_Class() const = 0;

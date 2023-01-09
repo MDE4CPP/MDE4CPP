@@ -7,15 +7,12 @@
 #ifndef UML_PACKAGEABLEELEMENT_HPP
 #define UML_PACKAGEABLEELEMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -66,7 +63,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API PackageableElement: virtual public NamedElement, virtual public ParameterableElement
+	class UML_API PackageableElement : virtual public NamedElement, virtual public ParameterableElement
 	{
 		public:
  			PackageableElement(const PackageableElement &) {}
@@ -94,12 +91,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A PackageableElement owned by a Namespace must have a visibility.
-			visibility = null implies namespace = null
-			*/
-			 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -114,25 +105,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

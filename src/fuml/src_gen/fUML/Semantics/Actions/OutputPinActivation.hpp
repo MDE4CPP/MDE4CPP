@@ -61,7 +61,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API OutputPinActivation: virtual public PinActivation
+	class FUML_API OutputPinActivation : virtual public PinActivation
 	{
 		public:
  			OutputPinActivation(const OutputPinActivation &) {}

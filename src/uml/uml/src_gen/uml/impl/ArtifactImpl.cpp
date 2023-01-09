@@ -1,9 +1,13 @@
 
 #include "uml/impl/ArtifactImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -183,7 +187,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr manifestation."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for manifestation.")
 	}
 
 	//clone reference 'nestedArtifact'
@@ -210,7 +214,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedArtifact."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for nestedArtifact.")
 	}
 
 	//clone reference 'ownedAttribute'
@@ -237,7 +241,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedAttribute."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedAttribute.")
 	}
 
 	//clone reference 'ownedOperation'
@@ -264,7 +268,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedOperation."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedOperation.")
 	}
 	/*Subset*/
 	getManifestation()->initSubset(getOwnedElement());
@@ -304,12 +308,12 @@ std::shared_ptr<ecore::EObject> ArtifactImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -418,122 +422,6 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> Artifac
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ArtifactImpl::getAttribute() const
-{
-	if(m_attribute == nullptr)
-	{
-		/*SubsetUnion*/
-		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getAttribute()->initSubsetUnion(getFeature());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
-		#endif
-		
-	}
-	return m_attribute;
-}
-
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ArtifactImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> ArtifactImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> ArtifactImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ArtifactImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ArtifactImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> ArtifactImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ArtifactImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -758,22 +646,22 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 			return eAny(getFileName(),ecore::ecorePackage::ESTRING_CLASS,false); //2038
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-			return eAnyBag(getManifestation(),uml::umlPackage::MANIFESTATION_CLASS); //2039
+			return eEcoreContainerAny(getManifestation(),uml::umlPackage::MANIFESTATION_CLASS); //2039
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-			return eAnyBag(getNestedArtifact(),uml::umlPackage::ARTIFACT_CLASS); //2040
+			return eEcoreContainerAny(getNestedArtifact(),uml::umlPackage::ARTIFACT_CLASS); //2040
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //2041
+			return eEcoreContainerAny(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //2041
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //2042
+			return eEcoreContainerAny(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //2042
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -808,164 +696,203 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ArtifactImpl::eSet(int featureID, Any newValue)
+bool ArtifactImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 		{
-			// CAST Any to std::string
-			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //2038
-			return true;
+			try
+			{
+				std::string _fileName = newValue->get<std::string>();
+				setFileName(_fileName); //2038
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'fileName'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
-			// CAST Any to Bag<uml::Manifestation>
-			if((newValue->isContainer()) && (uml::umlPackage::MANIFESTATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Manifestation>> manifestationList= newValue->get<std::shared_ptr<Bag<uml::Manifestation>>>();
-					std::shared_ptr<Bag<uml::Manifestation>> _manifestation=getManifestation();
-					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *_manifestation)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (manifestationList->find(indexManifestation) == -1)
+						std::shared_ptr<Bag<uml::Manifestation>> _manifestation = getManifestation();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_manifestation->erase(indexManifestation);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *manifestationList)
-					{
-						if (_manifestation->find(indexManifestation) == -1)
-						{
-							_manifestation->add(indexManifestation);
+							std::shared_ptr<uml::Manifestation> valueToAdd = std::dynamic_pointer_cast<uml::Manifestation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_manifestation->find(valueToAdd) == -1)
+								{
+									_manifestation->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'manifestation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'manifestation'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
-			// CAST Any to Bag<uml::Artifact>
-			if((newValue->isContainer()) && (uml::umlPackage::ARTIFACT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Artifact>> nestedArtifactList= newValue->get<std::shared_ptr<Bag<uml::Artifact>>>();
-					std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact=getNestedArtifact();
-					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *_nestedArtifact)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (nestedArtifactList->find(indexNestedArtifact) == -1)
+						std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact = getNestedArtifact();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_nestedArtifact->erase(indexNestedArtifact);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *nestedArtifactList)
-					{
-						if (_nestedArtifact->find(indexNestedArtifact) == -1)
-						{
-							_nestedArtifact->add(indexNestedArtifact);
+							std::shared_ptr<uml::Artifact> valueToAdd = std::dynamic_pointer_cast<uml::Artifact>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_nestedArtifact->find(valueToAdd) == -1)
+								{
+									_nestedArtifact->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'nestedArtifact'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'nestedArtifact'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// CAST Any to Bag<uml::Property>
-			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedAttribute->erase(indexOwnedAttribute);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
-					{
-						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
-						{
-							_ownedAttribute->add(indexOwnedAttribute);
+							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedAttribute->find(valueToAdd) == -1)
+								{
+									_ownedAttribute->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedAttribute'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedAttribute'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
-			// CAST Any to Bag<uml::Operation>
-			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
-					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedOperationList->find(indexOwnedOperation) == -1)
+						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedOperation->erase(indexOwnedOperation);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
-					{
-						if (_ownedOperation->find(indexOwnedOperation) == -1)
-						{
-							_ownedOperation->add(indexOwnedOperation);
+							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedOperation->find(valueToAdd) == -1)
+								{
+									_ownedOperation->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedOperation'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedOperation'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -982,9 +909,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -994,24 +921,72 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'createOwnedAttribute'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'lower'
 			//parameter 2
 			int incoming_param_lower;
-			std::list<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'lower'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'upper'
 			//parameter 3
 			int incoming_param_upper;
-			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAnyObject(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
+			Bag<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'upper'. Failed to invoke operation 'createOwnedAttribute'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Artifact::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 153390480
@@ -1020,24 +995,93 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'createOwnedOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
+			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'createOwnedOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
+			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_parameterTypes_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_parameterTypes.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
+								incoming_param_parameterTypes->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'createOwnedOperation'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'returnType'
 			//parameter 3
 			std::shared_ptr<uml::Type> incoming_param_returnType;
-			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAnyObject(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
+			Bag<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_returnType_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_returnType = std::dynamic_pointer_cast<uml::Type>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'returnType'. Failed to invoke operation 'createOwnedOperation'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 

@@ -61,7 +61,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API MessageEnd: virtual public NamedElement
+	class UML_API MessageEnd : virtual public NamedElement
 	{
 		public:
  			MessageEnd(const MessageEnd &) {}
@@ -112,7 +112,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() = 0;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment>> enclosingFragment() = 0;
 			/*!
 			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
@@ -136,7 +136,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() = 0;
+			virtual std::shared_ptr<Bag<uml::MessageEnd>> oppositeEnd() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -161,18 +161,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

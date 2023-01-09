@@ -7,7 +7,6 @@
 #ifndef UML_INSTANCESPECIFICATION_HPP
 #define UML_INSTANCESPECIFICATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -72,7 +69,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API InstanceSpecification: virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
+	class UML_API InstanceSpecification : virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
 	{
 		public:
  			InstanceSpecification(const InstanceSpecification &) {}
@@ -89,30 +86,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The definingFeature of each slot is a StructuralFeature related to a classifier of the InstanceSpecification, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
-			slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature)))
-			*/
-			 
-			virtual bool defining_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
-			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact))
-			*/
-			 
-			virtual bool deployment_artifact(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An InstanceSpecification can act as a DeploymentTarget if it represents an instance of a Node and functions as a part in the internal structure of an encompassing Node.
-			deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node)))
-			*/
-			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			No more than one slot in an InstanceSpecification may have the same definingFeature.
-			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1)))
-			*/
-			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -149,25 +122,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

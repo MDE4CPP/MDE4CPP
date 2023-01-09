@@ -68,7 +68,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ActivityNode: virtual public RedefinableElement
+	class UML_API ActivityNode : virtual public RedefinableElement
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}
@@ -178,24 +178,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

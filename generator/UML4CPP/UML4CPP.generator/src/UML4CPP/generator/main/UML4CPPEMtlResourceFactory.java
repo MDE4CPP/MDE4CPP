@@ -75,6 +75,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeFactoryEmtls(resourcePathPrefix);
 		initializeHelpersEmtls(resourcePathPrefix);
 		initializeImplEmtls(resourcePathPrefix);
+		initializeModelPackage_GlobalFunctionsEmtls(resourcePathPrefix);
 		initializePackageEmtls(resourcePathPrefix);
 		initializePluginEmtls(resourcePathPrefix);
 		initializeProfilesEmtls(resourcePathPrefix);
@@ -167,6 +168,15 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		generateFilePathMapData(moduleNames, "impl", resourcePathPrefix);
 	}
 	
+	private void initializeModelPackage_GlobalFunctionsEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generatePackageGlobalFunctions",
+								"generatePackageGlobalFunctionsHeader",
+								"generatePackageGlobalFunctionsSource"
+								};
+		generateFilePathMapData(moduleNames, "model_package/global_functions", resourcePathPrefix);
+	}
+	
 	private void initializePackageEmtls(String resourcePathPrefix)
 	{
 		String[] moduleNames = {"generatePackage",
@@ -212,7 +222,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeValidationEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"validateModel"};
+		String[] moduleNames = {"validation"};
 		generateFilePathMapData(moduleNames, "validation", resourcePathPrefix);
 	}
 

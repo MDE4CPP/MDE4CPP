@@ -365,6 +365,7 @@ void [packageName/]::initializePackageActivities()
 {
 [for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
 	initializeActivity_[anActivity.memberName()/]();
+	[anActivity.memberName()/]->_setID([anActivity.getMemberName().toUpperCase()/]);
 [/for]
 }
 

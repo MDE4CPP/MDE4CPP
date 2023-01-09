@@ -7,7 +7,6 @@
 #ifndef UML_OBJECTNODE_HPP
 #define UML_OBJECTNODE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -77,7 +74,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ObjectNode: virtual public ActivityNode, virtual public TypedElement
+	class UML_API ObjectNode : virtual public ActivityNode, virtual public TypedElement
 	{
 		public:
  			ObjectNode(const ObjectNode &) {}
@@ -94,28 +91,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			A selection Behavior has one input Parameter and one output Parameter. The input Parameter must have the same type as  or a supertype of the type of ObjectNode, be non-unique, and have multiplicity 0..*. The output Parameter must be the same or a subtype of the type of ObjectNode. The Behavior cannot have side effects.
-			selection<>null implies
-				selection.inputParameters()->size()=1 and
-				selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and
-				selection.outputParameters()->size()=1 and
-					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
-			*/
-			 
-			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
-			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
-			*/
-			 
-			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
-			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
-			*/
-			 
-			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -182,30 +157,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

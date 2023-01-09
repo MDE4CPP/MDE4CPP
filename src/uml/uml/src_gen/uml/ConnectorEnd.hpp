@@ -7,14 +7,11 @@
 #ifndef UML_CONNECTOREND_HPP
 #define UML_CONNECTOREND_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -61,7 +58,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API ConnectorEnd: virtual public MultiplicityElement
+	class UML_API ConnectorEnd : virtual public MultiplicityElement
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}
@@ -84,31 +81,6 @@ namespace uml
 			// Operations
 			//*********************************
 			
-			/*!
-			The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
-			self.compatibleWith(definingEnd)
-			*/
-			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
-			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
-			*/
-			 
-			virtual bool part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
-			partWithPort->notEmpty() implies 
-			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
-			*/
-			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The Property held in self.partWithPort must not be a Port.
-			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
-			*/
-			 
-			virtual bool self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -153,12 +125,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

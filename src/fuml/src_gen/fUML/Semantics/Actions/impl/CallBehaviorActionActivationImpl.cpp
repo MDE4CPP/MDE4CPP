@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/CallBehaviorActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,34 +34,40 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallBehaviorAction.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "uml/Behavior.hpp"
 #include "uml/CallAction.hpp"
 #include "fUML/Semantics/Actions/CallActionActivation.hpp"
 #include "uml/CallBehaviorAction.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "uml/Parameter.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -132,27 +142,43 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallBehaviorActionActivationImpl::getCallExecution()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallBehaviorActionActivationImpl::doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::CallBehaviorAction> callBehaviorAction = this->getCallBehaviorAction();
-    if(callBehaviorAction != nullptr)
-    {
-    	std::shared_ptr<uml::Behavior> behavior = callBehaviorAction->getBehavior();
-    	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = nullptr;
+	std::shared_ptr<uml::Behavior> behavior = this->retrieveBehavior();
 
-        if(behavior!=nullptr)
-        {
-            if (behavior->getContext()!= nullptr) 
-            {
-                DEBUG_MESSAGE(std::cout<<"[getCallExecution] behavior context = " << behavior->getContext()->getName()<<std::endl;)
-                context = this->getExecutionContext();
-            }
-            return this->getExecutionLocus()->getFactory()->createExecution(behavior,context);
-        }
-    }
-    return nullptr;
+	if(behavior != nullptr)
+	{
+		std::shared_ptr<uml::Element> context = nullptr;
+		if(behavior->getContext() != nullptr)
+		{
+			DEBUG_INFO("Behavior context is '" << behavior->getContext()->getName() << "'.")
+			context = this->getExecutionContext();
+		}
+		
+		return this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);
+	}
+	return nullptr;
+
+	//end of body
+}
+
+
+
+std::shared_ptr<uml::Behavior> CallBehaviorActionActivationImpl::retrieveBehavior() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->getCallBehaviorAction()->getBehavior();
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::Parameter>> CallBehaviorActionActivationImpl::retrieveCallParameters() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->retrieveBehavior()->getOwnedParameter();
 	//end of body
 }
 
@@ -226,20 +252,6 @@ void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CallBehaviorActionActivationImpl::getPinActivation() const
-{
-	if(m_pinActivation == nullptr)
-	{
-		/*Union*/
-		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_pinActivation;
-}
 
 //*********************************
 // Container Getter
@@ -362,7 +374,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -382,17 +394,40 @@ bool CallBehaviorActionActivationImpl::internalEIsSet(int featureID) const
 	return CallActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+bool CallBehaviorActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION:
 		{
-			// CAST Any to uml::CallBehaviorAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_temp);
-			setCallBehaviorAction(_callBehaviorAction); //1513
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(eObject);
+					if(_callBehaviorAction)
+					{
+						setCallBehaviorAction(_callBehaviorAction); //1513
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'callBehaviorAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'callBehaviorAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -402,16 +437,65 @@ bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::CallBehaviorActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 3714278039
-		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		// fUML::Semantics::Actions::CallBehaviorActionActivation::doCall(fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2530900674
+		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE:
 		{
-			result = eAnyObject(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			//Retrieve input parameter 'inputParameterValues'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameterValues;
+			Bag<Any>::const_iterator incoming_param_inputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputParameterValues_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputParameterValues.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputParameterValues->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->doCall(incoming_param_inputParameterValues);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			break;
+		}
+		// fUML::Semantics::Actions::CallBehaviorActionActivation::retrieveBehavior() : uml::Behavior {const}: 2035427474
+		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR:
+		{
+			result = eEcoreAny(this->retrieveBehavior(), uml::umlPackage::BEHAVIOR_CLASS);
+			break;
+		}
+		// fUML::Semantics::Actions::CallBehaviorActionActivation::retrieveCallParameters() : uml::Parameter[*] {const}: 3812119957
+		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS:
+		{
+			std::shared_ptr<Bag<uml::Parameter>> resultList = this->retrieveCallParameters();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 

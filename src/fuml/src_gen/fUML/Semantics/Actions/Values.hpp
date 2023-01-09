@@ -10,8 +10,8 @@
 
 #include <memory>
 #include <string>
+#include "abstractDataTypes/Any.hpp"
 // forward declarations
-template<class T> class Bag; 
 
 
 //*********************************
@@ -33,10 +33,6 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
@@ -71,11 +67,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<Bag<Any>> getValues() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -97,11 +93,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			mutable std::shared_ptr<Bag<Any>> m_values;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_VALUES_HPP */

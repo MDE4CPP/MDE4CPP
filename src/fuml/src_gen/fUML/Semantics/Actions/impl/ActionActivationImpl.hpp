@@ -47,24 +47,24 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge) ;
 			virtual void addPinActivation(std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() ;
 			virtual void createNodeActivations() ;
 			virtual void doAction() ;
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) ;
+			virtual std::shared_ptr<Bag<Any>> getTokens(std::shared_ptr<uml::InputPin> pin) ;
 			virtual bool isFirng() ;
 			virtual bool isReady() ;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) ;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> makeBooleanValue(bool value) ;
-			virtual void putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
-			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) ;
+			
+			virtual void putToken(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Any> value) ;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Bag<Any>> values) ;
 			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin> pin) ;
 			virtual void run() ;
 			virtual void sendOffers() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<uml::InputPin> pin) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
+			virtual std::shared_ptr<Bag<Any>> takeTokens(std::shared_ptr<uml::InputPin> pin) ;
 			virtual void terminate() ;
-			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) ;
+			virtual bool valueParticipatesInLink(std::shared_ptr<Any> value, std::shared_ptr<uml::Element> link) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -92,7 +92,7 @@ namespace fUML::Semantics::Actions
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -109,14 +109,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::ActionActivation> m_thisActionActivationPtr;

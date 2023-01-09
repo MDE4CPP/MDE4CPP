@@ -1,9 +1,13 @@
 
 #include "uml/impl/ElementImportImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -132,16 +136,6 @@ std::string ElementImportImpl::getName()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 //*********************************
 // Attribute Getters & Setters
 //*********************************
@@ -195,80 +189,6 @@ void ElementImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _imp
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ElementImportImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ElementImportImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::Element>> ElementImportImpl::getRelatedElement() const
-{
-	if(m_relatedElement == nullptr)
-	{
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_relatedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getSource() const
-{
-	if(m_source == nullptr)
-	{
-		/*SubsetUnion*/
-		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getSource()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_source;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getTarget() const
-{
-	if(m_target == nullptr)
-	{
-		/*SubsetUnion*/
-		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getTarget()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_target;
-}
 
 //*********************************
 // Container Getter
@@ -467,7 +387,7 @@ std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -478,7 +398,7 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAnyObject(returnValue,uml::umlPackage::NAMESPACE_CLASS); //828
+			return eEcoreAny(returnValue,uml::umlPackage::NAMESPACE_CLASS); //828
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility(),uml::umlPackage::VISIBILITYKIND_CLASS,false); //829
@@ -502,39 +422,99 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool ElementImportImpl::eSet(int featureID, Any newValue)
+bool ElementImportImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 		{
-			// CAST Any to std::string
-			std::string _alias = newValue->get<std::string>();
-			setAlias(_alias); //826
-			return true;
+			try
+			{
+				std::string _alias = newValue->get<std::string>();
+				setAlias(_alias); //826
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'alias'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
-			// CAST Any to uml::PackageableElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setImportedElement(_importedElement); //827
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(eObject);
+					if(_importedElement)
+					{
+						setImportedElement(_importedElement); //827
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'importedElement'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'importedElement'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
-			// CAST Any to uml::Namespace
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setImportingNamespace(_importingNamespace); //828
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(eObject);
+					if(_importingNamespace)
+					{
+						setImportingNamespace(_importingNamespace); //828
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'importingNamespace'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'importingNamespace'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
-			// CAST Any to uml::VisibilityKind
-			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //829
-			return true;
+			try
+			{
+				uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
+				setVisibility(_visibility); //829
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'visibility'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -544,48 +524,16 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ElementImportImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::ElementImport::getName() : std::string: 2948686225
 		case umlPackage::ELEMENTIMPORT_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName(),0,false);
-			break;
-		}
-		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 3938107701
-		case umlPackage::ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 3497731579
-		case umlPackage::ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->getName(), 0, false);
 			break;
 		}
 

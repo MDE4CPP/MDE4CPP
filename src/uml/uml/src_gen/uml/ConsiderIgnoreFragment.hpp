@@ -7,15 +7,12 @@
 #ifndef UML_CONSIDERIGNOREFRAGMENT_HPP
 #define UML_CONSIDERIGNOREFRAGMENT_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -69,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API ConsiderIgnoreFragment: virtual public CombinedFragment
+	class UML_API ConsiderIgnoreFragment : virtual public CombinedFragment
 	{
 		public:
  			ConsiderIgnoreFragment(const ConsiderIgnoreFragment &) {}
@@ -86,18 +83,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
-			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
-			*/
-			 
-			virtual bool consider_or_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
-			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
-			*/
-			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -116,24 +101,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

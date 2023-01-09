@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -47,13 +48,16 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
+	class ParameterValue;
 }
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
+	class Behavior;
 	class CallAction;
 	class CallOperationAction;
+	class Parameter;
 }
 
 // namespace macro header include
@@ -69,7 +73,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API CallOperationActionActivation: virtual public CallActionActivation
+	class FUML_API CallOperationActionActivation : virtual public CallActionActivation
 	{
 		public:
  			CallOperationActionActivation(const CallOperationActionActivation &) {}
@@ -86,7 +90,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues) = 0;
+			
+			virtual std::shared_ptr<uml::Behavior> retrieveBehavior() const = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> retrieveCallParameters() const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -107,7 +114,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

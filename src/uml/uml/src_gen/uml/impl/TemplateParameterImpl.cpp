@@ -1,9 +1,13 @@
 
 #include "uml/impl/TemplateParameterImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -134,10 +138,6 @@ std::shared_ptr<ecore::EObject> TemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -204,29 +204,6 @@ void TemplateParameterImpl::setSignature(std::weak_ptr<uml::TemplateSignature> _
 //*********************************
 // Union Getter
 //*********************************
-
-
-std::shared_ptr<Union<uml::Element>> TemplateParameterImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> TemplateParameterImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -429,7 +406,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -444,7 +421,7 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSignature().lock();
-			return eAnyObject(returnValue,uml::umlPackage::TEMPLATESIGNATURE_CLASS); //2316
+			return eEcoreAny(returnValue,uml::umlPackage::TEMPLATESIGNATURE_CLASS); //2316
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -468,49 +445,164 @@ bool TemplateParameterImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateParameterImpl::eSet(int featureID, Any newValue)
+bool TemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
 		{
-			// CAST Any to uml::ParameterableElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ParameterableElement> _default = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setDefault(_default); //2313
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ParameterableElement> _default = std::dynamic_pointer_cast<uml::ParameterableElement>(eObject);
+					if(_default)
+					{
+						setDefault(_default); //2313
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'default'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'default'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
 		{
-			// CAST Any to uml::ParameterableElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ParameterableElement> _ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setOwnedDefault(_ownedDefault); //2314
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ParameterableElement> _ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(eObject);
+					if(_ownedDefault)
+					{
+						setOwnedDefault(_ownedDefault); //2314
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'ownedDefault'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'ownedDefault'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
 		{
-			// CAST Any to uml::ParameterableElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setOwnedParameteredElement(_ownedParameteredElement); //2317
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(eObject);
+					if(_ownedParameteredElement)
+					{
+						setOwnedParameteredElement(_ownedParameteredElement); //2317
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'ownedParameteredElement'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'ownedParameteredElement'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
 		{
-			// CAST Any to uml::ParameterableElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ParameterableElement> _parameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setParameteredElement(_parameteredElement); //2315
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ParameterableElement> _parameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(eObject);
+					if(_parameteredElement)
+					{
+						setParameteredElement(_parameteredElement); //2315
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'parameteredElement'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'parameteredElement'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
-			// CAST Any to uml::TemplateSignature
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
-			setSignature(_signature); //2316
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(eObject);
+					if(_signature)
+					{
+						setSignature(_signature); //2316
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -520,28 +612,12 @@ bool TemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::TemplateParameter::must_be_compatible(Any, std::map) : bool: 2618018285
-		case umlPackage::TEMPLATEPARAMETER_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_be_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

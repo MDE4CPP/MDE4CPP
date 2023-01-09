@@ -1,9 +1,13 @@
 
 #include "uml/impl/DurationObservationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -133,7 +137,7 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr firstEvent."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for firstEvent.")
 	}
 
 	//copy references with no containment (soft copy)
@@ -153,10 +157,6 @@ std::shared_ptr<ecore::EObject> DurationObservationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -189,32 +189,6 @@ std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() cons
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> DurationObservationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> DurationObservationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> DurationObservationImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -379,12 +353,12 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return eAnyBag(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS); //8012
+			return eEcoreContainerAny(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS); //8012
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent(),ecore::ecorePackage::EBOOLEAN_CLASS,true); //8013
 	}
@@ -403,52 +377,84 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	return ObservationImpl::internalEIsSet(featureID);
 }
 
-bool DurationObservationImpl::eSet(int featureID, Any newValue)
+bool DurationObservationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			// CAST Any to Bag<uml::NamedElement>
-			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::NamedElement>> eventList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _event=getEvent();
-					for(const std::shared_ptr<uml::NamedElement> indexEvent: *_event)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (eventList->find(indexEvent) == -1)
+						std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_event->erase(indexEvent);
-						}
-					}
-
-					for(const std::shared_ptr<uml::NamedElement> indexEvent: *eventList)
-					{
-						if (_event->find(indexEvent) == -1)
-						{
-							_event->add(indexEvent);
+							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_event->find(valueToAdd) == -1)
+								{
+									_event->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'event'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'event'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
-			// CAST Any to Bag<bool>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<bool>> _firstEventList = newValue->get<std::shared_ptr<Bag<bool>>>();
+				std::shared_ptr<Bag<bool>> _firstEvent = isFirstEvent();
+				
+				for(const std::shared_ptr<bool> valueToAdd: *_firstEventList)
+				{
+					if (valueToAdd)
+					{
+						if(_firstEvent->find(valueToAdd) == -1)
+						{
+							_firstEvent->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'firstEvent'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -458,28 +464,12 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::DurationObservation::first_event_multiplicity(Any, std::map) : bool: 2503056873
-		case umlPackage::DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

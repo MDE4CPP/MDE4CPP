@@ -1,9 +1,13 @@
 
 #include "uml/impl/InteractionUseImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -155,7 +159,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr actualGate."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for actualGate.")
 	}
 
 	//clone reference 'argument'
@@ -182,7 +186,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for argument.")
 	}
 
 	//clone reference 'returnValue'
@@ -217,35 +221,6 @@ std::shared_ptr<ecore::EObject> InteractionUseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool InteractionUseImpl::gates_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -332,30 +307,6 @@ void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> 
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> InteractionUseImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> InteractionUseImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> InteractionUseImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -577,14 +528,14 @@ std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
-			return eAnyBag(getActualGate(),uml::umlPackage::GATE_CLASS); //12413
+			return eEcoreContainerAny(getActualGate(),uml::umlPackage::GATE_CLASS); //12413
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //12414
+			return eEcoreContainerAny(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //12414
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return eAny(getRefersTo(),uml::umlPackage::INTERACTION_CLASS,false); //12415
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
@@ -613,107 +564,192 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool InteractionUseImpl::eSet(int featureID, Any newValue)
+bool InteractionUseImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
-			// CAST Any to Bag<uml::Gate>
-			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Gate>> actualGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
-					std::shared_ptr<Bag<uml::Gate>> _actualGate=getActualGate();
-					for(const std::shared_ptr<uml::Gate> indexActualGate: *_actualGate)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (actualGateList->find(indexActualGate) == -1)
+						std::shared_ptr<Bag<uml::Gate>> _actualGate = getActualGate();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_actualGate->erase(indexActualGate);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Gate> indexActualGate: *actualGateList)
-					{
-						if (_actualGate->find(indexActualGate) == -1)
-						{
-							_actualGate->add(indexActualGate);
+							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_actualGate->find(valueToAdd) == -1)
+								{
+									_actualGate->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'actualGate'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'actualGate'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
-			// CAST Any to Bag<uml::ValueSpecification>
-			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _argument=getArgument();
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *_argument)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentList->find(indexArgument) == -1)
+						std::shared_ptr<Bag<uml::ValueSpecification>> _argument = getArgument();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_argument->erase(indexArgument);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *argumentList)
-					{
-						if (_argument->find(indexArgument) == -1)
-						{
-							_argument->add(indexArgument);
+							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_argument->find(valueToAdd) == -1)
+								{
+									_argument->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
-			// CAST Any to uml::Interaction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setRefersTo(_refersTo); //12415
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(eObject);
+					if(_refersTo)
+					{
+						setRefersTo(_refersTo); //12415
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'refersTo'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'refersTo'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setReturnValue(_returnValue); //12416
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_returnValue)
+					{
+						setReturnValue(_returnValue); //12416
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'returnValue'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'returnValue'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
-			// CAST Any to uml::Property
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setReturnValueRecipient(_returnValueRecipient); //12417
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(eObject);
+					if(_returnValueRecipient)
+					{
+						setReturnValueRecipient(_returnValueRecipient); //12417
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'returnValueRecipient'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'returnValueRecipient'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -723,108 +759,12 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::InteractionUse::all_lifelines(Any, std::map) : bool: 1011637994
-		case umlPackage::INTERACTIONUSE_OPERATION_ALL_LIFELINES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::InteractionUse::arguments_are_constants(Any, std::map) : bool: 733280904
-		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_ARE_CONSTANTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::InteractionUse::arguments_correspond_to_parameters(Any, std::map) : bool: 3043306836
-		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_CORRESPOND_TO_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::InteractionUse::gates_match(Any, std::map) : bool: 1724788051
-		case umlPackage::INTERACTIONUSE_OPERATION_GATES_MATCH_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::InteractionUse::returnValueRecipient_coverage(Any, std::map) : bool: 1468221886
-		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUERECIPIENT_COVERAGE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::InteractionUse::returnValue_type_recipient_correspondence(Any, std::map) : bool: 31244600
-		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->returnValue_type_recipient_correspondence(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

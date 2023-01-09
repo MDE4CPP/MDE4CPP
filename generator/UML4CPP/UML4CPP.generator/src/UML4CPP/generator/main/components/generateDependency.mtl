@@ -43,7 +43,7 @@
  * - apply stereotypes
 */]
 [template public generateDependencyInitialization(aDependency : Dependency)]
-[aDependency.memberName()/]->setName("[aDependency.name/]");
+[aDependency.memberName()/]->setName("[aDependency.metamodelElementName()/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
 [aDependency.generateStereotypeApplication()/]

@@ -1,9 +1,13 @@
 
 #include "uml/impl/ConnectableElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -126,7 +130,7 @@ ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableEleme
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
+std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnds()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -153,27 +157,6 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ConnectableElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ConnectableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -273,14 +256,14 @@ std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return eAnyBag(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5012
+			return eEcoreContainerAny(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5012
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -307,7 +290,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ConnectableElementImpl::eSet(int featureID, Any newValue)
+bool ConnectableElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -326,17 +309,17 @@ bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 700294205
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
-			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();
-			return eAnyBag(resultList,uml::umlPackage::CONNECTOREND_CLASS);
+			std::shared_ptr<Bag<uml::ConnectorEnd>> resultList = this->getEnds();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CONNECTOREND_CLASS);
 			break;
 		}
 

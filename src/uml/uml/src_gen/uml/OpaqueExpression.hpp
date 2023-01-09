@@ -7,14 +7,11 @@
 #ifndef UML_OPAQUEEXPRESSION_HPP
 #define UML_OPAQUEEXPRESSION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -69,7 +66,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API OpaqueExpression: virtual public ValueSpecification
+	class UML_API OpaqueExpression : virtual public ValueSpecification
 	{
 		public:
  			OpaqueExpression(const OpaqueExpression &) {}
@@ -110,25 +107,6 @@ namespace uml
 			*/
 			 
 			virtual bool isPositive() = 0;
-			/*!
-			If the language attribute is not empty, then the size of the body and language arrays must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size())
-			*/
-			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The behavior must have exactly one return result parameter.
-			behavior <> null implies
-			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
-			*/
-			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The behavior may only have return result parameters.
-			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
-			*/
-			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
@@ -179,25 +157,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

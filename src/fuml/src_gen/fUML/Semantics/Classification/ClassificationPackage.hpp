@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EOperation;
-	class EAnnotation;
-	class EClass;
 	class EStringToStringMapEntry;
+	class EAnnotation;
 	class EGenericType;
+	class EOperation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Classification 
 {
-	class InstanceValueEvaluation;
+
 }
  
 namespace fUML::Semantics::Classification 
@@ -47,24 +47,6 @@ namespace fUML::Semantics::Classification
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
-
-			// Begin Class InstanceValueEvaluation
-			//Class and Feature IDs 
-			static const unsigned long INSTANCEVALUEEVALUATION_CLASS = 1738756913;
-			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
-			
-			
-			static const unsigned int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 2581799787;
-			
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_Operation_evaluate() const = 0;
-			
-			// End Class InstanceValueEvaluation
 
 			
 			

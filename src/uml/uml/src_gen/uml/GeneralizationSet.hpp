@@ -7,15 +7,12 @@
 #ifndef UML_GENERALIZATIONSET_HPP
 #define UML_GENERALIZATIONSET_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -67,7 +64,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class UML_API GeneralizationSet: virtual public PackageableElement
+	class UML_API GeneralizationSet : virtual public PackageableElement
 	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}
@@ -84,20 +81,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
-			generalization->collect(general)->asSet()->size() <= 1
-			*/
-			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
-			powertype <> null implies generalization->forAll( gen | 
-			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
-			  )
-			*/
-			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -152,25 +135,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

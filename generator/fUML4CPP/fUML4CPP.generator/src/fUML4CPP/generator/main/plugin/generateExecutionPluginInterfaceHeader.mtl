@@ -18,7 +18,6 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
@@ -31,63 +30,19 @@
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-[if(aPackage.allOwnedElements()->filter(Operation)->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0 or 
-aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0)]
-namespace uml
-{
-	class OpaqueBehavior;
-}
-[/if]
-
-namespace PSCS::Semantics::Loci
-{
-	class CS_Executor;
-	class CS_ExecutionFactory;
-}
-
-namespace [aPackage.generateNamespace(false).sanitize()/]
-{
-	class [aPackage.generateNamespace(false).sanitize() + 'Locus'/];
-}
-
-
 namespace [aPackage.generateNamespace(false)/]
 {
 	class [packageName/] : virtual public UMLExecutionModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
-	
-			virtual std::string eclipseURI() = 0;
-			virtual std::string eNAME() = 0;
-			virtual std::string eNS_URI() = 0;
-			virtual std::string eNS_PREFIX() = 0;
-	
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
-			virtual Any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
-
+			
 		protected:
 			[packageName/](){};
 			virtual ~[packageName/](){};
 	
 		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
-
-		protected:
-			//Execution Environment
-[if (not aPackage.isReflectionModel())]
-			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
-			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
-			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
-			//OpaqueBehaviors for primitive prototypes for activity executions
-			[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-			[if (not anOperation.name.oclIsUndefined())]
-			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
-			[/if]
-			[/for]
-[/if]
-			
+			static std::shared_ptr<MDE4CPPPlugin> instance;		
 	};
 }
 [endGuard(aPackage,'ExecPlugin')/]

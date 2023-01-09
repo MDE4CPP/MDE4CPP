@@ -50,37 +50,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;
-			/*!
-			The value InputPin is not also the qualifier value InputPin.
-			value->excludesAll(qualifier.value)
-			*/
-			 
-			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The multiplicity of the value InputPin must be 1..1.
-			value<>null implies value.is(1,1)
-			*/
-			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The Property must be an Association memberEnd.
-			end.association <> null
-			*/
-			 
-			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The qualifiers must be qualifiers of the Association end.
-			end.qualifier->includesAll(qualifier.qualifier)
-			*/
-			 
-			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the value InputPin conforms to the type of the Association end.
-			value<>null implies value.type.conformsTo(end.type)
-			*/
-			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual std::shared_ptr<Bag<uml::InputPin>> allPins() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -123,18 +93,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -151,14 +115,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::LinkEndData> m_thisLinkEndDataPtr;

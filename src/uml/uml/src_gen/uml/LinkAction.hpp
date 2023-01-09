@@ -7,15 +7,12 @@
 #ifndef UML_LINKACTION_HPP
 #define UML_LINKACTION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -76,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API LinkAction: virtual public Action
+	class UML_API LinkAction : virtual public Action
 	{
 		public:
  			LinkAction(const LinkAction &) {}
@@ -100,24 +97,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Association> association() = 0;
-			/*!
-			The ends of the endData must not be static.
-			endData->forAll(not end.isStatic)
-			*/
-			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
-			endData.end = self.association().memberEnd->asBag()
-			*/
-			 
-			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
-			inputValue->asBag()=endData.allPins()
-			*/
-			 
-			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -142,36 +121,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

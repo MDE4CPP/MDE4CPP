@@ -7,15 +7,12 @@
 #ifndef UML_TRIGGER_HPP
 #define UML_TRIGGER_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -65,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API Trigger: virtual public NamedElement
+	class UML_API Trigger : virtual public NamedElement
 	{
 		public:
  			Trigger(const Trigger &) {}
@@ -82,12 +79,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
-			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
-			*/
-			 
-			virtual bool trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -118,18 +109,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

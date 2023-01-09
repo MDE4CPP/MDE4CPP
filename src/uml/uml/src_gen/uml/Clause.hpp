@@ -7,15 +7,12 @@
 #ifndef UML_CLAUSE_HPP
 #define UML_CLAUSE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -60,7 +57,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Clause: virtual public Element
+	class UML_API Clause : virtual public Element
 	{
 		public:
  			Clause(const Clause &) {}
@@ -77,26 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The bodyOutput Pins are OutputPins on Actions in the body of the Clause.
-			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
-			*/
-			 
-			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
-			test.oclAsType(Action).allActions().output->includes(decider) and
-			decider.type = Boolean and
-			decider.is(1,1)
-			*/
-			 
-			virtual bool decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The test and body parts of a ConditionalNode must be disjoint with each other.
-			test->intersection(_'body')->isEmpty()
-			*/
-			 
-			virtual bool test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -151,12 +128,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

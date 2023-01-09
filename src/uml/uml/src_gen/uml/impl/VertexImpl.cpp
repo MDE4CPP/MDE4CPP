@@ -1,9 +1,13 @@
 
 #include "uml/impl/VertexImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -132,12 +136,12 @@ std::shared_ptr<uml::StateMachine> VertexImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getIncomings()
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncomings()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings()
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoings()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -197,30 +201,6 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> VertexImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> VertexImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> VertexImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -328,19 +308,19 @@ std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAnyObject(returnValue,uml::umlPackage::REGION_CLASS); //2549
+			return eEcoreAny(returnValue,uml::umlPackage::REGION_CLASS); //2549
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
-			return eAnyBag(getIncoming(),uml::umlPackage::TRANSITION_CLASS); //25410
+			return eEcoreContainerAny(getIncoming(),uml::umlPackage::TRANSITION_CLASS); //25410
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
-			return eAnyBag(getOutgoing(),uml::umlPackage::TRANSITION_CLASS); //25411
+			return eEcoreContainerAny(getOutgoing(),uml::umlPackage::TRANSITION_CLASS); //25411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,17 +339,40 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool VertexImpl::eSet(int featureID, Any newValue)
+bool VertexImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
-			// CAST Any to uml::Region
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setContainer(_container); //2549
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(eObject);
+					if(_container)
+					{
+						setContainer(_container); //2549
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'container'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'container'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -379,30 +382,30 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> VertexImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::Vertex::containingStateMachine() : uml::StateMachine: 2007948051
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Vertex::getIncomings() : uml::Transition[*]: 124960789
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
-			std::shared_ptr<Bag<uml::Transition> > resultList = this->getIncomings();
-			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
+			std::shared_ptr<Bag<uml::Transition>> resultList = this->getIncomings();
+			return eEcoreContainerAny(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
 		// uml::Vertex::getOutgoings() : uml::Transition[*]: 3840074001
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
-			std::shared_ptr<Bag<uml::Transition> > resultList = this->getOutgoings();
-			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
+			std::shared_ptr<Bag<uml::Transition>> resultList = this->getOutgoings();
+			return eEcoreContainerAny(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
 		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 1632706225
@@ -411,9 +414,30 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 'r'
 			//parameter 0
 			std::shared_ptr<uml::Region> incoming_param_r;
-			std::list<Any>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_r = (*incoming_param_r_arguments_citer)->get<std::shared_ptr<uml::Region> >();
-			result = eAny(this->isContainedInRegion(incoming_param_r),0,false);
+			Bag<Any>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_r_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_r = std::dynamic_pointer_cast<uml::Region>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'r'. Failed to invoke operation 'isContainedInRegion'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isContainedInRegion(incoming_param_r), 0, false);
 			break;
 		}
 		// uml::Vertex::isContainedInState(uml::State) : bool: 3997919607
@@ -422,9 +446,30 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			//Retrieve input parameter 's'
 			//parameter 0
 			std::shared_ptr<uml::State> incoming_param_s;
-			std::list<Any>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s = (*incoming_param_s_arguments_citer)->get<std::shared_ptr<uml::State> >();
-			result = eAny(this->isContainedInState(incoming_param_s),0,false);
+			Bag<Any>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_s_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_s = std::dynamic_pointer_cast<uml::State>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 's'. Failed to invoke operation 'isContainedInState'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isContainedInState(incoming_param_s), 0, false);
 			break;
 		}
 

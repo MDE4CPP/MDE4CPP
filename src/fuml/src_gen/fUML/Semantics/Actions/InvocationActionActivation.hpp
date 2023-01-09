@@ -63,7 +63,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API InvocationActionActivation: virtual public ActionActivation
+	class FUML_API InvocationActionActivation : virtual public ActionActivation
 	{
 		public:
  			InvocationActionActivation(const InvocationActionActivation &) {}
@@ -92,7 +92,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

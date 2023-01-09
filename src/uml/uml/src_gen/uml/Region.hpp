@@ -7,15 +7,12 @@
 #ifndef UML_REGION_HPP
 #define UML_REGION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -72,7 +69,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API Region: virtual public Namespace, virtual public RedefinableElement
+	class UML_API Region : virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Region(const Region &) {}
@@ -125,26 +122,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			/*!
-			A Region can have at most one deep history Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			   select(kind = PseudostateKind::deepHistory)->size() <= 1
-			*/
-			 
-			virtual bool deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A Region can have at most one initial Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::initial)->size() <= 1
-			*/
-			 
-			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
-			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
-			*/
-			 
-			virtual bool owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -156,13 +133,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
-			/*!
-			A Region can have at most one shallow history Vertex.
-			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
-			*/
-			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -223,42 +193,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

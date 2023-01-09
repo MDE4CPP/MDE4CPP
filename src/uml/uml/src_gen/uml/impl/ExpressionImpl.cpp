@@ -1,9 +1,13 @@
 
 #include "uml/impl/ExpressionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -168,7 +172,7 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr operand."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for operand.")
 	}
 	/*Subset*/
 	getOperand()->initSubset(getOwnedElement());
@@ -232,32 +236,6 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::g
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ExpressionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ExpressionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ExpressionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -426,12 +404,12 @@ std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return eAnyBag(getOperand(),uml::umlPackage::VALUESPECIFICATION_CLASS); //9515
+			return eEcoreContainerAny(getOperand(),uml::umlPackage::VALUESPECIFICATION_CLASS); //9515
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol(),ecore::ecorePackage::ESTRING_CLASS,false); //9516
 	}
@@ -450,53 +428,68 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ExpressionImpl::eSet(int featureID, Any newValue)
+bool ExpressionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
-			// CAST Any to Bag<uml::ValueSpecification>
-			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ValueSpecification>> operandList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _operand=getOperand();
-					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *_operand)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (operandList->find(indexOperand) == -1)
+						std::shared_ptr<Bag<uml::ValueSpecification>> _operand = getOperand();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_operand->erase(indexOperand);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *operandList)
-					{
-						if (_operand->find(indexOperand) == -1)
-						{
-							_operand->add(indexOperand);
+							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_operand->find(valueToAdd) == -1)
+								{
+									_operand->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'operand'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'operand'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
-			// CAST Any to std::string
-			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //9516
-			return true;
+			try
+			{
+				std::string _symbol = newValue->get<std::string>();
+				setSymbol(_symbol); //9516
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'symbol'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -506,9 +499,9 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExpressionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

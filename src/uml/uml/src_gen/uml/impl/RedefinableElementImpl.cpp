@@ -1,9 +1,13 @@
 
 #include "uml/impl/RedefinableElementImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -127,21 +131,6 @@ bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::Red
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 //*********************************
 // Attribute Getters & Setters
 //*********************************
@@ -166,26 +155,6 @@ void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> RedefinableElementImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> RedefinableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-
 std::shared_ptr<Union<uml::RedefinableElement>> RedefinableElementImpl::getRedefinedElement() const
 {
 	if(m_redefinedElement == nullptr)
@@ -329,16 +298,16 @@ std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return eAny(getIsLeaf(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2049
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
-			return eAnyBag(getRedefinedElement(),uml::umlPackage::REDEFINABLEELEMENT_CLASS); //20410
+			return eEcoreContainerAny(getRedefinedElement(),uml::umlPackage::REDEFINABLEELEMENT_CLASS); //20410
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
-			return eAnyBag(getRedefinitionContext(),uml::umlPackage::CLASSIFIER_CLASS); //20411
+			return eEcoreContainerAny(getRedefinitionContext(),uml::umlPackage::CLASSIFIER_CLASS); //20411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -357,16 +326,23 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool RedefinableElementImpl::eSet(int featureID, Any newValue)
+bool RedefinableElementImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 		{
-			// CAST Any to bool
-			bool _isLeaf = newValue->get<bool>();
-			setIsLeaf(_isLeaf); //2049
-			return true;
+			try
+			{
+				bool _isLeaf = newValue->get<bool>();
+				setIsLeaf(_isLeaf); //2049
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isLeaf'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -376,9 +352,9 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -388,9 +364,30 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			//Retrieve input parameter 'redefiningElement'
 			//parameter 0
 			std::shared_ptr<uml::RedefinableElement> incoming_param_redefiningElement;
-			std::list<Any>::const_iterator incoming_param_redefiningElement_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_redefiningElement = (*incoming_param_redefiningElement_arguments_citer)->get<std::shared_ptr<uml::RedefinableElement> >();
-			result = eAny(this->isConsistentWith(incoming_param_redefiningElement),0,false);
+			Bag<Any>::const_iterator incoming_param_redefiningElement_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_redefiningElement_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_redefiningElement = std::dynamic_pointer_cast<uml::RedefinableElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'redefiningElement'. Failed to invoke operation 'isConsistentWith'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'redefiningElement'. Failed to invoke operation 'isConsistentWith'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isConsistentWith(incoming_param_redefiningElement), 0, false);
 			break;
 		}
 		// uml::RedefinableElement::isRedefinitionContextValid(uml::RedefinableElement) : bool: 3034109494
@@ -399,57 +396,30 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			//Retrieve input parameter 'redefinedElement'
 			//parameter 0
 			std::shared_ptr<uml::RedefinableElement> incoming_param_redefinedElement;
-			std::list<Any>::const_iterator incoming_param_redefinedElement_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_redefinedElement = (*incoming_param_redefinedElement_arguments_citer)->get<std::shared_ptr<uml::RedefinableElement> >();
-			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement),0,false);
-			break;
-		}
-		// uml::RedefinableElement::non_leaf_redefinition(Any, std::map) : bool: 1672313130
-		case umlPackage::REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::RedefinableElement::redefinition_consistent(Any, std::map) : bool: 566994478
-		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::RedefinableElement::redefinition_context_valid(Any, std::map) : bool: 1062628144
-		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->redefinition_context_valid(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_redefinedElement_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_redefinedElement_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_redefinedElement = std::dynamic_pointer_cast<uml::RedefinableElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'redefinedElement'. Failed to invoke operation 'isRedefinitionContextValid'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'redefinedElement'. Failed to invoke operation 'isRedefinitionContextValid'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement), 0, false);
 			break;
 		}
 

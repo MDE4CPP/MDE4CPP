@@ -1,9 +1,13 @@
 
 #include "uml/impl/ClauseImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -117,20 +121,6 @@ std::shared_ptr<ecore::EObject> ClauseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClauseImpl::decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClauseImpl::test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -213,20 +203,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> ClauseImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
 
 //*********************************
 // Container Getter
@@ -453,22 +429,22 @@ std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
-			return eAnyBag(getBody(),uml::umlPackage::EXECUTABLENODE_CLASS); //383
+			return eEcoreContainerAny(getBody(),uml::umlPackage::EXECUTABLENODE_CLASS); //383
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-			return eAnyBag(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //384
+			return eEcoreContainerAny(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //384
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider(),uml::umlPackage::OUTPUTPIN_CLASS,false); //385
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-			return eAnyBag(getPredecessorClause(),uml::umlPackage::CLAUSE_CLASS); //386
+			return eEcoreContainerAny(getPredecessorClause(),uml::umlPackage::CLAUSE_CLASS); //386
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-			return eAnyBag(getSuccessorClause(),uml::umlPackage::CLAUSE_CLASS); //387
+			return eEcoreContainerAny(getSuccessorClause(),uml::umlPackage::CLAUSE_CLASS); //387
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
-			return eAnyBag(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //388
+			return eEcoreContainerAny(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //388
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -493,202 +469,265 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ClauseImpl::eSet(int featureID, Any newValue)
+bool ClauseImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			// CAST Any to Bag<uml::ExecutableNode>
-			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExecutableNode>> bodyList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _body=getBody();
-					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *_body)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (bodyList->find(indexBody) == -1)
+						std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_body->erase(indexBody);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *bodyList)
-					{
-						if (_body->find(indexBody) == -1)
-						{
-							_body->add(indexBody);
+							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_body->find(valueToAdd) == -1)
+								{
+									_body->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'body'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'body'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			// CAST Any to Bag<uml::OutputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput=getBodyOutput();
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *_bodyOutput)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (bodyOutputList->find(indexBodyOutput) == -1)
+						std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_bodyOutput->erase(indexBodyOutput);
-						}
-					}
-
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *bodyOutputList)
-					{
-						if (_bodyOutput->find(indexBodyOutput) == -1)
-						{
-							_bodyOutput->add(indexBodyOutput);
+							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_bodyOutput->find(valueToAdd) == -1)
+								{
+									_bodyOutput->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'bodyOutput'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'bodyOutput'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
-			// CAST Any to uml::OutputPin
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setDecider(_decider); //385
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(eObject);
+					if(_decider)
+					{
+						setDecider(_decider); //385
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'decider'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'decider'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			// CAST Any to Bag<uml::Clause>
-			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Clause>> predecessorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _predecessorClause=getPredecessorClause();
-					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *_predecessorClause)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (predecessorClauseList->find(indexPredecessorClause) == -1)
+						std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_predecessorClause->erase(indexPredecessorClause);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *predecessorClauseList)
-					{
-						if (_predecessorClause->find(indexPredecessorClause) == -1)
-						{
-							_predecessorClause->add(indexPredecessorClause);
+							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_predecessorClause->find(valueToAdd) == -1)
+								{
+									_predecessorClause->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'predecessorClause'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'predecessorClause'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			// CAST Any to Bag<uml::Clause>
-			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Clause>> successorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _successorClause=getSuccessorClause();
-					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *_successorClause)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (successorClauseList->find(indexSuccessorClause) == -1)
+						std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_successorClause->erase(indexSuccessorClause);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *successorClauseList)
-					{
-						if (_successorClause->find(indexSuccessorClause) == -1)
-						{
-							_successorClause->add(indexSuccessorClause);
+							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_successorClause->find(valueToAdd) == -1)
+								{
+									_successorClause->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'successorClause'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'successorClause'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			// CAST Any to Bag<uml::ExecutableNode>
-			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _test=getTest();
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *_test)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (testList->find(indexTest) == -1)
+						std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_test->erase(indexTest);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *testList)
-					{
-						if (_test->find(indexTest) == -1)
-						{
-							_test->add(indexTest);
+							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_test->find(valueToAdd) == -1)
+								{
+									_test->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'test'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'test'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -698,60 +737,12 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ClauseImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Clause::body_output_pins(Any, std::map) : bool: 3629525042
-		case umlPackage::CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Clause::decider_output(Any, std::map) : bool: 1450067495
-		case umlPackage::CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Clause::test_and_body(Any, std::map) : bool: 4255472206
-		case umlPackage::CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

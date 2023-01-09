@@ -45,26 +45,54 @@ virtual public Object
 			// Operations
 			//*********************************
 			/*!
+			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
+			*/
+			 
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			/*!
+			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
+			Value will be added at the position given by insertAt.
+			*/
+			 
+			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt) ;
+			/*!
+			Abstract operation to destroy an instance.
+			*/
+			 
+			virtual void destroy() ;
+			/*!
 			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property> property) const ;
+			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const ;
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments) ;
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
 			/*!
-			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
-			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
+			Calls the Operation corresponding to the supplied OpaqueBehavior on the object, passing the supplied Arguments and returning the result.
+			The OpaqueBehavior must be zin the context of the Class of the Object, and the arguments must refer to Parameters of the OpaqueBehavior.
+			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property> property,Any value) ;
-			virtual void unset(std::shared_ptr<uml::Property> property) ;
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			/*!
+			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
+			*/
+			 
+			virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			/*!
+			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
+			parameter.
+			*/
+			 
+			virtual void set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -82,7 +110,7 @@ virtual public Object
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -99,14 +127,14 @@ virtual public Object
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Object> m_thisObjectPtr;

@@ -1,18 +1,22 @@
 #include "UML4CPPProfile/impl/MainBehaviorImpl.hpp"
 
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #include <iostream>
 
 
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
@@ -47,31 +51,14 @@ MainBehaviorImpl::MainBehaviorImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-	DEBUG_MESSAGE(std::cout<<"MainBehavior is created..."<<std::endl;)
+	DEBUG_INFO("Instance of 'MainBehavior' is created.")
 	//***********************************
-	// init Get Set
-	//getter init
-		//Property base_Behavior
-		m_getterMap.insert(std::pair<unsigned long,std::function<Any()>>(1956712138,[this](){ return eAny(this->getBase_Behavior(), uml::umlPackage::BEHAVIOR_CLASS, false);}));
-	
-	
-	//setter init
-	//Property base_Behavior
-		m_setterMap.insert(std::pair<unsigned long,std::function<void(Any)>>(1956712138,[this](Any object){this->setBase_Behavior(object->get<std::shared_ptr<uml::Behavior>>());}));
-	
-	
-	//unsetter init
-		//Property base_Behavior
-		m_unsetterMap.insert(std::pair<unsigned long,std::function<void()>>(1956712138,[this](){m_base_Behavior = std::shared_ptr<uml::Behavior>(nullptr);}));
-	
-	
-	
 }
 
 
 MainBehaviorImpl::~MainBehaviorImpl()
 {
-	DEBUG_MESSAGE(std::cout<<"MainBehavior is destroyed..."<<std::endl;)
+	DEBUG_INFO("Instance of 'MainBehavior' is destroyed.")
 }
 
 MainBehaviorImpl::MainBehaviorImpl(const MainBehaviorImpl & obj):MainBehaviorImpl()
@@ -154,83 +141,149 @@ std::weak_ptr<uml::Behavior> MainBehaviorImpl::getBase_Behavior() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any MainBehaviorImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> MainBehaviorImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    return this->get(qualifiedName);
+	return this->get(qualifiedName);
 }
 
-Any MainBehaviorImpl::get(std::string _qualifiedName) const
+std::shared_ptr<Any> MainBehaviorImpl::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->get(uID);
+	return this->get(uID);
 }
 
-Any MainBehaviorImpl::get(unsigned long _uID) const
+std::shared_ptr<Any> MainBehaviorImpl::get(unsigned long _uID) const
 {
-	std::map<unsigned long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
-    if(iter != m_getterMap.cend())
-    {
-        //invoke the getter function
-        return iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR:
+			return eUMLAny(this->getBase_Behavior().lock(), uml::umlPackage::BEHAVIOR_CLASS);
+	}
 
 	return eAny(nullptr, -1, false);
 }
 
 //Set
-void MainBehaviorImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void MainBehaviorImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->set(qualifiedName, value);
+	this->set(qualifiedName, value);
 }
 
-void MainBehaviorImpl::set(std::string _qualifiedName, Any value)
+void MainBehaviorImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->set(uID, value);
+	this->set(uID, value);
 }
 
-void MainBehaviorImpl::set(unsigned long _uID, Any value)
+void MainBehaviorImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
-    if(iter != m_setterMap.cend())
-    {
-        //invoke the setter function
-        iter->second(value);
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR:
+		{
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<uml::Behavior> _base_Behavior = std::dynamic_pointer_cast<uml::Behavior>(umlAny);
+					if(_base_Behavior)
+					{
+						setBase_Behavior(_base_Behavior);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Behavior'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Behavior'. Failed to set property!")
+				return;
+			}
+		break;
+		}
+	}
+}
+
+//Add
+void MainBehaviorImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->add(qualifiedName, value);
+}
+
+void MainBehaviorImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->add(uID, value);
+}
+
+void MainBehaviorImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+{
 }
 
 //Unset
 void MainBehaviorImpl::unset(std::shared_ptr<uml::Property> _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
-    this->unset(qualifiedName);
+	this->unset(qualifiedName);
 }
 
 void MainBehaviorImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    this->unset(uID);
+	this->unset(uID);
 }
 
 void MainBehaviorImpl::unset(unsigned long _uID)
 {
-	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
-    {
-        //invoke the unsetter function
-        iter->second();
-    }
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR:
+		{
+			m_base_Behavior.reset();
+			return;
+		}
+	}
+
 }
 
+//Remove
+void MainBehaviorImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+{
+	std::string qualifiedName = _property->getQualifiedName();
+	this->remove(qualifiedName, value);
+}
+
+void MainBehaviorImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void MainBehaviorImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+{
+}
 
 //*********************************
 // Operation Invoction
 //*********************************
 //Invoke
-Any MainBehaviorImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> MainBehaviorImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
 {
+	return eAny(nullptr, -1, false);
+
+	/* Currently not functioning. TODO: Clarifiy how this should work in the future
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
@@ -238,24 +291,18 @@ Any MainBehaviorImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::sh
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
 
-    return this->invoke(qualifiedName, _arguments);
+	return this->invoke(qualifiedName, _arguments);
+	*/
 }
 
-Any MainBehaviorImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> MainBehaviorImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-    return this->invoke(uID, _arguments);
+	return this->invoke(uID, _arguments);
 }
 
-Any MainBehaviorImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> MainBehaviorImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
 {
-	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
-    {
-        //invoke the operation
-        return iter->second(_arguments);
-    }
-	
 	return eAny(nullptr, -1, false);
 }
 

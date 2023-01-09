@@ -73,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API Action: virtual public ExecutableNode
+	class UML_API Action : virtual public ExecutableNode
 	{
 		public:
  			Action(const Action &) {}
@@ -96,14 +96,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions() = 0;
+			virtual std::shared_ptr<Bag<uml::Action>> allActions() = 0;
 			/*!
 			Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> allOwnedNodes() = 0;
 			/*!
 			result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
 			else if activity<>null then activity
@@ -161,12 +161,6 @@ namespace uml
 			// Union Reference Getters
 			//*********************************
 			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
 			The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p>
 			*/
@@ -178,24 +172,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

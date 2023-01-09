@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,18 +21,23 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "uml/Class.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -42,14 +51,14 @@
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "uml/Classifier.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
+#include "uml/ReadIsClassifiedObjectAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -107,6 +116,7 @@ ReadIsClassifiedObjectActionActivationImpl& ReadIsClassifiedObjectActionActivati
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_readIsClassifiedObjectAction  = obj.getReadIsClassifiedObjectAction();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -122,9 +132,62 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionActivationImpl::copy
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
+void ReadIsClassifiedObjectActionActivationImpl::doAction()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Get the value on the object input pin and determine if it is classified by the classifier specified in the action.
+// If the isDirect attribute of the action is false, then place true on the result output pin if the input object has the specified classifier or of one its (direct or indirect) descendants as a type.
+	// If the isDirect attribute of the action is true, then place true on the result output pin if the input object has the specified classifier as a type.
+	// Otherwise place false on the result output pin.
+
+	std::shared_ptr<uml::ReadIsClassifiedObjectAction> readIsClassifiedObjectAction = this->getReadIsClassifiedObjectAction();
+	std::shared_ptr<uml::Classifier> classifier = readIsClassifiedObjectAction->getClassifier();
+	bool isDirect = readIsClassifiedObjectAction->getIsDirect();
+	bool result = false;
+
+	std::shared_ptr<Any> inputAsAny = this->takeTokens(readIsClassifiedObjectAction->getObject())->at(0);
+
+	if(inputAsAny)
+	{
+		try
+		{
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(inputAsAny);
+			std::shared_ptr<uml::Element> input = umlAny->getAsElement();
+
+			std::shared_ptr<uml::Classifier> typeOfInput = input->getMetaClass();
+
+			result = (classifier == typeOfInput);
+
+			if(!isDirect && !result)
+			{
+
+				std::shared_ptr<Bag<uml::Classifier>> superTypesOfInput = typeOfInput->allParents();
+
+				for(std::shared_ptr<uml::Classifier> superType : *superTypesOfInput)
+				{
+					result = (classifier == superType);
+			
+					if(result)
+					{
+						break;
+					}
+				}
+			}
+		}
+		catch(...)
+		{
+			DEBUG_ERROR("Provided input is not an instance of uml::Element. Failed read is classified!")
+		}
+
+		std::shared_ptr<Any> resultValue = eAny(result, 0, false);
+
+		if(readIsClassifiedObjectAction->getResult())
+		{
+			this->putToken(readIsClassifiedObjectAction->getResult(), resultValue);
+		}
+	}
+	//end of body
 }
 
 //*********************************
@@ -134,24 +197,53 @@ bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference readIsClassifiedObjectAction */
+std::shared_ptr<uml::ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionActivationImpl::getReadIsClassifiedObjectAction() const
+{
+    return m_readIsClassifiedObjectAction;
+}
+void ReadIsClassifiedObjectActionActivationImpl::setReadIsClassifiedObjectAction(std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction)
+{
+    m_readIsClassifiedObjectAction = _readIsClassifiedObjectAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readIsClassifiedObjectAction);
+}
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void ReadIsClassifiedObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(_action);
+	if(_readIsClassifiedObjectAction)
+	{
+		m_readIsClassifiedObjectAction = _readIsClassifiedObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_readIsClassifiedObjectAction);
+	}
+	else
+	{
+		std::cerr<<"[ReadIsClassifiedObjectActionActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::ReadIsClassifiedObjectAction>'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ReadIsClassifiedObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(_node);
+	if(_readIsClassifiedObjectAction)
+	{
+		m_readIsClassifiedObjectAction = _readIsClassifiedObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[ReadIsClassifiedObjectActionActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::ReadIsClassifiedObjectAction>'"<<std::endl;
+	}
+}
 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadIsClassifiedObjectActionActivationImpl::getPinActivation() const
-{
-	if(m_pinActivation == nullptr)
-	{
-		/*Union*/
-		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_pinActivation;
-}
 
 //*********************************
 // Container Getter
@@ -186,6 +278,25 @@ void ReadIsClassifiedObjectActionActivationImpl::load(std::shared_ptr<persistenc
 
 void ReadIsClassifiedObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("readIsClassifiedObjectAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("readIsClassifiedObjectAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -199,6 +310,20 @@ void ReadIsClassifiedObjectActionActivationImpl::loadNode(std::string nodeName, 
 
 void ReadIsClassifiedObjectActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>( references.front() );
+				setReadIsClassifiedObjectAction(_readIsClassifiedObjectAction);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -220,6 +345,8 @@ void ReadIsClassifiedObjectActionActivationImpl::saveContent(std::shared_ptr<per
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getReadIsClassifiedObjectAction(), "readIsClassifiedObjectAction", getReadIsClassifiedObjectAction()->eClass() != uml::umlPackage::eInstance()->getReadIsClassifiedObjectAction_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -235,10 +362,12 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStat
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
+			return eAny(getReadIsClassifiedObjectAction(),uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS,false); //9011
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -247,14 +376,47 @@ bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) c
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
+			return getReadIsClassifiedObjectAction() != nullptr; //9011
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(eObject);
+					if(_readIsClassifiedObjectAction)
+					{
+						setReadIsClassifiedObjectAction(_readIsClassifiedObjectAction); //9011
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'readIsClassifiedObjectAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'readIsClassifiedObjectAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);
@@ -263,26 +425,16 @@ bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::checkAllParents(uml::Classifier, uml::Classifier) : bool: 2265886499
-		case ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
+		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::doAction(): 2223647656
+		case ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
-			//Retrieve input parameter 'type'
-			//parameter 0
-			std::shared_ptr<uml::Classifier> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			//Retrieve input parameter 'classifier'
-			//parameter 1
-			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
+			this->doAction();
 			break;
 		}
 

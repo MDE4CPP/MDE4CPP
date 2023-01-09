@@ -1,9 +1,13 @@
 
 #include "uml/impl/ClassifierImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -195,7 +199,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr collaborationUse."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for collaborationUse.")
 	}
 
 	//clone reference 'generalization'
@@ -222,7 +226,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr generalization."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for generalization.")
 	}
 
 	//clone reference 'inheritedMember'
@@ -249,7 +253,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inheritedMember."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inheritedMember.")
 	}
 
 	//clone reference 'ownedUseCase'
@@ -276,7 +280,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedUseCase."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedUseCase.")
 	}
 
 	//clone reference 'redefinedClassifier'
@@ -303,7 +307,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedClassifier."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for redefinedClassifier.")
 	}
 
 	//clone reference 'representation'
@@ -336,7 +340,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr substitution."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for substitution.")
 	}
 	/*SubsetUnion*/
 	getCollaborationUse()->initSubsetUnion(getOwnedElement());
@@ -368,22 +372,36 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::allAttributes()
+std::shared_ptr<Bag<uml::Property>> ClassifierImpl::allAttributes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Feature> > ClassifierImpl::allFeatures()
+std::shared_ptr<Bag<uml::Feature>> ClassifierImpl::allFeatures()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::allParents()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::allParents()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Classifier>> allParents(new Bag<uml::Classifier>());
+std::shared_ptr<Bag<uml::Classifier>> parents = this->parents();
+	
+allParents->insert(allParents->begin(), parents->begin(), parents->end());
+	
+for(std::shared_ptr<Classifier> parent : *parents)
+{
+	std::shared_ptr<Bag<uml::Classifier>> allParentsOfParent = parent->allParents();
+	allParents->insert(allParents->end(), allParentsOfParent->begin(), allParentsOfParent->end());
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allRealizedInterfaces()
+return allParents;
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allRealizedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -403,12 +421,12 @@ return allRealizedInterface;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatures()
+std::shared_ptr<Bag<uml::StructuralFeature>> ClassifierImpl::allSlottableFeatures()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allUsedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -428,7 +446,7 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyRealizedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::directlyRealizedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -454,7 +472,7 @@ return directlyRealizedInterfaces;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::directlyUsedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -487,7 +505,7 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
+std::shared_ptr<Bag<uml::Property>> ClassifierImpl::getAllAttributes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -506,7 +524,7 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassifierImpl::getAllOperations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -531,12 +549,12 @@ std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::getAllUsedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::getGenerals()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -544,27 +562,27 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::getInheritedMembers()
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::getInheritedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,bool ignoreCase)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, bool ignoreCase)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassifierImpl::getOperations()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any ClassifierImpl::getPropertyValue(std::string propertyName)
+std::shared_ptr<Any> ClassifierImpl::getPropertyValue(std::string propertyName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -576,11 +594,11 @@ Any ClassifierImpl::getPropertyValue(std::string propertyName)
 			return this->get(p);
 		}
 	}
-	return Any();
+	return eAny(nullptr, -1, false);
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::getUsedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -590,12 +608,12 @@ bool ClassifierImpl::hasVisibilityOf(std::shared_ptr<uml::NamedElement> n)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inheritableMembers(std::shared_ptr<uml::Classifier> c)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inheritableMembers(std::shared_ptr<uml::Classifier> c)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -605,27 +623,12 @@ bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier> contrac
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier> c)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::no_cycles_in_generalization(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ClassifierImpl::non_final_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -638,11 +641,6 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents()
 
 	return returnList;
 	//end of body
-}
-
-bool ClassifierImpl::specialize_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
@@ -892,83 +890,6 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ClassifierImpl::ge
 	}
 	return m_feature;
 }
-
-std::shared_ptr<Union<uml::NamedElement>> ClassifierImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> ClassifierImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ClassifierImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ClassifierImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> ClassifierImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> ClassifierImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -1322,40 +1243,40 @@ std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
-			return eAnyBag(getAttribute(),uml::umlPackage::PROPERTY_CLASS); //3625
+			return eEcoreContainerAny(getAttribute(),uml::umlPackage::PROPERTY_CLASS); //3625
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
-			return eAnyBag(getCollaborationUse(),uml::umlPackage::COLLABORATIONUSE_CLASS); //3626
+			return eEcoreContainerAny(getCollaborationUse(),uml::umlPackage::COLLABORATIONUSE_CLASS); //3626
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
-			return eAnyBag(getFeature(),uml::umlPackage::FEATURE_CLASS); //3624
+			return eEcoreContainerAny(getFeature(),uml::umlPackage::FEATURE_CLASS); //3624
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
-			return eAnyBag(getGeneral(),uml::umlPackage::CLASSIFIER_CLASS); //3627
+			return eEcoreContainerAny(getGeneral(),uml::umlPackage::CLASSIFIER_CLASS); //3627
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
-			return eAnyBag(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //3628
+			return eEcoreContainerAny(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //3628
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
-			return eAnyBag(getInheritedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //3630
+			return eEcoreContainerAny(getInheritedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //3630
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3631
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 			return eAny(getIsFinalSpecialization(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3632
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
-			return eAnyBag(getOwnedUseCase(),uml::umlPackage::USECASE_CLASS); //3633
+			return eEcoreContainerAny(getOwnedUseCase(),uml::umlPackage::USECASE_CLASS); //3633
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
-			return eAnyBag(getPowertypeExtent(),uml::umlPackage::GENERALIZATIONSET_CLASS); //3629
+			return eEcoreContainerAny(getPowertypeExtent(),uml::umlPackage::GENERALIZATIONSET_CLASS); //3629
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
-			return eAnyBag(getRedefinedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3635
+			return eEcoreContainerAny(getRedefinedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3635
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 			return eAny(getRepresentation(),uml::umlPackage::COLLABORATIONUSE_CLASS,false); //3636
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
-			return eAnyBag(getSubstitution(),uml::umlPackage::SUBSTITUTION_CLASS); //3637
+			return eEcoreContainerAny(getSubstitution(),uml::umlPackage::SUBSTITUTION_CLASS); //3637
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
-			return eAnyBag(getUseCase(),uml::umlPackage::USECASE_CLASS); //3634
+			return eEcoreContainerAny(getUseCase(),uml::umlPackage::USECASE_CLASS); //3634
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -1428,327 +1349,428 @@ bool ClassifierImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ClassifierImpl::eSet(int featureID, Any newValue)
+bool ClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
 		{
-			// CAST Any to Bag<uml::CollaborationUse>
-			if((newValue->isContainer()) && (uml::umlPackage::COLLABORATIONUSE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::CollaborationUse>> collaborationUseList= newValue->get<std::shared_ptr<Bag<uml::CollaborationUse>>>();
-					std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUse=getCollaborationUse();
-					for(const std::shared_ptr<uml::CollaborationUse> indexCollaborationUse: *_collaborationUse)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (collaborationUseList->find(indexCollaborationUse) == -1)
+						std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUse = getCollaborationUse();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_collaborationUse->erase(indexCollaborationUse);
-						}
-					}
-
-					for(const std::shared_ptr<uml::CollaborationUse> indexCollaborationUse: *collaborationUseList)
-					{
-						if (_collaborationUse->find(indexCollaborationUse) == -1)
-						{
-							_collaborationUse->add(indexCollaborationUse);
+							std::shared_ptr<uml::CollaborationUse> valueToAdd = std::dynamic_pointer_cast<uml::CollaborationUse>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_collaborationUse->find(valueToAdd) == -1)
+								{
+									_collaborationUse->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'collaborationUse'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'collaborationUse'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
-			// CAST Any to Bag<uml::Classifier>
-			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Classifier>> generalList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _general=getGeneral();
-					for(const std::shared_ptr<uml::Classifier> indexGeneral: *_general)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (generalList->find(indexGeneral) == -1)
+						std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_general->erase(indexGeneral);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Classifier> indexGeneral: *generalList)
-					{
-						if (_general->find(indexGeneral) == -1)
-						{
-							_general->add(indexGeneral);
+							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_general->find(valueToAdd) == -1)
+								{
+									_general->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'general'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'general'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
 		{
-			// CAST Any to Bag<uml::Generalization>
-			if((newValue->isContainer()) && (uml::umlPackage::GENERALIZATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Generalization>> generalizationList= newValue->get<std::shared_ptr<Bag<uml::Generalization>>>();
-					std::shared_ptr<Bag<uml::Generalization>> _generalization=getGeneralization();
-					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *_generalization)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (generalizationList->find(indexGeneralization) == -1)
+						std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_generalization->erase(indexGeneralization);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *generalizationList)
-					{
-						if (_generalization->find(indexGeneralization) == -1)
-						{
-							_generalization->add(indexGeneralization);
+							std::shared_ptr<uml::Generalization> valueToAdd = std::dynamic_pointer_cast<uml::Generalization>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_generalization->find(valueToAdd) == -1)
+								{
+									_generalization->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'generalization'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'generalization'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 		{
-			// CAST Any to bool
-			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //3631
-			return true;
+			try
+			{
+				bool _isAbstract = newValue->get<bool>();
+				setIsAbstract(_isAbstract); //3631
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isAbstract'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 		{
-			// CAST Any to bool
-			bool _isFinalSpecialization = newValue->get<bool>();
-			setIsFinalSpecialization(_isFinalSpecialization); //3632
-			return true;
+			try
+			{
+				bool _isFinalSpecialization = newValue->get<bool>();
+				setIsFinalSpecialization(_isFinalSpecialization); //3632
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isFinalSpecialization'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
 		{
-			// CAST Any to Bag<uml::UseCase>
-			if((newValue->isContainer()) && (uml::umlPackage::USECASE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::UseCase>> ownedUseCaseList= newValue->get<std::shared_ptr<Bag<uml::UseCase>>>();
-					std::shared_ptr<Bag<uml::UseCase>> _ownedUseCase=getOwnedUseCase();
-					for(const std::shared_ptr<uml::UseCase> indexOwnedUseCase: *_ownedUseCase)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedUseCaseList->find(indexOwnedUseCase) == -1)
+						std::shared_ptr<Bag<uml::UseCase>> _ownedUseCase = getOwnedUseCase();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedUseCase->erase(indexOwnedUseCase);
-						}
-					}
-
-					for(const std::shared_ptr<uml::UseCase> indexOwnedUseCase: *ownedUseCaseList)
-					{
-						if (_ownedUseCase->find(indexOwnedUseCase) == -1)
-						{
-							_ownedUseCase->add(indexOwnedUseCase);
+							std::shared_ptr<uml::UseCase> valueToAdd = std::dynamic_pointer_cast<uml::UseCase>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedUseCase->find(valueToAdd) == -1)
+								{
+									_ownedUseCase->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedUseCase'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedUseCase'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
-			// CAST Any to Bag<uml::GeneralizationSet>
-			if((newValue->isContainer()) && (uml::umlPackage::GENERALIZATIONSET_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::GeneralizationSet>> powertypeExtentList= newValue->get<std::shared_ptr<Bag<uml::GeneralizationSet>>>();
-					std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent=getPowertypeExtent();
-					for(const std::shared_ptr<uml::GeneralizationSet> indexPowertypeExtent: *_powertypeExtent)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (powertypeExtentList->find(indexPowertypeExtent) == -1)
+						std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_powertypeExtent->erase(indexPowertypeExtent);
-						}
-					}
-
-					for(const std::shared_ptr<uml::GeneralizationSet> indexPowertypeExtent: *powertypeExtentList)
-					{
-						if (_powertypeExtent->find(indexPowertypeExtent) == -1)
-						{
-							_powertypeExtent->add(indexPowertypeExtent);
+							std::shared_ptr<uml::GeneralizationSet> valueToAdd = std::dynamic_pointer_cast<uml::GeneralizationSet>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_powertypeExtent->find(valueToAdd) == -1)
+								{
+									_powertypeExtent->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'powertypeExtent'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'powertypeExtent'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
-			// CAST Any to Bag<uml::Classifier>
-			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Classifier>> redefinedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier=getRedefinedClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexRedefinedClassifier: *_redefinedClassifier)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (redefinedClassifierList->find(indexRedefinedClassifier) == -1)
+						std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier = getRedefinedClassifier();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_redefinedClassifier->erase(indexRedefinedClassifier);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Classifier> indexRedefinedClassifier: *redefinedClassifierList)
-					{
-						if (_redefinedClassifier->find(indexRedefinedClassifier) == -1)
-						{
-							_redefinedClassifier->add(indexRedefinedClassifier);
+							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_redefinedClassifier->find(valueToAdd) == -1)
+								{
+									_redefinedClassifier->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'redefinedClassifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'redefinedClassifier'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 		{
-			// CAST Any to uml::CollaborationUse
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CollaborationUse> _representation = std::dynamic_pointer_cast<uml::CollaborationUse>(_temp);
-			setRepresentation(_representation); //3636
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::CollaborationUse> _representation = std::dynamic_pointer_cast<uml::CollaborationUse>(eObject);
+					if(_representation)
+					{
+						setRepresentation(_representation); //3636
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'representation'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'representation'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 		{
-			// CAST Any to Bag<uml::Substitution>
-			if((newValue->isContainer()) && (uml::umlPackage::SUBSTITUTION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Substitution>> substitutionList= newValue->get<std::shared_ptr<Bag<uml::Substitution>>>();
-					std::shared_ptr<Bag<uml::Substitution>> _substitution=getSubstitution();
-					for(const std::shared_ptr<uml::Substitution> indexSubstitution: *_substitution)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (substitutionList->find(indexSubstitution) == -1)
+						std::shared_ptr<Bag<uml::Substitution>> _substitution = getSubstitution();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_substitution->erase(indexSubstitution);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Substitution> indexSubstitution: *substitutionList)
-					{
-						if (_substitution->find(indexSubstitution) == -1)
-						{
-							_substitution->add(indexSubstitution);
+							std::shared_ptr<uml::Substitution> valueToAdd = std::dynamic_pointer_cast<uml::Substitution>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_substitution->find(valueToAdd) == -1)
+								{
+									_substitution->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'substitution'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'substitution'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
-			// CAST Any to Bag<uml::UseCase>
-			if((newValue->isContainer()) && (uml::umlPackage::USECASE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::UseCase>> useCaseList= newValue->get<std::shared_ptr<Bag<uml::UseCase>>>();
-					std::shared_ptr<Bag<uml::UseCase>> _useCase=getUseCase();
-					for(const std::shared_ptr<uml::UseCase> indexUseCase: *_useCase)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (useCaseList->find(indexUseCase) == -1)
+						std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_useCase->erase(indexUseCase);
-						}
-					}
-
-					for(const std::shared_ptr<uml::UseCase> indexUseCase: *useCaseList)
-					{
-						if (_useCase->find(indexUseCase) == -1)
-						{
-							_useCase->add(indexUseCase);
+							std::shared_ptr<uml::UseCase> valueToAdd = std::dynamic_pointer_cast<uml::UseCase>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_useCase->find(valueToAdd) == -1)
+								{
+									_useCase->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'useCase'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'useCase'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -1775,101 +1797,101 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::Classifier::allAttributes() : uml::Property[*]: 3067782479
 		case umlPackage::CLASSIFIER_OPERATION_ALLATTRIBUTES:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->allAttributes();
-			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
+			std::shared_ptr<Bag<uml::Property>> resultList = this->allAttributes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::allFeatures() : uml::Feature[*]: 2625373874
 		case umlPackage::CLASSIFIER_OPERATION_ALLFEATURES:
 		{
-			std::shared_ptr<Bag<uml::Feature> > resultList = this->allFeatures();
-			return eAnyBag(resultList,uml::umlPackage::FEATURE_CLASS);
+			std::shared_ptr<Bag<uml::Feature>> resultList = this->allFeatures();
+			return eEcoreContainerAny(resultList,uml::umlPackage::FEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allParents() : uml::Classifier[*]: 299467449
 		case umlPackage::CLASSIFIER_OPERATION_ALLPARENTS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->allParents();
-			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->allParents();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::allRealizedInterfaces() : uml::Interface[*]: 1667853328
 		case umlPackage::CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->allRealizedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->allRealizedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::allSlottableFeatures() : uml::StructuralFeature[*]: 1526814209
 		case umlPackage::CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES:
 		{
-			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->allSlottableFeatures();
-			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
+			std::shared_ptr<Bag<uml::StructuralFeature>> resultList = this->allSlottableFeatures();
+			return eEcoreContainerAny(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allUsedInterfaces() : uml::Interface[*]: 703777961
 		case umlPackage::CLASSIFIER_OPERATION_ALLUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->allUsedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->allUsedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyRealizedInterfaces() : uml::Interface[*]: 2958885839
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyRealizedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->directlyRealizedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyUsedInterfaces() : uml::Interface[*]: 2666848748
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyUsedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->directlyUsedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllAttributes() : uml::Property[*]: 385172867
 		case umlPackage::CLASSIFIER_OPERATION_GETALLATTRIBUTES:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->getAllAttributes();
-			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
+			std::shared_ptr<Bag<uml::Property>> resultList = this->getAllAttributes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllOperations() : uml::Operation[*]: 3362998652
 		case umlPackage::CLASSIFIER_OPERATION_GETALLOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
-			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
+			std::shared_ptr<Bag<uml::Operation>> resultList = this->getAllOperations();
+			return eEcoreContainerAny(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllUsedInterfaces() : uml::Interface[*]: 1284650005
 		case umlPackage::CLASSIFIER_OPERATION_GETALLUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllUsedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getAllUsedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getGenerals() : uml::Classifier[*]: 3949457156
 		case umlPackage::CLASSIFIER_OPERATION_GETGENERALS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getGenerals();
-			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getGenerals();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::getInheritedMembers() : uml::NamedElement[*]: 4185121864
 		case umlPackage::CLASSIFIER_OPERATION_GETINHERITEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getInheritedMembers();
-			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::NamedElement>> resultList = this->getInheritedMembers();
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*]) : uml::Operation: 119886986
@@ -1878,19 +1900,67 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
+			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'getOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
-			result = eAnyObject(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes), uml::umlPackage::OPERATION_CLASS);
+			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_parameterTypes_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_parameterTypes.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
+								incoming_param_parameterTypes->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*], bool) : uml::Operation: 3635929158
@@ -1899,31 +1969,88 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
+			Bag<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'parameterNames'. Failed to invoke operation 'getOperation'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
+			Bag<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_parameterTypes_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_parameterTypes.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
+								incoming_param_parameterTypes->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'parameterTypes'. Failed to invoke operation 'getOperation'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'ignoreCase'
 			//parameter 3
 			bool incoming_param_ignoreCase;
-			std::list<Any>::const_iterator incoming_param_ignoreCase_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_ignoreCase = (*incoming_param_ignoreCase_arguments_citer)->get<bool >();
-			result = eAnyObject(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase), uml::umlPackage::OPERATION_CLASS);
+			Bag<Any>::const_iterator incoming_param_ignoreCase_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_ignoreCase = (*incoming_param_ignoreCase_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'ignoreCase'. Failed to invoke operation 'getOperation'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase), uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getOperations() : uml::Operation[*]: 1789810819
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getOperations();
-			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
+			std::shared_ptr<Bag<uml::Operation>> resultList = this->getOperations();
+			return eEcoreContainerAny(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getPropertyValue(std::string) : Any: 1124921106
@@ -1932,16 +2059,25 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'propertyName'
 			//parameter 0
 			std::string incoming_param_propertyName;
-			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
-			result = this->getPropertyValue(incoming_param_propertyName);
+			Bag<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'propertyName'. Failed to invoke operation 'getPropertyValue'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->getPropertyValue(incoming_param_propertyName), 0, false);
 			break;
 		}
 		// uml::Classifier::getUsedInterfaces() : uml::Interface[*]: 2875330752
 		case umlPackage::CLASSIFIER_OPERATION_GETUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getUsedInterfaces();
-			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
+			std::shared_ptr<Bag<uml::Interface>> resultList = this->getUsedInterfaces();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::hasVisibilityOf(uml::NamedElement) : bool: 3476094388
@@ -1950,9 +2086,30 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_n;
-			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->hasVisibilityOf(incoming_param_n),0,false);
+			Bag<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_n_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_n = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'hasVisibilityOf'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'n'. Failed to invoke operation 'hasVisibilityOf'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->hasVisibilityOf(incoming_param_n), 0, false);
 			break;
 		}
 		// uml::Classifier::inherit(uml::NamedElement[*]) : uml::NamedElement[*]: 1076598219
@@ -1961,10 +2118,40 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'inhs'
 			//parameter 0
 			std::shared_ptr<Bag<uml::NamedElement>> incoming_param_inhs;
-			std::list<Any>::const_iterator incoming_param_inhs_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_inhs = (*incoming_param_inhs_arguments_citer)->get<std::shared_ptr<Bag<uml::NamedElement>> >();
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inherit(incoming_param_inhs);
-			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_inhs_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inhs_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inhs.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::NamedElement> _temp = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
+								incoming_param_inhs->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inhs'. Failed to invoke operation 'inherit'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inhs'. Failed to invoke operation 'inherit'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::NamedElement>> resultList = this->inherit(incoming_param_inhs);
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::inheritableMembers(uml::Classifier) : uml::NamedElement[*]: 2989880290
@@ -1973,10 +2160,31 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'c'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_c;
-			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inheritableMembers(incoming_param_c);
-			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_c_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_c = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'inheritableMembers'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'inheritableMembers'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::NamedElement>> resultList = this->inheritableMembers(incoming_param_c);
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Classifier::isSubstitutableFor(uml::Classifier) : bool: 2463563559
@@ -1985,25 +2193,30 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'contract'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_contract;
-			std::list<Any>::const_iterator incoming_param_contract_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_contract = (*incoming_param_contract_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->isSubstitutableFor(incoming_param_contract),0,false);
-			break;
-		}
-		// uml::Classifier::maps_to_generalization_set(Any, std::map) : bool: 2990336940
-		case umlPackage::CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_contract_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_contract_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'contract'. Failed to invoke operation 'isSubstitutableFor'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'contract'. Failed to invoke operation 'isSubstitutableFor'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isSubstitutableFor(incoming_param_contract), 0, false);
 			break;
 		}
 		// uml::Classifier::maySpecializeType(uml::Classifier) : bool: 211370547
@@ -2012,64 +2225,37 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			//Retrieve input parameter 'c'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_c;
-			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->maySpecializeType(incoming_param_c),0,false);
-			break;
-		}
-		// uml::Classifier::no_cycles_in_generalization(Any, std::map) : bool: 3444230139
-		case umlPackage::CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Classifier::non_final_parents(Any, std::map) : bool: 3265360227
-		case umlPackage::CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context),0,false);
+			Bag<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_c_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_c = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'maySpecializeType'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'maySpecializeType'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->maySpecializeType(incoming_param_c), 0, false);
 			break;
 		}
 		// uml::Classifier::parents() : uml::Classifier[*]: 3079307280
 		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->parents();
-			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
-			break;
-		}
-		// uml::Classifier::specialize_type(Any, std::map) : bool: 1700667753
-		case umlPackage::CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context),0,false);
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->parents();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

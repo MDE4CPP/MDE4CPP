@@ -1,9 +1,13 @@
 
 #include "uml/impl/EnumerationLiteralImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -155,7 +159,7 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::copy() const
 //*********************************
 
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers()
+std::shared_ptr<Bag<uml::Classifier>> EnumerationLiteralImpl::getClassifiers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -181,32 +185,6 @@ void EnumerationLiteralImpl::setEnumeration(std::weak_ptr<uml::Enumeration> _enu
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> EnumerationLiteralImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> EnumerationLiteralImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> EnumerationLiteralImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -331,14 +309,14 @@ std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
-			return eAnyObject(returnValue,uml::umlPackage::ENUMERATION_CLASS); //8517
+			return eEcoreAny(returnValue,uml::umlPackage::ENUMERATION_CLASS); //8517
 		}
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -354,17 +332,40 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
+bool EnumerationLiteralImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
-			// CAST Any to uml::Enumeration
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setEnumeration(_enumeration); //8517
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(eObject);
+					if(_enumeration)
+					{
+						setEnumeration(_enumeration); //8517
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'enumeration'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'enumeration'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -374,17 +375,17 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::EnumerationLiteral::getClassifiers() : uml::Classifier[*]: 4270076526
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getClassifiers();
-			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getClassifiers();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

@@ -7,14 +7,11 @@
 #ifndef UML_LINKENDCREATIONDATA_HPP
 #define UML_LINKENDCREATIONDATA_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -60,7 +57,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class UML_API LinkEndCreationData: virtual public LinkEndData
+	class UML_API LinkEndCreationData : virtual public LinkEndData
 	{
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
@@ -77,17 +74,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			LinkEndCreationData for ordered Association ends must have a single insertAt InputPin for the insertion point with type UnlimitedNatural and multiplicity of 1..1, if isReplaceAll=false, and must have no InputPin for the insertion point when the association ends are unordered.
-			if  not end.isOrdered
-			then insertAt = null
-			else
-				not isReplaceAll=false implies
-				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
-			endif
-			*/
-			 
-			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -124,12 +110,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			//*********************************
 			// Container Getter

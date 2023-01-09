@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,9 +36,9 @@
 //Includes from codegen annotation
 #include "uml/Property.hpp"
 #include "uml/DestroyObjectAction.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -50,20 +54,16 @@
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/DestroyObjectAction.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -135,17 +135,19 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects)
+void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<Any> value, bool isDestroyLinks, bool isDestroyOwnedObjects)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// If the given value is a reference, then destroy the referenced object, per the given	destroy action attribute values.
+	// If the given value contains an uml::Element, then destroy the contained object, per the given destroy action attribute values.
 
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference> (value);
-	if(reference)
+	try
 	{
+		std::shared_ptr<uml::Element> object = value->get<std::shared_ptr<uml::Element>>();
+
 		if (isDestroyLinks || isDestroyOwnedObjects)
-		{
+		{	
+			/*Currently not supported
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > extensionalValues = this->getExecutionLocus()->getExtensionalValues();
 			for(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValue : *extensionalValues)
 			{
@@ -161,9 +163,11 @@ void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Sema
 					}
 				}
 			}
+			*/
 		}
 		if (isDestroyOwnedObjects)
-		{
+		{	
+			/*Currently not supported
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > objectFeatureValues = reference->retrieveFeatureValues();
 			for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *objectFeatureValues)
 			{
@@ -181,8 +185,13 @@ void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Sema
 					}
 				}
 			}
+			*/
 		}
-		reference->destroy();
+		object->destroy();
+	}
+	catch(...)
+	{
+		DEBUG_ERROR("Provided object is not an instance of uml::Element! Failed to destroy object!")
 	}
 	//end of body
 }
@@ -201,13 +210,13 @@ void DestroyObjectActionActivationImpl::doAction()
 	std::shared_ptr<uml::DestroyObjectAction> action = this->getDestroyObjectAction();
 	if(action)
 	{
-		std::shared_ptr<uml::InputPin > destroyTarget=action->getTarget();
+		std::shared_ptr<uml::InputPin> destroyTarget=action->getTarget();
 		if(destroyTarget)
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > tokens=this->takeTokens(destroyTarget);
-			for(std::shared_ptr<fUML::Semantics::Values::Value> value : *tokens)
+			std::shared_ptr<Bag<Any>> tokens = this->takeTokens(destroyTarget);
+			for(std::shared_ptr<Any> value : *tokens)
 			{
-				this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
+				this->destroyObject(value, action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
 			}
 		}
 		else
@@ -218,11 +227,12 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
+bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<uml::Element> reference, std::shared_ptr<uml::Element> link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		// Test whether the given reference participates in the given link as a composite.
+	/*Currently not supported
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> linkFeatureValues = link->getFeatureValues();
 	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *linkFeatureValues)
 	{
@@ -245,6 +255,7 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::
 			}
 		}
 	}
+	*/
 	return false;
 	//end of body
 }
@@ -303,20 +314,6 @@ void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNod
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> DestroyObjectActionActivationImpl::getPinActivation() const
-{
-	if(m_pinActivation == nullptr)
-	{
-		/*Union*/
-		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_pinActivation;
-}
 
 //*********************************
 // Container Getter
@@ -435,7 +432,7 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass()
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -455,17 +452,40 @@ bool DestroyObjectActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool DestroyObjectActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
-			// CAST Any to uml::DestroyObjectAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
-			setDestroyObjectAction(_destroyObjectAction); //3911
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(eObject);
+					if(_destroyObjectAction)
+					{
+						setDestroyObjectAction(_destroyObjectAction); //3911
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'destroyObjectAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -475,30 +495,57 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1147845695
-		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN:
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(Any, bool, bool): 3697661383
+		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'destroyObject'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'isDestroyLinks'
 			//parameter 1
 			bool incoming_param_isDestroyLinks;
-			std::list<Any>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool >();
+			Bag<Any>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyLinks'. Failed to invoke operation 'destroyObject'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'isDestroyOwnedObjects'
 			//parameter 2
 			bool incoming_param_isDestroyOwnedObjects;
-			std::list<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool >();
+			Bag<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyOwnedObjects'. Failed to invoke operation 'destroyObject'!")
+				return nullptr;
+			}
+		
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
 			break;
 		}
@@ -508,20 +555,62 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			this->doAction();
 			break;
 		}
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 4063746999
-		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(uml::Element, uml::Element) : bool: 4059157106
+		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT:
 		{
 			//Retrieve input parameter 'reference'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_reference;
-			std::list<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
+			std::shared_ptr<uml::Element> incoming_param_reference;
+			Bag<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_reference_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_reference = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'link'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
-			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
-			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
+			std::shared_ptr<uml::Element> incoming_param_link;
+			Bag<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_link_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_link = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link), 0, false);
 			break;
 		}
 

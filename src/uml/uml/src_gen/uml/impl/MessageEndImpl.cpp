@@ -1,9 +1,13 @@
 
 #include "uml/impl/MessageEndImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -116,7 +120,7 @@ MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment()
+std::shared_ptr<Bag<uml::InteractionFragment>> MessageEndImpl::enclosingFragment()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -131,7 +135,7 @@ bool MessageEndImpl::isSend()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
+std::shared_ptr<Bag<uml::MessageEnd>> MessageEndImpl::oppositeEnd()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -157,25 +161,6 @@ void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element>> MessageEndImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> MessageEndImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -299,7 +284,7 @@ std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -319,17 +304,40 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool MessageEndImpl::eSet(int featureID, Any newValue)
+bool MessageEndImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
-			// CAST Any to uml::Message
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
-			setMessage(_message); //1489
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(eObject);
+					if(_message)
+					{
+						setMessage(_message); //1489
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'message'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'message'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -339,36 +347,36 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> MessageEndImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 3122365935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
-			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
-			return eAnyBag(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
+			std::shared_ptr<Bag<uml::InteractionFragment>> resultList = this->enclosingFragment();
+			return eEcoreContainerAny(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 			break;
 		}
 		// uml::MessageEnd::isReceive() : bool: 3791628316
 		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
 		{
-			result = eAny(this->isReceive(),0,false);
+			result = eAny(this->isReceive(), 0, false);
 			break;
 		}
 		// uml::MessageEnd::isSend() : bool: 2112067343
 		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
 		{
-			result = eAny(this->isSend(),0,false);
+			result = eAny(this->isSend(), 0, false);
 			break;
 		}
 		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 2418148191
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
-			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();
-			return eAnyBag(resultList,uml::umlPackage::MESSAGEEND_CLASS);
+			std::shared_ptr<Bag<uml::MessageEnd>> resultList = this->oppositeEnd();
+			return eEcoreContainerAny(resultList,uml::umlPackage::MESSAGEEND_CLASS);
 			break;
 		}
 

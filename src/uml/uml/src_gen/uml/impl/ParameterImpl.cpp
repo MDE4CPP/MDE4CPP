@@ -1,9 +1,13 @@
 
 #include "uml/impl/ParameterImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -167,32 +171,7 @@ std::shared_ptr<ecore::EObject> ParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ParameterImpl::in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 bool ParameterImpl::isSetDefault()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ParameterImpl::not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ParameterImpl::object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -223,11 +202,6 @@ void ParameterImpl::setStringDefaultValue(std::string value)
 }
 
 void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool ParameterImpl::stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -341,32 +315,6 @@ std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ParameterImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ParameterImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ParameterImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -679,14 +627,14 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior().lock();
-			return eAnyObject(returnValue,uml::umlPackage::BEHAVIOR_CLASS); //17427
+			return eEcoreAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS); //17427
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //17419
@@ -703,12 +651,12 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOperation().lock();
-			return eAnyObject(returnValue,uml::umlPackage::OPERATION_CLASS); //17425
+			return eEcoreAny(returnValue,uml::umlPackage::OPERATION_CLASS); //17425
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-			return eAnyBag(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
+			return eEcoreContainerAny(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -751,97 +699,186 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ParameterImpl::eSet(int featureID, Any newValue)
+bool ParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
-			// CAST Any to uml::Behavior
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //17427
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-		{
-			// CAST Any to std::string
-			std::string _default = newValue->get<std::string>();
-			setDefault(_default); //17419
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-		{
-			// CAST Any to uml::ValueSpecification
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setDefaultValue(_defaultValue); //17420
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-		{
-			// CAST Any to uml::ParameterDirectionKind
-			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
-			setDirection(_direction); //17421
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-		{
-			// CAST Any to uml::ParameterEffectKind
-			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
-			setEffect(_effect); //17422
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-		{
-			// CAST Any to bool
-			bool _isException = newValue->get<bool>();
-			setIsException(_isException); //17423
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-		{
-			// CAST Any to bool
-			bool _isStream = newValue->get<bool>();
-			setIsStream(_isStream); //17424
-			return true;
-		}
-		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-		{
-			// CAST Any to Bag<uml::ParameterSet>
-			if((newValue->isContainer()) && (uml::umlPackage::PARAMETERSET_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ParameterSet>> parameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
-					std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet=getParameterSet();
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *_parameterSet)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(eObject);
+					if(_behavior)
 					{
-						if (parameterSetList->find(indexParameterSet) == -1)
-						{
-							_parameterSet->erase(indexParameterSet);
-						}
+						setBehavior(_behavior); //17427
 					}
-
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *parameterSetList)
+					else
 					{
-						if (_parameterSet->find(indexParameterSet) == -1)
-						{
-							_parameterSet->add(indexParameterSet);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'behavior'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'behavior'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
+		{
+			try
+			{
+				std::string _default = newValue->get<std::string>();
+				setDefault(_default); //17419
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'default'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(eObject);
+					if(_defaultValue)
+					{
+						setDefaultValue(_defaultValue); //17420
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'defaultValue'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
+		{
+			try
+			{
+				uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
+				setDirection(_direction); //17421
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'direction'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
+		{
+			try
+			{
+				uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
+				setEffect(_effect); //17422
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'effect'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
+		{
+			try
+			{
+				bool _isException = newValue->get<bool>();
+				setIsException(_isException); //17423
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isException'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
+		{
+			try
+			{
+				bool _isStream = newValue->get<bool>();
+				setIsStream(_isStream); //17424
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isStream'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_parameterSet->find(valueToAdd) == -1)
+								{
+									_parameterSet->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'parameterSet'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'parameterSet'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -858,96 +895,16 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Parameter::connector_end(Any, std::map) : bool: 1424722688
-		case umlPackage::PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Parameter::in_and_out(Any, std::map) : bool: 3334031447
-		case umlPackage::PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 		// uml::Parameter::isSetDefault() : bool: 1989057623
 		case umlPackage::PARAMETER_OPERATION_ISSETDEFAULT:
 		{
-			result = eAny(this->isSetDefault(),0,false);
-			break;
-		}
-		// uml::Parameter::not_exception(Any, std::map) : bool: 2813272446
-		case umlPackage::PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Parameter::object_effect(Any, std::map) : bool: 493477054
-		case umlPackage::PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Parameter::reentrant_behaviors(Any, std::map) : bool: 3622294264
-		case umlPackage::PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->isSetDefault(), 0, false);
 			break;
 		}
 		// uml::Parameter::setBooleanDefaultValue(bool): 126976962
@@ -956,8 +913,17 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'value'
 			//parameter 0
 			bool incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setBooleanDefaultValue'!")
+				return nullptr;
+			}
+		
 			this->setBooleanDefaultValue(incoming_param_value);
 			break;
 		}
@@ -967,8 +933,17 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'value'
 			//parameter 0
 			int incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setIntegerDefaultValue'!")
+				return nullptr;
+			}
+		
 			this->setIntegerDefaultValue(incoming_param_value);
 			break;
 		}
@@ -984,8 +959,17 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'value'
 			//parameter 0
 			double incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<double >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setRealDefaultValue'!")
+				return nullptr;
+			}
+		
 			this->setRealDefaultValue(incoming_param_value);
 			break;
 		}
@@ -995,8 +979,17 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::string incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setStringDefaultValue'!")
+				return nullptr;
+			}
+		
 			this->setStringDefaultValue(incoming_param_value);
 			break;
 		}
@@ -1006,25 +999,18 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'value'
 			//parameter 0
 			int incoming_param_value;
-			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'setUnlimitedNaturalDefaultValue'!")
+				return nullptr;
+			}
+		
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
-			break;
-		}
-		// uml::Parameter::stream_and_exception(Any, std::map) : bool: 1481041467
-		case umlPackage::PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 		// uml::Parameter::unsetDefault(): 190690520

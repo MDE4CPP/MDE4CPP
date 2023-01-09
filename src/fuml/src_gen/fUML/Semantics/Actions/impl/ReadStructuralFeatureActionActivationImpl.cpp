@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Subset.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,15 +34,16 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+//#include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/UMLAny.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/ReadStructuralFeatureAction.hpp"
-#include "uml/StructuralFeature.hpp"
+#include "uml/Property.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -58,8 +63,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -139,34 +144,52 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 	//generated from body annotation
 	std::shared_ptr<uml::ReadStructuralFeatureAction> action = this->getReadStructuralFeatureAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
-	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
+	if(!property)
+	{
+		return;
+	}
+
+	std::shared_ptr<Any> value = nullptr;
 	
 	/* MDE4CPP specific implementation for handling "self"-Pin */
 	std::string objectPinName = action->getObject()->getName();
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//value is set to the context of the current activity execution
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-		contextReference->setReferent(context);
-			
-		value = contextReference;
+		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
+	
+		value = eUMLAny(context, context->getMetaElementID());
 	}
 	else{
 		value = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
 
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
-	if (structuredValue)
+	std::shared_ptr<uml::Element> structuredValue = nullptr;
+
+	try
 	{
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = structuredValue->getValues(feature, featureValues);
-		putTokens(action->getResult(), values);
+		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+
+		structuredValue = umlAny->getAsElement();
+
+		if (structuredValue)
+		{
+			std::shared_ptr<Any> values = structuredValue->get(property);
+			putToken(action->getResult(), values);
+		}
+		else
+			
+		{
+	
+			DEBUG_ERROR("Context is nullptr! Failed to read feature!")
+			
+		}
 	}
-	else
+	catch(...)
 	{
-		throw "unhandled fUML::Value instance";
+		DEBUG_ERROR("Provided context is not an instance of uml::Element! Failed to read feature!")
 	}
 	//end of body
 }
@@ -225,20 +248,6 @@ void ReadStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::Act
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadStructuralFeatureActionActivationImpl::getPinActivation() const
-{
-	if(m_pinActivation == nullptr)
-	{
-		/*Union*/
-		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_pinActivation;
-}
 
 //*********************************
 // Container Getter
@@ -359,12 +368,12 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStati
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9411
+			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9311
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -374,22 +383,45 @@ bool ReadStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return getReadStructuralFeatureAction() != nullptr; //9411
+			return getReadStructuralFeatureAction() != nullptr; //9311
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
-			// CAST Any to uml::ReadStructuralFeatureAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
-			setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(eObject);
+					if(_readStructuralFeatureAction)
+					{
+						setReadStructuralFeatureAction(_readStructuralFeatureAction); //9311
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'readStructuralFeatureAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'readStructuralFeatureAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -399,9 +431,9 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

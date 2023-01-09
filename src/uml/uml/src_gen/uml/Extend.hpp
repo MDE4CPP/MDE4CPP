@@ -7,7 +7,6 @@
 #ifndef UML_EXTEND_HPP
 #define UML_EXTEND_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -68,7 +65,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UML_API Extend: virtual public DirectedRelationship, virtual public NamedElement
+	class UML_API Extend : virtual public DirectedRelationship, virtual public NamedElement
 	{
 		public:
  			Extend(const Extend &) {}
@@ -93,12 +90,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The ExtensionPoints referenced by the Extend relationship must belong to the UseCase that is being extended.
-			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
-			*/
-			 
-			virtual bool extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -153,42 +144,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
-			/*!
-			Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;
-			/*!
-			Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
 
 			//*********************************
 			// Container Getter

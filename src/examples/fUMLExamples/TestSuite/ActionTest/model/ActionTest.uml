@@ -18,20 +18,6 @@ for (int i=0; i&lt;size; i++)&#xD;
         <body>//INCLUDE</body>
         <body>//LIBRARY</body>
       </ownedBehavior>
-      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_s4C9MPQ6EemfQqubpKoUPA" name="fbGetFirstB">
-        <ownedParameter xmi:id="_t2eUUPQ6EemfQqubpKoUPA" name="bList" type="_zZdd4PArEemD6KgsJJSfgA">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NZgdQPQ7EemfQqubpKoUPA"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NzwJQPQ7EemfQqubpKoUPA" value="*"/>
-        </ownedParameter>
-        <ownedParameter xmi:id="_zZ6uwPQ6EemfQqubpKoUPA" name="b" type="_zZdd4PArEemD6KgsJJSfgA" direction="return"/>
-        <language>CPP</language>
-        <body>if (bList->size() > 0)&#xD;
-{&#xD;
-	b = bList->at(0);&#xD;
-}</body>
-        <body>//INCLUDE</body>
-        <body>//LIBRARY</body>
-      </ownedBehavior>
       <ownedOperation xmi:id="_wGmmAPArEemD6KgsJJSfgA" name="print" method="_HYWt4PAvEemD6KgsJJSfgA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_zZdd4PArEemD6KgsJJSfgA" name="B">
@@ -139,6 +125,20 @@ for (int i=0; i&lt;size; i++)&#xD;
         </argument>
         <result xmi:id="_IUx_IPQ7EemfQqubpKoUPA" name="b" outgoing="_KZGnUPQ7EemfQqubpKoUPA" type="_zZdd4PArEemD6KgsJJSfgA"/>
       </node>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_s4C9MPQ6EemfQqubpKoUPA" name="fbGetFirstB">
+      <ownedParameter xmi:id="_t2eUUPQ6EemfQqubpKoUPA" name="bList" type="_zZdd4PArEemD6KgsJJSfgA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NZgdQPQ7EemfQqubpKoUPA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NzwJQPQ7EemfQqubpKoUPA" value="*"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zZ6uwPQ6EemfQqubpKoUPA" name="b" type="_zZdd4PArEemD6KgsJJSfgA" direction="return"/>
+      <language>CPP</language>
+      <body>if (bList->size() > 0)&#xD;
+{&#xD;
+	b = bList->at(0);&#xD;
+}</body>
+      <body>//INCLUDE</body>
+      <body>//LIBRARY</body>
     </packagedElement>
     <profileApplication xmi:id="_gb73UOMQEeur7cjoMTUC9A">
       <eAnnotations xmi:id="_gb73UeMQEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">

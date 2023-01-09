@@ -7,14 +7,11 @@
 #ifndef UML_GATE_HPP
 #define UML_GATE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -64,7 +61,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class UML_API Gate: virtual public MessageEnd
+	class UML_API Gate : virtual public MessageEnd
 	{
 		public:
  			Gate(const Gate &) {}
@@ -81,24 +78,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			isActual() implies that no other actualGate of the parent InteractionUse returns the same getName() as returned for self
-			isActual() implies interactionUse.actualGate->select(getName() = self.getName())->size()=1
-			*/
-			 
-			virtual bool actual_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If this Gate is an actualGate, it must have exactly one matching formalGate within the referred Interaction.
-			interactionUse->notEmpty() implies interactionUse.refersTo.formalGate->select(matches(self))->size()=1
-			*/
-			 
-			virtual bool actual_gate_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			isFormal() implies that no other formalGate of the parent Interaction returns the same getName() as returned for self
-			isFormal() implies interaction.formalGate->select(getName() = self.getName())->size()=1
-			*/
-			 
-			virtual bool formal_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			This query returns the name of the gate, either the explicit name (.name) or the constructed name ('out_" or 'in_' concatenated in front of .message.name) if the explicit name is not present.
 			result = (if name->notEmpty() then name->asOrderedSet()->first()
@@ -133,20 +112,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::InteractionOperand> getOperand() = 0;
-			/*!
-			isInsideCF() implies that no other inside cfragmentGate attached to a message with its other end in the same InteractionOperator as self, returns the same getName() as returned for self
-			isInsideCF() implies
-			let selfOperand : InteractionOperand = self.getOperand() in
-			  combinedFragment.cfragmentGate->select(isInsideCF() and getName() = self.getName())->select(getOperand() = selfOperand)->size()=1
-			*/
-			 
-			virtual bool inside_cf_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If this Gate is inside a CombinedFragment, it must have exactly one matching Gate which is outside of that CombinedFragment.
-			isInsideCF() implies combinedFragment.cfragmentGate->select(isOutsideCF() and matches(self))->size()=1
-			*/
-			 
-			virtual bool inside_cf_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			This query returns true value if this Gate is an actualGate of an InteractionUse.
 			result = (interactionUse->notEmpty())
@@ -208,24 +173,6 @@ namespace uml
 			*/
 			 
 			virtual bool matches(std::shared_ptr<uml::Gate> gateToMatch) = 0;
-			/*!
-			isOutsideCF() implies that no other outside cfragmentGate of the parent CombinedFragment returns the same getName() as returned for self
-			isOutsideCF() implies combinedFragment.cfragmentGate->select(getName() = self.getName())->size()=1
-			*/
-			 
-			virtual bool outside_cf_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If this Gate is outside an 'alt' CombinedFragment,  for every InteractionOperator inside that CombinedFragment there must be exactly one matching Gate inside the CombindedFragment with its opposing end enclosed by that InteractionOperator. If this Gate is outside CombinedFragment with operator other than 'alt',   there must be exactly one matching Gate inside that CombinedFragment.
-			isOutsideCF() implies
-			 if self.combinedFragment.interactionOperator->asOrderedSet()->first() = InteractionOperatorKind::alt
-			 then self.combinedFragment.operand->forAll(op : InteractionOperand |
-			 self.combinedFragment.cfragmentGate->select(isInsideCF() and 
-			 oppositeEnd().enclosingFragment()->includes(self.combinedFragment) and matches(self))->size()=1)
-			 else  self.combinedFragment.cfragmentGate->select(isInsideCF() and matches(self))->size()=1
-			 endif
-			*/
-			 
-			virtual bool outside_cf_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -238,18 +185,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

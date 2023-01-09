@@ -1,9 +1,13 @@
 
 #include "uml/impl/UseCaseImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -183,7 +187,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr extend."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for extend.")
 	}
 
 	//clone reference 'extensionPoint'
@@ -210,7 +214,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr extensionPoint."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for extensionPoint.")
 	}
 
 	//clone reference 'include'
@@ -237,7 +241,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr include."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for include.")
 	}
 	/*Subset*/
 	getExtend()->initSubset(getOwnedMember());
@@ -271,27 +275,7 @@ std::shared_ptr<ecore::EObject> UseCaseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool UseCaseImpl::binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool UseCaseImpl::cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool UseCaseImpl::must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<Bag<uml::UseCase>> UseCaseImpl::allIncludedUseCases()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -381,102 +365,6 @@ std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> UseCaseImpl::getFeature() const
-{
-	if(m_feature == nullptr)
-	{
-		/*SubsetUnion*/
-		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getFeature()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_feature;
-}
-
-std::shared_ptr<Union<uml::NamedElement>> UseCaseImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> UseCaseImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> UseCaseImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> UseCaseImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> UseCaseImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> UseCaseImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -692,18 +580,18 @@ std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
-			return eAnyBag(getExtend(),uml::umlPackage::EXTEND_CLASS); //24841
+			return eEcoreContainerAny(getExtend(),uml::umlPackage::EXTEND_CLASS); //24841
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
-			return eAnyBag(getExtensionPoint(),uml::umlPackage::EXTENSIONPOINT_CLASS); //24842
+			return eEcoreContainerAny(getExtensionPoint(),uml::umlPackage::EXTENSIONPOINT_CLASS); //24842
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
-			return eAnyBag(getInclude(),uml::umlPackage::INCLUDE_CLASS); //24843
+			return eEcoreContainerAny(getInclude(),uml::umlPackage::INCLUDE_CLASS); //24843
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
-			return eAnyBag(getSubject(),uml::umlPackage::CLASSIFIER_CLASS); //24844
+			return eEcoreContainerAny(getSubject(),uml::umlPackage::CLASSIFIER_CLASS); //24844
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -724,157 +612,189 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
 
-bool UseCaseImpl::eSet(int featureID, Any newValue)
+bool UseCaseImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
-			// CAST Any to Bag<uml::Extend>
-			if((newValue->isContainer()) && (uml::umlPackage::EXTEND_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Extend>> extendList= newValue->get<std::shared_ptr<Bag<uml::Extend>>>();
-					std::shared_ptr<Bag<uml::Extend>> _extend=getExtend();
-					for(const std::shared_ptr<uml::Extend> indexExtend: *_extend)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (extendList->find(indexExtend) == -1)
+						std::shared_ptr<Bag<uml::Extend>> _extend = getExtend();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_extend->erase(indexExtend);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Extend> indexExtend: *extendList)
-					{
-						if (_extend->find(indexExtend) == -1)
-						{
-							_extend->add(indexExtend);
+							std::shared_ptr<uml::Extend> valueToAdd = std::dynamic_pointer_cast<uml::Extend>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extend->find(valueToAdd) == -1)
+								{
+									_extend->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extend'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'extend'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
-			// CAST Any to Bag<uml::ExtensionPoint>
-			if((newValue->isContainer()) && (uml::umlPackage::EXTENSIONPOINT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ExtensionPoint>> extensionPointList= newValue->get<std::shared_ptr<Bag<uml::ExtensionPoint>>>();
-					std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionPoint=getExtensionPoint();
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionPoint: *_extensionPoint)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (extensionPointList->find(indexExtensionPoint) == -1)
+						std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionPoint = getExtensionPoint();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_extensionPoint->erase(indexExtensionPoint);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionPoint: *extensionPointList)
-					{
-						if (_extensionPoint->find(indexExtensionPoint) == -1)
-						{
-							_extensionPoint->add(indexExtensionPoint);
+							std::shared_ptr<uml::ExtensionPoint> valueToAdd = std::dynamic_pointer_cast<uml::ExtensionPoint>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_extensionPoint->find(valueToAdd) == -1)
+								{
+									_extensionPoint->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'extensionPoint'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'extensionPoint'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
-			// CAST Any to Bag<uml::Include>
-			if((newValue->isContainer()) && (uml::umlPackage::INCLUDE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Include>> includeList= newValue->get<std::shared_ptr<Bag<uml::Include>>>();
-					std::shared_ptr<Bag<uml::Include>> _include=getInclude();
-					for(const std::shared_ptr<uml::Include> indexInclude: *_include)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (includeList->find(indexInclude) == -1)
+						std::shared_ptr<Bag<uml::Include>> _include = getInclude();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_include->erase(indexInclude);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Include> indexInclude: *includeList)
-					{
-						if (_include->find(indexInclude) == -1)
-						{
-							_include->add(indexInclude);
+							std::shared_ptr<uml::Include> valueToAdd = std::dynamic_pointer_cast<uml::Include>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_include->find(valueToAdd) == -1)
+								{
+									_include->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'include'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'include'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
-			// CAST Any to Bag<uml::Classifier>
-			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Classifier>> subjectList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _subject=getSubject();
-					for(const std::shared_ptr<uml::Classifier> indexSubject: *_subject)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (subjectList->find(indexSubject) == -1)
+						std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_subject->erase(indexSubject);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Classifier> indexSubject: *subjectList)
-					{
-						if (_subject->find(indexSubject) == -1)
-						{
-							_subject->add(indexSubject);
+							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_subject->find(valueToAdd) == -1)
+								{
+									_subject->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'subject'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'subject'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -884,81 +804,17 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> UseCaseImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::UseCase::allIncludedUseCases() : uml::UseCase[*]: 3794514740
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
-			std::shared_ptr<Bag<uml::UseCase> > resultList = this->allIncludedUseCases();
-			return eAnyBag(resultList,uml::umlPackage::USECASE_CLASS);
-			break;
-		}
-		// uml::UseCase::binary_associations(Any, std::map) : bool: 2884115735
-		case umlPackage::USECASE_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::UseCase::cannot_include_self(Any, std::map) : bool: 929569410
-		case umlPackage::USECASE_OPERATION_CANNOT_INCLUDE_SELF_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->cannot_include_self(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::UseCase::must_have_name(Any, std::map) : bool: 295172503
-		case umlPackage::USECASE_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::UseCase::no_association_to_use_case(Any, std::map) : bool: 1524958393
-		case umlPackage::USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_association_to_use_case(incoming_param_diagnostics,incoming_param_context),0,false);
+			std::shared_ptr<Bag<uml::UseCase>> resultList = this->allIncludedUseCases();
+			return eEcoreContainerAny(resultList,uml::umlPackage::USECASE_CLASS);
 			break;
 		}
 

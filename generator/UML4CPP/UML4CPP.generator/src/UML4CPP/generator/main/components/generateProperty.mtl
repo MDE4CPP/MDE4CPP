@@ -213,7 +213,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
  * - apply stereotypes
 */]
 [template public generateAttributeInitialization(aProperty : Property)]
-[aProperty.memberName()/]->setName("[aProperty.name/]");
+[aProperty.memberName()/]->setName("[aProperty.metamodelElementName()/]");
 [aProperty.memberName()/]->setType([aProperty.type.generatePackageGetterCall(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
@@ -226,6 +226,9 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
 [if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([aProperty.association.generatePackageGetterCall(aProperty)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
+
+[aProperty.memberName()/]->_setID([aProperty.getMemberName().toUpperCase()/]);
+
 [aProperty.generateStereotypeApplication()/]
 [/template]
 

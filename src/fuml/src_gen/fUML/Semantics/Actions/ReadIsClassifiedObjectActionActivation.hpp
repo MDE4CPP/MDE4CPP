@@ -48,7 +48,7 @@ namespace uml
 {
 	class Action;
 	class ActivityNode;
-	class Classifier;
+	class ReadIsClassifiedObjectAction;
 }
 
 // namespace macro header include
@@ -64,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ReadIsClassifiedObjectActionActivation: virtual public ActionActivation
+	class FUML_API ReadIsClassifiedObjectActionActivation : virtual public ActionActivation
 	{
 		public:
  			ReadIsClassifiedObjectActionActivation(const ReadIsClassifiedObjectActionActivation &) {}
@@ -81,7 +81,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
+			virtual void doAction() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -90,11 +90,16 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<uml::ReadIsClassifiedObjectAction> getReadIsClassifiedObjectAction() const = 0;
+			virtual void setReadIsClassifiedObjectAction(std::shared_ptr<uml::ReadIsClassifiedObjectAction>) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readIsClassifiedObjectAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readIsClassifiedObjectAction'*/
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter
@@ -116,6 +121,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::ReadIsClassifiedObjectAction> m_readIsClassifiedObjectAction;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READISCLASSIFIEDOBJECTACTIONACTIVATION_HPP */

@@ -15,18 +15,7 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 namespace SimpleClassifiers 
-{	class BooleanValue;
-	class CompoundValue;
-	class DataValue;
-	class EnumerationValue;
-	class FeatureValue;
-	class IntegerValue;
-	class PrimitiveValue;
-	class RealValue;
-	class SignalInstance;
-	class StringValue;
-	class StructuredValue;
-	class UnlimitedNaturalValue;
+{
 }
 
 namespace fUML::Semantics::SimpleClassifiers 
@@ -49,50 +38,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue(const int metaElementID = SimpleClassifiersPackage::BOOLEANVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::BOOLEANVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::BOOLEANVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::BOOLEANVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue(const int metaElementID = SimpleClassifiersPackage::DATAVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::DATAVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::DATAVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::DATAVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue(const int metaElementID = SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> createFeatureValue(const int metaElementID = SimpleClassifiersPackage::FEATUREVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> createFeatureValue_as_featureValues_in_CompoundValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> par_CompoundValue, const int metaElementID = SimpleClassifiersPackage::FEATUREVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue(const int metaElementID = SimpleClassifiersPackage::INTEGERVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::INTEGERVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::INTEGERVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::INTEGERVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue(const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance(const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue(const int metaElementID = SimpleClassifiersPackage::STRINGVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::STRINGVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::STRINGVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::STRINGVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue(const int metaElementID = SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS) const ;
-			 //Add as contained object
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS) const ;
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS) const ;
 			 
 
 		private:

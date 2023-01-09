@@ -1,9 +1,13 @@
 
 #include "uml/impl/TransitionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -173,7 +177,7 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr trigger."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for trigger.")
 	}
 	
 	/*Subset*/
@@ -201,52 +205,7 @@ std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::fork_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::fork_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::initial_transition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::join_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::join_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::state_is_external(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::state_is_internal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool TransitionImpl::state_is_local(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -358,80 +317,6 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger()
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement>> TransitionImpl::getMember() const
-{
-	if(m_member == nullptr)
-	{
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_member;
-}
-
-std::weak_ptr<uml::Namespace> TransitionImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> TransitionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> TransitionImpl::getOwnedMember() const
-{
-	if(m_ownedMember == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
-		#endif
-		
-	}
-	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> TransitionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> TransitionImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -724,14 +609,14 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAnyObject(returnValue,uml::umlPackage::REGION_CLASS); //24125
+			return eEcoreAny(returnValue,uml::umlPackage::REGION_CLASS); //24125
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 			return eAny(getEffect(),uml::umlPackage::BEHAVIOR_CLASS,false); //24118
@@ -746,9 +631,9 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
 			return eAny(getTarget(),uml::umlPackage::VERTEX_CLASS,false); //24123
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
-			return eAnyBag(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //24124
+			return eEcoreContainerAny(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //24124
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -789,101 +674,254 @@ bool TransitionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool TransitionImpl::eSet(int featureID, Any newValue)
+bool TransitionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
-			// CAST Any to uml::Region
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setContainer(_container); //24125
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
-		{
-			// CAST Any to uml::Behavior
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _effect = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setEffect(_effect); //24118
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
-		{
-			// CAST Any to uml::Constraint
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _guard = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setGuard(_guard); //24119
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
-		{
-			// CAST Any to uml::TransitionKind
-			uml::TransitionKind _kind = newValue->get<uml::TransitionKind>();
-			setKind(_kind); //24120
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
-		{
-			// CAST Any to uml::Transition
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Transition> _redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(_temp);
-			setRedefinedTransition(_redefinedTransition); //24121
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
-		{
-			// CAST Any to uml::Vertex
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Vertex> _source = std::dynamic_pointer_cast<uml::Vertex>(_temp);
-			setSource(_source); //24122
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
-		{
-			// CAST Any to uml::Vertex
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Vertex> _target = std::dynamic_pointer_cast<uml::Vertex>(_temp);
-			setTarget(_target); //24123
-			return true;
-		}
-		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
-		{
-			// CAST Any to Bag<uml::Trigger>
-			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
-					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
-					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(eObject);
+					if(_container)
 					{
-						if (triggerList->find(indexTrigger) == -1)
-						{
-							_trigger->erase(indexTrigger);
-						}
+						setContainer(_container); //24125
 					}
-
-					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
+					else
 					{
-						if (_trigger->find(indexTrigger) == -1)
-						{
-							_trigger->add(indexTrigger);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'container'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'container'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Behavior> _effect = std::dynamic_pointer_cast<uml::Behavior>(eObject);
+					if(_effect)
+					{
+						setEffect(_effect); //24118
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'effect'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'effect'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Constraint> _guard = std::dynamic_pointer_cast<uml::Constraint>(eObject);
+					if(_guard)
+					{
+						setGuard(_guard); //24119
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'guard'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'guard'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
+		{
+			try
+			{
+				uml::TransitionKind _kind = newValue->get<uml::TransitionKind>();
+				setKind(_kind); //24120
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'kind'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Transition> _redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(eObject);
+					if(_redefinedTransition)
+					{
+						setRedefinedTransition(_redefinedTransition); //24121
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'redefinedTransition'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'redefinedTransition'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Vertex> _source = std::dynamic_pointer_cast<uml::Vertex>(eObject);
+					if(_source)
+					{
+						setSource(_source); //24122
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'source'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Vertex> _target = std::dynamic_pointer_cast<uml::Vertex>(eObject);
+					if(_target)
+					{
+						setTarget(_target); //24123
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<uml::Trigger>> _trigger = getTrigger();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<uml::Trigger> valueToAdd = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_trigger->find(valueToAdd) == -1)
+								{
+									_trigger->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'trigger'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'trigger'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -900,166 +938,22 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TransitionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::Transition::containingStateMachine() : uml::StateMachine: 3793766704
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAnyObject(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
-			break;
-		}
-		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 1015992162
-		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::fork_segment_state(Any, std::map) : bool: 2022274173
-		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::initial_transition(Any, std::map) : bool: 2806356813
-		case umlPackage::TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::join_segment_guards(Any, std::map) : bool: 429318740
-		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::join_segment_state(Any, std::map) : bool: 1435600751
-		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::outgoing_pseudostates(Any, std::map) : bool: 1876038156
-		case umlPackage::TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eEcoreAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS);
 			break;
 		}
 		// uml::Transition::redefinitionContext() : uml::Classifier: 4168264280
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAnyObject(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
-			break;
-		}
-		// uml::Transition::state_is_external(Any, std::map) : bool: 1017523375
-		case umlPackage::TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::state_is_internal(Any, std::map) : bool: 3747710289
-		case umlPackage::TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Transition::state_is_local(Any, std::map) : bool: 3031218091
-		case umlPackage::TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_local(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eEcoreAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 

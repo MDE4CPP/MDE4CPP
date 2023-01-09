@@ -1,9 +1,13 @@
 
 #include "uml/impl/DeploymentImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -160,7 +164,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr configuration."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for configuration.")
 	}
 
 	//clone reference 'deployedArtifact'
@@ -187,7 +191,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr deployedArtifact."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for deployedArtifact.")
 	}
 	/*Subset*/
 	getConfiguration()->initSubset(getOwnedElement());
@@ -273,89 +277,6 @@ void DeploymentImpl::setLocation(std::weak_ptr<uml::DeploymentTarget> _location)
 //*********************************
 // Union Getter
 //*********************************
-
-
-std::weak_ptr<uml::Namespace> DeploymentImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> DeploymentImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> DeploymentImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::Element>> DeploymentImpl::getRelatedElement() const
-{
-	if(m_relatedElement == nullptr)
-	{
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_relatedElement;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getSource() const
-{
-	if(m_source == nullptr)
-	{
-		/*SubsetUnion*/
-		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getSource()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_source;
-}
-
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarget() const
-{
-	if(m_target == nullptr)
-	{
-		/*SubsetUnion*/
-		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getTarget()->initSubsetUnion(getRelatedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_target;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -542,18 +463,18 @@ std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return eAnyBag(getConfiguration(),uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS); //6917
+			return eEcoreContainerAny(getConfiguration(),uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS); //6917
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return eAnyBag(getDeployedArtifact(),uml::umlPackage::DEPLOYEDARTIFACT_CLASS); //6918
+			return eEcoreContainerAny(getDeployedArtifact(),uml::umlPackage::DEPLOYEDARTIFACT_CLASS); //6918
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
-			return eAnyObject(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS); //6919
+			return eEcoreAny(returnValue,uml::umlPackage::DEPLOYMENTTARGET_CLASS); //6919
 		}
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -573,91 +494,130 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	return DependencyImpl::internalEIsSet(featureID);
 }
 
-bool DeploymentImpl::eSet(int featureID, Any newValue)
+bool DeploymentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
-			// CAST Any to Bag<uml::DeploymentSpecification>
-			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList= newValue->get<std::shared_ptr<Bag<uml::DeploymentSpecification>>>();
-					std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration=getConfiguration();
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *_configuration)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (configurationList->find(indexConfiguration) == -1)
+						std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration = getConfiguration();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_configuration->erase(indexConfiguration);
-						}
-					}
-
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *configurationList)
-					{
-						if (_configuration->find(indexConfiguration) == -1)
-						{
-							_configuration->add(indexConfiguration);
+							std::shared_ptr<uml::DeploymentSpecification> valueToAdd = std::dynamic_pointer_cast<uml::DeploymentSpecification>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_configuration->find(valueToAdd) == -1)
+								{
+									_configuration->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'configuration'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'configuration'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			// CAST Any to Bag<uml::DeployedArtifact>
-			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYEDARTIFACT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList= newValue->get<std::shared_ptr<Bag<uml::DeployedArtifact>>>();
-					std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact=getDeployedArtifact();
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *_deployedArtifact)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (deployedArtifactList->find(indexDeployedArtifact) == -1)
+						std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_deployedArtifact->erase(indexDeployedArtifact);
-						}
-					}
-
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *deployedArtifactList)
-					{
-						if (_deployedArtifact->find(indexDeployedArtifact) == -1)
-						{
-							_deployedArtifact->add(indexDeployedArtifact);
+							std::shared_ptr<uml::DeployedArtifact> valueToAdd = std::dynamic_pointer_cast<uml::DeployedArtifact>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_deployedArtifact->find(valueToAdd) == -1)
+								{
+									_deployedArtifact->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'deployedArtifact'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'deployedArtifact'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
-			// CAST Any to uml::DeploymentTarget
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //6919
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(eObject);
+					if(_location)
+					{
+						setLocation(_location); //6919
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'location'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'location'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -667,9 +627,9 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> DeploymentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

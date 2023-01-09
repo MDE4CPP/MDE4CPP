@@ -1,9 +1,13 @@
 
 #include "uml/impl/MessageImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -149,7 +153,7 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for argument.")
 	}
 	/*Subset*/
 	getArgument()->initSubset(getOwnedElement());
@@ -171,47 +175,7 @@ std::shared_ptr<ecore::EObject> MessageImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
 uml::MessageKind MessageImpl::getMessageKind()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::occurrence_specifications(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::signature_is_operation_request(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::signature_is_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool MessageImpl::signature_refer_to(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -318,30 +282,6 @@ void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> MessageImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> MessageImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> MessageImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -633,18 +573,18 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //1479
+			return eEcoreContainerAny(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //1479
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return eAny(getConnector(),uml::umlPackage::CONNECTOR_CLASS,false); //14710
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::INTERACTION_CLASS); //14711
+			return eEcoreAny(returnValue,uml::umlPackage::INTERACTION_CLASS); //14711
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind(),uml::umlPackage::MESSAGEKIND_CLASS,false); //14712
@@ -684,93 +624,223 @@ bool MessageImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool MessageImpl::eSet(int featureID, Any newValue)
+bool MessageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
-			// CAST Any to Bag<uml::ValueSpecification>
-			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _argument=getArgument();
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *_argument)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentList->find(indexArgument) == -1)
+						std::shared_ptr<Bag<uml::ValueSpecification>> _argument = getArgument();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_argument->erase(indexArgument);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *argumentList)
-					{
-						if (_argument->find(indexArgument) == -1)
-						{
-							_argument->add(indexArgument);
+							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_argument->find(valueToAdd) == -1)
+								{
+									_argument->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 		{
-			// CAST Any to uml::Connector
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
-			setConnector(_connector); //14710
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(eObject);
+					if(_connector)
+					{
+						setConnector(_connector); //14710
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'connector'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'connector'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
-			// CAST Any to uml::Interaction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setInteraction(_interaction); //14711
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(eObject);
+					if(_interaction)
+					{
+						setInteraction(_interaction); //14711
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'interaction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'interaction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 		{
-			// CAST Any to uml::MessageSort
-			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
-			setMessageSort(_messageSort); //14713
-			return true;
+			try
+			{
+				uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
+				setMessageSort(_messageSort); //14713
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'messageSort'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 		{
-			// CAST Any to uml::MessageEnd
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::MessageEnd> _receiveEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setReceiveEvent(_receiveEvent); //14714
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::MessageEnd> _receiveEvent = std::dynamic_pointer_cast<uml::MessageEnd>(eObject);
+					if(_receiveEvent)
+					{
+						setReceiveEvent(_receiveEvent); //14714
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'receiveEvent'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'receiveEvent'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
 		{
-			// CAST Any to uml::MessageEnd
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::MessageEnd> _sendEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setSendEvent(_sendEvent); //14715
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::MessageEnd> _sendEvent = std::dynamic_pointer_cast<uml::MessageEnd>(eObject);
+					if(_sendEvent)
+					{
+						setSendEvent(_sendEvent); //14715
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'sendEvent'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'sendEvent'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
 		{
-			// CAST Any to uml::NamedElement
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::NamedElement> _signature = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
-			setSignature(_signature); //14716
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::NamedElement> _signature = std::dynamic_pointer_cast<uml::NamedElement>(eObject);
+					if(_signature)
+					{
+						setSignature(_signature); //14716
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'signature'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -780,144 +850,16 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> MessageImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Message::arguments(Any, std::map) : bool: 2315785773
-		case umlPackage::MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::cannot_cross_boundaries(Any, std::map) : bool: 771684206
-		case umlPackage::MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 		// uml::Message::getMessageKind() : uml::MessageKind: 1342630738
 		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
 		{
-			result = eAny(this->getMessageKind(),0,false);
-			break;
-		}
-		// uml::Message::occurrence_specifications(Any, std::map) : bool: 3654259023
-		case umlPackage::MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::sending_receiving_message_event(Any, std::map) : bool: 2667842979
-		case umlPackage::MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::signature_is_operation_reply(Any, std::map) : bool: 3249613031
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::signature_is_operation_request(Any, std::map) : bool: 1347631112
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::signature_is_signal(Any, std::map) : bool: 1922116441
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Message::signature_refer_to(Any, std::map) : bool: 2916908006
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_refer_to(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->getMessageKind(), 0, false);
 			break;
 		}
 

@@ -7,15 +7,12 @@
 #ifndef UML_BEHAVIOR_HPP
 #define UML_BEHAVIOR_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -86,7 +83,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class UML_API Behavior: virtual public Class
+	class UML_API Behavior : virtual public Class
 	{
 		public:
  			Behavior(const Behavior &) {}
@@ -133,12 +130,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element> from) = 0;
-			/*!
-			The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
-			_'context'.feature->includes(specification)
-			*/
-			 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			
 			/*!
 			The in and inout ownedParameters of the Behavior.
@@ -146,26 +137,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
-			/*!
-			There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
-			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
-			*/
-			 
-			virtual bool most_one_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() = 0;
 			/*!
 			The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
-			/*!
-			If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
-			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
-			*/
-			 
-			virtual bool parameters_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -246,67 +225,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const = 0;
-			/*!
-			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
-			/*!
-			The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const = 0;
-			
 
 			//*********************************
 			// Container Getter

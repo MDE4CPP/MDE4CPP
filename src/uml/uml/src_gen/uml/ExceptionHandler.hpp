@@ -7,7 +7,6 @@
 #ifndef UML_EXCEPTIONHANDLER_HPP
 #define UML_EXCEPTIONHANDLER_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -62,7 +59,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API ExceptionHandler: virtual public Element
+	class UML_API ExceptionHandler : virtual public Element
 	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}
@@ -84,57 +81,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
-			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
-			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source))
-			*/
-			 
-			virtual bool edge_source_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
-			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
-			*/
-			 
-			virtual bool exception_input_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
-			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
-			*/
-			 
-			virtual bool handler_body_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner
-			*/
-			 
-			virtual bool handler_body_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
-			handlerBody.oclIsKindOf(Action) and
-			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput
-			*/
-			 
-			virtual bool one_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
-			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
-			(
-			  handlerBody.oclIsKindOf(Action) and 
-			  let protectedNodeOutput : OrderedSet(OutputPin) = protectedNode.oclAsType(Action).output,
-			        handlerBodyOutput : OrderedSet(OutputPin) =  handlerBody.oclAsType(Action).output in
-			    protectedNodeOutput->size() = handlerBodyOutput->size() and
-			    Sequence{1..protectedNodeOutput->size()}->forAll(i |
-			    	handlerBodyOutput->at(i).type.conformsTo(protectedNodeOutput->at(i).type) and
-			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
-			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
-			)
-			*/
-			 
-			virtual bool output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -189,18 +135,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

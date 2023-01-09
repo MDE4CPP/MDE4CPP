@@ -1,9 +1,13 @@
 
 #include "uml/impl/InterruptibleActivityRegionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -150,7 +154,7 @@ InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(cons
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr node."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for node.")
 	}
 	return *this;
 }
@@ -166,10 +170,6 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -214,40 +214,6 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActiv
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityNode>> InterruptibleActivityRegionImpl::getContainedNode() const
-{
-	if(m_containedNode == nullptr)
-	{
-		/*Union*/
-		m_containedNode.reset(new Union<uml::ActivityNode>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_containedNode;
-}
-
-std::shared_ptr<Union<uml::Element>> InterruptibleActivityRegionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> InterruptibleActivityRegionImpl::getOwner() const
-{
-	return m_owner;
-}
 
 //*********************************
 // Container Getter
@@ -407,14 +373,14 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-			return eAnyBag(getInterruptingEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //12714
+			return eEcoreContainerAny(getInterruptingEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //12714
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //12715
+			return eEcoreContainerAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //12715
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -431,83 +397,99 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
 
-bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
+bool InterruptibleActivityRegionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
-			// CAST Any to Bag<uml::ActivityEdge>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ActivityEdge>> interruptingEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
-					std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge=getInterruptingEdge();
-					for(const std::shared_ptr<uml::ActivityEdge> indexInterruptingEdge: *_interruptingEdge)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (interruptingEdgeList->find(indexInterruptingEdge) == -1)
+						std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_interruptingEdge->erase(indexInterruptingEdge);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ActivityEdge> indexInterruptingEdge: *interruptingEdgeList)
-					{
-						if (_interruptingEdge->find(indexInterruptingEdge) == -1)
-						{
-							_interruptingEdge->add(indexInterruptingEdge);
+							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_interruptingEdge->find(valueToAdd) == -1)
+								{
+									_interruptingEdge->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'interruptingEdge'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'interruptingEdge'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
-			// CAST Any to Bag<uml::ActivityNode>
-			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
-					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
-					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (nodeList->find(indexNode) == -1)
+						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_node->erase(indexNode);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
-					{
-						if (_node->find(indexNode) == -1)
-						{
-							_node->add(indexNode);
+							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_node->find(valueToAdd) == -1)
+								{
+									_node->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'node'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -517,28 +499,12 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::InterruptibleActivityRegion::interrupting_edges(Any, std::map) : bool: 358373842
-		case umlPackage::INTERRUPTIBLEACTIVITYREGION_OPERATION_INTERRUPTING_EDGES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->interrupting_edges(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

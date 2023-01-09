@@ -64,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class FUML_API ReadStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
+	class FUML_API ReadStructuralFeatureActionActivation : virtual public StructuralFeatureActionActivation
 	{
 		public:
  			ReadStructuralFeatureActionActivation(const ReadStructuralFeatureActionActivation &) {}
@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			//*********************************
 			// Container Getter

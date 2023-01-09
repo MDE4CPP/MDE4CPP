@@ -1,9 +1,13 @@
 
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -40,22 +44,22 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/OpaqueBehavior.hpp"
-#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
-#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+//#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
+//#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 #include "uml/CentralBufferNode.hpp"
 #include "uml/StructuredActivityNode.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Evaluation.hpp"
+//#include "fUML/Semantics/Values/Value.hpp"
+//#include "fUML/Semantics/Values/Evaluation.hpp"
 #include "uml/Element.hpp"
 #include "uml/ValueSpecification.hpp"
-#include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
+/* #include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralNullEvaluation.hpp"
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralUnlimitedNaturalEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
-#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
+#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp" 
+#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp" */
 #include "uml/umlPackage.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/LiteralBoolean.hpp"
@@ -71,12 +75,12 @@
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
 #include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
 #include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
-#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
-#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
+//#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
-#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
 #include "fUML/Semantics/Activities/FlowFinalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
@@ -85,12 +89,12 @@
 #include "fUML/Semantics/Activities/JoinNodeActivation.hpp"
 #include "fUML/Semantics/Activities/MergeNodeActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 #include "fUML/Semantics/Actions/ReadStructuralFeatureActionActivation.hpp"
-#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
-#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
-#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
+#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActionActivation.hpp"
+//#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
+//#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
 #include "fUML/Semantics/Actions/ValueSpecificationActionActivation.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityFinalNode.hpp"
@@ -119,18 +123,18 @@
 #include "uml/SendSignalAction.hpp"
 #include "uml/TestIdentityAction.hpp"
 #include "uml/ValueSpecificationAction.hpp"
-#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
-#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
+//#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 #include "fUML/Semantics/Activities/DataStoreNodeActivation.hpp"
-#include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
-#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
-#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
-#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReclassifyObjectActionActivation.hpp"
-#include "fUML/Semantics/Actions/ReduceActionActivation.hpp"
-#include "fUML/Semantics/Actions/StartClassifierBehaviorActionActivation.hpp"
-#include "fUML/Semantics/Actions/StartObjectBehaviorActionActivation.hpp"
+#include "fUML/Semantics/Actions/ExpansionNodeActivation.hpp"
+#include "fUML/Semantics/Actions/ExpansionRegionActivation.hpp"
+//#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReclassifyObjectActionActivation.hpp"
+//#include "fUML/Semantics/Actions/ReduceActionActivation.hpp"
+//#include "fUML/Semantics/Actions/StartClassifierBehaviorActionActivation.hpp"
+//#include "fUML/Semantics/Actions/StartObjectBehaviorActionActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "uml/ConditionalNode.hpp"
@@ -149,28 +153,23 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
-#include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/OpaqueBehavior.hpp"
-#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -228,7 +227,6 @@ ExecutionFactoryImpl& ExecutionFactoryImpl::operator=(const ExecutionFactoryImpl
 	//copy references with no containment (soft copy)
 	m_builtInTypes  = obj.getBuiltInTypes();
 	m_locus  = obj.getLocus();
-	m_primitiveBehaviorPrototypes  = obj.getPrimitiveBehaviorPrototypes();
 	m_strategies  = obj.getStrategies();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -254,14 +252,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType> ty
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> > primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
-    primBehaviorExecution->push_back(execution);
-	//end of body
-}
+
 
 void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy)
 {
@@ -278,20 +269,9 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification> specification)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Values::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Semantics::Values::Evaluation>(this->instantiateVisitor(specification));
 
-    evaluation->setSpecification(specification);
-    evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;
 
-    return evaluation;
-	//end of body
-}
-
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -299,7 +279,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-        execution = this->instantiateOpaqueBehaviorExecution(behavior);
+	//Currently not supported
+        //execution = this->instantiateOpaqueBehaviorExecution(behavior);
     }
     else
     {
@@ -307,7 +288,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 		{
 			execution = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 			execution->getTypes()->push_back(behavior);
-            execution->createFeatureValues();	
+            		//execution->createFeatureValues();	
 		}
 		else{
 			/*
@@ -316,8 +297,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 			execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->instantiateVisitor(behavior));
 			if(execution != nullptr)
 			{
-			execution->getTypes()->push_back(behavior);
-            execution->createFeatureValues();
+				execution->getTypes()->push_back(behavior);
+            			//execution->createFeatureValues();
 			}
 		}
     }
@@ -328,6 +309,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
         return nullptr;
     }
     this->getLocus().lock()->add(execution);
+	execution->setLocus(this->getLocus().lock());
 
 
     if(context == nullptr)
@@ -417,77 +399,16 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution = nullptr;
-    unsigned int i = 0;
-    //DEBUG_MESSAGE(std::cout<<"SIZE PROTOTYPES "<< this->getPrimitiveBehaviorPrototypes()->size()<<std::endl;)
-    auto primitiveBehaviorPrototypes = this->getPrimitiveBehaviorPrototypes();
-    while(execution == nullptr && (i < primitiveBehaviorPrototypes->size()))
-    {
-    	std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> prototype = primitiveBehaviorPrototypes->at(i);
-        //DEBUG_MESSAGE(std::cout<<"BEHAVIOUR NAME:"<<prototype->getBehavior()->getName()<<"AND"<<behavior->getName()<<std::endl;)
-        if(prototype->getBehavior() == behavior)
-        {
-            execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(prototype->copy());
-        }
-        i++;
-    }
 
-    if(execution == nullptr)
-    {
-        DEBUG_MESSAGE(std::cout<<"[instantiateOpaqueExecution] No prototype execution found for " << behavior->getName() <<std::endl;)
-    }
-
-    return execution;
-	//end of body
-}
 
 std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
+	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 
 	switch (element->eClass()->getClassifierID()) 
 	{
-		case uml::umlPackage::LITERALBOOLEAN_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralBooleanEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALSTRING_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralStringEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALNULL_CLASS:
-		{
-			visitor =  fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralNullEvaluation();
-			break;
-		}
-		case uml::umlPackage::INSTANCEVALUE_CLASS:
-		{
-			visitor = fUML::Semantics::Classification::ClassificationFactory::eInstance()->createInstanceValueEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALINTEGER_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralIntegerEvaluation();
-			break;
-		}
-		case uml::umlPackage::LITERALREAL_CLASS:
-		{
-			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralRealEvaluation();
-			break;
-		}
 		case uml::umlPackage::ACTIVITY_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
@@ -535,12 +456,12 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::EXPANSIONREGION_CLASS:
 		{
-			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionRegionActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createExpansionRegionActivation();
 			break;
 		}
 		case uml::umlPackage::EXPANSIONNODE_CLASS:
 		{
-			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionNodeActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createExpansionNodeActivation();
 			break;
 		}
 		case uml::umlPackage::INPUTPIN_CLASS:
@@ -565,7 +486,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSELFACTION_CLASS:
@@ -575,7 +496,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage:: TESTIDENTITYACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
 			break;
 		}
 		case uml::umlPackage::VALUESPECIFICATIONACTION_CLASS:
@@ -610,37 +531,37 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActionActivation();
 			break;
 		}
 		case uml::umlPackage::READLINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CLEARASSOCIATIONACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::DESTROYLINKACTION_CLASS:
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CONDITIONALNODE_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
 			break;
 		}
 		case uml::umlPackage::LOOPNODE_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
 			break;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
@@ -650,37 +571,37 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
 			break;
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
 			break;
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
 			break;
 		}
 		case uml::umlPackage::REDUCEACTION_CLASS: 
 		{
-			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
+			//visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
 			break;
 		}
 		case uml::umlPackage::DATASTORENODE_CLASS: 
@@ -693,11 +614,11 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createCentralBufferNodeActivation();
 			break;
 		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
+		/*case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
 		{
-			visitor = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
+			//visitor = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
 			break;
-		}		
+		}*/		
 		default: 
 		{
 			std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
@@ -738,17 +659,7 @@ void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> 
 	
 }
 
-/* Getter & Setter for reference primitiveBehaviorPrototypes */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
-{
-	if(m_primitiveBehaviorPrototypes == nullptr)
-	{
-		m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>());
-		
-		
-	}
-    return m_primitiveBehaviorPrototypes;
-}
+
 
 /* Getter & Setter for reference strategies */
 std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryImpl::getStrategies() const
@@ -810,13 +721,6 @@ void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("builtInTypes")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 
-		iter = attr_list.find("primitiveBehaviorPrototypes");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("primitiveBehaviorPrototypes")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
 		iter = attr_list.find("strategies");
 		if ( iter != attr_list.end() )
 		{
@@ -872,20 +776,6 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 			return;
 		}
 
-		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(ref);
-				if (_r != nullptr)
-				{
-					_primitiveBehaviorPrototypes->push_back(_r);
-				}
-			}
-			return;
-		}
-
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
@@ -917,7 +807,6 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 	// Add references
 		saveHandler->addReferences<uml::PrimitiveType>("builtInTypes", this->getBuiltInTypes());
-		saveHandler->addReferences<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>("primitiveBehaviorPrototypes", this->getPrimitiveBehaviorPrototypes());
 		saveHandler->addReferences<fUML::Semantics::Loci::SemanticStrategy>("strategies", this->getStrategies());
 	}
 	catch (std::exception& e)
@@ -934,21 +823,19 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
-			return eAnyBag(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
+			return eEcoreContainerAny(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
-			return eAnyObject(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //470
+			return eEcoreAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS); //470
 		}
-		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return eAnyBag(getPrimitiveBehaviorPrototypes(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS); //472
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-			return eAnyBag(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
+			return eEcoreContainerAny(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -961,136 +848,136 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 			return getBuiltInTypes() != nullptr; //473
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 			return getLocus().lock() != nullptr; //470
-		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes() != nullptr; //472
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 			return getStrategies() != nullptr; //471
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
+bool ExecutionFactoryImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			// CAST Any to Bag<uml::PrimitiveType>
-			if((newValue->isContainer()) && (uml::umlPackage::PRIMITIVETYPE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypesList= newValue->get<std::shared_ptr<Bag<uml::PrimitiveType>>>();
-					std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes=getBuiltInTypes();
-					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *_builtInTypes)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (builtInTypesList->find(indexBuiltInTypes) == -1)
+						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_builtInTypes->erase(indexBuiltInTypes);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *builtInTypesList)
-					{
-						if (_builtInTypes->find(indexBuiltInTypes) == -1)
-						{
-							_builtInTypes->add(indexBuiltInTypes);
+							std::shared_ptr<uml::PrimitiveType> valueToAdd = std::dynamic_pointer_cast<uml::PrimitiveType>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_builtInTypes->find(valueToAdd) == -1)
+								{
+									_builtInTypes->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'builtInTypes'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'builtInTypes'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
-			// CAST Any to fUML::Semantics::Loci::Locus
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //470
-			return true;
-		}
-		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-		{
-			// CAST Any to Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>
-			if((newValue->isContainer()) && (fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> primitiveBehaviorPrototypesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes=getPrimitiveBehaviorPrototypes();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> indexPrimitiveBehaviorPrototypes: *_primitiveBehaviorPrototypes)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
+					if(_locus)
 					{
-						if (primitiveBehaviorPrototypesList->find(indexPrimitiveBehaviorPrototypes) == -1)
-						{
-							_primitiveBehaviorPrototypes->erase(indexPrimitiveBehaviorPrototypes);
-						}
+						setLocus(_locus); //470
 					}
-
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> indexPrimitiveBehaviorPrototypes: *primitiveBehaviorPrototypesList)
+					else
 					{
-						if (_primitiveBehaviorPrototypes->find(indexPrimitiveBehaviorPrototypes) == -1)
-						{
-							_primitiveBehaviorPrototypes->add(indexPrimitiveBehaviorPrototypes);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			// CAST Any to Bag<fUML::Semantics::Loci::SemanticStrategy>
-			if((newValue->isContainer()) && (fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> strategiesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies=getStrategies();
-					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *_strategies)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (strategiesList->find(indexStrategies) == -1)
+						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_strategies->erase(indexStrategies);
-						}
-					}
-
-					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *strategiesList)
-					{
-						if (_strategies->find(indexStrategies) == -1)
-						{
-							_strategies->add(indexStrategies);
+							std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_strategies->find(valueToAdd) == -1)
+								{
+									_strategies->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'strategies'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'strategies'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -1100,9 +987,9 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
@@ -1112,20 +999,30 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'type'
 			//parameter 0
 			std::shared_ptr<uml::PrimitiveType> incoming_param_type;
-			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::PrimitiveType> >();
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'addBuiltInType'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'addBuiltInType'!")
+					return nullptr;
+				}
+			}
+		
 			this->addBuiltInType(incoming_param_type);
-			break;
-		}
-		// fUML::Semantics::Loci::ExecutionFactory::addPrimitiveBehaviorPrototype(fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution): 2237491026
-		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION:
-		{
-			//Retrieve input parameter 'execution'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> incoming_param_execution;
-			std::list<Any>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> >();
-			this->addPrimitiveBehaviorPrototype(incoming_param_execution);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::assignStrategy(fUML::Semantics::Loci::SemanticStrategy): 4022033692
@@ -1134,36 +1031,88 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'strategy'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> incoming_param_strategy;
-			std::list<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_strategy = (*incoming_param_strategy_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> >();
+			Bag<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_strategy_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'strategy'. Failed to invoke operation 'assignStrategy'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'strategy'. Failed to invoke operation 'assignStrategy'!")
+					return nullptr;
+				}
+			}
+		
 			this->assignStrategy(incoming_param_strategy);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::createEvaluation(uml::ValueSpecification) : fUML::Semantics::Values::Evaluation: 2830428948
-		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION:
-		{
-			//Retrieve input parameter 'specification'
-			//parameter 0
-			std::shared_ptr<uml::ValueSpecification> incoming_param_specification;
-			std::list<Any>::const_iterator incoming_param_specification_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_specification = (*incoming_param_specification_arguments_citer)->get<std::shared_ptr<uml::ValueSpecification> >();
-			result = eAnyObject(this->createEvaluation(incoming_param_specification), fUML::Semantics::Values::ValuesPackage::EVALUATION_CLASS);
-			break;
-		}
-		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, fUML::Semantics::StructuredClassifiers::Object) : fUML::Semantics::CommonBehavior::Execution: 1344567686
-		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT:
+		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, uml::Element) : fUML::Semantics::CommonBehavior::Execution: 2395760303
+		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0
 			std::shared_ptr<uml::Behavior> incoming_param_behavior;
-			std::list<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
+			Bag<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_behavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'createExecution'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'createExecution'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
-			result = eAnyObject(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			std::shared_ptr<uml::Element> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'createExecution'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'createExecution'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->createExecution(incoming_param_behavior,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getBuiltInType(std::string) : uml::PrimitiveType: 3934172273
@@ -1172,9 +1121,18 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getBuiltInType'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getBuiltInType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getStrategy(std::string) : fUML::Semantics::Loci::SemanticStrategy: 4148006243
@@ -1183,9 +1141,18 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getStrategy'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getStrategy(incoming_param_name), fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::getStrategyIndex(std::string) : int: 353629829
@@ -1194,20 +1161,18 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getStrategyIndex(incoming_param_name),0,false);
-			break;
-		}
-		// fUML::Semantics::Loci::ExecutionFactory::instantiateOpaqueBehaviorExecution(uml::Behavior) : fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution: 1913492013
-		case LociPackage::EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR:
-		{
-			//Retrieve input parameter 'behavior'
-			//parameter 0
-			std::shared_ptr<uml::Behavior> incoming_param_behavior;
-			std::list<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_behavior = (*incoming_param_behavior_arguments_citer)->get<std::shared_ptr<uml::Behavior> >();
-			result = eAnyObject(this->instantiateOpaqueBehaviorExecution(incoming_param_behavior), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS);
+			Bag<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'name'. Failed to invoke operation 'getStrategyIndex'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->getStrategyIndex(incoming_param_name), 0, false);
 			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 442268567
@@ -1216,9 +1181,30 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
 			break;
 		}
 

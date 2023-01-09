@@ -19,6 +19,58 @@
  */]
 [module generateOpaqueBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * Generate method declaration from OpaqueBehavior
+ */]
+[template public generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior, isImpl: Boolean)
+	{
+		isFunctionBehavior : Boolean = anOpaqueBehavior.oclIsKindOf(FunctionBehavior);
+	}
+]
+virtual [anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for])[if (isFunctionBehavior)] const[/if] [abstractSuffix(isImpl)/];
+[/template]
+
+[template public generateOpaqueBehaviorImplementation(anOpaqueBehavior : OpaqueBehavior)]
+[anOpaqueBehavior.generateOpaqueBehaviorImplementation(true)/]
+[/template]
+
+[template public generateOpaqueBehaviorImplementation(anOpaqueBehavior : OpaqueBehavior, impl : Boolean)]
+[anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior._context.name.toUpperFirst()/][if(impl)]Impl[/if]::[anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[passedParameter.generateCppType(true)/] [passedParameter.name/][/for])[if (anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] const[/if] 
+{
+[if (anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	[anOpaqueBehavior.generateCppType()/] [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if][if (returnParameter.upper <> 1)](new Bag<[returnParameter.type.generateCppType(true)/]>())[/if][if(returnParameter.type.isPrimitive())] = [returnParameter.genDefault()/][/if];
+[/let]
+[/if]
+
+	[anOpaqueBehavior.generateMethodImplementationFromOpaqueBehavior()/]
+
+[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	return [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if];
+[/let]
+[/if]
+}
+[/template]
+
+[template public generateMethodImplementationFromOpaqueBehavior(anOpaqueBehavior : OpaqueBehavior)]
+[if (anOpaqueBehavior.hasLanguage(keyCPP()))]
+//Implemented as OpaqueBehaviour [anOpaqueBehavior.name/]
+[anOpaqueBehavior.getEntryForLanguage(keyCPP())/]
+[else]
+//No source code found for behavior '[anOpaqueBehavior.name/]'
+//Make sure that '[keyCPP()/]' is contained in the 'language' property of behavior '[anOpaqueBehavior.name/]'
+throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+[/if]
+[/template]
+
 [query public hasLanguage(anOpaqueBehavior : OpaqueBehavior, language : String) : Boolean = anOpaqueBehavior.language->includes(language) /]
 
 [query public getEntryForLanguage(anOpaqueBehavior : OpaqueBehavior, language : String) : String = 
@@ -38,3 +90,16 @@
 	endif
 /]
 
+[query public collectOpaqueBehaviorIncludeStrings(anOpaqueBehavior : OpaqueBehavior) : Set(String) = Set(String)
+{
+	anOpaqueBehavior.ownedParameter.collectParameterIncludeStrings(),
+	anOpaqueBehavior.collectOpaqueBehaviorIncludeStringsFromBody()
+}->flatten()
+/]
+
+[query private collectOpaqueBehaviorIncludeStringsFromBody(anOpaqueBehavior : OpaqueBehavior) : Set(String) = 
+	if (anOpaqueBehavior.hasLanguage(keyInclude()))
+	then anOpaqueBehavior.getEntriesForLanguageTokenized(keyInclude())->reject(s : String | s = '')->asSet()
+	else Set(String){}
+	endif
+/]

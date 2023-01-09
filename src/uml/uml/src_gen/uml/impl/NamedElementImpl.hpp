@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Namespace> > allNamespaces() const ;
+			virtual std::shared_ptr<Bag<uml::Namespace>> allNamespaces() const ;
 			/*!
 			The query allOwningPackages() returns the set of all the enclosing Namespaces of this NamedElement, working outwards, that are Packages, up to but not including the first such Namespace that is not a Package.
 			result = (if namespace.oclIsKindOf(Package)
@@ -76,7 +76,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > allOwningPackages() ;
+			virtual std::shared_ptr<Bag<uml::Package>> allOwningPackages() ;
 			/*!
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
@@ -92,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Dependency> > getClientDependencies() ;
+			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependencies() ;
 			/*!
 			Retrieves a localized label for this named element.
 			*/
@@ -117,19 +117,6 @@ namespace uml
 			 
 			virtual std::string getQualifiedName() const ;
 			/*!
-			If there is no name, or one of the containing Namespaces has no name, there is no qualifiedName.
-			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null
-			*/
-			 
-			virtual bool has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
-			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
-			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))
-			*/
-			 
-			virtual bool has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
 			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
 			    ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
@@ -137,7 +124,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns) ;
+			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns) ;
 			/*!
 			The query separator() gives the string that is used to separate names when constructing a qualifiedName.
 			result = ('::')
@@ -145,12 +132,6 @@ namespace uml
 			*/
 			 
 			virtual std::string separator() const ;
-			/*!
-			If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides mustBeOwned()) may have a visibility.
-			(namespace = null and owner <> null) implies visibility = null
-			*/
-			 
-			virtual bool visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -213,24 +194,12 @@ namespace uml
 			*/
 			
 			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -247,14 +216,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::NamedElement> m_thisNamedElementPtr;

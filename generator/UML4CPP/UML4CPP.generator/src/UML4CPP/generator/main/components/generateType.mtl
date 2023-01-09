@@ -21,7 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [**
@@ -46,13 +46,9 @@
  * - error message, if property type is undefined or property type name is undefined
 */]
 [template public generateCppType(aProperty : Property)]
-[if (not aProperty.type.oclIsUndefined() and aProperty.type.name.oclIsUndefined())]
-['type of property '.concat(aProperty.qualifiedName).concat(' is invalid (').concat(aProperty.type.toString()).concat(')').registerError() /]
-[/if]
-[if (not aProperty.type.oclIsUndefined())]
-	[if (aProperty.upper <> 1)]
-		[if (aProperty.isSubsetUnion())]
-			[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+[if (aProperty.upper <> 1)]
+	[if (aProperty.isSubsetUnion())]
+		[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 [aProperty.pointertype()/]<SubsetUnion<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[else]
 std::shared_ptr<SubsetUnion<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[/if]
 		[elseif(aProperty.isSubset())]
@@ -68,13 +64,10 @@ std::shared_ptr<Union<[aProperty.type.transformType()/]>>[/if]
 [aProperty.pointertype()/]<Bag<[aProperty.type.transformType()/]>>[else]
 std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
 		[/if]
-	[else]
+[else]
 		[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 [aProperty.pointertype()/]<[aProperty.type.transformType()/]>[else]
 [aProperty.type.transformType()/][/if]
-	[/if]
-[else]
-['type of property '.concat(aProperty.qualifiedName).concat(' is undefined').registerError() /]
 [/if]
 [/template]
 
@@ -96,15 +89,36 @@ std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
  * - error message, if Operation type is undefined or Operation type name is undefined
 */]
 [template public generateCppType(aOperation : Operation) post (trim())]
-[if (not aOperation.type.oclIsUndefined() and aOperation.type.name.oclIsUndefined())]
-['type of operation '.concat(aOperation.qualifiedName).concat(' is invalid (').concat(aOperation.type.toString()).concat(')').registerError() /]undefined
-[/if]
 [if (not(aOperation.upper=1))]
 std::shared_ptr<Bag<[aOperation.type.transformType()/]>>
 [elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()) and (not aOperation.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[aOperation.type.transformType()/]>
 [else]
 [aOperation.type.transformType()/][/if]
+[/template]
+
+[**
+ * generate the C++ representation of a type for an OpaqueBehavior
+ * 
+ * - pointer for types, which are not primitive or enumeration:
+ * - upper <> 1 -> Bag used  
+ * - error message, if OpaqueBehavior type is undefined or Operation type name is undefined
+*/]
+[template public generateCppType(anOpaqueBehavior : OpaqueBehavior) post (trim())]
+[if (not anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::return)->isEmpty())]
+[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::return)->first()]
+	[let returnType : Type = returnParameter.type]
+	[if (returnParameter.upper <> 1)]
+std::shared_ptr<Bag<[returnType.transformType()/]>>
+		[elseif (not (returnType.isPrimitive() or returnType.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[returnType.transformType()/]>
+		[else]
+[returnType.transformType()/][/if]
+	[/let]
+[/let]
+[else]
+[transformType(null)/]
+[/if]
 [/template]
 
 [**
@@ -115,9 +129,6 @@ std::shared_ptr<[aOperation.type.transformType()/]>
  * - error message, if Parameter type is undefined or Parameter type name is undefined
 */]
 [template public generateCppType(aParameter : Parameter, useReference : Boolean) post (trim())]
-[if (not aParameter.type.oclIsUndefined() and aParameter.type.name.oclIsUndefined())]
-['type of parameter '.concat(aParameter.qualifiedName).concat(' is invalid (').concat(aParameter.type.toString()).concat(')').registerError() /]undefined
-[/if]
 [if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if]
 [else]
@@ -132,9 +143,6 @@ std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformT
  * - error message, if Parameter type is undefined or Parameter type name is undefined
 */]
 [template public generateCppType(aPin : Pin, useReference : Boolean) post (trim())]
-[if (not aPin.type.oclIsUndefined() and aPin.type.name.oclIsUndefined())]
-['type of parameter '.concat(aPin.qualifiedName).concat(' is invalid (').concat(aPin.type.toString()).concat(')').registerError() /]undefined
-[/if]
 [if (not aPin.type.oclIsUndefined() and not (aPin.type.isPrimitive() or aPin.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[if (aPin.upper <> 1)]Bag<[/if][aPin.type.transformType()/]>[if (aPin.upper <> 1)]>[/if]
 [else]
@@ -199,3 +207,9 @@ std::string
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
 [if (aType.name.oclIsUndefined())]undefinedType[else][if (not aType.isIgnoreNamespace())][aType.namespace.oclAsType(Package).generateNamespace(true)/]::[/if][aType.name.toUpperFirst()/][/if]
 [/template]
+
+[query public collectTypeIncludeStrings(aType : Type) : Set(String) = Set(String)
+{
+	'#include "' + aType.getNearestPackage().generateNamespacePath(true) + '/' + aType.name.toUpperFirst() + '.hpp"'
+}->flatten()
+/]

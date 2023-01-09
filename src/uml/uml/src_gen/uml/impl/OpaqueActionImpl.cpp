@@ -1,9 +1,13 @@
 
 #include "uml/impl/OpaqueActionImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -17,12 +21,12 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -143,7 +147,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for body.")
 	}
 	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
 	if(languageList)
@@ -156,7 +160,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr language."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for language.")
 	}
 
 	//copy references with no containment (soft copy)
@@ -185,7 +189,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for inputValue.")
 	}
 
 	//clone reference 'outputValue'
@@ -212,7 +216,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr outputValue."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for outputValue.")
 	}
 	/*Subset*/
 	getInputValue()->initSubset(getInput());
@@ -240,10 +244,6 @@ std::shared_ptr<ecore::EObject> OpaqueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OpaqueActionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -316,95 +316,6 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup>> OpaqueActionImpl::getInGroup() const
-{
-	if(m_inGroup == nullptr)
-	{
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_inGroup;
-}
-
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> OpaqueActionImpl::getInput() const
-{
-	if(m_input == nullptr)
-	{
-		/*SubsetUnion*/
-		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getInput()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_input;
-}
-
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> OpaqueActionImpl::getOutput() const
-{
-	if(m_output == nullptr)
-	{
-		/*SubsetUnion*/
-		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOutput()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-	return m_output;
-}
-
-std::shared_ptr<Union<uml::Element>> OpaqueActionImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> OpaqueActionImpl::getOwner() const
-{
-	return m_owner;
-}
-
-std::shared_ptr<Union<uml::RedefinableElement>> OpaqueActionImpl::getRedefinedElement() const
-{
-	if(m_redefinedElement == nullptr)
-	{
-		/*Union*/
-		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_redefinedElement;
-}
 
 //*********************************
 // Container Getter
@@ -598,18 +509,18 @@ std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 			return eAny(getBody(),ecore::ecorePackage::ESTRING_CLASS,true); //16427
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return eAnyBag(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //16428
+			return eEcoreContainerAny(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //16428
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage(),ecore::ecorePackage::ESTRING_CLASS,true); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return eAnyBag(getOutputValue(),uml::umlPackage::OUTPUTPIN_CLASS); //16430
+			return eEcoreContainerAny(getOutputValue(),uml::umlPackage::OUTPUTPIN_CLASS); //16430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -630,95 +541,159 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueActionImpl::eSet(int featureID, Any newValue)
+bool OpaqueActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _body = getBody();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				{
+					if (valueToAdd)
+					{
+						if(_body->find(valueToAdd) == -1)
+						{
+							_body->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'body'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			// CAST Any to Bag<uml::InputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (inputValueList->find(indexInputValue) == -1)
+						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_inputValue->erase(indexInputValue);
-						}
-					}
-
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
-					{
-						if (_inputValue->find(indexInputValue) == -1)
-						{
-							_inputValue->add(indexInputValue);
+							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_inputValue->find(valueToAdd) == -1)
+								{
+									_inputValue->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'inputValue'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 		{
-			// CAST Any to Bag<std::string>
-			// nothing to do
-			return true;
+			try
+			{
+				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
+				std::shared_ptr<Bag<std::string>> _language = getLanguage();
+				
+				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				{
+					if (valueToAdd)
+					{
+						if(_language->find(valueToAdd) == -1)
+						{
+							_language->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'language'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
-			// CAST Any to Bag<uml::OutputPin>
-			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::OutputPin>> outputValueList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _outputValue=getOutputValue();
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *_outputValue)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (outputValueList->find(indexOutputValue) == -1)
+						std::shared_ptr<Bag<uml::OutputPin>> _outputValue = getOutputValue();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_outputValue->erase(indexOutputValue);
-						}
-					}
-
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *outputValueList)
-					{
-						if (_outputValue->find(indexOutputValue) == -1)
-						{
-							_outputValue->add(indexOutputValue);
+							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_outputValue->find(valueToAdd) == -1)
+								{
+									_outputValue->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'outputValue'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'outputValue'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -728,28 +703,12 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::OpaqueAction::language_body_size(Any, std::map) : bool: 2776050946
-		case umlPackage::OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 
 		default:
 		{

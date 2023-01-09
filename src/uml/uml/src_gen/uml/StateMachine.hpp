@@ -7,7 +7,6 @@
 #ifndef UML_STATEMACHINE_HPP
 #define UML_STATEMACHINE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
@@ -15,8 +14,6 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -91,7 +88,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API StateMachine: virtual public Behavior
+	class UML_API StateMachine : virtual public Behavior
 	{
 		public:
  			StateMachine(const StateMachine &) {}
@@ -122,7 +119,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) = 0;
+			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) = 0;
 			/*!
 			This utility funciton is like the LCA, except that it returns the nearest composite State that contains both input Vertices.
 			result = (if v2.oclIsTypeOf(State) and ancestor(v1, v2) then
@@ -136,7 +133,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2) = 0;
+			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1, std::shared_ptr<uml::Vertex> v2) = 0;
 			/*!
 			The query ancestor(s1, s2) checks whether Vertex s2 is an ancestor of Vertex s1.
 			result = (if (s2 = s1) then 
@@ -155,31 +152,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) = 0;
-			/*!
-			The Classifier context of a StateMachine cannot be an Interface.
-			_'context' <> null implies not _'context'.oclIsKindOf(Interface)
-			*/
-			 
-			virtual bool classifier_context(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The connection points of a StateMachine are Pseudostates of kind entry point or exit point.
-			connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
-			*/
-			 
-			virtual bool connection_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The context Classifier of the method StateMachine of a BehavioralFeature must be the Classifier that owns the BehavioralFeature.
-			specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context'))
-			*/
-			 
-			virtual bool context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			A StateMachine as the method for a BehavioralFeature cannot have entry/exit connection points.
-			specification <> null implies connectionPoint->isEmpty()
-			*/
-			 
-			virtual bool method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -216,67 +189,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const = 0;
-			/*!
-			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-			/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
-			/*!
-			The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const = 0;
-			
 
 			//*********************************
 			// Container Getter

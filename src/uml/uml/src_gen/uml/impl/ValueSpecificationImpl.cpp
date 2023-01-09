@@ -1,9 +1,13 @@
 
 #include "uml/impl/ValueSpecificationImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -220,32 +224,6 @@ void ValueSpecificationImpl::setValueSpecificationAction(std::weak_ptr<uml::Valu
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace> ValueSpecificationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-
-std::shared_ptr<Union<uml::Element>> ValueSpecificationImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
-std::weak_ptr<uml::Element> ValueSpecificationImpl::getOwner() const
-{
-	return m_owner;
-}
-
-
 
 //*********************************
 // Container Getter
@@ -387,22 +365,22 @@ std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningSlot().lock();
-			return eAnyObject(returnValue,uml::umlPackage::SLOT_CLASS); //25013
+			return eEcoreAny(returnValue,uml::umlPackage::SLOT_CLASS); //25013
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAnyObject(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //25014
+			return eEcoreAny(returnValue,uml::umlPackage::VALUESPECIFICATIONACTION_CLASS); //25014
 		}
 	}
-	Any result;
+	std::shared_ptr<Any> result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
 	if (result != nullptr && !result->isEmpty())
 	{
@@ -431,25 +409,71 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
-			// CAST Any to uml::Slot
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(_temp);
-			setOwningSlot(_owningSlot); //25013
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(eObject);
+					if(_owningSlot)
+					{
+						setOwningSlot(_owningSlot); //25013
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'owningSlot'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'owningSlot'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
-			// CAST Any to uml::ValueSpecificationAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
-			setValueSpecificationAction(_valueSpecificationAction); //25014
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(eObject);
+					if(_valueSpecificationAction)
+					{
+						setValueSpecificationAction(_valueSpecificationAction); //25014
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -466,52 +490,52 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
 		// uml::ValueSpecification::booleanValue() : bool: 1350723800
 		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
 		{
-			result = eAny(this->booleanValue(),0,false);
+			result = eAny(this->booleanValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::integerValue() : int: 2449030041
 		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
 		{
-			result = eAny(this->integerValue(),0,false);
+			result = eAny(this->integerValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::isComputable() : bool: 3895370351
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable(),0,false);
+			result = eAny(this->isComputable(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::isNull() : bool: 1141016246
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
 		{
-			result = eAny(this->isNull(),0,false);
+			result = eAny(this->isNull(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::realValue() : double: 1448638351
 		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
 		{
-			result = eAny(this->realValue(),0,false);
+			result = eAny(this->realValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::stringValue() : std::string: 1518605845
 		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue(),0,false);
+			result = eAny(this->stringValue(), 0, false);
 			break;
 		}
 		// uml::ValueSpecification::unlimitedValue() : int: 1134102830
 		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
 		{
-			result = eAny(this->unlimitedValue(),0,false);
+			result = eAny(this->unlimitedValue(), 0, false);
 			break;
 		}
 

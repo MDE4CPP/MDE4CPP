@@ -249,7 +249,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	/]
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
-[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
+[for (pack : EPackage | aPackage.metaModelLibraries()->sortedBy(name)->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
 
 	// dependency to model '[pack.name/]'
 	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
@@ -334,6 +334,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : EPackage) post (trim())]
-[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) separator (', ') ? (not(pack.name = aPackage.name))]
+[for (pack : EPackage | aPackage.metaModelLibraries()->sortedBy(name)->reject(doNotGenerateEPackage())) separator (', ') ? (not(pack.name = aPackage.name))]
 '[pack.name/]'[/for]
 [/template]

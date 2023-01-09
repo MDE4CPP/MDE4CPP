@@ -21,7 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 
 
@@ -132,9 +132,13 @@ template<class T> class Bag;
 */]
 [template public defineDebugMacro(namedelement : NamedElement)]
 #ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"['['/]\e['['/]0;32mInfo\e['['/]0m[']'/]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"['['/]\e['['/]0;33mWarning\e['['/]0m[']'/]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"['['/]\e['['/]0;31mError\e['['/]0m[']'/]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 [/template]
 
@@ -157,10 +161,10 @@ template<class T> class Bag;
 [query public getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().generateNamespace(false).concat('::').concat(anElement1.getNearestPackage().name).concat('Package').concat('::eInstance()->') /]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
-nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
+nullptr[printError('Cannot terminate package of element ' + failureElement.toString() + ' used by ' + name, 'UML4CPP::generator::main::helpers::generalHelper::handlePackageGetterError')/]
 [/template]
 [template private handlePackageGetterError(failureElement : ConnectorEnd, name : String)]
-nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
+nullptr[printError('Cannot terminate package of element ' + failureElement.toString() + ' used by ' + name, 'UML4CPP::generator::main::helpers::generalHelper::handlePackageGetterError')/]
 [/template]
 
 [query private hasMultiplicityConflict(firstProperty : Property, secondProperty : Property) : Boolean = not (firstProperty.upper = secondProperty.upper) /]
@@ -176,6 +180,6 @@ nullptr['cannot terminate package of element '.concat(failureElement.toString())
 [if (aClassifier._package.name = 'PrimitiveTypes')]
 types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 [else]
-[aClassifier.generateNamespace(true)/]::[aClassifier._package.myNamespaceName()/]Package::[aClassifier.name.toUpperCase()/]_CLASS
+[aClassifier.generateNamespace(true)/]::[aClassifier._package.myNamespaceName()/]Package::[aClassifier.getMemberName().toUpperCase()/]
 [/if]
 [/template]

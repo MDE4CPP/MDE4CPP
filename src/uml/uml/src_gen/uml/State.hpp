@@ -7,15 +7,12 @@
 #ifndef UML_STATE_HPP
 #define UML_STATE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -76,7 +73,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class UML_API State: virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
+	class UML_API State : virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
 	{
 		public:
  			State(const State &) {}
@@ -93,26 +90,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Only composite States can have entry or exit Pseudostates defined.
-			connectionPoint->notEmpty() implies isComposite
-			*/
-			 
-			virtual bool composite_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
-			self.isSubmachineState implies (self.connection->forAll (cp |
-			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
-			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
-			*/
-			 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only entry or exit Pseudostates can serve as connection points.
-			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
-			*/
-			 
-			virtual bool entry_or_exit(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A composite State is a State with at least one Region.
 			result = (region->notEmpty())
@@ -153,18 +130,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
-			/*!
-			A State is not allowed to have both a submachine and Regions.
-			isComposite implies not isSubmachineState
-			*/
-			 
-			virtual bool submachine_or_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Only submachine States can have connection point references.
-			isSubmachineState implies connection->notEmpty( )
-			*/
-			 
-			virtual bool submachine_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -297,42 +262,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

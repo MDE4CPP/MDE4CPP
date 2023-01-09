@@ -45,17 +45,17 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() ;
 			virtual void createEdgeInstances() ;
 			virtual void createNodeActivations() ;
 			virtual void doAction() ;
 			virtual void doStructuredActivity() ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin> pin) ;
+			virtual std::shared_ptr<Bag<Any>> getPinValues(std::shared_ptr<uml::OutputPin> pin) ;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) ;
 			virtual bool isSuspended() ;
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) ;
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) ;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Bag<Any>> values) ;
 			virtual void resume() ;
 			virtual void terminate() ;
 			virtual void terminateAll() ;
@@ -73,13 +73,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -96,14 +95,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> m_thisStructuredActivityNodeActivationPtr;

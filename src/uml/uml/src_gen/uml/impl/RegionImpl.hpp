@@ -76,26 +76,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;
 			/*!
-			A Region can have at most one deep history Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			   select(kind = PseudostateKind::deepHistory)->size() <= 1
-			*/
-			 
-			virtual bool deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			A Region can have at most one initial Vertex.
-			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::initial)->size() <= 1
-			*/
-			 
-			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
-			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
-			*/
-			 
-			virtual bool owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -107,13 +87,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext() ;
-			/*!
-			A Region can have at most one shallow history Vertex.
-			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
-			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
-			*/
-			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -174,48 +147,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -232,14 +169,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::Region> m_thisRegionPtr;

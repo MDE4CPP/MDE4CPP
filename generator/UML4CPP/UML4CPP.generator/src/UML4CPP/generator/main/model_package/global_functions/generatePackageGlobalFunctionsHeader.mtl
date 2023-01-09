@@ -1,0 +1,78 @@
+[comment encoding = UTF-8 /]
+[module generatePackageGlobalFunctionsHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::validation::validation/]
+
+[template public generatePackageGlobalFunctionsHeader(aPackage : Package)]
+[file (aPackage.generateNamespacePath(false) + '/_GlobalFunctions.hpp', false, 'UTF-8')]
+[startGuard(aPackage, '_GlobalFunctions')/]
+
+#include <memory>
+
+class Any;
+template<class T> class Bag;
+
+namespace uml
+{
+	class OpaqueBehavior;
+}
+[let opaqueBehaviorsForGlobalFunctionsOfPackage : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
+[let classifiersForForwardDeclaration : Set(Classifier) = Set
+{
+	opaqueBehaviorsForGlobalFunctionsOfPackage->includes()->filter(Class),
+	opaqueBehaviorsForGlobalFunctionsOfPackage->includes()->filter(Interface)
+}->flatten()]
+	[for (aPackage : Package | classifiersForForwardDeclaration.getNearestPackage()->asSet()->sortedBy(name)) before('\n//Forward declarations for used types\n') separator('\n') after('\n')]
+		[if (not aPackage.isIgnoreNamespace())]
+namespace [aPackage.generateNamespace(true)/] 
+{
+			[/if]
+		[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
+class [aClassifier.name.toUpperFirst()/];
+		[/for]
+		[if (not aPackage.isIgnoreNamespace())]
+}
+			[/if]
+	[/for]
+[/let]
+[for (anEnumeration : Enumeration | opaqueBehaviorsForGlobalFunctionsOfPackage->includes()->filter(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) before('\n') after('\n')]
+#include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+
+namespace [aPackage.generateNamespace(true)/]
+{
+	std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior>, std::shared_ptr<Bag<Any>>, std::shared_ptr<Bag<Any>>);
+}
+
+[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctionsOfPackage.namespace->asSet()->sortedBy(name)) separator('\n') after('\n')]
+namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/][elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/][else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/[/if]
+{
+	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctionsOfPackage->select(oB : OpaqueBehavior | oB.namespace = aNamespace))]
+	[anOpaqueBehavior.generateMethodDeclaration()/]
+	[/for]
+}
+[/for]
+[/let]
+[endGuard(aPackage, '_GlobalFunctions')/]
+[/file]
+[/template]
+
+[template private generateMethodDeclaration(anOpaqueBehavior : OpaqueBehavior)
+	{
+		isFunctionBehavior : Boolean = anOpaqueBehavior.oclIsKindOf(FunctionBehavior);
+	}
+]
+[anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for]);
+[/template]
+
+[query private includes(opaqueBehaviorsList : Set(OpaqueBehavior)) : Set(Type) =
+	Set(Type){
+		opaqueBehaviorsList.ownedParameter.type
+	}->flatten()
+/]

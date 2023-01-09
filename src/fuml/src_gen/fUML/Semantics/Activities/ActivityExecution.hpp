@@ -38,22 +38,22 @@ namespace fUML::Semantics::Activities
 }
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ObjectActivation;
 	class ParameterValue;
 }
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers 
+namespace ecore 
 {
-	class FeatureValue;
+	class EAnnotation;
 }
 namespace uml 
 {
 	class Activity;
 	class Behavior;
 	class Classifier;
+	class Comment;
 }
 
 // namespace macro header include
@@ -69,7 +69,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class FUML_API ActivityExecution: virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API ActivityExecution : virtual public fUML::Semantics::CommonBehavior::Execution
 	{
 		public:
  			ActivityExecution(const ActivityExecution &) {}
@@ -86,9 +86,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			virtual std::shared_ptr<Any> _copy() = 0;
 			virtual void execute() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			virtual std::shared_ptr<Any> new_() = 0;
 			virtual void terminate() = 0;
 
 			//*********************************

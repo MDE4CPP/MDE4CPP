@@ -7,15 +7,12 @@
 #ifndef UML_DURATIONOBSERVATION_HPP
 #define UML_DURATIONOBSERVATION_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T> class Bag; 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -65,7 +62,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class UML_API DurationObservation: virtual public Observation
+	class UML_API DurationObservation : virtual public Observation
 	{
 		public:
  			DurationObservation(const DurationObservation &) {}
@@ -82,14 +79,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The multiplicity of firstEvent must be 2 if the multiplicity of event is 2. Otherwise the multiplicity of firstEvent is 0.
-			if (event->size() = 2)
-			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
-			endif
-			*/
-			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -114,25 +103,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

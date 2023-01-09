@@ -7,15 +7,12 @@
 #ifndef UML_COLLABORATIONUSE_HPP
 #define UML_COLLABORATIONUSE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -64,7 +61,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class UML_API CollaborationUse: virtual public NamedElement
+	class UML_API CollaborationUse : virtual public NamedElement
 	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}
@@ -81,40 +78,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			All the client elements of a roleBinding are in one Classifier and all supplier elements of a roleBinding are in one Collaboration.
-			roleBinding->collect(client)->forAll(ne1, ne2 |
-			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
-			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
-			      ce1.structuredClassifier = ce2.structuredClassifier)
-			and
-			  roleBinding->collect(supplier)->forAll(ne1, ne2 |
-			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
-			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
-			      ce1.collaboration = ce2.collaboration)
-			*/
-			 
-			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
-			type.ownedConnector->forAll(connector |
-			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
-			        relevantBindings : Set(Dependency) = roleBinding->select(rb | rb.supplier->intersection(rolesConnectedInCollab)->notEmpty()),
-			        boundRoles : Set(ConnectableElement) = relevantBindings->collect(client.oclAsType(ConnectableElement))->asSet(),
-			        contextClassifier : StructuredClassifier = boundRoles->any(true).structuredClassifier->any(true) in
-			          contextClassifier.ownedConnector->exists( correspondingConnector | 
-			              correspondingConnector.end.role->forAll( role | boundRoles->includes(role) )
-			              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty()) implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
-			)
-			*/
-			 
-			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
-			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
-			*/
-			 
-			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -145,18 +108,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			//*********************************
 			// Container Getter

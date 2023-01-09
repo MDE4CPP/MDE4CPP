@@ -7,14 +7,11 @@
 #ifndef UML_INITIALNODE_HPP
 #define UML_INITIALNODE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -69,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class UML_API InitialNode: virtual public ControlNode
+	class UML_API InitialNode : virtual public ControlNode
 	{
 		public:
  			InitialNode(const InitialNode &) {}
@@ -86,18 +83,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
-			outgoing->forAll(oclIsKindOf(ControlFlow))
-			*/
-			 
-			virtual bool control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			An InitialNode has no incoming ActivityEdges.
-			incoming->isEmpty()
-			*/
-			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -110,30 +95,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			//*********************************
 			// Container Getter

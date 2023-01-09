@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
 
 
 
@@ -16,7 +15,6 @@ using namespace fUML::Semantics::Classification;
 
 ClassificationFactoryImpl::ClassificationFactoryImpl()
 {
-	m_idMap.insert(std::make_pair("fUML::Semantics::Classification::InstanceValueEvaluation", ClassificationPackage::INSTANCEVALUEEVALUATION_CLASS));
 }
 
 ClassificationFactoryImpl::~ClassificationFactoryImpl()
@@ -36,12 +34,6 @@ std::shared_ptr<ecore::EObject> ClassificationFactoryImpl::create(const int meta
 {
 	switch(metaElementID)
 	{
-		case ClassificationPackage::INSTANCEVALUEEVALUATION_CLASS:
-		{
-				return this->createInstanceValueEvaluation(metaElementID);
-			
-			break;
-		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
 	}
@@ -70,11 +62,4 @@ std::shared_ptr<ecore::EObject> ClassificationFactoryImpl::create(std::string _c
     return nullptr;
 }
 
-std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> ClassificationFactoryImpl::createInstanceValueEvaluation(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluationImpl> element(new fUML::Semantics::Classification::InstanceValueEvaluationImpl());
-	element->setMetaElementID(metaElementID);
-	element->setThisInstanceValueEvaluationPtr(element);
-	return element;
-}
 

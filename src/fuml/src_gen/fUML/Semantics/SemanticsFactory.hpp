@@ -18,106 +18,39 @@
 
 namespace fUML::Semantics::Activities
 {
+	class ActivityExecution;
 	class ActivityNodeActivationGroup;
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
 }
 
 
 namespace fUML::Semantics::Actions
 {
-	class CallActionActivation;
 	class StructuredActivityNodeActivation;
 }
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
-}
 
 
 
 
-namespace fUML::Semantics::Actions
-{
-	class CallActionActivation;
-}
-namespace fUML::Semantics::Activities
-{
-	class DecisionNodeActivation;
-	class ObjectToken;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace fUML::Semantics::SimpleClassifiers
+namespace uml
 {
-	class FeatureValue;
-}
-namespace fUML::Semantics::StructuredClassifiers
-{
-	class Object;
+	class DirectedRelationship;
 }
 
 
 
 
-namespace fUML::Semantics::Activities
-{
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ObjectActivation;
-	class ParameterValue;
-}
 
 
-namespace fUML::Semantics::Activities
-{
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::Loci
-{
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
-}
 
 
-namespace fUML::Semantics::Activities
-{
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
-}
 
 
 

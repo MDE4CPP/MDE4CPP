@@ -50,60 +50,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The InteractionUse must cover all Lifelines of the enclosing Interaction that are common with the lifelines covered by the referred Interaction. Lifelines are common if they have the same selector and represents associationEnd values.
-			let parentInteraction : Set(Interaction) = enclosingInteraction->asSet()->
-			union(enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
-			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
-			parentInteraction->size()=1 and let refInteraction : Interaction = refersTo in
-			parentInteraction.covered-> forAll(intLifeline : Lifeline | refInteraction.covered->
-			forAll( refLifeline : Lifeline | refLifeline.represents = intLifeline.represents and 
-			(
-			( refLifeline.selector.oclIsKindOf(LiteralString) implies
-			  intLifeline.selector.oclIsKindOf(LiteralString) and 
-			  refLifeline.selector.oclAsType(LiteralString).value = intLifeline.selector.oclAsType(LiteralString).value ) and
-			( refLifeline.selector.oclIsKindOf(LiteralInteger) implies
-			  intLifeline.selector.oclIsKindOf(LiteralInteger) and 
-			  refLifeline.selector.oclAsType(LiteralInteger).value = intLifeline.selector.oclAsType(LiteralInteger).value )
-			)
-			 implies self.covered->asSet()->includes(intLifeline)))
-			*/
-			 
-			virtual bool all_lifelines(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction.
-			*/
-			 
-			virtual bool arguments_are_constants(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
-			*/
-			 
-			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
-			actualGate->notEmpty() implies 
-			refersTo.formalGate->forAll( fg : Gate | self.actualGate->select(matches(fg))->size()=1) and
-			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1)
-			*/
-			 
-			virtual bool gates_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
-			returnValueRecipient->asSet()->notEmpty() implies
-			let covCE : Set(ConnectableElement) = covered.represents->asSet() in 
-			covCE->notEmpty() and let classes:Set(Classifier) = covCE.type.oclIsKindOf(Classifier).oclAsType(Classifier)->asSet() in 
-			let allProps : Set(Property) = classes.attribute->union(classes.allParents().attribute)->asSet() in 
-			allProps->includes(returnValueRecipient)
-			*/
-			 
-			virtual bool returnValueRecipient_coverage(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			The type of the returnValue must correspond to the type of the returnValueRecipient.
-			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()
-			*/
-			 
-			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -164,30 +110,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
 			//*********************************
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -204,14 +132,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::InteractionUse> m_thisInteractionUsePtr;

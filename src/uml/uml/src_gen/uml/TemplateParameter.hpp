@@ -7,15 +7,12 @@
 #ifndef UML_TEMPLATEPARAMETER_HPP
 #define UML_TEMPLATEPARAMETER_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -60,7 +57,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateParameter: virtual public Element
+	class UML_API TemplateParameter : virtual public Element
 	{
 		public:
  			TemplateParameter(const TemplateParameter &) {}
@@ -82,12 +79,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			The default must be compatible with the formal TemplateParameter.
-			default <> null implies default.isCompatibleWith(parameteredElement)
-			*/
-			 
-			virtual bool must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -160,20 +151,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-			
 
 			//*********************************
 			// Container Getter

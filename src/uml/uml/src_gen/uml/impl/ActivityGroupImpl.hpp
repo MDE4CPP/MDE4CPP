@@ -59,22 +59,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() ;
-			/*!
-			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
-			containedNode->forAll(activity = self.containingActivity()) and 
-			containedEdge->forAll(activity = self.containingActivity())
-			*/
-			 
-			virtual bool nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
-			/*!
-			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
-			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
-			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
-			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
-			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
-			*/
-			 
-			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -116,18 +100,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const ;
 			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;
-			/*!
 			Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
@@ -144,7 +116,7 @@ namespace uml
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -161,14 +133,14 @@ namespace uml
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<uml::ActivityGroup> m_thisActivityGroupPtr;

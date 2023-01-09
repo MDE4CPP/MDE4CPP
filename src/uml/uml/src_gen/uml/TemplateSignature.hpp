@@ -7,15 +7,12 @@
 #ifndef UML_TEMPLATESIGNATURE_HPP
 #define UML_TEMPLATESIGNATURE_HPP
 
-#include <map>
 
 #include <memory>
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T> class Union;
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -60,7 +57,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class UML_API TemplateSignature: virtual public Element
+	class UML_API TemplateSignature : virtual public Element
 	{
 		public:
  			TemplateSignature(const TemplateSignature &) {}
@@ -82,19 +79,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			Parameters must own the ParameterableElements they parameter or those ParameterableElements must be owned by the TemplateableElement being templated.
-			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
-			*/
-			 
-			virtual bool own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			/*!
-			The names of the parameters of a TemplateSignature are unique.
-			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
-			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
-			*/
-			 
-			virtual bool unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -126,18 +110,6 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-			/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 			/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>

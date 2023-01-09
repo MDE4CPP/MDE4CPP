@@ -1,9 +1,13 @@
 
 #include "uml/impl/NamespaceImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -136,7 +140,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr elementImport."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for elementImport.")
 	}
 
 	//clone reference 'importedMember'
@@ -163,7 +167,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr importedMember."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for importedMember.")
 	}
 
 	//clone reference 'ownedRule'
@@ -190,7 +194,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedRule."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for ownedRule.")
 	}
 
 	//clone reference 'packageImport'
@@ -217,7 +221,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packageImport."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for packageImport.")
 	}
 	/*SubsetUnion*/
 	getElementImport()->initSubsetUnion(getOwnedElement());
@@ -243,67 +247,52 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamespaceImpl::cannot_import_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::getImportedElements()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::getImportedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedElements()
+std::shared_ptr<Bag<uml::Package>> NamespaceImpl::getImportedPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedMembers()
+std::shared_ptr<Bag<std::string>> NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
+std::shared_ptr<Bag<uml::NamedElement>> NamespaceImpl::getOwnedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool NamespaceImpl::membersAreDistinguishable()
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
-
-bool NamespaceImpl::members_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -421,21 +410,6 @@ std::shared_ptr<Union<uml::NamedElement>> NamespaceImpl::getMember() const
 	return m_member;
 }
 
-std::shared_ptr<Union<uml::Element>> NamespaceImpl::getOwnedElement() const
-{
-	if(m_ownedElement == nullptr)
-	{
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_ownedElement;
-}
-
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> NamespaceImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
@@ -454,11 +428,6 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>>
 		
 	}
 	return m_ownedMember;
-}
-
-std::weak_ptr<uml::Element> NamespaceImpl::getOwner() const
-{
-	return m_owner;
 }
 
 //*********************************
@@ -626,22 +595,22 @@ std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-			return eAnyBag(getElementImport(),uml::umlPackage::ELEMENTIMPORT_CLASS); //15610
+			return eEcoreContainerAny(getElementImport(),uml::umlPackage::ELEMENTIMPORT_CLASS); //15610
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-			return eAnyBag(getImportedMember(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //15613
+			return eEcoreContainerAny(getImportedMember(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //15613
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-			return eAnyBag(getMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15614
+			return eEcoreContainerAny(getMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15614
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-			return eAnyBag(getOwnedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15612
+			return eEcoreContainerAny(getOwnedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15612
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-			return eAnyBag(getOwnedRule(),uml::umlPackage::CONSTRAINT_CLASS); //1569
+			return eEcoreContainerAny(getOwnedRule(),uml::umlPackage::CONSTRAINT_CLASS); //1569
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-			return eAnyBag(getPackageImport(),uml::umlPackage::PACKAGEIMPORT_CLASS); //15611
+			return eEcoreContainerAny(getPackageImport(),uml::umlPackage::PACKAGEIMPORT_CLASS); //15611
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -666,120 +635,144 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool NamespaceImpl::eSet(int featureID, Any newValue)
+bool NamespaceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
-			// CAST Any to Bag<uml::ElementImport>
-			if((newValue->isContainer()) && (uml::umlPackage::ELEMENTIMPORT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::ElementImport>> elementImportList= newValue->get<std::shared_ptr<Bag<uml::ElementImport>>>();
-					std::shared_ptr<Bag<uml::ElementImport>> _elementImport=getElementImport();
-					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *_elementImport)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (elementImportList->find(indexElementImport) == -1)
+						std::shared_ptr<Bag<uml::ElementImport>> _elementImport = getElementImport();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_elementImport->erase(indexElementImport);
-						}
-					}
-
-					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *elementImportList)
-					{
-						if (_elementImport->find(indexElementImport) == -1)
-						{
-							_elementImport->add(indexElementImport);
+							std::shared_ptr<uml::ElementImport> valueToAdd = std::dynamic_pointer_cast<uml::ElementImport>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_elementImport->find(valueToAdd) == -1)
+								{
+									_elementImport->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'elementImport'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'elementImport'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
-			// CAST Any to Bag<uml::Constraint>
-			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Constraint>> ownedRuleList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _ownedRule=getOwnedRule();
-					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *_ownedRule)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (ownedRuleList->find(indexOwnedRule) == -1)
+						std::shared_ptr<Bag<uml::Constraint>> _ownedRule = getOwnedRule();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_ownedRule->erase(indexOwnedRule);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *ownedRuleList)
-					{
-						if (_ownedRule->find(indexOwnedRule) == -1)
-						{
-							_ownedRule->add(indexOwnedRule);
+							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_ownedRule->find(valueToAdd) == -1)
+								{
+									_ownedRule->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'ownedRule'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'ownedRule'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
-			// CAST Any to Bag<uml::PackageImport>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEIMPORT_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::PackageImport>> packageImportList= newValue->get<std::shared_ptr<Bag<uml::PackageImport>>>();
-					std::shared_ptr<Bag<uml::PackageImport>> _packageImport=getPackageImport();
-					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *_packageImport)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (packageImportList->find(indexPackageImport) == -1)
+						std::shared_ptr<Bag<uml::PackageImport>> _packageImport = getPackageImport();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_packageImport->erase(indexPackageImport);
-						}
-					}
-
-					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *packageImportList)
-					{
-						if (_packageImport->find(indexPackageImport) == -1)
-						{
-							_packageImport->add(indexPackageImport);
+							std::shared_ptr<uml::PackageImport> valueToAdd = std::dynamic_pointer_cast<uml::PackageImport>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_packageImport->find(valueToAdd) == -1)
+								{
+									_packageImport->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'packageImport'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'packageImport'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -789,58 +782,56 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// uml::Namespace::cannot_import_ownedMembers(Any, std::map) : bool: 2277069255
-		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
-		// uml::Namespace::cannot_import_self(Any, std::map) : bool: 3009607981
-		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context),0,false);
-			break;
-		}
 		// uml::Namespace::createElementImport(uml::PackageableElement, uml::VisibilityKind) : uml::ElementImport: 3041688654
 		case umlPackage::NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND:
 		{
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::PackageableElement> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::PackageableElement> >();
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'createElementImport'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'createElementImport'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'visibility'
 			//parameter 1
 			uml::VisibilityKind incoming_param_visibility;
-			std::list<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind >();
-			result = eAnyObject(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
+			Bag<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'visibility'. Failed to invoke operation 'createElementImport'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createElementImport(incoming_param_element,incoming_param_visibility), uml::umlPackage::ELEMENTIMPORT_CLASS);
 			break;
 		}
 		// uml::Namespace::createPackageImport(uml::Package, uml::VisibilityKind) : uml::PackageImport: 3501829020
@@ -849,14 +840,44 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'package_'
 			//parameter 0
 			std::shared_ptr<uml::Package> incoming_param_package_;
-			std::list<Any>::const_iterator incoming_param_package__arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_package_ = (*incoming_param_package__arguments_citer)->get<std::shared_ptr<uml::Package> >();
+			Bag<Any>::const_iterator incoming_param_package__arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_package__arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_package_ = std::dynamic_pointer_cast<uml::Package>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'package_'. Failed to invoke operation 'createPackageImport'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'package_'. Failed to invoke operation 'createPackageImport'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'visibility'
 			//parameter 1
 			uml::VisibilityKind incoming_param_visibility;
-			std::list<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind >();
-			result = eAnyObject(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
+			Bag<Any>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get<uml::VisibilityKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'visibility'. Failed to invoke operation 'createPackageImport'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->createPackageImport(incoming_param_package_,incoming_param_visibility), uml::umlPackage::PACKAGEIMPORT_CLASS);
 			break;
 		}
 		// uml::Namespace::excludeCollisions(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2855843539
@@ -865,31 +886,61 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'imps'
 			//parameter 0
 			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
-			std::list<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->excludeCollisions(incoming_param_imps);
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_imps_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_imps.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::PackageableElement> _temp = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
+								incoming_param_imps->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'excludeCollisions'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'excludeCollisions'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->excludeCollisions(incoming_param_imps);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedElements() : uml::PackageableElement[*]: 2588792065
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedElements();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->getImportedElements();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedMembers() : uml::PackageableElement[*]: 2627629447
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedMembers();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->getImportedMembers();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedPackages() : uml::Package[*]: 1496815389
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->getImportedPackages();
-			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
+			std::shared_ptr<Bag<uml::Package>> resultList = this->getImportedPackages();
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::Namespace::getNamesOfMember(uml::NamedElement) : std::string[*]: 3293858424
@@ -898,16 +949,37 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->getNamesOfMember(incoming_param_element),0,true);
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'getNamesOfMember'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'getNamesOfMember'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->getNamesOfMember(incoming_param_element), 0, true);
 			break;
 		}
 		// uml::Namespace::getOwnedMembers() : uml::NamedElement[*]: 353105181
 		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getOwnedMembers();
-			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
+			std::shared_ptr<Bag<uml::NamedElement>> resultList = this->getOwnedMembers();
+			return eEcoreContainerAny(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::importMembers(uml::PackageableElement[*]) : uml::PackageableElement[*]: 2696590848
@@ -916,32 +988,46 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			//Retrieve input parameter 'imps'
 			//parameter 0
 			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
-			std::list<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->importMembers(incoming_param_imps);
-			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
+			Bag<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_imps_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_imps.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::PackageableElement> _temp = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
+								incoming_param_imps->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'importMembers'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'imps'. Failed to invoke operation 'importMembers'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<uml::PackageableElement>> resultList = this->importMembers(incoming_param_imps);
+			return eEcoreContainerAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::membersAreDistinguishable() : bool: 1431982872
 		case umlPackage::NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE:
 		{
-			result = eAny(this->membersAreDistinguishable(),0,false);
-			break;
-		}
-		// uml::Namespace::members_distinguishable(Any, std::map) : bool: 1065132056
-		case umlPackage::NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->members_distinguishable(incoming_param_diagnostics,incoming_param_context),0,false);
+			result = eAny(this->membersAreDistinguishable(), 0, false);
 			break;
 		}
 

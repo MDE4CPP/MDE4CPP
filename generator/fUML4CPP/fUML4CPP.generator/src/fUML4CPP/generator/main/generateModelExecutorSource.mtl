@@ -1,0 +1,461 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModelExecutorSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::keywords /]
+[import fUML4CPP::generator::main::fUMLCollectionHelper /]
+
+
+[query private getEnumerationsOwnedByPackage(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable()) /]
+[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
+[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
+[query private getEnumerationsOfValueSpecificationActionForPackage(aPackage : Package, otherPackage : Package) : Set(Enumeration) = aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getBehaviorsOwnedByPackage(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(Behavior) /]
+[query private getBehaviorsOfCallBehaviorAction(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getBehaviorsOfDecisionNodes(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getCalledBehaviors(aPackage : Package) : Set(Behavior) = aPackage.getBehaviorsOfCallBehaviorAction()->addAll(aPackage.getBehaviorsOfDecisionNodes())->asSet()->sortedBy(name)/]
+[query private getPackagesOfCalledBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(Behavior) = aPackage.getCalledBehaviors()->select(b : Behavior | b.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledActivities(aPackage : Package) : Set(Activity) = aPackage.getCalledBehaviors()->filter(Activity) /]
+[query private getPackagesOfCalledActivities(aPackage : Package) : Set(Package) = aPackage.getCalledActivities().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledActivitiesOfPackage(aPackage : Package, otherPackage : Package) : Set(Activity) = aPackage.getCalledActivities()->select(a : Activity | a.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledBehaviors()->filter(OpaqueBehavior) /]
+[query private getPackagesOfCalledOpaqueBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledOpaqueBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledOpaqueBehaviors()->select(oB : OpaqueBehavior | oB.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+
+[template public generateModelExecutorSource(aPackage : Package) 
+{
+packageName : String = aPackage.getPackageName().sanitize(); 
+originalName : String = aPackage.generateNamespacePath(false);
+}]
+
+[file (originalName.concat('Exec/impl/') + packageName.concat('ExecutorImpl.cpp'), false, 'UTF-8')]
+#include "[packageName/]ExecutorImpl.hpp"
+#include <iostream>
+
+[defineDebugMacro()/]
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/Activity.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+[for (requiredPackage : Package | 
+	aPackage.getEnumerationsOwnedByPackage()._package
+	->addAll(aPackage.getBehaviorsOwnedByPackage()->filter(OpaqueBehavior).getNearestPackage())
+->flatten()->asSet()->sortedBy(myQualifiedName()))]
+#include "[requiredPackage.generateNamespacePath(true)/]/[requiredPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
+#include "[anEnumeration._package.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
+[/for]
+[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+	[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
+[for (anIncludeString : String | 	
+	aPackage.getBehaviorsOwnedByPackage()
+	->filter(OpaqueBehavior)
+	->reject(oB : OpaqueBehavior | (not oB._context.oclIsUndefined()) and oB._context.oclIsTypeOf(Class))
+	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
+	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement())
+	->select(oB : OpaqueBehavior | oB.specification.oclIsUndefined())
+	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
+[anIncludeString/]
+[/for]
+[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+	[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
+
+using namespace [aPackage.generateNamespace(false)/];
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[packageName/]ExecutorImpl::[packageName/]ExecutorImpl()
+{
+}
+
+[packageName/]ExecutorImpl::~[packageName/]ExecutorImpl()
+{
+}
+
+std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+{
+[if (aPackage.getEnumerationsOfValueSpecificationAction()->addAll(aPackage.getEnumerationsOwnedByPackage())->size() > 0)]
+	switch (specification->eClass()->getClassifierID())
+	{
+		case uml::umlPackage::INSTANCEVALUE_CLASS:
+		{
+			std::shared_ptr<uml::EnumerationLiteral> literal = 
+				std::dynamic_pointer_cast<uml::EnumerationLiteral>((std::dynamic_pointer_cast<uml::InstanceValue>(specification))->getInstance());
+
+			if(literal)
+			{
+				std::shared_ptr<uml::Enumeration> enumeration = literal->getEnumeration().lock();
+				std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
+	
+				//Model-internal Enumerations
+[let internalPackages : OrderedSet(Package) = aPackage.getEnumerationsOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
+[if (internalPackages->size() = 0)]
+				//No internal enumerations
+[else]
+	[for (enumerationPackage : Package | internalPackages)]
+				[getIfElseIfString(internalPackages->indexOf(enumerationPackage))/](enumerationPackage == [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.name/]Package::eInstance())
+				{
+					[let enumerationsOfPackage : Set(Enumeration) = aPackage.getEnumerationsOwnedByPackage()->select(e : Enumeration | e._package = enumerationPackage)->sortedBy(myQualifiedName())->asSet()]
+					[if (enumerationsOfPackage->size() > 0)]
+						[for (anEnumeration : Enumeration | enumerationsOfPackage) before('\t\t\t\t\tswitch(enumeration->_getID())\n\t\t\t\t\t{\n') after('\t\t\t\t\t}\n')]
+						case [enumerationPackage.generateNamespace(true)/]::[enumerationPackage.getPackageName()/]Package::[anEnumeration.getMemberName().toUpperCase()/]:
+						{
+							[for (anEnumerationLiteral : EnumerationLiteral | anEnumeration.ownedLiteral)]
+							if (literal == [anEnumerationLiteral.generatePackageGetterCall()/])
+							{	
+								return eAny([enumerationPackage.generateNamespace(false)/]::[anEnumeration.name/]::[anEnumerationLiteral.name.toUpper()/], [enumerationPackage.generateNamespace(false)/]::[enumerationPackage.name/]Package::[anEnumeration.getMemberName().toUpperCase()/], false);
+							}
+							[/for]
+							return nullptr;
+						}
+						[/for]
+					[/if]
+					[/let]
+				}
+	[/for]
+[/if]
+[/let]
+				//Model-external Enumerations
+				[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+				[if (externalPackageList->size() = 0)]
+				//No external enumerations used in Activities of this model
+				[else]
+					std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+					std::string pluginName;
+				[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+					if(enumerationPackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
+					{
+						pluginName = "[externalPackage.getRootPackage().name/]Exec";
+					}
+				[/for]
+					std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+					if (plugin)
+					{
+						DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+				
+						std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+						if (executionPlugin)
+						{
+							DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+				
+							return executionPlugin->evaluateSpecification(specification);
+						}
+						else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+					}
+					else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+				[/if]
+				[/let]
+			}
+		}
+		default:
+		{
+			return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
+			//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
+		}
+	}
+
+[/if]
+	return fUML::Semantics::Loci::ExecutorImpl::evaluate(specification);
+	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
+}
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+{
+[if (aPackage.getBehaviorsOwnedByPackage()->addAll(aPackage.getCalledBehaviors())->size() > 0)]
+	int behaviorMetaElementID = behavior->getMetaElementID();
+    if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
+    {
+		std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
+		return this->invokeOpaqueBehavior(opaqueBehavior, context, inputs);
+    }
+	else if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = 
+			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
+
+		//Model-internal activities
+		if(activityExecution)
+		{
+			activityExecution->getParameterValues()->clear();
+			activityExecution->setContext(context);
+	
+			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
+		    {
+		        activityExecution->setParameterValue(inputParameterValue);
+		    }
+	
+			activityExecution->execute();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
+			activityExecution->getActivationGroup()->terminateAll();
+			
+			return outputParameterValues;
+		}
+		//Model-external activities
+		else
+		{
+			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+			[if (externalPackageList->size() = 0)]
+			//No external activities called in Activities of this model
+			[else]
+			std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+			std::string pluginName;
+				[for (externalActivity : Activity | externalPackageList.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities())) 
+				before('\t\t\tswitch(behavior->_getID())\n\t\t\t{\n') after('\n\t\t\t}')]
+				case [externalActivity.getNearestPackage().generateNamespace(true)/]::[externalActivity.getNearestPackage().getPackageName()/]Package::[externalActivity.getMemberName().toUpperCase()/]:
+				{
+					pluginName = "[externalActivity.getNearestPackage().getRootPackage().name/]Exec";
+					break;
+				}
+				[/for]
+			std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+			if (plugin)
+			{
+				DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+		
+				std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+				if (executionPlugin)
+				{
+					DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+	
+					return executionPlugin->executeBehavior(behavior);
+				}
+				else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+			}
+			else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+			[/if]
+			[/let]
+		}
+	}
+	else
+	{
+		std::cerr<<__PRETTY_FUNCTION__<<" : Unsupported type of Behavior! Currently only Activities, OpaqueBehaviors and FunctionBehaviors are supported!"<<std::endl;
+	}
+
+[/if]
+	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
+}
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+{
+	std::string pluginName;
+
+	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+	[if (externalPackageList->size() = 0)]
+	//No external opaque behaviors called in Activities of this model
+	[else]
+		[for (externalOpaqueBehavior : OpaqueBehavior | externalPackageList.allOwnedElements()->filter(OpaqueBehavior)->intersection(aPackage.getCalledOpaqueBehaviors()))
+		before('\tswitch(opaqueBehavior->_getID())\n\t{\n') after('\n\t}')]
+		case [externalOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[externalOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[externalOpaqueBehavior.getMemberName().toUpperCase()/]:
+		{
+			pluginName = "[externalOpaqueBehavior.getNearestPackage().getRootPackage().name/]Exec";
+			break;
+		}
+		[/for]
+	[/if]
+	[/let]
+
+	//I know, this is a very ugly way to determine if we are handling an internal or external behavior...
+	//Model-internal OpaqueBehavior
+	if(pluginName.empty())
+	{
+
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+
+		std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
+		std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
+		std::shared_ptr<Any> result;
+
+		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs)
+		{
+			inputArguments->add(parameterValue->getValues()->at(0));
+		}
+
+	[for (anOpaqueBehavior : OpaqueBehavior | 	aPackage.allOwnedElements()
+	->filter(OpaqueBehavior)
+	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
+	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))
+	before('\t\tswitch(opaqueBehavior->_getID())\n\t\t{\n') after('\n\t\t}')]
+			case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
+			{	
+			[comment 
+				If the OpaqueBehavior has a specification (i.e. it implements an Operation),
+				then invoke this Operation on the corresponding context object
+			/]
+			[if (not anOpaqueBehavior.specification.oclIsUndefined())]
+				[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
+				[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+					return outputParameterValues;
+				}
+				result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
+					[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+					[for (outputParameter : Parameter | outputParameters) before('\n')]
+				//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
+					[/for]
+					[/let]
+					[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+					[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+					[/let]
+					[/if]
+				[/let]
+				[/if]
+			[comment 
+				Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
+				but it has a defined context and this context is a class,
+				then execute this Behavior on the corresponding context object
+			/]
+			[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
+					return outputParameterValues;
+				}
+				result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
+				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+				[for (outputParameter : Parameter | outputParameters) before('\n')]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
+				[/for]
+				[/let]
+				[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+				[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+				[/let]
+				[/if]
+			[comment 
+				Else execute the global model function corresponding to this Behavior
+			/]
+			[else]
+				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
+				// and is therefore realized as a global function
+				result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
+				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
+				[for (outputParameter : Parameter | outputParameters) before('\n')]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				[outputParameter.name/]ParameterValue->setParameter([outputParameter.generatePackageGetterCall()/]);
+				[outputParameter.name/]ParameterValue->getValues()->add(outputArguments->at([outputParameters->indexOf(outputParameter) - 1/]));
+				outputParameterValues->add([outputParameter.name/]ParameterValue);
+				[/for]
+				[/let]
+				[if (anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+				[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+				returnParameterValue->setParameter([returnParameter.generatePackageGetterCall()/]);
+				[/let]
+				[/if]
+			[/if]
+				break;
+			}
+	[/for]
+
+		if(result)
+		{
+			returnParameterValue->getValues()->add(result);
+			outputParameterValues->add(returnParameterValue);
+		}
+
+		return outputParameterValues;
+	}
+	//Model-external OpaqueBehavior
+	else
+	{
+	[if (aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))->size() = 0)]
+		//No external opaque behaviors called in Activities of this model
+	[else]
+		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+		if (plugin)
+		{
+			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+		
+			std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+			if (executionPlugin)
+			{
+				DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+		
+				return executionPlugin->executeBehavior(opaqueBehavior, context, inputs);
+			}
+			else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+		}
+		else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+	[/if]
+	}
+
+	return nullptr;
+}
+
+void [packageName/]ExecutorImpl::setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor> thisExecutorPtr)
+{
+	/*PSCS::Semantics::Loci::CS_ExecutorImpl::setThisExecutorPtr(thisExecutorPtr)*/ fUML::Semantics::Loci::ExecutorImpl::setThisExecutorPtr(thisExecutorPtr);
+}
+[/file]
+[/template]
+
+[query private collectPackageGlobalFunctions_IncludeString(aPackage : Package) : String = '#include "' + aPackage.generateNamespacePath(true) + '/_GlobalFunctions.hpp"' /]
+[query private getIfElseIfString(index : Integer) : String = if(index = 1) then 'if' else 'else if' endif /]
