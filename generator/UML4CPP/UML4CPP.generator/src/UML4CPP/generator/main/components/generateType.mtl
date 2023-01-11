@@ -84,17 +84,23 @@ std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
 [**
  * generate the C++ representation of a type for an Operation
  * 
- * - pointer for types, which are not primitive or enumeration:
- * - upper <> 1 -> Bag used  
- * - error message, if Operation type is undefined or Operation type name is undefined
+ * - if anOperation does not have a return parameter, C++ type will be void
+ * - if anOperation has a return parameter, anOperation.type will be transformed...
+ * 		- ... as simple value in case of primitive type or enumeration
+ * 		- ... as shared_ptr (and possibly shared_ptr<Bag<>>) otherwise
 */]
-[template public generateCppType(aOperation : Operation) post (trim())]
-[if (not(aOperation.upper=1))]
-std::shared_ptr<Bag<[aOperation.type.transformType()/]>>
-[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()) and (not aOperation.type.oclIsKindOf(Enumeration)))]
-std::shared_ptr<[aOperation.type.transformType()/]>
+[template public generateCppType(anOperation : Operation) post (trim())]
+[if (anOperation.returnResult()->isEmpty())]
+void
 [else]
-[aOperation.type.transformType()/][/if]
+	[if (anOperation.upper <> 1)]
+std::shared_ptr<Bag<[anOperation.type.transformType()/]>>
+	[elseif (anOperation.type.oclIsUndefined() or ((not anOperation.type.isPrimitive()) and (not anOperation.type.oclIsKindOf(Enumeration))))]
+std::shared_ptr<[anOperation.type.transformType()/]>
+	[else]
+[anOperation.type.transformType()/]
+	[/if]
+[/if]
 [/template]
 
 [**
@@ -177,7 +183,7 @@ std::shared_ptr
  * Transformation uml to C++
 */]
 [template public transformType(aType : Type) ? (oclIsUndefined())]
-void
+Any
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'Boolean' or name = 'EBoolean')]

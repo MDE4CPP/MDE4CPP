@@ -1187,9 +1187,10 @@ public class ValidationService
 			//check if type is null
 			if(typedElement.getType() == null)
 			{
-				registerError(new UML4CPPMessage(
-						UML4CPPMessageServerityLevel.ERROR,
-						"'type' is not set" + getMessageInstanceSuffix(typedElement),
+				registerWarning(new UML4CPPMessage(
+						UML4CPPMessageServerityLevel.WARNING,
+						"'type' is not set" + getMessageInstanceSuffix(typedElement) + 
+						"\nWill be generated as 'Any' type.",
 						this.getClass().getName() + ":validateTypedElement"));
 			}
 		}

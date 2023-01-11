@@ -151,9 +151,9 @@ else
 [for (anOwnedParameter : Parameter | anOperation.ownedParameter) separator ('\n')]
 [anOwnedParameter.generateParameterInitialization()/]
 [/for]
-
+[if (not isReflectionModel(anOperation.getRootPackage()))]
 [anOperation.memberName()/]->_setID([anOperation.getMemberName().toUpperCase()/]);
-
+[/if]
 [anOperation.generateStereotypeApplication()/]
 [/template]
 

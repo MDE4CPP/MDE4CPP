@@ -61,9 +61,9 @@
 [template public generateInterfaceInitialization(anInterface : Interface)]
 [anInterface.memberName()/]->setName("[anInterface.metamodelElementName()/]");
 [anInterface.memberName()/]->setIsAbstract([anInterface.isAbstract/]);
-
+[if (not isReflectionModel(anInterface.getRootPackage()))]
 [anInterface.memberName()/]->_setID([anInterface.getMemberName().toUpperCase()/]);
-
+[/if]
 [anInterface.generateStereotypeApplication()/]
 [/template]
 

@@ -56,8 +56,9 @@
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
-
+[if (not isReflectionModel(aOpaqueBehavior.getRootPackage()))]
 [aOpaqueBehavior.memberName()/]->_setID([aOpaqueBehavior.getMemberName().toUpperCase()/]);
+[/if]
 
 [aOpaqueBehavior.generateStereotypeApplication()/]
 [/template]

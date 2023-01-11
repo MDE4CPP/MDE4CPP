@@ -65,7 +65,7 @@
 [if (not aPackage.isDoNotGenerate())]
 	[aPackage.generateUML()/]
 	[if (aPackage.isPackageOnly())]
-		[aPackage.generateFUMLModelForPackageOnly()/]
+		[comment][aPackage.generateFUMLModelForPackageOnly()/][/comment]
 	[else]
 		[aPackage.generateFUMLModel()/]
 	[/if]
