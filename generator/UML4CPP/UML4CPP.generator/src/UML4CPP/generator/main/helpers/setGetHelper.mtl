@@ -663,7 +663,9 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 				[let returnParameter : Parameter = returnParameterList->first()]
 			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
 					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
-					[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
+					[if (returnParameter.type.oclIsUndefined())]
+			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], -1, [if(returnParameter.upper = 1)]false[else]true[/if]);
+					[elseif (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
 			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
 					[comment returnParameter is typed by a Class or Interface /]
 					[else]

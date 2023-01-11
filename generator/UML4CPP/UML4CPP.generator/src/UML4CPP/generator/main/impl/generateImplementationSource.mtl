@@ -37,10 +37,10 @@
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet
 {
-	aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, 
-	aClass.ownedOperation.ownedParameter.type,
+	aClass.member->selectByKind(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type, 
+	aClass.ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type,
 	aClass.collectOpaqueBehaviorsContexedByClass().ownedParameter.type,
-	aClass.getAllAttributes().type, 
+	aClass.getAllAttributes()->reject(p : Property | p.type.oclIsUndefined()).type, 
 	aClass.importedMember, 
 	aClass.getImplicitCompositeOwners()
 }->flatten() /]

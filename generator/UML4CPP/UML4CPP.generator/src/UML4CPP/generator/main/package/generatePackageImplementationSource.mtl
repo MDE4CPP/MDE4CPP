@@ -51,7 +51,7 @@
 								aPackage.getGeneratableAppliedStereotypes()
 							}->flatten() /]
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-								aPackage.getElementsBelongingToPackage()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
+								aPackage.getElementsBelongingToPackage()->filter(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction).behavior.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(Element).getGeneratableAppliedStereotypes().getProfile(), 
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
@@ -63,10 +63,10 @@
 							}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
 								aPackage.getElementsBelongingToPackage().eClass(), 
-								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedAttribute->reject(p : Property | p.type.oclIsUndefined()).type.eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedAttribute->reject(p : Property | p.type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.method->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
@@ -75,7 +75,7 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Association).memberEnd.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(ConnectorEnd).role->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
-								aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior).ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(CallOperationAction)->reject(operation.oclIsUndefined()).operation.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction)->reject(behavior.oclIsUndefined()).behavior.eClass(),
