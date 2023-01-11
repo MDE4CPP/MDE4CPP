@@ -1445,7 +1445,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EInt_EInt->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
-	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setName("");
+	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setName("ecore_EClass_getEStructuralFeature_EInt_EIntreturn");
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setType(get_Ecore_EStructuralFeature());
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setLower(0);
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setUpper(1);
@@ -1472,7 +1472,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EString_EString->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
-	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setName("");
+	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setName("ecore_EClass_getEStructuralFeature_EString_EStringreturn");
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setType(get_Ecore_EStructuralFeature());
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setLower(0);
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setUpper(1);
@@ -1499,7 +1499,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getFeatureCount__->setType(get_Ecore_EInt());
 	
 	// parameter 
-	ecore_EClass_getFeatureCount__return->setName("");
+	ecore_EClass_getFeatureCount__return->setName("ecore_EClass_getFeatureCount__return");
 	ecore_EClass_getFeatureCount__return->setType(get_Ecore_EInt());
 	ecore_EClass_getFeatureCount__return->setLower(0);
 	ecore_EClass_getFeatureCount__return->setUpper(1);
@@ -1512,7 +1512,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EInt());
 	
 	// parameter 
-	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setName("");
+	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setName("ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn");
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setType(get_Ecore_EInt());
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setLower(0);
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
@@ -1539,7 +1539,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_isSuperTypeOf_EClass_EClass->setType(get_Ecore_EBoolean());
 	
 	// parameter 
-	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setName("");
+	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setName("ecore_EClass_isSuperTypeOf_EClass_EClassreturn");
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setType(get_Ecore_EBoolean());
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setLower(0);
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setUpper(1);
@@ -1643,7 +1643,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_getClassifierID__->setType(get_Ecore_EInt());
 	
 	// parameter 
-	ecore_EClassifier_getClassifierID__return->setName("");
+	ecore_EClassifier_getClassifierID__return->setName("ecore_EClassifier_getClassifierID__return");
 	ecore_EClassifier_getClassifierID__return->setType(get_Ecore_EInt());
 	ecore_EClassifier_getClassifierID__return->setLower(0);
 	ecore_EClassifier_getClassifierID__return->setUpper(1);
@@ -1656,7 +1656,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObject->setType(get_Ecore_EBoolean());
 	
 	// parameter 
-	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setName("");
+	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setName("ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn");
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setType(get_Ecore_EBoolean());
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setLower(0);
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setUpper(1);
@@ -1727,7 +1727,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EString_EString->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
-	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setName("");
+	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setName("ecore_EEnum_getEEnumLiteral_EString_EStringreturn");
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setType(get_Ecore_EEnumLiteral());
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setLower(0);
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setUpper(1);
@@ -1754,7 +1754,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EInt_EInt->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
-	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setName("");
+	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setName("ecore_EEnum_getEEnumLiteral_EInt_EIntreturn");
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setType(get_Ecore_EEnumLiteral());
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setLower(0);
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setUpper(1);
@@ -1781,7 +1781,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setName("");
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setName("ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn");
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setType(get_Ecore_EEnumLiteral());
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setLower(0);
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setUpper(1);
@@ -1885,7 +1885,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject->setType(get_Ecore_EString());
 	
 	// parameter 
-	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setName("");
+	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setName("ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn");
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setType(get_Ecore_EString());
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setLower(0);
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setUpper(1);
@@ -1926,7 +1926,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_create_EClass_EClass->setType(get_Ecore_EObject());
 	
 	// parameter 
-	ecore_EFactory_create_EClass_EClassreturn->setName("");
+	ecore_EFactory_create_EClass_EClassreturn->setName("ecore_EFactory_create_EClass_EClassreturn");
 	ecore_EFactory_create_EClass_EClassreturn->setType(get_Ecore_EObject());
 	ecore_EFactory_create_EClass_EClassreturn->setLower(0);
 	ecore_EFactory_create_EClass_EClassreturn->setUpper(1);
@@ -1953,7 +1953,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
-	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setName("");
+	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setName("ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn");
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setType(get_Ecore_EJavaObject());
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setLower(0);
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setUpper(1);
@@ -2093,7 +2093,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_getEAnnotation_EString_EString->setType(get_Ecore_EAnnotation());
 	
 	// parameter 
-	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setName("");
+	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setName("ecore_EModelElement_getEAnnotation_EString_EStringreturn");
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setType(get_Ecore_EAnnotation());
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setLower(0);
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setUpper(1);
@@ -2148,7 +2148,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eAllContents__->setType(get_Ecore_EObject_ETreeIterator_EObject());
 	
 	// parameter 
-	ecore_EObject_eAllContents__return->setName("");
+	ecore_EObject_eAllContents__return->setName("ecore_EObject_eAllContents__return");
 	ecore_EObject_eAllContents__return->setType(get_Ecore_EObject_ETreeIterator_EObject());
 	ecore_EObject_eAllContents__return->setLower(0);
 	ecore_EObject_eAllContents__return->setUpper(1);
@@ -2161,7 +2161,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eClass__->setType(get_Ecore_EClass());
 	
 	// parameter 
-	ecore_EObject_eClass__return->setName("");
+	ecore_EObject_eClass__return->setName("ecore_EObject_eClass__return");
 	ecore_EObject_eClass__return->setType(get_Ecore_EClass());
 	ecore_EObject_eClass__return->setLower(0);
 	ecore_EObject_eClass__return->setUpper(1);
@@ -2174,7 +2174,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eContainer__->setType(get_Ecore_EObject());
 	
 	// parameter 
-	ecore_EObject_eContainer__return->setName("");
+	ecore_EObject_eContainer__return->setName("ecore_EObject_eContainer__return");
 	ecore_EObject_eContainer__return->setType(get_Ecore_EObject());
 	ecore_EObject_eContainer__return->setLower(0);
 	ecore_EObject_eContainer__return->setUpper(1);
@@ -2187,7 +2187,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eContainingFeature__->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
-	ecore_EObject_eContainingFeature__return->setName("");
+	ecore_EObject_eContainingFeature__return->setName("ecore_EObject_eContainingFeature__return");
 	ecore_EObject_eContainingFeature__return->setType(get_Ecore_EStructuralFeature());
 	ecore_EObject_eContainingFeature__return->setLower(0);
 	ecore_EObject_eContainingFeature__return->setUpper(1);
@@ -2200,7 +2200,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eContainmentFeature__->setType(get_Ecore_EReference());
 	
 	// parameter 
-	ecore_EObject_eContainmentFeature__return->setName("");
+	ecore_EObject_eContainmentFeature__return->setName("ecore_EObject_eContainmentFeature__return");
 	ecore_EObject_eContainmentFeature__return->setType(get_Ecore_EReference());
 	ecore_EObject_eContainmentFeature__return->setLower(0);
 	ecore_EObject_eContainmentFeature__return->setUpper(1);
@@ -2213,7 +2213,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eContents__->setType(get_Ecore_EObject_EEList_EObject());
 	
 	// parameter 
-	ecore_EObject_eContents__return->setName("");
+	ecore_EObject_eContents__return->setName("ecore_EObject_eContents__return");
 	ecore_EObject_eContents__return->setType(get_Ecore_EObject_EEList_EObject());
 	ecore_EObject_eContents__return->setLower(0);
 	ecore_EObject_eContents__return->setUpper(1);
@@ -2226,7 +2226,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eCrossReferences__->setType(get_Ecore_EObject_EEList_EObject());
 	
 	// parameter 
-	ecore_EObject_eCrossReferences__return->setName("");
+	ecore_EObject_eCrossReferences__return->setName("ecore_EObject_eCrossReferences__return");
 	ecore_EObject_eCrossReferences__return->setType(get_Ecore_EObject_EEList_EObject());
 	ecore_EObject_eCrossReferences__return->setLower(0);
 	ecore_EObject_eCrossReferences__return->setUpper(1);
@@ -2239,7 +2239,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
-	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setName("");
+	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setName("ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn");
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setType(get_Ecore_EJavaObject());
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setLower(0);
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
@@ -2266,7 +2266,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setName("");
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setName("ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn");
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setType(get_Ecore_EJavaObject());
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setLower(0);
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setUpper(1);
@@ -2307,7 +2307,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eIsProxy__->setType(get_Ecore_EBoolean());
 	
 	// parameter 
-	ecore_EObject_eIsProxy__return->setName("");
+	ecore_EObject_eIsProxy__return->setName("ecore_EObject_eIsProxy__return");
 	ecore_EObject_eIsProxy__return->setType(get_Ecore_EBoolean());
 	ecore_EObject_eIsProxy__return->setLower(0);
 	ecore_EObject_eIsProxy__return->setUpper(1);
@@ -2320,7 +2320,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EBoolean());
 	
 	// parameter 
-	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setName("");
+	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setName("ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn");
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setType(get_Ecore_EBoolean());
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setLower(0);
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
@@ -2347,7 +2347,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eResource__->setType(get_Ecore_EResource());
 	
 	// parameter 
-	ecore_EObject_eResource__return->setName("");
+	ecore_EObject_eResource__return->setName("ecore_EObject_eResource__return");
 	ecore_EObject_eResource__return->setType(get_Ecore_EResource());
 	ecore_EObject_eResource__return->setLower(0);
 	ecore_EObject_eResource__return->setUpper(1);
@@ -2359,7 +2359,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject->setName("eSet");
 	
 	// parameter 
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setName("");
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setName("ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn");
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setType(nullptr);
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setLower(0);
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setUpper(1);
@@ -2399,7 +2399,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature->setName("eUnset");
 	
 	// parameter 
-	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setName("");
+	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setName("ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn");
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setType(nullptr);
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setLower(0);
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
@@ -2569,7 +2569,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_getEClassifier_EString_EString->setType(get_Ecore_EClassifier());
 	
 	// parameter 
-	ecore_EPackage_getEClassifier_EString_EStringreturn->setName("");
+	ecore_EPackage_getEClassifier_EString_EStringreturn->setName("ecore_EPackage_getEClassifier_EString_EStringreturn");
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setType(get_Ecore_EClassifier());
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setLower(0);
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setUpper(1);
@@ -2824,7 +2824,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_getContainerClass__->setType(get_Ecore_EStructuralFeature_EJavaClass_Wildcard());
 	
 	// parameter 
-	ecore_EStructuralFeature_getContainerClass__return->setName("");
+	ecore_EStructuralFeature_getContainerClass__return->setName("ecore_EStructuralFeature_getContainerClass__return");
 	ecore_EStructuralFeature_getContainerClass__return->setType(get_Ecore_EStructuralFeature_EJavaClass_Wildcard());
 	ecore_EStructuralFeature_getContainerClass__return->setLower(0);
 	ecore_EStructuralFeature_getContainerClass__return->setUpper(1);
@@ -2837,7 +2837,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_getFeatureID__->setType(get_Ecore_EInt());
 	
 	// parameter 
-	ecore_EStructuralFeature_getFeatureID__return->setName("");
+	ecore_EStructuralFeature_getFeatureID__return->setName("ecore_EStructuralFeature_getFeatureID__return");
 	ecore_EStructuralFeature_getFeatureID__return->setType(get_Ecore_EInt());
 	ecore_EStructuralFeature_getFeatureID__return->setLower(0);
 	ecore_EStructuralFeature_getFeatureID__return->setUpper(1);
@@ -2974,280 +2974,280 @@ void EcorePackageImpl::initializePackageClasses()
 void EcorePackageImpl::initializePackageAssociations()
 {
 	//
-	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->setName("");
+	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->setName("a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement");
 	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EModelElement_eAnnotations());
 	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EAnnotation_eModelElement());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->setName("");
+	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->setName("a_Ecore_EAttribute_eAllAttributes_ecore_EClass");
 	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllAttributes());
 	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAllAttributes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EAttribute_eAttributes_ecore_EClass->setName("");
+	a_Ecore_EAttribute_eAttributes_ecore_EClass->setName("a_Ecore_EAttribute_eAttributes_ecore_EClass");
 	a_Ecore_EAttribute_eAttributes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAttributes());
 	a_Ecore_EAttribute_eAttributes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAttributes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->setName("");
+	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->setName("a_Ecore_EAttribute_eIDAttribute_ecore_EClass");
 	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eIDAttribute());
 	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eIDAttribute_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EAttribute_eKeys_ecore_EReference->setName("");
+	a_Ecore_EAttribute_eKeys_ecore_EReference->setName("a_Ecore_EAttribute_eKeys_ecore_EReference");
 	a_Ecore_EAttribute_eKeys_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eKeys());
 	a_Ecore_EAttribute_eKeys_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EAttribute_eKeys_ecore_EReference_eReference());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->setName("");
+	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->setName("a_Ecore_EClass_eAllSuperTypes_ecore_EClass");
 	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllSuperTypes());
 	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EClass_eAllSuperTypes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClass_eReferenceType_ecore_EReference->setName("");
+	a_Ecore_EClass_eReferenceType_ecore_EReference->setName("a_Ecore_EClass_eReferenceType_ecore_EReference");
 	a_Ecore_EClass_eReferenceType_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eReferenceType());
 	a_Ecore_EClass_eReferenceType_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EClass_eReferenceType_ecore_EReference_eReference());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClass_eSuperTypes_ecore_EClass->setName("");
+	a_Ecore_EClass_eSuperTypes_ecore_EClass->setName("a_Ecore_EClass_eSuperTypes_ecore_EClass");
 	a_Ecore_EClass_eSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eSuperTypes());
 	a_Ecore_EClass_eSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EClass_eSuperTypes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->setName("");
+	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->setName("a_Ecore_EClassifier_eClassifier_ecore_EGenericType");
 	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eClassifier());
 	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eClassifier_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->setName("");
+	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->setName("a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage");
 	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EPackage_eClassifiers());
 	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EClassifier_ePackage());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClassifier_eExceptions_ecore_EOperation->setName("");
+	a_Ecore_EClassifier_eExceptions_ecore_EOperation->setName("a_Ecore_EClassifier_eExceptions_ecore_EOperation");
 	a_Ecore_EClassifier_eExceptions_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eExceptions());
 	a_Ecore_EClassifier_eExceptions_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_EClassifier_eExceptions_ecore_EOperation_eOperation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClassifier_eRawType_ecore_EGenericType->setName("");
+	a_Ecore_EClassifier_eRawType_ecore_EGenericType->setName("a_Ecore_EClassifier_eRawType_ecore_EGenericType");
 	a_Ecore_EClassifier_eRawType_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eRawType());
 	a_Ecore_EClassifier_eRawType_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eRawType_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EClassifier_eType_ecore_ETypedElement->setName("");
+	a_Ecore_EClassifier_eType_ecore_ETypedElement->setName("a_Ecore_EClassifier_eType_ecore_ETypedElement");
 	a_Ecore_EClassifier_eType_ecore_ETypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eType());
 	a_Ecore_EClassifier_eType_ecore_ETypedElement->getMemberEnd()->add(get_A_Ecore_EClassifier_eType_ecore_ETypedElement_eTypedElement());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->setName("");
+	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->setName("a_Ecore_EDataType_eAttributeType_ecore_EAttribute");
 	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->getMemberEnd()->add(get_Ecore_EAttribute_eAttributeType());
 	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->getMemberEnd()->add(get_A_Ecore_EDataType_eAttributeType_ecore_EAttribute_eAttribute());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->setName("");
+	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->setName("a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum");
 	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnum_eLiterals());
 	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnumLiteral_eEnum());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->setName("");
+	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->setName("a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass");
 	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllGenericSuperTypes());
 	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->setName("");
+	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->setName("a_Ecore_EGenericType_eBounds_ecore_ETypeParameter");
 	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->getMemberEnd()->add(get_Ecore_ETypeParameter_eBounds());
 	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->getMemberEnd()->add(get_A_Ecore_EGenericType_eBounds_ecore_ETypeParameter_eTypeParameter());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->setName("");
+	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->setName("a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation");
 	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eGenericExceptions());
 	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericExceptions_ecore_EOperation_eOperation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->setName("");
+	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->setName("a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass");
 	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eGenericSuperTypes());
 	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->setName("");
+	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->setName("a_Ecore_EGenericType_eGenericType_ecore_ETypedElement");
 	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eGenericType());
 	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericType_ecore_ETypedElement_eTypedElement());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->setName("");
+	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->setName("a_Ecore_EGenericType_eLowerBound_ecore_EGenericType");
 	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eLowerBound());
 	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eLowerBound_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->setName("");
+	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->setName("a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType");
 	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeArguments());
 	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eTypeArguments_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->setName("");
+	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->setName("a_Ecore_EGenericType_eUpperBound_ecore_EGenericType");
 	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eUpperBound());
 	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eUpperBound_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EObject_contents_ecore_EAnnotation->setName("");
+	a_Ecore_EObject_contents_ecore_EAnnotation->setName("a_Ecore_EObject_contents_ecore_EAnnotation");
 	a_Ecore_EObject_contents_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_contents());
 	a_Ecore_EObject_contents_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_contents_ecore_EAnnotation_eAnnotation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EObject_references_ecore_EAnnotation->setName("");
+	a_Ecore_EObject_references_ecore_EAnnotation->setName("a_Ecore_EObject_references_ecore_EAnnotation");
 	a_Ecore_EObject_references_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_references());
 	a_Ecore_EObject_references_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_references_ecore_EAnnotation_eAnnotation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EOperation_eAllOperations_ecore_EClass->setName("");
+	a_Ecore_EOperation_eAllOperations_ecore_EClass->setName("a_Ecore_EOperation_eAllOperations_ecore_EClass");
 	a_Ecore_EOperation_eAllOperations_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllOperations());
 	a_Ecore_EOperation_eAllOperations_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EOperation_eAllOperations_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->setName("");
+	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->setName("a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass");
 	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eOperations());
 	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EOperation_eContainingClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->setName("");
+	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->setName("a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance");
 	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EFactory_ePackage());
 	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EPackage_eFactoryInstance());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->setName("");
+	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->setName("a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage");
 	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSubpackages());
 	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSuperPackage());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->setName("");
+	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->setName("a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation");
 	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eParameters());
 	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EParameter_eOperation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EReference_eAllContainments_ecore_EClass->setName("");
+	a_Ecore_EReference_eAllContainments_ecore_EClass->setName("a_Ecore_EReference_eAllContainments_ecore_EClass");
 	a_Ecore_EReference_eAllContainments_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllContainments());
 	a_Ecore_EReference_eAllContainments_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllContainments_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EReference_eAllReferences_ecore_EClass->setName("");
+	a_Ecore_EReference_eAllReferences_ecore_EClass->setName("a_Ecore_EReference_eAllReferences_ecore_EClass");
 	a_Ecore_EReference_eAllReferences_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllReferences());
 	a_Ecore_EReference_eAllReferences_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllReferences_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EReference_eOpposite_ecore_EReference->setName("");
+	a_Ecore_EReference_eOpposite_ecore_EReference->setName("a_Ecore_EReference_eOpposite_ecore_EReference");
 	a_Ecore_EReference_eOpposite_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eOpposite());
 	a_Ecore_EReference_eOpposite_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EReference_eOpposite_ecore_EReference_eReference());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EReference_eReferences_ecore_EClass->setName("");
+	a_Ecore_EReference_eReferences_ecore_EClass->setName("a_Ecore_EReference_eReferences_ecore_EClass");
 	a_Ecore_EReference_eReferences_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eReferences());
 	a_Ecore_EReference_eReferences_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eReferences_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->setName("");
+	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->setName("a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation");
 	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_details());
 	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation_eAnnotation());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->setName("");
+	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->setName("a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass");
 	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllStructuralFeatures());
 	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass_eClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->setName("");
+	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->setName("a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass");
 	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eStructuralFeatures());
 	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EStructuralFeature_eContainingClass());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->setName("");
+	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->setName("a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType");
 	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeParameter());
 	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType_eGenericType());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->setName("");
+	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->setName("a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier");
 	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->getMemberEnd()->add(get_Ecore_EClassifier_eTypeParameters());
 	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier_eClassifier());
 	
 
     //-------------------------------------------
 	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->setName("");
+	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->setName("a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation");
 	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eTypeParameters());
 	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation_eOperation());
 	

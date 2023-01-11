@@ -17668,7 +17668,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("");
+	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn");
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setType(get_UML_Property());
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -17737,7 +17737,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("");
+	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn");
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setType(get_UML_Operation());
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setLower(1);
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setUpper(1);
@@ -17888,7 +17888,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_isBinary__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Association_isBinary__return->setName("");
+	uML_Association_isBinary__return->setName("uML_Association_isBinary__return");
 	uML_Association_isBinary__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Association_isBinary__return->setLower(1);
 	uML_Association_isBinary__return->setUpper(1);
@@ -18180,7 +18180,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type->setType(get_UML_Parameter());
 	
 	// parameter 
-	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn->setName("");
+	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn->setName("uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn");
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn->setType(get_UML_Parameter());
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn->setLower(1);
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn->setUpper(1);
@@ -18332,7 +18332,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_getAllImplementedInterfaces__->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setName("");
+	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setName("uML_BehavioredClassifier_getAllImplementedInterfaces__return");
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setType(get_UML_Interface());
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setLower(0);
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setUpper(-1);
@@ -18345,7 +18345,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_getImplementedInterfaces__->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_BehavioredClassifier_getImplementedInterfaces__return->setName("");
+	uML_BehavioredClassifier_getImplementedInterfaces__return->setName("uML_BehavioredClassifier_getImplementedInterfaces__return");
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setType(get_UML_Interface());
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setLower(0);
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setUpper(-1);
@@ -18701,7 +18701,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("");
+	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn");
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setType(get_UML_Operation());
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setLower(1);
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setUpper(1);
@@ -18783,7 +18783,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_isMetaclass__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Class_isMetaclass__return->setName("");
+	uML_Class_isMetaclass__return->setName("uML_Class_isMetaclass__return");
 	uML_Class_isMetaclass__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Class_isMetaclass__return->setLower(1);
 	uML_Class_isMetaclass__return->setUpper(1);
@@ -19149,7 +19149,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllAttributes__->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Classifier_getAllAttributes__return->setName("");
+	uML_Classifier_getAllAttributes__return->setName("uML_Classifier_getAllAttributes__return");
 	uML_Classifier_getAllAttributes__return->setType(get_UML_Property());
 	uML_Classifier_getAllAttributes__return->setLower(0);
 	uML_Classifier_getAllAttributes__return->setUpper(-1);
@@ -19162,7 +19162,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllOperations__->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Classifier_getAllOperations__return->setName("");
+	uML_Classifier_getAllOperations__return->setName("uML_Classifier_getAllOperations__return");
 	uML_Classifier_getAllOperations__return->setType(get_UML_Operation());
 	uML_Classifier_getAllOperations__return->setLower(0);
 	uML_Classifier_getAllOperations__return->setUpper(-1);
@@ -19175,7 +19175,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllUsedInterfaces__->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_Classifier_getAllUsedInterfaces__return->setName("");
+	uML_Classifier_getAllUsedInterfaces__return->setName("uML_Classifier_getAllUsedInterfaces__return");
 	uML_Classifier_getAllUsedInterfaces__return->setType(get_UML_Interface());
 	uML_Classifier_getAllUsedInterfaces__return->setLower(0);
 	uML_Classifier_getAllUsedInterfaces__return->setUpper(-1);
@@ -19188,7 +19188,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getOperation_String_String_Type_String_String_Type->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn->setName("");
+	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn->setName("uML_Classifier_getOperation_String_String_Type_String_String_Typereturn");
 	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn->setType(get_UML_Operation());
 	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn->setLower(0);
 	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn->setUpper(1);
@@ -19243,7 +19243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn->setName("");
+	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn->setName("uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn");
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn->setType(get_UML_Operation());
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn->setLower(0);
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn->setUpper(1);
@@ -19312,7 +19312,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getOperations__->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Classifier_getOperations__return->setName("");
+	uML_Classifier_getOperations__return->setName("uML_Classifier_getOperations__return");
 	uML_Classifier_getOperations__return->setType(get_UML_Operation());
 	uML_Classifier_getOperations__return->setLower(0);
 	uML_Classifier_getOperations__return->setUpper(-1);
@@ -19325,7 +19325,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getUsedInterfaces__->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_Classifier_getUsedInterfaces__return->setName("");
+	uML_Classifier_getUsedInterfaces__return->setName("uML_Classifier_getUsedInterfaces__return");
 	uML_Classifier_getUsedInterfaces__return->setType(get_UML_Interface());
 	uML_Classifier_getUsedInterfaces__return->setLower(0);
 	uML_Classifier_getUsedInterfaces__return->setUpper(-1);
@@ -19907,7 +19907,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_createOwnedClass_String_Boolean_String_Boolean->setType(get_UML_Class());
 	
 	// parameter 
-	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn->setName("");
+	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn->setName("uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn");
 	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn->setType(get_UML_Class());
 	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn->setLower(1);
 	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn->setUpper(1);
@@ -19948,7 +19948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_createOwnedEnumeration_String_String->setType(get_UML_Enumeration());
 	
 	// parameter 
-	uML_Component_createOwnedEnumeration_String_Stringreturn->setName("");
+	uML_Component_createOwnedEnumeration_String_Stringreturn->setName("uML_Component_createOwnedEnumeration_String_Stringreturn");
 	uML_Component_createOwnedEnumeration_String_Stringreturn->setType(get_UML_Enumeration());
 	uML_Component_createOwnedEnumeration_String_Stringreturn->setLower(1);
 	uML_Component_createOwnedEnumeration_String_Stringreturn->setUpper(1);
@@ -19975,7 +19975,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_createOwnedInterface_String_String->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_Component_createOwnedInterface_String_Stringreturn->setName("");
+	uML_Component_createOwnedInterface_String_Stringreturn->setName("uML_Component_createOwnedInterface_String_Stringreturn");
 	uML_Component_createOwnedInterface_String_Stringreturn->setType(get_UML_Interface());
 	uML_Component_createOwnedInterface_String_Stringreturn->setLower(1);
 	uML_Component_createOwnedInterface_String_Stringreturn->setUpper(1);
@@ -20002,7 +20002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_createOwnedPrimitiveType_String_String->setType(get_UML_PrimitiveType());
 	
 	// parameter 
-	uML_Component_createOwnedPrimitiveType_String_Stringreturn->setName("");
+	uML_Component_createOwnedPrimitiveType_String_Stringreturn->setName("uML_Component_createOwnedPrimitiveType_String_Stringreturn");
 	uML_Component_createOwnedPrimitiveType_String_Stringreturn->setType(get_UML_PrimitiveType());
 	uML_Component_createOwnedPrimitiveType_String_Stringreturn->setLower(1);
 	uML_Component_createOwnedPrimitiveType_String_Stringreturn->setUpper(1);
@@ -20632,7 +20632,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
 	// parameter 
-	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("");
+	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn");
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setType(get_UML_Property());
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -20701,7 +20701,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("");
+	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn");
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setType(get_UML_Operation());
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setLower(1);
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setUpper(1);
@@ -21132,7 +21132,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Duration_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_Duration_stringValue__return->setName("");
+	uML_Duration_stringValue__return->setName("uML_Duration_stringValue__return");
 	uML_Duration_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Duration_stringValue__return->setLower(1);
 	uML_Duration_stringValue__return->setUpper(1);
@@ -21288,7 +21288,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_addKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_addKeyword_String_Stringreturn->setName("");
+	uML_Element_addKeyword_String_Stringreturn->setName("uML_Element_addKeyword_String_Stringreturn");
 	uML_Element_addKeyword_String_Stringreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_addKeyword_String_Stringreturn->setLower(1);
 	uML_Element_addKeyword_String_Stringreturn->setUpper(1);
@@ -21328,7 +21328,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_applyStereotype_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Element_applyStereotype_Stereotype_Stereotypereturn->setName("");
+	uML_Element_applyStereotype_Stereotype_Stereotypereturn->setName("uML_Element_applyStereotype_Stereotype_Stereotypereturn");
 	uML_Element_applyStereotype_Stereotype_Stereotypereturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Element_applyStereotype_Stereotype_Stereotypereturn->setLower(1);
 	uML_Element_applyStereotype_Stereotype_Stereotypereturn->setUpper(1);
@@ -21355,7 +21355,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_createEAnnotation_String_String->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EAnnotation());
 	
 	// parameter 
-	uML_Element_createEAnnotation_String_Stringreturn->setName("");
+	uML_Element_createEAnnotation_String_Stringreturn->setName("uML_Element_createEAnnotation_String_Stringreturn");
 	uML_Element_createEAnnotation_String_Stringreturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EAnnotation());
 	uML_Element_createEAnnotation_String_Stringreturn->setLower(1);
 	uML_Element_createEAnnotation_String_Stringreturn->setUpper(1);
@@ -21387,7 +21387,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getApplicableStereotype_String_String->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getApplicableStereotype_String_Stringreturn->setName("");
+	uML_Element_getApplicableStereotype_String_Stringreturn->setName("uML_Element_getApplicableStereotype_String_Stringreturn");
 	uML_Element_getApplicableStereotype_String_Stringreturn->setType(get_UML_Stereotype());
 	uML_Element_getApplicableStereotype_String_Stringreturn->setLower(0);
 	uML_Element_getApplicableStereotype_String_Stringreturn->setUpper(1);
@@ -21414,7 +21414,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getApplicableStereotypes__->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getApplicableStereotypes__return->setName("");
+	uML_Element_getApplicableStereotypes__return->setName("uML_Element_getApplicableStereotypes__return");
 	uML_Element_getApplicableStereotypes__return->setType(get_UML_Stereotype());
 	uML_Element_getApplicableStereotypes__return->setLower(0);
 	uML_Element_getApplicableStereotypes__return->setUpper(-1);
@@ -21427,7 +21427,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getAppliedStereotype_String_String->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getAppliedStereotype_String_Stringreturn->setName("");
+	uML_Element_getAppliedStereotype_String_Stringreturn->setName("uML_Element_getAppliedStereotype_String_Stringreturn");
 	uML_Element_getAppliedStereotype_String_Stringreturn->setType(get_UML_Stereotype());
 	uML_Element_getAppliedStereotype_String_Stringreturn->setLower(0);
 	uML_Element_getAppliedStereotype_String_Stringreturn->setUpper(1);
@@ -21454,7 +21454,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getAppliedStereotypes__->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getAppliedStereotypes__return->setName("");
+	uML_Element_getAppliedStereotypes__return->setName("uML_Element_getAppliedStereotypes__return");
 	uML_Element_getAppliedStereotypes__return->setType(get_UML_Stereotype());
 	uML_Element_getAppliedStereotypes__return->setLower(0);
 	uML_Element_getAppliedStereotypes__return->setUpper(-1);
@@ -21467,7 +21467,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn->setName("");
+	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn->setName("uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn");
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn->setType(get_UML_Stereotype());
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn->setLower(0);
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn->setUpper(1);
@@ -21508,7 +21508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn->setName("");
+	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn->setName("uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn");
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn->setType(get_UML_Stereotype());
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn->setLower(0);
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn->setUpper(-1);
@@ -21535,7 +21535,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getKeywords__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_Element_getKeywords__return->setName("");
+	uML_Element_getKeywords__return->setName("uML_Element_getKeywords__return");
 	uML_Element_getKeywords__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Element_getKeywords__return->setLower(0);
 	uML_Element_getKeywords__return->setUpper(-1);
@@ -21548,7 +21548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getModel__->setType(get_UML_Model());
 	
 	// parameter 
-	uML_Element_getModel__return->setName("");
+	uML_Element_getModel__return->setName("uML_Element_getModel__return");
 	uML_Element_getModel__return->setType(get_UML_Model());
 	uML_Element_getModel__return->setLower(0);
 	uML_Element_getModel__return->setUpper(1);
@@ -21561,7 +21561,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getNearestPackage__->setType(get_UML_Package());
 	
 	// parameter 
-	uML_Element_getNearestPackage__return->setName("");
+	uML_Element_getNearestPackage__return->setName("uML_Element_getNearestPackage__return");
 	uML_Element_getNearestPackage__return->setType(get_UML_Package());
 	uML_Element_getNearestPackage__return->setLower(0);
 	uML_Element_getNearestPackage__return->setUpper(1);
@@ -21574,7 +21574,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRelationships__->setType(get_UML_Relationship());
 	
 	// parameter 
-	uML_Element_getRelationships__return->setName("");
+	uML_Element_getRelationships__return->setName("uML_Element_getRelationships__return");
 	uML_Element_getRelationships__return->setType(get_UML_Relationship());
 	uML_Element_getRelationships__return->setLower(0);
 	uML_Element_getRelationships__return->setUpper(-1);
@@ -21587,7 +21587,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRelationships_EClass_EClass->setType(get_UML_Relationship());
 	
 	// parameter 
-	uML_Element_getRelationships_EClass_EClassreturn->setName("");
+	uML_Element_getRelationships_EClass_EClassreturn->setName("uML_Element_getRelationships_EClass_EClassreturn");
 	uML_Element_getRelationships_EClass_EClassreturn->setType(get_UML_Relationship());
 	uML_Element_getRelationships_EClass_EClassreturn->setLower(0);
 	uML_Element_getRelationships_EClass_EClassreturn->setUpper(-1);
@@ -21614,7 +21614,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRequiredStereotype_String_String->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getRequiredStereotype_String_Stringreturn->setName("");
+	uML_Element_getRequiredStereotype_String_Stringreturn->setName("uML_Element_getRequiredStereotype_String_Stringreturn");
 	uML_Element_getRequiredStereotype_String_Stringreturn->setType(get_UML_Stereotype());
 	uML_Element_getRequiredStereotype_String_Stringreturn->setLower(0);
 	uML_Element_getRequiredStereotype_String_Stringreturn->setUpper(1);
@@ -21641,7 +21641,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRequiredStereotypes__->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Element_getRequiredStereotypes__return->setName("");
+	uML_Element_getRequiredStereotypes__return->setName("uML_Element_getRequiredStereotypes__return");
 	uML_Element_getRequiredStereotypes__return->setType(get_UML_Stereotype());
 	uML_Element_getRequiredStereotypes__return->setLower(0);
 	uML_Element_getRequiredStereotypes__return->setUpper(-1);
@@ -21654,7 +21654,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getSourceDirectedRelationships__->setType(get_UML_DirectedRelationship());
 	
 	// parameter 
-	uML_Element_getSourceDirectedRelationships__return->setName("");
+	uML_Element_getSourceDirectedRelationships__return->setName("uML_Element_getSourceDirectedRelationships__return");
 	uML_Element_getSourceDirectedRelationships__return->setType(get_UML_DirectedRelationship());
 	uML_Element_getSourceDirectedRelationships__return->setLower(0);
 	uML_Element_getSourceDirectedRelationships__return->setUpper(-1);
@@ -21667,7 +21667,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getSourceDirectedRelationships_EClass_EClass->setType(get_UML_DirectedRelationship());
 	
 	// parameter 
-	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn->setName("");
+	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn->setName("uML_Element_getSourceDirectedRelationships_EClass_EClassreturn");
 	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn->setType(get_UML_DirectedRelationship());
 	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn->setLower(0);
 	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn->setUpper(-1);
@@ -21694,7 +21694,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn->setName("");
+	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn->setName("uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn");
 	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn->setLower(0);
 	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn->setUpper(1);
@@ -21721,7 +21721,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getStereotypeApplications__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Element_getStereotypeApplications__return->setName("");
+	uML_Element_getStereotypeApplications__return->setName("uML_Element_getStereotypeApplications__return");
 	uML_Element_getStereotypeApplications__return->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Element_getStereotypeApplications__return->setLower(0);
 	uML_Element_getStereotypeApplications__return->setUpper(-1);
@@ -21734,7 +21734,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getTargetDirectedRelationships__->setType(get_UML_DirectedRelationship());
 	
 	// parameter 
-	uML_Element_getTargetDirectedRelationships__return->setName("");
+	uML_Element_getTargetDirectedRelationships__return->setName("uML_Element_getTargetDirectedRelationships__return");
 	uML_Element_getTargetDirectedRelationships__return->setType(get_UML_DirectedRelationship());
 	uML_Element_getTargetDirectedRelationships__return->setLower(0);
 	uML_Element_getTargetDirectedRelationships__return->setUpper(-1);
@@ -21747,7 +21747,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getTargetDirectedRelationships_EClass_EClass->setType(get_UML_DirectedRelationship());
 	
 	// parameter 
-	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn->setName("");
+	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn->setName("uML_Element_getTargetDirectedRelationships_EClass_EClassreturn");
 	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn->setType(get_UML_DirectedRelationship());
 	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn->setLower(0);
 	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn->setUpper(-1);
@@ -21774,7 +21774,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getValue_Stereotype_String_Stereotype_String->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EJavaObject());
 	
 	// parameter 
-	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn->setName("");
+	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn->setName("uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn");
 	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EJavaObject());
 	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn->setLower(0);
 	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn->setUpper(1);
@@ -21815,7 +21815,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_hasKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_hasKeyword_String_Stringreturn->setName("");
+	uML_Element_hasKeyword_String_Stringreturn->setName("uML_Element_hasKeyword_String_Stringreturn");
 	uML_Element_hasKeyword_String_Stringreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_hasKeyword_String_Stringreturn->setLower(1);
 	uML_Element_hasKeyword_String_Stringreturn->setUpper(1);
@@ -21842,7 +21842,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_hasValue_Stereotype_String_Stereotype_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn->setName("");
+	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn->setName("uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn");
 	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn->setLower(1);
 	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn->setUpper(1);
@@ -21883,7 +21883,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn->setName("");
+	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn->setName("uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn");
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn->setLower(1);
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn->setUpper(1);
@@ -21910,7 +21910,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn->setName("");
+	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn->setName("uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn");
 	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn->setLower(1);
 	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn->setUpper(1);
@@ -21937,7 +21937,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn->setName("");
+	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn->setName("uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn");
 	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn->setLower(1);
 	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn->setUpper(1);
@@ -21977,7 +21977,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_removeKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Element_removeKeyword_String_Stringreturn->setName("");
+	uML_Element_removeKeyword_String_Stringreturn->setName("uML_Element_removeKeyword_String_Stringreturn");
 	uML_Element_removeKeyword_String_Stringreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Element_removeKeyword_String_Stringreturn->setLower(1);
 	uML_Element_removeKeyword_String_Stringreturn->setUpper(1);
@@ -22044,7 +22044,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_unapplyStereotype_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn->setName("");
+	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn->setName("uML_Element_unapplyStereotype_Stereotype_Stereotypereturn");
 	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn->setLower(1);
 	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn->setUpper(1);
@@ -22242,7 +22242,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_getClassifiers__->setType(get_UML_Classifier());
 	
 	// parameter 
-	uML_EnumerationLiteral_getClassifiers__return->setName("");
+	uML_EnumerationLiteral_getClassifiers__return->setName("uML_EnumerationLiteral_getClassifiers__return");
 	uML_EnumerationLiteral_getClassifiers__return->setType(get_UML_Classifier());
 	uML_EnumerationLiteral_getClassifiers__return->setLower(0);
 	uML_EnumerationLiteral_getClassifiers__return->setUpper(-1);
@@ -22617,7 +22617,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_getStereotype__->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Extension_getStereotype__return->setName("");
+	uML_Extension_getStereotype__return->setName("uML_Extension_getStereotype__return");
 	uML_Extension_getStereotype__return->setType(get_UML_Stereotype());
 	uML_Extension_getStereotype__return->setLower(0);
 	uML_Extension_getStereotype__return->setUpper(1);
@@ -22630,7 +22630,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_getStereotypeEnd__->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Extension_getStereotypeEnd__return->setName("");
+	uML_Extension_getStereotypeEnd__return->setName("uML_Extension_getStereotypeEnd__return");
 	uML_Extension_getStereotypeEnd__return->setType(get_UML_Property());
 	uML_Extension_getStereotypeEnd__return->setLower(0);
 	uML_Extension_getStereotypeEnd__return->setUpper(1);
@@ -22715,7 +22715,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionEnd_getLower__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
 	// parameter 
-	uML_ExtensionEnd_getLower__return->setName("");
+	uML_ExtensionEnd_getLower__return->setName("uML_ExtensionEnd_getLower__return");
 	uML_ExtensionEnd_getLower__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_ExtensionEnd_getLower__return->setLower(1);
 	uML_ExtensionEnd_getLower__return->setUpper(1);
@@ -23461,7 +23461,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceValue_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_InstanceValue_stringValue__return->setName("");
+	uML_InstanceValue_stringValue__return->setName("uML_InstanceValue_stringValue__return");
 	uML_InstanceValue_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_InstanceValue_stringValue__return->setLower(1);
 	uML_InstanceValue_stringValue__return->setUpper(1);
@@ -23810,7 +23810,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("");
+	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn");
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setType(get_UML_Property());
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -23879,7 +23879,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
 	// parameter 
-	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("");
+	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setName("uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn");
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setType(get_UML_Operation());
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setLower(1);
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn->setUpper(1);
@@ -24444,7 +24444,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralBoolean_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_LiteralBoolean_stringValue__return->setName("");
+	uML_LiteralBoolean_stringValue__return->setName("uML_LiteralBoolean_stringValue__return");
 	uML_LiteralBoolean_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_LiteralBoolean_stringValue__return->setLower(1);
 	uML_LiteralBoolean_stringValue__return->setUpper(1);
@@ -24505,7 +24505,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralInteger_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_LiteralInteger_stringValue__return->setName("");
+	uML_LiteralInteger_stringValue__return->setName("uML_LiteralInteger_stringValue__return");
 	uML_LiteralInteger_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_LiteralInteger_stringValue__return->setLower(1);
 	uML_LiteralInteger_stringValue__return->setUpper(1);
@@ -24601,7 +24601,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralReal_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_LiteralReal_stringValue__return->setName("");
+	uML_LiteralReal_stringValue__return->setName("uML_LiteralReal_stringValue__return");
 	uML_LiteralReal_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_LiteralReal_stringValue__return->setLower(1);
 	uML_LiteralReal_stringValue__return->setUpper(1);
@@ -24645,7 +24645,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_integerValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
 	// parameter 
-	uML_LiteralString_integerValue__return->setName("");
+	uML_LiteralString_integerValue__return->setName("uML_LiteralString_integerValue__return");
 	uML_LiteralString_integerValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_LiteralString_integerValue__return->setLower(1);
 	uML_LiteralString_integerValue__return->setUpper(1);
@@ -24684,7 +24684,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_unlimitedValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
 	// parameter 
-	uML_LiteralString_unlimitedValue__return->setName("");
+	uML_LiteralString_unlimitedValue__return->setName("uML_LiteralString_unlimitedValue__return");
 	uML_LiteralString_unlimitedValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	uML_LiteralString_unlimitedValue__return->setLower(1);
 	uML_LiteralString_unlimitedValue__return->setUpper(1);
@@ -24732,7 +24732,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralUnlimitedNatural_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_LiteralUnlimitedNatural_stringValue__return->setName("");
+	uML_LiteralUnlimitedNatural_stringValue__return->setName("uML_LiteralUnlimitedNatural_stringValue__return");
 	uML_LiteralUnlimitedNatural_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_LiteralUnlimitedNatural_stringValue__return->setLower(1);
 	uML_LiteralUnlimitedNatural_stringValue__return->setUpper(1);
@@ -25195,7 +25195,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Model_isMetamodel__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Model_isMetamodel__return->setName("");
+	uML_Model_isMetamodel__return->setName("uML_Model_isMetamodel__return");
 	uML_Model_isMetamodel__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Model_isMetamodel__return->setLower(1);
 	uML_Model_isMetamodel__return->setUpper(1);
@@ -25585,7 +25585,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_createDependency_NamedElement_NamedElement->setType(get_UML_Dependency());
 	
 	// parameter 
-	uML_NamedElement_createDependency_NamedElement_NamedElementreturn->setName("");
+	uML_NamedElement_createDependency_NamedElement_NamedElementreturn->setName("uML_NamedElement_createDependency_NamedElement_NamedElementreturn");
 	uML_NamedElement_createDependency_NamedElement_NamedElementreturn->setType(get_UML_Dependency());
 	uML_NamedElement_createDependency_NamedElement_NamedElementreturn->setLower(1);
 	uML_NamedElement_createDependency_NamedElement_NamedElementreturn->setUpper(1);
@@ -25612,7 +25612,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_createUsage_NamedElement_NamedElement->setType(get_UML_Usage());
 	
 	// parameter 
-	uML_NamedElement_createUsage_NamedElement_NamedElementreturn->setName("");
+	uML_NamedElement_createUsage_NamedElement_NamedElementreturn->setName("uML_NamedElement_createUsage_NamedElement_NamedElementreturn");
 	uML_NamedElement_createUsage_NamedElement_NamedElementreturn->setType(get_UML_Usage());
 	uML_NamedElement_createUsage_NamedElement_NamedElementreturn->setLower(1);
 	uML_NamedElement_createUsage_NamedElement_NamedElementreturn->setUpper(1);
@@ -25639,7 +25639,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_getLabel__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_NamedElement_getLabel__return->setName("");
+	uML_NamedElement_getLabel__return->setName("uML_NamedElement_getLabel__return");
 	uML_NamedElement_getLabel__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_NamedElement_getLabel__return->setLower(0);
 	uML_NamedElement_getLabel__return->setUpper(1);
@@ -25652,7 +25652,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_getLabel_Boolean_Boolean->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_NamedElement_getLabel_Boolean_Booleanreturn->setName("");
+	uML_NamedElement_getLabel_Boolean_Booleanreturn->setName("uML_NamedElement_getLabel_Boolean_Booleanreturn");
 	uML_NamedElement_getLabel_Boolean_Booleanreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_NamedElement_getLabel_Boolean_Booleanreturn->setLower(0);
 	uML_NamedElement_getLabel_Boolean_Booleanreturn->setUpper(1);
@@ -25836,7 +25836,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind->setType(get_UML_ElementImport());
 	
 	// parameter 
-	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn->setName("");
+	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn->setName("uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn");
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn->setType(get_UML_ElementImport());
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn->setLower(1);
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn->setUpper(1);
@@ -25877,7 +25877,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind->setType(get_UML_PackageImport());
 	
 	// parameter 
-	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn->setName("");
+	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn->setName("uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn");
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn->setType(get_UML_PackageImport());
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn->setLower(1);
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn->setUpper(1);
@@ -25945,7 +25945,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_getImportedElements__->setType(get_UML_PackageableElement());
 	
 	// parameter 
-	uML_Namespace_getImportedElements__return->setName("");
+	uML_Namespace_getImportedElements__return->setName("uML_Namespace_getImportedElements__return");
 	uML_Namespace_getImportedElements__return->setType(get_UML_PackageableElement());
 	uML_Namespace_getImportedElements__return->setLower(0);
 	uML_Namespace_getImportedElements__return->setUpper(-1);
@@ -25958,7 +25958,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_getImportedPackages__->setType(get_UML_Package());
 	
 	// parameter 
-	uML_Namespace_getImportedPackages__return->setName("");
+	uML_Namespace_getImportedPackages__return->setName("uML_Namespace_getImportedPackages__return");
 	uML_Namespace_getImportedPackages__return->setType(get_UML_Package());
 	uML_Namespace_getImportedPackages__return->setLower(0);
 	uML_Namespace_getImportedPackages__return->setUpper(-1);
@@ -26089,7 +26089,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setType(get_UML_CommunicationPath());
 	
 	// parameter 
-	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setName("");
+	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setName("uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn");
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setType(get_UML_CommunicationPath());
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -26256,7 +26256,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Node_getCommunicationPaths__->setType(get_UML_CommunicationPath());
 	
 	// parameter 
-	uML_Node_getCommunicationPaths__return->setName("");
+	uML_Node_getCommunicationPaths__return->setName("uML_Node_getCommunicationPaths__return");
 	uML_Node_getCommunicationPaths__return->setType(get_UML_CommunicationPath());
 	uML_Node_getCommunicationPaths__return->setLower(0);
 	uML_Node_getCommunicationPaths__return->setUpper(-1);
@@ -26446,7 +26446,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_getCovered__->setType(get_UML_Lifeline());
 	
 	// parameter 
-	uML_OccurrenceSpecification_getCovered__return->setName("");
+	uML_OccurrenceSpecification_getCovered__return->setName("uML_OccurrenceSpecification_getCovered__return");
 	uML_OccurrenceSpecification_getCovered__return->setType(get_UML_Lifeline());
 	uML_OccurrenceSpecification_getCovered__return->setLower(0);
 	uML_OccurrenceSpecification_getCovered__return->setUpper(1);
@@ -26666,7 +26666,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_OpaqueExpression_stringValue__return->setName("");
+	uML_OpaqueExpression_stringValue__return->setName("uML_OpaqueExpression_stringValue__return");
 	uML_OpaqueExpression_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueExpression_stringValue__return->setLower(1);
 	uML_OpaqueExpression_stringValue__return->setUpper(1);
@@ -26885,7 +26885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_getReturnResult__->setType(get_UML_Parameter());
 	
 	// parameter 
-	uML_Operation_getReturnResult__return->setName("");
+	uML_Operation_getReturnResult__return->setName("uML_Operation_getReturnResult__return");
 	uML_Operation_getReturnResult__return->setType(get_UML_Parameter());
 	uML_Operation_getReturnResult__return->setLower(0);
 	uML_Operation_getReturnResult__return->setUpper(1);
@@ -27212,7 +27212,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_applyProfile_Profile_Profile->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Package_applyProfile_Profile_Profilereturn->setName("");
+	uML_Package_applyProfile_Profile_Profilereturn->setName("uML_Package_applyProfile_Profile_Profilereturn");
 	uML_Package_applyProfile_Profile_Profilereturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Package_applyProfile_Profile_Profilereturn->setLower(0);
 	uML_Package_applyProfile_Profile_Profilereturn->setUpper(-1);
@@ -27252,7 +27252,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean->setType(get_UML_Class());
 	
 	// parameter 
-	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn->setName("");
+	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn->setName("uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn");
 	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn->setType(get_UML_Class());
 	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn->setLower(1);
 	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn->setUpper(1);
@@ -27293,7 +27293,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedEnumeration_String_String->setType(get_UML_Enumeration());
 	
 	// parameter 
-	uML_Package_createOwnedEnumeration_String_Stringreturn->setName("");
+	uML_Package_createOwnedEnumeration_String_Stringreturn->setName("uML_Package_createOwnedEnumeration_String_Stringreturn");
 	uML_Package_createOwnedEnumeration_String_Stringreturn->setType(get_UML_Enumeration());
 	uML_Package_createOwnedEnumeration_String_Stringreturn->setLower(1);
 	uML_Package_createOwnedEnumeration_String_Stringreturn->setUpper(1);
@@ -27320,7 +27320,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedInterface_String_String->setType(get_UML_Interface());
 	
 	// parameter 
-	uML_Package_createOwnedInterface_String_Stringreturn->setName("");
+	uML_Package_createOwnedInterface_String_Stringreturn->setName("uML_Package_createOwnedInterface_String_Stringreturn");
 	uML_Package_createOwnedInterface_String_Stringreturn->setType(get_UML_Interface());
 	uML_Package_createOwnedInterface_String_Stringreturn->setLower(1);
 	uML_Package_createOwnedInterface_String_Stringreturn->setUpper(1);
@@ -27347,7 +27347,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedPrimitiveType_String_String->setType(get_UML_PrimitiveType());
 	
 	// parameter 
-	uML_Package_createOwnedPrimitiveType_String_Stringreturn->setName("");
+	uML_Package_createOwnedPrimitiveType_String_Stringreturn->setName("uML_Package_createOwnedPrimitiveType_String_Stringreturn");
 	uML_Package_createOwnedPrimitiveType_String_Stringreturn->setType(get_UML_PrimitiveType());
 	uML_Package_createOwnedPrimitiveType_String_Stringreturn->setLower(1);
 	uML_Package_createOwnedPrimitiveType_String_Stringreturn->setUpper(1);
@@ -27374,7 +27374,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean->setType(get_UML_Stereotype());
 	
 	// parameter 
-	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn->setName("");
+	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn->setName("uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn");
 	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn->setType(get_UML_Stereotype());
 	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn->setLower(1);
 	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn->setUpper(1);
@@ -27415,7 +27415,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAllAppliedProfiles__->setType(get_UML_Profile());
 	
 	// parameter 
-	uML_Package_getAllAppliedProfiles__return->setName("");
+	uML_Package_getAllAppliedProfiles__return->setName("uML_Package_getAllAppliedProfiles__return");
 	uML_Package_getAllAppliedProfiles__return->setType(get_UML_Profile());
 	uML_Package_getAllAppliedProfiles__return->setLower(0);
 	uML_Package_getAllAppliedProfiles__return->setUpper(-1);
@@ -27428,7 +27428,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAllProfileApplications__->setType(get_UML_ProfileApplication());
 	
 	// parameter 
-	uML_Package_getAllProfileApplications__return->setName("");
+	uML_Package_getAllProfileApplications__return->setName("uML_Package_getAllProfileApplications__return");
 	uML_Package_getAllProfileApplications__return->setType(get_UML_ProfileApplication());
 	uML_Package_getAllProfileApplications__return->setLower(0);
 	uML_Package_getAllProfileApplications__return->setUpper(-1);
@@ -27441,7 +27441,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAppliedProfile_String_String->setType(get_UML_Profile());
 	
 	// parameter 
-	uML_Package_getAppliedProfile_String_Stringreturn->setName("");
+	uML_Package_getAppliedProfile_String_Stringreturn->setName("uML_Package_getAppliedProfile_String_Stringreturn");
 	uML_Package_getAppliedProfile_String_Stringreturn->setType(get_UML_Profile());
 	uML_Package_getAppliedProfile_String_Stringreturn->setLower(0);
 	uML_Package_getAppliedProfile_String_Stringreturn->setUpper(1);
@@ -27468,7 +27468,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean->setType(get_UML_Profile());
 	
 	// parameter 
-	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn->setName("");
+	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn->setName("uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn");
 	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn->setType(get_UML_Profile());
 	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn->setLower(0);
 	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn->setUpper(1);
@@ -27509,7 +27509,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAppliedProfiles__->setType(get_UML_Profile());
 	
 	// parameter 
-	uML_Package_getAppliedProfiles__return->setName("");
+	uML_Package_getAppliedProfiles__return->setName("uML_Package_getAppliedProfiles__return");
 	uML_Package_getAppliedProfiles__return->setType(get_UML_Profile());
 	uML_Package_getAppliedProfiles__return->setLower(0);
 	uML_Package_getAppliedProfiles__return->setUpper(-1);
@@ -27522,7 +27522,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getProfileApplication_Profile_Profile->setType(get_UML_ProfileApplication());
 	
 	// parameter 
-	uML_Package_getProfileApplication_Profile_Profilereturn->setName("");
+	uML_Package_getProfileApplication_Profile_Profilereturn->setName("uML_Package_getProfileApplication_Profile_Profilereturn");
 	uML_Package_getProfileApplication_Profile_Profilereturn->setType(get_UML_ProfileApplication());
 	uML_Package_getProfileApplication_Profile_Profilereturn->setLower(0);
 	uML_Package_getProfileApplication_Profile_Profilereturn->setUpper(1);
@@ -27549,7 +27549,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean->setType(get_UML_ProfileApplication());
 	
 	// parameter 
-	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn->setName("");
+	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn->setName("uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn");
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn->setType(get_UML_ProfileApplication());
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn->setLower(0);
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn->setUpper(1);
@@ -27590,7 +27590,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_isModelLibrary__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Package_isModelLibrary__return->setName("");
+	uML_Package_isModelLibrary__return->setName("uML_Package_isModelLibrary__return");
 	uML_Package_isModelLibrary__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Package_isModelLibrary__return->setLower(1);
 	uML_Package_isModelLibrary__return->setUpper(1);
@@ -27603,7 +27603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_isProfileApplied_Profile_Profile->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Package_isProfileApplied_Profile_Profilereturn->setName("");
+	uML_Package_isProfileApplied_Profile_Profilereturn->setName("uML_Package_isProfileApplied_Profile_Profilereturn");
 	uML_Package_isProfileApplied_Profile_Profilereturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Package_isProfileApplied_Profile_Profilereturn->setLower(1);
 	uML_Package_isProfileApplied_Profile_Profilereturn->setUpper(1);
@@ -27709,7 +27709,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_unapplyProfile_Profile_Profile->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Package_unapplyProfile_Profile_Profilereturn->setName("");
+	uML_Package_unapplyProfile_Profile_Profilereturn->setName("uML_Package_unapplyProfile_Profile_Profilereturn");
 	uML_Package_unapplyProfile_Profile_Profilereturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Package_unapplyProfile_Profile_Profilereturn->setLower(0);
 	uML_Package_unapplyProfile_Profile_Profilereturn->setUpper(-1);
@@ -27966,7 +27966,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_isSetDefault__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Parameter_isSetDefault__return->setName("");
+	uML_Parameter_isSetDefault__return->setName("uML_Parameter_isSetDefault__return");
 	uML_Parameter_isSetDefault__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Parameter_isSetDefault__return->setLower(1);
 	uML_Parameter_isSetDefault__return->setUpper(1);
@@ -28383,7 +28383,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_create_Classifier_Classifier->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
 	// parameter 
-	uML_Profile_create_Classifier_Classifierreturn->setName("");
+	uML_Profile_create_Classifier_Classifierreturn->setName("uML_Profile_create_Classifier_Classifierreturn");
 	uML_Profile_create_Classifier_Classifierreturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	uML_Profile_create_Classifier_Classifierreturn->setLower(1);
 	uML_Profile_create_Classifier_Classifierreturn->setUpper(1);
@@ -28410,7 +28410,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_define__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
 	// parameter 
-	uML_Profile_define__return->setName("");
+	uML_Profile_define__return->setName("uML_Profile_define__return");
 	uML_Profile_define__return->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	uML_Profile_define__return->setLower(0);
 	uML_Profile_define__return->setUpper(1);
@@ -28423,7 +28423,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
 	// parameter 
-	uML_Profile_getDefinition__return->setName("");
+	uML_Profile_getDefinition__return->setName("uML_Profile_getDefinition__return");
 	uML_Profile_getDefinition__return->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	uML_Profile_getDefinition__return->setLower(0);
 	uML_Profile_getDefinition__return->setUpper(1);
@@ -28436,7 +28436,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getDefinition_NamedElement_NamedElement->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	
 	// parameter 
-	uML_Profile_getDefinition_NamedElement_NamedElementreturn->setName("");
+	uML_Profile_getDefinition_NamedElement_NamedElementreturn->setName("uML_Profile_getDefinition_NamedElement_NamedElementreturn");
 	uML_Profile_getDefinition_NamedElement_NamedElementreturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	uML_Profile_getDefinition_NamedElement_NamedElementreturn->setLower(0);
 	uML_Profile_getDefinition_NamedElement_NamedElementreturn->setUpper(1);
@@ -28463,7 +28463,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getOwnedExtensions_Boolean_Boolean->setType(get_UML_Extension());
 	
 	// parameter 
-	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn->setName("");
+	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn->setName("uML_Profile_getOwnedExtensions_Boolean_Booleanreturn");
 	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn->setType(get_UML_Extension());
 	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn->setLower(0);
 	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn->setUpper(-1);
@@ -28490,7 +28490,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getReferencedMetaclasses__->setType(get_UML_Class());
 	
 	// parameter 
-	uML_Profile_getReferencedMetaclasses__return->setName("");
+	uML_Profile_getReferencedMetaclasses__return->setName("uML_Profile_getReferencedMetaclasses__return");
 	uML_Profile_getReferencedMetaclasses__return->setType(get_UML_Class());
 	uML_Profile_getReferencedMetaclasses__return->setLower(0);
 	uML_Profile_getReferencedMetaclasses__return->setUpper(-1);
@@ -28503,7 +28503,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getReferencedMetamodels__->setType(get_UML_Model());
 	
 	// parameter 
-	uML_Profile_getReferencedMetamodels__return->setName("");
+	uML_Profile_getReferencedMetamodels__return->setName("uML_Profile_getReferencedMetamodels__return");
 	uML_Profile_getReferencedMetamodels__return->setType(get_UML_Model());
 	uML_Profile_getReferencedMetamodels__return->setLower(0);
 	uML_Profile_getReferencedMetamodels__return->setUpper(-1);
@@ -28516,7 +28516,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_isDefined__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Profile_isDefined__return->setName("");
+	uML_Profile_isDefined__return->setName("uML_Profile_isDefined__return");
 	uML_Profile_isDefined__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Profile_isDefined__return->setLower(1);
 	uML_Profile_isDefined__return->setUpper(1);
@@ -28573,7 +28573,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_getAppliedDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
 	// parameter 
-	uML_ProfileApplication_getAppliedDefinition__return->setName("");
+	uML_ProfileApplication_getAppliedDefinition__return->setName("uML_ProfileApplication_getAppliedDefinition__return");
 	uML_ProfileApplication_getAppliedDefinition__return->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	uML_ProfileApplication_getAppliedDefinition__return->setLower(0);
 	uML_ProfileApplication_getAppliedDefinition__return->setUpper(1);
@@ -28586,7 +28586,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	
 	// parameter 
-	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn->setName("");
+	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn->setName("uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn");
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn->setLower(0);
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn->setUpper(1);
@@ -28830,7 +28830,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_getOtherEnd__->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Property_getOtherEnd__return->setName("");
+	uML_Property_getOtherEnd__return->setName("uML_Property_getOtherEnd__return");
 	uML_Property_getOtherEnd__return->setType(get_UML_Property());
 	uML_Property_getOtherEnd__return->setLower(0);
 	uML_Property_getOtherEnd__return->setUpper(1);
@@ -28936,7 +28936,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isSetDefault__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
 	// parameter 
-	uML_Property_isSetDefault__return->setName("");
+	uML_Property_isSetDefault__return->setName("uML_Property_isSetDefault__return");
 	uML_Property_isSetDefault__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Property_isSetDefault__return->setLower(1);
 	uML_Property_isSetDefault__return->setUpper(1);
@@ -30322,7 +30322,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
 	// parameter 
-	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("");
+	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn");
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setType(get_UML_Property());
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -31165,7 +31165,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean->setType(get_UML_Extension());
 	
 	// parameter 
-	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn->setName("");
+	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn->setName("uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn");
 	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn->setType(get_UML_Extension());
 	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn->setLower(1);
 	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn->setUpper(1);
@@ -31206,7 +31206,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_createIcon_String_String->setType(get_UML_Image());
 	
 	// parameter 
-	uML_Stereotype_createIcon_String_Stringreturn->setName("");
+	uML_Stereotype_createIcon_String_Stringreturn->setName("uML_Stereotype_createIcon_String_Stringreturn");
 	uML_Stereotype_createIcon_String_Stringreturn->setType(get_UML_Image());
 	uML_Stereotype_createIcon_String_Stringreturn->setLower(1);
 	uML_Stereotype_createIcon_String_Stringreturn->setUpper(1);
@@ -31233,7 +31233,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_createIcon_String_String_String_String->setType(get_UML_Image());
 	
 	// parameter 
-	uML_Stereotype_createIcon_String_String_String_Stringreturn->setName("");
+	uML_Stereotype_createIcon_String_String_String_Stringreturn->setName("uML_Stereotype_createIcon_String_String_String_Stringreturn");
 	uML_Stereotype_createIcon_String_String_String_Stringreturn->setType(get_UML_Image());
 	uML_Stereotype_createIcon_String_String_String_Stringreturn->setLower(1);
 	uML_Stereotype_createIcon_String_String_String_Stringreturn->setUpper(1);
@@ -31274,7 +31274,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getAllExtendedMetaclasses__->setType(get_UML_Class());
 	
 	// parameter 
-	uML_Stereotype_getAllExtendedMetaclasses__return->setName("");
+	uML_Stereotype_getAllExtendedMetaclasses__return->setName("uML_Stereotype_getAllExtendedMetaclasses__return");
 	uML_Stereotype_getAllExtendedMetaclasses__return->setType(get_UML_Class());
 	uML_Stereotype_getAllExtendedMetaclasses__return->setLower(0);
 	uML_Stereotype_getAllExtendedMetaclasses__return->setUpper(-1);
@@ -31287,7 +31287,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EClass());
 	
 	// parameter 
-	uML_Stereotype_getDefinition__return->setName("");
+	uML_Stereotype_getDefinition__return->setName("uML_Stereotype_getDefinition__return");
 	uML_Stereotype_getDefinition__return->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EClass());
 	uML_Stereotype_getDefinition__return->setLower(0);
 	uML_Stereotype_getDefinition__return->setUpper(1);
@@ -31300,7 +31300,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getExtendedMetaclasses__->setType(get_UML_Class());
 	
 	// parameter 
-	uML_Stereotype_getExtendedMetaclasses__return->setName("");
+	uML_Stereotype_getExtendedMetaclasses__return->setName("uML_Stereotype_getExtendedMetaclasses__return");
 	uML_Stereotype_getExtendedMetaclasses__return->setType(get_UML_Class());
 	uML_Stereotype_getExtendedMetaclasses__return->setLower(0);
 	uML_Stereotype_getExtendedMetaclasses__return->setUpper(-1);
@@ -31313,7 +31313,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getKeyword__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_Stereotype_getKeyword__return->setName("");
+	uML_Stereotype_getKeyword__return->setName("uML_Stereotype_getKeyword__return");
 	uML_Stereotype_getKeyword__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Stereotype_getKeyword__return->setLower(1);
 	uML_Stereotype_getKeyword__return->setUpper(1);
@@ -31326,7 +31326,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getKeyword_Boolean_Boolean->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_Stereotype_getKeyword_Boolean_Booleanreturn->setName("");
+	uML_Stereotype_getKeyword_Boolean_Booleanreturn->setName("uML_Stereotype_getKeyword_Boolean_Booleanreturn");
 	uML_Stereotype_getKeyword_Boolean_Booleanreturn->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Stereotype_getKeyword_Boolean_Booleanreturn->setLower(1);
 	uML_Stereotype_getKeyword_Boolean_Booleanreturn->setUpper(1);
@@ -31703,7 +31703,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
 	// parameter 
-	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("");
+	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setName("uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn");
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setType(get_UML_Property());
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -32229,7 +32229,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeExpression_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
 	// parameter 
-	uML_TimeExpression_stringValue__return->setName("");
+	uML_TimeExpression_stringValue__return->setName("uML_TimeExpression_stringValue__return");
 	uML_TimeExpression_stringValue__return->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_TimeExpression_stringValue__return->setLower(1);
 	uML_TimeExpression_stringValue__return->setUpper(1);
@@ -32556,7 +32556,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setType(get_UML_Association());
 	
 	// parameter 
-	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setName("");
+	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setName("uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn");
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setType(get_UML_Association());
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setLower(1);
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn->setUpper(1);
@@ -32723,7 +32723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Type_getAssociations__->setType(get_UML_Association());
 	
 	// parameter 
-	uML_Type_getAssociations__return->setName("");
+	uML_Type_getAssociations__return->setName("uML_Type_getAssociations__return");
 	uML_Type_getAssociations__return->setType(get_UML_Association());
 	uML_Type_getAssociations__return->setLower(0);
 	uML_Type_getAssociations__return->setUpper(-1);

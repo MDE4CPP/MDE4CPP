@@ -90,62 +90,70 @@ namespace UML4CPPProfile
 				static std::shared_ptr<UML4CPPProfilePackage> eInstance();
 
 			//Static IDs
-				//Stereotype UML4CPPProfile::DoNotGenerate
-				static const unsigned long DONOTGENERATE_CLASS = 173581214;
-				static const unsigned int DONOTGENERATE_CLASS_FEATURE_COUNT = 1;
-				static const unsigned int DONOTGENERATE_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long DONOTGENERATE_ATTRIBUTE_BASE_ELEMENT = 1158171776;
-				//Stereotype UML4CPPProfile::ExternalLibrary
-				static const unsigned long EXTERNALLIBRARY_CLASS = 744219230;
-				static const unsigned int EXTERNALLIBRARY_CLASS_FEATURE_COUNT = 4;
-				static const unsigned int EXTERNALLIBRARY_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE = 441090789;
-					static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH = 83544771;
-					static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME = 596096889;
-					static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH = 1321918160;
-				//Stereotype UML4CPPProfile::GetterName
-				static const unsigned long GETTERNAME_CLASS = 1711019851;
-				static const unsigned int GETTERNAME_CLASS_FEATURE_COUNT = 2;
-				static const unsigned int GETTERNAME_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long GETTERNAME_ATTRIBUTE_BASE_PROPERTY = 14802423;
-					static const unsigned long GETTERNAME_ATTRIBUTE_GETTERNAME = 1932053206;
-				//Stereotype UML4CPPProfile::MainBehavior
-				static const unsigned long MAINBEHAVIOR_CLASS = 1527007467;
-				static const unsigned int MAINBEHAVIOR_CLASS_FEATURE_COUNT = 1;
-				static const unsigned int MAINBEHAVIOR_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR = 1956712138;
-				//Stereotype UML4CPPProfile::NonExecutable
-				static const unsigned long NONEXECUTABLE_CLASS = 1641344257;
-				static const unsigned int NONEXECUTABLE_CLASS_FEATURE_COUNT = 1;
-				static const unsigned int NONEXECUTABLE_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long NONEXECUTABLE_ATTRIBUTE_BASE_NAMEDELEMENT = 488558520;
-				//Stereotype UML4CPPProfile::SetterName
-				static const unsigned long SETTERNAME_CLASS = 103590585;
-				static const unsigned int SETTERNAME_CLASS_FEATURE_COUNT = 2;
-				static const unsigned int SETTERNAME_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long SETTERNAME_ATTRIBUTE_BASE_PROPERTY = 554856804;
-					static const unsigned long SETTERNAME_ATTRIBUTE_SETTERNAME = 1550049626;
-				//Stereotype UML4CPPProfile::Singleton
-				static const unsigned long SINGLETON_CLASS = 1215028894;
-				static const unsigned int SINGLETON_CLASS_FEATURE_COUNT = 1;
-				static const unsigned int SINGLETON_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long SINGLETON_ATTRIBUTE_BASE_CLASS = 2027377001;
-				//Stereotype UML4CPPProfile::UML4CPPPackage
-				static const unsigned long UML4CPPPACKAGE_CLASS = 1707580997;
-				static const unsigned int UML4CPPPACKAGE_CLASS_FEATURE_COUNT = 4;
-				static const unsigned int UML4CPPPACKAGE_CLASS_OPERATION_COUNT = 0;
-					//Properties
-					static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE = 364749133;
-					static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI = 1162675821;
-					static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE = 1716152545;
-					static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY = 262131715;
+			//Stereotype UML4CPPProfile::DoNotGenerate
+			static const unsigned long DONOTGENERATE_STEREOTYPE = 173581214;
+			static const unsigned int DONOTGENERATE_STEREOTYPE_FEATURE_COUNT = 1;
+			static const unsigned int DONOTGENERATE_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long DONOTGENERATE_ATTRIBUTE_BASE_ELEMENT = 1158171776;
+			
+			//Stereotype UML4CPPProfile::ExternalLibrary
+			static const unsigned long EXTERNALLIBRARY_STEREOTYPE = 744219230;
+			static const unsigned int EXTERNALLIBRARY_STEREOTYPE_FEATURE_COUNT = 4;
+			static const unsigned int EXTERNALLIBRARY_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE = 441090789;
+			static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH = 83544771;
+			static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME = 596096889;
+			static const unsigned long EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH = 1321918160;
+			
+			//Stereotype UML4CPPProfile::GetterName
+			static const unsigned long GETTERNAME_STEREOTYPE = 1711019851;
+			static const unsigned int GETTERNAME_STEREOTYPE_FEATURE_COUNT = 2;
+			static const unsigned int GETTERNAME_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long GETTERNAME_ATTRIBUTE_BASE_PROPERTY = 14802423;
+			static const unsigned long GETTERNAME_ATTRIBUTE_GETTERNAME = 1932053206;
+			
+			//Stereotype UML4CPPProfile::MainBehavior
+			static const unsigned long MAINBEHAVIOR_STEREOTYPE = 1527007467;
+			static const unsigned int MAINBEHAVIOR_STEREOTYPE_FEATURE_COUNT = 1;
+			static const unsigned int MAINBEHAVIOR_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR = 1956712138;
+			
+			//Stereotype UML4CPPProfile::NonExecutable
+			static const unsigned long NONEXECUTABLE_STEREOTYPE = 1641344257;
+			static const unsigned int NONEXECUTABLE_STEREOTYPE_FEATURE_COUNT = 1;
+			static const unsigned int NONEXECUTABLE_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long NONEXECUTABLE_ATTRIBUTE_BASE_NAMEDELEMENT = 488558520;
+			
+			//Stereotype UML4CPPProfile::SetterName
+			static const unsigned long SETTERNAME_STEREOTYPE = 103590585;
+			static const unsigned int SETTERNAME_STEREOTYPE_FEATURE_COUNT = 2;
+			static const unsigned int SETTERNAME_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long SETTERNAME_ATTRIBUTE_BASE_PROPERTY = 554856804;
+			static const unsigned long SETTERNAME_ATTRIBUTE_SETTERNAME = 1550049626;
+			
+			//Stereotype UML4CPPProfile::Singleton
+			static const unsigned long SINGLETON_STEREOTYPE = 1215028894;
+			static const unsigned int SINGLETON_STEREOTYPE_FEATURE_COUNT = 1;
+			static const unsigned int SINGLETON_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long SINGLETON_ATTRIBUTE_BASE_CLASS = 2027377001;
+			
+			//Stereotype UML4CPPProfile::UML4CPPPackage
+			static const unsigned long UML4CPPPACKAGE_STEREOTYPE = 1707580997;
+			static const unsigned int UML4CPPPACKAGE_STEREOTYPE_FEATURE_COUNT = 4;
+			static const unsigned int UML4CPPPACKAGE_STEREOTYPE_OPERATION_COUNT = 0;
+			//Properties
+			static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE = 364749133;
+			static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI = 1162675821;
+			static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE = 1716152545;
+			static const unsigned long UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY = 262131715;
+			
 			
 			
 	};
