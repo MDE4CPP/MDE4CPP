@@ -151,10 +151,12 @@ static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentP
 [/let]
 [/for]
 [comment  Properties of composite owners of aClass (i.e. back references to classes that have parts and/or ports of type aClass)/]
+[if (aClass.oclIsTypeOf(Class))]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Properties for composite owners\n')]
 //Property [compositeOwnerClass.name.toLowerFirst()/]
 static const unsigned long [aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
 [/for]
+[/if]
 [comment  Operations of aClass/]
 [for (anOperation : Operation | aClass.ownedOperation) before('//Operations\n')]
 //[anOperation.generateQualifiedNameWithSignature()/]
@@ -239,12 +241,6 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [query public generateGetThisPtrPropertyName(aClass : Class) : String = 'this'.concat(aClass.name.toUpperFirst()).concat('Ptr')/]
 [query public generateGetThisPtrPropertySetterName(aClass : Class) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
 [query public generateGetThisPtrPropertyGetterName(aClass : Class) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
-
-[**
- * queries for retireving the Package of a Class
-*/]
-[query public getPackage(aPackagedElement : PackageableElement) : Package = aPackagedElement.owner.oclAsType(Package) /]
-[query public getRootPackage(aPackagedElement : PackageableElement) : Package = if(aPackagedElement.getPackage().getSuperPackage().oclIsUndefined()) then aPackagedElement.getPackage() else aPackagedElement.getPackage().getRootPackage() endif /]
 
 [**
  * queries if aClass realizes anInterface directly
