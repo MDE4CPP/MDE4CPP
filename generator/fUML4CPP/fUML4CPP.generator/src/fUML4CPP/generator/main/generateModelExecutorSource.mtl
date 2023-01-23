@@ -85,7 +85,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [for (anEnumeration : Enumeration | aPackage.getEnumerationsOwnedByPackage()->sortedBy(myQualifiedName()))]
 #include "[anEnumeration._package.generateNamespacePath(true)/]/[anEnumeration.name.toUpperFirst()/].hpp"
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[let externalPackageList : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
 #include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
@@ -104,7 +104,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.getNearestPackage().collectPackageGlobalFunctions_IncludeString()->asSet())]
 [anIncludeString/]
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledBehaviors()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
 #include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
@@ -171,7 +171,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 [/if]
 [/let]
 				//Model-external Enumerations
-				[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+				[let externalPackageList : Set(Package) = aPackage.getEnumerationPackagesOfValueSpecificationAction()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 				[if (externalPackageList->size() = 0)]
 				//No external enumerations used in Activities of this model
 				[else]
@@ -248,7 +248,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		//Model-external activities
 		else
 		{
-			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+			[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledActivities()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 			[if (externalPackageList->size() = 0)]
 			//No external activities called in Activities of this model
 			[else]
@@ -294,7 +294,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 {
 	std::string pluginName;
 
-	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 	[if (externalPackageList->size() = 0)]
 	//No external opaque behaviors called in Activities of this model
 	[else]

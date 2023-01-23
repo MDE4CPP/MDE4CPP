@@ -80,11 +80,11 @@ static const unsigned int [aInterface.getMemberName().toUpperCase()/]_OPERATION_
  * template to generate create function declarations
 */]
 [template public generateInterfaceCreate(aInterface : Interface,impl : Boolean)]
-virtual std::shared_ptr<[aInterface.generateCppType(true)/]> create[aInterface.name.toUpperFirst()/](const int metaElementID=-1) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<[aInterface.generateCppRawType(true)/]> create[aInterface.name.toUpperFirst()/](const int metaElementID=-1) const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aInterface.getCompositionsToInterface())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aInterface.generateCppType(true)/]> create[aInterface.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID=-1) const [abstractSuffix(impl)/] ; 
+virtual std::shared_ptr<[aInterface.generateCppRawType(true)/]> create[aInterface.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID=-1) const [abstractSuffix(impl)/] ; 
 [/let]
 [/let]
 [/for]

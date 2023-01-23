@@ -166,7 +166,7 @@ int main()
 
 			[if (mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[let returnParameter : Parameter = mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-			[returnParameter.type.generateCppType(false)/] returnValue = activityResult->get<[returnParameter.type.generateCppType(false)/]>();
+			[returnParameter.type.generateCppRawType(false)/] returnValue = activityResult->get<[returnParameter.type.generateCppRawType(false)/]>();
 			DEBUG_INFO("Activity '[mainActivity.name/]' has a return parameter named '[returnParameter.name/]'.")
 			
 			if(returnValue == nullptr)

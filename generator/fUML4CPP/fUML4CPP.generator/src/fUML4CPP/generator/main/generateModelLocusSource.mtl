@@ -52,7 +52,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [for (aClass : Class | aPackage.getClassesOwnedByPackage()->sortedBy(myQualifiedName()))]
 #include "[aClass._package.generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
-[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
 		[if (externalPackage.isReflectionModel())]
@@ -117,7 +117,7 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(std::shared_p
 [/if]
 [/let]
 	//Model-external types
-[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[let externalPackageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() = 0)]
 	//No external types used in Activities of this model
 [else]

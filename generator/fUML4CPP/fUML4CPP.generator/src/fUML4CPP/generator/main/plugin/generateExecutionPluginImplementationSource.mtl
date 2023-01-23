@@ -285,7 +285,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new
 [if (aParameter.upper <> 1)]
 	[if (aParameter.type.oclIsKindOf(PrimitiveType) or aParameter.type.oclIsKindOf(Enumeration))]
 	[aParameter.generateCppType(false)/] elementList = [aParameter.name/]->get<[aParameter.generateCppType(false)/]>();
-	for([aParameter.type.generateCppType(false)/] anElement : *elementList)
+	for([aParameter.type.generateCppRawType(false)/] anElement : *elementList)
 	{
 		[aParameter.name/]_parameterValue->getValues()->add(eAny(anElement, [aParameter.name/]->getTypeId(), false));
 	}

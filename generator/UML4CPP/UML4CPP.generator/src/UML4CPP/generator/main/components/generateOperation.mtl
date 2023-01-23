@@ -52,7 +52,7 @@ virtual [anOperation.generateCppType()/] [anOperation.name/]([for (sParameter : 
 {
 [if (anOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 [let returnParameter : Parameter = anOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-	[anOperation.generateCppType()/] [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if][if (returnParameter.upper <> 1)](new Bag<[returnParameter.type.generateCppType(true)/]>())[/if][if(returnParameter.type.isPrimitive())] = [returnParameter.genDefault()/][/if];
+	[anOperation.generateCppType()/] [if(returnParameter.name.oclIsUndefined())][returnParameter.myQualifiedName()/][else][returnParameter.name/][/if][if (returnParameter.upper <> 1)](new Bag<[returnParameter.type.generateCppRawType(true)/]>())[/if][if(returnParameter.type.isPrimitive())] = [returnParameter.genDefault()/][/if];
 [/let]
 [/if]
 

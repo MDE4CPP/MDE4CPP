@@ -49,7 +49,7 @@
 [for (stereo : Stereotype | aElement.getAppliedStereotypes()->reject(isDoNotGenerate(aElement))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 {
 	//apply Stereotype [stereo.name/]
-	[stereo.generateCppType(false)/] stereo([stereo.generateCreateFunction()/]);
+	[stereo.generateCppRawType(false)/] stereo([stereo.generateCreateFunction()/]);
 [for (prop : Property | stereo.allAttributes())]
 [if(not aElement.getValue(stereo, prop.name).oclIsUndefined())]
 	[prop.generateAttributeSetting(aElement, stereo)/]
@@ -72,7 +72,7 @@ stereo->[prop.getterName()/]()->push_back([memberName(any.oclAsType(NamedElement
 [/for][elseif (prop.type.oclIsKindOf(PrimitiveType) and not(prop.upper = 1))]
 [for (any : OclAny | aElement.getValue(stereo, prop.name))]
 {
-	std::shared_ptr<[prop.type.generateCppType(false)/]> value(new [prop.type.generateCppType(false)/]([any.toString()/]));
+	std::shared_ptr<[prop.type.generateCppRawType(false)/]> value(new [prop.type.generateCppRawType(false)/]([any.toString()/]));
 	stereo->[prop.getterName()/]()->push_back(value);
 }
 [/for][else]

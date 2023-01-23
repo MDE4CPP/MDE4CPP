@@ -37,7 +37,7 @@
 [query private myParameterReturnName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter) and (name.oclIsUndefined() or ''=name) and (oclAsType(Parameter).direction = ParameterDirectionKind::return) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('return') else myParameterName() endif /]
 [query private myParameterName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter)  and not((oclAsType(Parameter).direction = ParameterDirectionKind::return)) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(myName()) else myAssociationName() endif /]
 [query private myAssociationName(anElement : NamedElement) : String = if(oclIsKindOf(Association) and (name.oclIsUndefined() or ''=name)) then 'A_'.concat(oclAsType(Association).memberEnd->first().myPropertyName()).concat('_').concat(oclAsType(Association).memberEnd->last().myPropertyName()) else myObjectFlowName() endif/]
-[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name) then aProperty.type.myQualifiedName().toLowerFirst() else aProperty.type.myQualifiedName().concat('_').concat(aProperty.name) endif /] 
+[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name) then aProperty.propertyTypeName().toLowerFirst() else if(aProperty.type.oclIsUndefined()) then 'Any'.concat('_').concat(aProperty.name) else aProperty.type.myQualifiedName().concat('_').concat(aProperty.name) endif endif /] 
 [query private myObjectFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ObjectFlow) and (name.oclIsUndefined() or ''=name)) then 'OF_'.concat(oclAsType(ObjectFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ObjectFlow).target.myQualifiedName()) else myControlFlowName() endif/]
 [query private myControlFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ControlFlow) and (name.oclIsUndefined() or ''=name)) then 'CF_'.concat(oclAsType(ControlFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ControlFlow).target.myQualifiedName()) else myExtensionEndName() endif/]
 [query private myExtensionEndName(anElement : NamedElement) : String = if (oclIsKindOf(ExtensionEnd)) then 'ExtensionEnd'.concat('_').concat(name).concat('_').concat(oclAsType(ExtensionEnd).type.myQualifiedName()) else myAssOwnedPropName() endif /]
@@ -62,8 +62,26 @@
 */]
 [comment  flag 'noReflection' indicates wether package names UML/Ecore will be transformed to uml/ecore (true) or umlReflection/ecoreReflection (false)/]
 [query public generateNamespace(aPackage : Package, noReflection : Boolean) : String = getNamespace(noReflection, false) /]
-[query public generateNamespace(aClassifier : Classifier, noReflection : Boolean) : String = aClassifier.getNearestPackage().getNamespace(noReflection ,false) /]
-[query public generateNamespaceName(aClassifier : Classifier, noReflection : Boolean) : String = generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst())/]
+[query public generateNamespace(aClassifier : Classifier, noReflection : Boolean) : String = 
+	if (aClassifier.oclIsKindOf(Behavior))
+	then aClassifier.oclAsType(Behavior).generateNamespace(noReflection)
+	else aClassifier.getNearestPackage().getNamespace(noReflection ,false)
+	endif
+/]
+[query public generateNamespaceName(aClassifier : Classifier, noReflection : Boolean) : String = 
+	if (aClassifier.oclIsKindOf(Behavior))
+	then aClassifier.oclAsType(Behavior).generateNamespaceName(noReflection)
+	else generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst())
+	endif
+/]
+[query public generateNamespace(aBehavior : Behavior, noReflection : Boolean) : String = 
+	if (aBehavior._context.oclIsUndefined())
+	then aBehavior.getNearestPackage().getNamespace(noReflection ,false)
+	else aBehavior._context.getNearestPackage().getNamespace(noReflection, false) + '::' + aBehavior._context.name
+	endif
+/]
+
+[query public generateNamespaceName(aBehavior : Behavior, noReflection : Boolean) : String =  aBehavior.generateNamespace(noReflection) + '::' + aBehavior.name /]
 [query public generateNamespace(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
 [query public generateNamespaceName(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(anOperation.name)/]
 [query public generateNamespace(aProperty : Property, noReflection : Boolean) : String = aProperty.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
@@ -90,7 +108,7 @@
 [query public setterName(feature : StructuralFeature) : String = if hasSetterName() then getSetterName() else 'set'.concat(name.toUpperFirst()) endif /]
 [query public getterName(feature : StructuralFeature) : String = if hasGetterName() then getGetterName() else getterPrefix().concat(name.toUpperFirst()) endif /]
 [query public getterPrefix(feature : StructuralFeature) : String = feature.type.getterPrefix() /]
-[query public getterPrefix(type : Type) : String = if type.name = 'Boolean' then 'is' else 'get' endif/]
+[query public getterPrefix(type : Type) : String = if(type.oclIsUndefined() or type.name <> 'Boolean') then 'get' else 'is' endif/]
 
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++
@@ -122,7 +140,7 @@
  *  generate substring of a qualified name, name is made up of parameter type names
 */]
 [template private generateParameterTypeList(anOperation : Operation)]
-[for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][sParameter.type.name/][/for]
+[for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][if(sParameter.type.oclIsUndefined())]Any[else][sParameter.type.name/][/if][/for]
 [/template]
 
 [**
@@ -181,8 +199,20 @@
 
 [query private getStaticAttributeIDName(anENamedElement : NamedElement) : String = anENamedElement.getMemberName().toUpperCase() /]
 
-[query public getMemberName(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(Classifier)) then anENamedElement.oclAsType(Classifier).getMemberNameCL() else anENamedElement.getMemberNameStructFeat()endif endif/]
+[query public getMemberName(aNamedElement : NamedElement) : String = if (aNamedElement.oclIsUndefined() or aNamedElement.name.oclIsUndefined()) then '' else aNamedElement.name.toLowerFirst() + '_Element' endif /]
+[query public getMemberName(aClassifier : Classifier) : String = 
+	if (aClassifier.oclIsUndefined()) 
+	then '' 
+	else if(aClassifier.oclIsKindOf(Behavior))
+		 then aClassifier.oclAsType(Behavior).getMemberName()
+		 else aClassifier.name.toLowerFirst() + '_' + aClassifier.eClass().name
+		 endif
+	endif /]
+[query public getMemberName(aBehavior : Behavior) : String = if(aBehavior.oclIsUndefined()) then '' else aBehavior.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_' + aBehavior.eClass().name + '_' + aBehavior.name.toLowerFirst() endif /]
+[query public getMemberName(aProperty : Property) : String = if (aProperty.oclIsUndefined()) then '' else aProperty.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_'+ aProperty.eClass().name + '_' + aProperty.name.toLowerFirst() endif /]
+[query public getMemberName(anOperation : Operation) : String = if (anOperation.oclIsUndefined()) then '' else anOperation.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_Operation_' + anOperation.name.toLowerFirst() + anOperation.parameterListName() endif /]
 
+[comment]
 [query private getMemberNameStructFeat(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(StructuralFeature)) then anENamedElement.oclAsType(StructuralFeature).getMemberNameST() else anENamedElement.getMemberNameOperation() endif endif/]
 [query private getMemberNameOperation(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined()) then ''else if (anENamedElement.oclIsKindOf(BehavioralFeature)) then anENamedElement.oclAsType(BehavioralFeature).getMemberNameOP() else anENamedElement.getMemberNameGeneral() endif endif/]
 [query private getMemberNameGeneral(anENamedElement : NamedElement) : String = if (anENamedElement.oclIsUndefined() or anENamedElement.name.oclIsUndefined()) then '' else anENamedElement.name.toLowerFirst().concat('_Element') endif/]
@@ -190,6 +220,8 @@
 [query private getMemberNameCL(aClassifier : Classifier) : String = if (aClassifier.oclIsUndefined()) then '' else aClassifier.name.toLowerFirst().concat('_').concat(aClassifier.eClass().name) endif/]
 [query private getMemberNameST(aStructural : StructuralFeature) : String = if (aStructural.oclIsUndefined()) then '' else aStructural.eContainer().oclAsType(NamedElement).myName().toLowerFirst().concat('_Attribute_').concat(aStructural.name.toLowerFirst()) endif/]
 [query private getMemberNameOP(aOperation : BehavioralFeature) : String = if (aOperation.oclIsUndefined()) then '' else aOperation.eContainer().oclAsType(NamedElement).myName().toLowerFirst().concat('_Operation_'.concat(aOperation.name.toLowerFirst()).concat(aOperation.parameterListName())) endif/]
+[/comment]
+
 
 [query private parameterListName(aOperation : BehavioralFeature) : String = if (aOperation.oclIsUndefined()) then '' else if aOperation.ownedParameter->notEmpty() then aOperation.singlemultipleParameter() else '' endif endif/]
 [** generate ParameterList similar to ecore. 
@@ -199,12 +231,14 @@
 		'' 
 	else 
 		if ( aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->size() > 1 ) then
-			'_'.concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->first().parameterType().concat('_').concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->last().parameterType())) 
+			'_'.concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->first().parameterTypeName().concat('_').concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->last().parameterTypeName())) 
 		else 
-			'_'.concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->first().parameterType()) 
+			'_'.concat(aOperation.ownedParameter->reject(p :Parameter | (p.direction = ParameterDirectionKind::return))->first().parameterTypeName()) 
 		endif 
 	endif/]
-[query private parameterType(aParameter : Parameter) : String = if ( (aParameter.oclIsUndefined()) or (aParameter.type.oclIsUndefined()) ) then '' else aParameter.type.myName() endif/] 
+
+[query private propertyTypeName(aProperty : Property) : String = if(aProperty.oclIsUndefined()) then '' else if(aProperty.type.oclIsUndefined()) then 'Any' else aProperty.type.myName() endif endif/]
+[query private parameterTypeName(aParameter : Parameter) : String = if(aParameter.oclIsUndefined()) then '' else if(aParameter.type.oclIsUndefined()) then 'Any' else aParameter.type.myName() endif endif/] 
 
 [query public getStaticClassID_Name(aNamedElement : NamedElement) : String = if ((aNamedElement.oclIsUndefined()) or (aNamedElement.name.oclIsUndefined())) then '' else ', '.concat(aNamedElement.myQualifiedTypeName(true)) endif/]
 

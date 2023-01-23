@@ -35,7 +35,7 @@ for(unsigned int i = 0; i < this->[aProperty.getterName()/]()->size(); i++)
 }
 [/if][comment If not, the variable of the property only has to be cleared/]
 this->[aProperty.getterName()/]()->clear();
-[elseif (aProperty.isSingleValue() and not aProperty.type.isPrimitive() and not aProperty.type.oclIsKindOf(Enumeration))]
+[elseif (aProperty.isSingleValue() and (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration)))))]
 //deleting property [aProperty.name/]
 [if (aProperty.isComposite)] [comment If property is a part or port (isComposite = true), property has to be destroyed recursively also/]
 //property is part or port and is destroyed recursively

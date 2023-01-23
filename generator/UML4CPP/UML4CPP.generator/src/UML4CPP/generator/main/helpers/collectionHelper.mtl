@@ -51,7 +51,7 @@
 
 [query private collectModelIncludes(aPackage : Package) : Set(Package) = 
 	OrderedSet{
-		aPackage.member->filter(Class)->select(isGeneratable()).attribute.type.getNearestPackage(),
+		aPackage.member->filter(Class)->select(isGeneratable()).attribute.type->reject(oclIsUndefined()).getNearestPackage(),
 		aPackage.member->filter(Class)->select(isGeneratable()).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 		aPackage.member->filter(Class)->select(isGeneratable()).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
 		aPackage.allOwnedElements().getGeneratableAppliedStereotypes()._package,

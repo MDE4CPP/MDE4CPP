@@ -59,7 +59,7 @@
 //General includes
 #include <iostream>
 [if (aClass.ownedOperation->select(method->isEmpty())->notEmpty())]
-#include <stdexcept>[/if]
+#include <stdexcept>['\n'/][/if]
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -73,7 +73,7 @@
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
-[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+[if (aClass.ownedAttribute->reject(type.oclIsUndefined())->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 #include "uml/EnumerationLiteral.hpp"
 [/if]
 [comment Package for used PrimitiveTypes /]
@@ -108,7 +108,7 @@
 #include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
 [/for]
 [comment Packages of included Enumerations /]
-[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n')]
+[for (aPackage : Package | aClass.ownedAttribute->reject(type.oclIsUndefined())->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n')]
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 [comment Plugin Framework /]
@@ -180,7 +180,7 @@
 }
 [/if] [/let] [/if] [/let] [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
-[className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
+[className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
 :[className/]()
 {
     m_[compositeOwnerClass.name/] = [compositeOwnerClass.name.toLowerFirst()/];
@@ -233,20 +233,20 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 	if (obj.[aProperty.getterName()/]() != nullptr)
 	{
-	[/if]	m_[aProperty.name/] = [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>([/if]obj.[aProperty.getterName()/]()[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+	[/if]	m_[aProperty.name/] = [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>([/if]obj.[aProperty.getterName()/]()[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]->copy())[/if];
 [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 	}
 [/if]
 [else]
 	[aProperty.generateCppType()/] [aProperty.name/]List = obj.[aProperty.getterName()/]();
-	Bag<[aProperty.type.generateCppType(true)/]>::iterator [aProperty.name/]Iter = [aProperty.name/]List->begin();
-	Bag<[aProperty.type.generateCppType(true)/]>::iterator [aProperty.name/]End = [aProperty.name/]List->end();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]Iter = [aProperty.name/]List->begin();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]End = [aProperty.name/]List->end();
 	while ([aProperty.name/]Iter != [aProperty.name/]End) 
 	{
 [if (aProperty.type.isPrimitive())]
-		std::shared_ptr<[aProperty.type.generateCppType(true)/]> temp(new [aProperty.type.generateCppType(true)/](*(*[aProperty.name/]Iter)));
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp(new [aProperty.type.generateCppRawType(true)/](*(*[aProperty.name/]Iter)));
 [else]
-		std::shared_ptr<[aProperty.type.generateCppType(true)/]> temp = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>((*[aProperty.name/]Iter)->copy());
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>((*[aProperty.name/]Iter)->copy());
 [/if]
 		[aProperty.getterName()/]()->push_back(temp);
 		[aProperty.name/]Iter++;

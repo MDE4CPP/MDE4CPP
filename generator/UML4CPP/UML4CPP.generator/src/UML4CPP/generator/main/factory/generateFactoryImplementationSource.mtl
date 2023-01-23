@@ -211,9 +211,9 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
 //--------------------------
 //create-Functions for class '[aClass.name/]'
 //--------------------------
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
+std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.generateCppType(true)/]Impl());
+	std::shared_ptr<[aClass.generateCppRawType(true)/]Impl> element(new [aClass.generateCppRawType(true)/]Impl());
 	element->setMetaElementID(metaElementID);
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	element->instantiate();
@@ -224,9 +224,9 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
 		[if (not containerProperty.opposite.oclIsUndefined())]
 			[let containmentProperty : Property = containerProperty.opposite]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.generateCppType(true)/]Impl([if (containmentProperty.isBackReference())]par_[containmentProperty.name.toLowerFirst()/][/if]));
+	std::shared_ptr<[aClass.generateCppRawType(true)/]Impl> element(new [aClass.generateCppRawType(true)/]Impl([if (containmentProperty.isBackReference())]par_[containmentProperty.name.toLowerFirst()/][/if]));
 	element->setMetaElementID(metaElementID);
 				[if (containmentProperty.isBackReference())]
 	if(auto wp = par_[containmentProperty.name.toLowerFirst()/].lock())
@@ -247,9 +247,9 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()->select(isGeneratable()))] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.generateCppType(true)/]Impl(par_[compositeOwnerClass.name.toLowerFirst()/]));
+	std::shared_ptr<[aClass.generateCppRawType(true)/]Impl> element(new [aClass.generateCppRawType(true)/]Impl(par_[compositeOwnerClass.name.toLowerFirst()/]));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_[compositeOwnerClass.name.toLowerFirst()/].lock())
 	{

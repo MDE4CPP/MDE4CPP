@@ -48,24 +48,24 @@
 [template public generateCppType(aProperty : Property)]
 [if (aProperty.upper <> 1)]
 	[if (aProperty.isSubsetUnion())]
-		[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+		[if (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))))]
 [aProperty.pointertype()/]<SubsetUnion<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[else]
 std::shared_ptr<SubsetUnion<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[/if]
 		[elseif(aProperty.isSubset())]
-			[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+			[if (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))))]
 [aProperty.pointertype()/]<Subset<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[else]
 std::shared_ptr<Subset<[aProperty.type.transformType()/], [aProperty.generateSubsetTypes()/]>>[/if]
 		[elseif(aProperty.isUnion())]
-			[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+			[if (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))))]
 [aProperty.pointertype()/]<Union<[aProperty.type.transformType()/]>>[else]
 std::shared_ptr<Union<[aProperty.type.transformType()/]>>[/if]
 		[else]
-			[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+			[if (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))))]
 [aProperty.pointertype()/]<Bag<[aProperty.type.transformType()/]>>[else]
 std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
 		[/if]
 [else]
-		[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+		[if (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))))]
 [aProperty.pointertype()/]<[aProperty.type.transformType()/]>[else]
 [aProperty.type.transformType()/][/if]
 [/if]
@@ -73,7 +73,7 @@ std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
 
 [template public generateSubsetTypes(aProperty : Property)]
 [for (subsettedProperty : Property | aProperty.subsettedProperty->select(owner.oclIsTypeOf(Class) or owner.oclIsKindOf(Interface))->asOrderedSet()->sortedBy(type.name)) separator(', ')]
-[subsettedProperty.type.generateCppType(true)/][if (not subsettedProperty.isUnion())] /*Subset does not reference a union*/[/if][/for]
+[subsettedProperty.type.generateCppRawType(true)/][if (not subsettedProperty.isUnion())] /*Subset does not reference a union*/[/if][/for]
 [/template]
 
 [template public generateSubsetElements(aProperty : Property)]
@@ -106,9 +106,10 @@ std::shared_ptr<[anOperation.type.transformType()/]>
 [**
  * generate the C++ representation of a type for an OpaqueBehavior
  * 
- * - pointer for types, which are not primitive or enumeration:
- * - upper <> 1 -> Bag used  
- * - error message, if OpaqueBehavior type is undefined or Operation type name is undefined
+ * - if anOpaqueBehavior does not have a return parameter, C++ type will be void
+ * - if anOpaqueBehavior has a return parameter, it's type will be transformed...
+ * 		- ... as simple value in case of primitive type or enumeration
+ * 		- ... as shared_ptr (and possibly shared_ptr<Bag<>>) otherwise
 */]
 [template public generateCppType(anOpaqueBehavior : OpaqueBehavior) post (trim())]
 [if (not anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::return)->isEmpty())]
@@ -116,26 +117,26 @@ std::shared_ptr<[anOperation.type.transformType()/]>
 	[let returnType : Type = returnParameter.type]
 	[if (returnParameter.upper <> 1)]
 std::shared_ptr<Bag<[returnType.transformType()/]>>
-		[elseif (not (returnType.isPrimitive() or returnType.oclIsKindOf(Enumeration)))]
+		[elseif (returnType.oclIsUndefined() or ((not returnType.isPrimitive()) and (not returnType.oclIsKindOf(Enumeration))))]
 std::shared_ptr<[returnType.transformType()/]>
 		[else]
 [returnType.transformType()/][/if]
 	[/let]
 [/let]
 [else]
-[transformType(null)/]
+void
 [/if]
 [/template]
 
 [**
  * generate the C++ representation of a type for a Parameter
  * 
- * - shared pointer for types, which are not primitive or enumeration
- * - upper <> 1 -> Bag used  
- * - error message, if Parameter type is undefined or Parameter type name is undefined
+ * - aParameter's type will be transformed...
+ * 		- ... as simple value in case of primitive type or enumeration with upper = 1
+ * 		- ... as shared_ptr (and possibly shared_ptr<Bag<>>) otherwise
 */]
 [template public generateCppType(aParameter : Parameter, useReference : Boolean) post (trim())]
-[if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
+[if (aParameter.type.oclIsUndefined() or ((not aParameter.type.isPrimitive()) and (not aParameter.type.oclIsKindOf(Enumeration))))]
 std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if]
 [else]
 [if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
@@ -144,27 +145,32 @@ std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformT
 [**
  * generate the C++ representation of a type for a Pin
  * 
- * - shared pointer for types, which are not primitive or enumeration
- * - upper <> 1 -> Bag used  
- * - error message, if Parameter type is undefined or Parameter type name is undefined
+ * - aPin's type will be transformed...
+ * 		- ... as simple value in case of primitive type or enumeration with upper = 1
+ * 		- ... as shared_ptr (and possibly shared_ptr<Bag<>>) otherwise
 */]
 [template public generateCppType(aPin : Pin, useReference : Boolean) post (trim())]
-[if (not aPin.type.oclIsUndefined() and not (aPin.type.isPrimitive() or aPin.type.oclIsKindOf(Enumeration)))]
+[if (aPin.type.oclIsUndefined() or ((not aPin.type.isPrimitive()) and (not aPin.type.oclIsKindOf(Enumeration))))]
 std::shared_ptr<[if (aPin.upper <> 1)]Bag<[/if][aPin.type.transformType()/]>[if (aPin.upper <> 1)]>[/if]
 [else]
 [if (aPin.upper <> 1)]std::shared_ptr<Bag<[/if][aPin.type.transformType()/][if (aPin.upper <> 1)]>>[/if][/if]
 [/template]
 
 [**
- * generate the C++ representation of a type for a Parameter
+ * generate the C++ representation of a type for a Type
  * 
- * - shared pointer for types, which are not primitive or enumeration
- * - upper <> 1 -> Bag used  
- * - error message, if Parameter type is undefined or Parameter type name is undefined
+ * - aType will be transformed...
+ * 		- ... as simple value in case of primitive type or enumeration or noShared = true
+ * 		- ... as shared_ptr otherwise
 */]
-[template public generateCppType(aType : Type, noShared : Boolean)]
+[template public generateCppRawType(aType : Type, noShared : Boolean) ? (aType.oclIsUndefined())]
+[if (not noShared)]std::shared_ptr<[/if]Any[if (not noShared)]>[/if]
+[/template]
+
+[template public generateCppRawType(aType : Type, noShared : Boolean)]
 [if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]>[/if]
 [/template]
+
 
 [**
  * determine if weak pointer or shared pointer should be used:

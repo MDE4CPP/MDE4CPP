@@ -68,19 +68,19 @@
 */]
 [template public generateClassCreate(aClass : Class,impl : Boolean)]
 //START Create methods for class [aClass.name/]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<[aClass.generateCppRawType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())] [comment for each association, that is a composition to aClass/]
 	[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
 		[if (not containerProperty.opposite.oclIsUndefined())]
 			[let containmentProperty : Property = containerProperty.opposite]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+virtual std::shared_ptr<[aClass.generateCppRawType(true)/]> create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
 			[/let]
 		[/if]
 	[/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
+virtual std::shared_ptr<[aClass.generateCppRawType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
 [/for]
 [/for]
 //END Create methods for class [aClass.name/]
@@ -306,27 +306,27 @@ virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstra
 [**
  * generates the lazy creation functionality for Subsets, Unions and SubsetUnions
 */]
-[template public generateContainerPropertyInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[template public generateContainerPropertyInit(aProperty : Property) ? (not (aProperty.upper = 1))]
 [if(aProperty.isSubsetUnion())]
 /*SubsetUnion*/
-m_[aProperty.name/].reset(new SubsetUnion<[aProperty.type.generateCppType(true)/], [aProperty.generateSubsetTypes()/] >());
+m_[aProperty.name/].reset(new SubsetUnion<[aProperty.type.generateCppRawType(true)/], [aProperty.generateSubsetTypes()/] >());
 #ifdef SHOW_SUBSET_UNION
 	std::cout << "Initialising shared pointer SubsetUnion: " << "m_[aProperty.name/] - SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
 #endif
 [elseif(aProperty.isSubset())]
 /*Subset*/
-m_[aProperty.name/].reset(new Subset<[aProperty.type.generateCppType(true)/], [aProperty.generateSubsetTypes()/] >());
+m_[aProperty.name/].reset(new Subset<[aProperty.type.generateCppRawType(true)/], [aProperty.generateSubsetTypes()/] >());
 #ifdef SHOW_SUBSET_UNION
 	std::cout << "Initialising shared pointer Subset: " << "m_[aProperty.name/] - Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
 #endif
 [elseif(aProperty.isUnion())]
 /*Union*/
-m_[aProperty.name/].reset(new Union<[aProperty.type.generateCppType(true)/]>());
+m_[aProperty.name/].reset(new Union<[aProperty.type.generateCppRawType(true)/]>());
 	#ifdef SHOW_SUBSET_UNION
 	std::cout << "Initialising Union: " << "m_[aProperty.name/] - Union<[aProperty.generateCppType()/]>()" << std::endl;
 #endif
 [else]
-m_[aProperty.name/].reset(new Bag<[aProperty.type.generateCppType(true)/]>());
+m_[aProperty.name/].reset(new Bag<[aProperty.type.generateCppRawType(true)/]>());
 [/if]
 [/template]
 

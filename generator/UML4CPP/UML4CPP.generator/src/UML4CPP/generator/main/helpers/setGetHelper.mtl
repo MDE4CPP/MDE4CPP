@@ -119,7 +119,9 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 	{
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
-			[if(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			[if (aProperty.type.oclIsUndefined())]
+			return eAny(this->[aProperty.getterName()/](), -1, [if(aProperty.upper = 1)]false[else]true[/if]);
+			[elseif(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
 			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
 			[else]
 			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if], [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
@@ -171,13 +173,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(hasSetter()))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
-		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
-		[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+		[comment aProperty has no type. i.e. is of any type /]
+		[if (aProperty.type.oclIsUndefined())]
 			[comment anEStructuralFeature is a single-instanced value /]
 			[if (aProperty.upper = 1)]
 			try
 			{
-				[aProperty.type.generateCppType(false)/] _[aProperty.name/] = value->get<[aProperty.type.generateCppType(false)/]>();
+				std::shared_ptr<Any> _[aProperty.name/] = value->get<std::shared_ptr<Any>>();
 				[aProperty.setterName()/](_[aProperty.name/]);
 			}
 			catch(...)
@@ -189,10 +191,53 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 			[comment aProperty is a bag value /]
 			try
 			{
-				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>();
-				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+				std::shared_ptr<Bag<Any>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<Any>>();
+				std::shared_ptr<Bag<Any>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
 				
-				for(const std::shared_ptr<[aProperty.type.generateCppType(true)/]> valueToAdd: *_[aProperty.name/]List)
+				for(const std::shared_ptr<Any> valueToAdd: *_[aProperty.name/]List)
+				{
+					if (valueToAdd)
+					{
+						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						{
+							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[/if]
+		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
+		[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			[comment anEStructuralFeature is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			try
+			{
+				[aProperty.type.generateCppRawType(false)/] _[aProperty.name/] = value->get<[aProperty.type.generateCppRawType(false)/]>();
+				[aProperty.setterName()/](_[aProperty.name/]);
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[else]
+			[comment aProperty is a bag value /]
+			try
+			{
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>();
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+				
+				for(const std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd: *_[aProperty.name/]List)
 				{
 					if (valueToAdd)
 					{
@@ -224,7 +269,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 				try
 				{
 					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					std::shared_ptr<[aProperty.type.generateCppType(true)/]> _[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(umlAny);
+					std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> _[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(umlAny);
 					if(_[aProperty.name/])
 					{
 						[aProperty.setterName()/](_[aProperty.name/]);
@@ -256,11 +301,11 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 	
 					if(elementList)
 					{
-						std::shared_ptr<[aProperty.type.generateCppType(true)/]> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+						std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
 	
 						for(const std::shared_ptr<uml::Element> anElement: *elementList)
 						{
-							std::shared_ptr<[aProperty.type.generateCppType(true)/]> valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(anElement);
+							std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(anElement);
 	
 							if (valueToAdd)
 							{
@@ -302,7 +347,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 				try
 				{
 					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/] = std::dynamic_pointer_cast<[compositeOwnerClass.generateCppType(true)/]>(umlAny);
+					std::shared_ptr<[compositeOwnerClass.generateCppRawType(true)/]> _[compositeOwnerClass.name/] = std::dynamic_pointer_cast<[compositeOwnerClass.generateCppRawType(true)/]>(umlAny);
 					if(_[compositeOwnerClass.name/])
 					{
 						this->set[compositeOwnerClass.name.toUpperFirst()/](_[compositeOwnerClass.name/]);
@@ -356,11 +401,22 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
-			[aProperty.type.generateCppType(false)/] valueToAdd;
+			[if (aProperty.type.oclIsUndefined())]
+			std::shared_ptr<Any> valueToAdd;
+			[else]
+			[aProperty.type.generateCppRawType(false)/] valueToAdd;
+			[/if]
 			if(value->isContainer())
 			{
-				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
-				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
+				[if (aProperty.type.oclIsUndefined())]
+				std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						valueToAdd = container->at(0);
+				}
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
 				if(container && !(container->empty()))
 				{
 						// If a non-empty container is passed, the first value of the container will be added to the property
@@ -375,21 +431,23 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 					{
 						// If a non-empty container is passed, the first value of the container will be added to the property
 						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(firstElement);
+						valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
 					}
 				}
 				[/if]
 			}
 			else
 			{
-				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
-				valueToAdd = value->get<[aProperty.type.generateCppType(false)/]>();
+				[if (aProperty.type.oclIsUndefined())]
+				valueToAdd = value->get<std::shared_ptr<Any>>();
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				valueToAdd = value->get<[aProperty.type.generateCppRawType(false)/]>();
 				[else]
 				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 				if(umlAny)
 				{
 					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(element);
+					valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
 				}
 				[/if]
 			}
@@ -431,10 +489,10 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedN
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
-[if (not aClass.getPropertiesForGetAndSet()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration))->isEmpty())]
+[if ((not aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration))))->isEmpty()))]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->reject(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration)))))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
@@ -483,11 +541,22 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
-			[aProperty.type.generateCppType(false)/] valueToRemove;
+			[if (aProperty.type.oclIsUndefined())]
+			std::shared_ptr<Any> valueToRemove;
+			[else]
+			[aProperty.type.generateCppRawType(false)/] valueToRemove;
+			[/if]
 			if(value->isContainer())
 			{
-				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
-				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>>>();
+				[if (aProperty.type.oclIsUndefined())]
+				std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
+				if(container && !(container->empty()))
+				{
+					// If a non-empty container is passed, the first value of the container will be removed from the property
+					valueToRemove = container->at(0);
+				}
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
 				if(container && !(container->empty()))
 				{
 						// If a non-empty container is passed, the first value of the container will be removed from the property
@@ -502,21 +571,23 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 					{
 						// If a non-empty container is passed, the first value of the container will be removed from the property
 						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(firstElement);
+						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
 					}
 				}
 				[/if]
 			}
 			else
 			{
-				[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
-				valueToRemove = value->get<[aProperty.type.generateCppType(false)/]>();
+				[if (aProperty.type.oclIsUndefined())]
+				valueToRemove = value->get<std::shared_ptr<Any>>();
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				valueToRemove = value->get<[aProperty.type.generateCppRawType(false)/]>();
 				[else]
 				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 				if(umlAny)
 				{
 					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>(element);
+					valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
 				}
 				[/if]
 			}
@@ -576,8 +647,8 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 			//Retrieve [anInputParameter.direction/] parameter '[anInputParameter.name/]'
 			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] =  inputArguments->at([inputParameterList->indexOf(anInputParameter) - 1/]);
 			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
-			[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
-				[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
+			[comment anInputParameter is typed by a PrimitiveType or Enumeration or is of Any type /]
+				[if (anInputParameter.type.oclIsUndefined() or anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
 			try
 			{
 				[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
@@ -598,7 +669,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 					try
 					{
 						std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
-						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(_temp);
+						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(_temp);
 					}
 					catch(...)
 					{
@@ -624,10 +695,10 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 					
 						if(elementList)
 						{
-							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppType(true)/]>>();
+							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppRawType(true)/]>>();
 							for(const std::shared_ptr<uml::Element> anElement: *elementList)
 							{
-								std::shared_ptr<[anInputParameter.type.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(anElement);
+								std::shared_ptr<[anInputParameter.type.generateCppRawType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(anElement);
 								[anInputParameter.name/]->add(_temp);
 							}
 						}
@@ -662,9 +733,10 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 				[let returnParameter : Parameter = returnParameterList->first()]
 			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
-					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
+					[comment returnParameter has no type, i.e. is of any type, ergo can be passed right away /]
 					[if (returnParameter.type.oclIsUndefined())]
 			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], -1, [if(returnParameter.upper = 1)]false[else]true[/if]);
+					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
 					[elseif (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
 			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
 					[comment returnParameter is typed by a Class or Interface /]
@@ -691,8 +763,11 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 					[/if]
 				[comment For out parameters, create a new Any-object to store the value /]
 				[else]
+					[comment anOutputParameter has no type, i.e. is of any type, ergo can be passed right away /]
+					[if (anOutputParameter.type.oclIsUndefined())]
+			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], -1, [if(anOutputParameter.upper = 1)]false[else]true[/if]);
 					[comment anOutputParameter is typed by a PrimitiveType or Enumeration /]
-					[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
+					[elseif (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
 			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]);
 					[comment anOutputParameter is typed by a Class or Interface /]
 					[else]
@@ -744,8 +819,9 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 			//Retrieve [anInputParameter.direction/] parameter '[anInputParameter.name/]'
 			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] =  inputArguments->at([inputParameterList->indexOf(anInputParameter) - 1/]);
 			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
-			[comment anInputParameter is typed by a PrimitiveType or Enumeration /]
-				[if (anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
+			[comment anInputParameter has no type. i.e. is of any type, ergo no transformation required /]
+			[comment anInputParameter is typed by a PrimitiveType or Enumeration or is of Any type/]
+				[if (anInputParameter.type.oclIsUndefined() or anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
 			try
 			{
 				[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
@@ -766,7 +842,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 					try
 					{
 						std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
-						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(_temp);
+						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(_temp);
 					}
 					catch(...)
 					{
@@ -792,10 +868,10 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 					
 						if(elementList)
 						{
-							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppType(true)/]>>();
+							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppRawType(true)/]>>();
 							for(const std::shared_ptr<uml::Element> anElement: *elementList)
 							{
-								std::shared_ptr<[anInputParameter.type.generateCppType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppType(true)/]>(anElement);
+								std::shared_ptr<[anInputParameter.type.generateCppRawType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(anElement);
 								[anInputParameter.name/]->add(_temp);
 							}
 						}
@@ -830,8 +906,11 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 				[let returnParameter : Parameter = returnParameterList->first()]
 			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
+					[comment returnParameter has no type, i.e. is of any type, ergo can be passed right away /]
+					[if (returnParameter.type.oclIsUndefined())]
+			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], -1, [if(returnParameter.upper = 1)]false[else]true[/if]);
 					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
-					[if (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
+					[elseif (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
 			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
 					[comment returnParameter is typed by a Class or Interface /]
 					[else]
@@ -857,8 +936,11 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 					[/if]
 				[comment For out parameters, create a new Any-object to store the value /]
 				[else]
+					[comment anOutputParameter has no type, i.e. is of any type, ergo can be passed right away /]
+					[if (anOutputParameter.type.oclIsUndefined())]
+			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], -1, [if(anOutputParameter.upper = 1)]false[else]true[/if]);
 					[comment anOutputParameter is typed by a PrimitiveType or Enumeration /]
-					[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
+					[elseif (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
 			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]);
 					[comment anOutputParameter is typed by a Class or Interface /]
 					[else]

@@ -51,7 +51,7 @@ namespace uml
 	class Property;
 	class Operation;
 	class OpaqueBehavior;
-[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+[if (aClass.ownedAttribute->reject(type.oclIsUndefined())->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 	class EnumerationLiteral;
 [/if]
 }
@@ -91,7 +91,7 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 	[/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
-			[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/]);
+			[className/](std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> [compositeOwnerClass.name.toLowerFirst()/]);
 [/for]
 
 		public:
