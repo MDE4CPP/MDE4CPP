@@ -272,7 +272,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 				{
 					DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 	
-					return executionPlugin->executeBehavior(behavior);
+					return executionPlugin->executeBehavior(behavior, context, inputs);
 				}
 				else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
 			}

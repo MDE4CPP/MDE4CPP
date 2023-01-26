@@ -92,7 +92,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 [/if]
 [/let]
 
-	return fUML::Semantics::Loci::ExecutionFactoryImpl::createExecution(behavior, context);
+	return nullptr;
 }
 
 [for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage())]
