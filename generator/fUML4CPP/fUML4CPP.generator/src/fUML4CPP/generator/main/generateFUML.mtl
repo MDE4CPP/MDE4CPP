@@ -81,27 +81,32 @@
 
 [comment Generate execution plugin, model Locus, model Executor, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
-[comment Generate execution plugin /]
-[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
-[aPackage.generateExecutionPlugin()/]
-
-[comment Generate model Locus /]
-[printInfo('Generating Locus class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
-[aPackage.generateModelLocusHeader()/]
-[aPackage.generateModelLocusSource()/]
-
-[comment Generate model Executor /]
-[printInfo('Generating Executor class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
-[aPackage.generateModelExecutorHeader()/]
-[aPackage.generateModelExecutorSource()/]
-
-[comment Generate model ExecutionFactory /]
-[printInfo('Generating ExecutionFactory class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
-[aPackage.generateModelExecutionFactoryHeader()/]
-[aPackage.generateModelExecutionFactorySource()/]
-
-[comment Generate project files /]
-[aPackage.generateExecutionBuildFiles(false)/]
+	[if (aPackage.oclIsKindOf(Profile))]
+		[comment For Profiles, no fUML-Adapter functionality should be generated /]
+		[printWarning(aPackage.generateNamespace(false) + ' is a Profile. For instances of uml::Profile, generation of fUML functionlity is disabled by default.', 'fUML4CPP.generator.main.generateFUML:generateFUMLModel', 1)/]
+	[else]
+		[comment Generate execution plugin /]
+		[printInfo('Generating execution plugin class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+		[aPackage.generateExecutionPlugin()/]
+		
+		[comment Generate model Locus /]
+		[printInfo('Generating Locus class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+		[aPackage.generateModelLocusHeader()/]
+		[aPackage.generateModelLocusSource()/]
+		
+		[comment Generate model Executor /]
+		[printInfo('Generating Executor class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+		[aPackage.generateModelExecutorHeader()/]
+		[aPackage.generateModelExecutorSource()/]
+		
+		[comment Generate model ExecutionFactory /]
+		[printInfo('Generating ExecutionFactory class for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
+		[aPackage.generateModelExecutionFactoryHeader()/]
+		[aPackage.generateModelExecutionFactorySource()/]
+		
+		[comment Generate project files /]
+		[aPackage.generateExecutionBuildFiles(false)/]
+	[/if]
 [/if]
 [/template]
 
