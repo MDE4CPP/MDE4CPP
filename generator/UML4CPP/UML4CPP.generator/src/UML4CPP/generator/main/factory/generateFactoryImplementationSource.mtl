@@ -38,15 +38,9 @@
 #include <cassert>
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(isGeneratable()))]
-#include "[aClass.getNearestPackage().generateNamespacePath(false)/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[for (aClassifier : Classifier | aPackage.collectPackageClassifiersForFactoryDeclaration()->select(isGeneratable()))]
+#include "[aClassifier.getNearestPackage().generateNamespacePath(false)/]/impl/[aClassifier.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
-
-[comment] DISABLE INTERFACE IMPLEMENTATION
-[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
-#include "[aPackage.getPackageName()/]/impl/[aInterface.name.concat('Impl.hpp')/]"
-[/for]
-[/comment]
 
 [if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 //*********************************
@@ -55,10 +49,10 @@
 [comment  generate standard constructor/]
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
-	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]));
+	[for (aClassifier : Classifier | aPackage.collectPackageClassifiersForFactoryFunctions()->select(isGeneratable()))]
+	m_idMap.insert(std::make_pair("[aClassifier.qualifiedName/]", [aPackage.name/]Package::[aClassifier.getMemberName().toUpperCase()/]));
 	[/for]
-	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
+	[for (aInterface : Interface | aPackage.collectPackageInterfacesForFactory())]
 	m_idMap.insert(std::make_pair("[aInterface.qualifiedName/]", [aPackage.name/]Package::[aInterface.getMemberName().toUpperCase()/]));
 	[/for]
 }
@@ -81,7 +75,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 {
 	switch(_metaClassId)
 	{
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
+	[for (aClass : Class | aPackage.collectPackageClassifiersForFactoryFunctions()->selectByKind(Class)->select(isGeneratable()))]
 	[let compositionsToClass : OrderedSet(Association) = aClass.getCompositionsToClass()]
 		case [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
@@ -131,52 +125,6 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 		}
 	[/let]
 	[/for]
-[comment] DISABLE INTERFACE IMPLEMENTATION
-	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
-	[let ref:OrderedSet(Association) = aInterface.getCompositionsToInterface()]
-		case [aPackage.name/]Package::[aInterface.getMemberName().toUpperCase()/]:
-		{
-[if(ref->size()>0)]
-			if (nullptr == container)
-			{
-[/if]
-				return this->create[aInterface.name.toUpperFirst()/](_metaClassId);
-[if(ref->size()>0)]			}
-			else
-			{
-[/if]
-				[if(ref->size()>1)]
-				switch(referenceID)
-				{
-					[for (anAssociation : Association | aInterface.getCompositionsToInterface())]
-					[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
-					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
-					//[aInterface.name/] has [anAssociation.name/] as a containment
-					case  [aPackage.name/]Package::[containmentProperty.name.toUpperCase()/]:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
-						return this->create[aInterface.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId);															  
-					}
-					[/let]
-					[/let]
-					[/for]
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
-				[elseif(ref->size()=1)]
-				[let containerProperty : Property = ref->first().memberEnd->select(type = aInterface)->asOrderedSet()->first()]
-				[let containmentProperty : Property = ref->first().memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
-				[containmentProperty.generateCppType()/] castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
-				assert(castedContainer);
-				return std::shared_ptr<[aInterface.name.toUpperFirst()/]>(this->create[aInterface.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId));
-				[/let]
-				[/let]
-				[/if]
-			[if(ref->size()>0)]}[/if]
-		}
-	[/let]
-	[/for]
-[/comment]
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << _metaClassId <<" not found" << std::endl;
 	}
@@ -207,7 +155,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
     return nullptr;
 }
 
-[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
+[for (aClass : Class | aPackage.collectPackageClassifiersForFactoryFunctions()->selectByKind(Class)->select(isGeneratable()))]
 //--------------------------
 //create-Functions for class '[aClass.name/]'
 //--------------------------
@@ -261,40 +209,18 @@ std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.
 }
 [/for]
 [/for][/for]
-
-[comment]
-[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
-std::shared_ptr<[aInterface.generateCppType(true)/]> [className/]::create[aInterface.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
+[for (aDataType : DataType | aPackage.collectPackageClassifiersForFactoryFunctions()->selectByKind(DataType)->select(isGeneratable()))]
+//--------------------------
+//create-Functions for data type '[aDataType.name/]'
+//--------------------------
+std::shared_ptr<[aDataType.generateCppRawType(true)/]> [className/]::create[aDataType.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aInterface.generateCppType(true)/]Impl> element(new [aInterface.name.toUpperFirst()/]Impl());
+	std::shared_ptr<[aDataType.generateCppRawType(true)/]Impl> element(new [aDataType.generateCppRawType(true)/]Impl());
 	element->setMetaElementID(metaElementID);
-	element->[aInterface.generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
-[for (anAssociation : Association | aInterface.getCompositionsToInterface())]
-[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
-[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
-std::shared_ptr<[aInterface.generateCppType(true)/]> [className/]::create[aInterface.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<[aInterface.generateCppType(true)/]Impl> element(new [aInterface.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
-	element->setMetaElementID(metaElementID);
-[if (containmentProperty.isBackReference())]
-	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
-[else]
-	if (nullptr != [containmentProperty.name.toLowerFirst()/])
-[/if]
-	{
-		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper <> 1)][containerProperty.getterName()/]()->push_back(element)[else][containerProperty.setterName()/](element)[/if];
-	}
-	element->[aInterface.generateGetThisPtrPropertySetterName()/](element);
-	return element;
-}
-[/let]
-[/let]
-[/for]
-[/for]
-[/comment]
 
+[/for]
 
 std::shared_ptr<[aPackage.name.concat('Package')/]> [className/]::get[aPackage.name.concat('Package')/]()
 {

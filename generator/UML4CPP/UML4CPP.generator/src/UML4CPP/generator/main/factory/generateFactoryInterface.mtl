@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateDataType /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -36,11 +37,11 @@
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Package')/].hpp"
 
 [comment  Generate Includes for the Factory/]
-[for (forwardDeclPackages : Package| aPackage.collectModelClassesForFactoryDeclaration()._package->asSet()) separator ('\n')]
+[for (forwardDeclPackages : Package| aPackage.collectPackageClassifiersForFactoryDeclaration()._package->asSet()) separator ('\n')]
 namespace [forwardDeclPackages.generateNamespace(false)/]
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages)->select(isGeneratable()))]
-	class [aClass.name.toUpperFirst()/];
+	[for (aClassifier : Classifier | aPackage.collectPackageClassifiersForFactoryDeclaration()->select(_package = forwardDeclPackages)->select(isGeneratable()))]
+	[if (aClassifier.oclIsTypeOf(DataType))]struct[else]class[/if] [aClassifier.name.toUpperFirst()/];
 	[/for]
 }
 [/for]
@@ -65,7 +66,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
-			[aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()).generateClassCreate(false)/]
+			[aPackage.collectPackageClassifiersForFactoryFunctions()->select(isGeneratable()).generateClassifierCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[aPackage.name.concat('Package')/]> get[aPackage.name.concat('Package')/]() = 0;
 	};

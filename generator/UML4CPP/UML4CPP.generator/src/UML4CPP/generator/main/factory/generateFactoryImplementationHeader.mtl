@@ -20,6 +20,7 @@
 [module generateFactoryImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateDataType /]
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -54,7 +55,7 @@
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 
 			//Creator functions
-			[aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()).generateClassCreate(true)/]
+			[aPackage.collectPackageClassifiersForFactoryFunctions()->select(isGeneratable()).generateClassifierCreate(true)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name/]Package> get[aPackage.name/]Package();

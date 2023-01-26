@@ -83,7 +83,7 @@
 #include "types/typesPackage.hpp"
 [/if]
 [comment Packages for used (non-primitive) Types /]
-[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n')]
+[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration) or t.oclIsTypeOf(DataType))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n')]
 #include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
 [/for]
 [comment Packages of external Interfaces realized by this class /]
@@ -95,7 +95,7 @@
 #include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
 [/for]
 [comment Used Types /]
-[for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
+[for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration)  or t.oclIsTypeOf(DataType))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
 [if (cl.getNearestPackage().hasIncludePath())]
 #include "[cl.getNearestPackage().getIncludePath()/]"
 [else]

@@ -31,6 +31,7 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::components::generateDataType /]
 
 [** 
  * Get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
@@ -66,7 +67,8 @@
 [**
  * template to generate create function declarations
 */]
-[template public generateClassCreate(aClass : Class,impl : Boolean)]
+[template public generateClassifierCreate(aClassifier : Classifier, impl : Boolean) ? (aClassifier.oclIsKindOf(Class))]
+[let aClass : Class = aClassifier.oclAsType(Class)]
 //START Create methods for class [aClass.name/]
 virtual std::shared_ptr<[aClass.generateCppRawType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())] [comment for each association, that is a composition to aClass/]
@@ -84,6 +86,7 @@ virtual std::shared_ptr<[aClass.generateCppRawType(true)/]> create[aClass.name.t
 [/for]
 [/for]
 //END Create methods for class [aClass.name/]
+[/let]
 
 [/template]
 [**
@@ -114,6 +117,18 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	->sortedBy(name)
 	->reject(name.oclIsInvalid() or name = ''))]
 [aClass.generateStaticPackageIDsForClass()/]
+[/for]
+[for (aDataType : DataType | aPackage.allOwnedElements()->selectByType(DataType)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticDataTypeID(aDataType)/]
+	[comment  Properties of c/]
+	[for (aProperty : Property | aDataType.ownedAttribute) before('\t\t//Properties\n')]
+	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	[/for]
+	[comment  Operations of c/]
+	[for (anOperation : Operation | aDataType.ownedOperation) before('//Operations\n')]
+	//[anOperation.generateQualifiedNameWithSignature()/]
+	static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
+	[/for]
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticInterfaceID(anInterface)/]
@@ -268,13 +283,13 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [**
  * Templates and Queries for generating the Subset/Union functionalities of a Class
 */]
-[template public generateUnionGetterCpp(aClass : Class)]
-[aClass.getUnionProperties()->sortedBy(name).generateUnionGetterCpp(aClass)/]
+[template public generateUnionGetterCpp(aClassifier : Classifier)]
+[aClassifier.getUnionProperties()->sortedBy(name).generateUnionGetterCpp(aClassifier)/]
 
 [/template]
 
-[template public generateUnionGetterCpp(aProperty : Property, aClass: Class) ? (aProperty.isUnion())]
-[aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const
+[template public generateUnionGetterCpp(aProperty : Property, aClassifier : Classifier) ? (aProperty.isUnion())]
+[aProperty.generateCppType()/] [aClassifier.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const
 {
 [if (not (aProperty.upper = 1))]
 	if(m_[aProperty.name/] == nullptr)
@@ -289,8 +304,8 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 
 [/template]
 
-[template public generateUnionGetterDeclaretaion(aClass : Class, impl : Boolean)]
-[aClass.getUnionProperties()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
+[template public generateUnionGetterDeclaretaion(aClassifier : Classifier, impl : Boolean)]
+[aClassifier.getUnionProperties()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
 [/template]
 
 [template public generateUnionGetterDeclaretaionBag(aProperty : Property, impl : Boolean) ? (isUnion())]
@@ -298,10 +313,10 @@ virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstra
 
 [/template]
 
-[query public getUnionProperties(aClass : Class) : Set(Property) = OrderedSet{aClass.getSubsetedUnionProperties(),aClass.attribute->select(isUnion())}->flatten()->sortedBy(name) /]
+[query public getUnionProperties(aClassifier : Classifier) : Set(Property) = OrderedSet{aClassifier.getSubsetedUnionProperties(), aClassifier.attribute->select(isUnion())}->flatten()->sortedBy(name) /]
 
-[query public getSubsetedUnionProperties(aClass : Class): Set(Property) =  aClass.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not p.isUnion()) else false endif ).subsettedProperty->asOrderedSet()->sortedBy(name)/]
-[query public getSubsetsForUnion(aClass : Class, union : Property): Set(Property) =  aClass.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not (p = union)) else false endif ).oclAsType(Property)->asOrderedSet()->sortedBy(name)/]
+[query public getSubsetedUnionProperties(aClassifier : Classifier): Set(Property) =  aClassifier.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not p.isUnion()) else false endif ).subsettedProperty->asOrderedSet()->sortedBy(name)/]
+[query public getSubsetsForUnion(aClassifier : Classifier, union : Property): Set(Property) =  aClassifier.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not (p = union)) else false endif ).oclAsType(Property)->asOrderedSet()->sortedBy(name)/]
 
 [**
  * generates the lazy creation functionality for Subsets, Unions and SubsetUnions

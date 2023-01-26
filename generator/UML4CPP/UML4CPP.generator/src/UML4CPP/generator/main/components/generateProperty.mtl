@@ -83,11 +83,11 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
  * generate property getter implementation
 */]
 [template public generateAttributeGetterImplementationCpp(aProperty : Property) ? (not aProperty.isUnion())]
-[aProperty.generateAttributeGetterImplementationCpp(aProperty.class)/]
+[aProperty.generateAttributeGetterImplementationCpp(aProperty.getFeaturingClassifier())/]
 [/template]
 
-[template public generateAttributeGetterImplementationCpp(aProperty : Property, aClass : Class)]
-[aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
+[template public generateAttributeGetterImplementationCpp(aProperty : Property, aClassifier : Classifier)]
+[aProperty.generateCppType()/] [aClassifier.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
 {
 [if (aProperty.upper <> 1)]
 	if(m_[aProperty.name/] == nullptr)
@@ -117,15 +117,15 @@ std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> [aClass.name.toUp
 [**
  * generate property setter implementation
 */]
-[template public generateAttributeSetterImplementationCpp(aProperty : Property )]
-[aProperty.generateAttributeSetterImplementationCpp(aProperty.class)/]
+[template public generateAttributeSetterImplementationCpp(aProperty : Property)]
+[aProperty.generateAttributeSetterImplementationCpp(aProperty.getFeaturingClassifier())/]
 [/template]
 
-[template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.hasSetter())]
-void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
+[template public generateAttributeSetterImplementationCpp(aProperty : Property, aClassifier : Classifier) ? (aProperty.hasSetter())]
+void [aClassifier.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
-	[aProperty.generateRedefinedPropertySet(aClass)/]
+	[aProperty.generateRedefinedPropertySet(aClassifier)/]
 }
 [/template]
 
@@ -137,7 +137,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 	[comment  if redefinedProperty is owned by a class and aProperty is owned by a class /]
 	[comment  this is done as a single condition, since a situation, where the owner of redefinedProperty is a Class and the owner of aProperty is an Interface would not make any sense/]
 	[if (redefinedProperty.owner.oclIsKindOf(Class) and owningClassifier.oclIsKindOf(Class))]
-[if (redefinedProperty.class = owningClassifier)]this->[else][redefinedProperty.class.transformType()/]Impl::[/if][redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+[if (redefinedProperty.getFeaturingClassifier() = owningClassifier)]this->[else][redefinedProperty.getFeaturingClassifier().transformType()/]Impl::[/if][redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
 	[comment  else, if redefinedProperty is owned by an Interface/]
 	[elseif(redefinedProperty.owner.oclIsKindOf(Interface))]
 	[let redefinedPropertyOwningInterface : Interface = redefinedProperty.owner.oclAsType(Interface)]
@@ -149,7 +149,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 this->[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
 			[comment else, if owningClass realizes this interface indirectly /]
 				[for (realizingBaseClass : Class | owningClass.getRealizingBaseClasses(redefinedPropertyOwningInterface))]
-[redefinedProperty.class.transformType()/]Impl::[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+[redefinedProperty.getFeaturingClassifier().transformType()/]Impl::[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
 				[/for]
 			[/if]
 		[/let]
@@ -190,15 +190,13 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
  * generate creation of meta model instance for an Property element
 */]
 [template public generateAttributeCreation(aProperty : Property) post(trim())]
-[if (not aProperty.class.oclIsUndefined())]
+[if (not aProperty.getFeaturingClassifier().oclIsUndefined())]
 	[if (aProperty.oclIsTypeOf(Property))]
-	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Class([aProperty.class.memberName()/]);
+	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
 	[elseif (aProperty.oclIsTypeOf(Port))]
-	[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_Class([aProperty.class.memberName()/]);
+	[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
 	[/if]
-[else][if (not aProperty.interface.oclIsUndefined())]
-	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Interface([aProperty.interface.memberName()/]);
-[/if][/if]
+[/if]
 [/template]
 
 [**
@@ -257,3 +255,5 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
 [aProperty.type.getNearestPackage().generateNamespace(true)/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]
+
+[query public getFeaturingClassifier(aProperty : Property) : Classifier = aProperty.featuringClassifier->asSequence()->first() /]

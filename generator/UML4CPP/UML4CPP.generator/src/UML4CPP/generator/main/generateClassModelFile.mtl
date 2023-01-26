@@ -56,7 +56,8 @@
 [let classifiersForForwardDeclaration : Set(Classifier) = Set
 {
 	aClass.includes()->filter(Class),
-	aClass.includes()->filter(Interface)
+	aClass.includes()->filter(Interface),
+	aClass.includes()->selectByType(DataType)
 }->flatten()]
 	[if (classifiersForForwardDeclaration->size() > 0)]
 //Forward declarations for used types
@@ -66,7 +67,7 @@ namespace [aPackage.generateNamespace(true)/]
 {
 			[/if]
 			[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
-class [aClassifier.name.toUpperFirst()/];
+[if (not aPackage.isIgnoreNamespace())]['\t'/][/if][if (aClassifier.oclIsTypeOf(DataType))]struct[else]class[/if] [aClassifier.name.toUpperFirst()/];
 			[/for]
 			[if (not aPackage.isIgnoreNamespace())]
 }

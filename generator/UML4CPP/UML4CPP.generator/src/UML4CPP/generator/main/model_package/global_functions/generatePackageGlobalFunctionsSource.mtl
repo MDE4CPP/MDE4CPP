@@ -214,7 +214,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr
 [/let]
 [/template]
 
-[query private collectAbstractDataTypes_Any_IncludeString(arg : OclAny) : String = '#include "uml/UMLAny.hpp"\n#include"uml/UMLContainerAny.hpp"' /]
+[query private collectAbstractDataTypes_Any_IncludeString(arg : OclAny) : String = '#include "uml/UMLAny.hpp"\n#include "uml/UMLContainerAny.hpp"' /]
 [query private collectAbstractDataTypes_Bag_IncludeString(arg : OclAny) : String = '#include "abstractDataTypes/Bag.hpp"' /]
 [query private collectUML_OpaqueBehavior_IncludeString(arg : OclAny) : String = '#include "uml/OpaqueBehavior.hpp"\n#include "uml/FunctionBehavior.hpp"' /]
 [query private collectPackageInterface_IncludeString(aPackage : Package) : String = '#include "' + (if(aPackage.name = 'PrimitiveTypes') then ('types/typesPackage.hpp"') else (aPackage.generateNamespacePath(false) + '/' + aPackage.name + 'Package.hpp"') endif) /]

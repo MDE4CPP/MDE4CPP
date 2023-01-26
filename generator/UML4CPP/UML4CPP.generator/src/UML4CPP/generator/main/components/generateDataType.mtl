@@ -14,20 +14,57 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module for generation of eSet/ eGet artefacts
+ * module for generation of UML DataType artefacts
  * 
  */]
-[module setGetHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateDataType('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::components::generateProperty /]
-[import UML4CPP::generator::main::components::generateOperation /]
-[import UML4CPP::generator::main::components::generateType /]
-[import UML4CPP::generator::main::components::generateClass /]
-[import UML4CPP::generator::main::components::generateNamedElement /]
-[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
+
+
+[template public generateStaticDataTypeID(aDataType : DataType)]
+//DataType [aDataType.generateNamespaceName(true)/]
+static const unsigned long [aDataType.getMemberName().toUpperCase()/] = [aDataType.transformType().generatePolynomialRollingHash()/];
+static const unsigned int [aDataType.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aDataType.allFeatures()->size()/];
+static const unsigned int [aDataType.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aDataType.ownedOperation->size()/];
+
+[/template]
+
+[**
+ * template to generate C++ fragment of interface names, which extend a DataType
+*/]
+[template public generateInterfaceExtensions(aDataType : DataType) post (trim())]
+[for (aSupplier : NamedElement | aDataType.directlyRealizedInterfaces()->reject(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
+public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.getNearestPackage().generateNamespace(false)/]::[/if][aSupplier.name/][/for]
+[/template]
+
+[**
+ * template to generate header include of template class Bag for a DataType element
+ * include of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1
+*/]
+[template public generateAbstractDataTypesIncludes(aDataType : DataType)]
+[if (aDataType.ownedAttribute->select(upper <> 1 and not isSubset() and not isUnion())->size() > 0 or aDataType.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+#include "abstractDataTypes/Bag.hpp"
+[/if]
+[if (aDataType.ownedAttribute->select((isSubset() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isSubset())))->size() > 0)]
+#include "abstractDataTypes/Subset.hpp"
+[/if]
+[if (aDataType.ownedAttribute->select(isSubsetUnion() or ((not opposite.oclIsUndefined()) and (opposite.isSubsetUnion())))->size() > 0)]
+#include "abstractDataTypes/SubsetUnion.hpp"
+[/if]
+[if (aDataType.ownedAttribute->select((isUnion() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isUnion() and (not opposite.isSubsetUnion()))))->size() > 0)]
+#include "abstractDataTypes/Union.hpp"[/if]
+[/template]
+
+[** 
+ * Get all Interfaces (direct or indirect) that are realized by aDataType
+*/]
+[query public collectAllRealizedInterfaces(aDataType : DataType) : Set(Interface) = aDataType.directlyRealizedInterfaces()->addAll(aDataType.directlyRealizedInterfaces().getAllBaseInterfaces())->flatten()->asSet() /]
 
 [**
  * checks if setter for a StructuralFeature should be generated
@@ -36,12 +73,12 @@
  * - feature with upper bound > 1 (realized by list and getter)
  * - feature is read only
 */]
-[query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
+[query public hasSetter(aStructuralFeature : StructuralFeature) : Boolean = not (( not (aStructuralFeature.upper = 1) ) and (not aStructuralFeature.oclAsType(Property).isReadOnly)) /]
 
 [**
  * generate get, set and unset function declaration
 */]
-[template public generateeGetSetDel(aClass : Class,impl : Boolean)]
+[template public generateeGetSetDel(aDataType : DataType, impl : Boolean)]
 //Get
 virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> get(std::string _qualifiedName) const [abstractSuffix(impl)/];
@@ -67,57 +104,54 @@ virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) [abstractSuf
 [**
  * generate get, set and unset function declaration
 */]
-[template public generateInvoke(aClass : Class,impl : Boolean)]
+[template public generateInvoke(aDataType : DataType, impl : Boolean)]
 //Operation invocation
 virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
-
-//OpaqueBehavior invocation
-virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
 [/template]
 
-[query private getPropertiesForGetAndSet(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
-[query private getOperationsForInvoke(aClass : Class) : OrderedSet(Operation) = aClass.ownedOperation->addAll(aClass.interfaceRealization.contract.ownedOperation)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
+[query private getPropertiesForGetAndSet(aDataType : DataType) : OrderedSet(Property) = aDataType.attribute->addAll(aDataType.directlyRealizedInterfaces().attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
+[query private getOperationsForInvoke(aDataType : DataType) : OrderedSet(Operation) = aDataType.ownedOperation->addAll(aDataType.directlyRealizedInterfaces().ownedOperation)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
 
 [**
  * generate get, set and unset function implementation
 */]
-[template public generateeGetSetImpl(aClass : Class)]
+[template public generateeGetSetImpl(aDataType : DataType)]
 //Get
-[aClass.generateGetImplementation()/]
+[aDataType.generateGetImplementation()/]
 
 //Set
-[aClass.generateSetImplementation()/]
+[aDataType.generateSetImplementation()/]
 
 //Add
-[aClass.generateAddImplementation()/]
+[aDataType.generateAddImplementation()/]
 
 //Unset
-[aClass.generateUnSetImplementation()/]
+[aDataType.generateUnSetImplementation()/]
 
 //Remove
-[aClass.generateRemoveImplementation()/]
+[aDataType.generateRemoveImplementation()/]
 [/template]
 
-[template private generateGetImplementation(aClass : Class)]
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+[template private generateGetImplementation(aDataType : DataType)]
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
 {
 	return this->get(_property->_getID());
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName) const
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName) const
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->get(uID);
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 {
-[if (not aClass.getPropertiesForGetAndSet()->isEmpty())]
+[if (not aDataType.getPropertiesForGetAndSet()->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet())]
+		[for (aProperty : Property | aDataType.getPropertiesForGetAndSet())]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 			[if (aProperty.type.oclIsUndefined())]
 			return eAny(this->[aProperty.getterName()/](), -1, [if(aProperty.upper = 1)]false[else]true[/if]);
@@ -127,19 +161,15 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if], [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
 			[/if]
 		[/for]
-		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
-			return eUMLAny(this->get[compositeOwnerClass.name.toUpperFirst()/]().lock(), [compositeOwnerClass.generateStaticClassifierIDAccess()/]);
-		[/for]
 	}
 
 [/if]
-[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-[if (classList->size() > 0)]
+[let classifierList : OrderedSet(Classifier) = aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classifierList->size() > 0)]
 	std::shared_ptr<Any> result;
-	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call get() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::get(_uID);
+	[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call get() for base class [general.name/]
+	result = [general.generateNamespaceName(true)/]Impl::get(_uID);
 	if (result != nullptr)
 	{
 		return result;
@@ -153,24 +183,24 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned 
 }
 [/template]
 
-[template private generateSetImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+[template private generateSetImplementation(aDataType : DataType)]
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
-[if (not aClass.getPropertiesForGetAndSet()->select(hasSetter())->isEmpty())]
+[if (not aDataType.getPropertiesForGetAndSet()->select(hasSetter())->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(hasSetter()))]
+		[for (aProperty : Property | aDataType.getPropertiesForGetAndSet()->select(hasSetter()))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 		[comment aProperty has no type. i.e. is of any type /]
@@ -338,67 +368,33 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::
 		break;
 		}
 		[/for]
-		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
-		{
-			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-			if(umlAny)
-			{
-				try
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					std::shared_ptr<[compositeOwnerClass.generateCppRawType(true)/]> _[compositeOwnerClass.name/] = std::dynamic_pointer_cast<[compositeOwnerClass.generateCppRawType(true)/]>(umlAny);
-					if(_[compositeOwnerClass.name/])
-					{
-						this->set[compositeOwnerClass.name.toUpperFirst()/](_[compositeOwnerClass.name/]);
-						//TODO also set back reference?
-					}			
-					else
-					{
-						throw "Invalid argument";
-					}		
-				}
-				catch(...)
-				{
-					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!")
-					return;
-				}
-			}
-			else
-			{
-				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property '[compositeOwnerClass.name/]'. Failed to set property!")
-				return;
-			}
-			break;
-		}
-		[/for]
 	}
 [/if]
-[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call set() for base class [sClass.name/]
-	[sClass.generateNamespaceName(true)/]Impl::set(_uID, value);
+[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::set(_uID, value);
 [/for]
 }
 [/template]
 
-[template private generateAddImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+[template private generateAddImplementation(aDataType : DataType)]
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+[if (not aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		[for (aProperty : Property | aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.type.oclIsUndefined())]
@@ -468,31 +464,31 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::
 	}
 
 [/if]
-[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call set() for base class [sClass.name/]
-	[sClass.generateNamespaceName(true)/]Impl::add(_uID, value, insertAt);
+[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::add(_uID, value, insertAt);
 [/for]
 }
 [/template]
 
-[template private generateUnSetImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+[template private generateUnSetImplementation(aDataType : DataType)]
+void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
 {
 	this->unset(_property->_getID());
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedName)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->unset(uID);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
-[if ((not aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration))))->isEmpty()))]
+[if ((not aDataType.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration))))->isEmpty()))]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration)))))]
+		[for (aProperty : Property | aDataType.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration)))))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
@@ -503,42 +499,34 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 			return;
 		}
 		[/for]
-		[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('//Composite owner properties\n')]
-		case [aClass.generateNamespace(true)/]::[aClass._package.getPackageName()/]Package::[aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/]:
-		{
-			m_[compositeOwnerClass.name/].reset();
-			//TODO also unset back reference
-			return;
-		}
-		[/for]
 	}
 
 [/if]
-	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call unset() for base class [sClass.name/]
-	[sClass.generateNamespaceName(true)/]Impl::unset(_uID);
+	[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call unset() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::unset(_uID);
 	[/for]
 }
 [/template]
 
-[template public generateRemoveImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+[template public generateRemoveImplementation(aDataType : DataType)]
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, std::shared_ptr<Any> value)
 {
-[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+[if (not aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		[for (aProperty : Property | aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.type.oclIsUndefined())]
@@ -601,9 +589,9 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 	}
 
 [/if]
-[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call set() for base class [sClass.name/]
-	[sClass.generateNamespaceName(true)/]Impl::remove(_uID, value);
+[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::remove(_uID, value);
 [/for]
 }
 [/template]
@@ -611,34 +599,30 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, st
 [**
  * generate invoke function implementation
 */]
-[template public generateInvokeImpl(aClass : Class)]
+[template public generateInvokeImpl(aDataType : DataType)]
 //Operation Invocation
-[aClass.generateOperationInvokeImplementation()/]
-
-//OpaqueBehavior Invocation
-[aClass.generateOpaqueBehaviorInvokeImplementation()/]
+[aDataType.generateOperationInvokeImplementation()/]
 [/template]
 
-[template private generateOperationInvokeImplementation(aClass : Class)]
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+[template private generateOperationInvokeImplementation(aDataType : DataType)]
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
-[if (not aClass.getOperationsForInvoke()->isEmpty())]
-
+[if (not aDataType.getOperationsForInvoke()->isEmpty())]
 	switch(_uID)
 	{
-		[for (anOperation : Operation | aClass.getOperationsForInvoke())]
+		[for (anOperation : Operation | aDataType.getOperationsForInvoke())]
 		case [anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
 		{
 			[comment Retrieve all parameter values for parameters with in or inout direction /]
@@ -732,7 +716,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 				[comment anOperation has a return parameter /]
 				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 				[let returnParameter : Parameter = returnParameterList->first()]
-			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
+			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
 					[comment returnParameter has no type, i.e. is of any type, ergo can be passed right away /]
 					[if (returnParameter.type.oclIsUndefined())]
 			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], -1, [if(returnParameter.upper = 1)]false[else]true[/if]);
@@ -783,11 +767,12 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 	}
 
 [/if]	
-[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-	[if (classList->size() > 0)]
-		[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call invoke() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_uID, inputArguments, outputArguments);
+[let classifierList : OrderedSet(Classifier) = aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+	[if (classifierList->size() > 0)]
+	std::shared_ptr<Any> result;
+		[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call invoke() for base class [general.name/]
+	result = [general.generateNamespaceName(true)/]Impl::invoke(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;
@@ -799,174 +784,14 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 }
 [/template]
 
-[template private generateOpaqueBehaviorInvokeImplementation(aClass : Class)]
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
-{
-[if (not aClass.collectOpaqueBehaviorsContexedByClass()->isEmpty())]
-	unsigned long uID = _opaqueBehavior->_getID();
+[**
+ * template to generate create function declarations
+*/]
+[template public generateClassifierCreate(aClassifier : Classifier, impl : Boolean) ? (aClassifier.oclIsTypeOf(DataType))]
+[let aDataType : DataType = aClassifier.oclAsType(DataType)]
+//START Create methods for data type [aDataType.name/]
+virtual std::shared_ptr<[aDataType.generateCppRawType(true)/]> create[aDataType.name.toUpperFirst()/](const int metaElementID = [aDataType.getNearestPackage().name/]Package::[aDataType.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+//END Create methods for data type [aDataType.name/]
+[/let]
 
-	switch(uID)
-	{
-	[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass())]
-		case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
-		{
-			[comment Retrieve all parameter values for parameters with in or inout direction /]
-			[let inputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_in) or (direction = ParameterDirectionKind::inout))]
-			[for (anInputParameter : Parameter | inputParameterList) before('\t\t//Retrieve input parameters\n') after('\n')]
-			//Retrieve [anInputParameter.direction/] parameter '[anInputParameter.name/]'
-			std::shared_ptr<Any> any[anInputParameter.name.toUpperFirst()/] =  inputArguments->at([inputParameterList->indexOf(anInputParameter) - 1/]);
-			[anInputParameter.generateCppType(false)/] [anInputParameter.name/];
-			[comment anInputParameter has no type. i.e. is of any type, ergo no transformation required /]
-			[comment anInputParameter is typed by a PrimitiveType or Enumeration or is of Any type/]
-				[if (anInputParameter.type.oclIsUndefined() or anInputParameter.type.oclIsKindOf(PrimitiveType) or anInputParameter.type.oclIsKindOf(Enumeration))]
-			try
-			{
-				[anInputParameter.name/] = any[anInputParameter.name.toUpperFirst()/]->get<[anInputParameter.generateCppType(false)/]>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-				return nullptr;
-			}
-				[comment anInputParameter is typed by a Class or Interface /]
-				[else]
-					[comment anInputParameter is a single-instanced value /]
-					[if (anInputParameter.upper = 1)]
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(any[anInputParameter.name.toUpperFirst()/]);
-				if(umlAny)
-				{
-					try
-					{
-						std::shared_ptr<uml::Element> _temp = umlAny->getAsElement();
-						[anInputParameter.name/] = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(_temp);
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-					return nullptr;
-				}
-			}
-					[comment anInputParameter is a bag value /]
-					[else]
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(any[anInputParameter.name.toUpperFirst()/]);
-				if(umlContainerAny)
-				{
-					try
-					{
-						std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
-					
-						if(elementList)
-						{
-							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppRawType(true)/]>>();
-							for(const std::shared_ptr<uml::Element> anElement: *elementList)
-							{
-								std::shared_ptr<[anInputParameter.type.generateCppRawType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(anElement);
-								[anInputParameter.name/]->add(_temp);
-							}
-						}
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for parameter '[anInputParameter.name/]'. Failed to invoke operation '[anInputParameter.operation.name/]'!")
-					return nullptr;
-				}
-			}
-					[/if]
-				[/if]
-			[/for]
-			[/let]
-			[comment Create all parameter values for parameters with out direction /]
-			[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::out)]
-			[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Create output parameters\n') after('\n')]
-			//Create [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
-			[anOutputParameter.generateCppType(false)/] [anOutputParameter.name/];
-			[/for]
-			[/let]
-			[comment Create return parameter (if there is any) and invoke the operation /]
-			//Invoke method
-			[let returnParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
-				[comment anOpaqueBehavior has a return parameter /]
-				[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
-				[let returnParameter : Parameter = returnParameterList->first()]
-			[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
-					[comment returnParameter has no type, i.e. is of any type, ergo can be passed right away /]
-					[if (returnParameter.type.oclIsUndefined())]
-			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], -1, [if(returnParameter.upper = 1)]false[else]true[/if]);
-					[comment returnParameter is typed by a PrimitiveType or Enumeration /]
-					[elseif (returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration))]
-			std::shared_ptr<Any> returnArgument = eAny([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(returnParameter.upper = 1)]false[else]true[/if]);
-					[comment returnParameter is typed by a Class or Interface /]
-					[else]
-			std::shared_ptr<Any> returnArgument = [if(returnParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
-					[/if]
-				[/let]
-				[comment anOpaqueBehavior has no return parameter /]
-				[else]
-			this->[anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
-			std::shared_ptr<Any> returnArgument = eAny(nullptr, -1, false);
-				[/if]
-			[/let]
-	
-			[comment Add all parameter values for parameters with inout or out direction the outputArguments /]
-			[let outputParameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::out))]
-			[for (anOutputParameter : Parameter | outputParameterList) before('\t\t//Store output parameters\n') after('\n')]
-				[comment For inout parameters, we can reuse the previously retrieved Any-object IF the stored value is of non-primitive type (i.e. stored as a shared pointer /]
-			//Store [anOutputParameter.direction/] parameter '[anOutputParameter.name/]'
-				[if (anOutputParameter.direction = ParameterDirectionKind::inout)]
-					[comment Only IF the inout parameter is primitive-typed, the new value (i.e. after operation invocation) has to be re-stored /]
-					[if (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
-			any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]); 
-					[/if]
-				[comment For out parameters, create a new Any-object to store the value /]
-				[else]
-					[comment anOutputParameter has no type, i.e. is of any type, ergo can be passed right away /]
-					[if (anOutputParameter.type.oclIsUndefined())]
-			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], -1, [if(anOutputParameter.upper = 1)]false[else]true[/if]);
-					[comment anOutputParameter is typed by a PrimitiveType or Enumeration /]
-					[elseif (anOutputParameter.type.oclIsKindOf(PrimitiveType) or anOutputParameter.type.oclIsKindOf(Enumeration))]
-			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = eAny([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(anOutputParameter.upper = 1)]false[else]true[/if]);
-					[comment anOutputParameter is typed by a Class or Interface /]
-					[else]
-			std::shared_ptr<Any> any[anOutputParameter.name.toUpperFirst()/] = [if(anOutputParameter.upper = 1)]eUMLAny[else]eUMLContainerAny[/if]([anOutputParameter.name/], [anOutputParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
-					[/if]
-				[/if]
-			outputArguments->add(any[anOutputParameter.name.toUpperFirst()/]);
-			[/for]
-			[/let]
-			return returnArgument;
-		}
-	[/for]
-	}
-[/if]	
-	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-	[if (classList->size() > 0)]
-	std::shared_ptr<Any> result;
-	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call invoke() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_opaqueBehavior, inputArguments, outputArguments);
-	if (result != nullptr)
-	{
-		return result;
-	}
-	[/for]
-	return result;
-	[else]
-	return eAny(nullptr, -1, false);
-	[/if]
-	[/let]
-}
 [/template]

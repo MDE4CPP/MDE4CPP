@@ -71,6 +71,24 @@ template<class T> class Bag;
 [/template]
 
 [**
+ * template to generate forward declaration of template class Bag for a DataType element
+ * forward declaration of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1 
+*/]
+[template public generateAbstractDataTypesForwardDeclaration(aDataType : DataType)]
+[if (aDataType.ownedAttribute->select(upper <> 1 and not isSubset() and not isUnion())->size() > 0 or aDataType.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+template<class T> class Bag;
+[/if]
+[if (aDataType.ownedAttribute->select(isSubset() and not isSubsetUnion())->size() > 0)]
+template<class T, class ... U> class Subset;
+[/if]
+[if (aDataType.ownedAttribute->select(isSubsetUnion())->size() > 0)]
+template<class T, class ... U> class SubsetUnion;
+[/if]
+[if (aDataType.ownedAttribute->select(isUnion() and not isSubsetUnion())->size() > 0)]
+template<class T> class Union;[/if]
+[/template]
+
+[**
  * template to generate header include of template class Bag for a Class element
  * include of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1
 */]

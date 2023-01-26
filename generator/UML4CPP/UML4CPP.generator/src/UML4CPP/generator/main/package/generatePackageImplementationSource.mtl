@@ -72,6 +72,8 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).generalization.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(DataType).ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(DataType).ownedAttribute->reject(p : Property | p.type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Association).memberEnd.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(ConnectorEnd).role->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
@@ -183,17 +185,18 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 
 	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
-	createPackageValueSpecifications([aPackage.memberName()/], factory);
-	createPackageInterfaces([aPackage.memberName()/], factory);
-	createPackageClasses([aPackage.memberName()/], factory);
-	createPackageAssociations([aPackage.memberName()/], factory);
-	createPackageInstanceSpecifications([aPackage.memberName()/], factory);
-	createPackageStereotypes([aPackage.memberName()/], factory);
 	createPackageActivities([aPackage.memberName()/], factory);
+	createPackageAssociations([aPackage.memberName()/], factory);
+	createPackageClasses([aPackage.memberName()/], factory);
+	createPackageDataTypes([aPackage.memberName()/], factory);
 	createPackageDependencies([aPackage.memberName()/], factory);
-	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageEnumerationLiterals([aPackage.memberName()/], factory);
+	createPackageValueSpecifications([aPackage.memberName()/], factory);
+	createPackageInstanceSpecifications([aPackage.memberName()/], factory);
+	createPackageInterfaces([aPackage.memberName()/], factory);
 	createPackageInterfaceRealizations([aPackage.memberName()/], factory);
+	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
+	createPackageStereotypes([aPackage.memberName()/], factory);
 }
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -221,6 +224,15 @@ void [packageName/]::createActivity_[anActivity.memberName()/](std::shared_ptr<u
 }
 
 [/for]
+
+[comment]Only Associations[/comment]
+void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[anAssociation.name/]
+	[anAssociation.memberName()/] = factory->createAssociation_as_ownedType_in_Package([aPackage.memberName()/]);
+[/for]
+}
 
 [comment]Only Classes[/comment]
 void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -257,14 +269,22 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	//[anOpaqueBehavior.name/]
 	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
 [/for]
-} 
+}
 
-[comment]Only Associations[/comment]
-void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+[comment]Only DataTypes[/comment]
+void [packageName/]::createPackageDataTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
-[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
-	//[anAssociation.name/]
-	[anAssociation.memberName()/] = factory->createAssociation_as_ownedType_in_Package([aPackage.memberName()/]);
+[for (aDataType : DataType | (aPackage.ownedMember->selectByType(DataType))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[aDataType.name/]
+	[aDataType.memberName()/] = factory->createDataType_as_ownedType_in_Package([aDataType.ancestors(Package)->first().memberName()/], [aDataType._package.generateNamespace(true)/]::[aDataType._package.myNamespaceName()/]Package::[aDataType.getMemberName().toUpperCase()/]);
+	[for (anProperty : Property | aDataType.ownedAttribute->sortedBy(name)) before ('    // '.concat(aDataType.name).concat(' attributes\n'))]
+	//[anProperty.name/]
+	[anProperty.generateAttributeCreation()/]
+	[/for]
+	[for (anOperation : Operation | aDataType.ownedOperation->sortedBy(name)) before ('    // '.concat(aDataType.name).concat(' operations\n')) separator('\n')]
+	//[anOperation.name/]
+	[anOperation.generateOperationCreation()/]
+	[/for] 
 [/for]
 }
 
@@ -348,8 +368,9 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	[/if]
 
 	initializePackageActivities();
-	initializePackageClasses();
 	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -389,6 +410,15 @@ void [packageName/]::initializeActivity_[anActivity.memberName()/]()
 }
 
 [/for]
+
+[comment]Only Associations[/comment]
+void [packageName/]::initializePackageAssociations()
+{
+	[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[anAssociation.name/]
+	[anAssociation.generateAssociationInitialization()/]
+	[/for]
+}
 
 [comment]Only Classes[/comment]
 void [packageName/]::initializePackageClasses()
@@ -432,13 +462,37 @@ void [packageName/]::initializePackageClasses()
 [/for]
 }
 
-[comment]Only Associations[/comment]
-void [packageName/]::initializePackageAssociations()
+[comment]Only DataTypes[/comment]
+void [packageName/]::initializePackageDataTypes()
 {
-	[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
-	//[anAssociation.name/]
-	[anAssociation.generateAssociationInitialization()/]
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+[for (aDataType : DataType | (aPackage.ownedMember->selectByType(DataType))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//DataType [aDataType.name/]
+	[aDataType.memberName()/]->setName("[aDataType.metamodelElementName()/]");
+	[aDataType.memberName()/]->setIsAbstract([aDataType.isAbstract/]);
+		[if (not isReflectionModel(aDataType.getRootPackage()))]
+	[aDataType.memberName()/]->_setID([aDataType.getMemberName().toUpperCase()/]);
+		[/if]
+	[for (general : Classifier | aDataType.general->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
+	gen = uml::umlFactory::eInstance()->createGeneralization_as_generalization_in_Classifier([aDataType.generatePackageGetterCall(aDataType)/]);
+	gen->setGeneral([general.generatePackageGetterCall(aDataType)/]);
 	[/for]
+	[aDataType.generateStereotypeApplication()/]
+	[for (anProperty : Property | aDataType.ownedAttribute->sortedBy(name)) before ('    // '.concat(aDataType.name).concat(' attributes\n')) after ('\n')]
+	//[anProperty.name/]
+	[anProperty.generateAttributeInitialization()/]
+	[/for]
+	[for (anOperation : Operation | aDataType.ownedOperation->sortedBy(name)) before ('    // '.concat(aDataType.name).concat(' operations\n')) separator('\n')]
+	//[anOperation.name/]
+	[anOperation.initalizeOperation()/]
+	[/for]
+	[for (aProperty : Property | aDataType.directlyRealizedInterfaces().ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
+		[if (aDataType.ownedAttribute->select(name = aProperty.name)->size() = 0)]
+	[aDataType.memberName()/]->getOwnedAttribute()->push_back([if (aDataType.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.generatePackageGetterCall()/][/if]);
+		[/if]
+	[/for]
+[/for]
 }
 
 [comment]Only Dependency[/comment]

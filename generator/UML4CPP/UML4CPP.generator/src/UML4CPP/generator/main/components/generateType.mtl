@@ -197,7 +197,7 @@ bool
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'UnlimitedNatural' )]
-unsigned int
+int
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'Integer' or name = 'EInt')]

@@ -1,0 +1,251 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateDataTypeImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateDataType /]
+[import UML4CPP::generator::main::helpers::keywords /]
+
+[query private includes(aDataType : DataType)  : Set(Type) = OrderedSet
+{
+	aDataType.member->selectByKind(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type, 
+	aDataType.ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type,
+	aDataType.getAllAttributes()->reject(p : Property | p.type.oclIsUndefined()).type, 
+	aDataType.importedMember
+}->flatten() /]
+
+[query private includes(anInterface : Interface)  : Set(Type) = OrderedSet{anInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, anInterface.ownedOperation.ownedParameter.type}->flatten() /]
+
+[query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
+[query private getAllAttributes(aDataType : DataType) : Set(Property) = OrderedSet{aDataType.ownedAttribute, aDataType.general->selectByKind(Classifier).getAllAttributes(), aDataType.directlyRealizedInterfaces().getAllAttributes()}->flatten() /]
+
+[template public generateDataTypeImplementationSource(aDataType : DataType) { dataTypeName : String = aDataType.name.toUpperFirst().concat('Impl'); containingPackage : Package = aDataType.ancestors()->filter(Package)->first(); }]
+[file (containingPackage.generateNamespacePath(false) + '/impl/' + dataTypeName + '.cpp', false, 'UTF-8')]
+#include "[containingPackage.generateNamespacePath(false)/]/impl/[dataTypeName.concat('.hpp')/]"
+
+[defineDebugMacro()/]
+
+//General includes
+#include <iostream>
+[if (aDataType.ownedOperation->select(method->isEmpty())->notEmpty())]
+#include <stdexcept>['\n'/][/if]
+[generateAbstractDataTypesIncludes()/]
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Parameter.hpp"
+#include "[containingPackage.generateNamespacePath(false)/]/[containingPackage.name.concat('Factory')/].hpp"
+#include "[containingPackage.generateNamespacePath(false)/]/impl/[containingPackage.name.concat('PackageImpl')/].hpp"
+#include "[aDataType.eClass().ePackage.name/]/[aDataType.eClass().name/].hpp"
+[if (aDataType.ownedAttribute->reject(type.oclIsUndefined())->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+#include "uml/EnumerationLiteral.hpp"
+[/if]
+[comment Package for used PrimitiveTypes /]
+[if (aDataType.includes()->filter(PrimitiveType)->size() > 0)]
+
+//Package for used PrimitiveTypes
+#include "types/typesPackage.hpp"
+[/if]
+[comment Packages for used (non-primitive) Types /]
+[for (containingPackage : Package | aDataType.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n')]
+#include "[containingPackage.generateNamespacePath(true)/]/[containingPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[comment Packages of external Interfaces realized by this DataType /]
+[for (externalPackage : Package | 
+		aDataType.collectAllRealizedInterfaces().ownedAttribute.getNearestPackage()
+		->addAll(aDataType.collectAllRealizedInterfaces().ownedOperation.getNearestPackage())
+		->flatten()->asSet()->reject(p : Package | p = containingPackage))
+	before('\n//external Interfaces realized by this class\n')]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[comment Used Types /]
+[for (cl : Type | aDataType.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration) or t.oclIsTypeOf(DataType))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
+[if (cl.getNearestPackage().hasIncludePath())]
+#include "[cl.getNearestPackage().getIncludePath()/]"
+[else]
+#include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
+[/if]
+[/for]
+[comment PackgeImpl and Factories included from types of attributes, operation parameters and imports /]
+[for (typePackage : Package | aDataType.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = containingPackage)->asSet()->sortedBy(myQualifiedName())) before('\n//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes\n')]
+#include "[typePackage.generateNamespacePath(true)/]/[typePackage.myNamespaceName().concat('Factory')/].hpp"
+#include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
+[/for]
+[comment Packages of included Enumerations /]
+[for (aPackage : Package | aDataType.ownedAttribute->reject(type.oclIsUndefined())->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = containingPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n')]
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
+[/for]
+[comment Plugin Framework /]
+[if (aDataType.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
+
+//Includes for PluginFramework
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if][/if]
+[comment Includes of OpaqueBehavior methods of Operations/]
+[for (aOperation : Operation | aDataType.ownedOperation->select(method->filter(OpaqueBehavior)->notEmpty())->asOrderedSet()->sortedBy(myQualifiedName())) before('\n//Includes of Operations') after('\n')]
+[let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]
+	[if (anOpaqueBehavior.hasLanguage(keyInclude()))]
+//Included from operation "[aOperation.name/]"
+[anOpaqueBehavior.getEntryForLanguage(keyInclude())/]
+	[/if]
+[/let]
+[/for]
+[comment Includes from InstanceValues /]
+[for (instVal : InstanceValue | aDataType.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Includes from InstanceValues\n') after('\n')]
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
+[/for]
+
+[if (not containingPackage.isIgnoreNamespace())]using namespace [containingPackage.generateNamespace(false)/];[/if]
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[dataTypeName/]::[dataTypeName/]()
+{
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
+	DEBUG_INFO("Instance of '[aDataType.name.toUpperFirst()/]' is created.")
+	//***********************************
+}
+
+[dataTypeName/]::~[dataTypeName/]()
+{
+	DEBUG_INFO("Instance of '[aDataType.name.toUpperFirst()/]' is destroyed.")
+}
+
+[dataTypeName/]::[dataTypeName/](const [dataTypeName/] & obj):[dataTypeName/]()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  [dataTypeName/]::copy() const
+{
+	std::shared_ptr<[dataTypeName/]> element(new [dataTypeName/]());
+	*element=(*this);
+	return element;
+}
+
+[dataTypeName/]& [dataTypeName/]::operator=(const [dataTypeName/] & obj)
+{
+[if (aDataType.general->isEmpty())]
+	//call overloaded =Operator for each base class
+	uml::[aDataType.getGeneralSuperClassName()/]Impl::operator=(obj);
+[else]
+	//call overloaded =Operator for each base class
+	[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[general.getClassifierName(aDataType, false, general.getNearestPackage().isIgnoreNamespace())/]Impl::operator=(obj);
+	[/for]
+[/if]
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aDataType.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+
+	//copy attributes with no containment (soft copy)
+[for (aProperty : Property | aDataType.ownedAttribute->select(isBackReference() or not (isComposite() or isSubset()))->asOrderedSet()->sortedBy(name))]
+	m_[aProperty.name/] = obj.[aProperty.getterName()/]();
+[/for]
+
+	//clone attributes with containment (deep copy)
+[for (aProperty : Property | aDataType.ownedAttribute->select((isComposite() or isSubset()) and not (isUnion() or isBackReference()))->asOrderedSet()->sortedBy(name))]
+[if (aProperty.upper = 1)]
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	if (obj.[aProperty.getterName()/]() != nullptr)
+	{
+	[/if]	m_[aProperty.name/] = [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>([/if]obj.[aProperty.getterName()/]()[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	}
+[/if]
+[else]
+	[aProperty.generateCppType()/] [aProperty.name/]List = obj.[aProperty.getterName()/]();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]Iter = [aProperty.name/]List->begin();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]End = [aProperty.name/]List->end();
+	while ([aProperty.name/]Iter != [aProperty.name/]End) 
+	{
+[if (aProperty.type.isPrimitive())]
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp(new [aProperty.type.generateCppRawType(true)/](*(*[aProperty.name/]Iter)));
+[else]
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>((*[aProperty.name/]Iter)->copy());
+[/if]
+		[aProperty.getterName()/]()->push_back(temp);
+		[aProperty.name/]Iter++;
+	}
+[/if]
+[/for]
+[for (anAttribute : Property | aDataType.ownedAttribute->select(isSubset()))]
+	[anAttribute.generateSubsetUnionInit()/]
+[/for]
+
+	return *this;
+}
+
+[if (isSingleton())]
+[aDataType.name.toUpperFirst()/]* [dataTypeName/]::create()
+{
+	return new [dataTypeName/]();
+}
+[/if]
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+[for (aAttribute : Property | aDataType.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
+[aAttribute.generateAttributeSetterImplementationCpp()/]
+[aAttribute.generateAttributeGetterImplementationCpp()/]
+[/for]
+[for (anInterface : Interface | aDataType.directlyRealizedInterfaces()->sortedBy(myQualifiedName()))] [for (aAttribute : Property | anInterface.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aDataType.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[aAttribute.generateAttributeSetterImplementationCpp(aDataType)/]
+[aAttribute.generateAttributeGetterImplementationCpp(aDataType)/]
+[/if][/for][/for]
+
+//*********************************
+// Union Getter
+//*********************************
+[aDataType.generateUnionGetterCpp()/]
+
+//*********************************
+// Operations
+//*********************************
+[for (aOperation : Operation | aDataType.ownedOperation->sortedBy(myQualifiedName())) separator('\n') after('\n')]
+[aOperation.generateOperationImplementation()/]
+[/for]
+
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
+[aDataType.generateeGetSetImpl()/]
+
+//**************************************
+// Operation Invocation
+//**************************************
+[aDataType.generateInvokeImpl()/]
+
+[/file]
+[/template]

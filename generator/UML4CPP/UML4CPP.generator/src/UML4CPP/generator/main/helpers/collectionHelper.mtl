@@ -133,27 +133,33 @@
  * This are all classes of the model except abstract classes and classes with active singleton annotation.
  * The resulting class list is sorted by myQualifiedName.
 */]
-[query public collectModelClassesForFactoryDeclaration(aPackage : Package) : OrderedSet(Class) = 
-	collectModelClassesForFactoryInternal(aPackage)
-	->addAll(collectModelClassesForFactoryInternal(aPackage).getImplicitCompositeOwners())
-	->addAll(collectModelStereotypesForFactory(aPackage))
+[query public collectPackageClassifiersForFactoryDeclaration(aPackage : Package) : OrderedSet(Classifier) = 
+	collectPackageClassesForFactoryInternal(aPackage)
+	->addAll(collectPackageClassesForFactoryInternal(aPackage).getImplicitCompositeOwners())
+	->addAll(collectPackageStereotypesForFactory(aPackage))
+	->addAll(collectPackageDataTypesForFactory(aPackage))
 	->sortedBy(myQualifiedName()) 
 /]
-[query public collectModelClassesForFactoryFunctions(aPackage : Package) : OrderedSet(Class) = 
-	collectModelClassesForFactoryInternal(aPackage)
-	->addAll(collectModelStereotypesForFactory(aPackage))
+[query public collectPackageClassifiersForFactoryFunctions(aPackage : Package) : OrderedSet(Classifier) = 
+	collectPackageClassesForFactoryInternal(aPackage)
+	->addAll(collectPackageStereotypesForFactory(aPackage))
+	->addAll(collectPackageDataTypesForFactory(aPackage))
 	->reject(isSingleton() or isAbstract = true)
 	->sortedBy(myQualifiedName()) 
 /]
-[query private collectModelStereotypesForFactory(aPackage : Package) : Set(Class) = 
-	aPackage.ownedMember
-	->selectByType(Stereotype) 
-/]
-[query private collectModelClassesForFactoryInternal(aPackage : Package) : Set(Class) = 
+[query private collectPackageClassesForFactoryInternal(aPackage : Package) : Set(Class) = 
 	aPackage.ownedMember
 	->selectByType(Class) 
 /]
-[query public collectModelInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = 
+[query private collectPackageStereotypesForFactory(aPackage : Package) : Set(Stereotype) = 
+	aPackage.ownedMember
+	->selectByType(Stereotype) 
+/]
+[query private collectPackageDataTypesForFactory(aPackage : Package) : Set(DataType) = 
+	aPackage.ownedMember
+	->selectByType(DataType)
+/]
+[query public collectPackageInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = 
 	aPackage.ownedMember
 	->selectByType(Interface)
 	->reject(isSingleton() or isAbstract = true)

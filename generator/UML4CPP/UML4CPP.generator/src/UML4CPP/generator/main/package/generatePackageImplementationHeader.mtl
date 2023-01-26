@@ -93,6 +93,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 [/for]
 			void createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageDataTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
@@ -108,6 +109,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializeActivity_[anActivity.memberName()/]();
 [/for]
 			void initializePackageClasses();
+			void initializePackageDataTypes();
 			void initializePackageAssociations();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();

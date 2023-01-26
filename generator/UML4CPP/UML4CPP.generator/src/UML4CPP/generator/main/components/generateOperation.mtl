@@ -47,7 +47,7 @@ virtual [anOperation.generateCppType()/] [anOperation.name/]([for (sParameter : 
 [/template]
 
 [template public generateOperationImplementation(anOperation : Operation, impl : Boolean)]
-[anOperation.generateCppType()/] [anOperation.class.name.toUpperFirst()/][if(impl)]Impl[/if]::[anOperation.name/]([for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[anOperation.generateCppType()/] [anOperation.getFeaturingClassifier().name.toUpperFirst()/][if(impl)]Impl[/if]::[anOperation.name/]([for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
 [sParameter.generateCppType(true)/] [sParameter.name/][/for])[if (anOperation.isQuery)] const[/if] 
 {
 [if (anOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
@@ -99,7 +99,7 @@ if (plugin)
 	[for (aParameter : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 		parameterList->push_back([aParameter.generateAnyCreationFromParameter()/]);
 	[/for]
-		std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[anOperation.class.name.toUpperFirst()/]Ptr());
+		std::shared_ptr<Any> activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[anOperation.getFeaturingClassifier().name.toUpperFirst()/]Ptr());
 
 	[if (anOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 		[anOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = activityResult->get<[anOperation.generateCppType()/]>();
@@ -124,8 +124,8 @@ else
  * - creation of operation parameter
 */]
 [template public generateOperationCreation(anOperation : Operation) post(trim())]
-[if (not anOperation.class.oclIsUndefined())]
-[memberName(anOperation)/] = factory->createOperation_as_ownedOperation_in_Class([memberName(anOperation.class)/]);
+[if (not anOperation.getFeaturingClassifier().oclIsUndefined())]
+[memberName(anOperation)/] = factory->createOperation_as_ownedOperation_in_Class([memberName(anOperation.getFeaturingClassifier())/]);
 [elseif (not anOperation.interface.oclIsUndefined())]
 [memberName(anOperation)/] = factory->createOperation_as_ownedOperation_in_Interface([memberName(anOperation.interface)/]);
 [/if]
@@ -186,3 +186,5 @@ else
 				= matchingOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type)
 		endif
 /]
+
+[query public getFeaturingClassifier(anOperation : Operation) : Classifier = anOperation.featuringClassifier->asSequence()->first() /]

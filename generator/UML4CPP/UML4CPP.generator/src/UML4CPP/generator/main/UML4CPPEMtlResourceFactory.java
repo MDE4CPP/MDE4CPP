@@ -72,6 +72,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initalizeGeneralEmtls(resourcePathPrefix);
 		initializeComponentsEmtls(resourcePathPrefix);
 		initializeConfigurationEmtls(resourcePathPrefix);
+		initializeDataTypeEmtls(resourcePathPrefix);
 		initializeFactoryEmtls(resourcePathPrefix);
 		initializeHelpersEmtls(resourcePathPrefix);
 		initializeImplEmtls(resourcePathPrefix);
@@ -103,6 +104,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateAssociation",
 								"generateClass",
 								"generateConnector",
+								"generateDataType",
 								"generateDependency",
 								"generateNamedElement",
 								"generateConstraint",
@@ -131,6 +133,16 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateEclipseFiles"
 								};
 		generateFilePathMapData(moduleNames, "configuration", resourcePathPrefix);
+	}
+	
+	private void initializeDataTypeEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generateDataTypeFiles",
+								"generateDataTypeImplementationHeader",
+								"generateDataTypeImplementationSource",
+								"generateDataTypeInterfaceHeader"
+								};
+		generateFilePathMapData(moduleNames, "datatypes", resourcePathPrefix);
 	}
 	
 	private void initializeFactoryEmtls(String resourcePathPrefix)
