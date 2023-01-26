@@ -51,7 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
-	dependsOn 'src:common:FoundationalModelLibrary:src:compileFoundationalModelLibrary'
+	dependsOn 'src:common:FoundationalModelLibrary:src_gen:compileFoundationalModelLibrary'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
