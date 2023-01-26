@@ -17,6 +17,7 @@ namespace uml
 {
 	class Property;
 	class Operation;
+	class OpaqueBehavior;
 }
 
 //*********************************
@@ -45,8 +46,6 @@ namespace UML4CPPProfile
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -68,9 +67,9 @@ namespace UML4CPPProfile
 			virtual void destroy();
 
 		public:
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			//**************************************
+			// StructuralFeature Getter & Setter
+			//**************************************
 			//Get
 			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const ;
 			virtual std::shared_ptr<Any> get(std::string _qualifiedName) const ;
@@ -92,13 +91,16 @@ namespace UML4CPPProfile
 			virtual void remove(std::string _qualifiedName, std::shared_ptr<Any> value) ;
 			virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) ;
 		
-			//*********************************
-			// Operation Invocation
-			//*********************************
-			//Invoke
-			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments) ;
-			virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments) ;
-			virtual std::shared_ptr<Any> invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments) ;
+			//**************************************
+			// Operation & OpaqueBehavior Invocation
+			//**************************************
+			//Operation invocation
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			virtual std::shared_ptr<Any> invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			
+			//OpaqueBehavior invocation
+			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
 
 		private:
 			std::weak_ptr<SetterName> m_thisSetterNamePtr;

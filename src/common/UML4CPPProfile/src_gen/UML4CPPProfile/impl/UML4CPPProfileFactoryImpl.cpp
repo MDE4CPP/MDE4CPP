@@ -13,7 +13,6 @@
 #include "UML4CPPProfile/impl/SingletonImpl.hpp"
 #include "UML4CPPProfile/impl/UML4CPPPackageImpl.hpp"
 
-
 using namespace UML4CPPProfile;
 //*********************************
 // Constructor / Destructor
@@ -216,8 +215,6 @@ std::shared_ptr<UML4CPPProfile::UML4CPPPackage> UML4CPPProfileFactoryImpl::creat
 	element->instantiate();
 	return element;
 }
-
-
 
 
 

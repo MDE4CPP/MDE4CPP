@@ -191,11 +191,20 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 */]
 [template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.getFeaturingClassifier().oclIsUndefined())]
-	[if (aProperty.oclIsTypeOf(Property))]
-	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
-	[elseif (aProperty.oclIsTypeOf(Port))]
-	[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
+	[if (aProperty.getFeaturingClassifier().oclIsKindOf(Class))]
+		[if (aProperty.oclIsTypeOf(Property))]
+[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Class([aProperty.getFeaturingClassifier().memberName()/]);
+		[elseif (aProperty.oclIsTypeOf(Port))]
+[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_Class([aProperty.getFeaturingClassifier().memberName()/]);
+		[/if]
+	[else]
+		[if (aProperty.oclIsTypeOf(Property))]
+[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
+		[elseif (aProperty.oclIsTypeOf(Port))]
+[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_[aProperty.getFeaturingClassifier().eClass().name/]([aProperty.getFeaturingClassifier().memberName()/]);
+		[/if]
 	[/if]
+
 [/if]
 [/template]
 

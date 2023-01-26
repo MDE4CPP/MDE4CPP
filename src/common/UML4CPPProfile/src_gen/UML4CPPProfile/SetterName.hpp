@@ -10,7 +10,7 @@
 
 
 
-//Forward Declaration for used types
+//Forward declarations for used types
 namespace uml 
 {
 	class Property;
@@ -45,8 +45,6 @@ namespace UML4CPPProfile
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 		protected:
 			//*********************************
 			// Members

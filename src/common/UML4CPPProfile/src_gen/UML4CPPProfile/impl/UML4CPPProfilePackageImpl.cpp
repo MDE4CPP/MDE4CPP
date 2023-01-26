@@ -75,23 +75,28 @@ void UML4CPPProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 
 	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
-	createPackageValueSpecifications(uML4CPPProfile, factory);
-	createPackageInterfaces(uML4CPPProfile, factory);
-	createPackageClasses(uML4CPPProfile, factory);
-	createPackageAssociations(uML4CPPProfile, factory);
-	createPackageInstanceSpecifications(uML4CPPProfile, factory);
-	createPackageStereotypes(uML4CPPProfile, factory);
 	createPackageActivities(uML4CPPProfile, factory);
+	createPackageAssociations(uML4CPPProfile, factory);
+	createPackageClasses(uML4CPPProfile, factory);
+	createPackageDataTypes(uML4CPPProfile, factory);
 	createPackageDependencies(uML4CPPProfile, factory);
-	createPackagePrimitiveTypes(uML4CPPProfile, factory);
 	createPackageEnumerationLiterals(uML4CPPProfile, factory);
+	createPackageValueSpecifications(uML4CPPProfile, factory);
+	createPackageInstanceSpecifications(uML4CPPProfile, factory);
+	createPackageInterfaces(uML4CPPProfile, factory);
 	createPackageInterfaceRealizations(uML4CPPProfile, factory);
+	createPackagePrimitiveTypes(uML4CPPProfile, factory);
+	createPackageStereotypes(uML4CPPProfile, factory);
 }
 
 void UML4CPPProfilePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
+
+void UML4CPPProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+}
 
 void UML4CPPProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -102,9 +107,9 @@ void UML4CPPProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 //-------------------------------------------
 //Opaque Behaviors
 
-} 
+}
 
-void UML4CPPProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+void UML4CPPProfilePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -134,49 +139,49 @@ void UML4CPPProfilePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml:
 
 void UML4CPPProfilePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
-	uML4CPPProfile_DoNotGenerate = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_STEREOTYPE);
+	uML4CPPProfile_DoNotGenerate = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, DONOTGENERATE_STEREOTYPE);
 	uML4CPPProfile_DoNotGenerate->setName("DoNotGenerate");
 	uML4CPPProfile_DoNotGenerate->setIsAbstract(false);
 	uML4CPPProfile_DoNotGenerate_base_Element = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_DoNotGenerate);
 	
 
-	uML4CPPProfile_ExternalLibrary = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_STEREOTYPE);
+	uML4CPPProfile_ExternalLibrary = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, EXTERNALLIBRARY_STEREOTYPE);
 	uML4CPPProfile_ExternalLibrary->setName("ExternalLibrary");
 	uML4CPPProfile_ExternalLibrary->setIsAbstract(false);
 	uML4CPPProfile_ExternalLibrary_base_Package = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_includePath = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryPath = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);
 	
 
-	uML4CPPProfile_GetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::GETTERNAME_STEREOTYPE);
+	uML4CPPProfile_GetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, GETTERNAME_STEREOTYPE);
 	uML4CPPProfile_GetterName->setName("GetterName");
 	uML4CPPProfile_GetterName->setIsAbstract(false);
 	uML4CPPProfile_GetterName_base_Property = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_GetterName);uML4CPPProfile_GetterName_getterName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_GetterName);
 	
 
-	uML4CPPProfile_MainBehavior = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_STEREOTYPE);
+	uML4CPPProfile_MainBehavior = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, MAINBEHAVIOR_STEREOTYPE);
 	uML4CPPProfile_MainBehavior->setName("MainBehavior");
 	uML4CPPProfile_MainBehavior->setIsAbstract(false);
 	uML4CPPProfile_MainBehavior_base_Behavior = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_MainBehavior);
 	
 
-	uML4CPPProfile_NonExecutable = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::NONEXECUTABLE_STEREOTYPE);
+	uML4CPPProfile_NonExecutable = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, NONEXECUTABLE_STEREOTYPE);
 	uML4CPPProfile_NonExecutable->setName("NonExecutable");
 	uML4CPPProfile_NonExecutable->setIsAbstract(false);
 	uML4CPPProfile_NonExecutable_base_NamedElement = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_NonExecutable);
 	
 
-	uML4CPPProfile_SetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_STEREOTYPE);
+	uML4CPPProfile_SetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, SETTERNAME_STEREOTYPE);
 	uML4CPPProfile_SetterName->setName("SetterName");
 	uML4CPPProfile_SetterName->setIsAbstract(false);
 	uML4CPPProfile_SetterName_base_Property = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_SetterName);uML4CPPProfile_SetterName_setterName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_SetterName);
 	
 
-	uML4CPPProfile_Singleton = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_STEREOTYPE);
+	uML4CPPProfile_Singleton = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, SINGLETON_STEREOTYPE);
 	uML4CPPProfile_Singleton->setName("Singleton");
 	uML4CPPProfile_Singleton->setIsAbstract(false);
 	uML4CPPProfile_Singleton_base_Class = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_Singleton);
 	
 
-	uML4CPPProfile_UML4CPPPackage = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_STEREOTYPE);
+	uML4CPPProfile_UML4CPPPackage = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPPACKAGE_STEREOTYPE);
 	uML4CPPProfile_UML4CPPPackage->setName("UML4CPPPackage");
 	uML4CPPProfile_UML4CPPPackage->setIsAbstract(false);
 	uML4CPPProfile_UML4CPPPackage_base_Package = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_eclipseURI = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_ignoreNamespace = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_packageOnly = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);
@@ -204,8 +209,9 @@ void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	this->setURI(eNS_URI);
 
 	initializePackageActivities();
-	initializePackageClasses();
 	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -222,6 +228,10 @@ void UML4CPPProfilePackageImpl::initializePackageActivities()
 }
 
 
+void UML4CPPProfilePackageImpl::initializePackageAssociations()
+{
+}
+
 void UML4CPPProfilePackageImpl::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -232,8 +242,10 @@ void UML4CPPProfilePackageImpl::initializePackageClasses()
 
 }
 
-void UML4CPPProfilePackageImpl::initializePackageAssociations()
+void UML4CPPProfilePackageImpl::initializePackageDataTypes()
 {
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
 }
 
 void UML4CPPProfilePackageImpl::initializePackageDependencies()
@@ -268,7 +280,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_DoNotGenerate_base_Element->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_DoNotGenerate_base_Element->setAssociation(get_UML4CPPProfile_Element_DoNotGenerate());
 	
-	uML4CPPProfile_DoNotGenerate_base_Element->_setID(DONOTGENERATE_ATTRIBUTE_BASE_ELEMENT);
+	uML4CPPProfile_DoNotGenerate_base_Element->_setID(DONOTGENERATE_PROPERTY_BASE_ELEMENT);
 	
 	
 
@@ -281,7 +293,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_ExternalLibrary_base_Package->setAssociation(get_UML4CPPProfile_Package_ExternalLibrary());
 	
-	uML4CPPProfile_ExternalLibrary_base_Package->_setID(EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE);
+	uML4CPPProfile_ExternalLibrary_base_Package->_setID(EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE);
 	uML4CPPProfile_ExternalLibrary_includePath->setName("includePath");
 	uML4CPPProfile_ExternalLibrary_includePath->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_ExternalLibrary_includePath->setLower(1);
@@ -291,7 +303,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_includePath->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
-	uML4CPPProfile_ExternalLibrary_includePath->_setID(EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH);
+	uML4CPPProfile_ExternalLibrary_includePath->_setID(EXTERNALLIBRARY_PROPERTY_INCLUDEPATH);
 	uML4CPPProfile_ExternalLibrary_libraryName->setName("libraryName");
 	uML4CPPProfile_ExternalLibrary_libraryName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_ExternalLibrary_libraryName->setLower(1);
@@ -301,7 +313,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_libraryName->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
-	uML4CPPProfile_ExternalLibrary_libraryName->_setID(EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME);
+	uML4CPPProfile_ExternalLibrary_libraryName->_setID(EXTERNALLIBRARY_PROPERTY_LIBRARYNAME);
 	uML4CPPProfile_ExternalLibrary_libraryPath->setName("libraryPath");
 	uML4CPPProfile_ExternalLibrary_libraryPath->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_ExternalLibrary_libraryPath->setLower(1);
@@ -311,7 +323,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_libraryPath->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
-	uML4CPPProfile_ExternalLibrary_libraryPath->_setID(EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH);
+	uML4CPPProfile_ExternalLibrary_libraryPath->_setID(EXTERNALLIBRARY_PROPERTY_LIBRARYPATH);
 	
 	
 
@@ -324,7 +336,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_GetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_GetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_GetterName());
 	
-	uML4CPPProfile_GetterName_base_Property->_setID(GETTERNAME_ATTRIBUTE_BASE_PROPERTY);
+	uML4CPPProfile_GetterName_base_Property->_setID(GETTERNAME_PROPERTY_BASE_PROPERTY);
 	uML4CPPProfile_GetterName_getterName->setName("getterName");
 	uML4CPPProfile_GetterName_getterName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_GetterName_getterName->setLower(1);
@@ -334,7 +346,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_GetterName_getterName->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
-	uML4CPPProfile_GetterName_getterName->_setID(GETTERNAME_ATTRIBUTE_GETTERNAME);
+	uML4CPPProfile_GetterName_getterName->_setID(GETTERNAME_PROPERTY_GETTERNAME);
 	
 	
 
@@ -347,7 +359,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_MainBehavior_base_Behavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_MainBehavior_base_Behavior->setAssociation(get_UML4CPPProfile_Behavior_MainBehavior());
 	
-	uML4CPPProfile_MainBehavior_base_Behavior->_setID(MAINBEHAVIOR_ATTRIBUTE_BASE_BEHAVIOR);
+	uML4CPPProfile_MainBehavior_base_Behavior->_setID(MAINBEHAVIOR_PROPERTY_BASE_BEHAVIOR);
 	
 	
 
@@ -360,7 +372,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_NonExecutable_base_NamedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_NonExecutable_base_NamedElement->setAssociation(get_UML4CPPProfile_NamedElement_NonExecutable());
 	
-	uML4CPPProfile_NonExecutable_base_NamedElement->_setID(NONEXECUTABLE_ATTRIBUTE_BASE_NAMEDELEMENT);
+	uML4CPPProfile_NonExecutable_base_NamedElement->_setID(NONEXECUTABLE_PROPERTY_BASE_NAMEDELEMENT);
 	
 	
 
@@ -373,7 +385,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_SetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_SetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_SetterName());
 	
-	uML4CPPProfile_SetterName_base_Property->_setID(SETTERNAME_ATTRIBUTE_BASE_PROPERTY);
+	uML4CPPProfile_SetterName_base_Property->_setID(SETTERNAME_PROPERTY_BASE_PROPERTY);
 	uML4CPPProfile_SetterName_setterName->setName("setterName");
 	uML4CPPProfile_SetterName_setterName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_SetterName_setterName->setLower(1);
@@ -383,7 +395,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_SetterName_setterName->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_SetterName_setterName->setAssociation(get_UML4CPPProfile_Property_SetterName());
 	
-	uML4CPPProfile_SetterName_setterName->_setID(SETTERNAME_ATTRIBUTE_SETTERNAME);
+	uML4CPPProfile_SetterName_setterName->_setID(SETTERNAME_PROPERTY_SETTERNAME);
 	
 	
 
@@ -396,7 +408,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_Singleton_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_Singleton_base_Class->setAssociation(get_UML4CPPProfile_Class_Singleton());
 	
-	uML4CPPProfile_Singleton_base_Class->_setID(SINGLETON_ATTRIBUTE_BASE_CLASS);
+	uML4CPPProfile_Singleton_base_Class->_setID(SINGLETON_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -409,7 +421,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_UML4CPPPackage_base_Package->setAssociation(get_UML4CPPProfile_Package_UML4CPPPackage());
 	
-	uML4CPPProfile_UML4CPPPackage_base_Package->_setID(UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE);
+	uML4CPPProfile_UML4CPPPackage_base_Package->_setID(UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE);
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setName("eclipseURI");
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setLower(1);
@@ -419,7 +431,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
-	uML4CPPProfile_UML4CPPPackage_eclipseURI->_setID(UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI);
+	uML4CPPProfile_UML4CPPPackage_eclipseURI->_setID(UML4CPPPACKAGE_PROPERTY_ECLIPSEURI);
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setName("ignoreNamespace");
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setLower(1);
@@ -429,7 +441,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setDefaultValue(uML4CPPProfile_UML4CPPPackage_ignoreNamespace_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_ignoreNamespace);
-	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->_setID(UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE);
+	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->_setID(UML4CPPPACKAGE_PROPERTY_IGNORENAMESPACE);
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setName("packageOnly");
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setLower(1);
@@ -439,7 +451,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setDefaultValue(uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly);
-	uML4CPPProfile_UML4CPPPackage_packageOnly->_setID(UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY);
+	uML4CPPProfile_UML4CPPPackage_packageOnly->_setID(UML4CPPPACKAGE_PROPERTY_PACKAGEONLY);
 	
 	
 }

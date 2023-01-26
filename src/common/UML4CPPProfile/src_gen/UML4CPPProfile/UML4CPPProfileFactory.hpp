@@ -48,27 +48,35 @@ namespace UML4CPPProfile
 			//START Create methods for class DoNotGenerate
 			virtual std::shared_ptr<UML4CPPProfile::DoNotGenerate> createDoNotGenerate(const int metaElementID = UML4CPPProfilePackage::DONOTGENERATE_STEREOTYPE) const  = 0;
 			//END Create methods for class DoNotGenerate
+			
 			//START Create methods for class ExternalLibrary
 			virtual std::shared_ptr<UML4CPPProfile::ExternalLibrary> createExternalLibrary(const int metaElementID = UML4CPPProfilePackage::EXTERNALLIBRARY_STEREOTYPE) const  = 0;
 			//END Create methods for class ExternalLibrary
+			
 			//START Create methods for class GetterName
 			virtual std::shared_ptr<UML4CPPProfile::GetterName> createGetterName(const int metaElementID = UML4CPPProfilePackage::GETTERNAME_STEREOTYPE) const  = 0;
 			//END Create methods for class GetterName
+			
 			//START Create methods for class MainBehavior
 			virtual std::shared_ptr<UML4CPPProfile::MainBehavior> createMainBehavior(const int metaElementID = UML4CPPProfilePackage::MAINBEHAVIOR_STEREOTYPE) const  = 0;
 			//END Create methods for class MainBehavior
+			
 			//START Create methods for class NonExecutable
 			virtual std::shared_ptr<UML4CPPProfile::NonExecutable> createNonExecutable(const int metaElementID = UML4CPPProfilePackage::NONEXECUTABLE_STEREOTYPE) const  = 0;
 			//END Create methods for class NonExecutable
+			
 			//START Create methods for class SetterName
 			virtual std::shared_ptr<UML4CPPProfile::SetterName> createSetterName(const int metaElementID = UML4CPPProfilePackage::SETTERNAME_STEREOTYPE) const  = 0;
 			//END Create methods for class SetterName
+			
 			//START Create methods for class Singleton
 			virtual std::shared_ptr<UML4CPPProfile::Singleton> createSingleton(const int metaElementID = UML4CPPProfilePackage::SINGLETON_STEREOTYPE) const  = 0;
 			//END Create methods for class Singleton
+			
 			//START Create methods for class UML4CPPPackage
 			virtual std::shared_ptr<UML4CPPProfile::UML4CPPPackage> createUML4CPPPackage(const int metaElementID = UML4CPPProfilePackage::UML4CPPPACKAGE_STEREOTYPE) const  = 0;
 			//END Create methods for class UML4CPPPackage
+			
 			
 			//Package
 			virtual std::shared_ptr<UML4CPPProfilePackage> getUML4CPPProfilePackage() = 0;

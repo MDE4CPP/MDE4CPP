@@ -36,7 +36,7 @@
  * - set isAbstract
 */]
 [template public generateStereotypeCreation(aStereotype : Stereotype)]
-[aStereotype.memberName()/] = factory->createStereotype_as_ownedType_in_Package([aStereotype.ancestors(Package)->first().memberName()/][aStereotype.oclAsType(NamedElement).getStaticClassID_Name()/]);
+[aStereotype.memberName()/] = factory->createStereotype_as_ownedType_in_Package([aStereotype.ancestors(Package)->first().memberName()/], [aStereotype.getMemberName().toUpperCase()/]);
 [aStereotype.memberName()/]->setName("[aStereotype.metamodelElementName()/]");
 [aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
 [/template]

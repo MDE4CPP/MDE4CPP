@@ -10,8 +10,8 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
+//General includes
 #include <iostream>
-
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -19,28 +19,25 @@
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "UML4CPPProfile/UML4CPPProfileFactory.hpp"
 #include "UML4CPPProfile/impl/UML4CPPProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 
-//Types included from attributes, operation parameters, imports and composite owner classes
+//Package for used PrimitiveTypes
 #include "types/typesPackage.hpp"
+
+//Packages for used (non-primitive) Types
 #include "uml/umlPackage.hpp"
+
+//Used Types
 #include "uml/Property.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
 #include "uml/umlFactory.hpp"
 #include "uml/impl/umlPackageImpl.hpp"
-
-//Packages of included Enumerations
-
-
-//Includes from InstanceValues (if required)
-
-//Includes from Ports typed by interfaces (if required)
-
-//Includes from roles of ConnectorEnds (if required)
 
 using namespace UML4CPPProfile;
 
@@ -151,15 +148,13 @@ std::string SetterNameImpl::getSetterName() const
 //*********************************
 // Operations
 //*********************************
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
 //Get
 std::shared_ptr<Any> SetterNameImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	return this->get(qualifiedName);
+	return this->get(_property->_getID());
 }
 
 std::shared_ptr<Any> SetterNameImpl::get(std::string _qualifiedName) const
@@ -172,9 +167,9 @@ std::shared_ptr<Any> SetterNameImpl::get(unsigned long _uID) const
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_PROPERTY_BASE_PROPERTY:
 			return eUMLAny(this->getBase_Property().lock(), uml::umlPackage::PROPERTY_CLASS);
-		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_PROPERTY_SETTERNAME:
 			return eAny(this->getSetterName(), types::typesPackage::STRING_CLASS, false);
 	}
 
@@ -184,8 +179,7 @@ std::shared_ptr<Any> SetterNameImpl::get(unsigned long _uID) const
 //Set
 void SetterNameImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->set(_property->_getID(), value);
 }
 
 void SetterNameImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -198,7 +192,7 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_PROPERTY_BASE_PROPERTY:
 		{
 			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 			if(umlAny)
@@ -229,7 +223,7 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_SETTERNAME:
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_PROPERTY_SETTERNAME:
 		{
 			try
 			{
@@ -249,8 +243,7 @@ void SetterNameImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 //Add
 void SetterNameImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->add(qualifiedName, value);
+	this->add(_property->_getID(), value);
 }
 
 void SetterNameImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -266,8 +259,7 @@ void SetterNameImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int ins
 //Unset
 void SetterNameImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->unset(qualifiedName);
+	this->unset(_property->_getID());
 }
 
 void SetterNameImpl::unset(std::string _qualifiedName)
@@ -280,7 +272,7 @@ void SetterNameImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_ATTRIBUTE_BASE_PROPERTY:
+		case UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_PROPERTY_BASE_PROPERTY:
 		{
 			m_base_Property.reset();
 			return;
@@ -292,8 +284,7 @@ void SetterNameImpl::unset(unsigned long _uID)
 //Remove
 void SetterNameImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->remove(qualifiedName, value);
+	this->remove(_property->_getID(), value);
 }
 
 void SetterNameImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -306,33 +297,29 @@ void SetterNameImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 {
 }
 
-//*********************************
-// Operation Invoction
-//*********************************
-//Invoke
-std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
+//Operation Invocation
+std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-	return eAny(nullptr, -1, false);
-
-	/* Currently not functioning. TODO: Clarifiy how this should work in the future
-	std::string qualifiedName = _operation->getQualifiedName();
-
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
-	{
-		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
-	}
-
-	return this->invoke(qualifiedName, _arguments);
-	*/
+	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, _arguments);
+	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> SetterNameImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SetterNameImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	return result;
+}
+
+//OpaqueBehavior Invocation
+std::shared_ptr<Any> SetterNameImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

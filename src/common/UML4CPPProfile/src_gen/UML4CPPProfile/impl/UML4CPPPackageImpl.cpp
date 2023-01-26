@@ -10,8 +10,8 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
+//General includes
 #include <iostream>
-
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -19,28 +19,25 @@
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "UML4CPPProfile/UML4CPPProfileFactory.hpp"
 #include "UML4CPPProfile/impl/UML4CPPProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 
-//Types included from attributes, operation parameters, imports and composite owner classes
+//Package for used PrimitiveTypes
 #include "types/typesPackage.hpp"
+
+//Packages for used (non-primitive) Types
 #include "uml/umlPackage.hpp"
+
+//Used Types
 #include "uml/Package.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
 #include "uml/umlFactory.hpp"
 #include "uml/impl/umlPackageImpl.hpp"
-
-//Packages of included Enumerations
-
-
-//Includes from InstanceValues (if required)
-
-//Includes from Ports typed by interfaces (if required)
-
-//Includes from roles of ConnectorEnds (if required)
 
 using namespace UML4CPPProfile;
 
@@ -177,15 +174,13 @@ bool UML4CPPPackageImpl::isPackageOnly() const
 //*********************************
 // Operations
 //*********************************
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
 //Get
 std::shared_ptr<Any> UML4CPPPackageImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	return this->get(qualifiedName);
+	return this->get(_property->_getID());
 }
 
 std::shared_ptr<Any> UML4CPPPackageImpl::get(std::string _qualifiedName) const
@@ -198,13 +193,13 @@ std::shared_ptr<Any> UML4CPPPackageImpl::get(unsigned long _uID) const
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE:
 			return eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_ECLIPSEURI:
 			return eAny(this->getEclipseURI(), types::typesPackage::STRING_CLASS, false);
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_IGNORENAMESPACE:
 			return eAny(this->isIgnoreNamespace(), types::typesPackage::BOOLEAN_CLASS, false);
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_PACKAGEONLY:
 			return eAny(this->isPackageOnly(), types::typesPackage::BOOLEAN_CLASS, false);
 	}
 
@@ -214,8 +209,7 @@ std::shared_ptr<Any> UML4CPPPackageImpl::get(unsigned long _uID) const
 //Set
 void UML4CPPPackageImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->set(_property->_getID(), value);
 }
 
 void UML4CPPPackageImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -228,7 +222,7 @@ void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE:
 		{
 			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 			if(umlAny)
@@ -259,7 +253,7 @@ void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_ECLIPSEURI:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_ECLIPSEURI:
 		{
 			try
 			{
@@ -273,7 +267,7 @@ void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_IGNORENAMESPACE:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_IGNORENAMESPACE:
 		{
 			try
 			{
@@ -287,7 +281,7 @@ void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_PACKAGEONLY:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_PACKAGEONLY:
 		{
 			try
 			{
@@ -307,8 +301,7 @@ void UML4CPPPackageImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 //Add
 void UML4CPPPackageImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->add(qualifiedName, value);
+	this->add(_property->_getID(), value);
 }
 
 void UML4CPPPackageImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -324,8 +317,7 @@ void UML4CPPPackageImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int
 //Unset
 void UML4CPPPackageImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->unset(qualifiedName);
+	this->unset(_property->_getID());
 }
 
 void UML4CPPPackageImpl::unset(std::string _qualifiedName)
@@ -338,7 +330,7 @@ void UML4CPPPackageImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE:
 		{
 			m_base_Package.reset();
 			return;
@@ -350,8 +342,7 @@ void UML4CPPPackageImpl::unset(unsigned long _uID)
 //Remove
 void UML4CPPPackageImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->remove(qualifiedName, value);
+	this->remove(_property->_getID(), value);
 }
 
 void UML4CPPPackageImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -364,33 +355,29 @@ void UML4CPPPackageImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 {
 }
 
-//*********************************
-// Operation Invoction
-//*********************************
-//Invoke
-std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
+//Operation Invocation
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-	return eAny(nullptr, -1, false);
-
-	/* Currently not functioning. TODO: Clarifiy how this should work in the future
-	std::string qualifiedName = _operation->getQualifiedName();
-
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
-	{
-		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
-	}
-
-	return this->invoke(qualifiedName, _arguments);
-	*/
+	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, _arguments);
+	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> UML4CPPPackageImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	return result;
+}
+
+//OpaqueBehavior Invocation
+std::shared_ptr<Any> UML4CPPPackageImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

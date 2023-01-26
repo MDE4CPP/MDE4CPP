@@ -10,8 +10,8 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
+//General includes
 #include <iostream>
-
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -19,28 +19,25 @@
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "UML4CPPProfile/UML4CPPProfileFactory.hpp"
 #include "UML4CPPProfile/impl/UML4CPPProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 
-//Types included from attributes, operation parameters, imports and composite owner classes
+//Package for used PrimitiveTypes
 #include "types/typesPackage.hpp"
+
+//Packages for used (non-primitive) Types
 #include "uml/umlPackage.hpp"
+
+//Used Types
 #include "uml/Package.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
 #include "uml/umlFactory.hpp"
 #include "uml/impl/umlPackageImpl.hpp"
-
-//Packages of included Enumerations
-
-
-//Includes from InstanceValues (if required)
-
-//Includes from Ports typed by interfaces (if required)
-
-//Includes from roles of ConnectorEnds (if required)
 
 using namespace UML4CPPProfile;
 
@@ -179,15 +176,13 @@ std::string ExternalLibraryImpl::getLibraryPath() const
 //*********************************
 // Operations
 //*********************************
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
 //Get
 std::shared_ptr<Any> ExternalLibraryImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	return this->get(qualifiedName);
+	return this->get(_property->_getID());
 }
 
 std::shared_ptr<Any> ExternalLibraryImpl::get(std::string _qualifiedName) const
@@ -200,13 +195,13 @@ std::shared_ptr<Any> ExternalLibraryImpl::get(unsigned long _uID) const
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
 			return eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_INCLUDEPATH:
 			return eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYNAME:
 			return eAny(this->getLibraryName(), types::typesPackage::STRING_CLASS, false);
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYPATH:
 			return eAny(this->getLibraryPath(), types::typesPackage::STRING_CLASS, false);
 	}
 
@@ -216,8 +211,7 @@ std::shared_ptr<Any> ExternalLibraryImpl::get(unsigned long _uID) const
 //Set
 void ExternalLibraryImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->set(_property->_getID(), value);
 }
 
 void ExternalLibraryImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -230,7 +224,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
 		{
 			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 			if(umlAny)
@@ -261,7 +255,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_INCLUDEPATH:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_INCLUDEPATH:
 		{
 			try
 			{
@@ -275,7 +269,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYNAME:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYNAME:
 		{
 			try
 			{
@@ -289,7 +283,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 			}
 		break;
 		}
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_LIBRARYPATH:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYPATH:
 		{
 			try
 			{
@@ -309,8 +303,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 //Add
 void ExternalLibraryImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->add(qualifiedName, value);
+	this->add(_property->_getID(), value);
 }
 
 void ExternalLibraryImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -326,8 +319,7 @@ void ExternalLibraryImpl::add(unsigned long _uID, std::shared_ptr<Any> value, in
 //Unset
 void ExternalLibraryImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->unset(qualifiedName);
+	this->unset(_property->_getID());
 }
 
 void ExternalLibraryImpl::unset(std::string _qualifiedName)
@@ -340,7 +332,7 @@ void ExternalLibraryImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
-		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_ATTRIBUTE_BASE_PACKAGE:
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
 		{
 			m_base_Package.reset();
 			return;
@@ -352,8 +344,7 @@ void ExternalLibraryImpl::unset(unsigned long _uID)
 //Remove
 void ExternalLibraryImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->remove(qualifiedName, value);
+	this->remove(_property->_getID(), value);
 }
 
 void ExternalLibraryImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -366,33 +357,29 @@ void ExternalLibraryImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 {
 }
 
-//*********************************
-// Operation Invoction
-//*********************************
-//Invoke
-std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
+//Operation Invocation
+std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-	return eAny(nullptr, -1, false);
-
-	/* Currently not functioning. TODO: Clarifiy how this should work in the future
-	std::string qualifiedName = _operation->getQualifiedName();
-
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
-	{
-		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
-	}
-
-	return this->invoke(qualifiedName, _arguments);
-	*/
+	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, _arguments);
+	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExternalLibraryImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> ExternalLibraryImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	return result;
+}
+
+//OpaqueBehavior Invocation
+std::shared_ptr<Any> ExternalLibraryImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }
