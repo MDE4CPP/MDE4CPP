@@ -359,6 +359,7 @@ namespace StandardProfile
 		private:
 			void createPackageActivities(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageClasses(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageDataTypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
@@ -371,6 +372,7 @@ namespace StandardProfile
 
 			void initializePackageActivities();
 			void initializePackageClasses();
+			void initializePackageDataTypes();
 			void initializePackageAssociations();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();

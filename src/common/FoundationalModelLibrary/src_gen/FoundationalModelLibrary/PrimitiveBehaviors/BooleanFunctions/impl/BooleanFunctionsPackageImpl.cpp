@@ -102,10 +102,27 @@ void BooleanFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Pack
 //-------------------------------------------
 //Opaque Behaviors
 
-	//ToBoolean
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean);
+	//Xor
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
+	
+	//And
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
+	
+	//Not
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not);
+	
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString);
 	
 	//Or
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
@@ -113,33 +130,16 @@ void BooleanFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Pack
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or);
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or);
 	
-	//ToString
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString);
-	
-	//Xor
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor);
+	//ToBoolean
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean);
 	
 	//Implies
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies);
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies);
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies);
-	
-	//Not
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not);
-	
-	//And
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And);
 	
 }
 
@@ -226,23 +226,94 @@ void BooleanFunctionsPackageImpl::initializePackageClasses()
 //-------------------------------------------
 //Opaque Behaviors
 
-	//ToBoolean
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean->setName("ToBoolean");
+	//Xor
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor->setName("Xor");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setLower(0);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOBOOLEAN);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_XOR);
+	
+	
+	//And
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And->setName("And");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_AND);
+	
+	
+	//Not
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not->setName("Not");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_NOT);
+	
+	
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString->setName("ToString");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
 	
 	
 	//Or
@@ -271,49 +342,23 @@ void BooleanFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_OR);
 	
 	
-	//ToString
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString->setName("ToString");
+	//ToBoolean
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean->setName("ToBoolean");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
-	
-	
-	//Xor
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor->setName("Xor");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_XOR);
+	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOBOOLEAN);
 	
 	
 	//Implies
@@ -340,51 +385,6 @@ void BooleanFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_IMPLIES);
-	
-	
-	//Not
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not->setName("Not");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_NOT);
-	
-	
-	//And
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And->setName("And");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And->_setID(BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_AND);
 	
 	
 }

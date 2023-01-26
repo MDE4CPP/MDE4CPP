@@ -10,15 +10,16 @@
 
 
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class BehavioralFeature;
-}
-
+//Forward declarations for used types
 namespace uml 
 {
 	class Usage;
+	class BehavioralFeature;
+}
+namespace uml 
+{
+	class Usage;
+	class BehavioralFeature;
 }
 
 // base class includes
@@ -50,8 +51,6 @@ namespace StandardProfile
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 		protected:
 			//*********************************
 			// Members

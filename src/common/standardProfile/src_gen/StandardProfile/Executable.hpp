@@ -10,7 +10,7 @@
 
 
 
-//Forward Declaration for used types
+//Forward declarations for used types
 namespace uml 
 {
 	class Artifact;
@@ -42,8 +42,6 @@ namespace StandardProfile
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 		protected:
 			//*********************************
 			// Members

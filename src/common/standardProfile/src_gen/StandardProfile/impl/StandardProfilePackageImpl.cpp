@@ -73,23 +73,28 @@ void StandardProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Pack
 
 	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
-	createPackageValueSpecifications(standardProfile, factory);
-	createPackageInterfaces(standardProfile, factory);
-	createPackageClasses(standardProfile, factory);
-	createPackageAssociations(standardProfile, factory);
-	createPackageInstanceSpecifications(standardProfile, factory);
-	createPackageStereotypes(standardProfile, factory);
 	createPackageActivities(standardProfile, factory);
+	createPackageAssociations(standardProfile, factory);
+	createPackageClasses(standardProfile, factory);
+	createPackageDataTypes(standardProfile, factory);
 	createPackageDependencies(standardProfile, factory);
-	createPackagePrimitiveTypes(standardProfile, factory);
 	createPackageEnumerationLiterals(standardProfile, factory);
+	createPackageValueSpecifications(standardProfile, factory);
+	createPackageInstanceSpecifications(standardProfile, factory);
+	createPackageInterfaces(standardProfile, factory);
 	createPackageInterfaceRealizations(standardProfile, factory);
+	createPackagePrimitiveTypes(standardProfile, factory);
+	createPackageStereotypes(standardProfile, factory);
 }
 
 void StandardProfilePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
+
+void StandardProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+}
 
 void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -100,9 +105,9 @@ void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packa
 //-------------------------------------------
 //Opaque Behaviors
 
-} 
+}
 
-void StandardProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+void StandardProfilePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -132,199 +137,199 @@ void StandardProfilePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml
 
 void StandardProfilePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
-	standardProfile_Auxiliary = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::AUXILIARY_STEREOTYPE);
+	standardProfile_Auxiliary = factory->createStereotype_as_ownedType_in_Package(standardProfile, AUXILIARY_STEREOTYPE);
 	standardProfile_Auxiliary->setName("Auxiliary");
 	standardProfile_Auxiliary->setIsAbstract(false);
 	standardProfile_Auxiliary_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Auxiliary);
 	
 
-	standardProfile_BuildComponent = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::BUILDCOMPONENT_STEREOTYPE);
+	standardProfile_BuildComponent = factory->createStereotype_as_ownedType_in_Package(standardProfile, BUILDCOMPONENT_STEREOTYPE);
 	standardProfile_BuildComponent->setName("BuildComponent");
 	standardProfile_BuildComponent->setIsAbstract(false);
 	standardProfile_BuildComponent_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_BuildComponent);
 	
 
-	standardProfile_Call = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::CALL_STEREOTYPE);
+	standardProfile_Call = factory->createStereotype_as_ownedType_in_Package(standardProfile, CALL_STEREOTYPE);
 	standardProfile_Call->setName("Call");
 	standardProfile_Call->setIsAbstract(false);
 	standardProfile_Call_base_Usage = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Call);
 	
 
-	standardProfile_Create = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::CREATE_STEREOTYPE);
+	standardProfile_Create = factory->createStereotype_as_ownedType_in_Package(standardProfile, CREATE_STEREOTYPE);
 	standardProfile_Create->setName("Create");
 	standardProfile_Create->setIsAbstract(false);
 	standardProfile_Create_base_BehavioralFeature = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Create);standardProfile_Create_base_Usage = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Create);
 	
 
-	standardProfile_Derive = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::DERIVE_STEREOTYPE);
+	standardProfile_Derive = factory->createStereotype_as_ownedType_in_Package(standardProfile, DERIVE_STEREOTYPE);
 	standardProfile_Derive->setName("Derive");
 	standardProfile_Derive->setIsAbstract(false);
 	standardProfile_Derive_base_Abstraction = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Derive);
 	
 
-	standardProfile_Destroy = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::DESTROY_STEREOTYPE);
+	standardProfile_Destroy = factory->createStereotype_as_ownedType_in_Package(standardProfile, DESTROY_STEREOTYPE);
 	standardProfile_Destroy->setName("Destroy");
 	standardProfile_Destroy->setIsAbstract(false);
 	standardProfile_Destroy_base_BehavioralFeature = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Destroy);
 	
 
-	standardProfile_Document = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::DOCUMENT_STEREOTYPE);
+	standardProfile_Document = factory->createStereotype_as_ownedType_in_Package(standardProfile, DOCUMENT_STEREOTYPE);
 	standardProfile_Document->setName("Document");
 	standardProfile_Document->setIsAbstract(false);
 	standardProfile_Document_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Document);
 	
 
-	standardProfile_Entity = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::ENTITY_STEREOTYPE);
+	standardProfile_Entity = factory->createStereotype_as_ownedType_in_Package(standardProfile, ENTITY_STEREOTYPE);
 	standardProfile_Entity->setName("Entity");
 	standardProfile_Entity->setIsAbstract(false);
 	standardProfile_Entity_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Entity);
 	
 
-	standardProfile_Executable = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::EXECUTABLE_STEREOTYPE);
+	standardProfile_Executable = factory->createStereotype_as_ownedType_in_Package(standardProfile, EXECUTABLE_STEREOTYPE);
 	standardProfile_Executable->setName("Executable");
 	standardProfile_Executable->setIsAbstract(false);
 	standardProfile_Executable_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Executable);
 	
 
-	standardProfile_File = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::FILE_STEREOTYPE);
+	standardProfile_File = factory->createStereotype_as_ownedType_in_Package(standardProfile, FILE_STEREOTYPE);
 	standardProfile_File->setName("File");
 	standardProfile_File->setIsAbstract(false);
 	standardProfile_File_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_File);
 	
 
-	standardProfile_Focus = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::FOCUS_STEREOTYPE);
+	standardProfile_Focus = factory->createStereotype_as_ownedType_in_Package(standardProfile, FOCUS_STEREOTYPE);
 	standardProfile_Focus->setName("Focus");
 	standardProfile_Focus->setIsAbstract(false);
 	standardProfile_Focus_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Focus);
 	
 
-	standardProfile_Framework = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::FRAMEWORK_STEREOTYPE);
+	standardProfile_Framework = factory->createStereotype_as_ownedType_in_Package(standardProfile, FRAMEWORK_STEREOTYPE);
 	standardProfile_Framework->setName("Framework");
 	standardProfile_Framework->setIsAbstract(false);
 	standardProfile_Framework_base_Package = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Framework);
 	
 
-	standardProfile_Implement = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::IMPLEMENT_STEREOTYPE);
+	standardProfile_Implement = factory->createStereotype_as_ownedType_in_Package(standardProfile, IMPLEMENT_STEREOTYPE);
 	standardProfile_Implement->setName("Implement");
 	standardProfile_Implement->setIsAbstract(false);
 	standardProfile_Implement_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Implement);
 	
 
-	standardProfile_ImplementationClass = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::IMPLEMENTATIONCLASS_STEREOTYPE);
+	standardProfile_ImplementationClass = factory->createStereotype_as_ownedType_in_Package(standardProfile, IMPLEMENTATIONCLASS_STEREOTYPE);
 	standardProfile_ImplementationClass->setName("ImplementationClass");
 	standardProfile_ImplementationClass->setIsAbstract(false);
 	standardProfile_ImplementationClass_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_ImplementationClass);
 	
 
-	standardProfile_Instantiate = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::INSTANTIATE_STEREOTYPE);
+	standardProfile_Instantiate = factory->createStereotype_as_ownedType_in_Package(standardProfile, INSTANTIATE_STEREOTYPE);
 	standardProfile_Instantiate->setName("Instantiate");
 	standardProfile_Instantiate->setIsAbstract(false);
 	standardProfile_Instantiate_base_Usage = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Instantiate);
 	
 
-	standardProfile_Library = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::LIBRARY_STEREOTYPE);
+	standardProfile_Library = factory->createStereotype_as_ownedType_in_Package(standardProfile, LIBRARY_STEREOTYPE);
 	standardProfile_Library->setName("Library");
 	standardProfile_Library->setIsAbstract(false);
 	standardProfile_Library_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Library);
 	
 
-	standardProfile_Metaclass = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::METACLASS_STEREOTYPE);
+	standardProfile_Metaclass = factory->createStereotype_as_ownedType_in_Package(standardProfile, METACLASS_STEREOTYPE);
 	standardProfile_Metaclass->setName("Metaclass");
 	standardProfile_Metaclass->setIsAbstract(false);
 	standardProfile_Metaclass_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Metaclass);
 	
 
-	standardProfile_Metamodel = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::METAMODEL_STEREOTYPE);
+	standardProfile_Metamodel = factory->createStereotype_as_ownedType_in_Package(standardProfile, METAMODEL_STEREOTYPE);
 	standardProfile_Metamodel->setName("Metamodel");
 	standardProfile_Metamodel->setIsAbstract(false);
 	standardProfile_Metamodel_base_Model = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Metamodel);
 	
 
-	standardProfile_ModelLibrary = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::MODELLIBRARY_STEREOTYPE);
+	standardProfile_ModelLibrary = factory->createStereotype_as_ownedType_in_Package(standardProfile, MODELLIBRARY_STEREOTYPE);
 	standardProfile_ModelLibrary->setName("ModelLibrary");
 	standardProfile_ModelLibrary->setIsAbstract(false);
 	standardProfile_ModelLibrary_base_Package = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_ModelLibrary);
 	
 
-	standardProfile_Process = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::PROCESS_STEREOTYPE);
+	standardProfile_Process = factory->createStereotype_as_ownedType_in_Package(standardProfile, PROCESS_STEREOTYPE);
 	standardProfile_Process->setName("Process");
 	standardProfile_Process->setIsAbstract(false);
 	standardProfile_Process_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Process);
 	
 
-	standardProfile_Realization = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::REALIZATION_STEREOTYPE);
+	standardProfile_Realization = factory->createStereotype_as_ownedType_in_Package(standardProfile, REALIZATION_STEREOTYPE);
 	standardProfile_Realization->setName("Realization");
 	standardProfile_Realization->setIsAbstract(false);
 	standardProfile_Realization_base_Classifier = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Realization);
 	
 
-	standardProfile_Refine = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::REFINE_STEREOTYPE);
+	standardProfile_Refine = factory->createStereotype_as_ownedType_in_Package(standardProfile, REFINE_STEREOTYPE);
 	standardProfile_Refine->setName("Refine");
 	standardProfile_Refine->setIsAbstract(false);
 	standardProfile_Refine_base_Abstraction = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Refine);
 	
 
-	standardProfile_Responsibility = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::RESPONSIBILITY_STEREOTYPE);
+	standardProfile_Responsibility = factory->createStereotype_as_ownedType_in_Package(standardProfile, RESPONSIBILITY_STEREOTYPE);
 	standardProfile_Responsibility->setName("Responsibility");
 	standardProfile_Responsibility->setIsAbstract(false);
 	standardProfile_Responsibility_base_Usage = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Responsibility);
 	
 
-	standardProfile_Script = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SCRIPT_STEREOTYPE);
+	standardProfile_Script = factory->createStereotype_as_ownedType_in_Package(standardProfile, SCRIPT_STEREOTYPE);
 	standardProfile_Script->setName("Script");
 	standardProfile_Script->setIsAbstract(false);
 	standardProfile_Script_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Script);
 	
 
-	standardProfile_Send = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SEND_STEREOTYPE);
+	standardProfile_Send = factory->createStereotype_as_ownedType_in_Package(standardProfile, SEND_STEREOTYPE);
 	standardProfile_Send->setName("Send");
 	standardProfile_Send->setIsAbstract(false);
 	standardProfile_Send_base_Usage = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Send);
 	
 
-	standardProfile_Service = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SERVICE_STEREOTYPE);
+	standardProfile_Service = factory->createStereotype_as_ownedType_in_Package(standardProfile, SERVICE_STEREOTYPE);
 	standardProfile_Service->setName("Service");
 	standardProfile_Service->setIsAbstract(false);
 	standardProfile_Service_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Service);
 	
 
-	standardProfile_Source = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SOURCE_STEREOTYPE);
+	standardProfile_Source = factory->createStereotype_as_ownedType_in_Package(standardProfile, SOURCE_STEREOTYPE);
 	standardProfile_Source->setName("Source");
 	standardProfile_Source->setIsAbstract(false);
 	standardProfile_Source_base_Artifact = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Source);
 	
 
-	standardProfile_Specification = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SPECIFICATION_STEREOTYPE);
+	standardProfile_Specification = factory->createStereotype_as_ownedType_in_Package(standardProfile, SPECIFICATION_STEREOTYPE);
 	standardProfile_Specification->setName("Specification");
 	standardProfile_Specification->setIsAbstract(false);
 	standardProfile_Specification_base_Classifier = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Specification);
 	
 
-	standardProfile_Subsystem = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SUBSYSTEM_STEREOTYPE);
+	standardProfile_Subsystem = factory->createStereotype_as_ownedType_in_Package(standardProfile, SUBSYSTEM_STEREOTYPE);
 	standardProfile_Subsystem->setName("Subsystem");
 	standardProfile_Subsystem->setIsAbstract(false);
 	standardProfile_Subsystem_base_Component = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Subsystem);
 	
 
-	standardProfile_SystemModel = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::SYSTEMMODEL_STEREOTYPE);
+	standardProfile_SystemModel = factory->createStereotype_as_ownedType_in_Package(standardProfile, SYSTEMMODEL_STEREOTYPE);
 	standardProfile_SystemModel->setName("SystemModel");
 	standardProfile_SystemModel->setIsAbstract(false);
 	standardProfile_SystemModel_base_Model = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_SystemModel);
 	
 
-	standardProfile_Trace = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::TRACE_STEREOTYPE);
+	standardProfile_Trace = factory->createStereotype_as_ownedType_in_Package(standardProfile, TRACE_STEREOTYPE);
 	standardProfile_Trace->setName("Trace");
 	standardProfile_Trace->setIsAbstract(false);
 	standardProfile_Trace_base_Abstraction = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Trace);
 	
 
-	standardProfile_Type = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::TYPE_STEREOTYPE);
+	standardProfile_Type = factory->createStereotype_as_ownedType_in_Package(standardProfile, TYPE_STEREOTYPE);
 	standardProfile_Type->setName("Type");
 	standardProfile_Type->setIsAbstract(false);
 	standardProfile_Type_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Type);
 	
 
-	standardProfile_Utility = factory->createStereotype_as_ownedType_in_Package(standardProfile, StandardProfile::StandardProfilePackage::UTILITY_STEREOTYPE);
+	standardProfile_Utility = factory->createStereotype_as_ownedType_in_Package(standardProfile, UTILITY_STEREOTYPE);
 	standardProfile_Utility->setName("Utility");
 	standardProfile_Utility->setIsAbstract(false);
 	standardProfile_Utility_base_Class = factory->createProperty_as_ownedAttribute_in_Class(standardProfile_Utility);
@@ -416,8 +421,9 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 	this->setURI(eNS_URI);
 
 	initializePackageActivities();
-	initializePackageClasses();
 	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -434,6 +440,10 @@ void StandardProfilePackageImpl::initializePackageActivities()
 }
 
 
+void StandardProfilePackageImpl::initializePackageAssociations()
+{
+}
+
 void StandardProfilePackageImpl::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -444,8 +454,10 @@ void StandardProfilePackageImpl::initializePackageClasses()
 
 }
 
-void StandardProfilePackageImpl::initializePackageAssociations()
+void StandardProfilePackageImpl::initializePackageDataTypes()
 {
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
 }
 
 void StandardProfilePackageImpl::initializePackageDependencies()
@@ -480,7 +492,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Auxiliary_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Auxiliary_base_Class->setAssociation(get_StandardProfile_Class_Auxiliary());
 	
-	standardProfile_Auxiliary_base_Class->_setID(AUXILIARY_ATTRIBUTE_BASE_CLASS);
+	standardProfile_Auxiliary_base_Class->_setID(AUXILIARY_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -493,7 +505,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_BuildComponent_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_BuildComponent_base_Component->setAssociation(get_StandardProfile_Component_BuildComponent());
 	
-	standardProfile_BuildComponent_base_Component->_setID(BUILDCOMPONENT_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_BuildComponent_base_Component->_setID(BUILDCOMPONENT_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -506,7 +518,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Call_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Call_base_Usage->setAssociation(get_StandardProfile_Usage_Call());
 	
-	standardProfile_Call_base_Usage->_setID(CALL_ATTRIBUTE_BASE_USAGE);
+	standardProfile_Call_base_Usage->_setID(CALL_PROPERTY_BASE_USAGE);
 	
 	
 
@@ -519,7 +531,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Create_base_BehavioralFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Create_base_BehavioralFeature->setAssociation(get_StandardProfile_BehavioralFeature_Create());
 	
-	standardProfile_Create_base_BehavioralFeature->_setID(CREATE_ATTRIBUTE_BASE_BEHAVIORALFEATURE);
+	standardProfile_Create_base_BehavioralFeature->_setID(CREATE_PROPERTY_BASE_BEHAVIORALFEATURE);
 	standardProfile_Create_base_Usage->setName("base_Usage");
 	standardProfile_Create_base_Usage->setType(UML::UMLPackage::eInstance()->get_UML_Usage());
 	standardProfile_Create_base_Usage->setLower(1);
@@ -529,7 +541,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Create_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Create_base_Usage->setAssociation(get_StandardProfile_Usage_Create());
 	
-	standardProfile_Create_base_Usage->_setID(CREATE_ATTRIBUTE_BASE_USAGE);
+	standardProfile_Create_base_Usage->_setID(CREATE_PROPERTY_BASE_USAGE);
 	
 	
 
@@ -542,7 +554,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Derive_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Derive_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Derive());
 	
-	standardProfile_Derive_base_Abstraction->_setID(DERIVE_ATTRIBUTE_BASE_ABSTRACTION);
+	standardProfile_Derive_base_Abstraction->_setID(DERIVE_PROPERTY_BASE_ABSTRACTION);
 	
 	
 
@@ -555,7 +567,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Destroy_base_BehavioralFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Destroy_base_BehavioralFeature->setAssociation(get_StandardProfile_BehavioralFeature_Destroy());
 	
-	standardProfile_Destroy_base_BehavioralFeature->_setID(DESTROY_ATTRIBUTE_BASE_BEHAVIORALFEATURE);
+	standardProfile_Destroy_base_BehavioralFeature->_setID(DESTROY_PROPERTY_BASE_BEHAVIORALFEATURE);
 	
 	
 
@@ -568,7 +580,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Document_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Document_base_Artifact->setAssociation(get_StandardProfile_Artifact_Document());
 	
-	standardProfile_Document_base_Artifact->_setID(DOCUMENT_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_Document_base_Artifact->_setID(DOCUMENT_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -581,7 +593,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Entity_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Entity_base_Component->setAssociation(get_StandardProfile_Component_Entity());
 	
-	standardProfile_Entity_base_Component->_setID(ENTITY_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_Entity_base_Component->_setID(ENTITY_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -594,7 +606,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Executable_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Executable_base_Artifact->setAssociation(get_StandardProfile_Artifact_Executable());
 	
-	standardProfile_Executable_base_Artifact->_setID(EXECUTABLE_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_Executable_base_Artifact->_setID(EXECUTABLE_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -607,7 +619,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_File_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_File_base_Artifact->setAssociation(get_StandardProfile_Artifact_File());
 	
-	standardProfile_File_base_Artifact->_setID(FILE_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_File_base_Artifact->_setID(FILE_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -620,7 +632,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Focus_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Focus_base_Class->setAssociation(get_StandardProfile_Class_Focus());
 	
-	standardProfile_Focus_base_Class->_setID(FOCUS_ATTRIBUTE_BASE_CLASS);
+	standardProfile_Focus_base_Class->_setID(FOCUS_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -633,7 +645,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Framework_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Framework_base_Package->setAssociation(get_StandardProfile_Package_Framework());
 	
-	standardProfile_Framework_base_Package->_setID(FRAMEWORK_ATTRIBUTE_BASE_PACKAGE);
+	standardProfile_Framework_base_Package->_setID(FRAMEWORK_PROPERTY_BASE_PACKAGE);
 	
 	
 
@@ -646,7 +658,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Implement_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Implement_base_Component->setAssociation(get_StandardProfile_Component_Implement());
 	
-	standardProfile_Implement_base_Component->_setID(IMPLEMENT_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_Implement_base_Component->_setID(IMPLEMENT_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -659,7 +671,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_ImplementationClass_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_ImplementationClass_base_Class->setAssociation(get_StandardProfile_Class_ImplementationClass());
 	
-	standardProfile_ImplementationClass_base_Class->_setID(IMPLEMENTATIONCLASS_ATTRIBUTE_BASE_CLASS);
+	standardProfile_ImplementationClass_base_Class->_setID(IMPLEMENTATIONCLASS_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -672,7 +684,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Instantiate_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Instantiate_base_Usage->setAssociation(get_StandardProfile_Usage_Instantiate());
 	
-	standardProfile_Instantiate_base_Usage->_setID(INSTANTIATE_ATTRIBUTE_BASE_USAGE);
+	standardProfile_Instantiate_base_Usage->_setID(INSTANTIATE_PROPERTY_BASE_USAGE);
 	
 	
 
@@ -685,7 +697,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Library_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Library_base_Artifact->setAssociation(get_StandardProfile_Artifact_Library());
 	
-	standardProfile_Library_base_Artifact->_setID(LIBRARY_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_Library_base_Artifact->_setID(LIBRARY_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -698,7 +710,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Metaclass_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Metaclass_base_Class->setAssociation(get_StandardProfile_Class_Metaclass());
 	
-	standardProfile_Metaclass_base_Class->_setID(METACLASS_ATTRIBUTE_BASE_CLASS);
+	standardProfile_Metaclass_base_Class->_setID(METACLASS_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -711,7 +723,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Metamodel_base_Model->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Metamodel_base_Model->setAssociation(get_StandardProfile_Model_Metamodel());
 	
-	standardProfile_Metamodel_base_Model->_setID(METAMODEL_ATTRIBUTE_BASE_MODEL);
+	standardProfile_Metamodel_base_Model->_setID(METAMODEL_PROPERTY_BASE_MODEL);
 	
 	
 
@@ -724,7 +736,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_ModelLibrary_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_ModelLibrary_base_Package->setAssociation(get_StandardProfile_Package_ModelLibrary());
 	
-	standardProfile_ModelLibrary_base_Package->_setID(MODELLIBRARY_ATTRIBUTE_BASE_PACKAGE);
+	standardProfile_ModelLibrary_base_Package->_setID(MODELLIBRARY_PROPERTY_BASE_PACKAGE);
 	
 	
 
@@ -737,7 +749,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Process_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Process_base_Component->setAssociation(get_StandardProfile_Component_Process());
 	
-	standardProfile_Process_base_Component->_setID(PROCESS_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_Process_base_Component->_setID(PROCESS_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -750,7 +762,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Realization_base_Classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Realization_base_Classifier->setAssociation(get_StandardProfile_Classifier_Realization());
 	
-	standardProfile_Realization_base_Classifier->_setID(REALIZATION_ATTRIBUTE_BASE_CLASSIFIER);
+	standardProfile_Realization_base_Classifier->_setID(REALIZATION_PROPERTY_BASE_CLASSIFIER);
 	
 	
 
@@ -763,7 +775,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Refine_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Refine_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Refine());
 	
-	standardProfile_Refine_base_Abstraction->_setID(REFINE_ATTRIBUTE_BASE_ABSTRACTION);
+	standardProfile_Refine_base_Abstraction->_setID(REFINE_PROPERTY_BASE_ABSTRACTION);
 	
 	
 
@@ -776,7 +788,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Responsibility_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Responsibility_base_Usage->setAssociation(get_StandardProfile_Usage_Responsibility());
 	
-	standardProfile_Responsibility_base_Usage->_setID(RESPONSIBILITY_ATTRIBUTE_BASE_USAGE);
+	standardProfile_Responsibility_base_Usage->_setID(RESPONSIBILITY_PROPERTY_BASE_USAGE);
 	
 	
 
@@ -789,7 +801,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Script_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Script_base_Artifact->setAssociation(get_StandardProfile_Artifact_Script());
 	
-	standardProfile_Script_base_Artifact->_setID(SCRIPT_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_Script_base_Artifact->_setID(SCRIPT_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -802,7 +814,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Send_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Send_base_Usage->setAssociation(get_StandardProfile_Usage_Send());
 	
-	standardProfile_Send_base_Usage->_setID(SEND_ATTRIBUTE_BASE_USAGE);
+	standardProfile_Send_base_Usage->_setID(SEND_PROPERTY_BASE_USAGE);
 	
 	
 
@@ -815,7 +827,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Service_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Service_base_Component->setAssociation(get_StandardProfile_Component_Service());
 	
-	standardProfile_Service_base_Component->_setID(SERVICE_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_Service_base_Component->_setID(SERVICE_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -828,7 +840,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Source_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Source_base_Artifact->setAssociation(get_StandardProfile_Artifact_Source());
 	
-	standardProfile_Source_base_Artifact->_setID(SOURCE_ATTRIBUTE_BASE_ARTIFACT);
+	standardProfile_Source_base_Artifact->_setID(SOURCE_PROPERTY_BASE_ARTIFACT);
 	
 	
 
@@ -841,7 +853,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Specification_base_Classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Specification_base_Classifier->setAssociation(get_StandardProfile_Classifier_Specification());
 	
-	standardProfile_Specification_base_Classifier->_setID(SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER);
+	standardProfile_Specification_base_Classifier->_setID(SPECIFICATION_PROPERTY_BASE_CLASSIFIER);
 	
 	
 
@@ -854,7 +866,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Subsystem_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Subsystem_base_Component->setAssociation(get_StandardProfile_Component_Subsystem());
 	
-	standardProfile_Subsystem_base_Component->_setID(SUBSYSTEM_ATTRIBUTE_BASE_COMPONENT);
+	standardProfile_Subsystem_base_Component->_setID(SUBSYSTEM_PROPERTY_BASE_COMPONENT);
 	
 	
 
@@ -867,7 +879,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_SystemModel_base_Model->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_SystemModel_base_Model->setAssociation(get_StandardProfile_Model_SystemModel());
 	
-	standardProfile_SystemModel_base_Model->_setID(SYSTEMMODEL_ATTRIBUTE_BASE_MODEL);
+	standardProfile_SystemModel_base_Model->_setID(SYSTEMMODEL_PROPERTY_BASE_MODEL);
 	
 	
 
@@ -880,7 +892,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Trace_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Trace_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Trace());
 	
-	standardProfile_Trace_base_Abstraction->_setID(TRACE_ATTRIBUTE_BASE_ABSTRACTION);
+	standardProfile_Trace_base_Abstraction->_setID(TRACE_PROPERTY_BASE_ABSTRACTION);
 	
 	
 
@@ -893,7 +905,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Type_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Type_base_Class->setAssociation(get_StandardProfile_Class_Type());
 	
-	standardProfile_Type_base_Class->_setID(TYPE_ATTRIBUTE_BASE_CLASS);
+	standardProfile_Type_base_Class->_setID(TYPE_PROPERTY_BASE_CLASS);
 	
 	
 
@@ -906,7 +918,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Utility_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Utility_base_Class->setAssociation(get_StandardProfile_Class_Utility());
 	
-	standardProfile_Utility_base_Class->_setID(UTILITY_ATTRIBUTE_BASE_CLASS);
+	standardProfile_Utility_base_Class->_setID(UTILITY_PROPERTY_BASE_CLASS);
 	
 	
 }

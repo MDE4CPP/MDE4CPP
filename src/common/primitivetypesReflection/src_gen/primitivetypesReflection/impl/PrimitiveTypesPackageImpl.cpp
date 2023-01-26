@@ -67,23 +67,28 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 
 	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
-	createPackageValueSpecifications(primitiveTypes, factory);
-	createPackageInterfaces(primitiveTypes, factory);
-	createPackageClasses(primitiveTypes, factory);
-	createPackageAssociations(primitiveTypes, factory);
-	createPackageInstanceSpecifications(primitiveTypes, factory);
-	createPackageStereotypes(primitiveTypes, factory);
 	createPackageActivities(primitiveTypes, factory);
+	createPackageAssociations(primitiveTypes, factory);
+	createPackageClasses(primitiveTypes, factory);
+	createPackageDataTypes(primitiveTypes, factory);
 	createPackageDependencies(primitiveTypes, factory);
-	createPackagePrimitiveTypes(primitiveTypes, factory);
 	createPackageEnumerationLiterals(primitiveTypes, factory);
+	createPackageValueSpecifications(primitiveTypes, factory);
+	createPackageInstanceSpecifications(primitiveTypes, factory);
+	createPackageInterfaces(primitiveTypes, factory);
 	createPackageInterfaceRealizations(primitiveTypes, factory);
+	createPackagePrimitiveTypes(primitiveTypes, factory);
+	createPackageStereotypes(primitiveTypes, factory);
 }
 
 void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
+
+void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+{
+}
 
 void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -94,9 +99,9 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 //-------------------------------------------
 //Opaque Behaviors
 
-} 
+}
 
-void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -159,8 +164,9 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	this->setURI(eNS_URI);
 
 	initializePackageActivities();
-	initializePackageClasses();
 	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -177,6 +183,10 @@ void PrimitiveTypesPackageImpl::initializePackageActivities()
 }
 
 
+void PrimitiveTypesPackageImpl::initializePackageAssociations()
+{
+}
+
 void PrimitiveTypesPackageImpl::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -187,8 +197,10 @@ void PrimitiveTypesPackageImpl::initializePackageClasses()
 
 }
 
-void PrimitiveTypesPackageImpl::initializePackageAssociations()
+void PrimitiveTypesPackageImpl::initializePackageDataTypes()
 {
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
 }
 
 void PrimitiveTypesPackageImpl::initializePackageDependencies()
