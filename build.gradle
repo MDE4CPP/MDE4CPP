@@ -39,6 +39,7 @@ task generateAll() {
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 	dependsOn 'src:generateUMLProfiles'
+	dependsOn 'src:common:FoundationalModelLibrary:model:generateFoundationalModelLibrary'
 }
 
 task compileAll() {
@@ -50,6 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
+	dependsOn 'src:common:FoundationalModelLibrary:src:compileFoundationalModelLibrary'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
