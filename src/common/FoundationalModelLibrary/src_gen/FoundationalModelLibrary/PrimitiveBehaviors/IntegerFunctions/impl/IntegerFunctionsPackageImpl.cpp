@@ -1,0 +1,1047 @@
+#include "FoundationalModelLibrary/PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.hpp"
+
+//meta meta model classes
+#include "uml/FunctionBehavior.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
+//meta meta model factory
+#include "uml/umlFactory.hpp"
+
+//metamodel factory
+#include "FoundationalModelLibrary/PrimitiveBehaviors/IntegerFunctions/IntegerFunctionsFactory.hpp"
+
+//depending model packages
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+
+//Superpackage
+#include "FoundationalModelLibrary/PrimitiveBehaviors/PrimitiveBehaviorsPackage.hpp"
+
+
+
+using namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions;
+
+IntegerFunctionsPackageImpl::IntegerFunctionsPackageImpl()
+{
+}
+
+IntegerFunctionsPackageImpl::~IntegerFunctionsPackageImpl()
+{
+}
+
+bool IntegerFunctionsPackageImpl::isInited = false;
+
+IntegerFunctionsPackage* IntegerFunctionsPackageImpl::create()
+{
+	if (isInited)
+	{
+		return IntegerFunctionsPackage::eInstance().get();
+	}
+	isInited = true;
+	
+    // Obtain or create and register package, create package meta-data objects
+    IntegerFunctionsPackageImpl * metaModelPackage = new IntegerFunctionsPackageImpl();
+    return metaModelPackage;
+}
+
+void IntegerFunctionsPackageImpl::init(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions)
+{
+    // Initialize created meta-data
+	setThisPackagePtr(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	initMetaModel();
+    createPackageContents(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+    initializePackageContents(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);   
+}
+
+void IntegerFunctionsPackageImpl::initMetaModel()
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions)
+{
+	if (isCreated)
+	{
+		return;
+	}
+	isCreated = true;
+
+	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
+
+	createPackageActivities(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageAssociations(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageClasses(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageDataTypes(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageDependencies(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageEnumerationLiterals(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageValueSpecifications(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageInstanceSpecifications(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageInterfaces(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageInterfaceRealizations(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackagePrimitiveTypes(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+	createPackageStereotypes(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, factory);
+}
+
+void IntegerFunctionsPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+
+void IntegerFunctionsPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+	//Div
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div);
+	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan);
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max);
+	
+	//equals
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals);
+	
+	//lessOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual);
+	
+	//ToInteger
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger);
+	
+	//times
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times);
+	
+	//minus
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus);
+	
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan);
+	
+	//Neg
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg);
+	
+	//Min
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min);
+	
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString);
+	
+	//ToUnlimitedNatural
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural);
+	
+	//plus
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus);
+	
+	//divide
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide);
+	
+	//greaterOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual);
+	
+	//Mod
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod);
+	
+	//Abs
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs);
+	
+}
+
+void IntegerFunctionsPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void IntegerFunctionsPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result);
+	
+}
+
+void IntegerFunctionsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions)
+{
+	if (isInitialized)
+	{
+		return;
+	}
+	isInitialized = true;
+
+	// Initialize package
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
+	this->setNestingPackage(FoundationalModelLibrary::PrimitiveBehaviors::PrimitiveBehaviorsPackage::eInstance());
+
+	initializePackageActivities();
+	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
+	initializePackageDependencies();
+	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
+	initializePackageInterfaces();
+	initializePackageNestedPackages();
+	initializePackageStereotypes();
+	initializePackageValueSpecifications();
+	
+}
+
+//ActivityNodes and Edges
+void IntegerFunctionsPackageImpl::initializePackageActivities()
+{
+}
+
+
+void IntegerFunctionsPackageImpl::initializePackageAssociations()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageClasses()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+	//Div
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div->setName("Div");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_DIV);
+	
+	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan->setName("greaterThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max->setName("Max");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
+	
+	
+	//equals
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals->setName("equals");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_EQUALS);
+	
+	
+	//lessOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual->setName("lessOrEqual");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL);
+	
+	
+	//ToInteger
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger->setName("ToInteger");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER);
+	
+	
+	//times
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times->setName("times");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TIMES);
+	
+	
+	//minus
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus->setName("minus");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MINUS);
+	
+	
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan->setName("lessThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
+	
+	
+	//Neg
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg->setName("Neg");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_NEG);
+	
+	
+	//Min
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min->setName("Min");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MIN);
+	
+	
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString->setName("ToString");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
+	
+	
+	//ToUnlimitedNatural
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural->setName("ToUnlimitedNatural");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL);
+	
+	
+	//plus
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus->setName("plus");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_PLUS);
+	
+	
+	//divide
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide->setName("divide");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE);
+	
+	
+	//greaterOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual->setName("greaterOrEqual");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL);
+	
+	
+	//Mod
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod->setName("Mod");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MOD);
+	
+	
+	//Abs
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs->setName("Abs");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs->_setID(INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_ABS);
+	
+	
+}
+
+void IntegerFunctionsPackageImpl::initializePackageDataTypes()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+}
+
+void IntegerFunctionsPackageImpl::initializePackageDependencies()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageInstanceSpecifications()
+{
+}
+
+
+void IntegerFunctionsPackageImpl::initializePackageInterfaceRealizations()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageInterfaces()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageNestedPackages()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageStereotypes()
+{
+}
+
+void IntegerFunctionsPackageImpl::initializePackageValueSpecifications()
+{
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result->setValue(0);
+
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result->setValue(0);
+
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result->setValue(0);
+
+	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setValue(0);
+}
+
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y;
+}
+std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x;
+}
+std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y;
+}
+
+
+
+

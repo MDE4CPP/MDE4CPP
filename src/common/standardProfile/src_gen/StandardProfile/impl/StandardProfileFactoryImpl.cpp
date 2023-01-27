@@ -38,7 +38,6 @@
 #include "StandardProfile/impl/TypeImpl.hpp"
 #include "StandardProfile/impl/UtilityImpl.hpp"
 
-
 using namespace StandardProfile;
 //*********************************
 // Constructor / Destructor
@@ -716,8 +715,6 @@ std::shared_ptr<StandardProfile::Utility> StandardProfileFactoryImpl::createUtil
 	element->instantiate();
 	return element;
 }
-
-
 
 
 

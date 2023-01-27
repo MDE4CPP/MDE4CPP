@@ -39,7 +39,7 @@ task buildEcoreModels() {
 	group 'Source'
 	description 'generate and compile all ecore models'
 	
-	dependsOn 'ecore:ecore:buildEcore'
+	dependsOn 'ecore:buildEcore'
 	dependsOn 'uml:types:buildTypes'
 	dependsOn 'uml:uml:buildUml'
 	dependsOn 'fuml:buildFUML'
@@ -73,7 +73,7 @@ task compileEcoreModels() {
 	
 	dependsOn 'deliverBasicInterfaces'
 	
-	dependsOn 'ecore:ecore:src_gen:compileEcore'
+	dependsOn 'ecore:src_gen:compileEcore'
 	dependsOn 'uml:types:src_gen:compileTypes'
 	dependsOn 'uml:uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
@@ -108,7 +108,7 @@ task generateEcoreModels() {
 	group 'Source'
 	description 'generate all ecore models'
 	
-	dependsOn 'ecore:ecore:model:generateEcore'
+	dependsOn 'ecore:model:generateEcore'
 	dependsOn 'uml:types:model:generateTypes'
 	dependsOn 'uml:uml:model:generateUml'
 	dependsOn 'fuml:model:generateFUML'

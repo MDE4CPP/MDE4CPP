@@ -10,8 +10,8 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
+//General includes
 #include <iostream>
-
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/util.hpp"
@@ -19,27 +19,22 @@
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 
-//Types included from attributes, operation parameters, imports and composite owner classes
+//Packages for used (non-primitive) Types
 #include "uml/umlPackage.hpp"
+
+//Used Types
 #include "uml/Classifier.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
 #include "uml/umlFactory.hpp"
 #include "uml/impl/umlPackageImpl.hpp"
-
-//Packages of included Enumerations
-
-
-//Includes from InstanceValues (if required)
-
-//Includes from Ports typed by interfaces (if required)
-
-//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -136,15 +131,13 @@ std::weak_ptr<uml::Classifier> SpecificationImpl::getBase_Classifier() const
 //*********************************
 // Operations
 //*********************************
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
 //Get
 std::shared_ptr<Any> SpecificationImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	return this->get(qualifiedName);
+	return this->get(_property->_getID());
 }
 
 std::shared_ptr<Any> SpecificationImpl::get(std::string _qualifiedName) const
@@ -157,7 +150,7 @@ std::shared_ptr<Any> SpecificationImpl::get(unsigned long _uID) const
 {
 	switch(_uID)
 	{
-		case StandardProfile::StandardProfilePackage::SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER:
+		case StandardProfile::StandardProfilePackage::SPECIFICATION_PROPERTY_BASE_CLASSIFIER:
 			return eUMLAny(this->getBase_Classifier().lock(), uml::umlPackage::CLASSIFIER_CLASS);
 	}
 
@@ -167,8 +160,7 @@ std::shared_ptr<Any> SpecificationImpl::get(unsigned long _uID) const
 //Set
 void SpecificationImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->set(qualifiedName, value);
+	this->set(_property->_getID(), value);
 }
 
 void SpecificationImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -181,7 +173,7 @@ void SpecificationImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 {
 	switch(_uID)
 	{
-		case StandardProfile::StandardProfilePackage::SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER:
+		case StandardProfile::StandardProfilePackage::SPECIFICATION_PROPERTY_BASE_CLASSIFIER:
 		{
 			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 			if(umlAny)
@@ -218,8 +210,7 @@ void SpecificationImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 //Add
 void SpecificationImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->add(qualifiedName, value);
+	this->add(_property->_getID(), value);
 }
 
 void SpecificationImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
@@ -235,8 +226,7 @@ void SpecificationImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int 
 //Unset
 void SpecificationImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->unset(qualifiedName);
+	this->unset(_property->_getID());
 }
 
 void SpecificationImpl::unset(std::string _qualifiedName)
@@ -249,7 +239,7 @@ void SpecificationImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
-		case StandardProfile::StandardProfilePackage::SPECIFICATION_ATTRIBUTE_BASE_CLASSIFIER:
+		case StandardProfile::StandardProfilePackage::SPECIFICATION_PROPERTY_BASE_CLASSIFIER:
 		{
 			m_base_Classifier.reset();
 			return;
@@ -261,8 +251,7 @@ void SpecificationImpl::unset(unsigned long _uID)
 //Remove
 void SpecificationImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
 {
-	std::string qualifiedName = _property->getQualifiedName();
-	this->remove(qualifiedName, value);
+	this->remove(_property->_getID(), value);
 }
 
 void SpecificationImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
@@ -275,33 +264,29 @@ void SpecificationImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 {
 }
 
-//*********************************
-// Operation Invoction
-//*********************************
-//Invoke
-std::shared_ptr<Any> SpecificationImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
+//Operation Invocation
+std::shared_ptr<Any> SpecificationImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
-	return eAny(nullptr, -1, false);
-
-	/* Currently not functioning. TODO: Clarifiy how this should work in the future
-	std::string qualifiedName = _operation->getQualifiedName();
-
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
-	{
-		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
-	}
-
-	return this->invoke(qualifiedName, _arguments);
-	*/
+	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> SpecificationImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SpecificationImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, _arguments);
+	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> SpecificationImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+std::shared_ptr<Any> SpecificationImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+{
+	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	return result;
+}
+
+//OpaqueBehavior Invocation
+std::shared_ptr<Any> SpecificationImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

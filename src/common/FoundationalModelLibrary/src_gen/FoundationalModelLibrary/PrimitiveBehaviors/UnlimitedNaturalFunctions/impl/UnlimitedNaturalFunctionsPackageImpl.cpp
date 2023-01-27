@@ -1,0 +1,631 @@
+#include "FoundationalModelLibrary/PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsPackageImpl.hpp"
+
+//meta meta model classes
+#include "uml/FunctionBehavior.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
+//meta meta model factory
+#include "uml/umlFactory.hpp"
+
+//metamodel factory
+#include "FoundationalModelLibrary/PrimitiveBehaviors/UnlimitedNaturalFunctions/UnlimitedNaturalFunctionsFactory.hpp"
+
+//depending model packages
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+
+//Superpackage
+#include "FoundationalModelLibrary/PrimitiveBehaviors/PrimitiveBehaviorsPackage.hpp"
+
+
+
+using namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions;
+
+UnlimitedNaturalFunctionsPackageImpl::UnlimitedNaturalFunctionsPackageImpl()
+{
+}
+
+UnlimitedNaturalFunctionsPackageImpl::~UnlimitedNaturalFunctionsPackageImpl()
+{
+}
+
+bool UnlimitedNaturalFunctionsPackageImpl::isInited = false;
+
+UnlimitedNaturalFunctionsPackage* UnlimitedNaturalFunctionsPackageImpl::create()
+{
+	if (isInited)
+	{
+		return UnlimitedNaturalFunctionsPackage::eInstance().get();
+	}
+	isInited = true;
+	
+    // Obtain or create and register package, create package meta-data objects
+    UnlimitedNaturalFunctionsPackageImpl * metaModelPackage = new UnlimitedNaturalFunctionsPackageImpl();
+    return metaModelPackage;
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::init(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions)
+{
+    // Initialize created meta-data
+	setThisPackagePtr(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	initMetaModel();
+    createPackageContents(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+    initializePackageContents(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);   
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initMetaModel()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions)
+{
+	if (isCreated)
+	{
+		return;
+	}
+	isCreated = true;
+
+	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
+
+	createPackageActivities(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageAssociations(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageClasses(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageDataTypes(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageDependencies(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageEnumerationLiterals(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageValueSpecifications(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageInstanceSpecifications(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageInterfaces(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageInterfaceRealizations(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackagePrimitiveTypes(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+	createPackageStereotypes(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, factory);
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString);
+	
+	//ToUnlimitedNatural
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural);
+	
+	//greaterOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual);
+	
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan);
+	
+	//Min
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min);
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max);
+	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan);
+	
+	//ToInteger
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger);
+	
+	//lessOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual);
+	
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions, std::shared_ptr<uml::umlFactory> factory)
+{
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result = factory->createLiteralInteger_as_ownedElement_in_Element(foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result);
+	
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions)
+{
+	if (isInitialized)
+	{
+		return;
+	}
+	isInitialized = true;
+
+	// Initialize package
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
+	this->setNestingPackage(FoundationalModelLibrary::PrimitiveBehaviors::PrimitiveBehaviorsPackage::eInstance());
+
+	initializePackageActivities();
+	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
+	initializePackageDependencies();
+	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
+	initializePackageInterfaces();
+	initializePackageNestedPackages();
+	initializePackageStereotypes();
+	initializePackageValueSpecifications();
+	
+}
+
+//ActivityNodes and Edges
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageActivities()
+{
+}
+
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageAssociations()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageClasses()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+	//ToString
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString->setName("ToString");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
+	
+	
+	//ToUnlimitedNatural
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural->setName("ToUnlimitedNatural");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL);
+	
+	
+	//greaterOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual->setName("greaterOrEqual");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL);
+	
+	
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan->setName("lessThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
+	
+	
+	//Min
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min->setName("Min");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_MIN);
+	
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max->setName("Max");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
+	
+	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan->setName("greaterThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	
+	
+	//ToInteger
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger->setName("ToInteger");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER);
+	
+	
+	//lessOrEqual
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual->setName("lessOrEqual");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual->_setID(UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL);
+	
+	
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageDataTypes()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageDependencies()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageInstanceSpecifications()
+{
+}
+
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageInterfaceRealizations()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageInterfaces()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageNestedPackages()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageStereotypes()
+{
+}
+
+void UnlimitedNaturalFunctionsPackageImpl::initializePackageValueSpecifications()
+{
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result->setValue(0);
+
+	foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result->setValue(0);
+}
+
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_y;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_y;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_x;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_x;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_x;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_y;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_y;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_y;
+}
+std::shared_ptr<uml::FunctionBehavior> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_x;
+}
+std::shared_ptr<uml::Parameter> UnlimitedNaturalFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y()
+{
+	return foundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_y;
+}
+
+
+
+

@@ -82,23 +82,186 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<uml::Package> ecore
 
 	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
-	createPackageValueSpecifications(ecore, factory);
-	createPackageInterfaces(ecore, factory);
-	createPackageClasses(ecore, factory);
-	createPackageAssociations(ecore, factory);
-	createPackageInstanceSpecifications(ecore, factory);
-	createPackageStereotypes(ecore, factory);
 	createPackageActivities(ecore, factory);
+	createPackageAssociations(ecore, factory);
+	createPackageClasses(ecore, factory);
+	createPackageDataTypes(ecore, factory);
 	createPackageDependencies(ecore, factory);
-	createPackagePrimitiveTypes(ecore, factory);
 	createPackageEnumerationLiterals(ecore, factory);
+	createPackageValueSpecifications(ecore, factory);
+	createPackageInstanceSpecifications(ecore, factory);
+	createPackageInterfaces(ecore, factory);
 	createPackageInterfaceRealizations(ecore, factory);
+	createPackagePrimitiveTypes(ecore, factory);
+	createPackageStereotypes(ecore, factory);
 }
 
 void EcorePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
+
+void EcorePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+	//
+	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eAllAttributes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eAttributes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eIDAttribute_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eKeys_eReference = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eAllSuperTypes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eReferenceType_eReference = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eSuperTypes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eClassifier_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eExceptions_eOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eRawType_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eType_eTypedElement = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EDataType_eAttributeType_eAttribute = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eAllGenericSuperTypes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eBounds_eTypeParameter = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericExceptions_eOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericSuperTypes_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericType_eTypedElement = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eLowerBound_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eTypeArguments_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eUpperBound_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EObject_contents_eAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EObject_references_eAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EOperation_eAllOperations_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eAllContainments_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eAllReferences_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eOpposite_eReference = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eReferences_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStringToStringMapEntry_details_eAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameter_eGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameters_eClassifier = factory->createAssociation_as_ownedType_in_Package(ecore);
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameters_eOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
+}
 
 void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -512,168 +675,10 @@ void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore,
 //-------------------------------------------
 //Opaque Behaviors
 
-} 
+}
 
-void EcorePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+void EcorePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
-	//
-	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eAllAttributes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eAttributes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eIDAttribute_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eKeys_ecore_EReference = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eAllSuperTypes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eReferenceType_ecore_EReference = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eSuperTypes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eClassifier_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eExceptions_ecore_EOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eRawType_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eType_ecore_ETypedElement = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EDataType_eAttributeType_ecore_EAttribute = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EObject_contents_ecore_EAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EObject_references_ecore_EAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EOperation_eAllOperations_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eAllContainments_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eAllReferences_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eOpposite_ecore_EReference = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eReferences_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier = factory->createAssociation_as_ownedType_in_Package(ecore);
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation = factory->createAssociation_as_ownedType_in_Package(ecore);
 }
 
 void EcorePackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
@@ -1133,8 +1138,9 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	this->setURI(eNS_URI);
 
 	initializePackageActivities();
-	initializePackageClasses();
 	initializePackageAssociations();
+	initializePackageClasses();
+	initializePackageDataTypes();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -1150,6 +1156,288 @@ void EcorePackageImpl::initializePackageActivities()
 {
 }
 
+
+void EcorePackageImpl::initializePackageAssociations()
+{
+	//
+	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->setName("a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement");
+	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EModelElement_eAnnotations());
+	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EAnnotation_eModelElement());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eAllAttributes_eClass->setName("a_Ecore_EAttribute_eAllAttributes_eClass");
+	a_Ecore_EAttribute_eAllAttributes_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllAttributes());
+	a_Ecore_EAttribute_eAllAttributes_eClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAllAttributes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eAttributes_eClass->setName("a_Ecore_EAttribute_eAttributes_eClass");
+	a_Ecore_EAttribute_eAttributes_eClass->getMemberEnd()->add(get_Ecore_EClass_eAttributes());
+	a_Ecore_EAttribute_eAttributes_eClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAttributes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eIDAttribute_eClass->setName("a_Ecore_EAttribute_eIDAttribute_eClass");
+	a_Ecore_EAttribute_eIDAttribute_eClass->getMemberEnd()->add(get_Ecore_EClass_eIDAttribute());
+	a_Ecore_EAttribute_eIDAttribute_eClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eIDAttribute_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EAttribute_eKeys_eReference->setName("a_Ecore_EAttribute_eKeys_eReference");
+	a_Ecore_EAttribute_eKeys_eReference->getMemberEnd()->add(get_Ecore_EReference_eKeys());
+	a_Ecore_EAttribute_eKeys_eReference->getMemberEnd()->add(get_A_Ecore_EAttribute_eKeys_eReference_eReference());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eAllSuperTypes_eClass->setName("a_Ecore_EClass_eAllSuperTypes_eClass");
+	a_Ecore_EClass_eAllSuperTypes_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllSuperTypes());
+	a_Ecore_EClass_eAllSuperTypes_eClass->getMemberEnd()->add(get_A_Ecore_EClass_eAllSuperTypes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eReferenceType_eReference->setName("a_Ecore_EClass_eReferenceType_eReference");
+	a_Ecore_EClass_eReferenceType_eReference->getMemberEnd()->add(get_Ecore_EReference_eReferenceType());
+	a_Ecore_EClass_eReferenceType_eReference->getMemberEnd()->add(get_A_Ecore_EClass_eReferenceType_eReference_eReference());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClass_eSuperTypes_eClass->setName("a_Ecore_EClass_eSuperTypes_eClass");
+	a_Ecore_EClass_eSuperTypes_eClass->getMemberEnd()->add(get_Ecore_EClass_eSuperTypes());
+	a_Ecore_EClass_eSuperTypes_eClass->getMemberEnd()->add(get_A_Ecore_EClass_eSuperTypes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eClassifier_eGenericType->setName("a_Ecore_EClassifier_eClassifier_eGenericType");
+	a_Ecore_EClassifier_eClassifier_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eClassifier());
+	a_Ecore_EClassifier_eClassifier_eGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eClassifier_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->setName("a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage");
+	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EPackage_eClassifiers());
+	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EClassifier_ePackage());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eExceptions_eOperation->setName("a_Ecore_EClassifier_eExceptions_eOperation");
+	a_Ecore_EClassifier_eExceptions_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eExceptions());
+	a_Ecore_EClassifier_eExceptions_eOperation->getMemberEnd()->add(get_A_Ecore_EClassifier_eExceptions_eOperation_eOperation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eRawType_eGenericType->setName("a_Ecore_EClassifier_eRawType_eGenericType");
+	a_Ecore_EClassifier_eRawType_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eRawType());
+	a_Ecore_EClassifier_eRawType_eGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eRawType_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EClassifier_eType_eTypedElement->setName("a_Ecore_EClassifier_eType_eTypedElement");
+	a_Ecore_EClassifier_eType_eTypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eType());
+	a_Ecore_EClassifier_eType_eTypedElement->getMemberEnd()->add(get_A_Ecore_EClassifier_eType_eTypedElement_eTypedElement());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EDataType_eAttributeType_eAttribute->setName("a_Ecore_EDataType_eAttributeType_eAttribute");
+	a_Ecore_EDataType_eAttributeType_eAttribute->getMemberEnd()->add(get_Ecore_EAttribute_eAttributeType());
+	a_Ecore_EDataType_eAttributeType_eAttribute->getMemberEnd()->add(get_A_Ecore_EDataType_eAttributeType_eAttribute_eAttribute());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->setName("a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum");
+	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnum_eLiterals());
+	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnumLiteral_eEnum());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eAllGenericSuperTypes_eClass->setName("a_Ecore_EGenericType_eAllGenericSuperTypes_eClass");
+	a_Ecore_EGenericType_eAllGenericSuperTypes_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllGenericSuperTypes());
+	a_Ecore_EGenericType_eAllGenericSuperTypes_eClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eBounds_eTypeParameter->setName("a_Ecore_EGenericType_eBounds_eTypeParameter");
+	a_Ecore_EGenericType_eBounds_eTypeParameter->getMemberEnd()->add(get_Ecore_ETypeParameter_eBounds());
+	a_Ecore_EGenericType_eBounds_eTypeParameter->getMemberEnd()->add(get_A_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericExceptions_eOperation->setName("a_Ecore_EGenericType_eGenericExceptions_eOperation");
+	a_Ecore_EGenericType_eGenericExceptions_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eGenericExceptions());
+	a_Ecore_EGenericType_eGenericExceptions_eOperation->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericSuperTypes_eClass->setName("a_Ecore_EGenericType_eGenericSuperTypes_eClass");
+	a_Ecore_EGenericType_eGenericSuperTypes_eClass->getMemberEnd()->add(get_Ecore_EClass_eGenericSuperTypes());
+	a_Ecore_EGenericType_eGenericSuperTypes_eClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eGenericType_eTypedElement->setName("a_Ecore_EGenericType_eGenericType_eTypedElement");
+	a_Ecore_EGenericType_eGenericType_eTypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eGenericType());
+	a_Ecore_EGenericType_eGenericType_eTypedElement->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eLowerBound_eGenericType->setName("a_Ecore_EGenericType_eLowerBound_eGenericType");
+	a_Ecore_EGenericType_eLowerBound_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eLowerBound());
+	a_Ecore_EGenericType_eLowerBound_eGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eTypeArguments_eGenericType->setName("a_Ecore_EGenericType_eTypeArguments_eGenericType");
+	a_Ecore_EGenericType_eTypeArguments_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeArguments());
+	a_Ecore_EGenericType_eTypeArguments_eGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EGenericType_eUpperBound_eGenericType->setName("a_Ecore_EGenericType_eUpperBound_eGenericType");
+	a_Ecore_EGenericType_eUpperBound_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eUpperBound());
+	a_Ecore_EGenericType_eUpperBound_eGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EObject_contents_eAnnotation->setName("a_Ecore_EObject_contents_eAnnotation");
+	a_Ecore_EObject_contents_eAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_contents());
+	a_Ecore_EObject_contents_eAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_contents_eAnnotation_eAnnotation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EObject_references_eAnnotation->setName("a_Ecore_EObject_references_eAnnotation");
+	a_Ecore_EObject_references_eAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_references());
+	a_Ecore_EObject_references_eAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_references_eAnnotation_eAnnotation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EOperation_eAllOperations_eClass->setName("a_Ecore_EOperation_eAllOperations_eClass");
+	a_Ecore_EOperation_eAllOperations_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllOperations());
+	a_Ecore_EOperation_eAllOperations_eClass->getMemberEnd()->add(get_A_Ecore_EOperation_eAllOperations_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->setName("a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass");
+	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eOperations());
+	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EOperation_eContainingClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->setName("a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance");
+	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EFactory_ePackage());
+	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EPackage_eFactoryInstance());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->setName("a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage");
+	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSubpackages());
+	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSuperPackage());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->setName("a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation");
+	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eParameters());
+	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EParameter_eOperation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eAllContainments_eClass->setName("a_Ecore_EReference_eAllContainments_eClass");
+	a_Ecore_EReference_eAllContainments_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllContainments());
+	a_Ecore_EReference_eAllContainments_eClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllContainments_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eAllReferences_eClass->setName("a_Ecore_EReference_eAllReferences_eClass");
+	a_Ecore_EReference_eAllReferences_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllReferences());
+	a_Ecore_EReference_eAllReferences_eClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllReferences_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eOpposite_eReference->setName("a_Ecore_EReference_eOpposite_eReference");
+	a_Ecore_EReference_eOpposite_eReference->getMemberEnd()->add(get_Ecore_EReference_eOpposite());
+	a_Ecore_EReference_eOpposite_eReference->getMemberEnd()->add(get_A_Ecore_EReference_eOpposite_eReference_eReference());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EReference_eReferences_eClass->setName("a_Ecore_EReference_eReferences_eClass");
+	a_Ecore_EReference_eReferences_eClass->getMemberEnd()->add(get_Ecore_EClass_eReferences());
+	a_Ecore_EReference_eReferences_eClass->getMemberEnd()->add(get_A_Ecore_EReference_eReferences_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStringToStringMapEntry_details_eAnnotation->setName("a_Ecore_EStringToStringMapEntry_details_eAnnotation");
+	a_Ecore_EStringToStringMapEntry_details_eAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_details());
+	a_Ecore_EStringToStringMapEntry_details_eAnnotation->getMemberEnd()->add(get_A_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass->setName("a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass");
+	a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass->getMemberEnd()->add(get_Ecore_EClass_eAllStructuralFeatures());
+	a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass->getMemberEnd()->add(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->setName("a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass");
+	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eStructuralFeatures());
+	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EStructuralFeature_eContainingClass());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameter_eGenericType->setName("a_Ecore_ETypeParameter_eTypeParameter_eGenericType");
+	a_Ecore_ETypeParameter_eTypeParameter_eGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeParameter());
+	a_Ecore_ETypeParameter_eTypeParameter_eGenericType->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameters_eClassifier->setName("a_Ecore_ETypeParameter_eTypeParameters_eClassifier");
+	a_Ecore_ETypeParameter_eTypeParameters_eClassifier->getMemberEnd()->add(get_Ecore_EClassifier_eTypeParameters());
+	a_Ecore_ETypeParameter_eTypeParameters_eClassifier->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier());
+	
+
+    //-------------------------------------------
+	//
+	a_Ecore_ETypeParameter_eTypeParameters_eOperation->setName("a_Ecore_ETypeParameter_eTypeParameters_eOperation");
+	a_Ecore_ETypeParameter_eTypeParameters_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eTypeParameters());
+	a_Ecore_ETypeParameter_eTypeParameters_eOperation->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation());
+	
+}
 
 void EcorePackageImpl::initializePackageClasses()
 {
@@ -1171,7 +1459,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_contents->setIsUnique(true);
 	ecore_EAnnotation_contents->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EAnnotation_contents->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EAnnotation_contents->setAssociation(get_A_Ecore_EObject_contents_ecore_EAnnotation());
+	ecore_EAnnotation_contents->setAssociation(get_A_Ecore_EObject_contents_eAnnotation());
 	
 	
 	//details
@@ -1182,7 +1470,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_details->setIsUnique(true);
 	ecore_EAnnotation_details->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EAnnotation_details->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EAnnotation_details->setAssociation(get_A_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation());
+	ecore_EAnnotation_details->setAssociation(get_A_Ecore_EStringToStringMapEntry_details_eAnnotation());
 	
 	
 	//eModelElement
@@ -1204,7 +1492,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_references->setIsUnique(true);
 	ecore_EAnnotation_references->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAnnotation_references->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EAnnotation_references->setAssociation(get_A_Ecore_EObject_references_ecore_EAnnotation());
+	ecore_EAnnotation_references->setAssociation(get_A_Ecore_EObject_references_eAnnotation());
 	
 	
 	//source
@@ -1237,7 +1525,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAttribute_eAttributeType->setIsUnique(true);
 	ecore_EAttribute_eAttributeType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAttribute_eAttributeType->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EAttribute_eAttributeType->setAssociation(get_A_Ecore_EDataType_eAttributeType_ecore_EAttribute());
+	ecore_EAttribute_eAttributeType->setAssociation(get_A_Ecore_EDataType_eAttributeType_eAttribute());
 	
 	
 	//id
@@ -1281,7 +1569,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllAttributes->setIsUnique(true);
 	ecore_EClass_eAllAttributes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllAttributes->setAssociation(get_A_Ecore_EAttribute_eAllAttributes_ecore_EClass());
+	ecore_EClass_eAllAttributes->setAssociation(get_A_Ecore_EAttribute_eAllAttributes_eClass());
 	
 	
 	//eAllContainments
@@ -1292,7 +1580,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllContainments->setIsUnique(true);
 	ecore_EClass_eAllContainments->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllContainments->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllContainments->setAssociation(get_A_Ecore_EReference_eAllContainments_ecore_EClass());
+	ecore_EClass_eAllContainments->setAssociation(get_A_Ecore_EReference_eAllContainments_eClass());
 	
 	
 	//eAllGenericSuperTypes
@@ -1303,7 +1591,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllGenericSuperTypes->setIsUnique(true);
 	ecore_EClass_eAllGenericSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass());
+	ecore_EClass_eAllGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass());
 	
 	
 	//eAllOperations
@@ -1314,7 +1602,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllOperations->setIsUnique(true);
 	ecore_EClass_eAllOperations->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllOperations->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllOperations->setAssociation(get_A_Ecore_EOperation_eAllOperations_ecore_EClass());
+	ecore_EClass_eAllOperations->setAssociation(get_A_Ecore_EOperation_eAllOperations_eClass());
 	
 	
 	//eAllReferences
@@ -1325,7 +1613,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllReferences->setIsUnique(true);
 	ecore_EClass_eAllReferences->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllReferences->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllReferences->setAssociation(get_A_Ecore_EReference_eAllReferences_ecore_EClass());
+	ecore_EClass_eAllReferences->setAssociation(get_A_Ecore_EReference_eAllReferences_eClass());
 	
 	
 	//eAllStructuralFeatures
@@ -1336,7 +1624,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllStructuralFeatures->setIsUnique(true);
 	ecore_EClass_eAllStructuralFeatures->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllStructuralFeatures->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllStructuralFeatures->setAssociation(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass());
+	ecore_EClass_eAllStructuralFeatures->setAssociation(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass());
 	
 	
 	//eAllSuperTypes
@@ -1347,7 +1635,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllSuperTypes->setIsUnique(true);
 	ecore_EClass_eAllSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAllSuperTypes->setAssociation(get_A_Ecore_EClass_eAllSuperTypes_ecore_EClass());
+	ecore_EClass_eAllSuperTypes->setAssociation(get_A_Ecore_EClass_eAllSuperTypes_eClass());
 	
 	
 	//eAttributes
@@ -1358,7 +1646,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAttributes->setIsUnique(true);
 	ecore_EClass_eAttributes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eAttributes->setAssociation(get_A_Ecore_EAttribute_eAttributes_ecore_EClass());
+	ecore_EClass_eAttributes->setAssociation(get_A_Ecore_EAttribute_eAttributes_eClass());
 	
 	
 	//eGenericSuperTypes
@@ -1369,7 +1657,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eGenericSuperTypes->setIsUnique(true);
 	ecore_EClass_eGenericSuperTypes->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClass_eGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass());
+	ecore_EClass_eGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eGenericSuperTypes_eClass());
 	
 	
 	//eIDAttribute
@@ -1380,7 +1668,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eIDAttribute->setIsUnique(true);
 	ecore_EClass_eIDAttribute->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eIDAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eIDAttribute->setAssociation(get_A_Ecore_EAttribute_eIDAttribute_ecore_EClass());
+	ecore_EClass_eIDAttribute->setAssociation(get_A_Ecore_EAttribute_eIDAttribute_eClass());
 	
 	
 	//eOperations
@@ -1402,7 +1690,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eReferences->setIsUnique(true);
 	ecore_EClass_eReferences->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eReferences->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eReferences->setAssociation(get_A_Ecore_EReference_eReferences_ecore_EClass());
+	ecore_EClass_eReferences->setAssociation(get_A_Ecore_EReference_eReferences_eClass());
 	
 	
 	//eStructuralFeatures
@@ -1424,7 +1712,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eSuperTypes->setIsUnique(true);
 	ecore_EClass_eSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClass_eSuperTypes->setAssociation(get_A_Ecore_EClass_eSuperTypes_ecore_EClass());
+	ecore_EClass_eSuperTypes->setAssociation(get_A_Ecore_EClass_eSuperTypes_eClass());
 	
 	
 	//interface
@@ -1600,7 +1888,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_eTypeParameters->setIsUnique(true);
 	ecore_EClassifier_eTypeParameters->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClassifier_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EClassifier_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier());
+	ecore_EClassifier_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier());
 	
 	
 	//instanceClass
@@ -2006,7 +2294,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eClassifier->setIsUnique(true);
 	ecore_EGenericType_eClassifier->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eClassifier->setAssociation(get_A_Ecore_EClassifier_eClassifier_ecore_EGenericType());
+	ecore_EGenericType_eClassifier->setAssociation(get_A_Ecore_EClassifier_eClassifier_eGenericType());
 	
 	
 	//eLowerBound
@@ -2017,7 +2305,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eLowerBound->setIsUnique(true);
 	ecore_EGenericType_eLowerBound->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eLowerBound->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eLowerBound->setAssociation(get_A_Ecore_EGenericType_eLowerBound_ecore_EGenericType());
+	ecore_EGenericType_eLowerBound->setAssociation(get_A_Ecore_EGenericType_eLowerBound_eGenericType());
 	
 	
 	//eRawType
@@ -2028,7 +2316,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eRawType->setIsUnique(true);
 	ecore_EGenericType_eRawType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eRawType->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eRawType->setAssociation(get_A_Ecore_EClassifier_eRawType_ecore_EGenericType());
+	ecore_EGenericType_eRawType->setAssociation(get_A_Ecore_EClassifier_eRawType_eGenericType());
 	
 	
 	//eTypeArguments
@@ -2039,7 +2327,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeArguments->setIsUnique(true);
 	ecore_EGenericType_eTypeArguments->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eTypeArguments->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eTypeArguments->setAssociation(get_A_Ecore_EGenericType_eTypeArguments_ecore_EGenericType());
+	ecore_EGenericType_eTypeArguments->setAssociation(get_A_Ecore_EGenericType_eTypeArguments_eGenericType());
 	
 	
 	//eTypeParameter
@@ -2050,7 +2338,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeParameter->setIsUnique(true);
 	ecore_EGenericType_eTypeParameter->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eTypeParameter->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eTypeParameter->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType());
+	ecore_EGenericType_eTypeParameter->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType());
 	
 	
 	//eUpperBound
@@ -2061,7 +2349,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eUpperBound->setIsUnique(true);
 	ecore_EGenericType_eUpperBound->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eUpperBound->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EGenericType_eUpperBound->setAssociation(get_A_Ecore_EGenericType_eUpperBound_ecore_EGenericType());
+	ecore_EGenericType_eUpperBound->setAssociation(get_A_Ecore_EGenericType_eUpperBound_eGenericType());
 	
 	
 
@@ -2449,7 +2737,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eExceptions->setIsUnique(true);
 	ecore_EOperation_eExceptions->setAggregation(uml::AggregationKind::NONE);
 	ecore_EOperation_eExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EOperation_eExceptions->setAssociation(get_A_Ecore_EClassifier_eExceptions_ecore_EOperation());
+	ecore_EOperation_eExceptions->setAssociation(get_A_Ecore_EClassifier_eExceptions_eOperation());
 	
 	
 	//eGenericExceptions
@@ -2460,7 +2748,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eGenericExceptions->setIsUnique(true);
 	ecore_EOperation_eGenericExceptions->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EOperation_eGenericExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EOperation_eGenericExceptions->setAssociation(get_A_Ecore_EGenericType_eGenericExceptions_ecore_EOperation());
+	ecore_EOperation_eGenericExceptions->setAssociation(get_A_Ecore_EGenericType_eGenericExceptions_eOperation());
 	
 	
 	//eParameters
@@ -2482,7 +2770,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eTypeParameters->setIsUnique(true);
 	ecore_EOperation_eTypeParameters->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EOperation_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EOperation_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation());
+	ecore_EOperation_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_eOperation());
 	
 	
 
@@ -2652,7 +2940,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eKeys->setIsUnique(true);
 	ecore_EReference_eKeys->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eKeys->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EReference_eKeys->setAssociation(get_A_Ecore_EAttribute_eKeys_ecore_EReference());
+	ecore_EReference_eKeys->setAssociation(get_A_Ecore_EAttribute_eKeys_eReference());
 	
 	
 	//eOpposite
@@ -2663,7 +2951,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eOpposite->setIsUnique(true);
 	ecore_EReference_eOpposite->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eOpposite->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EReference_eOpposite->setAssociation(get_A_Ecore_EReference_eOpposite_ecore_EReference());
+	ecore_EReference_eOpposite->setAssociation(get_A_Ecore_EReference_eOpposite_eReference());
 	
 	
 	//eReferenceType
@@ -2674,7 +2962,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eReferenceType->setIsUnique(true);
 	ecore_EReference_eReferenceType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eReferenceType->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_EReference_eReferenceType->setAssociation(get_A_Ecore_EClass_eReferenceType_ecore_EReference());
+	ecore_EReference_eReferenceType->setAssociation(get_A_Ecore_EClass_eReferenceType_eReference());
 	
 	
 	//resolveProxies
@@ -2862,7 +3150,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypeParameter_eBounds->setIsUnique(true);
 	ecore_ETypeParameter_eBounds->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_ETypeParameter_eBounds->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_ETypeParameter_eBounds->setAssociation(get_A_Ecore_EGenericType_eBounds_ecore_ETypeParameter());
+	ecore_ETypeParameter_eBounds->setAssociation(get_A_Ecore_EGenericType_eBounds_eTypeParameter());
 	
 	
 
@@ -2884,7 +3172,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eGenericType->setIsUnique(true);
 	ecore_ETypedElement_eGenericType->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_ETypedElement_eGenericType->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_ETypedElement_eGenericType->setAssociation(get_A_Ecore_EGenericType_eGenericType_ecore_ETypedElement());
+	ecore_ETypedElement_eGenericType->setAssociation(get_A_Ecore_EGenericType_eGenericType_eTypedElement());
 	
 	
 	//eType
@@ -2895,7 +3183,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eType->setIsUnique(true);
 	ecore_ETypedElement_eType->setAggregation(uml::AggregationKind::NONE);
 	ecore_ETypedElement_eType->setVisibility(uml::VisibilityKind::PUBLIC);
-	ecore_ETypedElement_eType->setAssociation(get_A_Ecore_EClassifier_eType_ecore_ETypedElement());
+	ecore_ETypedElement_eType->setAssociation(get_A_Ecore_EClassifier_eType_eTypedElement());
 	
 	
 	//lowerBound
@@ -2971,286 +3259,10 @@ void EcorePackageImpl::initializePackageClasses()
 
 }
 
-void EcorePackageImpl::initializePackageAssociations()
+void EcorePackageImpl::initializePackageDataTypes()
 {
-	//
-	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->setName("a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement");
-	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EModelElement_eAnnotations());
-	a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement->getMemberEnd()->add(get_Ecore_EAnnotation_eModelElement());
-	
+	std::shared_ptr<uml::Generalization> gen = nullptr;
 
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->setName("a_Ecore_EAttribute_eAllAttributes_ecore_EClass");
-	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllAttributes());
-	a_Ecore_EAttribute_eAllAttributes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAllAttributes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eAttributes_ecore_EClass->setName("a_Ecore_EAttribute_eAttributes_ecore_EClass");
-	a_Ecore_EAttribute_eAttributes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAttributes());
-	a_Ecore_EAttribute_eAttributes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eAttributes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->setName("a_Ecore_EAttribute_eIDAttribute_ecore_EClass");
-	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eIDAttribute());
-	a_Ecore_EAttribute_eIDAttribute_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EAttribute_eIDAttribute_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EAttribute_eKeys_ecore_EReference->setName("a_Ecore_EAttribute_eKeys_ecore_EReference");
-	a_Ecore_EAttribute_eKeys_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eKeys());
-	a_Ecore_EAttribute_eKeys_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EAttribute_eKeys_ecore_EReference_eReference());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->setName("a_Ecore_EClass_eAllSuperTypes_ecore_EClass");
-	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllSuperTypes());
-	a_Ecore_EClass_eAllSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EClass_eAllSuperTypes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eReferenceType_ecore_EReference->setName("a_Ecore_EClass_eReferenceType_ecore_EReference");
-	a_Ecore_EClass_eReferenceType_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eReferenceType());
-	a_Ecore_EClass_eReferenceType_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EClass_eReferenceType_ecore_EReference_eReference());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClass_eSuperTypes_ecore_EClass->setName("a_Ecore_EClass_eSuperTypes_ecore_EClass");
-	a_Ecore_EClass_eSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eSuperTypes());
-	a_Ecore_EClass_eSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EClass_eSuperTypes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->setName("a_Ecore_EClassifier_eClassifier_ecore_EGenericType");
-	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eClassifier());
-	a_Ecore_EClassifier_eClassifier_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eClassifier_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->setName("a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage");
-	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EPackage_eClassifiers());
-	a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage->getMemberEnd()->add(get_Ecore_EClassifier_ePackage());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eExceptions_ecore_EOperation->setName("a_Ecore_EClassifier_eExceptions_ecore_EOperation");
-	a_Ecore_EClassifier_eExceptions_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eExceptions());
-	a_Ecore_EClassifier_eExceptions_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_EClassifier_eExceptions_ecore_EOperation_eOperation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eRawType_ecore_EGenericType->setName("a_Ecore_EClassifier_eRawType_ecore_EGenericType");
-	a_Ecore_EClassifier_eRawType_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eRawType());
-	a_Ecore_EClassifier_eRawType_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EClassifier_eRawType_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EClassifier_eType_ecore_ETypedElement->setName("a_Ecore_EClassifier_eType_ecore_ETypedElement");
-	a_Ecore_EClassifier_eType_ecore_ETypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eType());
-	a_Ecore_EClassifier_eType_ecore_ETypedElement->getMemberEnd()->add(get_A_Ecore_EClassifier_eType_ecore_ETypedElement_eTypedElement());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->setName("a_Ecore_EDataType_eAttributeType_ecore_EAttribute");
-	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->getMemberEnd()->add(get_Ecore_EAttribute_eAttributeType());
-	a_Ecore_EDataType_eAttributeType_ecore_EAttribute->getMemberEnd()->add(get_A_Ecore_EDataType_eAttributeType_ecore_EAttribute_eAttribute());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->setName("a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum");
-	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnum_eLiterals());
-	a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum->getMemberEnd()->add(get_Ecore_EEnumLiteral_eEnum());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->setName("a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass");
-	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllGenericSuperTypes());
-	a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->setName("a_Ecore_EGenericType_eBounds_ecore_ETypeParameter");
-	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->getMemberEnd()->add(get_Ecore_ETypeParameter_eBounds());
-	a_Ecore_EGenericType_eBounds_ecore_ETypeParameter->getMemberEnd()->add(get_A_Ecore_EGenericType_eBounds_ecore_ETypeParameter_eTypeParameter());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->setName("a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation");
-	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eGenericExceptions());
-	a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericExceptions_ecore_EOperation_eOperation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->setName("a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass");
-	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eGenericSuperTypes());
-	a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->setName("a_Ecore_EGenericType_eGenericType_ecore_ETypedElement");
-	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->getMemberEnd()->add(get_Ecore_ETypedElement_eGenericType());
-	a_Ecore_EGenericType_eGenericType_ecore_ETypedElement->getMemberEnd()->add(get_A_Ecore_EGenericType_eGenericType_ecore_ETypedElement_eTypedElement());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->setName("a_Ecore_EGenericType_eLowerBound_ecore_EGenericType");
-	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eLowerBound());
-	a_Ecore_EGenericType_eLowerBound_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eLowerBound_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->setName("a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType");
-	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeArguments());
-	a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eTypeArguments_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->setName("a_Ecore_EGenericType_eUpperBound_ecore_EGenericType");
-	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eUpperBound());
-	a_Ecore_EGenericType_eUpperBound_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_EGenericType_eUpperBound_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EObject_contents_ecore_EAnnotation->setName("a_Ecore_EObject_contents_ecore_EAnnotation");
-	a_Ecore_EObject_contents_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_contents());
-	a_Ecore_EObject_contents_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_contents_ecore_EAnnotation_eAnnotation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EObject_references_ecore_EAnnotation->setName("a_Ecore_EObject_references_ecore_EAnnotation");
-	a_Ecore_EObject_references_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_references());
-	a_Ecore_EObject_references_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EObject_references_ecore_EAnnotation_eAnnotation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EOperation_eAllOperations_ecore_EClass->setName("a_Ecore_EOperation_eAllOperations_ecore_EClass");
-	a_Ecore_EOperation_eAllOperations_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllOperations());
-	a_Ecore_EOperation_eAllOperations_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EOperation_eAllOperations_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->setName("a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass");
-	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eOperations());
-	a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EOperation_eContainingClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->setName("a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance");
-	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EFactory_ePackage());
-	a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance->getMemberEnd()->add(get_Ecore_EPackage_eFactoryInstance());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->setName("a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage");
-	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSubpackages());
-	a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage->getMemberEnd()->add(get_Ecore_EPackage_eSuperPackage());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->setName("a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation");
-	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EOperation_eParameters());
-	a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation->getMemberEnd()->add(get_Ecore_EParameter_eOperation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eAllContainments_ecore_EClass->setName("a_Ecore_EReference_eAllContainments_ecore_EClass");
-	a_Ecore_EReference_eAllContainments_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllContainments());
-	a_Ecore_EReference_eAllContainments_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllContainments_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eAllReferences_ecore_EClass->setName("a_Ecore_EReference_eAllReferences_ecore_EClass");
-	a_Ecore_EReference_eAllReferences_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllReferences());
-	a_Ecore_EReference_eAllReferences_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eAllReferences_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eOpposite_ecore_EReference->setName("a_Ecore_EReference_eOpposite_ecore_EReference");
-	a_Ecore_EReference_eOpposite_ecore_EReference->getMemberEnd()->add(get_Ecore_EReference_eOpposite());
-	a_Ecore_EReference_eOpposite_ecore_EReference->getMemberEnd()->add(get_A_Ecore_EReference_eOpposite_ecore_EReference_eReference());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EReference_eReferences_ecore_EClass->setName("a_Ecore_EReference_eReferences_ecore_EClass");
-	a_Ecore_EReference_eReferences_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eReferences());
-	a_Ecore_EReference_eReferences_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EReference_eReferences_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->setName("a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation");
-	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->getMemberEnd()->add(get_Ecore_EAnnotation_details());
-	a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation->getMemberEnd()->add(get_A_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation_eAnnotation());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->setName("a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass");
-	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->getMemberEnd()->add(get_Ecore_EClass_eAllStructuralFeatures());
-	a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass->getMemberEnd()->add(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass_eClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->setName("a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass");
-	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EClass_eStructuralFeatures());
-	a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass->getMemberEnd()->add(get_Ecore_EStructuralFeature_eContainingClass());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->setName("a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType");
-	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->getMemberEnd()->add(get_Ecore_EGenericType_eTypeParameter());
-	a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType_eGenericType());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->setName("a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier");
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->getMemberEnd()->add(get_Ecore_EClassifier_eTypeParameters());
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier_eClassifier());
-	
-
-    //-------------------------------------------
-	//
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->setName("a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation");
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->getMemberEnd()->add(get_Ecore_EOperation_eTypeParameters());
-	a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation->getMemberEnd()->add(get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation_eOperation());
-	
 }
 
 void EcorePackageImpl::initializePackageDependencies()
@@ -3599,197 +3611,197 @@ std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAnnotation_eAnn
 {
 	return a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass()
 {
-	return a_Ecore_EAttribute_eAllAttributes_ecore_EClass;
+	return a_Ecore_EAttribute_eAllAttributes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass_eClass()
 {
-	return a_Ecore_EAttribute_eAllAttributes_ecore_EClass_eClass;
+	return a_Ecore_EAttribute_eAllAttributes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass()
 {
-	return a_Ecore_EAttribute_eAttributes_ecore_EClass;
+	return a_Ecore_EAttribute_eAttributes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass_eClass()
 {
-	return a_Ecore_EAttribute_eAttributes_ecore_EClass_eClass;
+	return a_Ecore_EAttribute_eAttributes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass()
 {
-	return a_Ecore_EAttribute_eIDAttribute_ecore_EClass;
+	return a_Ecore_EAttribute_eIDAttribute_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass_eClass()
 {
-	return a_Ecore_EAttribute_eIDAttribute_ecore_EClass_eClass;
+	return a_Ecore_EAttribute_eIDAttribute_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_ecore_EReference()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference()
 {
-	return a_Ecore_EAttribute_eKeys_ecore_EReference;
+	return a_Ecore_EAttribute_eKeys_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_ecore_EReference_eReference()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference_eReference()
 {
-	return a_Ecore_EAttribute_eKeys_ecore_EReference_eReference;
+	return a_Ecore_EAttribute_eKeys_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass()
 {
-	return a_Ecore_EClass_eAllSuperTypes_ecore_EClass;
+	return a_Ecore_EClass_eAllSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass_eClass()
 {
-	return a_Ecore_EClass_eAllSuperTypes_ecore_EClass_eClass;
+	return a_Ecore_EClass_eAllSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_ecore_EReference()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference()
 {
-	return a_Ecore_EClass_eReferenceType_ecore_EReference;
+	return a_Ecore_EClass_eReferenceType_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_ecore_EReference_eReference()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference_eReference()
 {
-	return a_Ecore_EClass_eReferenceType_ecore_EReference_eReference;
+	return a_Ecore_EClass_eReferenceType_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass()
 {
-	return a_Ecore_EClass_eSuperTypes_ecore_EClass;
+	return a_Ecore_EClass_eSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass_eClass()
 {
-	return a_Ecore_EClass_eSuperTypes_ecore_EClass_eClass;
+	return a_Ecore_EClass_eSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType()
 {
-	return a_Ecore_EClassifier_eClassifier_ecore_EGenericType;
+	return a_Ecore_EClassifier_eClassifier_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType_eGenericType()
 {
-	return a_Ecore_EClassifier_eClassifier_ecore_EGenericType_eGenericType;
+	return a_Ecore_EClassifier_eClassifier_eGenericType_eGenericType;
 }
 std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage()
 {
 	return a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_ecore_EOperation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation()
 {
-	return a_Ecore_EClassifier_eExceptions_ecore_EOperation;
+	return a_Ecore_EClassifier_eExceptions_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_ecore_EOperation_eOperation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation_eOperation()
 {
-	return a_Ecore_EClassifier_eExceptions_ecore_EOperation_eOperation;
+	return a_Ecore_EClassifier_eExceptions_eOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType()
 {
-	return a_Ecore_EClassifier_eRawType_ecore_EGenericType;
+	return a_Ecore_EClassifier_eRawType_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType_eGenericType()
 {
-	return a_Ecore_EClassifier_eRawType_ecore_EGenericType_eGenericType;
+	return a_Ecore_EClassifier_eRawType_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eType_ecore_ETypedElement()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement()
 {
-	return a_Ecore_EClassifier_eType_ecore_ETypedElement;
+	return a_Ecore_EClassifier_eType_eTypedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eType_ecore_ETypedElement_eTypedElement()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement_eTypedElement()
 {
-	return a_Ecore_EClassifier_eType_ecore_ETypedElement_eTypedElement;
+	return a_Ecore_EClassifier_eType_eTypedElement_eTypedElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_ecore_EAttribute()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute()
 {
-	return a_Ecore_EDataType_eAttributeType_ecore_EAttribute;
+	return a_Ecore_EDataType_eAttributeType_eAttribute;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_ecore_EAttribute_eAttribute()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute_eAttribute()
 {
-	return a_Ecore_EDataType_eAttributeType_ecore_EAttribute_eAttribute;
+	return a_Ecore_EDataType_eAttributeType_eAttribute_eAttribute;
 }
 std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum()
 {
 	return a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass()
 {
-	return a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass;
+	return a_Ecore_EGenericType_eAllGenericSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass()
 {
-	return a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass_eClass;
+	return a_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_ecore_ETypeParameter()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter()
 {
-	return a_Ecore_EGenericType_eBounds_ecore_ETypeParameter;
+	return a_Ecore_EGenericType_eBounds_eTypeParameter;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_ecore_ETypeParameter_eTypeParameter()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter()
 {
-	return a_Ecore_EGenericType_eBounds_ecore_ETypeParameter_eTypeParameter;
+	return a_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_ecore_EOperation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation()
 {
-	return a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation;
+	return a_Ecore_EGenericType_eGenericExceptions_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_ecore_EOperation_eOperation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation()
 {
-	return a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation_eOperation;
+	return a_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass()
 {
-	return a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass;
+	return a_Ecore_EGenericType_eGenericSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass()
 {
-	return a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass_eClass;
+	return a_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_ecore_ETypedElement()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement()
 {
-	return a_Ecore_EGenericType_eGenericType_ecore_ETypedElement;
+	return a_Ecore_EGenericType_eGenericType_eTypedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_ecore_ETypedElement_eTypedElement()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement()
 {
-	return a_Ecore_EGenericType_eGenericType_ecore_ETypedElement_eTypedElement;
+	return a_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType()
 {
-	return a_Ecore_EGenericType_eLowerBound_ecore_EGenericType;
+	return a_Ecore_EGenericType_eLowerBound_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType()
 {
-	return a_Ecore_EGenericType_eLowerBound_ecore_EGenericType_eGenericType;
+	return a_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType()
 {
-	return a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType;
+	return a_Ecore_EGenericType_eTypeArguments_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType()
 {
-	return a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType_eGenericType;
+	return a_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType()
 {
-	return a_Ecore_EGenericType_eUpperBound_ecore_EGenericType;
+	return a_Ecore_EGenericType_eUpperBound_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType()
 {
-	return a_Ecore_EGenericType_eUpperBound_ecore_EGenericType_eGenericType;
+	return a_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_contents_ecore_EAnnotation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation()
 {
-	return a_Ecore_EObject_contents_ecore_EAnnotation;
+	return a_Ecore_EObject_contents_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_contents_ecore_EAnnotation_eAnnotation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation_eAnnotation()
 {
-	return a_Ecore_EObject_contents_ecore_EAnnotation_eAnnotation;
+	return a_Ecore_EObject_contents_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_references_ecore_EAnnotation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation()
 {
-	return a_Ecore_EObject_references_ecore_EAnnotation;
+	return a_Ecore_EObject_references_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_references_ecore_EAnnotation_eAnnotation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation_eAnnotation()
 {
-	return a_Ecore_EObject_references_ecore_EAnnotation_eAnnotation;
+	return a_Ecore_EObject_references_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass()
 {
-	return a_Ecore_EOperation_eAllOperations_ecore_EClass;
+	return a_Ecore_EOperation_eAllOperations_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass_eClass()
 {
-	return a_Ecore_EOperation_eAllOperations_ecore_EClass_eClass;
+	return a_Ecore_EOperation_eAllOperations_eClass_eClass;
 }
 std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass()
 {
@@ -3807,81 +3819,81 @@ std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EParameter_ePara
 {
 	return a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass()
 {
-	return a_Ecore_EReference_eAllContainments_ecore_EClass;
+	return a_Ecore_EReference_eAllContainments_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass_eClass()
 {
-	return a_Ecore_EReference_eAllContainments_ecore_EClass_eClass;
+	return a_Ecore_EReference_eAllContainments_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass()
 {
-	return a_Ecore_EReference_eAllReferences_ecore_EClass;
+	return a_Ecore_EReference_eAllReferences_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass_eClass()
 {
-	return a_Ecore_EReference_eAllReferences_ecore_EClass_eClass;
+	return a_Ecore_EReference_eAllReferences_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_ecore_EReference()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference()
 {
-	return a_Ecore_EReference_eOpposite_ecore_EReference;
+	return a_Ecore_EReference_eOpposite_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_ecore_EReference_eReference()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference_eReference()
 {
-	return a_Ecore_EReference_eOpposite_ecore_EReference_eReference;
+	return a_Ecore_EReference_eOpposite_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eReferences_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass()
 {
-	return a_Ecore_EReference_eReferences_ecore_EClass;
+	return a_Ecore_EReference_eReferences_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eReferences_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass_eClass()
 {
-	return a_Ecore_EReference_eReferences_ecore_EClass_eClass;
+	return a_Ecore_EReference_eReferences_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation()
 {
-	return a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation;
+	return a_Ecore_EStringToStringMapEntry_details_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation_eAnnotation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation()
 {
-	return a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation_eAnnotation;
+	return a_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass()
 {
-	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass;
+	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass_eClass()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass()
 {
-	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass_eClass;
+	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass;
 }
 std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass()
 {
 	return a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType()
 {
-	return a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType;
+	return a_Ecore_ETypeParameter_eTypeParameter_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType_eGenericType()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType()
 {
-	return a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType_eGenericType;
+	return a_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier()
 {
-	return a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier;
+	return a_Ecore_ETypeParameter_eTypeParameters_eClassifier;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier_eClassifier()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier()
 {
-	return a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier_eClassifier;
+	return a_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation()
+std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation()
 {
-	return a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation;
+	return a_Ecore_ETypeParameter_eTypeParameters_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation_eOperation()
+std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation()
 {
-	return a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation_eOperation;
+	return a_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation;
 }
 std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EAnnotation()
 {
