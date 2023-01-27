@@ -34,7 +34,7 @@ using namespace [aPackage.name/];
 //static initialisation
 std::shared_ptr<MDE4CPPPlugin> [aPackage.name/]Plugin::eInstance()
 {
-	static std::shared_ptr<MDE4CPPPlugin> instance;
+	static std::shared_ptr<MDE4CPPPlugin> instance = nullptr;
 
 	if(instance==nullptr)
 	{

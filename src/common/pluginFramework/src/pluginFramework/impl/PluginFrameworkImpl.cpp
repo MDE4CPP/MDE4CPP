@@ -38,6 +38,19 @@
 #include "abstractDataTypes/Bag.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 
+
+std::shared_ptr<PluginFramework> PluginFramework::eInstance()
+{
+	static std::shared_ptr<PluginFramework> instance = nullptr;
+
+	if (instance == nullptr)
+	{
+		instance.reset(PluginFrameworkImpl::create());
+	}
+	return instance;
+}
+
+
 PluginFrameworkImpl::PluginFrameworkImpl():
 	m_debugMode(false)
 {

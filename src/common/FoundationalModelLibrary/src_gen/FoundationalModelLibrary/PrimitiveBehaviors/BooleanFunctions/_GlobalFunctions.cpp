@@ -22,6 +22,16 @@ bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Not(bool x)
 
 	return result;
 }
+bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or(bool x,bool y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour Or
+	result = (x || y);
+	
+
+	return result;
+}
 bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Xor(bool x,bool y)
 {
 	bool result = 0;
@@ -32,32 +42,22 @@ bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Xor(bool x,
 
 	return result;
 }
+bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies(bool x,bool y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour Implies
+	result = (not(x)) || (x && y);
+	
+
+	return result;
+}
 bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::And(bool x,bool y)
 {
 	bool result = 0;
 
 	//Implemented as OpaqueBehaviour And
 	result = (x && y);
-	
-
-	return result;
-}
-std::string FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString(bool x)
-{
-	std::string result = "";
-
-	//Implemented as OpaqueBehaviour ToString
-	result = (x) ? "true" : "false";
-	
-
-	return result;
-}
-bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or(bool x,bool y)
-{
-	bool result = 0;
-
-	//Implemented as OpaqueBehaviour Or
-	result = (x || y);
 	
 
 	return result;
@@ -77,12 +77,12 @@ bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToBoolean(s
 
 	return result;
 }
-bool FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies(bool x,bool y)
+std::string FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString(bool x)
 {
-	bool result = 0;
+	std::string result = "";
 
-	//Implemented as OpaqueBehaviour Implies
-	result = (not(x)) || (x && y);
+	//Implemented as OpaqueBehaviour ToString
+	result = (x) ? "true" : "false";
 	
 
 	return result;
@@ -113,6 +113,40 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::BooleanFuncti
 
 			//Invoke method
 			bool result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Not(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
+	
+			return returnArgument;
+		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_OR:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			bool x;
+			try
+			{
+				x = anyX->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			bool y;
+			try
+			{
+				y = anyY->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			bool result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or(x, y);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
 	
 			return returnArgument;
@@ -151,6 +185,40 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::BooleanFuncti
 	
 			return returnArgument;
 		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_IMPLIES:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			bool x;
+			try
+			{
+				x = anyX->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			bool y;
+			try
+			{
+				y = anyY->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			bool result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies(x, y);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
+	
+			return returnArgument;
+		}
 		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_AND:
 		{
 		//Retrieve input parameters
@@ -185,62 +253,6 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::BooleanFuncti
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			bool x;
-			try
-			{
-				x = anyX->get<bool>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString(x);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_OR:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			bool x;
-			try
-			{
-				x = anyX->get<bool>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			bool y;
-			try
-			{
-				y = anyY->get<bool>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			bool result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
-	
-			return returnArgument;
-		}
 		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOBOOLEAN:
 		{
 		//Retrieve input parameters
@@ -263,7 +275,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::BooleanFuncti
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_IMPLIES:
+		case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -278,22 +290,10 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::BooleanFuncti
 				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
 				return nullptr;
 			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			bool y;
-			try
-			{
-				y = anyY->get<bool>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
 
 			//Invoke method
-			bool result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
+			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
 	
 			return returnArgument;
 		}

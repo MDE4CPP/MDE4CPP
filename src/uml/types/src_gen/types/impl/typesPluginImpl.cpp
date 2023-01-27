@@ -8,7 +8,7 @@ using namespace types;
 //static initialisation
 std::shared_ptr<MDE4CPPPlugin> typesPlugin::eInstance()
 {
-	static std::shared_ptr<MDE4CPPPlugin> instance;
+	static std::shared_ptr<MDE4CPPPlugin> instance = nullptr;
 
 	if(instance==nullptr)
 	{

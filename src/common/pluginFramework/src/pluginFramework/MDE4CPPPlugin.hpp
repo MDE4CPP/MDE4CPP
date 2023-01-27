@@ -14,7 +14,6 @@
 namespace ecore
 {
 	class EObject;
-	class EPackage;
 }
 
 class MDE4CPPPlugin

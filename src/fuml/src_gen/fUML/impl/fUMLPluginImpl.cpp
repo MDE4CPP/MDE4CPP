@@ -8,7 +8,7 @@ using namespace fUML;
 //static initialisation
 std::shared_ptr<MDE4CPPPlugin> fUMLPlugin::eInstance()
 {
-	static std::shared_ptr<MDE4CPPPlugin> instance;
+	static std::shared_ptr<MDE4CPPPlugin> instance = nullptr;
 
 	if(instance==nullptr)
 	{

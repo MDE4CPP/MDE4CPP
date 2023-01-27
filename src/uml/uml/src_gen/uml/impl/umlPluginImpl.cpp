@@ -8,7 +8,7 @@ using namespace uml;
 //static initialisation
 std::shared_ptr<MDE4CPPPlugin> umlPlugin::eInstance()
 {
-	static std::shared_ptr<MDE4CPPPlugin> instance;
+	static std::shared_ptr<MDE4CPPPlugin> instance = nullptr;
 
 	if(instance==nullptr)
 	{
