@@ -32,9 +32,6 @@ namespace ecore
 		protected:
 			ecorePlugin(){};
 			virtual ~ecorePlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: ECOREPLUGIN_HPP */

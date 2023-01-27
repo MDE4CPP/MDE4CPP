@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
 	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
-	class EParameter;
 	class EDataType;
+	class EGenericType;
+	class EStringToStringMapEntry;
+	class EOperation;
+	class EParameter;
+	class EClass;
+	class EAnnotation;
 }
 
 namespace fUML::Semantics::StructuredClassifiers 
@@ -100,9 +100,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<StructuredClassifiersPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<StructuredClassifiersPackage> eInstance();
 	};

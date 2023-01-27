@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/ETypeParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/ETypeParameter.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EAnnotation.hpp"
 
 //metamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -21,6 +21,23 @@
 //depending model packages
 
 using namespace ecore;
+
+//Singleton implementation 
+std::shared_ptr<ecorePackage> ecorePackage::eInstance()
+{
+	static std::shared_ptr<ecorePackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ecorePackageImpl::create());
+		std::dynamic_pointer_cast<ecorePackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string ecorePackage::eNAME ="ecore";
+const std::string ecorePackage::eNS_URI ="http://www.eclipse.org/emf/2002/Ecore";
+const std::string ecorePackage::eNS_PREFIX ="ecore";
 
 bool ecorePackageImpl::isInited = false;
 

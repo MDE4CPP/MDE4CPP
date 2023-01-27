@@ -32,9 +32,6 @@ namespace types
 		protected:
 			typesPlugin(){};
 			virtual ~typesPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: TYPESPLUGIN_HPP */

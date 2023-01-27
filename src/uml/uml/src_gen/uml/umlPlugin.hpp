@@ -32,9 +32,6 @@ namespace uml
 		protected:
 			umlPlugin(){};
 			virtual ~umlPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: UMLPLUGIN_HPP */

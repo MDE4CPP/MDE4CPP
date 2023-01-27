@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
 	class EGenericType;
+	class EStringToStringMapEntry;
 	class EOperation;
 	class EClass;
+	class EAnnotation;
 }
 
 namespace fUML::Semantics::Classification 
@@ -53,9 +53,7 @@ namespace fUML::Semantics::Classification
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ClassificationPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ClassificationPackage> eInstance();
 	};

@@ -34,16 +34,13 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	ecoreFactory.cpp
 	impl/ecoreFactoryImpl.cpp
-	ecorePackage.cpp
 	impl/ecorePackageImpl.cpp
 	impl/ecorePackageImpl_Creation.cpp
 	impl/ecorePackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/ecorePluginImpl.cpp
-	ecorePlugin.cpp
 # Package content
 	impl/EAnnotationImpl.cpp
 	impl/EAttributeImpl.cpp

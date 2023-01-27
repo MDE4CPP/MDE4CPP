@@ -29,9 +29,7 @@ namespace fUML::Semantics::Values
 		protected:
 			ValuesFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ValuesFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ValuesFactory> eInstance();
 		

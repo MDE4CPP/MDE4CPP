@@ -34,16 +34,13 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	umlFactory.cpp
 	impl/umlFactoryImpl.cpp
-	umlPackage.cpp
 	impl/umlPackageImpl.cpp
 	impl/umlPackageImpl_Creation.cpp
 	impl/umlPackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/umlPluginImpl.cpp
-	umlPlugin.cpp
 # Package content
 	impl/AbstractionImpl.cpp
 	impl/AcceptCallActionImpl.cpp

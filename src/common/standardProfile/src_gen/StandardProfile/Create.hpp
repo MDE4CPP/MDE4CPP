@@ -15,9 +15,11 @@ namespace uml
 {
 	class Usage;
 	class BehavioralFeature;
+	class Usage;
 }
 namespace uml 
 {
+	class BehavioralFeature;
 	class Usage;
 	class BehavioralFeature;
 }

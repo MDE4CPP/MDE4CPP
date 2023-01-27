@@ -72,9 +72,7 @@ namespace fUML
 		protected:
 			fUMLFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<fUMLFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<fUMLFactory> eInstance();
 		

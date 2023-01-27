@@ -9,10 +9,9 @@ const std::string LociPackage::eNS_URI ="http:///fUML_Semantics/Semantics/Loci.e
 const std::string LociPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Loci";
 
 //Singleton 
-std::shared_ptr<LociPackage> LociPackage::instance;
-
 std::shared_ptr<LociPackage> LociPackage::eInstance()
 {
+	static std::shared_ptr<LociPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

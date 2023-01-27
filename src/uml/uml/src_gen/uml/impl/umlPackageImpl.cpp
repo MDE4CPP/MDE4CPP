@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EEnumLiteral.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EAnnotation.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -24,6 +24,23 @@
 #include "types/typesPackage.hpp"
 
 using namespace uml;
+
+//Singleton implementation 
+std::shared_ptr<umlPackage> umlPackage::eInstance()
+{
+	static std::shared_ptr<umlPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(umlPackageImpl::create());
+		std::dynamic_pointer_cast<umlPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string umlPackage::eNAME ="uml";
+const std::string umlPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/UML";
+const std::string umlPackage::eNS_PREFIX ="uml";
 
 bool umlPackageImpl::isInited = false;
 

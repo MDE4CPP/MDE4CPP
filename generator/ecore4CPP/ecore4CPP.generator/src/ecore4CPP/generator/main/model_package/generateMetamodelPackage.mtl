@@ -17,11 +17,9 @@
 [import ecore4CPP::generator::main::model_package::generatePackageImplementationHeader /]
 [import ecore4CPP::generator::main::model_package::generatePackageImplementationSource /]
 [import ecore4CPP::generator::main::model_package::generatePackageInterface /]
-[import ecore4CPP::generator::main::model_package::generatePackageInterfaceSource /]
 
 [template public generatePackageImpl(anEPackage : EPackage)]
 [anEPackage.generatePackageInterface()/]
-[anEPackage.generatePackageInterfaceSource()/]
 [anEPackage.generatePackageImplHeader()/]
 [anEPackage.generatePackageImplSource()/]
 [/template]

@@ -30,6 +30,17 @@
 
 using namespace ecore;
 
+std::shared_ptr<ecoreFactory> ecoreFactory::eInstance()
+{
+	static std::shared_ptr<ecoreFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ecoreFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

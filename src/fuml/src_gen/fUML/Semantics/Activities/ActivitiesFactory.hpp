@@ -37,9 +37,7 @@ namespace fUML::Semantics::Activities
 		protected:
 			ActivitiesFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ActivitiesFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ActivitiesFactory> eInstance();
 		

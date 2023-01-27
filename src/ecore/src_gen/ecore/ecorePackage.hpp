@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
 	class EAttribute;
 	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
-	class EParameter;
-	class ETypeParameter;
 	class EDataType;
+	class EGenericType;
+	class EStringToStringMapEntry;
+	class EOperation;
+	class ETypeParameter;
+	class EParameter;
+	class EClass;
+	class EAnnotation;
 }
 
 namespace ecore 
@@ -774,12 +774,9 @@ namespace ecore
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ecorePackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ecorePackage> eInstance();
-
 			//prevent from hiding functions
 			using EPackage::getEAnnotation;
 			using EPackage::getEClassifier;

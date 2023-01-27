@@ -9,10 +9,9 @@ const std::string StructuredClassifiersPackage::eNS_URI ="http:///fUML_Semantics
 const std::string StructuredClassifiersPackage::eNS_PREFIX ="fUML_Semantics.Semantics.StructuredClassifiers";
 
 //Singleton 
-std::shared_ptr<StructuredClassifiersPackage> StructuredClassifiersPackage::instance;
-
 std::shared_ptr<StructuredClassifiersPackage> StructuredClassifiersPackage::eInstance()
 {
+	static std::shared_ptr<StructuredClassifiersPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EPackage.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/SemanticsFactory.hpp"
@@ -40,6 +40,23 @@
 #include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 using namespace fUML::Semantics;
+
+//Singleton implementation 
+std::shared_ptr<SemanticsPackage> SemanticsPackage::eInstance()
+{
+	static std::shared_ptr<SemanticsPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(SemanticsPackageImpl::create());
+		std::dynamic_pointer_cast<SemanticsPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string SemanticsPackage::eNAME ="Semantics";
+const std::string SemanticsPackage::eNS_URI ="http:///fUML_Semantics/Semantics.ecore";
+const std::string SemanticsPackage::eNS_PREFIX ="fUML_Semantics.Semantics";
 
 bool SemanticsPackageImpl::isInited = false;
 

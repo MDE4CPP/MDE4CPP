@@ -9,10 +9,9 @@ const std::string ValuesPackage::eNS_URI ="http:///fUML_Semantics/Semantics/Valu
 const std::string ValuesPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Values";
 
 //Singleton 
-std::shared_ptr<ValuesPackage> ValuesPackage::instance;
-
 std::shared_ptr<ValuesPackage> ValuesPackage::eInstance()
 {
+	static std::shared_ptr<ValuesPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

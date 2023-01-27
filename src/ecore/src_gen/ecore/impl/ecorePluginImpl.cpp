@@ -5,6 +5,24 @@
 
 using namespace ecore;
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> ecorePlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new ecorePluginImpl());
+	}
+	return instance;
+}
+
+ECORE_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return ecorePluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

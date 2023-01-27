@@ -35,6 +35,17 @@
 
 using namespace fUML::Semantics::Activities;
 
+std::shared_ptr<ActivitiesFactory> ActivitiesFactory::eInstance()
+{
+	static std::shared_ptr<ActivitiesFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ActivitiesFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

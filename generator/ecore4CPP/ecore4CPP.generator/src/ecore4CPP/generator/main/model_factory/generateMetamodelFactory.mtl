@@ -17,11 +17,9 @@
 [import ecore4CPP::generator::main::model_factory::generateFactoryImplementationHeader /]
 [import ecore4CPP::generator::main::model_factory::generateFactoryImplementationSource /]
 [import ecore4CPP::generator::main::model_factory::generateFactoryInterface /]
-[import ecore4CPP::generator::main::model_factory::generateFactoryInterfaceSource /]
 
 [template public generateFactoryImpl(anEPackage : EPackage)]
 [anEPackage.generateFactoryInterface()/]
-[anEPackage.generateFactoryCpp()/]
 [anEPackage.generateFactoryImplHeader()/]
 [anEPackage.generateFactoryImplSource()/]
 [/template]

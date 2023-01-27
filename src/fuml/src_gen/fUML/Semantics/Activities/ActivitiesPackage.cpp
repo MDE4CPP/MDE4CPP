@@ -9,10 +9,9 @@ const std::string ActivitiesPackage::eNS_URI ="http:///fUML_Semantics/Semantics/
 const std::string ActivitiesPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Activities";
 
 //Singleton 
-std::shared_ptr<ActivitiesPackage> ActivitiesPackage::instance;
-
 std::shared_ptr<ActivitiesPackage> ActivitiesPackage::eInstance()
 {
+	static std::shared_ptr<ActivitiesPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

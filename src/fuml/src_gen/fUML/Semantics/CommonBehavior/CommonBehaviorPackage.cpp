@@ -9,10 +9,9 @@ const std::string CommonBehaviorPackage::eNS_URI ="http:///fUML_Semantics/Semant
 const std::string CommonBehaviorPackage::eNS_PREFIX ="fUML_Semantics.Semantics.CommonBehavior";
 
 //Singleton 
-std::shared_ptr<CommonBehaviorPackage> CommonBehaviorPackage::instance;
-
 std::shared_ptr<CommonBehaviorPackage> CommonBehaviorPackage::eInstance()
 {
+	static std::shared_ptr<CommonBehaviorPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

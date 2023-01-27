@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EAnnotation.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -24,6 +24,23 @@
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
+
+//Singleton implementation 
+std::shared_ptr<CommonBehaviorPackage> CommonBehaviorPackage::eInstance()
+{
+	static std::shared_ptr<CommonBehaviorPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(CommonBehaviorPackageImpl::create());
+		std::dynamic_pointer_cast<CommonBehaviorPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string CommonBehaviorPackage::eNAME ="CommonBehavior";
+const std::string CommonBehaviorPackage::eNS_URI ="http:///fUML_Semantics/Semantics/CommonBehavior.ecore";
+const std::string CommonBehaviorPackage::eNS_PREFIX ="fUML_Semantics.Semantics.CommonBehavior";
 
 bool CommonBehaviorPackageImpl::isInited = false;
 

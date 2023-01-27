@@ -11,6 +11,17 @@
 
 using namespace fUML::Semantics::StructuredClassifiers;
 
+std::shared_ptr<StructuredClassifiersFactory> StructuredClassifiersFactory::eInstance()
+{
+	static std::shared_ptr<StructuredClassifiersFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(StructuredClassifiersFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

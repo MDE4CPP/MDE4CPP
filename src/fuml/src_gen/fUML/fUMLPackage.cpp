@@ -9,10 +9,9 @@ const std::string fUMLPackage::eNS_URI ="http://www.omg.org/spec/FUML/20180501";
 const std::string fUMLPackage::eNS_PREFIX ="fUML_Semantics";
 
 //Singleton 
-std::shared_ptr<fUMLPackage> fUMLPackage::instance;
-
 std::shared_ptr<fUMLPackage> fUMLPackage::eInstance()
 {
+	static std::shared_ptr<fUMLPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

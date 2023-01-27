@@ -9,10 +9,9 @@ const std::string SimpleClassifiersPackage::eNS_URI ="http:///fUML_Semantics/Sem
 const std::string SimpleClassifiersPackage::eNS_PREFIX ="fUML_Semantics.Semantics.SimpleClassifiers";
 
 //Singleton 
-std::shared_ptr<SimpleClassifiersPackage> SimpleClassifiersPackage::instance;
-
 std::shared_ptr<SimpleClassifiersPackage> SimpleClassifiersPackage::eInstance()
 {
+	static std::shared_ptr<SimpleClassifiersPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

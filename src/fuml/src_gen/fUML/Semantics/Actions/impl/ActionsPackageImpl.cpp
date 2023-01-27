@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EAnnotation.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -24,6 +24,23 @@
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
+
+//Singleton implementation 
+std::shared_ptr<ActionsPackage> ActionsPackage::eInstance()
+{
+	static std::shared_ptr<ActionsPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(ActionsPackageImpl::create());
+		std::dynamic_pointer_cast<ActionsPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string ActionsPackage::eNAME ="Actions";
+const std::string ActionsPackage::eNS_URI ="http:///fUML_Semantics/Semantics/Actions.ecore";
+const std::string ActionsPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Actions";
 
 bool ActionsPackageImpl::isInited = false;
 

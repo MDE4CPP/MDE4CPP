@@ -9,6 +9,17 @@
 
 using namespace fUML::Semantics::SimpleClassifiers;
 
+std::shared_ptr<SimpleClassifiersFactory> SimpleClassifiersFactory::eInstance()
+{
+	static std::shared_ptr<SimpleClassifiersFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(SimpleClassifiersFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

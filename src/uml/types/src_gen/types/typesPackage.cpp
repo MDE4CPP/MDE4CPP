@@ -9,10 +9,9 @@ const std::string typesPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/Type
 const std::string typesPackage::eNS_PREFIX ="types";
 
 //Singleton 
-std::shared_ptr<typesPackage> typesPackage::instance;
-
 std::shared_ptr<typesPackage> typesPackage::eInstance()
 {
+	static std::shared_ptr<typesPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation

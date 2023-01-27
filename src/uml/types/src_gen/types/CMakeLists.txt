@@ -34,16 +34,13 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	typesFactory.cpp
 	impl/typesFactoryImpl.cpp
-	typesPackage.cpp
 	impl/typesPackageImpl.cpp
 	impl/typesPackageImpl_Creation.cpp
 	impl/typesPackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/typesPluginImpl.cpp
-	typesPlugin.cpp
 # Package content
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )

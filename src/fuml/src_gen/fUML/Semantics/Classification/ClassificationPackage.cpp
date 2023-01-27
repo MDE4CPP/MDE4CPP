@@ -9,10 +9,9 @@ const std::string ClassificationPackage::eNS_URI ="http:///fUML_Semantics/Semant
 const std::string ClassificationPackage::eNS_PREFIX ="fUML_Semantics.Semantics.Classification";
 
 //Singleton 
-std::shared_ptr<ClassificationPackage> ClassificationPackage::instance;
-
 std::shared_ptr<ClassificationPackage> ClassificationPackage::eInstance()
 {
+	static std::shared_ptr<ClassificationPackage> instance;
 	if(!instance)
 	{
 		//create a new Factoryimplementation
