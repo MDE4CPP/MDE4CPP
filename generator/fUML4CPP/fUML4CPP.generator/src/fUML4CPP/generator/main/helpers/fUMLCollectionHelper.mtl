@@ -14,10 +14,12 @@
  */]
 [module fUMLCollectionHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import fUML4CPP::generator::main::helpers::parameterHelper /]
+
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateConnector /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
-[import fUML4CPP::generator::main::parameterHelper /]
+
 
 [comment]COLLECT REALIZING CLASSES FOR CERTAIN INTERFACE --------------- [/comment]
 [query public collectRealizingClasses(anInterface : Interface) : OrderedSet(Class) = 

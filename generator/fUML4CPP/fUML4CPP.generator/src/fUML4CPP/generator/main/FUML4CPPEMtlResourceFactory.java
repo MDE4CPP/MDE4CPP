@@ -20,40 +20,82 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	{
 		super.initialize();
 		String resourcePathPrefix = "rsrc:fUML4CPP/generator/main/";
-		initalizeGeneralEmtls(resourcePathPrefix);
-		initalizePluginEmtls(resourcePathPrefix);
-		initalizeStrategyEmtls(resourcePathPrefix);
+		initializeGeneralEmtls(resourcePathPrefix);
+		initializeBuildFilesEmtls(resourcePathPrefix);
+		initializeHelpersEmtls(resourcePathPrefix);
+		initializeModelExecutionFactoryEmtls(resourcePathPrefix);
+		initializeModelExecutionPluginEmtls(resourcePathPrefix);
+		initializeModelExecutorEmtls(resourcePathPrefix);
+		initializeModelLocusEmtls(resourcePathPrefix);
+		initializeStrategyEmtls(resourcePathPrefix);
 	}
 	
-	private void initalizeGeneralEmtls(String resourcePathPrefix)
+	private void initializeGeneralEmtls(String resourcePathPrefix)
 	{		
-		String[] moduleNames = {
-								"generateExecutionBuildFile",
-								"generateModelExecutorHeader",
-								"generateModelExecutorSource",
-								"generateModelLocusHeader",
-								"generateModelLocusSource",
-								"generateModelExecutionFactoryHeader",
-								"generateModelExecutionFactorySource",
-								"generateFUML",
-								"fUMLCollectionHelper",
-								"fUMLKeywords",
-								"parameterHelper"
-		};
+		String[] moduleNames = {"generateFUML"};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);
 	}
 	
-	private void initalizePluginEmtls(String resourcePathPrefix)
+	private void initializeBuildFilesEmtls(String resourcePathPrefix)
 	{
-		String[] ModuleNames = {"generateExecutionPlugin",
+		String[] ModuleNames = {"build_files_helper",
+								"generateExecutionBuildFiles",
+								"generateExecutionCMakeFile",
+								"generateExecutionGradleFiles"
+								};
+		generateFilePathMapData(ModuleNames, "build_files", resourcePathPrefix);
+	}
+	
+	private void initializeHelpersEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"fUMLCollectionHelper",
+								"fUMLKeywords",
+								"parameterHelper"
+								};
+		generateFilePathMapData(ModuleNames, "helpers", resourcePathPrefix);
+	}
+	
+	private void initializeModelExecutionFactoryEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generateModelExecutionFactoryFiles",
+								"generateModelExecutionFactoryImplementationHeader",
+								"generateModelExecutionFactoryImplementationSource",
+								"generateModelExecutionFactoryInterfaceHeader"
+								};
+		generateFilePathMapData(ModuleNames, "model_execution_factory", resourcePathPrefix);
+	}
+	
+	private void initializeModelExecutionPluginEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generateExecutionPluginFiles",
 								"generateExecutionPluginImplementationHeader",
 								"generateExecutionPluginImplementationSource",
 								"generateExecutionPluginInterfaceHeader"
 								};
-		generateFilePathMapData(ModuleNames, "plugin", resourcePathPrefix);
+		generateFilePathMapData(ModuleNames, "model_execution_plugin", resourcePathPrefix);
 	}
 	
-	private void initalizeStrategyEmtls(String resourcePathPrefix)
+	private void initializeModelExecutorEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generateModelExecutorFiles",
+								"generateModelExecutorImplementationHeader",
+								"generateModelExecutorImplementationSource",
+								"generateModelExecutorInterfaceHeader"
+								};
+		generateFilePathMapData(ModuleNames, "model_executor", resourcePathPrefix);
+	}
+	
+	private void initializeModelLocusEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generateModelLocusFiles",
+								"generateModelLocusImplementationHeader",
+								"generateModelLocusImplementationSource",
+								"generateModelLocusInterfaceHeader"
+								};
+		generateFilePathMapData(ModuleNames, "model_locus", resourcePathPrefix);
+	}
+	
+	private void initializeStrategyEmtls(String resourcePathPrefix)
 	{
 		String[] ModuleNames = {"generateStrategyHeader",
 								"generateStrategySource"

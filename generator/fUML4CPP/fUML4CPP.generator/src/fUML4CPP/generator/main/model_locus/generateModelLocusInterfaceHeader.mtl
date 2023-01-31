@@ -12,19 +12,19 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateModelLocusHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateModelLocusInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateModelLocusHeader(aPackage : Package)
+[template public generateModelLocusInterfaceHeader(aPackage : Package)
 {
 upperName : String = aPackage.getPackageName().sanitize();
 originalName : String = aPackage.generateNamespacePath(false);
 }]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'LocusExecution')/]
+[startGuard(aPackage,'Locus')/]
 
 //#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,36 +45,6 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>) = 0;
 	};
 }
-[endGuard(aPackage,'LocusExecution')/]
-[/file]
-
-[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'LocusImpl_Execution')/]
-
-#include "../[upperName/]Locus.hpp"
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
-
-namespace [aPackage.generateNamespace(false)/] 
-{
-	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
-	{
-		private:    
-			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
-
-		public:
-			[upperName/]LocusImpl();
-
-		public:
-			//destructor
-			virtual ~[upperName/]LocusImpl();
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
-			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
-	};
-}
-[endGuard(aPackage,'LocusImpl_Execution')/]
+[endGuard(aPackage,'Locus')/]
 [/file]
 [/template]

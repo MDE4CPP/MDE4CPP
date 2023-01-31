@@ -12,7 +12,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateModelExecutorSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateModelExecutorImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import fUML4CPP::generator::main::helpers::fUMLCollectionHelper /]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -22,31 +24,9 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::keywords /]
-[import fUML4CPP::generator::main::fUMLCollectionHelper /]
 
 
-[query private getEnumerationsOwnedByPackage(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable()) /]
-[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
-[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
-[query private getEnumerationsOfValueSpecificationActionForPackage(aPackage : Package, otherPackage : Package) : Set(Enumeration) = aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = otherPackage)->asSet()->sortedBy(name) /]
-
-[query private getBehaviorsOwnedByPackage(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(Behavior) /]
-[query private getBehaviorsOfCallBehaviorAction(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
-[query private getBehaviorsOfDecisionNodes(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
-[query private getCalledBehaviors(aPackage : Package) : Set(Behavior) = aPackage.getBehaviorsOfCallBehaviorAction()->addAll(aPackage.getBehaviorsOfDecisionNodes())->asSet()->sortedBy(name)/]
-[query private getPackagesOfCalledBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
-[query private getCalledBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(Behavior) = aPackage.getCalledBehaviors()->select(b : Behavior | b.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
-
-[query private getCalledActivities(aPackage : Package) : Set(Activity) = aPackage.getCalledBehaviors()->filter(Activity) /]
-[query private getPackagesOfCalledActivities(aPackage : Package) : Set(Package) = aPackage.getCalledActivities().getNearestPackage()->asSet()->sortedBy(name) /]
-[query private getCalledActivitiesOfPackage(aPackage : Package, otherPackage : Package) : Set(Activity) = aPackage.getCalledActivities()->select(a : Activity | a.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
-
-[query private getCalledOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledBehaviors()->filter(OpaqueBehavior) /]
-[query private getPackagesOfCalledOpaqueBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
-[query private getCalledOpaqueBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledOpaqueBehaviors()->select(oB : OpaqueBehavior | oB.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
-
-
-[template public generateModelExecutorSource(aPackage : Package) 
+[template public generateModelExecutorImplementationSource(aPackage : Package) 
 {
 packageName : String = aPackage.getPackageName().sanitize(); 
 originalName : String = aPackage.generateNamespacePath(false);
@@ -459,3 +439,23 @@ void [packageName/]ExecutorImpl::setThisExecutorPtr(std::weak_ptr</*PSCS::Semant
 
 [query private collectPackageGlobalFunctions_IncludeString(aPackage : Package) : String = '#include "' + aPackage.generateNamespacePath(true) + '/_GlobalFunctions.hpp"' /]
 [query private getIfElseIfString(index : Integer) : String = if(index = 1) then 'if' else 'else if' endif /]
+
+[query private getEnumerationsOwnedByPackage(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(Enumeration)->select(isGeneratable()) /]
+[query private getEnumerationsOfValueSpecificationAction(aPackage : Package) : Set(Enumeration) = aPackage.allOwnedElements()->filter(ValueSpecificationAction).value->filter(EnumerationLiteral).enumeration->asSet()->sortedBy(name) /]
+[query private getEnumerationPackagesOfValueSpecificationAction(aPackage : Package) : Set(Package) = aPackage.getEnumerationsOfValueSpecificationAction()._package->asSet()->sortedBy(name) /]
+[query private getEnumerationsOfValueSpecificationActionForPackage(aPackage : Package, otherPackage : Package) : Set(Enumeration) = aPackage.getEnumerationsOfValueSpecificationAction()->select(e : Enumeration | e._package = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getBehaviorsOwnedByPackage(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(Behavior) /]
+[query private getBehaviorsOfCallBehaviorAction(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getBehaviorsOfDecisionNodes(aPackage : Package) : Set(Behavior) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->asSet()->sortedBy(name)/]
+[query private getCalledBehaviors(aPackage : Package) : Set(Behavior) = aPackage.getBehaviorsOfCallBehaviorAction()->addAll(aPackage.getBehaviorsOfDecisionNodes())->asSet()->sortedBy(name)/]
+[query private getPackagesOfCalledBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(Behavior) = aPackage.getCalledBehaviors()->select(b : Behavior | b.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledActivities(aPackage : Package) : Set(Activity) = aPackage.getCalledBehaviors()->filter(Activity) /]
+[query private getPackagesOfCalledActivities(aPackage : Package) : Set(Package) = aPackage.getCalledActivities().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledActivitiesOfPackage(aPackage : Package, otherPackage : Package) : Set(Activity) = aPackage.getCalledActivities()->select(a : Activity | a.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]
+
+[query private getCalledOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledBehaviors()->filter(OpaqueBehavior) /]
+[query private getPackagesOfCalledOpaqueBehaviors(aPackage : Package) : Set(Package) = aPackage.getCalledOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name) /]
+[query private getCalledOpaqueBehaviorsOfPackage(aPackage : Package, otherPackage : Package) : Set(OpaqueBehavior) = aPackage.getCalledOpaqueBehaviors()->select(oB : OpaqueBehavior | oB.getNearestPackage() = otherPackage)->asSet()->sortedBy(name) /]

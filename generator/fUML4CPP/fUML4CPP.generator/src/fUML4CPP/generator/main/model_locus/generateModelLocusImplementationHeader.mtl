@@ -12,36 +12,44 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateExecutionPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateModelLocusImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::keywords /]
-[import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
-[import fUML4CPP::generator::main::fUMLKeywords /]
-[import UML4CPP::generator::main::profiles::profileHelper /]
-[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 
-[template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.concat('ExecPlugin');}]
-[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'Plugin')/]
-
-#include "pluginFramework/UMLExecutionModelPlugin.hpp"
-
-namespace [aPackage.generateNamespace(false)/]
+[template public generateModelLocusImplementationHeader(aPackage : Package)
 {
-	class [packageName/] : virtual public UMLExecutionModelPlugin
+upperName : String = aPackage.getPackageName().sanitize();
+originalName : String = aPackage.generateNamespacePath(false);
+}]
+[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'LocusImpl')/]
+
+#include "../[upperName/]Locus.hpp"
+#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
+//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
+
+namespace [aPackage.generateNamespace(false)/] 
+{
+	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
 	{
+		private:    
+			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
+
 		public:
-			static std::shared_ptr<MDE4CPPPlugin> eInstance();
+			[upperName/]LocusImpl();
+
+		public:
+			//destructor
+			virtual ~[upperName/]LocusImpl();
 			
-		protected:
-			[packageName/](){};
-			virtual ~[packageName/](){};	
+			/*!
+			 */ 
+			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
+			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
 	};
 }
-[endGuard(aPackage,'ExecPlugin')/]
+[endGuard(aPackage,'LocusImpl')/]
 [/file]
 [/template]

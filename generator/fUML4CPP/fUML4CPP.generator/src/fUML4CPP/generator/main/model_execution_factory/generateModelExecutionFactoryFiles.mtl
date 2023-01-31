@@ -12,14 +12,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateExecutionPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateModelExecutionFactoryFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::plugin::generateExecutionPluginInterfaceHeader /]
-[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationHeader /]
-[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
+[import fUML4CPP::generator::main::model_execution_factory::generateModelExecutionFactoryInterfaceHeader /]
+[import fUML4CPP::generator::main::model_execution_factory::generateModelExecutionFactoryImplementationHeader /]
+[import fUML4CPP::generator::main::model_execution_factory::generateModelExecutionFactoryImplementationSource /]
 
-[template public generateExecutionPlugin(aPackage : Package)]
-[aPackage.generateExecutionPluginInterfaceHeader()/]
-[aPackage.generateExecutionPluginImplHeader()/]
-[aPackage.generateExecutionPluginImplSource()/]
+[template public generateModelExecutionFactoryFiles(aPackage : Package)]
+[aPackage.generateModelExecutionFactoryInterfaceHeader()/]
+[aPackage.generateModelExecutionFactoryImplementationHeader()/]
+[aPackage.generateModelExecutionFactoryImplementationSource()/]
 [/template]

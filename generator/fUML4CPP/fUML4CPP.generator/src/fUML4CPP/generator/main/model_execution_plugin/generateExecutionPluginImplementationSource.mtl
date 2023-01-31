@@ -14,9 +14,10 @@
  */]
 [module generateExecutionPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::fUMLCollectionHelper /]
-[import fUML4CPP::generator::main::fUMLKeywords /]
+[import fUML4CPP::generator::main::helpers::parameterHelper /]
+[import fUML4CPP::generator::main::helpers::fUMLCollectionHelper /]
+[import fUML4CPP::generator::main::helpers::fUMLKeywords /]
+
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
