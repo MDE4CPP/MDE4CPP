@@ -58,7 +58,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 			//protected default construcotr
 			[packageName/](){}
 
-			//Singleton Instance and Getter
+			//Singleton Getter
 			[generateSingletonDecl(packageName)/]
 
 			//Creator functions

@@ -121,8 +121,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generateMetamodelFactory",
 								"generateFactoryImplementationHeader",
 								"generateFactoryImplementationSource",
-								"generateFactoryInterface",
-								"generateFactoryInterfaceSource"
+								"generateFactoryInterface"
 								};
 		generateFilePathMapData(moduleNames, "model_factory", resourcePathPrefix);
 	}
@@ -151,8 +150,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generatePackageHelper",
 								"generatePackageImplementationHeader",
 								"generatePackageImplementationSource",
-								"generatePackageInterface",
-								"generatePackageInterfaceSource"
+								"generatePackageInterface"
 								};
 		generateFilePathMapData(moduleNames, "model_package", resourcePathPrefix);
 	}
@@ -162,8 +160,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generateEcorePlugin",
 								"generateEcorePluginImplementationHeader",
 								"generateEcorePluginImplementationSource",
-								"generateEcorePluginInterfaceHeader",
-								"generateEcorePluginInterfaceSource"
+								"generateEcorePluginInterfaceHeader"
 								};
 		generateFilePathMapData(moduleNames, "model_plugin", resourcePathPrefix);
 	}

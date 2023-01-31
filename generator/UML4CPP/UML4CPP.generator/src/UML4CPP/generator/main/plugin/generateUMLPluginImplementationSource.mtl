@@ -37,6 +37,24 @@
 
 [if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.name/];[/if]
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> [aPackage.name/]Plugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new [packageName/]());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return [packageName/]::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

@@ -150,8 +150,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generateFactory",
 								"generateFactoryImplementationHeader",
 								"generateFactoryImplementationSource",
-								"generateFactoryInterface",
-								"generateFactoryInterfaceSource"
+								"generateFactoryInterface"
 								};
 		generateFilePathMapData(moduleNames, "factory", resourcePathPrefix);
 	}
@@ -194,8 +193,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generatePackage",
 								"generatePackageImplementationHeader",
 								"generatePackageImplementationSource",
-								"generatePackageInterface",
-								"generatePackageInterfaceSource"
+								"generatePackageInterface"
 								};
 		generateFilePathMapData(moduleNames, "package", resourcePathPrefix);
 	}
@@ -205,8 +203,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generateUMLPlugin",
 								"generateUMLPluginImplementationHeader",
 								"generateUMLPluginImplementationSource",
-								"generateUMLPluginInterfaceHeader",
-								"generateUMLPluginInterfaceSource"
+								"generateUMLPluginInterfaceHeader"
 								};
 		generateFilePathMapData(moduleNames, "plugin", resourcePathPrefix);
 	}

@@ -77,7 +77,7 @@ namespace [subPackage.generateNamespace(false)/]
 			[subPackage.generateSubPackageGetter(false)/]
 			[/for]
 
-			//Singleton Instance and Getter
+			//Singleton Getter
 			[generateSingletonDecl(packageName)/]
 
 			[if (not isReflectionModel(aPackage))]

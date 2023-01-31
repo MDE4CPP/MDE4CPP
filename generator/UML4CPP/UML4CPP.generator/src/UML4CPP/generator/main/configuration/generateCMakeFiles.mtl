@@ -67,7 +67,6 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	# Model plugin
 	impl/[aPackage.name/]PluginImpl.cpp
-	[aPackage.name/]Plugin.cpp
 	[aPackage.generatePackageSourceFilesToCompile(packOnly, true)/]
 	[if (not packOnly)]
 	${MDE4CPP_HOME}/application/include/util/util.cpp
@@ -169,11 +168,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
 # Package of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]PackageImpl.cpp
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Package.cpp
 [if (not packOnly)]
 # Factory of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]FactoryImpl.cpp
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Factory.cpp
 [if (aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0)]
 # Global functions of [aPackage.generateNamespace(false)/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]_GlobalFunctions.cpp

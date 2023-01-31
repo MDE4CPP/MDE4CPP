@@ -44,6 +44,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::helpers::singletonHelper /]
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
@@ -138,6 +139,13 @@
 [/for]
 
 [if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+
+//Singleton implemenation
+[generateSingletonImpl(aPackage.name + 'Package', true)/]
+//static initialization
+const std::string [aPackage.name + 'Package'/]::eNAME ="[aPackage.name/]";
+const std::string [aPackage.name + 'Package'/]::eNS_URI ="[aPackage.URI/]";
+const std::string [aPackage.name + 'Package'/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
 
 [packageName/]::[packageName/]()
 {

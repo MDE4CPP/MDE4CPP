@@ -37,13 +37,11 @@
 [module generateFactory('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::factory::generateFactoryInterface /]
-[import UML4CPP::generator::main::factory::generateFactoryInterfaceSource /]
 [import UML4CPP::generator::main::factory::generateFactoryImplementationHeader /]
 [import UML4CPP::generator::main::factory::generateFactoryImplementationSource /]
 
 [template public generateFactoryFiles(aPackage : Package)]
 [aPackage.generateFactoryInterface()/]
-[aPackage.generateFactoryCpp()/]
 [aPackage.generateFactoryImplHeader()/]
 [aPackage.generateFactoryImplSource()/]
 [/template]

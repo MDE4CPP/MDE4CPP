@@ -23,9 +23,6 @@
  * generate singleton declaration with static variable and getter function
 */]
 [template public generateSingletonDecl(packageName : String)]
-
-private:
-	static std::shared_ptr<[packageName/]> instance;
 public:
 	static std::shared_ptr<[packageName/]> eInstance();
 [/template]
@@ -34,10 +31,9 @@ public:
  * generate singleton implementation with option to call function init of singleton instance
 */]
 [template public generateSingletonImpl(packageName : String, callInit : Boolean)]
-std::shared_ptr<[packageName/]> [packageName/]::instance;
-
 std::shared_ptr<[packageName/]> [packageName/]::eInstance()
 {
+	static std::shared_ptr<[packageName/]> instance;
 	if(instance==nullptr)
 	{
 		//create a new Singelton Instance

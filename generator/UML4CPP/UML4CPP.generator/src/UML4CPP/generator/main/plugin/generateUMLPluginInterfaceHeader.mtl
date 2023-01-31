@@ -50,9 +50,6 @@
 		protected:
 			[packageName/](){};
 			virtual ~[packageName/](){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'Plugin')/]

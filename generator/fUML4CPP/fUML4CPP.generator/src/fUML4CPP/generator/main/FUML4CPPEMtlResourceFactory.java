@@ -48,8 +48,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 		String[] ModuleNames = {"generateExecutionPlugin",
 								"generateExecutionPluginImplementationHeader",
 								"generateExecutionPluginImplementationSource",
-								"generateExecutionPluginInterfaceHeader",
-								"generateExecutionPluginInterfaceSource"
+								"generateExecutionPluginInterfaceHeader"
 								};
 		generateFilePathMapData(ModuleNames, "plugin", resourcePathPrefix);
 	}

@@ -63,7 +63,6 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 	#Model Execution Plugin
-	[aPackage.name.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
 	[if (not packageOnly)]
 	# Model Execution Locus

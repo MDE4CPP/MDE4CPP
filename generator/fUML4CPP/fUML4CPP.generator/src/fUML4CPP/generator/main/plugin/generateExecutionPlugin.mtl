@@ -15,13 +15,11 @@
 [module generateExecutionPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginInterfaceHeader /]
-[import fUML4CPP::generator::main::plugin::generateExecutionPluginInterfaceSource /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationHeader /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 
 [template public generateExecutionPlugin(aPackage : Package)]
 [aPackage.generateExecutionPluginInterfaceHeader()/]
-[aPackage.generateExecutionPluginInterfaceSource()/]
 [aPackage.generateExecutionPluginImplHeader()/]
 [aPackage.generateExecutionPluginImplSource()/]
 [/template]

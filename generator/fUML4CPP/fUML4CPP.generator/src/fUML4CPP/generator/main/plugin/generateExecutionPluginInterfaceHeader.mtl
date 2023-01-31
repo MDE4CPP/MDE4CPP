@@ -39,10 +39,7 @@ namespace [aPackage.generateNamespace(false)/]
 			
 		protected:
 			[packageName/](){};
-			virtual ~[packageName/](){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;		
+			virtual ~[packageName/](){};	
 	};
 }
 [endGuard(aPackage,'ExecPlugin')/]

@@ -33,13 +33,11 @@
 [module generatePackage('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::package::generatePackageInterface /]
-[import UML4CPP::generator::main::package::generatePackageInterfaceSource /]
 [import UML4CPP::generator::main::package::generatePackageImplementationHeader /]
 [import UML4CPP::generator::main::package::generatePackageImplementationSource /]
 
 [template public generatePackageFiles(aPackage : Package)]
 [aPackage.generatePackageInterface()/]
-[aPackage.generatePackageInterfaceSource()/]
 [aPackage.generatePackageImplHeader()/]
 [aPackage.generatePackageImplSource()/]
 [/template]
