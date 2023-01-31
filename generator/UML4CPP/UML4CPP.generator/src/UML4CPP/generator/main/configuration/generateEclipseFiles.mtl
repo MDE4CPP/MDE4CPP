@@ -21,13 +21,9 @@
  
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateEclipseFiles(aPackage : Package, prepareApplication : Boolean) { packageName : String = getPackageName(); }]
-[if (prepareApplication)]
+[template public generateEclipseFiles(aPackage : Package, prepareApplication : Boolean)]
 [aPackage.generateCProject(prepareApplication)/]
 [aPackage.generateProject(prepareApplication)/]
-[/if]
-[aPackage.generateCProject(false)/]
-[aPackage.generateProject(false)/]
 [/template]
 
 [template private generateCProject(aPackage : Package, prepareApplication : Boolean) { packageName : String = getPackageName(); }]

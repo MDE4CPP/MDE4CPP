@@ -14,25 +14,42 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to generate class interface source file implementing singleton pattern
+ * module to generate plugin class implementation header file
  * 
  */]
-[module generateImplModelSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePluginImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helpers::singletonHelper /]
+[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateClassCpp(aClass : Class)  {className : String = aClass.name.toUpperFirst(); }]
-[file  (aClass._package.generateNamespacePath(false).concat('/').concat(className).concat('.cpp'), false, 'UTF-8')]
+[template public generatePluginImplementationHeader(aPackage : Package)]
+[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'PluginImpl')/]
 
-#include "[aClass._package.generateNamespacePath(false)/]/[className/].hpp"
-#include "[aClass._package.generateNamespacePath(false)/]/impl/[className.concat('Impl')/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name/]Plugin.hpp"
 
-[if (not aClass._package.isIgnoreNamespace())]using namespace [aClass._package.generateNamespace(false)/];[/if]
-
-//static initialisation
-[generateSingletonImpl(className, false)/]
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.name/] 
+{
+[/if]
+	class [aPackage.name.concat('PluginImpl')/] : virtual public [aPackage.name.concat('Plugin')/] 
+	{
+		public:
+			[aPackage.name/]PluginImpl();
+			virtual ~[aPackage.name/]PluginImpl();
+		
+			virtual std::string eclipseURI();
+			virtual std::string eNAME();
+			virtual std::string eNS_URI();
+			virtual std::string eNS_PREFIX();
+	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<uml::Factory> getFactory();
+			virtual std::shared_ptr<uml::Package> getPackage();
+	};
+[if (not aPackage.getNearestPackage().isIgnoreNamespace())]}[/if]
+[endGuard(aPackage,'PluginImpl')/]
 [/file]
 [/template]

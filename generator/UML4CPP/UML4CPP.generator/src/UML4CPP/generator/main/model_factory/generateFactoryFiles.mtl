@@ -14,14 +14,18 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to trigger model plugin generation
+ * module to trigger model factory generation
  * 
- * The plugin class is used to register the model library in the plugin framework und thus makes the model available for other models on C++ layer without direct linking during compilation.
- * The plugin class is realized as singleton. 
+ * The factory class is used to create instances of all model classes.
+ * The class is realized as singleton.  
  * 
- * The plugin implements the interface UMLModelPlugin from pluginFramework project and provides the following functionality:
- * - model meta data (name, ns_uri, ns_prefix, eclipse specific uri)
- * - getter for model factory and model package
+ * The factory provides the following functionality:
+ * - general create function to create a class instance based on class name
+ * - simple create functions for each model class
+ * - complex create functions with the container as parameter: (requires composition)
+ * 	 - created instance is put to the containers attribute
+ *   - container is set to class instance (if bidirectional association)
+ * - getter for model package
  * 
  * Following files will be generated:
  * - interface header file
@@ -30,16 +34,16 @@
  * - implementation source file
  * 
  */]
-[module generateUMLPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateFactoryFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::plugin::generateUMLPluginInterfaceHeader /]
-[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationHeader /]
-[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationSource /]
+[import UML4CPP::generator::main::model_factory::generateFactoryInterface /]
+[import UML4CPP::generator::main::model_factory::generateFactoryImplementationHeader /]
+[import UML4CPP::generator::main::model_factory::generateFactoryImplementationSource /]
 
-[template public generateUMLPluginFiles(aPackage : Package, packOnly:Boolean)]
-[aPackage.generateUMLPluginInterfaceHeader()/]
-[aPackage.generateUMLPluginImplHeader()/]
-[aPackage.generateUMLPluginImplSource(packOnly)/]
+[template public generateFactoryFiles(aPackage : Package)]
+[aPackage.generateFactoryInterface()/]
+[aPackage.generateFactoryImplHeader()/]
+[aPackage.generateFactoryImplSource()/]
 [/template]
 
 

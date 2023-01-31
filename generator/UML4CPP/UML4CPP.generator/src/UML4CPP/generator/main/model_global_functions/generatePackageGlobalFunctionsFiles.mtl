@@ -1,0 +1,10 @@
+[comment encoding = UTF-8 /]
+[module generatePackageGlobalFunctionsFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::model_global_functions::generatePackageGlobalFunctionsHeader /]
+[import UML4CPP::generator::main::model_global_functions::generatePackageGlobalFunctionsSource /]
+
+[template public generatePackageGlobalFunctionsFiles(aPackage : Package)]
+[aPackage.generatePackageGlobalFunctionsHeader()/]
+[aPackage.generatePackageGlobalFunctionsSource()/]
+[/template]

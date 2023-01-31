@@ -17,7 +17,7 @@
  * module for generation of class model file
  * 
  */]
-[module generateClassModelFile('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::components::generateOperation /]
@@ -39,7 +39,7 @@
 	aClass.getImplicitCompositeOwners()
 }->flatten() /]
 
-[template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
+[template public generateClassInterfaceHeader(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 

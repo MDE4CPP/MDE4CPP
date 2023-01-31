@@ -14,14 +14,14 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to trigger model package generation
+ * module to trigger model plugin generation
  * 
- * The model package class represents the model on C++ layer. 
- * The class is realized as singleton.  
+ * The plugin class is used to register the model library in the plugin framework und thus makes the model available for other models on C++ layer without direct linking during compilation.
+ * The plugin class is realized as singleton. 
  * 
- * The package provides the following functionality:
- * - static variable for model meta data (name, ns_uri, ns_prefix)
- * - getter function for all NamedElement elements except ValueSpecification elements 
+ * The plugin implements the interface UMLModelPlugin from pluginFramework project and provides the following functionality:
+ * - model meta data (name, ns_uri, ns_prefix, eclipse specific uri)
+ * - getter for model factory and model package
  * 
  * Following files will be generated:
  * - interface header file
@@ -30,14 +30,22 @@
  * - implementation source file
  * 
  */]
-[module generatePackage('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePluginFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::package::generatePackageInterface /]
-[import UML4CPP::generator::main::package::generatePackageImplementationHeader /]
-[import UML4CPP::generator::main::package::generatePackageImplementationSource /]
+[import UML4CPP::generator::main::model_plugin::generatePluginInterfaceHeader /]
+[import UML4CPP::generator::main::model_plugin::generatePluginImplementationHeader /]
+[import UML4CPP::generator::main::model_plugin::generatePluginImplementationSource /]
 
-[template public generatePackageFiles(aPackage : Package)]
-[aPackage.generatePackageInterface()/]
-[aPackage.generatePackageImplHeader()/]
-[aPackage.generatePackageImplSource()/]
+[template public generatePluginFiles(aPackage : Package, packOnly:Boolean)]
+[aPackage.generatePluginInterfaceHeader()/]
+[aPackage.generatePluginImplementationHeader()/]
+[aPackage.generatePluginImplementationSource(packOnly)/]
 [/template]
+
+
+
+
+
+
+
+

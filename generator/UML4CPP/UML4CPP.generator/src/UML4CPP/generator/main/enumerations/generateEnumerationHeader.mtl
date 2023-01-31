@@ -14,42 +14,34 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to generate plugin class implementation header file
+ * module for generation of enumeration header file
  * 
  */]
-[module generateUMLPluginImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateEnumerationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateUMLPluginImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name).concat('PluginImpl.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'PluginImpl')/]
+[**
+ * template for generation of file with delcaration of enumeration class and corresponding literals
+*/]
+[template public generateEnumerationHeader(anEnumeration : Enumeration)]
+[file (anEnumeration._package.generateNamespacePath(false).concat('/').concat(anEnumeration.name).concat('.hpp'), false, 'UTF-8')]
+[anEnumeration.startGuard()/]
 
-#include "[aPackage.getPackageName()/]/[aPackage.name/]Plugin.hpp"
-
-[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.name/] 
+[if (not anEnumeration.getNearestPackage().isIgnoreNamespace())]namespace [anEnumeration._package.generateNamespace(false)/] 
 {
 [/if]
-	class [aPackage.name.concat('PluginImpl')/] : virtual public [aPackage.name.concat('Plugin')/] 
+	enum class [anEnumeration.name/] 
 	{
-		public:
-			[aPackage.name/]PluginImpl();
-			virtual ~[aPackage.name/]PluginImpl();
-		
-			virtual std::string eclipseURI();
-			virtual std::string eNAME();
-			virtual std::string eNS_URI();
-			virtual std::string eNS_PREFIX();
-	
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const;
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<uml::Factory> getFactory();
-			virtual std::shared_ptr<uml::Package> getPackage();
+	[for (lit : EnumerationLiteral | anEnumeration.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n') after('\n')]
+		[if (not lit.specification->filter(LiteralInteger)->isEmpty())]
+		[lit.name.toUpperCase()/] = [lit.specification->filter(LiteralInteger)->asOrderedSet()->first().value/][else]
+		[lit.name.toUpperCase()/][/if]
+	[/for]
 	};
-[if (not aPackage.getNearestPackage().isIgnoreNamespace())]}[/if]
-[endGuard(aPackage,'PluginImpl')/]
+[if (not anEnumeration.getNearestPackage().isIgnoreNamespace())]}[/if]
+[anEnumeration.endGuard()/]
 [/file]
 [/template]

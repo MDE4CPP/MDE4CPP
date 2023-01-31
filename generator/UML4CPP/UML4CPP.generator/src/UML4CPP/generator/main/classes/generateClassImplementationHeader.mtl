@@ -17,7 +17,7 @@
  * module to generate class implementation header file
  * 
  */]
-[module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateInterface /]
@@ -31,7 +31,7 @@
 [import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
+[template public generateClassImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 

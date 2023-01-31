@@ -70,15 +70,18 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	{
 		String resourcePathPrefix = "rsrc:UML4CPP/generator/main/";
 		initalizeGeneralEmtls(resourcePathPrefix);
+		initializeClassesEmtls(resourcePathPrefix);
 		initializeComponentsEmtls(resourcePathPrefix);
 		initializeConfigurationEmtls(resourcePathPrefix);
 		initializeDataTypeEmtls(resourcePathPrefix);
-		initializeFactoryEmtls(resourcePathPrefix);
+		initializeEnumerationsEmtls(resourcePathPrefix);
 		initializeHelpersEmtls(resourcePathPrefix);
-		initializeImplEmtls(resourcePathPrefix);
-		initializeModelPackage_GlobalFunctionsEmtls(resourcePathPrefix);
-		initializePackageEmtls(resourcePathPrefix);
-		initializePluginEmtls(resourcePathPrefix);
+		initializeInterfacesEmtls(resourcePathPrefix);
+		initializeMainApplicationEmtls(resourcePathPrefix);
+		initializeModelFactoryEmtls(resourcePathPrefix);
+		initializeModelGlobalFunctionsEmtls(resourcePathPrefix);
+		initializeModelPackageEmtls(resourcePathPrefix);
+		initializeModelPluginEmtls(resourcePathPrefix);
 		initializeProfilesEmtls(resourcePathPrefix);
 		initializePscsEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
@@ -86,14 +89,19 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initalizeGeneralEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generate", 
-								"generateApplicationFiles",
-								"generateClassModelFile",
-								"generateEnumerationFile",
-								"generateInterfaceModelFile",
-								"generateMainExecution"
-								};
+		String[] moduleNames = {"generate"};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);	   	 
+	}
+	
+	private void initializeClassesEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generateClassFiles",
+								"generateClassImplementationHeader",
+								"generateClassImplementationSource",
+								"generateClassInterfaceHeader",
+								"generateClassInterfaceSource"
+								};
+		generateFilePathMapData(moduleNames, "classes", resourcePathPrefix);
 	}
 	
 	private void initializeComponentsEmtls(String resourcePathPrefix)
@@ -145,14 +153,12 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		generateFilePathMapData(moduleNames, "datatypes", resourcePathPrefix);
 	}
 	
-	private void initializeFactoryEmtls(String resourcePathPrefix)
+	private void initializeEnumerationsEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generateFactory",
-								"generateFactoryImplementationHeader",
-								"generateFactoryImplementationSource",
-								"generateFactoryInterface"
+		String[] moduleNames = {"generateEnumerationFiles",
+								"generateEnumerationHeader"
 								};
-		generateFilePathMapData(moduleNames, "factory", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "enumerations", resourcePathPrefix);
 	}
 	
 	private void initializeHelpersEmtls(String resourcePathPrefix)
@@ -168,44 +174,62 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}
-
-	private void initializeImplEmtls(String resourcePathPrefix)
+	
+	private void initializeInterfacesEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generateImplModelSource",
-								"generateImplementation",
-								"generateImplementationHeader",
-								"generateImplementationSource"
+		String[] moduleNames = {"generateInterfaceFiles",
+								"generateInterfaceHeader"
 								};
-		generateFilePathMapData(moduleNames, "impl", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "interfaces", resourcePathPrefix);
 	}
 	
-	private void initializeModelPackage_GlobalFunctionsEmtls(String resourcePathPrefix)
+	private void initializeMainApplicationEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generatePackageGlobalFunctions",
+		String[] moduleNames = {"generateMainApplicationFiles",
+								"generateMainApplicationCMakeFile",
+								"generateMainApplicationGradleFile",
+								"generateMainApplicationSource"
+								};
+		generateFilePathMapData(moduleNames, "main_application", resourcePathPrefix);
+	}
+	
+	private void initializeModelFactoryEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generateFactoryFiles",
+								"generateFactoryImplementationHeader",
+								"generateFactoryImplementationSource",
+								"generateFactoryInterface"
+								};
+		generateFilePathMapData(moduleNames, "model_factory", resourcePathPrefix);
+	}
+	
+	private void initializeModelGlobalFunctionsEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generatePackageGlobalFunctionsFiles",
 								"generatePackageGlobalFunctionsHeader",
 								"generatePackageGlobalFunctionsSource"
 								};
-		generateFilePathMapData(moduleNames, "model_package/global_functions", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_global_functions", resourcePathPrefix);
 	}
 	
-	private void initializePackageEmtls(String resourcePathPrefix)
+	private void initializeModelPackageEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generatePackage",
+		String[] moduleNames = {"generatePackageFiles",
 								"generatePackageImplementationHeader",
 								"generatePackageImplementationSource",
 								"generatePackageInterface"
 								};
-		generateFilePathMapData(moduleNames, "package", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_package", resourcePathPrefix);
 	}
 	
-	private void initializePluginEmtls(String resourcePathPrefix)
+	private void initializeModelPluginEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generateUMLPlugin",
-								"generateUMLPluginImplementationHeader",
-								"generateUMLPluginImplementationSource",
-								"generateUMLPluginInterfaceHeader"
+		String[] moduleNames = {"generatePluginFiles",
+								"generatePluginImplementationHeader",
+								"generatePluginImplementationSource",
+								"generatePluginInterfaceHeader"
 								};
-		generateFilePathMapData(moduleNames, "plugin", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "model_plugin", resourcePathPrefix);
 	}
 	
 	private void initializeProfilesEmtls(String resourcePathPrefix)

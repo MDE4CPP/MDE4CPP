@@ -14,26 +14,30 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to trigger implementation files generation of classes
+ * module to trigger model package generation
+ * 
+ * The model package class represents the model on C++ layer. 
+ * The class is realized as singleton.  
+ * 
+ * The package provides the following functionality:
+ * - static variable for model meta data (name, ns_uri, ns_prefix)
+ * - getter function for all NamedElement elements except ValueSpecification elements 
  * 
  * Following files will be generated:
- * - singleton source file for classes with active singleton annotation
+ * - interface header file
+ * - interface source file
  * - implementation header file
  * - implementation source file
  * 
  */]
-[module generateImplementation('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePackageFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::impl::generateImplModelSource /]
-[import UML4CPP::generator::main::impl::generateImplementationHeader /]
-[import UML4CPP::generator::main::impl::generateImplementationSource /]
-[import UML4CPP::generator::main::helpers::generalHelper /]
-[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_package::generatePackageInterface /]
+[import UML4CPP::generator::main::model_package::generatePackageImplementationHeader /]
+[import UML4CPP::generator::main::model_package::generatePackageImplementationSource /]
 
-[template public generateImplementation(aClass : Class)]
-[aClass.generateImplementationHeader()/]
-[aClass.generateImplementationSource()/]
-[if (aClass.isSingleton())]
-[aClass.generateClassCpp()/]
-[/if]
+[template public generatePackageFiles(aPackage : Package)]
+[aPackage.generatePackageInterface()/]
+[aPackage.generatePackageImplHeader()/]
+[aPackage.generatePackageImplSource()/]
 [/template]

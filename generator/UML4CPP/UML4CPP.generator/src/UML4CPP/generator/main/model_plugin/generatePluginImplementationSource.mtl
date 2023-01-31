@@ -17,7 +17,7 @@
  * module to generate plugin class implementation source file
  * 
  */]
-[module generateUMLPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -25,7 +25,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.concat('PluginImpl'); }]
+[template public generatePluginImplementationSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
 

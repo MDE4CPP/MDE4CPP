@@ -14,42 +14,25 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to trigger model factory generation
- * 
- * The factory class is used to create instances of all model classes.
- * The class is realized as singleton.  
- * 
- * The factory provides the following functionality:
- * - general create function to create a class instance based on class name
- * - simple create functions for each model class
- * - complex create functions with the container as parameter: (requires composition)
- * 	 - created instance is put to the containers attribute
- *   - container is set to class instance (if bidirectional association)
- * - getter for model package
- * 
- * Following files will be generated:
- * - interface header file
- * - interface source file
- * - implementation header file
- * - implementation source file
+ * module to generate class interface source file implementing singleton pattern
  * 
  */]
-[module generateFactory('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::factory::generateFactoryInterface /]
-[import UML4CPP::generator::main::factory::generateFactoryImplementationHeader /]
-[import UML4CPP::generator::main::factory::generateFactoryImplementationSource /]
+[import UML4CPP::generator::main::helpers::singletonHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateFactoryFiles(aPackage : Package)]
-[aPackage.generateFactoryInterface()/]
-[aPackage.generateFactoryImplHeader()/]
-[aPackage.generateFactoryImplSource()/]
+[template public generateClassInterfaceSource(aClass : Class)  {className : String = aClass.name.toUpperFirst(); }]
+[file  (aClass._package.generateNamespacePath(false).concat('/').concat(className).concat('.cpp'), false, 'UTF-8')]
+
+#include "[aClass._package.generateNamespacePath(false)/]/[className/].hpp"
+#include "[aClass._package.generateNamespacePath(false)/]/impl/[className.concat('Impl')/].hpp"
+
+[if (not aClass._package.isIgnoreNamespace())]using namespace [aClass._package.generateNamespace(false)/];[/if]
+
+//static initialisation
+[generateSingletonImpl(className, false)/]
+[/file]
 [/template]
-
-
-
-
-
-
-
-

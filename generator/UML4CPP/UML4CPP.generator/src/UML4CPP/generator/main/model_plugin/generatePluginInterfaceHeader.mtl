@@ -17,13 +17,13 @@
  * module to generate plugin class interface header file
  * 
  */]
-[module generateUMLPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[template public generateUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.concat('Plugin');}]
+[template public generatePluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.concat('Plugin');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
