@@ -21,6 +21,23 @@
 
 using namespace PrimitiveTypes;
 
+//Singleton implemenation
+std::shared_ptr<PrimitiveTypesPackage> PrimitiveTypesPackage::eInstance()
+{
+	static std::shared_ptr<PrimitiveTypesPackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(PrimitiveTypesPackageImpl::create());
+		std::dynamic_pointer_cast<PrimitiveTypesPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string PrimitiveTypesPackage::eNAME ="PrimitiveTypes";
+const std::string PrimitiveTypesPackage::eNS_URI ="http://www.omg.org/spec/PrimitiveTypes/20131001";
+const std::string PrimitiveTypesPackage::eNS_PREFIX ="";
+
 PrimitiveTypesPackageImpl::PrimitiveTypesPackageImpl()
 {
 }

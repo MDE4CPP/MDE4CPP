@@ -107,10 +107,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<IntegerFunctionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<IntegerFunctionsPackage> eInstance();
 

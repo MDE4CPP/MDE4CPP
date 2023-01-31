@@ -45,6 +45,23 @@
 
 using namespace UML;
 
+//Singleton implemenation
+std::shared_ptr<UMLPackage> UMLPackage::eInstance()
+{
+	static std::shared_ptr<UMLPackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(UMLPackageImpl::create());
+		std::dynamic_pointer_cast<UMLPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string UMLPackage::eNAME ="UML";
+const std::string UMLPackage::eNS_URI ="http://www.omg.org/spec/UML/20131001";
+const std::string UMLPackage::eNS_PREFIX ="";
+
 UMLPackageImpl::UMLPackageImpl()
 {
 }

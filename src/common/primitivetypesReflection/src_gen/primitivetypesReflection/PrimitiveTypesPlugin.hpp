@@ -29,9 +29,6 @@ namespace PrimitiveTypes
 		protected:
 			PrimitiveTypesPlugin(){};
 			virtual ~PrimitiveTypesPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_PLUGIN_HPP */

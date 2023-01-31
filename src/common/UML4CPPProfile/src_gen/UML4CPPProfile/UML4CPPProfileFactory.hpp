@@ -33,10 +33,7 @@ namespace UML4CPPProfile
 			//protected default construcotr
 			UML4CPPProfileFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<UML4CPPProfileFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<UML4CPPProfileFactory> eInstance();
 

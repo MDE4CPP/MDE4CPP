@@ -46,10 +46,7 @@ namespace FoundationalModelLibrary::Common
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<CommonPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<CommonPackage> eInstance();
 

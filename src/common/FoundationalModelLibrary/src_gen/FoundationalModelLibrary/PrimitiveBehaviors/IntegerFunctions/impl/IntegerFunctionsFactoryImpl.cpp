@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions;
+std::shared_ptr<IntegerFunctionsFactory> IntegerFunctionsFactory::eInstance()
+{
+	static std::shared_ptr<IntegerFunctionsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(IntegerFunctionsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

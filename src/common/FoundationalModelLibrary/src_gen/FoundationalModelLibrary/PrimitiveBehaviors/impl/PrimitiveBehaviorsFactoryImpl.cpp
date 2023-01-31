@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors;
+std::shared_ptr<PrimitiveBehaviorsFactory> PrimitiveBehaviorsFactory::eInstance()
+{
+	static std::shared_ptr<PrimitiveBehaviorsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(PrimitiveBehaviorsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

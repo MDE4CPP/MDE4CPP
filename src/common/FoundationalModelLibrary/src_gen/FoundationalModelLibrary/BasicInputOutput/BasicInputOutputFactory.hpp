@@ -33,10 +33,7 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//protected default construcotr
 			BasicInputOutputFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<BasicInputOutputFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<BasicInputOutputFactory> eInstance();
 

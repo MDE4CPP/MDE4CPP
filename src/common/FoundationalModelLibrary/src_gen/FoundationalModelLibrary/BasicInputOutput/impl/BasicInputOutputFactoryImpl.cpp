@@ -14,6 +14,17 @@
 #include "FoundationalModelLibrary/BasicInputOutput/impl/TextOutputChannelImpl.hpp"
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
+std::shared_ptr<BasicInputOutputFactory> BasicInputOutputFactory::eInstance()
+{
+	static std::shared_ptr<BasicInputOutputFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(BasicInputOutputFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

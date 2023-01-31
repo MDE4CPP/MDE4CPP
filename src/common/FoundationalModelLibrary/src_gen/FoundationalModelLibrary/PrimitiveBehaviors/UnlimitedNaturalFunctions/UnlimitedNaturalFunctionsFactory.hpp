@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunction
 			//protected default construcotr
 			UnlimitedNaturalFunctionsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<UnlimitedNaturalFunctionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<UnlimitedNaturalFunctionsFactory> eInstance();
 

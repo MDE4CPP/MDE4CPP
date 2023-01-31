@@ -16,6 +16,24 @@
 
 using namespace PrimitiveTypes;
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> PrimitiveTypesPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new PrimitiveTypesPluginImpl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return PrimitiveTypesPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

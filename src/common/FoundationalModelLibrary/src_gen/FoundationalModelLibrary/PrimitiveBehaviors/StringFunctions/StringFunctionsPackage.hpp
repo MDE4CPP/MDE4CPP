@@ -52,10 +52,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<StringFunctionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<StringFunctionsPackage> eInstance();
 

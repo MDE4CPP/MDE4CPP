@@ -16,6 +16,24 @@
 
 using namespace UML4CPPProfile;
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> UML4CPPProfilePlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new UML4CPPProfilePluginImpl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return UML4CPPProfilePluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

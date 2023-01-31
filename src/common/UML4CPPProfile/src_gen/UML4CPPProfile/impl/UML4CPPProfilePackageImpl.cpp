@@ -29,6 +29,23 @@
 
 using namespace UML4CPPProfile;
 
+//Singleton implemenation
+std::shared_ptr<UML4CPPProfilePackage> UML4CPPProfilePackage::eInstance()
+{
+	static std::shared_ptr<UML4CPPProfilePackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(UML4CPPProfilePackageImpl::create());
+		std::dynamic_pointer_cast<UML4CPPProfilePackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string UML4CPPProfilePackage::eNAME ="UML4CPPProfile";
+const std::string UML4CPPProfilePackage::eNS_URI ="http://www.tu-ilmenau.de/sse/UML4CPPProfile";
+const std::string UML4CPPProfilePackage::eNS_PREFIX ="";
+
 UML4CPPProfilePackageImpl::UML4CPPProfilePackageImpl()
 {
 }

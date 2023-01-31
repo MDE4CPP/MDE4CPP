@@ -67,10 +67,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 			virtual std::shared_ptr<StringFunctions::StringFunctionsPackage> getStringFunctions_Package() const  = 0;
 			virtual std::shared_ptr<UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage> getUnlimitedNaturalFunctions_Package() const  = 0;
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<PrimitiveBehaviorsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<PrimitiveBehaviorsPackage> eInstance();
 

@@ -16,6 +16,24 @@
 
 using namespace FoundationalModelLibrary;
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> FoundationalModelLibraryPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new FoundationalModelLibraryPluginImpl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return FoundationalModelLibraryPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

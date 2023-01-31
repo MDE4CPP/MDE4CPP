@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions;
+std::shared_ptr<StringFunctionsFactory> StringFunctionsFactory::eInstance()
+{
+	static std::shared_ptr<StringFunctionsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(StringFunctionsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

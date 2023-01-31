@@ -25,7 +25,6 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 	#Model Execution Plugin
-	FoundationalModelLibraryExecPlugin.cpp
 	impl/FoundationalModelLibraryExecPluginImpl.cpp
 	# Model Execution Locus
 	impl/FoundationalModelLibraryLocusImpl.cpp
@@ -36,19 +35,19 @@ SET(SOURCE_FILES
 	#Strategy classes for Package FoundationalModelLibrary
 	#Strategy classes for Package FoundationalModelLibrary::Common
 	
-	#Strategy classes for Package FoundationalModelLibrary::BasicInputOutput
-	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 	
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
 	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 	
+	
+	#Strategy classes for Package FoundationalModelLibrary::BasicInputOutput
 	
 	
 )

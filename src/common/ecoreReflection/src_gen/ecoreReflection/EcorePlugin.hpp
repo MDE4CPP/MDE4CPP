@@ -29,9 +29,6 @@ namespace Ecore
 		protected:
 			EcorePlugin(){};
 			virtual ~EcorePlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: ECORE_PLUGIN_HPP */

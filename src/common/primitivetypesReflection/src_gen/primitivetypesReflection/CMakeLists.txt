@@ -30,10 +30,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	# Model plugin
 	impl/PrimitiveTypesPluginImpl.cpp
-	PrimitiveTypesPlugin.cpp
 	# Package of PrimitiveTypes
 	impl/PrimitiveTypesPackageImpl.cpp
-	PrimitiveTypesPackage.cpp
 	
 )
 

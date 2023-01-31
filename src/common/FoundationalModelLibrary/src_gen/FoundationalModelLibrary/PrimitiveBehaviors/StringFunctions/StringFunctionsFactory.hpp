@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			//protected default construcotr
 			StringFunctionsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<StringFunctionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<StringFunctionsFactory> eInstance();
 

@@ -27,10 +27,7 @@ namespace FoundationalModelLibrary::Common
 			//protected default construcotr
 			CommonFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<CommonFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<CommonFactory> eInstance();
 

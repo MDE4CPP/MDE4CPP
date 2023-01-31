@@ -82,10 +82,7 @@ namespace UML4CPPProfile
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<UML4CPPProfilePackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<UML4CPPProfilePackage> eInstance();
 

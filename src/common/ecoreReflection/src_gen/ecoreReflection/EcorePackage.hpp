@@ -350,10 +350,7 @@ namespace Ecore
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<EcorePackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<EcorePackage> eInstance();
 

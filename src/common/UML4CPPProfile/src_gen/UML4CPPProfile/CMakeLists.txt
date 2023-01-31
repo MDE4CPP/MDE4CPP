@@ -30,13 +30,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	# Model plugin
 	impl/UML4CPPProfilePluginImpl.cpp
-	UML4CPPProfilePlugin.cpp
 	# Package of UML4CPPProfile
 	impl/UML4CPPProfilePackageImpl.cpp
-	UML4CPPProfilePackage.cpp
 	# Factory of UML4CPPProfile
 	impl/UML4CPPProfileFactoryImpl.cpp
-	UML4CPPProfileFactory.cpp
 	# Contents of UML4CPPProfile
 	impl/DoNotGenerateImpl.cpp
 	impl/ExternalLibraryImpl.cpp

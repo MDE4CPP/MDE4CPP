@@ -177,10 +177,7 @@ namespace StandardProfile
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<StandardProfilePackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<StandardProfilePackage> eInstance();
 

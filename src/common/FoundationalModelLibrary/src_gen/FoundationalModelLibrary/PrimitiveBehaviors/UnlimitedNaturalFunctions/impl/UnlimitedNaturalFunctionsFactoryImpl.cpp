@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions;
+std::shared_ptr<UnlimitedNaturalFunctionsFactory> UnlimitedNaturalFunctionsFactory::eInstance()
+{
+	static std::shared_ptr<UnlimitedNaturalFunctionsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(UnlimitedNaturalFunctionsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

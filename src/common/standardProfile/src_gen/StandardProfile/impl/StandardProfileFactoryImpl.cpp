@@ -39,6 +39,17 @@
 #include "StandardProfile/impl/UtilityImpl.hpp"
 
 using namespace StandardProfile;
+std::shared_ptr<StandardProfileFactory> StandardProfileFactory::eInstance()
+{
+	static std::shared_ptr<StandardProfileFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(StandardProfileFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

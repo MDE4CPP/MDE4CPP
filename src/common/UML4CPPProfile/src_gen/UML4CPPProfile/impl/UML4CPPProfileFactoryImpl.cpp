@@ -14,6 +14,17 @@
 #include "UML4CPPProfile/impl/UML4CPPPackageImpl.hpp"
 
 using namespace UML4CPPProfile;
+std::shared_ptr<UML4CPPProfileFactory> UML4CPPProfileFactory::eInstance()
+{
+	static std::shared_ptr<UML4CPPProfileFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(UML4CPPProfileFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

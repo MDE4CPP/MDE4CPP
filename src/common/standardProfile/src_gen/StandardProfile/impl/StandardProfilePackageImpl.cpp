@@ -27,6 +27,23 @@
 
 using namespace StandardProfile;
 
+//Singleton implemenation
+std::shared_ptr<StandardProfilePackage> StandardProfilePackage::eInstance()
+{
+	static std::shared_ptr<StandardProfilePackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(StandardProfilePackageImpl::create());
+		std::dynamic_pointer_cast<StandardProfilePackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string StandardProfilePackage::eNAME ="StandardProfile";
+const std::string StandardProfilePackage::eNS_URI ="http://www.omg.org/spec/UML/20161101/StandardProfile";
+const std::string StandardProfilePackage::eNS_PREFIX ="";
+
 StandardProfilePackageImpl::StandardProfilePackageImpl()
 {
 }

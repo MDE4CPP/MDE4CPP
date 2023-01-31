@@ -25,6 +25,23 @@
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors;
 
+//Singleton implemenation
+std::shared_ptr<PrimitiveBehaviorsPackage> PrimitiveBehaviorsPackage::eInstance()
+{
+	static std::shared_ptr<PrimitiveBehaviorsPackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(PrimitiveBehaviorsPackageImpl::create());
+		std::dynamic_pointer_cast<PrimitiveBehaviorsPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string PrimitiveBehaviorsPackage::eNAME ="PrimitiveBehaviors";
+const std::string PrimitiveBehaviorsPackage::eNS_URI ="";
+const std::string PrimitiveBehaviorsPackage::eNS_PREFIX ="FoundationalModelLibrary";
+
 PrimitiveBehaviorsPackageImpl::PrimitiveBehaviorsPackageImpl()
 {
 }

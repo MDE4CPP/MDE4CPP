@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions;
+std::shared_ptr<BooleanFunctionsFactory> BooleanFunctionsFactory::eInstance()
+{
+	static std::shared_ptr<BooleanFunctionsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(BooleanFunctionsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

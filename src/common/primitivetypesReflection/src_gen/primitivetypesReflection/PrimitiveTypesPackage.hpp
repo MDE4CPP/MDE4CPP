@@ -44,10 +44,7 @@ namespace PrimitiveTypes
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<PrimitiveTypesPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<PrimitiveTypesPackage> eInstance();
 

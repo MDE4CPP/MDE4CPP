@@ -55,10 +55,7 @@ namespace FoundationalModelLibrary
 			virtual std::shared_ptr<Common::CommonPackage> getCommon_Package() const  = 0;
 			virtual std::shared_ptr<PrimitiveBehaviors::PrimitiveBehaviorsPackage> getPrimitiveBehaviors_Package() const  = 0;
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<FoundationalModelLibraryPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<FoundationalModelLibraryPackage> eInstance();
 

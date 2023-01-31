@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary;
+std::shared_ptr<FoundationalModelLibraryFactory> FoundationalModelLibraryFactory::eInstance()
+{
+	static std::shared_ptr<FoundationalModelLibraryFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(FoundationalModelLibraryFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

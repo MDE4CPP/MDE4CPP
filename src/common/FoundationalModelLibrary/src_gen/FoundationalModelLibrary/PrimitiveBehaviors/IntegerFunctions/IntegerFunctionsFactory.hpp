@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 			//protected default construcotr
 			IntegerFunctionsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<IntegerFunctionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<IntegerFunctionsFactory> eInstance();
 

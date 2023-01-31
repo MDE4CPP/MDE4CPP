@@ -3297,10 +3297,7 @@ namespace UML
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<UMLPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<UMLPackage> eInstance();
 

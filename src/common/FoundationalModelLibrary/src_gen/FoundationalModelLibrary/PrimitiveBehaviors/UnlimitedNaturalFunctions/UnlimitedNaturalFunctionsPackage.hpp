@@ -73,10 +73,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunction
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<UnlimitedNaturalFunctionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<UnlimitedNaturalFunctionsPackage> eInstance();
 

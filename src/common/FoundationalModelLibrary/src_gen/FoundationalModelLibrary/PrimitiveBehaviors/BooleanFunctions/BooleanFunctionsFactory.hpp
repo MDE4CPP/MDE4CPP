@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 			//protected default construcotr
 			BooleanFunctionsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<BooleanFunctionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<BooleanFunctionsFactory> eInstance();
 

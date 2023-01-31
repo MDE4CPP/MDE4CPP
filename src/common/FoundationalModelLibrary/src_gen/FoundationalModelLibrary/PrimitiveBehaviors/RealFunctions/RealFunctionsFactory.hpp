@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			//protected default construcotr
 			RealFunctionsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<RealFunctionsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<RealFunctionsFactory> eInstance();
 

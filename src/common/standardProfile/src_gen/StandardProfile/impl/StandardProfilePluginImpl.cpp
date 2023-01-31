@@ -16,6 +16,24 @@
 
 using namespace StandardProfile;
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> StandardProfilePlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new StandardProfilePluginImpl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return StandardProfilePluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

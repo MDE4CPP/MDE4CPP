@@ -16,6 +16,24 @@
 
 using namespace Ecore;
 
+//static initialization
+std::shared_ptr<MDE4CPPPlugin> EcorePlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton instance
+		instance.reset(new EcorePluginImpl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return EcorePluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

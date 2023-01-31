@@ -8,6 +8,17 @@
 #include "FoundationalModelLibrary/Common/impl/StatusImpl.hpp"
 
 using namespace FoundationalModelLibrary::Common;
+std::shared_ptr<CommonFactory> CommonFactory::eInstance()
+{
+	static std::shared_ptr<CommonFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(CommonFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

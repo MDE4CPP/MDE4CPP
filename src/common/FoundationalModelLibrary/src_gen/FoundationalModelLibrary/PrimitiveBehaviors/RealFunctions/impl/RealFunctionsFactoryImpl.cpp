@@ -6,6 +6,17 @@
 
 
 using namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions;
+std::shared_ptr<RealFunctionsFactory> RealFunctionsFactory::eInstance()
+{
+	static std::shared_ptr<RealFunctionsFactory> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(RealFunctionsFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

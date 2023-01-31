@@ -30,13 +30,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	# Model plugin
 	impl/StandardProfilePluginImpl.cpp
-	StandardProfilePlugin.cpp
 	# Package of StandardProfile
 	impl/StandardProfilePackageImpl.cpp
-	StandardProfilePackage.cpp
 	# Factory of StandardProfile
 	impl/StandardProfileFactoryImpl.cpp
-	StandardProfileFactory.cpp
 	# Contents of StandardProfile
 	impl/AuxiliaryImpl.cpp
 	impl/BuildComponentImpl.cpp

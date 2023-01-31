@@ -104,10 +104,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 
 			//getter for subPackages
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<RealFunctionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<RealFunctionsPackage> eInstance();
 

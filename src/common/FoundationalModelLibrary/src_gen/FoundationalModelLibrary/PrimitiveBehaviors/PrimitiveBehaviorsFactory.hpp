@@ -22,10 +22,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 			//protected default construcotr
 			PrimitiveBehaviorsFactory(){}
 
-			//Singleton Instance and Getter
-			
-			private:
-				static std::shared_ptr<PrimitiveBehaviorsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<PrimitiveBehaviorsFactory> eInstance();
 

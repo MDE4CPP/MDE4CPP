@@ -18,10 +18,7 @@ namespace FoundationalModelLibrary
 			
 		protected:
 			FoundationalModelLibraryExecPlugin(){};
-			virtual ~FoundationalModelLibraryExecPlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;		
+			virtual ~FoundationalModelLibraryExecPlugin(){};	
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_EXECPLUGIN_HPP */

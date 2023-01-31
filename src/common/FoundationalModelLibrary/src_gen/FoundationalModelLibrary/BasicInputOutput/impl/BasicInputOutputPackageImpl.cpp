@@ -40,6 +40,23 @@
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
 
+//Singleton implemenation
+std::shared_ptr<BasicInputOutputPackage> BasicInputOutputPackage::eInstance()
+{
+	static std::shared_ptr<BasicInputOutputPackage> instance;
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(BasicInputOutputPackageImpl::create());
+		std::dynamic_pointer_cast<BasicInputOutputPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialization
+const std::string BasicInputOutputPackage::eNAME ="BasicInputOutput";
+const std::string BasicInputOutputPackage::eNS_URI ="";
+const std::string BasicInputOutputPackage::eNS_PREFIX ="FoundationalModelLibrary";
+
 BasicInputOutputPackageImpl::BasicInputOutputPackageImpl()
 {
 }

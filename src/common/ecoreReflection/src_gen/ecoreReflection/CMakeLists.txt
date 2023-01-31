@@ -30,10 +30,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	# Model plugin
 	impl/EcorePluginImpl.cpp
-	EcorePlugin.cpp
 	# Package of Ecore
 	impl/EcorePackageImpl.cpp
-	EcorePackage.cpp
 	
 )
 

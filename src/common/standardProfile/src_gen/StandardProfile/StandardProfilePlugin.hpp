@@ -29,9 +29,6 @@ namespace StandardProfile
 		protected:
 			StandardProfilePlugin(){};
 			virtual ~StandardProfilePlugin(){};
-	
-		private:
-			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_PLUGIN_HPP */
