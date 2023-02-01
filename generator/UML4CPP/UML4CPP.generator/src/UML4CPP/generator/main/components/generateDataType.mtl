@@ -25,6 +25,7 @@
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::components::generateStructuralFeature /]
 
 
 [template public generateStaticDataTypeID(aDataType : DataType)]
@@ -65,15 +66,6 @@ public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.getNearestPackage
  * Get all Interfaces (direct or indirect) that are realized by aDataType
 */]
 [query public collectAllRealizedInterfaces(aDataType : DataType) : Set(Interface) = aDataType.directlyRealizedInterfaces()->addAll(aDataType.directlyRealizedInterfaces().getAllBaseInterfaces())->flatten()->asSet() /]
-
-[**
- * checks if setter for a StructuralFeature should be generated
- * 
- * setter should not exist for:
- * - feature with upper bound > 1 (realized by list and getter)
- * - feature is read only
-*/]
-[query public hasSetter(aStructuralFeature : StructuralFeature) : Boolean = not (( not (aStructuralFeature.upper = 1) ) and (not aStructuralFeature.oclAsType(Property).isReadOnly)) /]
 
 [**
  * generate get, set and unset function declaration

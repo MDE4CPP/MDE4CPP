@@ -102,13 +102,6 @@
  *  queries to determinate name of NamedElement elements
 */]
 [query public myName( anElement: NamedElement) : String = if ( (anElement.oclIsUndefined()) or (anElement.name.oclIsUndefined())) then ('Undefined Element found: ' + anElement.toString()) else name endif /]
-[**
- * queries to generate getter and setter names
-*/]
-[query public setterName(feature : StructuralFeature) : String = if hasSetterName() then getSetterName() else 'set'.concat(name.toUpperFirst()) endif /]
-[query public getterName(feature : StructuralFeature) : String = if hasGetterName() then getGetterName() else getterPrefix().concat(name.toUpperFirst()) endif /]
-[query public getterPrefix(feature : StructuralFeature) : String = feature.type.getterPrefix() /]
-[query public getterPrefix(type : Type) : String = if(type.oclIsUndefined() or type.name <> 'Boolean') then 'get' else 'is' endif/]
 
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++

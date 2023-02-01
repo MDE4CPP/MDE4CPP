@@ -17,7 +17,7 @@
  * module for generation of UML Property artefacts
  * 
  */]
-[module generateProperty('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateProperty('http://www.eclipse.org/uml2/5.0.0/UML') extends UML4CPP::generator::main::components::generateStructuralFeature]
 
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateClass /]

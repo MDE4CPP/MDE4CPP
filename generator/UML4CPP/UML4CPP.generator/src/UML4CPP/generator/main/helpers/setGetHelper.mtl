@@ -30,15 +30,6 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [**
- * checks if setter for a StructuralFeature should be generated
- * 
- * setter should not exist for:
- * - feature with upper bound > 1 (realized by list and getter)
- * - feature is read only
-*/]
-[query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
-
-[**
  * generate get, set and unset function declaration
 */]
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]

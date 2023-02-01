@@ -1,0 +1,30 @@
+[comment encoding = UTF-8 /]
+[module generateStructuralFeature('http://www.eclipse.org/uml2/5.0.0/UML') extends UML4CPP::generator::main::components::generateFeature]
+
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+
+
+[**
+ * checks if setter for a StructuralFeature should be generated
+ * 
+ * setter should not exist for:
+ * - feature with upper bound > 1 (realized by list and getter)
+ * - feature is read only
+*/]
+[query public hasSetter(aStructuralFeature : StructuralFeature) : Boolean = not (( not (aStructuralFeature.upper = 1) ) and (not aStructuralFeature.oclAsType(Property).isReadOnly)) /]
+
+[**
+ * queries to generate getter and setter names
+*/]
+[query public setterName(aStructuralFeature : StructuralFeature) : String = if hasSetterName() then getSetterName() else 'set'.concat(name.toUpperFirst()) endif /]
+[query public getterName(aStructuralFeature : StructuralFeature) : String = if hasGetterName() then getGetterName() else getterPrefix().concat(name.toUpperFirst()) endif /]
+[query public getterPrefix(aStructuralFeature : StructuralFeature) : String = 
+	let aType : Type = aStructuralFeature.type in
+	(
+		if(type.oclIsUndefined() or type.name <> 'Boolean')
+		then 'get'
+		else 'is'
+		endif
+	) 
+/]
+

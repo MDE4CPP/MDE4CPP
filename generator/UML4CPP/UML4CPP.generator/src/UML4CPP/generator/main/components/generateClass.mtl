@@ -24,6 +24,7 @@
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateEnumeration /]
+[import UML4CPP::generator::main::components::generateStructuralFeature /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
