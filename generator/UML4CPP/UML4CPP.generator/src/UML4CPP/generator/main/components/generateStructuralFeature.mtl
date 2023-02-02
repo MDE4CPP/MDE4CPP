@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module generateStructuralFeature('http://www.eclipse.org/uml2/5.0.0/UML') extends UML4CPP::generator::main::components::generateFeature]
+[module generateStructuralFeature('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
