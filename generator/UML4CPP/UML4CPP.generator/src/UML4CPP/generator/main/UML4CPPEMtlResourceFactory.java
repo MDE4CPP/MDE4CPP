@@ -127,6 +127,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generatePrimitivetype", 
 								"generateProperty", 
 								"generateStereotype",
+								"generateStructuralFeature",
 								"generateType",
 	   	 						"generateValueSpecification"
 								};

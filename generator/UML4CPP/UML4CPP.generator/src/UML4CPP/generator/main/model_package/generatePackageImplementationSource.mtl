@@ -209,12 +209,12 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
-[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())))]
 	createActivity_[anActivity.memberName()/]([aPackage.memberName()/], factory);
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())))]
 void [packageName/]::createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
 	[anActivity.generateActivityCreation()/]
@@ -392,7 +392,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 //ActivityNodes and Edges
 void [packageName/]::initializePackageActivities()
 {
-[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())))]
 	initializeActivity_[anActivity.memberName()/]();
 	[if (not isReflectionModel(anActivity.getRootPackage()))]
 	[anActivity.memberName()/]->_setID([anActivity.getMemberName().toUpperCase()/]);
@@ -400,7 +400,7 @@ void [packageName/]::initializePackageActivities()
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())))]
 void [packageName/]::initializeActivity_[anActivity.memberName()/]()
 {
 	[anActivity.generateActivityInitialization()/]
