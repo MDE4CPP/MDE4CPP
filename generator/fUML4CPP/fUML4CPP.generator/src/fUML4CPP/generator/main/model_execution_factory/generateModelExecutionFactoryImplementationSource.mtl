@@ -18,6 +18,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 
 [template public generateModelExecutionFactoryImplementationSource(aPackage : Package)
@@ -32,7 +33,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [defineDebugMacro()/]
 
 //Model includes
-[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage().getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
+[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
 #include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
 [/for]
 
@@ -43,16 +44,16 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 [for (anIncludeString : String | 
-	aPackage.collectActivitiesOwnedByPackage().node
-	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).input)
-	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).output)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).input)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).output)
+	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node
+	->addAll(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).input)
+	->addAll(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).output)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).input)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).output)
 	.generateCorrespondingActivityNodeActivationInclude()->asSet()) before('//ActivityNodeActivation includes\n')]
 [anIncludeString/]
 [/for]
-[if (aPackage.getRootPackage().allOwnedElements()->filter(ActivityEdge)->size() > 0)]
+[if (aPackage.getRootPackage().allOwnedElements()->filter(ActivityEdge)->reject(isDoNotGenerateElement())->size() > 0)]
 //ActivityEdgeInstance include
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 [/if]
@@ -60,18 +61,18 @@ originalName : String = aPackage.generateNamespacePath(false);
 //UML includes
 #include "uml/Activity.hpp"
 [for (anIncludeString : String | 
-	aPackage.collectActivitiesOwnedByPackage().node
-	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).input)
-	->addAll(aPackage.collectActivitiesOwnedByPackage().node->filter(Action).output)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).input)
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().node->filter(Action).output)
+	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node
+	->addAll(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).input)
+	->addAll(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).output)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).input)
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).output)
 	.generateCorrespondingActivityNodeInclude()->asSet()) before('//ActivityNode includes\n')]
 [anIncludeString/]
 [/for]
 [for (anIncludeString : String | 
-	aPackage.collectActivitiesOwnedByPackage().edge
-	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage().edge)
+	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).edge
+	->addAll(aPackage.collectStructuredActivityNodesOwnedByPackage()->reject(isDoNotGenerateElement()).edge)
 	.generateCorrespondingActivityEdgeInclude()->asSet()) before('//ActivityEdge includes\n')]
 [anIncludeString/]
 [/for]
@@ -91,7 +92,7 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context)
 {
-[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
+[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]
 	[for (anActivity : Activity | activitiesOwnedByPackage)  before('\tswitch(behavior->_getID())\n\t{\n') after('\t}\n')]
 		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
@@ -109,7 +110,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 	return nullptr;
 }
 
-[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage())]
+[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()))]
 [comment]
 std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> [packageName/]ExecutionFactoryImpl::get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype()
 {

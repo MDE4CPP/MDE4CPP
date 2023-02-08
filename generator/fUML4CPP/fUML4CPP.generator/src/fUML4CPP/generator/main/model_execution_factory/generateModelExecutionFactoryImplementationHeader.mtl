@@ -18,6 +18,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 
 [template public generateModelExecutionFactoryImplementationHeader(aPackage : Package) 
@@ -43,7 +44,7 @@ namespace [aPackage.generateNamespace(false)/]
 	{
 		private:    
 			[upperName/]ExecutionFactoryImpl& operator=([upperName/]ExecutionFactoryImpl const&) = delete;
-			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()) before('\t\t\t//Methods to create ActivityExecution Prototypes\n')]
+			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//Methods to create ActivityExecution Prototypes\n')]
 			void create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
 			[comment]std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();[/comment]
 			[/for]
@@ -58,7 +59,7 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory>);
 	
 		private:
-			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()) before('\t\t\t//ActivityExecution Prototypes\n')]
+			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//ActivityExecution Prototypes\n')]
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_[anActivity.memberName()/]ExecutionPrototype;
 			[/for]
 	};

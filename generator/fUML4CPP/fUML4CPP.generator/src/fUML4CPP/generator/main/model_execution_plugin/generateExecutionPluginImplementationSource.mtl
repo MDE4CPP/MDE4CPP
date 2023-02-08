@@ -119,7 +119,7 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 	{
 		initialize();
 	}
-[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->sortedBy(myQualifiedName())->asSet()]
+[let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]
 	[for (anActivity : Activity | activitiesOwnedByPackage) before('\n\tswitch(activity->_getID())\n\t{\n') after('\t}\n')]
 		case [anActivity.getNearestPackage().generateNamespace(true)/]::[anActivity.getNearestPackage().getPackageName()/]Package::[anActivity.getMemberName().toUpperCase()/]:
@@ -212,7 +212,7 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 #include "uml/UMLContainerAny.hpp"
 
 //Model includes
-[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage().getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
+[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
 #include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
 [/for]
 [/template]
