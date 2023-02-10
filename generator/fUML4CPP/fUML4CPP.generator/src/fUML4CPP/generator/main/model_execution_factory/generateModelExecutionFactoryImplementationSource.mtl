@@ -260,6 +260,9 @@ fUML::Semantics::Actions::CreateObjectActionActivation
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DestroyObjectAction))]
 fUML::Semantics::Actions::DestroyObjectActionActivation
 [/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadExtentAction))]
+fUML::Semantics::Actions::ReadExtentActionActivation
+[/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadSelfAction))]
 fUML::Semantics::Actions::ReadSelfActionActivation
 [/template]
