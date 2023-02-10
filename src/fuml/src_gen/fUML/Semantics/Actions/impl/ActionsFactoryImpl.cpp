@@ -19,6 +19,7 @@
 #include "fUML/Semantics/Actions/impl/InvocationActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/OutputPinActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/PinActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ReadExtentActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadSelfActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.hpp"
@@ -64,6 +65,7 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ExpansionRegionActivation", ActionsPackage::EXPANSIONREGIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::InputPinActivation", ActionsPackage::INPUTPINACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::OutputPinActivation", ActionsPackage::OUTPUTPINACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadExtentActionActivation", ActionsPackage::READEXTENTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation", ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadSelfActionActivation", ActionsPackage::READSELFACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadStructuralFeatureActionActivation", ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
@@ -283,6 +285,20 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
+			}
+			break;
+		}
+		case ActionsPackage::READEXTENTACTIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createReadExtentActionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation>(this->createReadExtentActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -660,6 +676,26 @@ std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> ActionsFactoryImp
 	}
 	
 	element->setThisOutputPinActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ActionsFactoryImpl::createReadExtentActionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivationImpl> element(new fUML::Semantics::Actions::ReadExtentActionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisReadExtentActionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ActionsFactoryImpl::createReadExtentActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivationImpl> element(new fUML::Semantics::Actions::ReadExtentActionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisReadExtentActionActivationPtr(element);
 	return element;
 	
 }

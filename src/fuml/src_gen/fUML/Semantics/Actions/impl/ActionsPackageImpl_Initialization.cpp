@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EAnnotation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -59,6 +59,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_invocationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
+	m_readExtentActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readIsClassifiedObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
@@ -85,6 +86,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeInvocationActionActivationContent();
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
+	initializeReadExtentActionActivationContent();
 	initializeReadIsClassifiedObjectActionActivationContent();
 	initializeReadSelfActionActivationContent();
 	initializeReadStructuralFeatureActionActivationContent();
@@ -1878,6 +1880,60 @@ void ActionsPackageImpl::initializePinActivationContent()
 	m_pinActivation_Operation_takeOfferedTokens->setOrdered(false);
 	
 	m_pinActivation_Operation_takeOfferedTokens->_setID(PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
+	
+	
+	
+}
+
+void ActionsPackageImpl::initializeReadExtentActionActivationContent()
+{
+	m_readExtentActionActivation_Class->setName("ReadExtentActionActivation");
+	m_readExtentActionActivation_Class->setAbstract(false);
+	m_readExtentActionActivation_Class->setInterface(false);
+	
+	m_readExtentActionActivation_Class->_setID(READEXTENTACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_readExtentActionActivation_Attribute_readExtentAction->setName("readExtentAction");
+	m_readExtentActionActivation_Attribute_readExtentAction->setEType(uml::umlPackage::eInstance()->getReadExtentAction_Class());
+	m_readExtentActionActivation_Attribute_readExtentAction->setLowerBound(1);
+	m_readExtentActionActivation_Attribute_readExtentAction->setUpperBound(1);
+	m_readExtentActionActivation_Attribute_readExtentAction->setTransient(false);
+	m_readExtentActionActivation_Attribute_readExtentAction->setVolatile(false);
+	m_readExtentActionActivation_Attribute_readExtentAction->setChangeable(true);
+	m_readExtentActionActivation_Attribute_readExtentAction->setUnsettable(false);
+	m_readExtentActionActivation_Attribute_readExtentAction->setUnique(true);
+	m_readExtentActionActivation_Attribute_readExtentAction->setDerived(false);
+	m_readExtentActionActivation_Attribute_readExtentAction->setOrdered(true);
+	m_readExtentActionActivation_Attribute_readExtentAction->setContainment(false);
+	m_readExtentActionActivation_Attribute_readExtentAction->setResolveProxies(true);
+	m_readExtentActionActivation_Attribute_readExtentAction->setDefaultValueLiteral("");	
+	
+	m_readExtentActionActivation_Attribute_readExtentAction->_setID(READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_readExtentActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_readExtentActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_readExtentActionActivation_Operation_doAction->setLowerBound(0);
+	m_readExtentActionActivation_Operation_doAction->setUpperBound(1);
+	m_readExtentActionActivation_Operation_doAction->setUnique(true);
+	m_readExtentActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_readExtentActionActivation_Operation_doAction->_setID(READEXTENTACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
 	

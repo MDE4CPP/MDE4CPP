@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EAnnotation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -51,6 +51,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createInvocationActionActivationContent(package, factory);
 	createOutputPinActivationContent(package, factory);
 	createPinActivationContent(package, factory);
+	createReadExtentActionActivationContent(package, factory);
 	createReadIsClassifiedObjectActionActivationContent(package, factory);
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
@@ -266,6 +267,16 @@ void ActionsPackageImpl::createPinActivationContent(std::shared_ptr<ecore::EPack
 	
 	m_pinActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_pinActivation_Class, PINACTIVATION_OPERATION_FIRE_TOKEN);
 	m_pinActivation_Operation_takeOfferedTokens = factory->createEOperation_as_eOperations_in_EClass(m_pinActivation_Class, PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
+	
+}
+
+void ActionsPackageImpl::createReadExtentActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_readExtentActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, READEXTENTACTIONACTIVATION_CLASS);
+	
+	m_readExtentActionActivation_Attribute_readExtentAction = factory->createEReference_as_eReferences_in_EClass(m_readExtentActionActivation_Class, READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION);
+	
+	m_readExtentActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_readExtentActionActivation_Class, READEXTENTACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

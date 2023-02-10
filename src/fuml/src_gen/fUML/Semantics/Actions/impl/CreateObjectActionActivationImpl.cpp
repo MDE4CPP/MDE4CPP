@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -153,6 +153,7 @@ if(action)
 
 		if(newObject)
 		{
+			this->getExecutionLocus()->add(newObject);	//TODO: This should happen within object's destroy method as soon as all generated C++ classes reference fUML::Semantics::Loci::Locus
 			std::shared_ptr<Any> value = eUMLAny(newObject, newObject->getMetaElementID());
 			this->putToken(action->getResult(), value);
 		}

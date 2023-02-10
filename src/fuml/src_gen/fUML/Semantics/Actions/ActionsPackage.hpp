@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
 	class EAttribute;
 	class EReference;
-	class EDataType;
 	class EGenericType;
-	class EStringToStringMapEntry;
 	class EOperation;
-	class EParameter;
 	class EClass;
-	class EAnnotation;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Actions 
@@ -42,6 +42,7 @@ namespace fUML::Semantics::Actions
 	class InvocationActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
+	class ReadExtentActionActivation;
 	class ReadIsClassifiedObjectActionActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
@@ -496,6 +497,27 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EOperation> getPinActivation_Operation_takeOfferedTokens() const = 0;
 			
 			// End Class PinActivation
+
+
+			// Begin Class ReadExtentActionActivation
+			//Class and Feature IDs 
+			static const unsigned long READEXTENTACTIONACTIVATION_CLASS = 46156097;
+			static const unsigned int READEXTENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			
+			static const unsigned long READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION = 582742228;
+			
+			static const unsigned long READEXTENTACTIONACTIVATION_OPERATION_DOACTION = 2912116878;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getReadExtentActionActivation_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getReadExtentActionActivation_Attribute_readExtentAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getReadExtentActionActivation_Operation_doAction() const = 0;
+			
+			// End Class ReadExtentActionActivation
 
 
 			// Begin Class ReadIsClassifiedObjectActionActivation

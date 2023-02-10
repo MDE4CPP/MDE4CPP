@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -276,7 +276,7 @@ std::shared_ptr<Bag<uml::Element>> LocusImpl::retrieveExtent(std::shared_ptr<uml
 			extent->push_back(value);
 		}*/
 
-		if(classifier->eClass()->getClassifierID() == value->getMetaElementID())
+		if(classifier->_getID() == value->getMetaElementID())
 		{
 			extent->push_back(value);
 		}

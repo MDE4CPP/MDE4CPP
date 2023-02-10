@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EAnnotation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -576,6 +576,25 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 }
 
 // End Class PinActivation
+
+// Begin Class ReadExtentActionActivation
+std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadExtentActionActivation_Class() const
+{
+	return m_readExtentActionActivation_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl::getReadExtentActionActivation_Attribute_readExtentAction() const
+{
+	return m_readExtentActionActivation_Attribute_readExtentAction;
+}
+
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getReadExtentActionActivation_Operation_doAction() const
+{
+	return m_readExtentActionActivation_Operation_doAction;
+}
+
+// End Class ReadExtentActionActivation
 
 // Begin Class ReadIsClassifiedObjectActionActivation
 std::shared_ptr<ecore::EClass> fUML::Semantics::Actions::ActionsPackageImpl::getReadIsClassifiedObjectActionActivation_Class() const
