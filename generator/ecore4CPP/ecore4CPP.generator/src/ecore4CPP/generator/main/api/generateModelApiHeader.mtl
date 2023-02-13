@@ -14,12 +14,38 @@
  */]
 [module generateModelApiHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
+
 [template public generateModelApiHeader(anEPackage : EPackage){
 	packageName : String = anEPackage.name.concat('Api');
     fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp');
 }]
 [printInfo(fileGenerationMessage(fileName, 'model api header file'), 2)/]
 [file (fileName, false, 'UTF-8')]
+#include "util/crow_all.h"
+#include "ecore/EClass.hpp"
+#include "[anEPackage.name/]/[anEPackage.name/]Factory.hpp"
+#include "[anEPackage.name/]/[anEPackage.name/]Package.hpp"
+[for (elements : EClassifier| anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
+#include "[elements.generateNamespacePath()/]/impl/[elements.name.toUpperFirst().concat('Impl.hpp')/]"
+[/for]
 
+using namespace ecore;
+using namespace libraryModel_ecore;
+
+class [packageName/]{
+public:
+    static std::shared_ptr<[packageName/]> eInstance(std::shared_ptr<[anEPackage.name/]Factory>& factory);
+    crow::json::wvalue writeValue(const std::shared_ptr<Any>& any);
+    std::shared_ptr<Any> readValue(const crow::json::rvalue& content, const long& metaElementId);
+
+private:
+    explicit [packageName/](std::shared_ptr<[anEPackage.name/]Factory>& factory);
+    template <typename T> T convert_to(const crow::json::rvalue& value);
+    bool keyIsAvailable(const crow::json::rvalue& content, const std::string& key);
+    std::shared_ptr<[anEPackage.name/]Factory> m_factory;
+    std::map<std::string,std::shared_ptr<Any>> m_objects{};
+};
 [/file]
 [/template]
