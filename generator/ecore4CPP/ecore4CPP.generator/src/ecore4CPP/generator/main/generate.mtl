@@ -14,6 +14,7 @@
  */]
 [module generate('http://www.eclipse.org/emf/2002/Ecore')/]
 
+[import ecore4CPP::generator::main::api::generateModelApi/]
 [import ecore4CPP::generator::main::model_factory::generateMetamodelFactory/]
 [import ecore4CPP::generator::main::generateApplication/]
 [import ecore4CPP::generator::main::generateBuildFile/]
@@ -83,9 +84,11 @@
 	[/for]
 	
 		[printInfo('Generating package class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
-		[anEPackage.generateFactoryImpl()/]
-		[printInfo('Generating factory class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
 		[anEPackage.generatePackageImpl()/]
+		[printInfo('Generating factory class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+		[anEPackage.generateFactoryImpl()/]
+        [printInfo('Generating model api class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
+        [anEPackage.generateModelApi()/]
 
 	[comment Model plugin, build files, project files and main application are only generated for the root package /]
 	[if (anEPackage.eSuperPackage.oclIsUndefined())]
