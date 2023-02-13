@@ -113,6 +113,9 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O1 -DNDEBUG")
 [else]
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 [/if]
+[if hasCreateApiFlag()]
+SET(BOOST_ROOT ${BOOST_ROOT})
+[/if]
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
@@ -124,9 +127,19 @@ SET(SOURCE_FILES
 # [/protected]
 )
 
+[if hasCreateApiFlag()]
+FIND_PACKAGE(Boost)
+IF(NOT Boost_FOUND)
+    	MESSAGE(FATAL_ERROR "Please define BOOST_ROOT as an environment variable!")
+ENDIF()
+[/if]
+
 INCLUDE_DIRECTORIES(
 	../
 	${MDE4CPP_HOME}/application/include
+[if hasCreateApiFlag()]
+    	${Boost_INCLUDE_DIRS}
+[/if]
 # [protected ('includes')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
@@ -261,6 +274,12 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/if]
 [/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+
+        [if hasCreateApiFlag()]
+        [buildModeCMakeProperty(debugMode)/] ${Boost_LIBRARIES}
+        [buildModeCMakeProperty(debugMode)/] ws2_32
+        [buildModeCMakeProperty(debugMode)/] wsock32
+        [/if]
 
 	# [protected ('library_linking_' + buildModeCMakeProperty(debugMode))] 
 	# You may manually edit the following lines, won't be overwritten upon generation.
