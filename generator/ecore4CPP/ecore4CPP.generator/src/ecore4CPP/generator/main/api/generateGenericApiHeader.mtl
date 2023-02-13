@@ -22,7 +22,7 @@
 }]
 [printInfo(fileGenerationMessage(fileName, 'generic api header file'), 2)/]
 [file (fileName, false, 'UTF-8')]
-#include "crow/crow_all.h"
+#include "util/crow_all.h"
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include "ecore/EObject.hpp"
