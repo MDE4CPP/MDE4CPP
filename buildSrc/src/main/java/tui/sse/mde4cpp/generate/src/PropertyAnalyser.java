@@ -63,4 +63,25 @@ class PropertyAnalyser
 	{
 		return (project.hasProperty("StructureOnly") || project.hasProperty("SO"));
 	}
+
+	/**
+	 * Checks, if project should generate a rest api
+	 *
+	 * @param project
+	 *            current project instance contains existing properties
+	 * @return {@code true} if {@core GenerateApi} is requested, otherwise {@code false}
+	 */
+	static boolean isApiGenerationRequested(Project project)
+	{
+		return project.hasProperty("GenerateApi");
+	}
+
+	/**
+	 * @param project Gradle project
+	 * @return true if parameter 'generateApi' is configured, otherwise false
+	 */
+	static boolean hasApiGenerationFlag(Project project)
+	{
+		return (project.hasProperty("GenerateApi"));
+	}
 }

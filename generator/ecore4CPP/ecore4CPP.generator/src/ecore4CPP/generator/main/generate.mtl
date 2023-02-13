@@ -87,8 +87,10 @@
 		[anEPackage.generatePackageImpl()/]
 		[printInfo('Generating factory class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
 		[anEPackage.generateFactoryImpl()/]
+		[if hasCreateApiFlag()]
         [printInfo('Generating model api class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
         [anEPackage.generateModelApi()/]
+        [/if]
 
 	[comment Model plugin, build files, project files and main application are only generated for the root package /]
 	[if (anEPackage.eSuperPackage.oclIsUndefined())]

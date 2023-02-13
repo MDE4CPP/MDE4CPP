@@ -31,6 +31,7 @@
 
 [query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->notEmpty() else false endif /]
 [query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->first().value /]
+[query public hasCreateApiFlag() : Boolean = invoke('ecore4CPP.generator.main.Generate', 'getGenerateApi()', Sequence{}) /]
 
 [**
  * namespace generation
