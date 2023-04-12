@@ -298,14 +298,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > heldTokens = this->getHeldTokens();
-    for (unsigned int i = 0; i < heldTokens->size(); i++) 
-    {
-    	std::shared_ptr<fUML::Semantics::Activities::Token> heldToken = heldTokens->at(i);
-        tokens->push_back(heldToken);
-    }
-
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(this->getHeldTokens());
     return tokens;
 	//end of body
 }

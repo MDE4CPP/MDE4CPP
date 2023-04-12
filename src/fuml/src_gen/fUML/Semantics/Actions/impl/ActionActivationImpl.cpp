@@ -509,15 +509,13 @@ std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::r
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = nullptr;
+	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = nullptr;
+    std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> pinActivationList = this->getPinActivation();
 
-    Bag<fUML::Semantics::Actions::PinActivation>* pinActivationListPtr = this->getPinActivation().get();
-    const int size = pinActivationListPtr->size();
-    std::shared_ptr<fUML::Semantics::Actions::PinActivation>thisPinActivation;
-    for(int i=0; i< size; i++)
+    for(std::shared_ptr<fUML::Semantics::Actions::PinActivation> thisPinActivation : *pinActivationList)
     {
-        thisPinActivation = (*pinActivationListPtr)[i];
-        if (thisPinActivation->getNode() == pin) {
+        if (thisPinActivation->getNode() == pin) 
+		{
             pinActivation = thisPinActivation;
             break;
         }

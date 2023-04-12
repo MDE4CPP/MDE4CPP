@@ -220,19 +220,22 @@ bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<Bag<fUM
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    unsigned int j = 0;
-    bool notFound = true;
+	    bool notFound = true;
 
-    while (j < incomingEdges->size() && notFound) {
-        unsigned int k = 0;
-        while (k < activations->size() && notFound) {
-            if (activations->at(k)->isSourceFor(
-                        incomingEdges->at(j))) {
+	Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator incomingEdgesIterator = incomingEdges->begin();
+	Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator incomingEdgesEnd = incomingEdges->end();
+	Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator activationsIterator = activations->begin();
+	Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator activationsEnd = activations->end();
+
+    while (incomingEdgesIterator != incomingEdgesEnd && notFound) {
+        while (activationsIterator != activationsEnd && notFound) {
+            if ((*activationsIterator)->isSourceFor(
+                        (*incomingEdgesIterator))) {
                 notFound = false;
             }
-            k = k + 1;
+            activationsIterator++;
         }
-        j = j + 1;
+        incomingEdgesIterator++;
     }
 
     return notFound;
@@ -243,9 +246,8 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (unsigned int i = 0; i < edges->size(); i++) 
+	for (std::shared_ptr<uml::ActivityEdge> edge : *edges) 
 	{
-        std::shared_ptr<uml::ActivityEdge> edge = edges->at(i);
 
 	DEBUG_INFO("Creating edge " 
 		<< ((edge->getName() != "") ? ("'" + edge->getName() + "' ") : "")
@@ -263,9 +265,8 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml
         this->getNodeActivation(edge->getTarget())->addIncomingEdge(edgeInstance);
     }
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
-    for (unsigned int i = 0; i < nodeActivations->size(); i++) {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation = nodeActivations->at(i);
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations = this->getNodeActivations();
+    for (std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation : *nodeActivations) {
         nodeActivation->createEdgeInstances();
     }
 	//end of body
@@ -296,9 +297,8 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (unsigned int i = 0; i < nodes->size(); i++) 
+	for (std::shared_ptr<uml::ActivityNode> node: *nodes) 
 	{
-		std::shared_ptr<uml::ActivityNode> node = nodes->at(i);
         if(node != nullptr)
         {
         	DEBUG_INFO("Creating " << node->eClass()->getName() << " '" << node->getName() << "'.")
@@ -372,13 +372,15 @@ bool ActivityNodeActivationGroupImpl::hasSourceFor(std::shared_ptr<fUML::Semanti
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		bool hasSource = false;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > activations = this->getNodeActivations();
-    unsigned int i = 0;
-    while (!hasSource && i < activations->size()) 
+	bool hasSource = false;
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations = this->getNodeActivations();
+	Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator activationsIterator = activations->begin();
+	Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator activationsEnd = activations->end();
+
+    while (activationsIterator != activationsEnd && !hasSource) 
     {
-        hasSource = activations->at(i)->isSourceFor(edgeInstance);
-        i = i + 1;
+        hasSource = (*activationsIterator)->isSourceFor(edgeInstance);
+        activationsIterator++;
     }
     return hasSource;
 	//end of body
