@@ -2614,24 +2614,24 @@
       <eClassifiers xsi:type="ecore:EClass" name="Offer">
         <eOperations name="countOfferedVales" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="    this->removeWithdrawnTokens();&#xD;&#xA;&#xD;&#xA;    int count = 0;&#xD;&#xA;    for (unsigned int i = 0; i &lt; this->getOfferedTokens()->size(); i++) {&#xD;&#xA;        if (this->getOfferedTokens()->at(i)->getValue() != nullptr) {&#xD;&#xA;            count = count + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return count;"/>
+            <details key="body" value="&#x9;this->removeWithdrawnTokens();&#xA;&#xA;    int count = 0;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();&#xA;&#xA;    for (std::shared_ptr&lt;fUML::Semantics::Activities::Token> offeredToken: *offeredTokens) {&#xA;        if (offeredToken->getValue() != nullptr) {&#xA;            count = count + 1;&#xA;        }&#xA;    }&#xA;&#xA;    return count;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="retrieveOfferedTokens" ordered="false" upperBound="-1"
             eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="this->removeWithdrawnTokens();&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > offeredTokens = this->getOfferedTokens();&#xA;    for (unsigned int i = 0; i &lt; this->getOfferedTokens()->size(); i++)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> offeredToken = offeredTokens->at(i);&#xA;        tokens->push_back(offeredToken);&#xA;    }&#xA;&#xA;    return tokens;"/>
+            <details key="body" value="this->removeWithdrawnTokens();&#xA;&#xA;&#x9;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(this->getOfferedTokens());&#xA;&#xA;    &#x9;&#xA;return tokens;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="removeOfferedValues" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="    int n = count;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (n > 0) {&#xD;&#xA;        if (this->getOfferedTokens()->at(i)->getValue() != nullptr) {&#xD;&#xA;            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i);&#xD;&#xA;        } else {&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;        n = n - 1;&#xD;&#xA;    }"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();&#xA;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator it = offeredTokens->begin();&#xA;&#x9;&#xA;    while (count > 0) &#xA;&#x9;{&#xA;        if ((*it)->getValue() != nullptr) &#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator delIt = it;&#xA;&#x9;&#x9;&#x9;it++;&#xA;            offeredTokens->erase(delIt);&#xA;        } &#xA;&#x9;&#x9;else &#xA;&#x9;&#x9;{&#xA;            it++;&#xA;        }&#xA;        count = count - 1;&#xA;    }"/>
           </eAnnotations>
           <eParameters name="count" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         </eOperations>
         <eOperations name="removeWithdrawnTokens" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value=" std::shared_ptr&lt; Bag&lt;fUML::Semantics::Activities::Token> > offeredTokens= this->getOfferedTokens();&#xA;    Bag&lt;fUML::Semantics::Activities::Token> *offeredTokensPtr=offeredTokens.get();&#xA;&#xA;    const unsigned int numberTokens=offeredTokensPtr->size();&#xA;&#xA;    if(numberTokens==1)&#xA;    {&#xA;        if((*offeredTokensPtr)[0]->isWithdrawn())&#xA;        {&#xA;            offeredTokensPtr->clear();&#xA;        }&#xA;    }&#xA;    else&#xA;    {&#xA;        Bag&lt;fUML::Semantics::Activities::Token> *new_OfferedTokensPtr = new Bag&lt;fUML::Semantics::Activities::Token>();&#xA;        m_offeredTokens.reset(new_OfferedTokensPtr);&#xA;        //&#x9;m_offeredTokens.reserve(numberTokens);&#xA;        for(unsigned int i = 0; i &lt; numberTokens; i++)&#xA;        {&#xA;            if(!((*offeredTokensPtr)[i]->isWithdrawn()))&#xA;            {&#xA;                new_OfferedTokensPtr->push_back((*offeredTokensPtr)[i]);&#xA;            }&#xA;        }&#xA;    }"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();&#xA;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator it = offeredTokens->begin();&#xA;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator endIt = offeredTokens->end();&#xA;&#x9;&#xA;&#x9;&#xA;&#x9;while(it != endIt)&#xA;&#x9;{&#xA;&#x9;&#x9;if((*it)->isWithdrawn())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator delIt = it;&#xA;&#x9;&#x9;&#x9;it++;&#xA;&#x9;&#x9;&#x9;offeredTokens->erase(delIt);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;it++;&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="hasTokens" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
