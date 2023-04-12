@@ -691,7 +691,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if (values->size() == 0)
 	{
-		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
+		//std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
 		return;
 	}
 [for (aProperty : Property | aClassifier.getMyAttributes()) ? (not (aProperty.isReadOnly or aProperty.isBackReference()))]

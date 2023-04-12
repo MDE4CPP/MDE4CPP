@@ -91,7 +91,8 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]Lo
 				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
 				object->setUmlValue([packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
-				object->setLocus(this->getThisLocusPtr());
+				object->createFeatureValues();
+				this->add(object);
 				return object;
 			}
 [/let]
