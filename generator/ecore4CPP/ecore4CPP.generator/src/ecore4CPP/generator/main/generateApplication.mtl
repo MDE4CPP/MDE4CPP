@@ -161,6 +161,10 @@ ELSE()
 	[generateCMakeFindLibraryCommands('', 'lib', 'Win')/]
 ENDIF()
 
+[if hasCreateApiFlag()]
+    FILE(COPY ${MDE4CPP_HOME}/src/api/swagger DESTINATION ${PROJECT_BINARY_DIR})
+[/if]
+
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
