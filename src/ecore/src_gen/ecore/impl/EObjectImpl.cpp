@@ -222,7 +222,7 @@ std::shared_ptr<std::list < std::shared_ptr<ecore::EObject>>> EObjectImpl::eCros
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const
+std::shared_ptr<Any> EObjectImpl::eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -230,7 +230,7 @@ std::shared_ptr<Any> EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature
 	//end of body
 }
 
-std::shared_ptr<Any> EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature, bool resolve) const
+std::shared_ptr<Any> EObjectImpl::eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature, bool resolve) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,7 +238,7 @@ std::shared_ptr<Any> EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature
 	//end of body
 }
 
-std::shared_ptr<Any> EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> EObjectImpl::eInvoke(const std::shared_ptr<ecore::EOperation>& operation, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -251,7 +251,7 @@ bool EObjectImpl::eIsProxy() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const
+bool EObjectImpl::eIsSet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -264,7 +264,7 @@ int EObjectImpl::eResource() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature, std::shared_ptr<Any> newValue)
+void EObjectImpl::eSet(const std::shared_ptr<ecore::EStructuralFeature>& feature, const std::shared_ptr<Any>& newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -272,7 +272,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature, std::
 	//end of body
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const
+void EObjectImpl::eUnset(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

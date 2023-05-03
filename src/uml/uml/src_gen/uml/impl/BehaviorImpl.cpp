@@ -338,7 +338,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element> from)
+std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(const std::shared_ptr<uml::Element>& from)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

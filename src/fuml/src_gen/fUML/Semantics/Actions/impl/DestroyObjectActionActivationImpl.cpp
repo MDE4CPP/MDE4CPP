@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -135,7 +135,7 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<Any> value, bool isDestroyLinks, bool isDestroyOwnedObjects)
+void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>& value, bool isDestroyLinks, bool isDestroyOwnedObjects)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -228,7 +228,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<uml::Element> reference, std::shared_ptr<uml::Element> link)
+bool DestroyObjectActionActivationImpl::objectIsComposite(const std::shared_ptr<uml::Element>& reference, const std::shared_ptr<uml::Element>& link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

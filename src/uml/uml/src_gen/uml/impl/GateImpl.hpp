@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool matches(std::shared_ptr<uml::Gate> gateToMatch) ;
+			virtual bool matches(const std::shared_ptr<uml::Gate>& gateToMatch) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

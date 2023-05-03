@@ -87,19 +87,19 @@ namespace uml
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement> element, uml::VisibilityKind visibility) = 0;
+			virtual std::shared_ptr<uml::ElementImport> createElementImport(const std::shared_ptr<uml::PackageableElement>& element, uml::VisibilityKind visibility) = 0;
 			/*!
 			Creates an import of the specified package into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package> package_, uml::VisibilityKind visibility) = 0;
+			virtual std::shared_ptr<uml::PackageImport> createPackageImport(const std::shared_ptr<uml::Package>& package_, uml::VisibilityKind visibility) = 0;
 			/*!
 			The query excludeCollisions() excludes from a set of PackageableElements any that would not be distinguishable from each other in this Namespace.
 			result = (imps->reject(imp1  | imps->exists(imp2 | not imp1.isDistinguishableFrom(imp2, self))))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement>> excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps) = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) = 0;
 			/*!
 			Retrieves the elements imported by this namespace.
 			*/
@@ -132,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getNamesOfMember(std::shared_ptr<uml::NamedElement> element) = 0;
+			virtual std::shared_ptr<Bag<std::string>> getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element) = 0;
 			virtual std::shared_ptr<Bag<uml::NamedElement>> getOwnedMembers() = 0;
 			/*!
 			The query importMembers() defines which of a set of PackageableElements are actually imported into the Namespace. This excludes hidden ones, i.e., those which have names that conflict with names of ownedMembers, and it also excludes PackageableElements that would have the indistinguishable names when imported.
@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement>> importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps) = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) = 0;
 			/*!
 			The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are distinguishable within it.
 			result = (member->forAll( memb |

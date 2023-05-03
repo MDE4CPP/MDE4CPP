@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -121,7 +121,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
 	//end of body
 }
 
-bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
+bool TokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -142,7 +142,7 @@ bool TokenImpl::isControl()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder)
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& holder)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

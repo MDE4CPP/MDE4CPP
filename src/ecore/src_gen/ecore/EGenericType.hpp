@@ -69,7 +69,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool isInstance(std::shared_ptr<Any> object) const = 0;
+			virtual bool isInstance(const std::shared_ptr<Any>& object) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

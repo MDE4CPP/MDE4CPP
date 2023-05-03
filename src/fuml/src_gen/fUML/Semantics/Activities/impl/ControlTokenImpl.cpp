@@ -43,8 +43,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -125,7 +125,7 @@ return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createContro
 	//end of body
 }
 
-bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
+bool ControlTokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

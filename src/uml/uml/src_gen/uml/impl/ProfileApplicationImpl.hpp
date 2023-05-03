@@ -55,7 +55,7 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(const std::shared_ptr<uml::NamedElement>& namedElement) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

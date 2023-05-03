@@ -123,12 +123,12 @@ MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityEl
 //*********************************
 // Operations
 //*********************************
-bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement> other)
+bool MultiplicityElementImpl::compatibleWith(const std::shared_ptr<uml::MultiplicityElement>& other)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M)
+bool MultiplicityElementImpl::includesMultiplicity(const std::shared_ptr<uml::MultiplicityElement>& M)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

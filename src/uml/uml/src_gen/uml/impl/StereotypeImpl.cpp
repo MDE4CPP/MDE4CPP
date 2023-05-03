@@ -221,7 +221,7 @@ std::shared_ptr<uml::Profile> StereotypeImpl::containingProfile()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class> metaclass, bool isRequired)
+std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(const std::shared_ptr<uml::Class>& metaclass, bool isRequired)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

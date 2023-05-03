@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject> VariableImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action> a)
+bool VariableImpl::isAccessibleBy(const std::shared_ptr<uml::Action>& a)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

@@ -66,7 +66,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element> from) ;
+			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(const std::shared_ptr<uml::Element>& from) ;
 			
 			/*!
 			The in and inout ownedParameters of the Behavior.

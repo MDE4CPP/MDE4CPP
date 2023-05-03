@@ -48,17 +48,17 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() ;
 			virtual void doOutput() ;
 			virtual void doStructuredActivity() ;
-			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> getExpansionNodeActivation(const std::shared_ptr<uml::ExpansionNode>& node) ;
 			virtual bool isSuspended() ;
 			virtual int numberOfValues() ;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
+			virtual void resume(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup) ;
+			virtual void runGroup(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup) ;
 			virtual void runIterative() ;
 			virtual void runParallel() ;
 			virtual void sendOffers() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
 			virtual void terminate() ;
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup) ;
+			virtual void terminateGroup(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

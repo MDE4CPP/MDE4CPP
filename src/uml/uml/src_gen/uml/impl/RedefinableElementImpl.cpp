@@ -121,12 +121,12 @@ RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableEleme
 //*********************************
 // Operations
 //*********************************
-bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement)
+bool RedefinableElementImpl::isConsistentWith(const std::shared_ptr<uml::RedefinableElement>& redefiningElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement)
+bool RedefinableElementImpl::isRedefinitionContextValid(const std::shared_ptr<uml::RedefinableElement>& redefinedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

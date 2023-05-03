@@ -157,7 +157,7 @@ bool GateImpl::isOutsideCF()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::matches(std::shared_ptr<uml::Gate> gateToMatch)
+bool GateImpl::matches(const std::shared_ptr<uml::Gate>& gateToMatch)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

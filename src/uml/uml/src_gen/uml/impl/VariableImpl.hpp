@@ -61,7 +61,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action> a) ;
+			virtual bool isAccessibleBy(const std::shared_ptr<uml::Action>& a) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) ;
+			virtual bool isContainedInRegion(const std::shared_ptr<uml::Region>& r) ;
 			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInState(std::shared_ptr<uml::State> s) ;
+			virtual bool isContainedInState(const std::shared_ptr<uml::State>& s) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

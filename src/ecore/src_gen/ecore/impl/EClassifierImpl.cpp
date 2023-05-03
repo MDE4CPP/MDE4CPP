@@ -145,7 +145,7 @@ int EClassifierImpl::getClassifierID()
 	//end of body
 }
 
-bool EClassifierImpl::isInstance(std::shared_ptr<Any> object) const
+bool EClassifierImpl::isInstance(const std::shared_ptr<Any>& object) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

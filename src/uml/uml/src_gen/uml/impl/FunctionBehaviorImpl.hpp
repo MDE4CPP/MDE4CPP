@@ -61,7 +61,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType> d) ;
+			virtual bool hasAllDataTypeAttributes(const std::shared_ptr<uml::DataType>& d) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

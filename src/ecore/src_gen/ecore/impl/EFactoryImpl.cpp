@@ -123,7 +123,7 @@ std::shared_ptr<ecore::EObject> EFactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDataType, std::shared_ptr<Any> instanceValue) const
+std::string EFactoryImpl::convertToString(const std::shared_ptr<ecore::EDataType>& eDataType, const std::shared_ptr<Any>& instanceValue) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -531,12 +531,12 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 	//end of body
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(const std::shared_ptr<ecore::EClass>& eClass) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType, std::string literalValue) const
+std::shared_ptr<Any> EFactoryImpl::createFromString(const std::shared_ptr<ecore::EDataType>& eDataType, std::string literalValue) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

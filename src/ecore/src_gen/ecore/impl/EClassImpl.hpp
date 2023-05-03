@@ -50,12 +50,12 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(int featureID) const ;
 			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(std::string featureName) const ;
 			virtual int getFeatureCount() const ;
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
-			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
+			virtual int getFeatureID(const std::shared_ptr<ecore::EStructuralFeature>& feature) const ;
+			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(const std::shared_ptr<ecore::EStructuralFeature>& feature) const ;
 			virtual int getOperationCount() const ;
-			virtual int getOperationID(std::shared_ptr<ecore::EOperation> operation) const ;
-			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation> operation) const ;
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const ;
+			virtual int getOperationID(const std::shared_ptr<ecore::EOperation>& operation) const ;
+			virtual std::shared_ptr<ecore::EOperation> getOverride(const std::shared_ptr<ecore::EOperation>& operation) const ;
+			virtual bool isSuperTypeOf(const std::shared_ptr<ecore::EClass>& someClass) const ;
 			
 			//*********************************
 			// Attribute Getters & Setters

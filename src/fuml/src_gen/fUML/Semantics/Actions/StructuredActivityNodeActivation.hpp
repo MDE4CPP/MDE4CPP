@@ -89,12 +89,12 @@ namespace fUML::Semantics::Actions
 			virtual void createNodeActivations() = 0;
 			virtual void doAction() = 0;
 			virtual void doStructuredActivity() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
-			virtual std::shared_ptr<Bag<Any>> getPinValues(std::shared_ptr<uml::OutputPin> pin) = 0;
-			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) = 0;
+			virtual std::shared_ptr<Bag<Any>> getPinValues(const std::shared_ptr<uml::OutputPin>& pin) = 0;
+			virtual bool isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance) = 0;
 			virtual bool isSuspended() = 0;
-			virtual std::shared_ptr<Bag<uml::ActivityNode>> makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) = 0;
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Bag<Any>> values) = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> makeActivityNodeList(const std::shared_ptr<Bag<uml::ExecutableNode>>& nodes) = 0;
+			virtual void putPinValues(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Bag<Any>>& values) = 0;
 			virtual void resume() = 0;
 			virtual void terminate() = 0;
 			virtual void terminateAll() = 0;

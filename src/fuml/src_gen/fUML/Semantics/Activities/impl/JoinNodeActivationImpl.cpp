@@ -34,6 +34,8 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
+#include <algorithm>
+
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "uml/ActivityNode.hpp"
 //Forward declaration includes
@@ -49,8 +51,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -122,47 +124,46 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void JoinNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if (this->getNode() != nullptr)
+		if (this->getNode() != nullptr)
 	{
 		DEBUG_INFO("Firing JoinNode '" << this->getNode()->getName() << "'.")
 	}
 
 	int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensToSend(new Bag<fUML::Semantics::Activities::Token>());
 
-	Bag<fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();
-	Bag<fUML::Semantics::Activities::Token>::iterator tokenEnd = incomingTokens->end();
-	while (tokenIter != tokenEnd)
+	bool onlyControlTokens = std::all_of(
+								incomingTokens->cbegin(), 
+								incomingTokens->cend(), 
+								[controlTokenID](std::shared_ptr<fUML::Semantics::Activities::Token> token) 
+									{
+										return (token->getMetaElementID() == controlTokenID); 
+									}
+								);
+
+	if(onlyControlTokens)
 	{
-		if ((*tokenIter)->getMetaElementID() == controlTokenID)
+		tokensToSend->add(incomingTokens->front());
+	}
+	else
+	{
+		Bag<fUML::Semantics::Activities::Token>::iterator incomingTokensIter = incomingTokens->begin();
+		Bag<fUML::Semantics::Activities::Token>::iterator incomingTokensEnd = incomingTokens->end();
+		while (incomingTokensIter != incomingTokensEnd)
 		{
-			controlTokenList->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::ControlToken>(*tokenIter));
-		}
-		tokenIter++;
-	}
-
-	DEBUG_INFO(std::to_string(controlTokenList->size()) << " control tokens contained within all " << std::to_string(incomingTokens->size()) << " incoming tokens.")
-	if (controlTokenList->size() == incomingTokens->size()) // all incoming tokens are ControlToken -> only one token should be offered
-	{
-		incomingTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
-		incomingTokens->push_back(controlTokenList->front());
-	}
-	else // remove all ControlToken and offer only ObjectToken
-	{
-		Bag<fUML::Semantics::Activities::Token>::iterator controlIter = incomingTokens->begin();
-		Bag<fUML::Semantics::Activities::Token>::iterator controlEnd = incomingTokens->end();
-		while (controlIter != controlEnd)
-		{
-			incomingTokens->erase(*controlIter);
-			controlIter++;
+			if((*incomingTokensIter)->getMetaElementID() != controlTokenID)
+			{
+				tokensToSend->add(*incomingTokensIter);
+			}
+			incomingTokensIter++;
 		}
 	}
 
-	this->sendOffers(incomingTokens);
+this->sendOffers(tokensToSend);
 	//end of body
 }
 

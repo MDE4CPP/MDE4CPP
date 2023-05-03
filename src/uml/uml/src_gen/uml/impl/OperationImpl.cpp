@@ -304,7 +304,7 @@ bool OperationImpl::isUnique()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool OperationImpl::matches(std::shared_ptr<uml::Operation> comparedOperation)
+bool OperationImpl::matches(const std::shared_ptr<uml::Operation>& comparedOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -374,7 +374,7 @@ void OperationImpl::setLower(int newLower)
 	//end of body
 }
 
-void OperationImpl::setType(std::shared_ptr<uml::Type> newType)
+void OperationImpl::setType(const std::shared_ptr<uml::Type>& newType)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

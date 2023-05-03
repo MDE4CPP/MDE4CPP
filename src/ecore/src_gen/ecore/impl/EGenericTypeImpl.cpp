@@ -142,7 +142,7 @@ std::shared_ptr<ecore::EObject> EGenericTypeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool EGenericTypeImpl::isInstance(std::shared_ptr<Any> object) const
+bool EGenericTypeImpl::isInstance(const std::shared_ptr<Any>& object) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

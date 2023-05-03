@@ -92,7 +92,7 @@ namespace uml
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name, std::shared_ptr<uml::Type> type) = 0;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name, const std::shared_ptr<uml::Type>& type) = 0;
 			/*!
 			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))

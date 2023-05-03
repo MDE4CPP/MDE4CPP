@@ -80,7 +80,7 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual int getOperationID() = 0;
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
+			virtual bool isOverrideOf(const std::shared_ptr<ecore::EOperation>& someOperation) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

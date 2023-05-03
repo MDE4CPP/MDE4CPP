@@ -146,12 +146,12 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoings()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region> r)
+bool VertexImpl::isContainedInRegion(const std::shared_ptr<uml::Region>& r)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool VertexImpl::isContainedInState(std::shared_ptr<uml::State> s)
+bool VertexImpl::isContainedInState(const std::shared_ptr<uml::State>& s)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

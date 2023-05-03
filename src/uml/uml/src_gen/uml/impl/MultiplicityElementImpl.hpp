@@ -50,7 +50,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement> other) ;
+			virtual bool compatibleWith(const std::shared_ptr<uml::MultiplicityElement>& other) ;
 			/*!
 			The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
 			self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()->notEmpty() and M.lowerBound()->notEmpty()
@@ -58,7 +58,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M) ;
+			virtual bool includesMultiplicity(const std::shared_ptr<uml::MultiplicityElement>& M) ;
 			/*!
 			The operation is determines if the upper and lower bound of the ranges are the ones given.
 			result = (lowerbound = self.lowerBound() and upperbound = self.upperBound())

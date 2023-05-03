@@ -45,13 +45,13 @@ virtual public Locus
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<uml::Element> value) ;
-			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) ;
-			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) ;
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type, std::shared_ptr<uml::Classifier> classifier) ;
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class> type) ;
-			virtual void remove(std::shared_ptr<uml::Element> value) ;
-			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual void add(const std::shared_ptr<uml::Element>& value) ;
+			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) ;
+			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) ;
+			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) ;
+			virtual void remove(const std::shared_ptr<uml::Element>& value) ;
+			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

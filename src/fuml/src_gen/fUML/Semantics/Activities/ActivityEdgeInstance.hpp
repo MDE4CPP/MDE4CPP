@@ -79,7 +79,7 @@ namespace fUML::Semantics::Activities
 			virtual int countOfferedValue() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() = 0;
 			virtual bool hasOffer() = 0;
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) = 0;
+			virtual void sendOffer(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens(int maxCount) = 0;
 

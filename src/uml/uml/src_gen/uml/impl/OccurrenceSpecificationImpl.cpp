@@ -148,7 +148,7 @@ std::shared_ptr<ecore::EObject> OccurrenceSpecificationImpl::copy() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline> value)
+void OccurrenceSpecificationImpl::setCovered(const std::shared_ptr<uml::Lifeline>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

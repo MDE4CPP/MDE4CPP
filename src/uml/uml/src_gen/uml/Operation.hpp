@@ -146,7 +146,7 @@ namespace uml
 			*/
 			 
 			virtual bool isUnique() = 0;
-			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) = 0;
+			virtual bool matches(const std::shared_ptr<uml::Operation>& comparedOperation) = 0;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -157,7 +157,7 @@ namespace uml
 			virtual void setIsOrdered(bool newIsOrdered) = 0;
 			virtual void setIsUnique(bool newIsUnique) = 0;
 			virtual void setLower(int newLower) = 0;
-			virtual void setType(std::shared_ptr<uml::Type> newType) = 0;
+			virtual void setType(const std::shared_ptr<uml::Type>& newType) = 0;
 			virtual void setUpper(int newUpper) = 0;
 
 			//*********************************

@@ -42,7 +42,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>&) = 0;
 	};
 }
 [endGuard(aPackage,'Locus')/]

@@ -89,9 +89,9 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void execute() = 0;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getOutputParameterValues() = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(const std::shared_ptr<uml::Parameter>& parameter) = 0;
 			virtual std::shared_ptr<Any> new_() = 0;
-			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) = 0;
+			virtual void setParameterValue(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue) = 0;
 			virtual void terminate() = 0;
 
 			//*********************************

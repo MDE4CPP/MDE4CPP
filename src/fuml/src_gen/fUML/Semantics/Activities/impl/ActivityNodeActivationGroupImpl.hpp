@@ -49,22 +49,22 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes, std::shared_ptr<Bag<uml::ActivityEdge>> edges) ;
-			virtual void addEdgeInstance(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> instance) ;
-			virtual void addNodeActivation(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges, std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) ;
-			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges) ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes) ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
+			virtual void activate(const std::shared_ptr<Bag<uml::ActivityNode>>& nodes, const std::shared_ptr<Bag<uml::ActivityEdge>>& edges) ;
+			virtual void addEdgeInstance(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& instance) ;
+			virtual void addNodeActivation(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;
+			virtual bool checkIncomingEdges(const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdges, const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& activations) ;
+			virtual void createEdgeInstance(const std::shared_ptr<Bag<uml::ActivityEdge>>& edges) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
+			virtual void createNodeActivations(const std::shared_ptr<Bag<uml::ActivityNode>>& nodes) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> getOutputParameterNodeActivations() ;
-			virtual bool hasSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) ;
+			virtual bool hasSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance) ;
 			virtual bool isSuspended() ;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
+			virtual void resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> retrieveActivityExecution() ;
-			virtual void run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) ;
-			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode>> nodes) ;
-			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
+			virtual void run(const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& activations) ;
+			virtual void runNodes(const std::shared_ptr<Bag<uml::ActivityNode>>& nodes) ;
+			virtual void suspend(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;
 			virtual void terminateAll() ;
 			
 			//*********************************

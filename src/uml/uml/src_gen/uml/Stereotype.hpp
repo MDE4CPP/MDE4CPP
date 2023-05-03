@@ -115,7 +115,7 @@ namespace uml
 			Creates a(n) (required) extension of the specified metaclass with this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class> metaclass, bool isRequired) = 0;
+			virtual std::shared_ptr<uml::Extension> createExtension(const std::shared_ptr<uml::Class>& metaclass, bool isRequired) = 0;
 			/*!
 			Creates an icon with the specified location for this stereotype.
 			*/

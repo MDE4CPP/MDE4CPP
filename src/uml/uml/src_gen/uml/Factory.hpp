@@ -81,7 +81,7 @@ namespace uml
 			every property.
 			*/
 			 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) = 0;
+			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class>& metaClass) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

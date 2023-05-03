@@ -23,7 +23,7 @@
 
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
-[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][sParameter.generateParameterType()/] [sParameter.name/][/for]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if(sParameter.eType.oclIsKindOf(EClass) or sParameter.eType.isAnyType())]const [/if][sParameter.generateParameterType()/][if(sParameter.eType.oclIsKindOf(EClass) or sParameter.eType.isAnyType())]&[/if] [sParameter.name/][/for]
 [/template]
 
 [comment

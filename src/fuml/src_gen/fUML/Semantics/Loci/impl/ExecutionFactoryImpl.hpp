@@ -47,17 +47,17 @@ virtual public ExecutionFactory
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType> type) ;
+			virtual void addBuiltInType(const std::shared_ptr<uml::PrimitiveType>& type) ;
 			
-			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) ;
+			virtual void assignStrategy(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>& strategy) ;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context) ;
 			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ;
 			virtual int getStrategyIndex(std::string name) ;
 			
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(const std::shared_ptr<uml::Element>& element) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -55,7 +55,7 @@ namespace uml
 			Sets the Lifeline on which the OccurrenceSpecification appears.
 			*/
 			 
-			virtual void setCovered(std::shared_ptr<uml::Lifeline> value) ;
+			virtual void setCovered(const std::shared_ptr<uml::Lifeline>& value) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

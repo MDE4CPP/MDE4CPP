@@ -262,17 +262,17 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2)
+std::shared_ptr<uml::Region> StateMachineImpl::LCA(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex> v1, std::shared_ptr<uml::Vertex> v2)
+std::shared_ptr<uml::State> StateMachineImpl::LCAState(const std::shared_ptr<uml::Vertex>& v1, const std::shared_ptr<uml::Vertex>& v2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2)
+bool StateMachineImpl::ancestor(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

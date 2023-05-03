@@ -226,7 +226,7 @@ std::shared_ptr<ecore::EObject> ProfileImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier> classifier)
+std::shared_ptr<ecore::EObject> ProfileImpl::create(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -236,7 +236,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context)
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, const std::shared_ptr<Any>& diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -246,7 +246,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement> namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(const std::shared_ptr<uml::NamedElement>& namedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

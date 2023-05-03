@@ -271,9 +271,7 @@
 [if(not action.onPort.oclIsUndefined())]
 [action.memberName()/]->setOnPort([action.onPort.generatePackageGetterCall()/]);
 [/if]
-[for (inputPin : InputPin | action.input)]
-[inputPin.initializePin(inputPin = action.target)/]
-[/for]
+[action.input.initializePin()/]
 [action.output.initializePin()/]
 [/let]
 [/template]
@@ -332,7 +330,7 @@
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
 [action.memberName()/]->setIsDestroyOwnedObjects([action.isDestroyOwnedObjects/]);
 [action.memberName()/]->setIsDestroyLinks([action.isDestroyLinks/]);
-[action.input.initializePin(true)/]
+[action.input.initializePin()/]
 [action.output.initializePin()/]
 [/let]
 [/template]
@@ -457,15 +455,13 @@
  * 
  * this includes:
  * - set name
- * - if pin is a target pin, add to input pin list of CallOperationAction instance
+ * - set lower
+ * - set upper
 */]
 [template private initializePin(pin : Pin)]
-[pin.initializePin(false)/]
-[/template]
-[template private initializePin(pin : Pin, isTarget : Boolean)]
 [pin.memberName()/]->setName("[pin.metamodelElementName()/]");
 [pin.memberName()/]->setLower([pin.lower/]);
-[pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
+[pin.memberName()/]->setUpper([pin.upper/]);
 [pin.generateStereotypeApplication()/]
 
 [/template]
