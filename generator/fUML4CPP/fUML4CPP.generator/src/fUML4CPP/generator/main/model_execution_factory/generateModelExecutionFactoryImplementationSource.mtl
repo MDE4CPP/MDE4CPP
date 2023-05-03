@@ -90,7 +90,7 @@ using namespace [aPackage.generateNamespace(false)/];
 {
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context)
 {
 [let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]

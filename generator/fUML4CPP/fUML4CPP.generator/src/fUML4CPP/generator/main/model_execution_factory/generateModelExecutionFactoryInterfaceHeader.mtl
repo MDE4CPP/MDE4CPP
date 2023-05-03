@@ -42,7 +42,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&) = 0;
 	};
 }
 [endGuard(aPackage,'ExecutionFactory')/]

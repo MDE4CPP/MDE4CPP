@@ -46,7 +46,7 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>&);
 			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
 	};
 }

@@ -107,7 +107,7 @@ using namespace [aPackage.generateNamespace(false)/];
 {
 }
 
-std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(const std::shared_ptr<uml::ValueSpecification>& specification)
 {
 [if (aPackage.getEnumerationsOfValueSpecificationAction()->addAll(aPackage.getEnumerationsOwnedByPackage())->size() > 0)]
 	switch (specification->eClass()->getClassifierID())
@@ -194,7 +194,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(std::shared_ptr<uml::V
 	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 [if (aPackage.getBehaviorsOwnedByPackage()->addAll(aPackage.getCalledBehaviors())->size() > 0)]
 	int behaviorMetaElementID = behavior->getMetaElementID();
@@ -272,7 +272,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	std::string pluginName;
 
