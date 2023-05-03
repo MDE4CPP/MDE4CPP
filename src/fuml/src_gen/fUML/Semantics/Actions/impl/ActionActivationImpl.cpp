@@ -80,8 +80,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -273,7 +273,9 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::c
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_INFO("Checking if Action '" << this->getNode()->getName() << "' can fire again.")
+	this->sendOffers();
+
+DEBUG_INFO("Checking if Action '" << this->getNode()->getName() << "' can fire again.")
 
     _beginIsolation();
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
@@ -369,7 +371,6 @@ void ActionActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activ
         DEBUG_INFO("Firing Action '"  << this->getNode()->getName()  << "'.")
 
         this->doAction();
-        this->sendOffers();
         remainingTokens = this->completeAction();
 
     } while (remainingTokens->size() > 0);
@@ -432,8 +433,8 @@ bool ActionActivationImpl::isReady()
          //Have all Inputpin an Activation?
          if(ready)
          {
-        	 std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation > > activations = this->getInputPinActivation();
-             ready = std::all_of(activations->begin(),activations->end(),[this]( std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> pin){return pin->isReady();});
+		std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> activations = this->getInputPinActivation();
+		ready = std::all_of(activations->begin(),activations->end(),[]( std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> pin){return pin->isReady();});
          }
 
     }

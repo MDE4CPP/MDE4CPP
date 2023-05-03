@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -141,15 +141,16 @@ int ObjectNodeActivationImpl::countOfferedValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		int totalValueCount = 0;
-    unsigned int i = 0;
-    while (i < this->getIncomingEdges()->size()) {
-        totalValueCount = totalValueCount
-                + this->getIncomingEdges()->at(i)->countOfferedValue();
-        i = i + 1;
-    }
+	int totalValueCount = 0;
 
-    return totalValueCount;
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges = this->getIncomingEdges();
+
+	for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge : *incomingEdges)
+	{
+		totalValueCount = totalValueCount + incomingEdge->countOfferedValue();
+	}
+
+	return totalValueCount;
 	//end of body
 }
 

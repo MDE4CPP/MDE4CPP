@@ -45,7 +45,7 @@ virtual public Offer
 			//*********************************
 			// Operations
 			//*********************************
-			virtual int countOfferedVales() ;
+			virtual int countOfferedValues() ;
 			virtual bool hasTokens() ;
 			virtual void removeOfferedValues(int count) ;
 			virtual void removeWithdrawnTokens() ;

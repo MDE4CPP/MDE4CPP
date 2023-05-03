@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -340,7 +340,7 @@ void ActivitiesPackageImpl::createOfferContent(std::shared_ptr<ecore::EPackage> 
 	
 	m_offer_Attribute_offeredTokens = factory->createEReference_as_eReferences_in_EClass(m_offer_Class, OFFER_ATTRIBUTE_OFFEREDTOKENS);
 	
-	m_offer_Operation_countOfferedVales = factory->createEOperation_as_eOperations_in_EClass(m_offer_Class, OFFER_OPERATION_COUNTOFFEREDVALES);
+	m_offer_Operation_countOfferedValues = factory->createEOperation_as_eOperations_in_EClass(m_offer_Class, OFFER_OPERATION_COUNTOFFEREDVALUES);
 	m_offer_Operation_hasTokens = factory->createEOperation_as_eOperations_in_EClass(m_offer_Class, OFFER_OPERATION_HASTOKENS);
 	m_offer_Operation_removeOfferedValues_EInt = factory->createEOperation_as_eOperations_in_EClass(m_offer_Class, OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT);
 	m_offer_Operation_removeWithdrawnTokens = factory->createEOperation_as_eOperations_in_EClass(m_offer_Class, OFFER_OPERATION_REMOVEWITHDRAWNTOKENS);

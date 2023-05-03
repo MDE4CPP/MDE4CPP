@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -2605,14 +2605,14 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	/*
 	 * EOperations
 	 */
-	m_offer_Operation_countOfferedVales->setName("countOfferedVales");
-	m_offer_Operation_countOfferedVales->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
-	m_offer_Operation_countOfferedVales->setLowerBound(1);
-	m_offer_Operation_countOfferedVales->setUpperBound(1);
-	m_offer_Operation_countOfferedVales->setUnique(true);
-	m_offer_Operation_countOfferedVales->setOrdered(false);
+	m_offer_Operation_countOfferedValues->setName("countOfferedValues");
+	m_offer_Operation_countOfferedValues->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_offer_Operation_countOfferedValues->setLowerBound(1);
+	m_offer_Operation_countOfferedValues->setUpperBound(1);
+	m_offer_Operation_countOfferedValues->setUnique(true);
+	m_offer_Operation_countOfferedValues->setOrdered(false);
 	
-	m_offer_Operation_countOfferedVales->_setID(OFFER_OPERATION_COUNTOFFEREDVALES);
+	m_offer_Operation_countOfferedValues->_setID(OFFER_OPERATION_COUNTOFFEREDVALUES);
 	
 	
 	m_offer_Operation_hasTokens->setName("hasTokens");

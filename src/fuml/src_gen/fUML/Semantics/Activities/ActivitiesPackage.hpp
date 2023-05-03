@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::Activities 
@@ -644,7 +644,7 @@ namespace fUML::Semantics::Activities
 			
 			static const unsigned long OFFER_ATTRIBUTE_OFFEREDTOKENS = 295657861;
 			
-			static const unsigned long OFFER_OPERATION_COUNTOFFEREDVALES = 904773483;
+			static const unsigned long OFFER_OPERATION_COUNTOFFEREDVALUES = 1884613252;
 			static const unsigned long OFFER_OPERATION_HASTOKENS = 3339319593;
 			static const unsigned long OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT = 1313324759;
 			static const unsigned long OFFER_OPERATION_REMOVEWITHDRAWNTOKENS = 3955994697;
@@ -656,7 +656,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EReference> getOffer_Attribute_offeredTokens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_countOfferedVales() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_countOfferedValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_hasTokens() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_removeOfferedValues_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_removeWithdrawnTokens() const = 0;

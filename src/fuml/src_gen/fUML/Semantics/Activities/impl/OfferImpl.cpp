@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject> OfferImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-int OfferImpl::countOfferedVales()
+int OfferImpl::countOfferedValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -117,7 +117,7 @@ int OfferImpl::countOfferedVales()
     int count = 0;
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
 
-    for (std::shared_ptr<fUML::Semantics::Activities::Token> offeredToken: *offeredTokens) {
+    for (const std::shared_ptr<fUML::Semantics::Activities::Token>& offeredToken: *offeredTokens) {
         if (offeredToken->getValue() != nullptr) {
             count = count + 1;
         }
@@ -411,10 +411,10 @@ std::shared_ptr<Any> OfferImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Activities::Offer::countOfferedVales() : int: 904773483
-		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
+		// fUML::Semantics::Activities::Offer::countOfferedValues() : int: 1884613252
+		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALUES:
 		{
-			result = eAny(this->countOfferedVales(), 0, false);
+			result = eAny(this->countOfferedValues(), 0, false);
 			break;
 		}
 		// fUML::Semantics::Activities::Offer::hasTokens() : bool: 3339319593

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -776,9 +776,9 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Activities::ActivitiesPackag
 	return m_offer_Attribute_offeredTokens;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getOffer_Operation_countOfferedVales() const
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getOffer_Operation_countOfferedValues() const
 {
-	return m_offer_Operation_countOfferedVales;
+	return m_offer_Operation_countOfferedValues;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getOffer_Operation_hasTokens() const
 {
