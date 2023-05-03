@@ -1418,7 +1418,7 @@
         </eOperations>
         <eOperations name="fire" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token>> remainingTokens = incomingTokens;&#xA;&#xA;&#x9;do {&#xA;&#xA;        DEBUG_INFO(&quot;Firing Action '&quot;  &lt;&lt; this->getNode()->getName()  &lt;&lt; &quot;'.&quot;)&#xA;&#xA;        this->doAction();&#xA;        this->sendOffers();&#xA;        remainingTokens = this->completeAction();&#xA;&#xA;    } while (remainingTokens->size() > 0);"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token>> remainingTokens = incomingTokens;&#xA;&#xA;&#x9;do {&#xA;&#xA;        DEBUG_INFO(&quot;Firing Action '&quot;  &lt;&lt; this->getNode()->getName()  &lt;&lt; &quot;'.&quot;)&#xA;&#xA;        this->doAction();&#xA;        remainingTokens = this->completeAction();&#xA;&#xA;    } while (remainingTokens->size() > 0);"/>
           </eAnnotations>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
