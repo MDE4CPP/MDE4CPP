@@ -55,7 +55,7 @@ namespace uml
 			Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual std::shared_ptr<ecore::EObject> create(const std::shared_ptr<uml::Classifier>& classifier) ;
 			/*!
 			Defines this profile by (re)creating Ecore representations of its current contents.
 			*/
@@ -65,7 +65,7 @@ namespace uml
 			Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, std::shared_ptr<Any> diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context) ;
+			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, const std::shared_ptr<Any>& diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context) ;
 			/*!
 			Retrieves the current definition (Ecore representation) of this profile.
 			*/
@@ -75,7 +75,7 @@ namespace uml
 			Retrieves the current definition (Ecore representation) of the specified named element in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
+			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(const std::shared_ptr<uml::NamedElement>& namedElement) ;
 			/*!
 			Retrieves the extensions owned by this profile, excluding non-required extensions if indicated.
 			*/

@@ -69,8 +69,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<Any> inputValue, std::shared_ptr<Any> decisionInputValue)
+std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(const std::shared_ptr<Any>& inputValue, const std::shared_ptr<Any>& decisionInputValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +209,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(st
 	//end of body
 }
 
-void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -293,7 +293,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::getDecisionInputFlowValue()
 	//end of body
 }
 
-std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -362,7 +362,7 @@ bool DecisionNodeActivationImpl::isReady()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -415,7 +415,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationI
 
 
 
-bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> guard, std::shared_ptr<Any> value)
+bool DecisionNodeActivationImpl::test(const std::shared_ptr<uml::ValueSpecification>& guard, const std::shared_ptr<Any>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

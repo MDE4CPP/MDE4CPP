@@ -47,8 +47,8 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -116,7 +116,7 @@ std::shared_ptr<ecore::EObject> DispatchStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<uml::Element> object, std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(const std::shared_ptr<uml::Element>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -133,7 +133,7 @@ std::string DispatchStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<uml::Element> object, std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(const std::shared_ptr<uml::Element>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

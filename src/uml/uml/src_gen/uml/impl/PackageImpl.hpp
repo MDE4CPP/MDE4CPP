@@ -66,7 +66,7 @@ namespace uml
 			Applies the current definition of the specified profile to this package and automatically applies required stereotypes in the profile to elements within this package's namespace hieararchy. If a different definition is already applied, automatically migrates any associated stereotype values on a "best effort" basis (matching classifiers and structural features by name).
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject>> applyProfile(std::shared_ptr<uml::Profile> profile) ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> applyProfile(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			The query containingProfile() returns the closest profile directly or indirectly containing this package (or this package itself, if it is a profile).
 			result = (if self.oclIsKindOf(Profile) then 
@@ -153,12 +153,12 @@ namespace uml
 			Retrieves the application of the specified profile to this package, or null if no such profile is applied.
 			*/
 			 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile> profile) ;
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			Retrieves the application of the specified profile to this package or any of its nesting packages (if indicated), or null if no such profile is applied.
 			*/
 			 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile> profile, bool recurse) ;
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(const std::shared_ptr<uml::Profile>& profile, bool recurse) ;
 			/*!
 			Determines whether this package is a model library.
 			*/
@@ -168,7 +168,7 @@ namespace uml
 			Determines whether the specified profile is applied to this package.
 			*/
 			 
-			virtual bool isProfileApplied(std::shared_ptr<uml::Profile> profile) ;
+			virtual bool isProfileApplied(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			The query makesVisible() defines whether a Package makes an element visible outside itself. Elements with no visibility and elements with public visibility are made visible.
 			member->includes(el)
@@ -178,12 +178,12 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool makesVisible(std::shared_ptr<uml::NamedElement> el) ;
+			virtual bool makesVisible(const std::shared_ptr<uml::NamedElement>& el) ;
 			/*!
 			Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy.
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject>> unapplyProfile(std::shared_ptr<uml::Profile> profile) ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> unapplyProfile(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			The query visibleMembers() defines which members of a Package can be accessed outside it.
 			result = (member->select( m | m.oclIsKindOf(PackageableElement) and self.makesVisible(m))->collect(oclAsType(PackageableElement))->asSet())

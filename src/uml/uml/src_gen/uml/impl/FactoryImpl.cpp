@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EObject> FactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class> metaClass)
+std::shared_ptr<uml::Element> FactoryImpl::create(const std::shared_ptr<uml::Class>& metaClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

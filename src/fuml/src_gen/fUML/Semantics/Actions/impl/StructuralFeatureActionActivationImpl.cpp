@@ -59,8 +59,8 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -125,7 +125,7 @@ StructuralFeatureActionActivationImpl& StructuralFeatureActionActivationImpl::op
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +144,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue)
+std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end, std::shared_ptr<Any> oppositeValue, std::shared_ptr<Any> endValue)
+std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue, const std::shared_ptr<Any>& endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETT
 	//end of body
 }
 
-std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association> association, std::shared_ptr<uml::StructuralFeature> end)
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

@@ -47,7 +47,7 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual int getClassifierID() ;
-			virtual bool isInstance(std::shared_ptr<Any> object) const ;
+			virtual bool isInstance(const std::shared_ptr<Any>& object) const ;
 			
 			//*********************************
 			// Attribute Getters & Setters

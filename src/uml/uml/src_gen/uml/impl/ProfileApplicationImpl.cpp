@@ -139,7 +139,7 @@ std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(const std::shared_ptr<uml::NamedElement>& namedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

@@ -78,7 +78,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
+			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getExpansionRegionActivation() = 0;
 			virtual bool isReady() = 0;
 			virtual void receiveOffer() = 0;

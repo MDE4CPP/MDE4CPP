@@ -71,9 +71,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType, std::shared_ptr<Any> instanceValue) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const = 0;
-			virtual std::shared_ptr<Any> createFromString(std::shared_ptr<ecore::EDataType> eDataType, std::string literalValue) const = 0;
+			virtual std::string convertToString(const std::shared_ptr<ecore::EDataType>& eDataType, const std::shared_ptr<Any>& instanceValue) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::shared_ptr<ecore::EClass>& eClass) const = 0;
+			virtual std::shared_ptr<Any> createFromString(const std::shared_ptr<ecore::EDataType>& eDataType, std::string literalValue) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -48,13 +48,13 @@ virtual public Object
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
 			/*!
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			Value will be added at the position given by insertAt.
 			*/
 			 
-			virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt) ;
+			virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt) ;
 			/*!
 			Abstract operation to destroy an instance.
 			*/
@@ -66,33 +66,33 @@ virtual public Object
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const ;
+			virtual std::shared_ptr<Any> get(const std::shared_ptr<uml::Property>& _property) const ;
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) ;
 			/*!
 			Calls the Operation corresponding to the supplied OpaqueBehavior on the object, passing the supplied Arguments and returning the result.
 			The OpaqueBehavior must be zin the context of the Class of the Object, and the arguments must refer to Parameters of the OpaqueBehavior.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) ;
+			virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) ;
 			/*!
 			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
 			*/
 			 
-			virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
+			virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) ;
-			virtual void unset(std::shared_ptr<uml::Property> _property) ;
+			virtual void set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
+			virtual void unset(const std::shared_ptr<uml::Property>& _property) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

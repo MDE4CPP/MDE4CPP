@@ -45,9 +45,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void destroyObject(std::shared_ptr<Any> value, bool isDestroyLinks, bool isDestroyOwnedObjects) ;
+			virtual void destroyObject(const std::shared_ptr<Any>& value, bool isDestroyLinks, bool isDestroyOwnedObjects) ;
 			virtual void doAction() ;
-			virtual bool objectIsComposite(std::shared_ptr<uml::Element> reference, std::shared_ptr<uml::Element> link) ;
+			virtual bool objectIsComposite(const std::shared_ptr<uml::Element>& reference, const std::shared_ptr<uml::Element>& link) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

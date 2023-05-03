@@ -247,17 +247,17 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element, uml::VisibilityKind visibility)
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(const std::shared_ptr<uml::PackageableElement>& element, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_, uml::VisibilityKind visibility)
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(const std::shared_ptr<uml::Package>& package_, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -277,7 +277,7 @@ std::shared_ptr<Bag<uml::Package>> NamespaceImpl::getImportedPackages()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string>> NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
+std::shared_ptr<Bag<std::string>> NamespaceImpl::getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -287,7 +287,7 @@ std::shared_ptr<Bag<uml::NamedElement>> NamespaceImpl::getOwnedMembers()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

@@ -64,7 +64,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void setContainer(std::shared_ptr<Bag<ecore::EObject>> container) = 0;
+			virtual void setContainer(const std::shared_ptr<Bag<ecore::EObject>>& container) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

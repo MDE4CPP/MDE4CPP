@@ -53,8 +53,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
@@ -73,8 +73,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -149,7 +149,7 @@ std::shared_ptr<ecore::EObject> CallOperationActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperationActionActivationImpl::doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperationActionActivationImpl::doCall(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

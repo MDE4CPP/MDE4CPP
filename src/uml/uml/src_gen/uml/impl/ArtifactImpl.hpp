@@ -56,12 +56,12 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, std::shared_ptr<uml::Type> type, int lower, int upper) ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) ;
 			/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, std::shared_ptr<uml::Type> returnType) ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -82,27 +82,27 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void addIncomingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge) = 0;
-			virtual void addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge) = 0;
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
-			virtual void addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) = 0;
+			virtual void addIncomingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) = 0;
+			virtual void addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) = 0;
+			virtual void addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) = 0;
+			virtual void addTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) = 0;
 			virtual void clearTokens() = 0;
 			virtual void createEdgeInstances() = 0;
 			virtual void createNodeActivations() = 0;
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
+			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() = 0;
 			virtual std::shared_ptr<uml::Element> getExecutionContext() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() = 0;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) = 0;
 			virtual bool getRunning() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() = 0;
 			virtual bool isReady() = 0;
-			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstances) = 0;
+			virtual bool isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstances) = 0;
 			virtual void receiveOffer() = 0;
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
+			virtual int removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) = 0;
 			virtual void resume() = 0;
 			virtual void run() = 0;
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) = 0;
+			virtual void sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) = 0;
 			virtual void suspend() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeTokens() = 0;

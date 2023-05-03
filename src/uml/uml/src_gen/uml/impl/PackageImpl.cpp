@@ -379,7 +379,7 @@ std::shared_ptr<Bag<uml::Stereotype>> PackageImpl::allApplicableStereotypes()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject>> PackageImpl::applyProfile(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<Bag<ecore::EObject>> PackageImpl::applyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -454,12 +454,12 @@ std::shared_ptr<Bag<uml::Type>> PackageImpl::getOwnedTypes()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile, bool recurse)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(const std::shared_ptr<uml::Profile>& profile, bool recurse)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -469,17 +469,17 @@ bool PackageImpl::isModelLibrary()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile> profile)
+bool PackageImpl::isProfileApplied(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement> el)
+bool PackageImpl::makesVisible(const std::shared_ptr<uml::NamedElement>& el)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject>> PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<Bag<ecore::EObject>> PackageImpl::unapplyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

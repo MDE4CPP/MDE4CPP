@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -116,7 +116,7 @@ ObjectNodeActivationImpl& ObjectNodeActivationImpl::operator=(const ObjectNodeAc
 //*********************************
 // Operations
 //*********************************
-void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+void ObjectNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
 	//end of body
 }
 
-int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+int ObjectNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +209,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
+void ObjectNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

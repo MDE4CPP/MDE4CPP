@@ -51,16 +51,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject> LocusImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(std::shared_ptr<uml::Element> value)
+void LocusImpl::add(const std::shared_ptr<uml::Element>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -168,7 +168,7 @@ void LocusImpl::add(std::shared_ptr<uml::Element> value)
 	//end of body
 }
 
-void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor)
+void LocusImpl::assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +177,7 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> 
 	//end of body
 }
 
-void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory)
+void LocusImpl::assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -186,7 +186,7 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFa
 	//end of body
 }
 
-bool LocusImpl::conforms(std::shared_ptr<uml::Classifier> type, std::shared_ptr<uml::Classifier> classifier)
+bool LocusImpl::conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -208,7 +208,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier> type, std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<uml::Element> LocusImpl::instantiate(std::shared_ptr<uml::Class> type)
+std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::Class>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,18 +239,18 @@ return nullptr;
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<uml::Element> value)
+void LocusImpl::remove(const std::shared_ptr<uml::Element>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		//TODO decide hoe the reference between an instance and a locus should be handled
 	//value->setLocus(nullptr);
 	this->getExtensionalValues()->erase(value);
-	value.reset();
+	//value.reset();
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier> classifier)
+std::shared_ptr<Bag<uml::Element>> LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

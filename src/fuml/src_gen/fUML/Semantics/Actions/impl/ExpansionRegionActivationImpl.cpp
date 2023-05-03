@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -270,7 +270,7 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node)
+std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(const std::shared_ptr<uml::ExpansionNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -329,7 +329,7 @@ int ExpansionRegionActivationImpl::numberOfValues()
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::resume(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::resume(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -346,7 +346,7 @@ void ExpansionRegionActivationImpl::resume(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::runGroup(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -533,7 +533,7 @@ void ExpansionRegionActivationImpl::terminate()
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::terminateGroup(std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::terminateGroup(const std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

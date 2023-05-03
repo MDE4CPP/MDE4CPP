@@ -67,7 +67,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) ;
+			virtual std::shared_ptr<uml::Region> LCA(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2) ;
 			/*!
 			This utility funciton is like the LCA, except that it returns the nearest composite State that contains both input Vertices.
 			result = (if v2.oclIsTypeOf(State) and ancestor(v1, v2) then
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1, std::shared_ptr<uml::Vertex> v2) ;
+			virtual std::shared_ptr<uml::State> LCAState(const std::shared_ptr<uml::Vertex>& v1, const std::shared_ptr<uml::Vertex>& v2) ;
 			/*!
 			The query ancestor(s1, s2) checks whether Vertex s2 is an ancestor of Vertex s1.
 			result = (if (s2 = s1) then 
@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1, std::shared_ptr<uml::Vertex> s2) ;
+			virtual bool ancestor(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

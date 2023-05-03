@@ -48,9 +48,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
-			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
+			virtual void resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;
+			virtual void suspend(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -51,8 +51,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -117,7 +117,7 @@ WriteStructuralFeatureActionActivationImpl& WriteStructuralFeatureActionActivati
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<Any> value, std::shared_ptr<Bag<Any>> list, int startAt)
+int WriteStructuralFeatureActionActivationImpl::position(const std::shared_ptr<Any>& value, const std::shared_ptr<Bag<Any>>& list, int startAt)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

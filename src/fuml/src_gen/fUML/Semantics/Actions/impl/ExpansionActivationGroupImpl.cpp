@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -146,7 +146,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ExpansionActivatio
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionAc
 	//end of body
 }
 
-void ExpansionActivationGroupImpl::resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation)
+void ExpansionActivationGroupImpl::resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -199,7 +199,7 @@ void ExpansionActivationGroupImpl::resume(std::shared_ptr<fUML::Semantics::Activ
 	//end of body
 }
 
-void ExpansionActivationGroupImpl::suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation)
+void ExpansionActivationGroupImpl::suspend(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

@@ -567,12 +567,12 @@ std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::getInheritedMembers()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, bool ignoreCase)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -603,27 +603,27 @@ std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::getUsedInterfaces()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::hasVisibilityOf(std::shared_ptr<uml::NamedElement> n)
+bool ClassifierImpl::hasVisibilityOf(const std::shared_ptr<uml::NamedElement>& n)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inheritableMembers(std::shared_ptr<uml::Classifier> c)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inheritableMembers(const std::shared_ptr<uml::Classifier>& c)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier> contract)
+bool ClassifierImpl::isSubstitutableFor(const std::shared_ptr<uml::Classifier>& contract)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier> c)
+bool ClassifierImpl::maySpecializeType(const std::shared_ptr<uml::Classifier>& c)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

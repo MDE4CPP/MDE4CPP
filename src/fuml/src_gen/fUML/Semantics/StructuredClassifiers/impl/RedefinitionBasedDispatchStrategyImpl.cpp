@@ -48,8 +48,8 @@
 #include "uml/Element.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -115,7 +115,7 @@ std::shared_ptr<ecore::EObject> RedefinitionBasedDispatchStrategyImpl::copy() co
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation> ownedOperation, std::shared_ptr<uml::Operation> baseOperation)
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -137,7 +137,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<uml::Element> object, std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(const std::shared_ptr<uml::Element>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

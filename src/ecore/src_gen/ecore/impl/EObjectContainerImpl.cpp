@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject> EObjectContainerImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void EObjectContainerImpl::setContainer(std::shared_ptr<Bag<ecore::EObject>> container)
+void EObjectContainerImpl::setContainer(const std::shared_ptr<Bag<ecore::EObject>>& container)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

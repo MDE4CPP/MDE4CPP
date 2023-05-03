@@ -161,12 +161,12 @@ std::shared_ptr<Bag<uml::Package>> NamedElementImpl::allOwningPackages()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement> supplier)
+std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(const std::shared_ptr<uml::NamedElement>& supplier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement> supplier)
+std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(const std::shared_ptr<uml::NamedElement>& supplier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -211,7 +211,7 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns)
+bool NamedElementImpl::isDistinguishableFrom(const std::shared_ptr<uml::NamedElement>& n, const std::shared_ptr<uml::Namespace>& ns)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

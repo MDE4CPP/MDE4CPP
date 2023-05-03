@@ -80,8 +80,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -202,7 +202,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 //*********************************
 // Operations
 //*********************************
-void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
+void ActionActivationImpl::addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,7 +239,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation)
+void ActionActivationImpl::addPinActivation(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& pinActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -358,23 +358,25 @@ void ActionActivationImpl::doAction()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void ActionActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    do {
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> remainingTokens = incomingTokens;
+
+	do {
 
         DEBUG_INFO("Firing Action '"  << this->getNode()->getName()  << "'.")
 
         this->doAction();
         this->sendOffers();
-        incomingTokens = this->completeAction();
+        remainingTokens = this->completeAction();
 
-    } while (incomingTokens->size() > 0);
+    } while (remainingTokens->size() > 0);
 	//end of body
 }
 
-std::shared_ptr<Bag<Any>> ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<Any>> ActionActivationImpl::getTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -459,7 +461,7 @@ bool ActionActivationImpl::isReady()
 	//end of body
 }
 
-bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance)
+bool ActionActivationImpl::isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -479,7 +481,7 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activiti
 
 
 
-void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Any> value)
+void ActionActivationImpl::putToken(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Any>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -492,7 +494,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin, std::sh
 	//end of body
 }
 
-void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin, std::shared_ptr<Bag<Any>> values)
+void ActionActivationImpl::putTokens(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Bag<Any>>& values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -505,7 +507,7 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin, std::s
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin> pin)
+std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(const std::shared_ptr<uml::Pin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -618,7 +620,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
 	//end of body
 }
 
-std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -663,7 +665,7 @@ void ActionActivationImpl::terminate()
 	//end of body
 }
 
-bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<Any> value, std::shared_ptr<uml::Element> link)
+bool ActionActivationImpl::valueParticipatesInLink(const std::shared_ptr<Any>& value, const std::shared_ptr<uml::Element>& link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

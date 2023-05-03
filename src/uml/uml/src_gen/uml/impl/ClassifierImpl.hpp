@@ -150,12 +150,12 @@ namespace uml
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes) ;
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier, ignoring case if indicated.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, std::shared_ptr<Bag<uml::Type>> parameterTypes, bool ignoreCase) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase) ;
 			/*!
 			Retrieves the operations of this classifier.
 			*/
@@ -178,7 +178,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool hasVisibilityOf(std::shared_ptr<uml::NamedElement> n) ;
+			virtual bool hasVisibilityOf(const std::shared_ptr<uml::NamedElement>& n) ;
 			/*!
 			The query inherit() defines how to inherit a set of elements passed as its argument.  It excludes redefined elements from the result.
 			result = (inhs->reject(inh |
@@ -189,7 +189,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement>> inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs) ;
 			/*!
 			The query inheritableMembers() gives all of the members of a Classifier that may be inherited in one of its descendants, subject to whatever visibility restrictions apply.
 			c.allParents()->includes(self)
@@ -197,20 +197,20 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement>> inheritableMembers(std::shared_ptr<uml::Classifier> c) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> inheritableMembers(const std::shared_ptr<uml::Classifier>& c) ;
 			/*!
 			result = (substitution.contract->includes(contract))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier> contract) ;
+			virtual bool isSubstitutableFor(const std::shared_ptr<uml::Classifier>& contract) ;
 			/*!
 			The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
 			result = (self.oclIsKindOf(c.oclType()))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier> c) ;
+			virtual bool maySpecializeType(const std::shared_ptr<uml::Classifier>& c) ;
 			/*!
 			The query parents() gives all of the immediate ancestors of a generalized Classifier.
 			result = (generalization.general->asSet())

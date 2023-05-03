@@ -116,7 +116,7 @@ ParameterableElementImpl& ParameterableElementImpl::operator=(const Parameterabl
 //*********************************
 // Operations
 //*********************************
-bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p)
+bool ParameterableElementImpl::isCompatibleWith(const std::shared_ptr<uml::ParameterableElement>& p)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -114,7 +114,7 @@ void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<A
 	//end of body
 }
 
-void ObjectImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt)
+void ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -124,32 +124,32 @@ void ObjectImpl::destroy()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> ObjectImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ObjectImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ObjectImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> ObjectImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ObjectImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ObjectImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property> _property)
+void ObjectImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

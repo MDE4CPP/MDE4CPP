@@ -121,12 +121,12 @@ namespace uml
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement> supplier) = 0;
+			virtual std::shared_ptr<uml::Dependency> createDependency(const std::shared_ptr<uml::NamedElement>& supplier) = 0;
 			/*!
 			Creates a usage between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement> supplier) = 0;
+			virtual std::shared_ptr<uml::Usage> createUsage(const std::shared_ptr<uml::NamedElement>& supplier) = 0;
 			/*!
 			result = (Dependency.allInstances()->select(d | d.client->includes(self)))
 			<p>From package UML::CommonStructure.</p>
@@ -164,7 +164,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n, std::shared_ptr<uml::Namespace> ns) = 0;
+			virtual bool isDistinguishableFrom(const std::shared_ptr<uml::NamedElement>& n, const std::shared_ptr<uml::Namespace>& ns) = 0;
 			/*!
 			The query separator() gives the string that is used to separate names when constructing a qualifiedName.
 			result = ('::')

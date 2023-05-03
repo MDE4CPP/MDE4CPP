@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool FunctionBehaviorImpl::hasAllDataTypeAttributes(std::shared_ptr<uml::DataType> d)
+bool FunctionBehaviorImpl::hasAllDataTypeAttributes(const std::shared_ptr<uml::DataType>& d)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

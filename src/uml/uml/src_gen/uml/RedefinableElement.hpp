@@ -84,14 +84,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) = 0;
+			virtual bool isConsistentWith(const std::shared_ptr<uml::RedefinableElement>& redefiningElement) = 0;
 			/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) = 0;
+			virtual bool isRedefinitionContextValid(const std::shared_ptr<uml::RedefinableElement>& redefinedElement) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

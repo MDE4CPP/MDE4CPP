@@ -206,7 +206,7 @@ int EOperationImpl::getOperationID()
 	//end of body
 }
 
-bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
+bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

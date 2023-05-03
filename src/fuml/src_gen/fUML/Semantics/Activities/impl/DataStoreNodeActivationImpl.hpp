@@ -45,8 +45,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
+			virtual void addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) ;
+			virtual int removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

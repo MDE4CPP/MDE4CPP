@@ -89,7 +89,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual void doAction() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameterValues) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameterValues) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<uml::Parameter>> retrieveCallParameters() const = 0;

@@ -197,7 +197,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name, std::shared_ptr<uml::Type> type)
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name, const std::shared_ptr<uml::Type>& type)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
