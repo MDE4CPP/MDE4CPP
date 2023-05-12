@@ -407,7 +407,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	//Model-external OpaqueBehavior
 	else
 	{
-	[if (aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))->size() = 0)]
+	[let externalPackageList : Set(Package) = aPackage.getPackagesOfCalledOpaqueBehaviors()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+	[if (externalPackageList->size() = 0)]
 		//No external opaque behaviors called in Activities of this model
 	[else]
 		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
@@ -427,6 +428,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 		}
 		else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
 	[/if]
+	[/let]
 	}
 
 	return nullptr;
