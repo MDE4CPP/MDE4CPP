@@ -1,0 +1,207 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModelApiSource('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
+[import ecore4CPP::generator::main::generateEClass /]
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::generateAttribute /]
+[import ecore4CPP::generator::main::generateReference /]
+[import ecore4CPP::generator::main::helpers::IDHelper /]
+
+[template public generateModelApiSource(anEPackage : EPackage){
+    packageName : String = anEPackage.name.concat('Api');
+    fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'model api source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
+#define CROW_JSON_USE_MAP
+#include "[packageName/].hpp"
+
+std::shared_ptr<[packageName/]> [packageName/]::eInstance(std::shared_ptr<[anEPackage.name/]Factory> &factory) {
+    static std::shared_ptr<[packageName/]> instance = std::make_shared<[packageName/]>([packageName/](factory));
+    return instance;
+}
+
+[packageName/]::[packageName/](std::shared_ptr<[anEPackage.name/]Factory>& factory) {
+    m_factory = factory;
+    crow::SimpleApp app;
+
+    //Create function
+    CROW_ROUTE(app, "/objects/<string>/<string>").methods(crow::HTTPMethod::Post)(['['/]this[']'/](const crow::request& request, const std::string& className, const std::string& objectName){
+        if(m_objects.find(objectName) != m_objects.end()){
+            return crow::response(400, "Object already exists!");
+        }
+        auto object = readValue(crow::json::load(request.body), m_factory->create(className)->eClass()->getMetaElementID());
+        m_objects['['/]objectName[']'/] = object;
+        return crow::response(201);
+    });
+
+    //Read function
+    CROW_ROUTE(app, "/objects/<string>/<string>").methods(crow::HTTPMethod::Get)(['['/]this[']'/](const std::string& className, const std::string& objectName){
+        if(m_objects.find(objectName) == m_objects.end()){
+            return crow::response(404);
+        }
+        auto result = writeValue(m_objects['['/]objectName[']'/]);
+        return crow::response(200, result);
+    });
+
+    //Update function
+    CROW_ROUTE(app, "/objects/<string>/<string>").methods(crow::HTTPMethod::Put)(['['/]this[']'/](const crow::request& request, const std::string& className, const std::string& objectName){
+        if(m_objects.find(objectName) == m_objects.end()){
+            return crow::response(404);
+        }
+        m_objects.erase(m_objects.find(objectName));
+        auto object = readValue(crow::json::load(request.body), m_factory->create(className)->eClass()->getMetaElementID());
+        m_objects['['/]objectName[']'/] = object;
+        return crow::response(200);
+    });
+
+    //Delete function
+    CROW_ROUTE(app, "/objects/<string>/<string>").methods(crow::HTTPMethod::Delete)(['['/]this[']'/](const std::string& className, const std::string& objectName){
+        if(m_objects.find(objectName) == m_objects.end()){
+            return crow::response(404);
+        }
+        m_objects.erase(m_objects.find(objectName));
+        return crow::response(204);
+    });
+
+    //create instance model
+    CROW_ROUTE(app, "/objects").methods(crow::HTTPMethod::Post)(['['/]this[']'/](const crow::request& request){
+        for(const auto & entry : crow::json::load(request.body)){
+            auto object = readValue(entry, entry['['/]"ecore_type"[']'/].i());
+            m_objects['['/]entry['['/]"ecore_identifier"[']'/].s()[']'/] = object;
+        }
+        return crow::response(201);
+    });
+
+    //get instance model
+    CROW_ROUTE(app, "/objects/").methods(crow::HTTPMethod::Get)(['['/]this[']'/](){
+        crow::json::wvalue result;
+        int i = 0;
+        for(const auto & object : m_objects){
+            auto wvalue = writeValue(object.second);
+            wvalue['['/]"ecore_identifier"[']'/] = object.first;
+            wvalue['['/]"ecore_type"[']'/] = object.second->getTypeId();
+            result['['/]i[']'/] = std::move(wvalue);
+            i++;
+        }
+        return crow::response(200, result);
+    });
+
+    //Swagger
+    CROW_ROUTE(app, "/")([](){
+        auto page = crow::mustache::load_text("index.html");
+        return crow::response(page);
+    });
+
+    CROW_ROUTE(app, "/<string>")([](const std::string& path){
+        auto page = crow::mustache::load_text(path);
+        return crow::response(page);
+    });
+
+    app.port(8080).multithreaded().run();
+}
+
+crow::json::wvalue [packageName/]::writeValue(const std::shared_ptr<Any>& any){
+    auto result = crow::json::wvalue();
+    auto metaElementId = any->getTypeId();
+    switch (metaElementId) {
+    	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false and aClass.interface=false)]
+    	case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
+    	{
+    	    auto value = any->get<[aClass.generateType(true)/]>();
+    	    [for (attribute : EAttribute | aClass.eAllAttributes->asOrderedSet()->sortedBy(name))]
+    	    result['['/]"[attribute.name/]"[']'/] = value->get[attribute.name.toUpperFirst()/]();
+    	    [/for]
+    	    [for (reference : EReference | aClass.eAllReferences->asOrderedSet()->sortedBy(name))]
+    	    [if (not reference.isBackReference())]
+            [if (reference.upperBound = 1)]
+            result['['/]"[reference.name/]"[']'/] = writeValue(eAny(value->get[reference.name.toUpperFirst()/](), [reference.eType.getMetaElementIDName()/], false));
+            [else]
+            for(int i=0;i<value->get[reference.name.toUpperFirst()/]()->size();i++){
+                result['['/]"[reference.name/]"[']'/]['['/]i[']'/] = writeValue(eAny(value->get[reference.name.toUpperFirst()/]()->at(i), [reference.eType.getMetaElementIDName()/], false));
+            }
+            [/if]
+    	    [/if]
+    	    [/for]
+    	    break;
+    	}
+    	[/for]
+        default:
+        {
+            result = nullptr;
+            break;
+        }
+    }
+    return result;
+}
+
+std::shared_ptr<Any> [packageName/]::readValue(const crow::json::rvalue& content, const long& metaElementId){
+    switch (metaElementId) {
+    	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false and aClass.interface=false)]
+    	case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
+    	{
+    	    auto value = m_factory->create[aClass.name.toUpperFirst()/]();
+    	    [for (attribute : EAttribute | aClass.eAllAttributes->asOrderedSet()->sortedBy(name))]
+    	    if(keyIsAvailable(content, "[attribute.name/]")){
+                value->set[attribute.name.toUpperFirst()/](convert_to<[attribute.generateStructuralFeatureType(true)/]>(content['['/]"[attribute.name/]"[']'/]));
+    	    }
+    	    [/for]
+    	    [for (reference : EReference | aClass.eAllReferences->asOrderedSet()->sortedBy(name))]
+    	    [if (not reference.isBackReference())]
+            if(keyIsAvailable(content, "[reference.name/]")){
+            [if (reference.upperBound = 1)]
+                value->set[reference.name.toUpperFirst()/](readValue(content['['/]"[reference.name/]"[']'/], [reference.eType.getMetaElementIDName()/])->get<std::shared_ptr<[reference.generateReferenceType()/])
+            [else]
+    	        for(const auto& it : content['['/]"[reference.name/]"[']'/]){
+    	            value->get[reference.name.toUpperFirst()/]()->add(readValue(it, [reference.eType.getMetaElementIDName()/])->get<std::shared_ptr<[reference.eGenericType.generateCppType(false)/]>>());
+    	        }
+    	    [/if]
+    	    }
+    	    [/if]
+    	    [/for]
+    	    return eAny(value, [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/], false);
+    	}
+    	[/for]
+        default:
+        {
+            return nullptr;
+        }
+    }
+}
+
+bool [packageName/]::keyIsAvailable(const crow::json::rvalue& content, const std::string& key){
+    try{
+        content['['/]key[']'/];
+        return true;
+    }catch (std::runtime_error& error){
+        return false;
+    }
+}
+
+//generic conversion methods for json
+template<> bool [packageName/]::convert_to<bool>(const crow::json::rvalue& value){
+    return value.b();
+}
+template <typename T> T [packageName/]::convert_to(const crow::json::rvalue& value){
+    std::istringstream ss(value.operator std::string());
+    T num;
+    ss >> num;
+    return num;
+}
+[/file]
+[/template]
