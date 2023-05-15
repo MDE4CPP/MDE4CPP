@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "c545b4bb-7b88-44ad-82c3-5a0aa1b1a5d3",
+		"name": "Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create an object",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Book1\",\r\n    \"authors\": [\r\n        {\r\n            \"Name\": \"Author1\"\r\n        },\r\n        {\r\n            \"Name\": \"Author2\"\r\n        }\r\n    ],\r\n    \"pictures\": [\r\n        {\r\n            \"Name\": \"Picture1\",\r\n            \"pageNumber\": 123\r\n        },\r\n        {\r\n            \"Name\": \"Picture2\",\r\n            \"pageNumber\": 321\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/objects/Book/book1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects",
+						"Book",
+						"book1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read an object",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/objects/Book/book1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects",
+						"Book",
+						"book1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an object",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Book1\",\r\n    \"authors\": [\r\n        {\r\n            \"Name\": \"Author3\"\r\n        },\r\n        {\r\n            \"Name\": \"Author4\"\r\n        }\r\n    ],\r\n    \"pictures\": [\r\n        {\r\n            \"Name\": \"Picture3\",\r\n            \"pageNumber\": 162\r\n        },\r\n        {\r\n            \"Name\": \"Picture4\",\r\n            \"pageNumber\": 1256\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/objects/Book/book1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects",
+						"Book",
+						"book1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an object",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/objects/Book/book1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects",
+						"Book",
+						"book1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read objects as specification",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/objects",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create objects from specification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"Name\": \"Book1\",\r\n        \"authors\": [\r\n            {\r\n                \"Name\": \"Author3\"\r\n            },\r\n            {\r\n                \"Name\": \"Author4\"\r\n            }\r\n        ],\r\n        \"ecore_identifier\": \"book1\",\r\n        \"ecore_type\": \"Book\",\r\n        \"pictures\": [\r\n            {\r\n                \"Name\": \"Picture3\",\r\n                \"pageNumber\": 162\r\n            },\r\n            {\r\n                \"Name\": \"Picture4\",\r\n                \"pageNumber\": 1256\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"Name\": \"Book1\",\r\n        \"authors\": [\r\n            {\r\n                \"Name\": \"Author1\"\r\n            },\r\n            {\r\n                \"Name\": \"Author2\"\r\n            }\r\n        ],\r\n        \"ecore_identifier\": \"book2\",\r\n        \"ecore_type\": \"Book\",\r\n        \"pictures\": [\r\n            {\r\n                \"Name\": \"Picture1\",\r\n                \"pageNumber\": 123\r\n            },\r\n            {\r\n                \"Name\": \"Picture2\",\r\n                \"pageNumber\": 321\r\n            }\r\n        ]\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/objects",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
