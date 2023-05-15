@@ -217,36 +217,36 @@ std::shared_ptr<Any> TextOutputChannelImpl::get(unsigned long _uID) const
 }
 
 //Set
-void TextOutputChannelImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void TextOutputChannelImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void TextOutputChannelImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class OutputChannel
 	FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::set(_uID, value);
 }
 
 //Add
-void TextOutputChannelImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void TextOutputChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void TextOutputChannelImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void TextOutputChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void TextOutputChannelImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void TextOutputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	//Call set() for base class OutputChannel
 	FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::add(_uID, value, insertAt);
@@ -271,18 +271,18 @@ void TextOutputChannelImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void TextOutputChannelImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void TextOutputChannelImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void TextOutputChannelImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void TextOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class OutputChannel
 	FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::remove(_uID, value);
@@ -292,18 +292,18 @@ void TextOutputChannelImpl::remove(unsigned long _uID, std::shared_ptr<Any> valu
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> TextOutputChannelImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> TextOutputChannelImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> TextOutputChannelImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 
@@ -524,7 +524,7 @@ std::shared_ptr<Any> TextOutputChannelImpl::invoke(unsigned long _uID, std::shar
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> TextOutputChannelImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result;
 	//Call invoke() for base class OutputChannel

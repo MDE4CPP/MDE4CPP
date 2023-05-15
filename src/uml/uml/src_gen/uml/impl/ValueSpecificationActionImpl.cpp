@@ -378,7 +378,7 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ValueSpecificationActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ValueSpecificationActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -452,7 +452,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, std::shared_ptr<Any> newV
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ValueSpecificationActionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

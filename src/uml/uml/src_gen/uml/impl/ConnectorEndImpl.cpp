@@ -369,7 +369,7 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
 
-bool ConnectorEndImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ConnectorEndImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -474,7 +474,7 @@ bool ConnectorEndImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ConnectorEndImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

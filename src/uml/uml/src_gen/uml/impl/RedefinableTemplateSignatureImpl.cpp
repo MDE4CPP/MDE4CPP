@@ -470,7 +470,7 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RedefinableTemplateSignatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool RedefinableTemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -565,7 +565,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, std::shared_ptr<Any> 
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> RedefinableTemplateSignatureImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

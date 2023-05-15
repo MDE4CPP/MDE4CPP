@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -274,7 +274,7 @@ bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
 	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool DataStoreNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool DataStoreNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -286,7 +286,7 @@ bool DataStoreNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> DataStoreNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

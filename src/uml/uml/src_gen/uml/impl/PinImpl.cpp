@@ -339,7 +339,7 @@ bool PinImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PinImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool PinImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -372,7 +372,7 @@ bool PinImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> PinImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> PinImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

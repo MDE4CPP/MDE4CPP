@@ -330,7 +330,7 @@ bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 	return VariableActionImpl::internalEIsSet(featureID);
 }
 
-bool WriteVariableActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool WriteVariableActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -373,7 +373,7 @@ bool WriteVariableActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> WriteVariableActionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

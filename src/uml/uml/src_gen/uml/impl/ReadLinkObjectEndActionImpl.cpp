@@ -428,7 +428,7 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadLinkObjectEndActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ReadLinkObjectEndActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -533,7 +533,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ReadLinkObjectEndActionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

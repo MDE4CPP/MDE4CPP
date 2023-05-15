@@ -610,7 +610,7 @@ void BasicInputOutputPackageImpl::initializeActivity_foundationalModelLibrary_Ba
 	foundationalModelLibrary_BasicInputOutput_ReadLine_CallOperationAction_Call_readLine->setOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_Status_Status());
 	inputPin_ReadLine_ReadLine_Call_readLine_target->setName("target");
 	inputPin_ReadLine_ReadLine_Call_readLine_target->setLower(1);
-	inputPin_ReadLine_ReadLine_Call_readLine_target->setUpper(-1);
+	inputPin_ReadLine_ReadLine_Call_readLine_target->setUpper(1);
 	
 	
 	outputPin_ReadLine_ReadLine_Call_readLine_ReturnResult->setName("ReturnResult");
@@ -688,10 +688,9 @@ void BasicInputOutputPackageImpl::initializeActivity_foundationalModelLibrary_Ba
 	inputPin_WriteLine_WriteLine_Call_writeLine_value->setLower(1);
 	inputPin_WriteLine_WriteLine_Call_writeLine_value->setUpper(1);
 	
-	
 	inputPin_WriteLine_WriteLine_Call_writeLine_target->setName("target");
 	inputPin_WriteLine_WriteLine_Call_writeLine_target->setLower(1);
-	inputPin_WriteLine_WriteLine_Call_writeLine_target->setUpper(-1);
+	inputPin_WriteLine_WriteLine_Call_writeLine_target->setUpper(1);
 	
 	
 	outputPin_WriteLine_WriteLine_Call_writeLine_errorStatus->setName("errorStatus");

@@ -329,7 +329,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }
 
-bool ConsiderIgnoreFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ConsiderIgnoreFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -386,7 +386,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ConsiderIgnoreFragmentImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

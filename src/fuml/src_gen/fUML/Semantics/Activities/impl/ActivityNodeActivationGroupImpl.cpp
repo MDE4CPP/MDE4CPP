@@ -66,8 +66,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -894,7 +894,7 @@ bool ActivityNodeActivationGroupImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -1103,7 +1103,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, std::shared_ptr<Any> n
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

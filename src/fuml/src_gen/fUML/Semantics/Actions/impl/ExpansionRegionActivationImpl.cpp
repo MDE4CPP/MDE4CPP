@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -820,7 +820,7 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -981,7 +981,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, std::shared_ptr<Any> new
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ExpansionRegionActivationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -383,7 +383,7 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	return ConstraintImpl::internalEIsSet(featureID);
 }
 
-bool InteractionConstraintImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool InteractionConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -457,7 +457,7 @@ bool InteractionConstraintImpl::eSet(int featureID, std::shared_ptr<Any> newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> InteractionConstraintImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -44,9 +44,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -58,8 +58,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -381,7 +381,7 @@ bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -424,7 +424,7 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, std::shared
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

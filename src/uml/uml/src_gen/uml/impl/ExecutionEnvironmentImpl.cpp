@@ -332,7 +332,7 @@ bool ExecutionEnvironmentImpl::internalEIsSet(int featureID) const
 	return NodeImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionEnvironmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ExecutionEnvironmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -344,7 +344,7 @@ bool ExecutionEnvironmentImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ExecutionEnvironmentImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

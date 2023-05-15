@@ -434,7 +434,7 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 	return ArtifactImpl::internalEIsSet(featureID);
 }
 
-bool DeploymentSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool DeploymentSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -505,7 +505,7 @@ bool DeploymentSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> DeploymentSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

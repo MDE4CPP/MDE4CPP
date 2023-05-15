@@ -29,7 +29,7 @@ namespace FoundationalModelLibrary
 	{
 		private:    
 			FoundationalModelLibraryExecutorImpl& operator=(FoundationalModelLibraryExecutorImpl const&) = delete;
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(std::shared_ptr<uml::OpaqueBehavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<uml::Element>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&);
 
 		public:
 			FoundationalModelLibraryExecutorImpl();
@@ -37,8 +37,8 @@ namespace FoundationalModelLibrary
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Any> evaluate(std::shared_ptr<uml::ValueSpecification>);
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
+			virtual std::shared_ptr<Any> evaluate(const std::shared_ptr<uml::ValueSpecification>&);
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&);
 			virtual void setThisExecutorPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Executor*/fUML::Semantics::Loci::Executor>);
 	};
 }

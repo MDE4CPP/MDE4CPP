@@ -425,7 +425,7 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
 
-bool ObjectFlowImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ObjectFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -527,7 +527,7 @@ bool ObjectFlowImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ObjectFlowImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

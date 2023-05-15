@@ -1349,7 +1349,7 @@ bool ClassifierImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -1797,7 +1797,7 @@ bool ClassifierImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

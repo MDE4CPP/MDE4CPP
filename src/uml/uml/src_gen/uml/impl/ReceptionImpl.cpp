@@ -309,7 +309,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
 
-bool ReceptionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ReceptionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -352,7 +352,7 @@ bool ReceptionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ReceptionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

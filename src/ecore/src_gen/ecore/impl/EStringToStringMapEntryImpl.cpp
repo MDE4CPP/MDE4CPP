@@ -273,7 +273,7 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EStringToStringMapEntryImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool EStringToStringMapEntryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -313,7 +313,7 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> EStringToStringMapEntryImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

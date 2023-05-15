@@ -395,7 +395,7 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	return VertexImpl::internalEIsSet(featureID);
 }
 
-bool ConnectionPointReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -528,7 +528,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, std::shared_ptr<Any> newV
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ConnectionPointReferenceImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

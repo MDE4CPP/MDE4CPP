@@ -38,7 +38,7 @@ FoundationalModelLibraryLocusImpl::~FoundationalModelLibraryLocusImpl()
 #endif
 }
 
-std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
 {
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 

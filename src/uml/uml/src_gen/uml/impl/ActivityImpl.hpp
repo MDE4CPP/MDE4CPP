@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const ;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
@@ -151,13 +151,13 @@ namespace uml
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
+			virtual bool eSet(int featureID, const std::shared_ptr<Any>& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Activity> m_thisActivityPtr;

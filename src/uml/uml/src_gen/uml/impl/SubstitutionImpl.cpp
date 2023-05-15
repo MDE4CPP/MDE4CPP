@@ -380,7 +380,7 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 	return RealizationImpl::internalEIsSet(featureID);
 }
 
-bool SubstitutionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool SubstitutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -454,7 +454,7 @@ bool SubstitutionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> SubstitutionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -158,18 +158,18 @@ std::shared_ptr<Any> DestroyImpl::get(unsigned long _uID) const
 }
 
 //Set
-void DestroyImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void DestroyImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void DestroyImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void DestroyImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void DestroyImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void DestroyImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -208,18 +208,18 @@ void DestroyImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 }
 
 //Add
-void DestroyImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void DestroyImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void DestroyImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void DestroyImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void DestroyImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void DestroyImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 }
 
@@ -249,18 +249,18 @@ void DestroyImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void DestroyImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void DestroyImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void DestroyImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void DestroyImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void DestroyImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void DestroyImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 }
 
@@ -268,25 +268,25 @@ void DestroyImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> DestroyImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> DestroyImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> DestroyImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> DestroyImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> DestroyImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> DestroyImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	return result;
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> DestroyImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> DestroyImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

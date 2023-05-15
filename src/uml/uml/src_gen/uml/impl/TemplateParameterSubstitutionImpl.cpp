@@ -404,7 +404,7 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateParameterSubstitutionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool TemplateParameterSubstitutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -540,7 +540,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, std::shared_ptr<Any>
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> TemplateParameterSubstitutionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

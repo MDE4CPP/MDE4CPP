@@ -452,7 +452,7 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ExtendImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ExtendImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -609,7 +609,7 @@ bool ExtendImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ExtendImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ExtendImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

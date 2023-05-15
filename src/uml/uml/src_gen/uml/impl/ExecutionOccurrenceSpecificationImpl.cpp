@@ -325,7 +325,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -368,7 +368,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<A
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

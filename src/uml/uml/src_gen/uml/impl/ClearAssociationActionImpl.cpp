@@ -387,7 +387,7 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ClearAssociationActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ClearAssociationActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -461,7 +461,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ClearAssociationActionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

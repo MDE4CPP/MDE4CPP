@@ -54,8 +54,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -275,7 +275,7 @@ bool ActivityFinalNodeActivationImpl::internalEIsSet(int featureID) const
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ActivityFinalNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ActivityFinalNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -287,7 +287,7 @@ bool ActivityFinalNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> n
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ActivityFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ActivityFinalNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

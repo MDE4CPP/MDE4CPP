@@ -158,18 +158,18 @@ std::shared_ptr<Any> ProcessImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ProcessImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ProcessImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void ProcessImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ProcessImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void ProcessImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void ProcessImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -208,18 +208,18 @@ void ProcessImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 }
 
 //Add
-void ProcessImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ProcessImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void ProcessImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ProcessImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void ProcessImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ProcessImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 }
 
@@ -249,18 +249,18 @@ void ProcessImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void ProcessImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ProcessImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void ProcessImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ProcessImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void ProcessImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void ProcessImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 }
 
@@ -268,25 +268,25 @@ void ProcessImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> ProcessImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ProcessImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ProcessImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ProcessImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ProcessImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ProcessImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	return result;
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> ProcessImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ProcessImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

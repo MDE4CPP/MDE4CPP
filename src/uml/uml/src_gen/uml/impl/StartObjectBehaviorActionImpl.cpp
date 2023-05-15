@@ -345,7 +345,7 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 	return CallActionImpl::internalEIsSet(featureID);
 }
 
-bool StartObjectBehaviorActionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool StartObjectBehaviorActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -388,7 +388,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, std::shared_ptr<Any> new
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> StartObjectBehaviorActionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

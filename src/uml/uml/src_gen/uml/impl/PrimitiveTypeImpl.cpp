@@ -315,7 +315,7 @@ bool PrimitiveTypeImpl::internalEIsSet(int featureID) const
 	return DataTypeImpl::internalEIsSet(featureID);
 }
 
-bool PrimitiveTypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool PrimitiveTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -327,7 +327,7 @@ bool PrimitiveTypeImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> PrimitiveTypeImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

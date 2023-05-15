@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -518,7 +518,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StructuredActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool StructuredActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -561,7 +561,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, std::shared_ptr<A
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> StructuredActivityNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

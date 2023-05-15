@@ -239,7 +239,7 @@ bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool OperationTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool OperationTemplateParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -251,7 +251,7 @@ bool OperationTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> ne
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> OperationTemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

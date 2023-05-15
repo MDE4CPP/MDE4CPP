@@ -157,18 +157,18 @@ std::shared_ptr<Any> StatusImpl::get(unsigned long _uID) const
 }
 
 //Set
-void StatusImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void StatusImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void StatusImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void StatusImpl::set(std::string _qualifiedName,const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void StatusImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -218,18 +218,18 @@ void StatusImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 }
 
 //Add
-void StatusImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void StatusImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void StatusImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void StatusImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void StatusImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void StatusImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 }
 
@@ -250,18 +250,18 @@ void StatusImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void StatusImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void StatusImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void StatusImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 }
 
@@ -269,18 +269,18 @@ void StatusImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> StatusImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> StatusImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> StatusImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> StatusImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> StatusImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> StatusImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	return result;

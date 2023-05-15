@@ -354,7 +354,7 @@ bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
 	return OpaqueBehaviorImpl::internalEIsSet(featureID);
 }
 
-bool FunctionBehaviorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool FunctionBehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -366,7 +366,7 @@ bool FunctionBehaviorImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> FunctionBehaviorImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

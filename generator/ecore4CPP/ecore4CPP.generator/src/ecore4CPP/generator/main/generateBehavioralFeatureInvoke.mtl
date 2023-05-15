@@ -123,14 +123,14 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
  *  Declaration of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDDeclaration(aClass : EClass, impl : Boolean)]
-virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) [abstractSufix(impl)/];
+virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) [abstractSufix(impl)/];
 [/template]
 
 [**/
  *  Implementation of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDImplementation(aClass : EClass) post(trim())]
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

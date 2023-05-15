@@ -279,7 +279,7 @@ bool RealizationImpl::internalEIsSet(int featureID) const
 	return AbstractionImpl::internalEIsSet(featureID);
 }
 
-bool RealizationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool RealizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -291,7 +291,7 @@ bool RealizationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> RealizationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> RealizationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

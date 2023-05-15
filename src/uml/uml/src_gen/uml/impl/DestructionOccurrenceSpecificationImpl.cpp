@@ -278,7 +278,7 @@ bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -290,7 +290,7 @@ bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, std::shared_ptr
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

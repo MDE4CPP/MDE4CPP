@@ -465,7 +465,7 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool EStructuralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool EStructuralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -575,7 +575,7 @@ bool EStructuralFeatureImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> EStructuralFeatureImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

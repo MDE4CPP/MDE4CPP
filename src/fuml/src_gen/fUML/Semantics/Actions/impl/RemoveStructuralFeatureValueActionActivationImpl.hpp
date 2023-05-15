@@ -87,13 +87,13 @@ namespace fUML::Semantics::Actions
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
+			virtual bool eSet(int featureID, const std::shared_ptr<Any>& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> m_thisRemoveStructuralFeatureValueActionActivationPtr;

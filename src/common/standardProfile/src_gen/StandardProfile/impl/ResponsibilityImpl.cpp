@@ -158,18 +158,18 @@ std::shared_ptr<Any> ResponsibilityImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ResponsibilityImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ResponsibilityImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void ResponsibilityImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ResponsibilityImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void ResponsibilityImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void ResponsibilityImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -208,18 +208,18 @@ void ResponsibilityImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 }
 
 //Add
-void ResponsibilityImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ResponsibilityImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void ResponsibilityImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ResponsibilityImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void ResponsibilityImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ResponsibilityImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 }
 
@@ -249,18 +249,18 @@ void ResponsibilityImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void ResponsibilityImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ResponsibilityImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void ResponsibilityImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ResponsibilityImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void ResponsibilityImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void ResponsibilityImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 }
 
@@ -268,25 +268,25 @@ void ResponsibilityImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> ResponsibilityImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ResponsibilityImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ResponsibilityImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ResponsibilityImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ResponsibilityImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ResponsibilityImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	return result;
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> ResponsibilityImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ResponsibilityImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return eAny(nullptr, -1, false);
 }

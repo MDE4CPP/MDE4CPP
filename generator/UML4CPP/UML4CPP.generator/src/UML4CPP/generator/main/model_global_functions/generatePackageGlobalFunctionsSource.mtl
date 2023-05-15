@@ -38,7 +38,7 @@
 	[/for]
 [/for]
 
-std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 [if (not aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->isEmpty())]
 	unsigned long uID = _opaqueBehavior->_getID();

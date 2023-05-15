@@ -135,36 +135,36 @@ std::shared_ptr<Any> ActiveChannelImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ActiveChannelImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ActiveChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void ActiveChannelImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ActiveChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void ActiveChannelImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void ActiveChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class Channel
 	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::set(_uID, value);
 }
 
 //Add
-void ActiveChannelImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ActiveChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void ActiveChannelImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ActiveChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void ActiveChannelImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ActiveChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	//Call set() for base class Channel
 	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::add(_uID, value, insertAt);
@@ -189,18 +189,18 @@ void ActiveChannelImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void ActiveChannelImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ActiveChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void ActiveChannelImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ActiveChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void ActiveChannelImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void ActiveChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class Channel
 	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::remove(_uID, value);
@@ -210,18 +210,18 @@ void ActiveChannelImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> ActiveChannelImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ActiveChannelImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ActiveChannelImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ActiveChannelImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ActiveChannelImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ActiveChannelImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	//Call invoke() for base class Channel
@@ -234,7 +234,7 @@ std::shared_ptr<Any> ActiveChannelImpl::invoke(unsigned long _uID, std::shared_p
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> ActiveChannelImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ActiveChannelImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result;
 	//Call invoke() for base class Channel

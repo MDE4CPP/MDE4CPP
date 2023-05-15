@@ -353,7 +353,7 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 	return ObservationImpl::internalEIsSet(featureID);
 }
 
-bool TimeObservationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool TimeObservationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -410,7 +410,7 @@ bool TimeObservationImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> TimeObservationImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

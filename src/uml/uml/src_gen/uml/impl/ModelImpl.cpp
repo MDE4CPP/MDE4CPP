@@ -348,7 +348,7 @@ bool ModelImpl::internalEIsSet(int featureID) const
 	return PackageImpl::internalEIsSet(featureID);
 }
 
-bool ModelImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ModelImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -374,7 +374,7 @@ bool ModelImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ModelImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ModelImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

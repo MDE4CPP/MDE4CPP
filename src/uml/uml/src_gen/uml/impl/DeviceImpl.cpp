@@ -332,7 +332,7 @@ bool DeviceImpl::internalEIsSet(int featureID) const
 	return NodeImpl::internalEIsSet(featureID);
 }
 
-bool DeviceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool DeviceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -344,7 +344,7 @@ bool DeviceImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> DeviceImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> DeviceImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

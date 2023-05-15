@@ -76,21 +76,21 @@ virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const
 virtual std::shared_ptr<Any> get(std::string _qualifiedName) const [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> get(unsigned long _uID) const [abstractSuffix(impl)/];
 //Set
-virtual void set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
-virtual void set(std::string _qualifiedName, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
-virtual void set(unsigned long _uID, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
+virtual void set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void set(std::string _qualifiedName, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void set(unsigned long _uID, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
 //Add
-virtual void add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt = -1) [abstractSuffix(impl)/];
-virtual void add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt = -1) [abstractSuffix(impl)/];
-virtual void add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
 //Unset
 virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 //Remove
-virtual void remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
-virtual void remove(std::string _qualifiedName, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
-virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) [abstractSuffix(impl)/];
+virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void remove(std::string _qualifiedName, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void remove(unsigned long _uID, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -98,9 +98,9 @@ virtual void remove(unsigned long _uID, std::shared_ptr<Any> value) [abstractSuf
 */]
 [template public generateInvoke(aDataType : DataType, impl : Boolean)]
 //Operation invocation
-virtual std::shared_ptr<Any> invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
-virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
-virtual std::shared_ptr<Any> invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
 [/template]
 
 [query private getPropertiesForGetAndSet(aDataType : DataType) : OrderedSet(Property) = aDataType.attribute->addAll(aDataType.directlyRealizedInterfaces().attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
@@ -176,18 +176,18 @@ std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::get(unsign
 [/template]
 
 [template private generateSetImplementation(aDataType : DataType)]
-void [aDataType.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName,const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 [if (not aDataType.getPropertiesForGetAndSet()->select(hasSetter())->isEmpty())]
 	switch(_uID)
@@ -370,18 +370,18 @@ void [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, st
 [/template]
 
 [template private generateAddImplementation(aDataType : DataType)]
-void [aDataType.name.toUpperFirst().concat('Impl')/]::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 [if (not aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
 	switch(_uID)
@@ -502,18 +502,18 @@ void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [/template]
 
 [template public generateRemoveImplementation(aDataType : DataType)]
-void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 [if (not aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
 	switch(_uID)
@@ -597,18 +597,18 @@ void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 [/template]
 
 [template private generateOperationInvokeImplementation(aDataType : DataType)]
-std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 [if (not aDataType.getOperationsForInvoke()->isEmpty())]

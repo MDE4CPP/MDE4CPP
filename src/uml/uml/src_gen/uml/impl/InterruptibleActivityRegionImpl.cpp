@@ -397,7 +397,7 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
 
-bool InterruptibleActivityRegionImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -499,7 +499,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, std::shared_ptr<Any> n
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> InterruptibleActivityRegionImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

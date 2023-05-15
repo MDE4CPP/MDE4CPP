@@ -48,8 +48,8 @@
 #include "uml/Element.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -285,7 +285,7 @@ bool RedefinitionBasedDispatchStrategyImpl::internalEIsSet(int featureID) const
 	return DispatchStrategyImpl::internalEIsSet(featureID);
 }
 
-bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -297,7 +297,7 @@ bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, std::shared_ptr<
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FOUNDATIONALMODELLIBRARY_LOCUSEXECUTION_HPP
-#define FOUNDATIONALMODELLIBRARY_LOCUSEXECUTION_HPP
+#ifndef FOUNDATIONALMODELLIBRARY_LOCUS_HPP
+#define FOUNDATIONALMODELLIBRARY_LOCUS_HPP
 
 //#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -23,7 +23,7 @@ namespace FoundationalModelLibrary
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>&) = 0;
 	};
 }
-#endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUSEXECUTION_HPP */
+#endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUS_HPP */

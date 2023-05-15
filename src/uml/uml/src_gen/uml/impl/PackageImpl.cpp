@@ -995,7 +995,7 @@ bool PackageImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -1289,7 +1289,7 @@ bool PackageImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> PackageImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -322,7 +322,7 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool ClassifierTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool ClassifierTemplateParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -393,7 +393,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, std::shared_ptr<Any> n
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> ClassifierTemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -166,18 +166,18 @@ std::shared_ptr<Any> ExecutableImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ExecutableImpl::set(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ExecutableImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->set(_property->_getID(), value);
 }
 
-void ExecutableImpl::set(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ExecutableImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->set(uID, value);
 }
 
-void ExecutableImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
+void ExecutableImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -218,18 +218,18 @@ void ExecutableImpl::set(unsigned long _uID, std::shared_ptr<Any> value)
 }
 
 //Add
-void ExecutableImpl::add(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ExecutableImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	this->add(_property->_getID(), value);
 }
 
-void ExecutableImpl::add(std::string _qualifiedName, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ExecutableImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->add(uID, value);
 }
 
-void ExecutableImpl::add(unsigned long _uID, std::shared_ptr<Any> value, int insertAt /*= -1*/)
+void ExecutableImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	//Call set() for base class File
 	StandardProfile::FileImpl::add(_uID, value, insertAt);
@@ -263,18 +263,18 @@ void ExecutableImpl::unset(unsigned long _uID)
 }
 
 //Remove
-void ExecutableImpl::remove(std::shared_ptr<uml::Property> _property, std::shared_ptr<Any> value)
+void ExecutableImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	this->remove(_property->_getID(), value);
 }
 
-void ExecutableImpl::remove(std::string _qualifiedName, std::shared_ptr<Any> value)
+void ExecutableImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	this->remove(uID, value);
 }
 
-void ExecutableImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
+void ExecutableImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class File
 	StandardProfile::FileImpl::remove(_uID, value);
@@ -284,18 +284,18 @@ void ExecutableImpl::remove(unsigned long _uID, std::shared_ptr<Any> value)
 // Operation & OpaqueBehavior Invocation
 //**************************************
 //Operation Invocation
-std::shared_ptr<Any> ExecutableImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExecutableImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->invoke(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExecutableImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
 	//Call invoke() for base class File
@@ -308,7 +308,7 @@ std::shared_ptr<Any> ExecutableImpl::invoke(unsigned long _uID, std::shared_ptr<
 }
 
 //OpaqueBehavior Invocation
-std::shared_ptr<Any> ExecutableImpl::invoke(std::shared_ptr<uml::OpaqueBehavior> _opaqueBehavior, std::shared_ptr<Bag<Any>> inputArguments, std::shared_ptr<Bag<Any>> outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result;
 	//Call invoke() for base class File

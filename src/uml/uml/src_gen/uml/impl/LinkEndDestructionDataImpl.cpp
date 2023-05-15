@@ -306,7 +306,7 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
 
-bool LinkEndDestructionDataImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool LinkEndDestructionDataImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -363,7 +363,7 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> LinkEndDestructionDataImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

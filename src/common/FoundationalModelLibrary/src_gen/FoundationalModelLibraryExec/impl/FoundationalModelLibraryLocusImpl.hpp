@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FOUNDATIONALMODELLIBRARY_LOCUSIMPL_EXECUTION_HPP
-#define FOUNDATIONALMODELLIBRARY_LOCUSIMPL_EXECUTION_HPP
+#ifndef FOUNDATIONALMODELLIBRARY_LOCUSIMPL_HPP
+#define FOUNDATIONALMODELLIBRARY_LOCUSIMPL_HPP
 
 #include "../FoundationalModelLibraryLocus.hpp"
 #include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
@@ -27,8 +27,8 @@ namespace FoundationalModelLibrary
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Element> instantiate(std::shared_ptr<uml::Class>);
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>&);
 			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
 	};
 }
-#endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUSIMPL_EXECUTION_HPP */
+#endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUSIMPL_HPP */
